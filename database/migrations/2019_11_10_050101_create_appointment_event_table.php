@@ -18,9 +18,6 @@ class CreateAppointmentEventTable extends Migration
             $table->unsignedBigInteger('appointment_id');
             $table->unsignedBigInteger('event_id');
             $table->timestamps();
-
-            $table->foreign('appointment_id')->references('id')->on('appointments');
-            $table->foreign('event_id')->references('id')->on('events');
         });
     }
 

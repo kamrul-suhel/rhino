@@ -15,6 +15,8 @@ class CreateGuestsTable extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('event_id')->index();
+            $table->unsignedBigInteger('appointment_id')->index()->nullable();
             $table->string('unique');
             $table->string('firstname');
             $table->string('surname');
@@ -27,8 +29,6 @@ class CreateGuestsTable extends Migration
             $table->string('postcode');
             $table->string('landline');
             $table->string('mobile');
-            $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('appointment_id')->nullable();
             $table->boolean('new');
             $table->boolean('used');
             $table->string('part_ex_vrm')->nullable();
@@ -43,9 +43,6 @@ class CreateGuestsTable extends Migration
             $table->dateTime('last_logged_in');
             $table->integer('stage');
             $table->timestamps();
-
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('appointment_id')->references('id')->on('appointments');
         });
     }
 

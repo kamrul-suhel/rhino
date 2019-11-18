@@ -13,8 +13,13 @@ class ForeignKeyForBrandsTranslations extends Migration
      */
     public function up()
     {
-        Schema::table('brand_translation', function (Blueprint $table) {
+        Schema::table('brands', function(Blueprint $table){
+            $table->foreign('company_id')->references('id')->on('companies');
+        });
+
+        Schema::table('brands_translation', function (Blueprint $table) {
             $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('language_id')->references('id')->on('languages');
         });
     }
 
@@ -25,8 +30,12 @@ class ForeignKeyForBrandsTranslations extends Migration
      */
     public function down()
     {
-        Schema::table('brand_translation', function(Blueprint $table){
-            $table->dropForeign('brand_id');
+        Schema::table('brands_translation', function(Blueprint $table){
+            $table->dropForeign(['brand_id','language_id']);
+        });
+
+        Schema::table('brands', function(Blueprint $table){
+            $table->dropForeign('company_id');
         });
     }
 }

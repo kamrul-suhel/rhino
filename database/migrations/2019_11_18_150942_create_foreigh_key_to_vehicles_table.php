@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+class CreateForeighKeyToVehiclesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('identifier');
-            $table->timestamps();
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->foreign('brand_id')->references('id')->on('brands');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->dropForeign(['brand_id']);
+        });
     }
 }

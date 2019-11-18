@@ -13,13 +13,10 @@ class CreateEventsUsersRelationshipTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_users', function (Blueprint $table) {
+        Schema::create('event_user', function (Blueprint $table) {
             $table->unsignedBigInteger('event_id')->index();
             $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
-
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

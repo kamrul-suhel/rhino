@@ -19,8 +19,8 @@ class CreateDealershipUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('dealership_id')->references('id')->on('dealerships');
-            $table->foreign('user_id')->references('id')->on('users');
+//            $table->foreign('dealership_id')->references('id')->on('dealerships');
+//            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+class CreateGroupsTranslationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('identifier');
+        Schema::create('groups_translation', function (Blueprint $table) {
+            $table->bigIncrements('d')->index();
+            $table->unsignedBigInteger('group_id')->index();
+            $table->unsignedBigInteger('language_id')->index();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('groups_translation');
     }
 }

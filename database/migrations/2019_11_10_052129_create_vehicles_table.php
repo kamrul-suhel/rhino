@@ -15,13 +15,11 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('brand_id')->index();
             $table->string('model');
             $table->string('driver_seating_position_left_image');
             $table->string('driver_seating_position_right_image');
-            $table->unsignedBigInteger('brand_id');
             $table->timestamps();
-
-//            $table->foreign('brand_id')->references('id')->on('brands');
         });
     }
 

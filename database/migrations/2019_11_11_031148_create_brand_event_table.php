@@ -18,9 +18,6 @@ class CreateBrandEventTable extends Migration
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('event_id');
             $table->timestamps();
-
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('event_id')->references('id')->on('events');
         });
     }
 

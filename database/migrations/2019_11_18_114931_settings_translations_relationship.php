@@ -13,10 +13,10 @@ class SettingsTranslationsRelationship extends Migration
      */
     public function up()
     {
-        Schema::table('settings_translations', function (Blueprint $table) {
-            $table->foreign('language_id')->references('id')->on('languages');
-            $table->foreign('settings_id')->references('id')->on('settings');
-        });
+//        Schema::table('settings_translations', function (Blueprint $table) {
+//            $table->foreign('language_id')->references('id')->on('languages');
+//            $table->foreign('settings_id')->references('id')->on('settings');
+//        });
     }
 
     /**
@@ -26,8 +26,8 @@ class SettingsTranslationsRelationship extends Migration
      */
     public function down()
     {
-        Schema::table('settings_translations', function(Blueprint $table){
-            $table->dropForeign(['language_id', 'settings_id']);
-        });
+//        Schema::table('settings_translations', function(Blueprint $table){
+//            $table->dropForeign(['language_id', 'settings_id']);
+//        });
     }
 }

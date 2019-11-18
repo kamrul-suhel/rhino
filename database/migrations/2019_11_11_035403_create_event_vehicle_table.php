@@ -22,9 +22,6 @@ class CreateEventVehicleTable extends Migration
             $table->string('image')->nullable();
             $table->integer('order')->nullable();
             $table->timestamps();
-
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });
     }
 

@@ -15,16 +15,11 @@ class CreateBrandUserTable extends Migration
     {
         Schema::create('brand_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('brand_id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('dealership_id');
+            $table->unsignedBigInteger('brand_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
             $table->boolean('new');
             $table->boolean('used');
             $table->timestamps();
-
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('dealership_id')->references('id')->on('dealerships');
         });
     }
 

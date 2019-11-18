@@ -15,12 +15,9 @@ class CreateGuestVehicleTable extends Migration
     {
         Schema::create('guest_vehicle', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('guest_id');
-            $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('guest_id')->index();
+            $table->unsignedBigInteger('vehicle_id')->index();
             $table->timestamps();
-
-            $table->foreign('guest_id')->references('id')->on('guests');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });
     }
 

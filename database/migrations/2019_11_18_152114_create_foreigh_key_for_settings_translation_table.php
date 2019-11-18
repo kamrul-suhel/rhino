@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ForeignKeyForCompaniesTranslations extends Migration
+class CreateForeighKeyForSettingsTranslationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ForeignKeyForCompaniesTranslations extends Migration
      */
     public function up()
     {
-        Schema::table('companies_translation', function (Blueprint $table) {
-            $table->foreign('company_id')->references('id')->on('companies');
+        Schema::table('settings_translations', function (Blueprint $table) {
+            $table->foreign('setting_id')->references('id')->on('settings');
             $table->foreign('language_id')->references('id')->on('languages');
         });
     }
@@ -26,8 +26,8 @@ class ForeignKeyForCompaniesTranslations extends Migration
      */
     public function down()
     {
-        Schema::table('companies_translation', function(Blueprint $table){
-            $table->dropForeign(['company_id', 'language_id']);
+        Schema::table('event_user', function (Blueprint $table) {
+            $table->dropForeign(['setting_id', 'language_id']);
         });
     }
 }

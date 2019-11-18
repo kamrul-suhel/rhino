@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniessTranslationTable extends Migration
+class CreateCompaniesTranslationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,10 @@ class CreateCompaniessTranslationTable extends Migration
     {
         Schema::create('companies_translation', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('language_id')->index();
             $table->unsignedBigInteger('company_id');
             $table->string('name');
             $table->timestamps();
-        });
-
-        Schema::table('companies', function (Blueprint $table){
-            $table->dropColumn('name');
         });
     }
 
@@ -33,9 +30,5 @@ class CreateCompaniessTranslationTable extends Migration
     public function down()
     {
         Schema::dropIfExists('companiess_translation');
-
-        Schema::table('companies', function (Blueprint $table){
-            $table->string('name');
-        });
     }
 }

@@ -15,13 +15,11 @@ class CreateBrandsTranslationTable extends Migration
     {
         Schema::create('brands_translation', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('brand_id')->index();
+            $table->unsignedBigInteger('language_id')->index();
             $table->string('name', 20);
+            $table->text('description');
             $table->timestamps();
-        });
-
-        Schema::table('brands', function (Blueprint $table) {
-            $table->dropColumn('name');
         });
     }
 
@@ -33,9 +31,5 @@ class CreateBrandsTranslationTable extends Migration
     public function down()
     {
         Schema::dropIfExists('brands_translation');
-
-        Schema::table('brands', function (Blueprint $table) {
-            $table->string('name');
-        });
     }
 }
