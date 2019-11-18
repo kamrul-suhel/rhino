@@ -26,6 +26,8 @@ class SettingsTranslationsRelationship extends Migration
      */
     public function down()
     {
-        $table->dropForeign(['language_id', 'settings_id']);
+        Schema::table('settings_translations', function(Blueprint $table){
+            $table->dropForeign(['language_id', 'settings_id']);
+        });
     }
 }
