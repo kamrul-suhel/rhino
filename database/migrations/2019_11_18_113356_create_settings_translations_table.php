@@ -15,14 +15,12 @@ class CreateSettingsTranslationsTable extends Migration
     {
         Schema::create('settings_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigIncrements('settings_id');
-            $table->unsignedBigIncrements('language_id');
+            $table->unsignedBigIncrements('settings_id')->index();
+            $table->unsignedBigIncrements('language_id')->index();
             $table->string('label');
             $table->string('identifier');
             $table->string('translation');
             $table->timestamps();
-
-            $table->index(['settings_id', 'language_id']);
         });
 
     }
