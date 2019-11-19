@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
 
         // Seed the Languages
         $this->call(LanguagesTableSeeder::class);
+
+        // Seed the setting table
+        $this->call(SettingsTableSeeder::class);
     }
 }

@@ -10,7 +10,7 @@ class SettingTranslation extends Model
      * Table name
      * @var string
      */
-    protected $table = 'setting_translations';
+    protected $table = 'settings_translation';
 
     /**
      * Fillable attribute

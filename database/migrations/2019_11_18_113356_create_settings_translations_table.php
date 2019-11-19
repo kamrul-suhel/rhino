@@ -13,7 +13,7 @@ class CreateSettingsTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings_translations', function (Blueprint $table) {
+        Schema::create('settings_translation', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('setting_id')->index();
             $table->unsignedBigInteger('language_id')->index();
@@ -31,6 +31,6 @@ class CreateSettingsTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings_translations');
+        Schema::dropIfExists('settings_translation');
     }
 }

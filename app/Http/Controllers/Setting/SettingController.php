@@ -17,10 +17,10 @@ class SettingController extends Controller
     {
         $settings = Setting::select(
             'settings.*',
-            'settings_translations.*'
-        )->leftJoin('settings_translations', 'settings_translations.setting_id', '=', 'settings.id')
-            ->where('settings_translations.language_id', $this->languageId)
-        ->get();
+            'settings_translation.*'
+        )->leftJoin('settings_translation', 'settings_translation.setting_id', '=', 'settings.id')
+            ->where('settings_translation.language_id', $this->languageId)
+            ->get();
 
         return response()->json($settings);
     }
@@ -28,7 +28,7 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -39,7 +39,7 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -50,8 +50,8 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -62,7 +62,7 @@ class SettingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -70,7 +70,8 @@ class SettingController extends Controller
         //
     }
 
-    public function generateDefaultSetting(){
+    public function generateDefaultSetting()
+    {
         $result = AddSetting::addToDatabase();
         return response()->json($result);
     }

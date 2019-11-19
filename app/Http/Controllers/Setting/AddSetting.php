@@ -33,20 +33,25 @@ class AddSetting
     public static function addToDatabase(){
         $settingArray = self::getSettingArray();
 
+        // Empty the table
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Setting::truncate();
+        SettingTranslation::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $languageId = 40; // By default english is language table
-
-        dd($languageId);
         foreach($settingArray as $item){
-            $setting = Setting::create([
-                'identifier' => $item['identifier']
-            ]);
+            $setting = new Setting();
+            $setting->identifier = $item['identifier'];
+            $setting->save();
 
-            $settingTranslation = SettingTranslation::create([
-                'setting_id' => $setting->id,
-                'language_id' => $languageId,
-                'label' => $item['label'],
-                'translation' => $item['translation']
-            ]);
+            $settingTranslation = new SettingTranslation();
+            $settingTranslation->setting_id = $setting->id;
+            $settingTranslation->language_id = $languageId;
+            $settingTranslation->label = $item['label'];
+            $settingTranslation->translation = $item['translation'];
+
+            $settingTranslation->save();
         }
 
         return ['success' => true];

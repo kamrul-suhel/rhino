@@ -13,7 +13,7 @@ class CreateForeighKeyForSettingsTranslationTable extends Migration
      */
     public function up()
     {
-        Schema::table('settings_translations', function (Blueprint $table) {
+        Schema::table('settings_translation', function (Blueprint $table) {
             $table->foreign('setting_id')->references('id')->on('settings');
             $table->foreign('language_id')->references('id')->on('languages');
         });
@@ -26,7 +26,7 @@ class CreateForeighKeyForSettingsTranslationTable extends Migration
      */
     public function down()
     {
-        Schema::table('event_user', function (Blueprint $table) {
+        Schema::table('settings_translation', function (Blueprint $table) {
             $table->dropForeign(['setting_id', 'language_id']);
         });
     }
