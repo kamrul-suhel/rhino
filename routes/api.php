@@ -16,3 +16,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Settings
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('settings')->group(function(){
+    Route::post('add', 'Setting\SettingController@generateDefaultSetting');
+    Route::get('/', 'Setting\SettingController@index');
+});
