@@ -13,20 +13,40 @@ class AddSetting
     public static function getSettingArray()
     {
         return [
-        [
-             'label' => 'Home',
-             'identifier' => 'home',
-             'translation' => 'Home'
-         ],
-         [
-              'label' => 'Dealerships',
-              'identifier' => 'dealerships',
-              'translation' => 'Dealerships'
-          ],
-          [
-                'label' => 'Add Dealerships',
-                'identifier' => 'add_dealerships',
-                'translation' => 'Add Dealerships'
+            [
+                'label' => 'Home',
+                'identifier' => 'home',
+                'translation' => 'Home'
+            ],
+            [
+                'label' => 'Dealerships',
+                'identifier' => 'dealerships',
+                'translation' => 'Dealerships'
+            ],
+            [
+                'label' => 'Languages',
+                'identifier' => 'languages',
+                'translation' => 'Languages'
+            ],
+            [
+                'label' => 'Add Language',
+                'identifier' => 'add_language',
+                'translation' => 'Add Language'
+            ],
+            [
+                'label' => 'Create Language',
+                'identifier' => 'create_language',
+                'translation' => 'Create Language'
+            ],
+            [
+                'label' => 'Edit Language',
+                'identifier' => 'edit_language',
+                'translation' => 'Edit Language'
+            ],
+            [
+                'label' => 'Update Language',
+                'identifier' => 'update_language',
+                'translation' => 'Update Language'
             ]
         ];
     }
