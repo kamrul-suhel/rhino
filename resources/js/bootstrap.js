@@ -59,9 +59,12 @@ new Vue({
     template: '<App/>',
 
     created(){
-
+        this.initSetting();
     },
 
     methods: {
+        initSetting(){
+            this.$store.dispatch('getAllSettingFields');
+        }
     }
 })

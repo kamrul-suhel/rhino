@@ -21,6 +21,10 @@
                 <v-list-tile-title>Home</v-list-tile-title>
             </v-list-tile>
 
+            <div v-for="field in fields">
+                {{ field.label }}
+            </div>
+
             <v-list-group
                     dark
                     color="dark"
@@ -54,8 +58,7 @@
 
         computed: {
             ...mapGetters({
-                role: 'getUserRole',
-                isLogin: 'getIsLogin'
+                fields: 'getFields'
             })
         },
 

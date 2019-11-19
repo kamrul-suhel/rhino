@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class AddSetting
 {
-    public static function getSettingArray(){
+    public static function getSettingArray()
+    {
         return [
         [
              'label' => 'Home',
@@ -27,10 +28,11 @@ class AddSetting
                 'identifier' => 'add_dealerships',
                 'translation' => 'Add Dealerships'
             ]
-         ];
+        ];
     }
 
-    public static function addToDatabase(){
+    public static function addToDatabase()
+    {
         $settingArray = self::getSettingArray();
 
         // Empty the table
@@ -40,7 +42,7 @@ class AddSetting
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $languageId = 40; // By default english is language table
-        foreach($settingArray as $item){
+        foreach ($settingArray as $item) {
             $setting = new Setting();
             $setting->identifier = $item['identifier'];
             $setting->save();
