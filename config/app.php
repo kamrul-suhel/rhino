@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        ErnySans\Laraworld\LaraworldServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,6 +226,14 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /**
+         * Package service provider
+         */
+
+        'Countries' => ErnySans\Laraworld\Facades\Countries::class,
+        'TimeZones' => ErnySans\Laraworld\Facades\TimeZones::class,
+        'Languages' => ErnySans\Laraworld\Facades\Languages::class,
 
     ],
 
