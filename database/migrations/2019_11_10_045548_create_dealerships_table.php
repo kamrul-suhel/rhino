@@ -16,6 +16,7 @@ class CreateDealershipsTable extends Migration
         Schema::create('dealerships', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('country_id')->index();
+            $table->unsignedBigInteger('region_id')->index();
             $table->unsignedBigInteger('group_id')->index();
             $table->float('latitude', 9, 6)->index()->nullable();
             $table->float('longitude', 9, 6)->index()->nullable();
