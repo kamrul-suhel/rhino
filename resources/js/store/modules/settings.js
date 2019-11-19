@@ -1,6 +1,8 @@
 const state = {
     theme:'dark',
-    fields: []
+    fields: {},
+    navigations: [],
+    home:'',
 };
 
 const mutations = {
@@ -9,24 +11,35 @@ const mutations = {
     },
 
     setFieldsItem(state, fields){
-        state.fields = [...fields]
-    }
+        state.fields = {...fields}
+    },
+
+    setHome(state, home){
+        state.home = home.translation;
+    },
+
+
 }
 
 const getters = {
     getTheme(state){
-       return state.theme;
+       return state.theme
     },
     getFields(state){
         return state.fields
+    },
+
+
+    getHome(state){
+        return state.home
     }
 }
 
 const actions = {
-    getAllSettingFields({commit}, payload){
+    getAllSettingFields({commit,dispatch}, payload){
         axios.get('/api/settings').then((response) => {
-            console.log(response.data);
             commit('setFieldsItem', response.data);
+            dispatch('dispatchNavigation', response.data) // Dispatch to navigation store
         });
     }
 }
