@@ -25,6 +25,7 @@ const getters = {
     getTheme(state){
        return state.theme
     },
+
     getFields(state){
         return state.fields
     },

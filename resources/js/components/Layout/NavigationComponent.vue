@@ -18,12 +18,8 @@
                 <v-list-tile-action>
                     <v-icon>home</v-icon>
                 </v-list-tile-action>
-                <v-list-tile-title>Home</v-list-tile-title>
+                <v-list-tile-title>{{ home }}</v-list-tile-title>
             </v-list-tile>
-
-            <div v-for="field in fields">
-                {{ field.label }}
-            </div>
 
             <v-list-group
                     dark
@@ -58,42 +54,15 @@
 
         computed: {
             ...mapGetters({
-                fields: 'getFields'
+                fields: 'getFields',
+                home: 'getHomeTitle',
+                items: 'getNavigationBar'
             })
         },
 
         data() {
             return {
-                drawer: true,
-                items: [
-                    {
-                        icon: 'add_shopping_cart',
-                        text: 'Dealership',
-                        navs: [
-                            {
-                                icon: 'history',
-                                text: 'All Dealership',
-                                link: 'dealerships',
-                                access: ''
-                            },
-
-                            {
-                                icon: 'history',
-                                text: 'Add Dealership',
-                                link: 'addDealership',
-                                access: ''
-                            },
-
-
-                            {
-                                icon: 'subscriptions',
-                                text: 'Groups',
-                                link: 'groups',
-                                access: ''
-                            }
-                        ],
-                    }
-                ],
+                drawer: true
             }
         },
 

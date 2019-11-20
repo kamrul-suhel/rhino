@@ -13,14 +13,16 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-layout row align-center style="max-width: 350px">
-                <v-select
+                <v-autocomplete
                         color="white"
-                        placeholder="Select a language"
+                        :placeholder="trans.select_a_language"
                         prepend-icon="search"
+                        :items="languages"
                         item-text="name"
+                        @change="selectedLanguage"
                         item-value="id"
                         return-object
-                ></v-select>
+                ></v-autocomplete>
             </v-layout>
         </v-toolbar>
 
@@ -55,9 +57,13 @@
             }
         },
 
+        watch: {
+        },
+
         computed: {
             ...mapGetters({
-                shops : 'getShops',
+                trans: 'getFields',
+                languages: 'getLanguages',
                 isLogin: 'getIsLogin'
             })
         },
@@ -66,6 +72,13 @@
         },
 
         methods: {
+            /**
+             * Language change render all translation
+             * @param value
+             */
+            selectedLanguage(value){
+                this.$store.commit('setSelectedLanguage', value)
+            }
         }
     }
 </script>

@@ -29,3 +29,16 @@ Route::prefix('settings')->group(function(){
     Route::post('add', 'Setting\SettingController@generateDefaultSetting');
     Route::get('/', 'Setting\SettingController@index');
 });
+
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Languages
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('languages')->group(function(){
+    Route::get('/', 'Language\LanguageController@index');
+});

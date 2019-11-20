@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dealerships', function(){
-    return view('welcome');
-});
+Route::prefix('dealerships')->group(function(){
+    Route::get('/', function(){
+        return view('welcome');
+    });
 
-Route::prefix('delerships')->group(function(){
     Route::get('create', function(){
         return view('welcome');
     });

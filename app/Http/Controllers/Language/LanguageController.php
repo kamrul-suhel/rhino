@@ -13,10 +13,19 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $languages = Language::where('status', 1)
-            ->get();
+        $languages = Language::where('status', 1);
+        // request has type then filter by type
+        if($request->has('type')){
+            switch($request->type){
+                case 'active':
+                    $languages = $languages->where('status', 1);
+                    break;
+            }
+        }
+
+        $languages = $languages->get();
         return response()->json($languages);
     }
 

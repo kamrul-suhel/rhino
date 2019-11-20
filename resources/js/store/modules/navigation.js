@@ -18,7 +18,7 @@ const mutations = {
                     {
                         icon: 'history',
                         text: trans.all_dealerships,
-                        link: 'dealerships',
+                        link: 'listDealership',
                         access: ''
                     },
 

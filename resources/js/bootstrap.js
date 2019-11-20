@@ -64,7 +64,12 @@ new Vue({
 
     methods: {
         initSetting(){
+            // Setup translation fields
             this.$store.dispatch('getAllSettingFields');
+
+            // Initialize language
+            this.$store.dispatch('fetchLanguages')
+
         }
     }
 })

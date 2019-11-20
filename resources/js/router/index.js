@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LoginComponent from '../pages/login/LoginComponent'
-import Dealership from '../pages/Dealership/List'
+import * as Dealership from '../pages/Dealership/index.js'
 
 Vue.use(Router)
 
@@ -15,18 +15,24 @@ const routes = [
     {
         path: '/dealerships',
         name: 'dealerships',
-        component: Dealership,
+        component: Dealership.Root,
         children: [
             {
-                path: '/create',
+                path: '',
                 name: 'listDealership',
-                component: LoginComponent
+                component: Dealership.List
             },
 
             {
-                path: '/:id/edit',
-                name: 'createDealership',
-                component: LoginComponent
+                path: 'create',
+                name: 'addDealership',
+                component: Dealership.Create
+            },
+
+            {
+                path: ':id/edit',
+                name: 'editDealership',
+                component: Dealership.List
             }
         ]
     }
