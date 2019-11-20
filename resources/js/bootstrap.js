@@ -24,7 +24,7 @@ window.axios.defaults.headers.common = {
  */
 
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from './plugins/Vuetify'
 import Vuex from 'vuex';
 
 /**
@@ -32,11 +32,7 @@ import Vuex from 'vuex';
  */
 
 import router from './router'
-Vue.use(Vuetify);
 Vue.use(Vuex);
-
-
-
 Vue.config.productionTip = true
 
 /**
