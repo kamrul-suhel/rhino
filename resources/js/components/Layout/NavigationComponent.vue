@@ -68,14 +68,6 @@
 
         methods: {
             async onPageChange(item) {
-                if (item.link === 'logout') {
-                   await axios.get('/logout').then(() => {
-                        LoginEventBus.logoutStateChange();
-                        this.$store.commit('setIsLogin', false)
-                        this.$router.push({name: 'login'});
-                    });
-                    return;
-                }
                 this.$router.push({name: item.link});
             },
 

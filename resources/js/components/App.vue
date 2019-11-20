@@ -2,7 +2,7 @@
     <div id="app">
         <v-app
             id="inspire"
-            dark
+            light
         >
             <navigation-component></navigation-component>
             <header-component></header-component>

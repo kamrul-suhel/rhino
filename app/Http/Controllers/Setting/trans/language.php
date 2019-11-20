@@ -1,6 +1,16 @@
 <?php
 return [
     [
+        'label' => 'Languages',
+        'identifier' => 'languages',
+        'translation' => 'Languages'
+    ],
+    [
+        'label' => 'List Of Languages',
+        'identifier' => 'list_of_languages',
+        'translation' => 'List Of Languages'
+    ],
+    [
         'label' => 'Add Language',
         'identifier' => 'add_language',
         'translation' => 'Add Language'

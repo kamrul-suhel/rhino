@@ -18,14 +18,14 @@ const mutations = {
                     {
                         icon: 'history',
                         text: trans.all_dealerships,
-                        link: 'listDealership',
+                        link: 'listDealerships',
                         access: ''
                     },
 
                     {
                         icon: 'history',
                         text: trans.create_dealerships,
-                        link: 'addDealership',
+                        link: 'addDealerships',
                         access: ''
                     },
 
@@ -37,7 +37,59 @@ const mutations = {
                         access: ''
                     }
                 ],
-            }
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.countries,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.list_of_country,
+                        link: 'listCountries',
+                        access: ''
+                    },
+
+                    {
+                        icon: 'map',
+                        text: trans.create_country,
+                        link: 'createCountries',
+                        access: ''
+                    }
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.languages,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.list_of_languages,
+                        link: 'listLanguages',
+                        access: ''
+                    }
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.brands,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.list_of_brand,
+                        link: 'listBrands',
+                        access: ''
+                    },
+                    {
+                        icon: 'history',
+                        text: trans.create_brand,
+                        link: 'createBrands',
+                        access: ''
+                    }
+                ],
+            },
         ]
 
         state.navigation = [...navItems];
