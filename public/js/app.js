@@ -63470,25 +63470,269 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            totalDesserts: 0,
+            desserts: [],
+            pagination: {},
+            searchCountry: '',
+            dialog: false,
+            deleteDialog: false
+        };
     },
 
 
-    computed: {},
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        countries: 'getCountries',
+        trans: 'getFields',
+        headers: 'getCountriesListHeader',
+        totalCountry: 'getTotalCountry',
+        loading: 'getCountryLoading',
+        rowsPerPage: 'getCountryListRowsPerPage',
+        selectedCountry: 'getSelectedCountry'
+    })),
+
+    watch: {
+        pagination: {
+            handler: function handler() {
+                var paginateOption = _extends({}, this.pagination, {
+                    trans: this.trans,
+                    paginate: true
+                });
+                this.initialize(paginateOption);
+            }
+        },
+
+        searchCountry: function searchCountry(value) {
+            var paginateOption = _extends({}, this.pagination, {
+                page: 1, // Setup first page,
+                trans: this.trans,
+                paginate: true,
+                search: value
+            });
+
+            this.initialize(paginateOption);
+        }
+    },
 
     created: function created() {},
+    mounted: function mounted() {},
 
+    methods: {
+        // Initialize data when first render
+        initialize: function initialize() {
+            var paginateOption = _extends({}, this.pagination, {
+                trans: this.trans,
+                paginate: true,
+                search: this.searchCountry
+            });
 
-    methods: {}
+            this.$store.dispatch('fetchCountries', paginateOption);
+        },
+        editCountry: function editCountry(country) {
+            this.$store.commit('setSelectedCountry', country);
+            this.dialog = true;
+        },
+        updateCountry: function updateCountry() {
+            var _this = this;
+
+            var selectedCountry = this.selectedCountry;
+            var ID = selectedCountry.id;
+            var URL = '/api/countries/' + ID + '/update';
+            axios.post(URL, selectedCountry).then(function (response) {
+                if (response.data.success) {
+
+                    _this.initialize();
+                    // reset selectedCountry in store
+                    _this.$store.commit('setSelectedCountry', {});
+                    _this.dialog = false;
+                }
+            });
+        },
+        deleteCountry: function deleteCountry(country) {
+            this.$store.commit('setSelectedCountry', country);
+            this.deleteDialog = true;
+        },
+        confirmDeleteCountry: function confirmDeleteCountry() {
+            var _this2 = this;
+
+            var selectedCountry = this.selectedCountry;
+            var URL = 'api/countries/' + selectedCountry.id + '/delete';
+
+            axios.delete(URL).then(function (response) {
+                if (response.data.success) {
+                    _this2.initialize();
+                    // reset selectedCountry in store
+                    _this2.$store.commit('setSelectedCountry', {});
+                    _this2.dialog = false;
+                }
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -63499,7 +63743,361 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-layout", [_c("h2", [_vm._v("Create country")])])
+  return _c(
+    "div",
+    [
+      _c(
+        "v-toolbar",
+        { attrs: { flat: "" } },
+        [
+          _c("v-toolbar-title", [_vm._v(_vm._s(_vm.trans.countries))]),
+          _vm._v(" "),
+          _c("v-divider", {
+            staticClass: "mx-2",
+            attrs: { inset: "", vertical: "" }
+          }),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: { label: _vm.trans.search_country_by_name },
+            model: {
+              value: _vm.searchCountry,
+              callback: function($$v) {
+                _vm.searchCountry = $$v
+              },
+              expression: "searchCountry"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.countries,
+          pagination: _vm.pagination,
+          "no-results-text": _vm.trans.no_country_found,
+          "no-data-text": _vm.trans.no_country_found,
+          "rows-per-page-text": _vm.trans.rows_per_page,
+          "rows-per-page-items": _vm.rowsPerPage,
+          "total-items": _vm.totalCountry,
+          loading: _vm.loading
+        },
+        on: {
+          "update:pagination": function($event) {
+            _vm.pagination = $event
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("td", [_vm._v(_vm._s(props.item.full_name))]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.capital))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.iso_3166_2))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.driver_seating_position))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(
+                    _vm._s(
+                      props.item.status === 1
+                        ? _vm.trans.active
+                        : _vm.trans.inactive
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "text-xs-right" },
+                  [
+                    _c(
+                      "v-icon",
+                      {
+                        staticClass: "mr-2",
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editCountry(props.item)
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    edit\n                ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-icon",
+                      {
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteCountry(props.item)
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    delete\n                ")]
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "500" },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.trans.edit) +
+                    " " +
+                    _vm._s(_vm.selectedCountry.full_name) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: { label: _vm.trans.name },
+                        model: {
+                          value: _vm.selectedCountry.full_name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.selectedCountry, "full_name", $$v)
+                          },
+                          expression: "selectedCountry.full_name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: { label: _vm.trans.capital },
+                        model: {
+                          value: _vm.selectedCountry.capital,
+                          callback: function($$v) {
+                            _vm.$set(_vm.selectedCountry, "capital", $$v)
+                          },
+                          expression: "selectedCountry.capital"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: { label: _vm.trans.code },
+                        model: {
+                          value: _vm.selectedCountry.iso_3166_2,
+                          callback: function($$v) {
+                            _vm.$set(_vm.selectedCountry, "iso_3166_2", $$v)
+                          },
+                          expression: "selectedCountry.iso_3166_2"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c("v-switch", {
+                        attrs: { label: _vm.trans.status },
+                        model: {
+                          value: _vm.selectedCountry.status,
+                          callback: function($$v) {
+                            _vm.$set(_vm.selectedCountry, "status", $$v)
+                          },
+                          expression: "selectedCountry.status"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.updateCountry()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.update) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "290" },
+          model: {
+            value: _vm.deleteDialog,
+            callback: function($$v) {
+              _vm.deleteDialog = $$v
+            },
+            expression: "deleteDialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.trans.delete) +
+                    " " +
+                    _vm._s(_vm.selectedCountry.full_name) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c("v-flex", { attrs: { xs12: "" } }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.trans.delete_confirmation) +
+                        "\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { staticClass: "pa-3" },
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "info", small: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.deleteDialog = false
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.cancel) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", small: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDeleteCountry()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.delete) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -63784,6 +64382,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -63796,21 +64395,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         HeaderComponent: __WEBPACK_IMPORTED_MODULE_1__Layout_HeaderComonent_vue___default.a
     },
 
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapGetters */])({
-        isLogin: 'getIsLogin'
-    })),
-
     data: function data() {
         return {
             login: false,
-            barcodeDialog: false,
-            barcode: ''
+            initialize: false
         };
     },
 
-    props: {
-        source: String
-    },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapGetters */])({
+        isLogin: 'getIsLogin',
+        isLoading: 'getIsLoading'
+    })),
 
     created: function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -64190,7 +64785,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
         fields: 'getFields',
         home: 'getHomeTitle',
@@ -64359,29 +64953,31 @@ var render = function() {
     "div",
     { attrs: { id: "app" } },
     [
-      _c(
-        "v-app",
-        { attrs: { id: "inspire", light: "" } },
-        [
-          _c("navigation-component"),
-          _vm._v(" "),
-          _c("header-component"),
-          _vm._v(" "),
-          _c(
-            "v-content",
+      _vm.isLoading
+        ? _c(
+            "v-app",
+            { attrs: { id: "inspire", dark: "" } },
             [
+              _c("navigation-component"),
+              _vm._v(" "),
+              _c("header-component"),
+              _vm._v(" "),
               _c(
-                "v-container",
-                { attrs: { "fill-height": "" } },
-                [_c("v-layout", [_c("v-flex", [_c("router-view")], 1)], 1)],
+                "v-content",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "fill-height": "" } },
+                    [_c("v-layout", [_c("v-flex", [_c("router-view")], 1)], 1)],
+                    1
+                  )
+                ],
                 1
               )
             ],
             1
           )
-        ],
-        1
-      )
+        : _vm._e()
     ],
     1
   )
@@ -64408,6 +65004,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_user__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_navigation__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_language__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_country__ = __webpack_require__(113);
+
 
 
 
@@ -64437,7 +65035,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
         settings: __WEBPACK_IMPORTED_MODULE_2__modules_settings__["a" /* default */],
         user: __WEBPACK_IMPORTED_MODULE_3__modules_user__["a" /* default */],
         navigation: __WEBPACK_IMPORTED_MODULE_4__modules_navigation__["a" /* default */],
-        language: __WEBPACK_IMPORTED_MODULE_5__modules_language__["a" /* default */]
+        language: __WEBPACK_IMPORTED_MODULE_5__modules_language__["a" /* default */],
+        country: __WEBPACK_IMPORTED_MODULE_6__modules_country__["a" /* default */]
     }
 });
 
@@ -64454,7 +65053,8 @@ var state = {
     theme: 'dark',
     fields: {},
     navigations: [],
-    home: ''
+    home: '',
+    isLoading: false
 };
 
 var mutations = {
@@ -64466,6 +65066,9 @@ var mutations = {
     },
     setHome: function setHome(state, home) {
         state.home = home.translation;
+    },
+    setIsLoading: function setIsLoading(state, loading) {
+        state.isLoading = loading;
     }
 };
 
@@ -64478,6 +65081,9 @@ var getters = {
     },
     getHome: function getHome(state) {
         return state.home;
+    },
+    getIsLoading: function getIsLoading(state) {
+        return state.isLoading;
     }
 };
 
@@ -64489,6 +65095,7 @@ var actions = {
         axios.get('/api/settings').then(function (response) {
             commit('setFieldsItem', response.data);
             dispatch('dispatchNavigation', response.data); // Dispatch to navigation store
+            commit('setIsLoading', true);
         });
     }
 };
@@ -64717,8 +65324,8 @@ var actions = {
         var commit = _ref.commit;
         var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-        var params = typeof payload.type != 'undefined' ? 'type=' + payload.type : '';
-        var URL = '/api/languages?type=' + params;
+        var params = typeof payload.type != 'undefined' ? '?type=' + payload.type : '';
+        var URL = '/api/languages' + params;
 
         axios.get(URL).then(function (response) {
             commit('setLanguages', response.data);
@@ -65413,6 +66020,164 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-089c4714", module.exports)
   }
 }
+
+/***/ }),
+/* 113 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var defaultState = {
+    countries: [],
+    selectedCountry: {},
+    listHeader: [],
+    totalCountry: 0,
+    loading: true,
+    countryListRowPerPage: [15, 25, 40]
+};
+
+var state = _extends({}, defaultState);
+
+var mutations = {
+    setCountryListRowsPerPage: function setCountryListRowsPerPage(state, rowsPerPage) {
+        // Need to send and array of object
+        state.countryListRowPerPage = rowsPerPage;
+    },
+    setCountries: function setCountries(state, countries) {
+        state.countries = [].concat(_toConsumableArray(countries));
+    },
+    setSelectedCountry: function setSelectedCountry(state, country) {
+        state.selectedCountry = _extends({}, country);
+    },
+    setTotalCountry: function setTotalCountry(state, totalCountry) {
+        state.totalCountry = totalCountry;
+    },
+    resetCountriesStore: function resetCountriesStore(state) {
+        state = _extends({}, defaultState);
+    },
+    setCountryLoading: function setCountryLoading(state, loading) {
+        state.loading = loading;
+    },
+    setCountriesListHeader: function setCountriesListHeader(state, trans) {
+        var header = [{
+            text: trans.name,
+            align: 'left',
+            sortable: false,
+            value: 'name'
+        }, {
+            text: trans.capital,
+            value: 'capital'
+        }, {
+            text: trans.code,
+            value: 'code'
+        }, {
+            text: trans.seating_position,
+            value: 'seating_position'
+        }, {
+            text: trans.status,
+            value: 'status'
+        }, {
+            text: trans.action,
+            value: 'action'
+        }];
+
+        state.listHeader = header;
+    }
+};
+
+var getters = {
+    getCountries: function getCountries(state) {
+        return state.countries;
+    },
+    getSelectedCountry: function getSelectedCountry(state) {
+        return state.selectedCountry;
+    },
+    getCountriesListHeader: function getCountriesListHeader(state) {
+        return state.listHeader;
+    },
+    getTotalCountry: function getTotalCountry(state) {
+        return state.totalCountry;
+    },
+    getCountryLoading: function getCountryLoading(state) {
+        return state.loading;
+    },
+    getCountryListRowsPerPage: function getCountryListRowsPerPage(state) {
+        return state.countryListRowPerPage;
+    }
+};
+
+var actions = {
+    /**
+     * You can filter by status
+     * sent type= 'active' | 'inactive'
+     * ...this.pagination // Default pagination object
+     * trans: translation object, // Important
+     * paginate: true, // If you want all record, do not sent
+     * search: optional | if search by any text
+     * @param commit
+     * @param payload
+     */
+    fetchCountries: function fetchCountries(_ref) {
+        var commit = _ref.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        // Set loading is true
+        commit('setCountryLoading', true);
+
+        // Setup header for list view
+        commit('setCountriesListHeader', payload.trans);
+
+        var params = generateParams(payload);
+        var URL = '/api/countries' + params;
+        axios.get(URL).then(function (response) {
+            if (response.data.data) {
+                commit('setCountries', response.data.data);
+                commit('setTotalCountry', response.data.total);
+                commit('setCountryLoading', false);
+            }
+        });
+    }
+};
+
+/**
+ * helper function to generate params
+ * @param payload
+ * @returns {string}
+ */
+function generateParams(payload) {
+    var params = '?';
+    if (payload.type && typeof payload.type != 'undefined') {
+        params += 'type=' + payload.type;
+    }
+
+    if (payload.rowsPerPage && typeof payload.rowsPerPage != 'undefined') {
+        params += '&rowsPerPage=' + payload.rowsPerPage;
+    }
+
+    if (payload.paginate && typeof payload.paginate != 'undefined') {
+        params += '&paginate=true';
+    }
+
+    if (payload.page && typeof payload.page != 'undefined') {
+        params += '&page=' + payload.page;
+    }
+
+    if (payload.search && typeof payload.search != 'undefined') {
+        params += '&search=' + payload.search;
+    }
+
+    return params;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: state,
+    mutations: mutations,
+    getters: getters,
+    actions: actions
+});
 
 /***/ })
 /******/ ]);

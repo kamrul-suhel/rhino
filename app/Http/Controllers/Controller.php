@@ -27,5 +27,9 @@ class Controller extends BaseController
         if($request->has('perPage')){
             $this->perPage = $request->perPage;
         }
+
+        if($request->has('rowsPerPage')){
+            $this->perPage = $request->rowsPerPage;
+        }
     }
 }

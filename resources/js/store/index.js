@@ -5,6 +5,7 @@ import settings from './modules/settings';
 import user from './modules/user'
 import navigation from "./modules/navigation";
 import language from './modules/language'
+import country from "./modules/country";
 
 
 Vue.use(Vuex);
@@ -32,7 +33,8 @@ const store = new Vuex.Store({
         settings,
         user,
         navigation,
-        language
+        language,
+        country
     }
 });
 

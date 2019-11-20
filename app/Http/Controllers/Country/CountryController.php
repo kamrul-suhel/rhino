@@ -18,10 +18,48 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $countries = Country::where('status', 1)
-            ->get();
+        $countries = Country::select(
+            'id',
+            'full_name',
+            'capital',
+            'iso_3166_2',
+            'driver_seating_position',
+            'status',
+            'flag'
+        );
+        // To get the list view populate
+        if($request->has('paginate') && !empty($request->paginate)){
+            // Search by name
+            if($request->has('search') && !empty($request->search)){
+                $countries = $countries->where('full_name', 'LIKE', '%'.$request->search.'%');
+            }
+
+            // Get Only active country
+            if($request->has('type') && !empty($request->type)){
+                switch($request->type){
+                    case 'active':
+                        $countries = $countries->where('status', 1);
+                        break;
+
+                    case 'inactive':
+                        $countries = $countries->where('status', 0);
+                        break;
+                }
+            }
+
+            $countries = $countries->paginate($this->perPage);
+            $data = $countries->items();
+            $total = $countries->total();
+
+
+            return response()->json([
+                'data' => $data,
+                'total' => $total
+            ]);
+        }
+        $countries = $countries->get();
 
         return response()->json($countries);
     }
@@ -58,7 +96,7 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $country = Country::find($id);
+        $country = Country::findOrFail($id);
 
         $request->has('name') ? $country->name = $request->name : null;
         $request->has('capital') ? $country->capital = $request->capital : null;
@@ -82,7 +120,7 @@ class CountryController extends Controller
         // Save country
         $country->save();
 
-        return response()->json($country);
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -93,6 +131,9 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
+        $country = Country::findOrFail($id);
+        $country->delete();
 
+        return response()->json(['success' => true]);
     }
 }

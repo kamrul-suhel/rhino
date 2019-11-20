@@ -3,6 +3,7 @@ const state = {
     fields: {},
     navigations: [],
     home:'',
+    isLoading: false
 };
 
 const mutations = {
@@ -18,6 +19,9 @@ const mutations = {
         state.home = home.translation;
     },
 
+    setIsLoading(state, loading){
+        state.isLoading = loading
+    }
 
 }
 
@@ -33,6 +37,10 @@ const getters = {
 
     getHome(state){
         return state.home
+    },
+
+    getIsLoading(state){
+        return state.isLoading
     }
 }
 
@@ -41,6 +49,7 @@ const actions = {
         axios.get('/api/settings').then((response) => {
             commit('setFieldsItem', response.data);
             dispatch('dispatchNavigation', response.data) // Dispatch to navigation store
+            commit('setIsLoading', true)
         });
     }
 }

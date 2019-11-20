@@ -2,7 +2,8 @@
     <div id="app">
         <v-app
             id="inspire"
-            light
+            dark
+            v-if="isLoading"
         >
             <navigation-component></navigation-component>
             <header-component></header-component>
@@ -31,20 +32,16 @@
             HeaderComponent,
         },
 
-        computed:{
-            ...mapGetters({
-                isLogin: 'getIsLogin'
-            })
-        },
-
         data: () => ({
             login:false,
-            barcodeDialog: false,
-            barcode:''
+            initialize: false
         }),
 
-        props: {
-            source: String
+        computed:{
+            ...mapGetters({
+                isLogin: 'getIsLogin',
+                isLoading: 'getIsLoading'
+            })
         },
 
         async created() {

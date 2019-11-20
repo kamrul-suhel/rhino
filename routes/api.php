@@ -42,3 +42,16 @@ Route::prefix('settings')->group(function(){
 Route::prefix('languages')->group(function(){
     Route::get('/', 'Language\LanguageController@index');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Countries
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('countries')->group(function(){
+    Route::get('/', 'Country\CountryController@index');
+    Route::post('{id}/update', 'Country\CountryController@update');
+});

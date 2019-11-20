@@ -43,6 +43,14 @@ class AddSetting
             $settingArray = include $path;
 
             foreach ($settingArray as $item) {
+                /*
+                 * Check exist identifier
+                 */
+                $existsSetting = Setting::where('identifier', $item['identifier'])->first();
+                if($existsSetting){
+                    continue;
+                }
+
                 $setting = new Setting();
                 $setting->identifier = $item['identifier'];
                 $setting->save();

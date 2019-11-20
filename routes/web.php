@@ -1,5 +1,8 @@
 <?php
 
+
+Auth::routes();
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Routes for Dealerships
+|--------------------------------------------------------------------------
+|
+*/
+
 Route::prefix('dealerships')->group(function(){
     Route::get('/', function(){
         return view('welcome');
@@ -25,14 +35,46 @@ Route::prefix('dealerships')->group(function(){
     });
 });
 
-Route::get('/home', function () {
-    return 'Wooooot';
+Route::get('/home', 'HomeController@index')->name('home');
+
+/*
+|--------------------------------------------------------------------------
+| Routes for countries
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('countries')->group(function(){
+    Route::get('/', function(){
+       return view('welcome');
+    });
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/*
+|--------------------------------------------------------------------------
+| Routes for Languages
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('languages')->group(function(){
+    Route::get('/', function(){
+        return view('welcome');
+    });
+});
 
-Auth::routes();
+/*
+|--------------------------------------------------------------------------
+| Routes for Brands
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('brands')->group(function(){
+    Route::get('/', function(){
+        return view('welcome');
+    });
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('create', function(){
+        return view('welcome');
+    });
+});

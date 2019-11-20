@@ -31,8 +31,8 @@ const actions = {
      * @param payload
      */
     fetchLanguages({commit}, payload = {}){
-        const params = typeof(payload.type) != 'undefined' ? 'type='+payload.type : '';
-        const URL = '/api/languages?type='+ params
+        const params = typeof(payload.type) != 'undefined' ? '?type='+payload.type : '';
+        const URL = '/api/languages'+ params
 
         axios.get(URL).then((response)=>{
             commit('setLanguages', response.data)
