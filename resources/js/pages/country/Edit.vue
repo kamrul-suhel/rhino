@@ -16,7 +16,7 @@
         </v-layout>
 
         <v-layout>
-            <v-flex xs12 sm8>
+            <v-flex xs12>
                 <v-card>
                     <v-card-title
                         primary-title
@@ -77,8 +77,6 @@
                     </v-card-actions>
                 </v-card>
             </v-flex>
-
-            <RegionComponent></RegionComponent>
         </v-layout>
     </v-container>
 </template>
@@ -86,12 +84,8 @@
 <script>
     import {mapGetters} from 'vuex'
 
-    // Component Import
-    import RegionComponent from '../../components/Region/List'
-
     export default {
         components:{
-            RegionComponent
         },
 
         data() {
@@ -115,6 +109,28 @@
             initialize() {
                 const Id = this.$route.params.id;
                 this.$store.dispatch('fetchCountry', {id: Id})
+            },
+
+            updateCountry(){
+                const selectedCountry = this.selectedCountry
+                const ID = selectedCountry.id
+                const URL = `/api/countries/${ID}/update`
+                axios.post(URL, selectedCountry).then((response)=>{
+                    if(response.data.success){
+                        // Show success message
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            // bgColor: this.themeOption.snackBarSuccess,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.selectedCountry.full_name}  ${this.trans.successfully_updated}`
+                        })
+                        // reset selectedCountry in store
+                        this.$store.commit('setSelectedCountry', {})
+
+                        this.$router.push({name: 'listCountries'});
+                    }
+
+                })
             }
         }
     }

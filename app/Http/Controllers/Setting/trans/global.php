@@ -56,5 +56,11 @@ return [
         'label' => 'Cancel',
         'identifier' => 'cancel',
         'translation' => 'Cancel'
+    ],
+    [
+        'label' => 'Successfully updated',
+        'identifier' => 'successfully_updated',
+        'translation' => 'Successfully updated'
     ]
+
 ];

@@ -15,7 +15,11 @@ const defaultState = {
 
         // Header setting
         textHeadingColor: 'cyan',
-        loadingColor: 'white'
+        loadingColor: 'white',
+
+        // Snack bar option
+        snackBarSuccess: 'success',
+        snackBarTimeout : 6000
     }
 }
 const state = {

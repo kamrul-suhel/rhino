@@ -243,21 +243,7 @@
                 this.$router.push({name: 'editCountries', params:{id: country.id}})
             },
 
-            updateCountry(){
-                const selectedCountry = this.selectedCountry
-                const ID = selectedCountry.id
-                const URL = `/api/countries/${ID}/update`
-                axios.post(URL, selectedCountry).then((response)=>{
-                  if(response.data.success){
 
-                      this.initialize()
-                      // reset selectedCountry in store
-                      this.$store.commit('setSelectedCountry', {})
-                      this.dialog = false
-                  }
-
-                })
-            },
 
             deleteCountry(country){
                 this.$store.commit('setSelectedCountry', country)

@@ -11,6 +11,7 @@
                 <v-container fill-height>
                     <v-layout >
                         <v-flex>
+                            <SnackBar></SnackBar>
                             <router-view></router-view>
                         </v-flex>
                     </v-layout>
@@ -23,6 +24,7 @@
 <script>
     import  HeaderComponent  from './Layout/HeaderComonent.vue';
     import  NavigationComponent  from './Layout/NavigationComponent.vue';
+    import SnackBar from "./SnackBar";
     import {mapGetters} from 'vuex';
 
     export default {
@@ -30,6 +32,7 @@
         components: {
             NavigationComponent,
             HeaderComponent,
+            SnackBar
         },
 
         data: () => ({
