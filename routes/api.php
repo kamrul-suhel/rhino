@@ -52,6 +52,8 @@ Route::prefix('languages')->group(function(){
 */
 
 Route::prefix('countries')->group(function(){
-    Route::get('/', 'Country\CountryController@index');
+    Route::get('', 'Country\CountryController@index');
+    Route::get('{id}/show', 'Country\CountryController@show');
     Route::post('{id}/update', 'Country\CountryController@update');
+    Route::delete('{id}/delete', 'Country\CountryController@destroy');
 });

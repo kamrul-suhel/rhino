@@ -127,6 +127,21 @@ const actions = {
                 commit('setCountryLoading', false)
             }
         });
+    },
+
+    /**
+     * Get Selected country & regions
+     * @param id // required
+     */
+    fetchCountry({commit}, payload){
+        const URL = `/api/countries/${payload.id}/show`
+        axios.get(URL).then((response) => {
+            if(response.data){
+                commit('setSelectedCountry', response.data)
+            }
+        }).catch((error)=>{
+            // Generate error message
+        })
     }
 }
 

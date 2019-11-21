@@ -83,7 +83,10 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $country = Country::find($id);
+        $country = Country::with('regions')
+            ->where('id', $id)
+            ->first();
+
         return response()->json($country);
     }
 

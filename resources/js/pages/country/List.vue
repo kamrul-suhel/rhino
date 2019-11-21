@@ -99,9 +99,18 @@
 
                 <v-divider></v-divider>
 
-                <v-card-actions>
+                <v-card-actions class="pa-3">
                     <v-spacer></v-spacer>
                     <v-btn
+                        small
+                        @click="dialog = false"
+                    >
+                        {{ trans.cancel }}
+                    </v-btn>
+
+                    <v-btn
+                        class="success"
+                        small
                         @click="updateCountry()"
                     >
                         {{ trans.update }}
@@ -119,7 +128,7 @@
                 <v-card-title
                     primary-title
                 >
-                    {{ trans.delete }} {{ selectedCountry.full_name }}
+                    <h2>{{ trans.delete }} {{ selectedCountry.full_name }}</h2>
                 </v-card-title>
 
                 <v-divider></v-divider>
@@ -226,8 +235,9 @@
             },
 
             editCountry(country){
-                this.$store.commit('setSelectedCountry', country)
-                this.dialog = true
+                this.$router.push({name: 'editCountries', params:{id: country.id}})
+                // this.$store.commit('setSelectedCountry', country)
+                // this.dialog = true
             },
 
             updateCountry(){

@@ -36,4 +36,11 @@ class Country extends Model
         'flag',
         'driver_seating_position',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function regions(){
+        return $this->hasMany(Country::class,'id', 'country_id');
+    }
 }
