@@ -66,12 +66,6 @@
 
                     <v-card-actions class="pa-3">
                         <v-spacer></v-spacer>
-                        <v-btn
-                            small
-                            @click="dialog = false"
-                        >
-                            {{ trans.cancel }}
-                        </v-btn>
 
                         <v-btn
                             :class="themeOption.buttonSuccess"
@@ -84,67 +78,7 @@
                 </v-card>
             </v-flex>
 
-            <v-flex xs12 sm4>
-                <v-card class="ml-4">
-                    <v-card-title
-                        primary-title
-                    >
-                        <h3 :class="themeOption.textHeadingColor+'--text'">{{ trans.regions }}</h3>
-                    </v-card-title>
-
-                    <v-divider></v-divider>
-
-                    <v-card-text>
-                        <v-flex xs12>
-                            <v-text-field
-                                :label="trans.name"
-                                v-model="selectedCountry.full_name"
-                            ></v-text-field>
-                        </v-flex>
-
-                        <v-flex xs12>
-                            <v-text-field
-                                :label="trans.capital"
-                                v-model="selectedCountry.capital"
-                            ></v-text-field>
-                        </v-flex>
-
-                        <v-flex xs12>
-                            <v-text-field
-                                :label="trans.code"
-                                v-model="selectedCountry.iso_3166_2"
-                            ></v-text-field>
-                        </v-flex>
-
-                        <v-flex xs12>
-                            <v-switch
-                                v-model="selectedCountry.status"
-                                :label="trans.status"
-                            ></v-switch>
-                        </v-flex>
-                    </v-card-text>
-
-                    <v-divider></v-divider>
-
-                    <v-card-actions class="pa-3">
-                        <v-spacer></v-spacer>
-                        <v-btn
-                            small
-                            @click="dialog = false"
-                        >
-                            {{ trans.cancel }}
-                        </v-btn>
-
-                        <v-btn
-                            class="success"
-                            small
-                            @click="updateCountry()"
-                        >
-                            {{ trans.update }}
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-flex>
+            <RegionComponent></RegionComponent>
         </v-layout>
     </v-container>
 </template>
@@ -152,7 +86,14 @@
 <script>
     import {mapGetters} from 'vuex'
 
+    // Component Import
+    import RegionComponent from '../../components/Region/List'
+
     export default {
+        components:{
+            RegionComponent
+        },
+
         data() {
             return {}
         },

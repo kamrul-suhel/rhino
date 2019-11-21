@@ -40,7 +40,7 @@ return [
     [
         'label' => 'Rows Per Page test',
         'identifier' => 'rows_per_page',
-        'translation' => 'Rows Per Page test'
+        'translation' => 'Rows Per Page'
     ],
     [
         'label' => 'Delete',

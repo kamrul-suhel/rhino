@@ -14,8 +14,8 @@ const defaultState = {
         buttonSuccess: 'success',
 
         // Header setting
-        textHeadingColor: 'cyan'
-
+        textHeadingColor: 'cyan',
+        loadingColor: 'white'
     }
 }
 const state = {

@@ -15,7 +15,7 @@ class CreateForeignKeyBetweenDealershipAndDealershipTranslation extends Migratio
     {
         Schema::table('dealerships', function(Blueprint $table){
             $table->foreign('country_id')->references('id')->on('countries');
-            $table->foreign('region_id')->references('id')->on('countries');
+            $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('group_id')->references('id')->on('groups');
         });
 

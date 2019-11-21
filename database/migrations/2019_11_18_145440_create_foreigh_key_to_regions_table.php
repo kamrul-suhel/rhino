@@ -14,7 +14,6 @@ class CreateForeighKeyToRegionsTable extends Migration
     public function up()
     {
         Schema::table('regions', function (Blueprint $table) {
-            $table->foreign('brand_id')->references('id')->on('brands');
             $table->foreign('country_id')->references('id')->on('countries');
         });
     }

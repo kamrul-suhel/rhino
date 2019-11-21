@@ -63221,6 +63221,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -63244,7 +63247,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         totalCountry: 'getTotalCountry',
         loading: 'getCountryLoading',
         rowsPerPage: 'getCountryListRowsPerPage',
-        selectedCountry: 'getSelectedCountry'
+        selectedCountry: 'getSelectedCountry',
+        themeOption: 'getThemeOption'
     })),
 
     watch: {
@@ -63278,6 +63282,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         initialize: function initialize() {
             var paginateOption = _extends({}, this.pagination, {
                 trans: this.trans,
+                themeOption: this.themeOption,
                 paginate: true,
                 search: this.searchCountry
             });
@@ -63286,8 +63291,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         editCountry: function editCountry(country) {
             this.$router.push({ name: 'editCountries', params: { id: country.id } });
-            // this.$store.commit('setSelectedCountry', country)
-            // this.dialog = true
         },
         updateCountry: function updateCountry() {
             var _this = this;
@@ -63342,7 +63345,11 @@ var render = function() {
         "v-toolbar",
         { attrs: { flat: "" } },
         [
-          _c("v-toolbar-title", [_vm._v(_vm._s(_vm.trans.countries))]),
+          _c("v-toolbar-title", [
+            _c("span", { class: _vm.themeOption.textHeadingColor + "--text" }, [
+              _vm._v(_vm._s(_vm.trans.countries))
+            ])
+          ]),
           _vm._v(" "),
           _c("v-divider", {
             staticClass: "mx-2",
@@ -63352,7 +63359,10 @@ var render = function() {
           _c("v-spacer"),
           _vm._v(" "),
           _c("v-text-field", {
-            attrs: { label: _vm.trans.search_country_by_name },
+            attrs: {
+              color: _vm.themeOption.inputColor,
+              label: _vm.trans.search_country_by_name
+            },
             model: {
               value: _vm.searchCountry,
               callback: function($$v) {
@@ -63963,6 +63973,8 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Region_List__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Region_List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Region_List__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -64050,76 +64062,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+
+
+// Component Import
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        RegionComponent: __WEBPACK_IMPORTED_MODULE_1__components_Region_List___default.a
+    },
+
     data: function data() {
         return {};
     },
@@ -64316,25 +64269,6 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          attrs: { small: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm.trans.cancel) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
                           class: _vm.themeOption.buttonSuccess,
                           attrs: { small: "" },
                           on: {
@@ -64361,157 +64295,7 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm4: "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "ml-4" },
-                [
-                  _c("v-card-title", { attrs: { "primary-title": "" } }, [
-                    _c(
-                      "h3",
-                      { class: _vm.themeOption.textHeadingColor + "--text" },
-                      [_vm._v(_vm._s(_vm.trans.regions))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("v-divider"),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: _vm.trans.name },
-                            model: {
-                              value: _vm.selectedCountry.full_name,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "full_name", $$v)
-                              },
-                              expression: "selectedCountry.full_name"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: _vm.trans.capital },
-                            model: {
-                              value: _vm.selectedCountry.capital,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "capital", $$v)
-                              },
-                              expression: "selectedCountry.capital"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: _vm.trans.code },
-                            model: {
-                              value: _vm.selectedCountry.iso_3166_2,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "iso_3166_2", $$v)
-                              },
-                              expression: "selectedCountry.iso_3166_2"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c("v-switch", {
-                            attrs: { label: _vm.trans.status },
-                            model: {
-                              value: _vm.selectedCountry.status,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "status", $$v)
-                              },
-                              expression: "selectedCountry.status"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("v-divider"),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    { staticClass: "pa-3" },
-                    [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { small: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm.trans.cancel) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "success",
-                          attrs: { small: "" },
-                          on: {
-                            click: function($event) {
-                              return _vm.updateCountry()
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm.trans.update) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
+          _c("RegionComponent")
         ],
         1
       )
@@ -65384,8 +65168,8 @@ var defaultState = {
         buttonSuccess: 'success',
 
         // Header setting
-        textHeadingColor: 'cyan'
-
+        textHeadingColor: 'cyan',
+        loadingColor: 'white'
     }
 };
 var state = _extends({}, defaultState);
@@ -65622,7 +65406,7 @@ var defaultState = {
     selectedCountry: {},
     listHeader: [],
     totalCountry: 0,
-    loading: true,
+    loading: 'white',
     countryListRowPerPage: [15, 25, 40]
 };
 
@@ -65712,7 +65496,7 @@ var actions = {
         var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         // Set loading is true
-        commit('setCountryLoading', true);
+        commit('setCountryLoading', payload.themeOption.loadingColor);
 
         // Setup header for list view
         commit('setCountriesListHeader', payload.trans);
@@ -66857,6 +66641,404 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-7677b2a3", module.exports)
+  }
+}
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(148)
+/* template */
+var __vue_template__ = __webpack_require__(149)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Region/List.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3cbd5d5e", Component.options)
+  } else {
+    hotAPI.reload("data-v-3cbd5d5e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 148 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            headers: [{
+                text: 'Dessert (100g serving)',
+                align: 'left',
+                sortable: false,
+                value: 'name'
+            }, { text: 'Calories', value: 'calories' }, { text: 'Fat (g)', value: 'fat' }, { text: 'Carbs (g)', value: 'carbs' }, { text: 'Protein (g)', value: 'protein' }, { text: 'Iron (%)', value: 'iron' }],
+            desserts: [{
+                name: 'Frozen Yogurt',
+                calories: 159,
+                fat: 6.0,
+                carbs: 24,
+                protein: 4.0,
+                iron: '1%'
+            }, {
+                name: 'Ice cream sandwich',
+                calories: 237,
+                fat: 9.0,
+                carbs: 37,
+                protein: 4.3,
+                iron: '1%'
+            }, {
+                name: 'Eclair',
+                calories: 262,
+                fat: 16.0,
+                carbs: 23,
+                protein: 6.0,
+                iron: '7%'
+            }, {
+                name: 'Cupcake',
+                calories: 305,
+                fat: 3.7,
+                carbs: 67,
+                protein: 4.3,
+                iron: '8%'
+            }, {
+                name: 'Gingerbread',
+                calories: 356,
+                fat: 16.0,
+                carbs: 49,
+                protein: 3.9,
+                iron: '16%'
+            }, {
+                name: 'Jelly bean',
+                calories: 375,
+                fat: 0.0,
+                carbs: 94,
+                protein: 0.0,
+                iron: '0%'
+            }, {
+                name: 'Lollipop',
+                calories: 392,
+                fat: 0.2,
+                carbs: 98,
+                protein: 0,
+                iron: '2%'
+            }, {
+                name: 'Honeycomb',
+                calories: 408,
+                fat: 3.2,
+                carbs: 87,
+                protein: 6.5,
+                iron: '45%'
+            }, {
+                name: 'Donut',
+                calories: 452,
+                fat: 25.0,
+                carbs: 51,
+                protein: 4.9,
+                iron: '22%'
+            }, {
+                name: 'KitKat',
+                calories: 518,
+                fat: 26.0,
+                carbs: 65,
+                protein: 7,
+                iron: '6%'
+            }]
+        };
+    },
+
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        // headers: 'getCountriesListHeader',
+        selectedCountry: 'getSelectedCountry',
+        themeOption: 'getThemeOption'
+    }))
+});
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-flex",
+    { attrs: { xs12: "", sm4: "" } },
+    [
+      _c(
+        "v-card",
+        { staticClass: "ml-4" },
+        [
+          _c("v-card-title", { attrs: { "primary-title": "" } }, [
+            _c("h3", { class: _vm.themeOption.textHeadingColor + "--text" }, [
+              _vm._v(_vm._s(_vm.trans.regions))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  flat: "",
+                  "hide-headers": "",
+                  "hide-actions": "",
+                  headers: _vm.headers,
+                  items: _vm.desserts
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "headerCell",
+                    fn: function(props) {
+                      return [
+                        _c(
+                          "v-tooltip",
+                          {
+                            attrs: { bottom: "" },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "activator",
+                                  fn: function(ref) {
+                                    var on = ref.on
+                                    return [
+                                      _c("span", _vm._g({}, on), [
+                                        _vm._v(
+                                          "\n        " +
+                                            _vm._s(props.header.text) +
+                                            "\n      "
+                                        )
+                                      ])
+                                    ]
+                                  }
+                                }
+                              ],
+                              null,
+                              true
+                            )
+                          },
+                          [
+                            _vm._v(" "),
+                            _c("span", [
+                              _vm._v(
+                                "\n      " +
+                                  _vm._s(props.header.text) +
+                                  "\n    "
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    }
+                  },
+                  {
+                    key: "items",
+                    fn: function(props) {
+                      return [
+                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(_vm._s(props.item.calories))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(_vm._s(props.item.fat))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(_vm._s(props.item.carbs))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(_vm._s(props.item.protein))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(_vm._s(props.item.iron))
+                        ])
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            { staticClass: "pa-3" },
+            [
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { small: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.dialog = false
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.trans.cancel) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  staticClass: "success",
+                  attrs: { small: "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateCountry()
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.trans.update) +
+                      "\n            "
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3cbd5d5e", module.exports)
   }
 }
 

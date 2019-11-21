@@ -1,7 +1,9 @@
 <template>
     <div>
         <v-toolbar flat>
-            <v-toolbar-title>{{ trans.countries }}</v-toolbar-title>
+            <v-toolbar-title>
+                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.countries }}</span>
+            </v-toolbar-title>
             <v-divider
                 class="mx-2"
                 inset
@@ -11,6 +13,7 @@
             <v-spacer></v-spacer>
 
             <v-text-field
+                :color="themeOption.inputColor"
                 :label="trans.search_country_by_name"
                 v-model="searchCountry">
             </v-text-field>
@@ -187,7 +190,8 @@
                 totalCountry: 'getTotalCountry',
                 loading: 'getCountryLoading',
                 rowsPerPage: 'getCountryListRowsPerPage',
-                selectedCountry: 'getSelectedCountry'
+                selectedCountry: 'getSelectedCountry',
+                themeOption: 'getThemeOption'
             })
         }),
 
@@ -227,6 +231,7 @@
                 const paginateOption = {
                     ...this.pagination,
                     trans: this.trans,
+                    themeOption: this.themeOption,
                     paginate: true,
                     search: this.searchCountry
                 }
@@ -236,8 +241,6 @@
 
             editCountry(country){
                 this.$router.push({name: 'editCountries', params:{id: country.id}})
-                // this.$store.commit('setSelectedCountry', country)
-                // this.dialog = true
             },
 
             updateCountry(){

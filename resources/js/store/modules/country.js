@@ -3,7 +3,7 @@ const defaultState = {
     selectedCountry: {},
     listHeader:[],
     totalCountry: 0,
-    loading: true,
+    loading: 'white',
     countryListRowPerPage: [15,25,40]
 }
 
@@ -113,7 +113,7 @@ const actions = {
      */
     fetchCountries({commit}, payload = {}){
         // Set loading is true
-        commit('setCountryLoading', true)
+        commit('setCountryLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
         commit('setCountriesListHeader', payload.trans)
