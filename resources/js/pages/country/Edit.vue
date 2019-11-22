@@ -120,7 +120,6 @@
                         // Show success message
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
-                            // bgColor: this.themeOption.snackBarSuccess,
                             timeOut: this.themeOption.snackBarTimeout,
                             message: `${this.selectedCountry.full_name}  ${this.trans.successfully_updated}`
                         })
@@ -129,7 +128,6 @@
 
                         this.$router.push({name: 'listCountries'});
                     }
-
                 })
             }
         }

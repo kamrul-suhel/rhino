@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeighKeyForSettingsTranslationTable extends Migration
+class AddForeignKeyToTypesTranslationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateForeighKeyForSettingsTranslationTable extends Migration
      */
     public function up()
     {
-        Schema::table('settings_translation', function (Blueprint $table) {
-            $table->foreign('setting_id')->references('id')->on('settings');
+        Schema::table('types_translation', function (Blueprint $table) {
+            $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('language_id')->references('id')->on('languages');
         });
     }
@@ -26,8 +26,8 @@ class CreateForeighKeyForSettingsTranslationTable extends Migration
      */
     public function down()
     {
-        Schema::table('settings_translation', function (Blueprint $table) {
-            $table->dropForeign(['setting_id', 'language_id']);
+        Schema::table('types', function (Blueprint $table) {
+            $table->dropForeign(['type_id', 'language_id']);
         });
     }
 }

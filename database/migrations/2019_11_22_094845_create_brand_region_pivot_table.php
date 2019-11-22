@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeighKeyToEventTable extends Migration
+class CreateBrandRegionPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateForeighKeyToEventTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->foreign('type_id')->references('id')->on('types');
-            $table->foreign('dealership_id')->references('id')->on('dealerships');
+        Schema::create('brand_region', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('brand_id')->index();
+            $table->unsignedBigInteger('region_id')->index();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ class CreateForeighKeyToEventTable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('brand_region');
     }
 }

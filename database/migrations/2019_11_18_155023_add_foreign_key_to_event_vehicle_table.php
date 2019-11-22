@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeighKeyToBrandEventTable extends Migration
+class AddForeignKeyToEventVehicleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateForeighKeyToBrandEventTable extends Migration
      */
     public function up()
     {
-        Schema::table('brand_event', function (Blueprint $table) {
-            $table->foreign('brand_id')->references('id')->on('brands');
+        Schema::table('event_vehicle', function (Blueprint $table) {
             $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });
     }
 
@@ -26,8 +26,8 @@ class CreateForeighKeyToBrandEventTable extends Migration
      */
     public function down()
     {
-        Schema::table('brand_event', function (Blueprint $table) {
-            $table->dropForeign(['brand_id', 'event_id']);
+        Schema::table('event_vehicle', function (Blueprint $table) {
+            $table->dropForeign(['event_id', 'vehicle_id']);
         });
     }
 }

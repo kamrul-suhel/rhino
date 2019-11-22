@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeighKeyToAppointmentEventTable extends Migration
+class AddForeignKeyToGuestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateForeighKeyToAppointmentEventTable extends Migration
      */
     public function up()
     {
-        Schema::table('appointment_event', function (Blueprint $table) {
-            $table->foreign('appointment_id')->references('id')->on('appointments');
+        Schema::table('guests', function (Blueprint $table) {
             $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('appointment_id')->references('id')->on('appointments');
         });
     }
 
@@ -26,8 +26,8 @@ class CreateForeighKeyToAppointmentEventTable extends Migration
      */
     public function down()
     {
-        Schema::table('appointment_event', function (Blueprint $table) {
-            $table->dropForeign(['appointment_id', 'event_id']);
+        Schema::table('guests', function (Blueprint $table) {
+            $table->dropForeign(['event_id', 'appointment_id']);
         });
     }
 }

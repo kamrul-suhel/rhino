@@ -17,8 +17,8 @@ class CreateBrandsTranslationTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('brand_id')->index();
             $table->unsignedBigInteger('language_id')->index();
-            $table->string('name', 20);
-            $table->text('description');
+            $table->string('name', 120)->index();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

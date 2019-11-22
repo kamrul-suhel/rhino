@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeighKeyToRegionsTable extends Migration
+class AddForeignKeyToRegionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class CreateForeighKeyToRegionsTable extends Migration
     public function up()
     {
         Schema::table('regions', function (Blueprint $table) {
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries');
         });
     }
 
@@ -26,7 +28,7 @@ class CreateForeighKeyToRegionsTable extends Migration
     public function down()
     {
         Schema::table('regions', function (Blueprint $table) {
-            $table->dropForeign(['brand_id', 'country_id']);
+            $table->dropForeign(['country_id']);
         });
     }
 }

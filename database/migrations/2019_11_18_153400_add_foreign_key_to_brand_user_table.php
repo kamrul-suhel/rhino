@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeighKeyToVehiclesTable extends Migration
+class AddForeignKeyToBrandUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateForeighKeyToVehiclesTable extends Migration
      */
     public function up()
     {
-        Schema::table('vehicles', function (Blueprint $table) {
+        Schema::table('brand_user', function (Blueprint $table) {
             $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -25,8 +26,8 @@ class CreateForeighKeyToVehiclesTable extends Migration
      */
     public function down()
     {
-        Schema::table('vehicles', function (Blueprint $table) {
-            $table->dropForeign(['brand_id']);
+        Schema::table('brand_user', function (Blueprint $table) {
+            $table->dropForeign(['brand_id', 'user_id']);
         });
     }
 }

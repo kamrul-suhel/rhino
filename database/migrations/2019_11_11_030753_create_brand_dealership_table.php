@@ -19,10 +19,6 @@ class CreateBrandDealershipTable extends Migration
             $table->unsignedBigInteger('dealership_id');
             $table->unsignedBigInteger('region_id')->nullable();
             $table->timestamps();
-
-//            $table->foreign('brand_id')->references('id')->on('brands');
-//            $table->foreign('dealership_id')->references('id')->on('dealerships');
-//            $table->foreign('region_id')->references('id')->on('regions');
         });
     }
 

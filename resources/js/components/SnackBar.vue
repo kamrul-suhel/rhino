@@ -3,7 +3,7 @@
         <v-snackbar
             v-model="show"
             :color="themeOption.snackBarSuccess"
-            :timeout="timeOut"
+            :timeout="themeOption.snackBarTimeout"
             top
             right
         >
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import {mapGetters, mapMutations} from 'vuex'
+    import {mapGetters} from 'vuex'
 
     export default {
         data() {

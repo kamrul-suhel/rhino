@@ -18,7 +18,8 @@ const defaultState = {
         loadingColor: 'white',
 
         // Snack bar option
-        snackBarSuccess: 'success',
+        snackBarBgSuccess: 'success',
+        snackBarBgError: 'red',
         snackBarTimeout : 6000
     }
 }

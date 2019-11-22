@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeighKeyToEventUserTable extends Migration
+class AddForeignKeyBetweenDealershipAndUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateForeighKeyToEventUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('event_user', function (Blueprint $table) {
-            $table->foreign('event_id')->references('id')->on('events');
+        Schema::table('dealership_user', function (Blueprint $table) {
+            $table->foreign('dealership_id')->references('id')->on('dealerships');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -26,8 +26,8 @@ class CreateForeighKeyToEventUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('event_user', function (Blueprint $table) {
-            $table->dropForeign(['event_id', 'user_id']);
+        Schema::table('dealership_user', function (Blueprint $table) {
+            $table->dropForeign(['dealership_id', 'user_id']);
         });
     }
 }

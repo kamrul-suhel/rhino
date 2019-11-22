@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeignKeyBetweenDealershipAndDealershipTranslation extends Migration
+class AddForeignKeyBetweenDealershipAndDealershipTranslation extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,6 @@ class CreateForeignKeyBetweenDealershipAndDealershipTranslation extends Migratio
     public function up()
     {
         Schema::table('dealerships', function(Blueprint $table){
-            $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('group_id')->references('id')->on('groups');
         });
