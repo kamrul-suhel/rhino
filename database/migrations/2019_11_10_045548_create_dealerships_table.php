@@ -33,6 +33,7 @@ class CreateDealershipsTable extends Migration
             $table->time('saturday_end');
             $table->time('sunday_start');
             $table->time('sunday_end');
+            $table->tinyInteger('status')->index()->default(1);
             $table->timestamps();
         });
     }

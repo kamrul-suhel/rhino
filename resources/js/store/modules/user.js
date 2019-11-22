@@ -20,7 +20,12 @@ const defaultState = {
         // Snack bar option
         snackBarBgSuccess: 'success',
         snackBarBgError: 'red',
-        snackBarTimeout : 6000
+        snackBarTimeout : 6000,
+
+
+        //Tab option
+        tabColor: 'dark',
+        tabSliderColor: 'white'
     }
 }
 const state = {

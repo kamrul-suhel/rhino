@@ -1,10 +1,10 @@
 const defaultState = {
-    countries: [],
-    selectedCountry: {},
+    dealerships : [],
+    selectedDealership: {},
     listHeader:[],
-    totalCountry: 0,
     loading: 'white',
-    countryListRowPerPage: [15,25,40]
+    totalDealership: 0,
+    dealershipListRowPerPage: [15,25,40]
 }
 
 const state = {
@@ -12,32 +12,27 @@ const state = {
 }
 
 const mutations = {
-    setCountryListRowsPerPage(state, rowsPerPage){
-        // Need to send and array of object
-        state.countryListRowPerPage = [...rowsPerPage]
+    setDealerships(state, dealerships){
+        state.dealerships = [...dealerships]
     },
 
-    setCountries(state, countries){
-        state.countries = [...countries]
+    setDealershipLoading(state, status){
+        state.loading = status
     },
 
-    setSelectedCountry(state, country){
-        state.selectedCountry = {...country}
+    setSelectedDealership(state, dealership){
+        state.selectedDealership = {...dealership}
     },
 
-    setTotalCountry(state, totalCountry){
-        state.totalCountry = totalCountry
+    setTotalDealership(state, totalDealership){
+        state.totalDealership = totalDealership
     },
 
-    resetCountriesStore(state){
+    resetDealershipStore(state){
         state = {...defaultState}
     },
 
-    setCountryLoading(state, loading){
-        state.loading = loading
-    },
-
-    setCountriesListHeader(state, trans){
+    setDealershipListHeader(state, trans){
         const header = [
             {
                 text: trans.name,
@@ -47,18 +42,18 @@ const mutations = {
             },
 
             {
-                text: trans.capital,
-                value: 'capital'
+                text: trans.country,
+                value: 'country'
             },
 
             {
-                text: trans.code ,
-                value: 'code'
+                text: trans.region ,
+                value: 'region'
             },
 
             {
-                text: trans.seating_position,
-                value: 'seating_position'
+                text: trans.group,
+                value: 'group'
             },
 
             {
@@ -77,29 +72,30 @@ const mutations = {
 }
 
 const getters = {
-    getCountries(state){
-        return state.countries
+    getDealerships(state){
+        return state.dealerships
     },
 
-    getSelectedCountry(state){
-        return state.selectedCountry
-    },
-
-    getCountriesListHeader(state){
+    getDealershipListHeader(state){
         return state.listHeader
     },
 
-    getTotalCountry(state){
-        return state.totalCountry
-    },
-
-    getCountryLoading(state){
+    getDealershipLoading(state){
         return state.loading
     },
 
-    getCountryListRowsPerPage(state){
-        return state.countryListRowPerPage
-    }
+    getDealershipListRowsPerPage(state){
+        return state.dealershipListRowPerPage
+    },
+
+    getSelectedDealership(state){
+        return state.selectedDealership
+    },
+
+    getTotalDealership(state){
+        return state.totalDealership
+    },
+
 }
 
 const actions = {
@@ -113,33 +109,38 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchCountries({commit}, payload = {}){
+    fetchDealerships({commit}, payload = {}) {
+
+        console.log('paginage option is: ', payload);
+
         // Set loading is true
-        commit('setCountryLoading', payload.themeOption.loadingColor)
+        commit('setDealershipLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        commit('setCountriesListHeader', payload.trans)
+        commit('setDealershipListHeader', payload.trans)
 
         const params = generateParams(payload)
-        const URL = '/api/countries'+ params
-        axios.get(URL).then((response)=>{
-            if(response.data.data){
-                commit('setCountries', response.data.data)
-                commit('setTotalCountry', response.data.total)
-                commit('setCountryLoading', false)
+        const URL = '/api/dealerships' + params
+
+        axios.get(URL).then((response) => {
+            if (response.data.dealership) {
+                commit('setDealerships', response.data.dealership)
+                commit('setTotalDealership', response.data.total)
+                commit('setDealershipLoading', false)
             }
         });
     },
+
 
     /**
      * Get Selected country & regions
      * @param id // required
      */
     fetchCountry({commit}, payload){
-        const URL = `/api/countries/${payload.id}/show`
+        const URL = `/api/dealerships/${payload.id}/show`
         axios.get(URL).then((response) => {
             if(response.data){
-                commit('setSelectedCountry', response.data)
+                commit('setSelectedDealership', response.data)
             }
         }).catch((error)=>{
             // Generate error message
@@ -170,12 +171,17 @@ function generateParams(payload){
         params += '&page='+payload.page
     }
 
+    if(payload.sortBy && typeof(payload.sortBy) != 'undefined'){
+        params += '&sortBy='+payload.sortBy
+    }
+
     if(payload.search && typeof (payload.search) != 'undefined'){
         params += '&search='+payload.search
     }
 
     return params
 }
+
 
 export default {
     state,

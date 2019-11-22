@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingsTableSeeder::class);
 
         // Seed the company & company translation
-        $this->call(CompanySeeder::class);
+//        $this->call(CompanySeeder::class);
 
         // Seed dealership group table
         $this->call(GroupSeeder::class);
@@ -35,6 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DealershipSeeder::class);
 
         // Seed Brand table
-        $this->call(BrandSeeder::class);
+//        $this->call(BrandSeeder::class);
     }
 }

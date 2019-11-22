@@ -44,7 +44,7 @@ class AddSetting
 
             foreach ($settingArray as $item) {
                 /*
-                 * Check exist identifier
+                 * Check exist identifier to prevent duplication
                  */
                 $existsSetting = Setting::where('identifier', $item['identifier'])->first();
                 if($existsSetting){

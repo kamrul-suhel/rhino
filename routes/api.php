@@ -31,6 +31,20 @@ Route::prefix('settings')->group(function(){
 });
 
 
+/*
+|--------------------------------------------------------------------------
+| API Route for Dealership
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('dealerships')->group(function(){
+    Route::get('', 'Dealership\DealershipController@index');
+    Route::get('{id}/show', 'Dealership\DealershipController@show');
+    Route::put('{id}/update', 'Dealership\DealershipController@update');
+});
+
+
 
 /*
 |--------------------------------------------------------------------------

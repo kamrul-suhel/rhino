@@ -17,8 +17,9 @@ class CreateDealershipsTranslation extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('dealership_id')->index();
             $table->unsignedBigInteger('language_id')->index();
-            $table->string('name');
-            $table->string('address_line_1')->nullable();
+            $table->string('name', 120)->index(); // Searchable
+            $table->string('description', 120)->nullable();
+            $table->string('address_line_1')->nullable()->index(); // Make it searchable
             $table->string('address_line_2')->nullable();
             $table->string('address_line_3')->nullable();
             $table->string('address_line_4')->nullable();

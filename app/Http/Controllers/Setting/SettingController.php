@@ -20,6 +20,7 @@ class SettingController extends Controller
             'settings_translation.*'
         )->leftJoin('settings_translation', 'settings_translation.setting_id', '=', 'settings.id')
             ->where('settings_translation.language_id', $this->languageId)
+            ->orderBy('settings.identifier')
             ->pluck('translation', 'identifier');
 
         return response()->json($settings);

@@ -25,6 +25,7 @@ $factory->define(\App\Dealership::class, function (Faker $faker) {
         'region_id' => \App\Region::all()->random()->id,
         'longitude' => $faker->longitude,
         'latitude' => $faker->latitude,
+        'status' => $faker->randomElement([0,1]),
         'monday_start' => $faker->time('H:i:s', $startTime),
         'monday_end' => $faker->time('H:i:s', $endTime),
         'tuesday_start' => $faker->time('H:i:s', $startTime),

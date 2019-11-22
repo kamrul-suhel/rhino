@@ -7,6 +7,7 @@ import navigation from "./modules/navigation";
 import language from './modules/language'
 import country from "./modules/country";
 import SnackBar from "./modules/snackbar";
+import Dealership from './modules/dealership'
 
 
 Vue.use(Vuex);
@@ -36,7 +37,8 @@ const store = new Vuex.Store({
         user,
         navigation,
         language,
-        country
+        country,
+        Dealership
     }
 });
 

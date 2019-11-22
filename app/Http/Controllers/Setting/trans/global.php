@@ -61,6 +61,78 @@ return [
         'label' => 'Successfully updated',
         'identifier' => 'successfully_updated',
         'translation' => 'Successfully updated'
-    ]
+    ],
+
+    [
+        'label' => 'Name',
+        'identifier' => 'name',
+        'translation' => 'Name'
+    ],
+
+    [
+        'label' => 'Country',
+        'identifier' => 'country',
+        'translation' => 'Country'
+    ],
+
+    [
+        'label' => 'Region',
+        'identifier' => 'region',
+        'translation' => 'Region'
+    ],
+
+    [
+        'label' => 'Address',
+        'identifier' => 'address',
+        'translation' => 'Address'
+    ],
+
+    [
+        'label' => 'Opening Times',
+        'identifier' => 'opening_times',
+        'translation' => 'Opening Times'
+    ],
+
+    [
+        'label' => 'Status',
+        'identifier' => 'status',
+        'translation' => 'Status'
+    ],
+
+    [
+        'label' => 'Select Country',
+        'identifier' => 'select_country',
+        'translation' => 'Select Country'
+    ],
+
+    [
+        'label' => 'Select Region',
+        'identifier' => 'select_region',
+        'translation' => 'Select region'
+    ],
+
+    [
+        'label' => 'Postcode',
+        'identifier' => 'postcode',
+        'translation' => 'Postcode'
+    ],
+
+    [
+        'label' => 'Capital',
+        'identifier' => 'capital',
+        'translation' => 'Capital'
+    ],
+
+    [
+        'label' => 'Region',
+        'identifier' => 'region',
+        'translation' => 'Region'
+    ],
+
+    [
+        'label' => 'Group',
+        'identifier' => 'group',
+        'translation' => 'group'
+    ],
 
 ];

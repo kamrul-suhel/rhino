@@ -36743,6 +36743,10 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_TimePicker__ = __webpack_require__(454);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_TimePicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_TimePicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__ = __webpack_require__(457);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -36818,14 +36822,153 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {},
+    components: {
+        TimePicker: __WEBPACK_IMPORTED_MODULE_1__components_TimePicker___default.a,
+        ImageUpload: __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default.a
+    },
 
     data: function data() {
-        return {};
+        return {
+
+            dealership: {},
+            times: {},
+            active: null
+        };
     },
 
 
@@ -36836,6 +36979,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         themeOption: 'getThemeOption'
     })),
 
+    watch: {
+        dealership: function dealership() {
+            console.log('update dealership', this.dealership);
+        }
+    },
+
     created: function created() {
         this.initialize();
     },
@@ -36845,6 +36994,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         initialize: function initialize() {
             var Id = this.$route.params.id;
             this.$store.dispatch('fetchCountry', { id: Id });
+        },
+        updateTimes: function updateTimes(times) {
+            console.log('time is: ', times);
         }
     }
 });
@@ -36874,7 +37026,11 @@ var render = function() {
                 { attrs: { flat: "" } },
                 [
                   _c("v-toolbar-title", [
-                    _vm._v(_vm._s(_vm.trans.create_dealerships))
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.trans.create_dealerships) +
+                        "\n                "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("v-divider", {
@@ -36907,85 +37063,452 @@ var render = function() {
                     "v-card-text",
                     [
                       _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
                         [
-                          _c("v-text-field", {
-                            attrs: {
-                              color: _vm.themeOption.inputColor,
-                              label: _vm.trans.name
-                            },
-                            model: {
-                              value: _vm.selectedCountry.full_name,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "full_name", $$v)
-                              },
-                              expression: "selectedCountry.full_name"
-                            }
-                          })
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", "pa-2": "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  color: _vm.themeOption.inputColor,
+                                  label: _vm.trans.name_of_dealership
+                                },
+                                model: {
+                                  value: _vm.dealership.name,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.dealership, "name", $$v)
+                                  },
+                                  expression: "dealership.name"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
                       ),
                       _vm._v(" "),
                       _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
                         [
-                          _c("v-text-field", {
-                            attrs: {
-                              color: _vm.themeOption.inputColor,
-                              label: _vm.trans.capital
-                            },
-                            model: {
-                              value: _vm.selectedCountry.capital,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "capital", $$v)
-                              },
-                              expression: "selectedCountry.capital"
-                            }
-                          })
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  color: _vm.themeOption.inputColor,
+                                  label: _vm.trans.select_country
+                                },
+                                model: {
+                                  value: _vm.dealership.country,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.dealership, "country", $$v)
+                                  },
+                                  expression: "dealership.country"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  color: _vm.themeOption.inputColor,
+                                  label: _vm.trans.select_region
+                                },
+                                model: {
+                                  value: _vm.dealership.region,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.dealership, "region", $$v)
+                                  },
+                                  expression: "dealership.region"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
                       ),
                       _vm._v(" "),
                       _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
                         [
-                          _c("v-text-field", {
-                            attrs: {
-                              color: _vm.themeOption.inputColor,
-                              label: _vm.trans.code
-                            },
-                            model: {
-                              value: _vm.selectedCountry.iso_3166_2,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "iso_3166_2", $$v)
-                              },
-                              expression: "selectedCountry.iso_3166_2"
-                            }
-                          })
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  color: _vm.themeOption.inputColor,
+                                  label: _vm.trans.latitude
+                                },
+                                model: {
+                                  value: _vm.dealership.latitude,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.dealership, "latitude", $$v)
+                                  },
+                                  expression: "dealership.latitude"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  color: _vm.themeOption.inputColor,
+                                  label: _vm.trans.longitude
+                                },
+                                model: {
+                                  value: _vm.dealership.longitude,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.dealership, "longitude", $$v)
+                                  },
+                                  expression: "dealership.longitude"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
                       ),
                       _vm._v(" "),
+                      _c("v-divider", { staticClass: "mt-2 mb-2" }),
+                      _vm._v(" "),
                       _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
+                        "v-layout",
+                        { attrs: { column: "", wrap: "" } },
                         [
-                          _c("v-switch", {
-                            attrs: {
-                              color: _vm.themeOption.inputColor,
-                              label: _vm.trans.status
-                            },
-                            model: {
-                              value: _vm.selectedCountry.status,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedCountry, "status", $$v)
+                          _c(
+                            "v-tabs",
+                            {
+                              attrs: {
+                                color: _vm.themeOption.tabColor,
+                                "slider-color": _vm.themeOption.tabSliderColor
                               },
-                              expression: "selectedCountry.status"
-                            }
-                          })
+                              model: {
+                                value: _vm.active,
+                                callback: function($$v) {
+                                  _vm.active = $$v
+                                },
+                                expression: "active"
+                              }
+                            },
+                            [
+                              _c(
+                                "v-tab",
+                                {
+                                  key: "dealershipImage",
+                                  attrs: { ripple: "" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.trans.dealership_banner) +
+                                      "\n\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-tab",
+                                { key: "address", attrs: { ripple: "" } },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.trans.address) +
+                                      "\n\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-tab",
+                                { key: "times", attrs: { ripple: "" } },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.trans.opening_times) +
+                                      "\n\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-tab-item",
+                                { key: "dealershipImage" },
+                                [
+                                  _c(
+                                    "v-layout",
+                                    {
+                                      attrs: { row: "", wrap: "", "pt-3": "" }
+                                    },
+                                    [_c("ImageUpload")],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-tab-item",
+                                { key: "address" },
+                                [
+                                  _c(
+                                    "v-layout",
+                                    {
+                                      attrs: { row: "", wrap: "", "pt-3": "" }
+                                    },
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs12: "",
+                                            sm6: "",
+                                            "pa-2": ""
+                                          }
+                                        },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              color: _vm.themeOption.inputColor,
+                                              label: _vm.trans.address_line_1
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.dealership.addressLineOne,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.dealership,
+                                                  "addressLineOne",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "dealership.addressLineOne"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs12: "",
+                                            sm6: "",
+                                            "pa-2": ""
+                                          }
+                                        },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              color: _vm.themeOption.inputColor,
+                                              label: _vm.trans.address_line_2
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.dealership.addressLineTwo,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.dealership,
+                                                  "addressLineTwo",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "dealership.addressLineTwo"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-layout",
+                                    {
+                                      attrs: { row: "", wrap: "", "pt-3": "" }
+                                    },
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs12: "",
+                                            sm6: "",
+                                            "pa-2": ""
+                                          }
+                                        },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              color: _vm.themeOption.inputColor,
+                                              label: _vm.trans.address_line_3
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.dealership.addressLineThree,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.dealership,
+                                                  "addressLineThree",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "dealership.addressLineThree"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs12: "",
+                                            sm6: "",
+                                            "pa-2": ""
+                                          }
+                                        },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              color: _vm.themeOption.inputColor,
+                                              label: _vm.trans.address_line_4
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.dealership.addressLineFour,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.dealership,
+                                                  "addressLineFour",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "dealership.addressLineFour"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-layout",
+                                    { attrs: { row: "", wrap: "" } },
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs12: "",
+                                            sm6: "",
+                                            "pa-2": ""
+                                          }
+                                        },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              color: _vm.themeOption.inputColor,
+                                              label: _vm.trans.address_line_5
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.dealership.addressLineFive,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.dealership,
+                                                  "addressLineFive",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "dealership.addressLineFive"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs12: "",
+                                            sm6: "",
+                                            "pa-2": ""
+                                          }
+                                        },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              color: _vm.themeOption.inputColor,
+                                              label: _vm.trans.address_line_6
+                                            },
+                                            model: {
+                                              value:
+                                                _vm.dealership.addressLineSix,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.dealership,
+                                                  "addressLineSix",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "dealership.addressLineSix"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-tab-item",
+                                { key: "times" },
+                                [
+                                  _c("TimePicker", {
+                                    attrs: { dealership: _vm.times },
+                                    on: { sendTimes: _vm.updateTimes }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -37015,7 +37538,7 @@ var render = function() {
                         [
                           _vm._v(
                             "\n                        " +
-                              _vm._s(_vm.trans.update) +
+                              _vm._s(_vm.trans.create_dealerships) +
                               "\n                    "
                           )
                         ]
@@ -37099,6 +37622,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -37118,30 +37644,178 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            items: [{
-                text: 'Dashboard',
-                disabled: false,
-                href: 'breadcrumbs_dashboard'
-            }, {
-                text: 'Link 1',
-                disabled: false,
-                href: 'breadcrumbs_link_1'
-            }, {
-                text: 'Link 2',
-                disabled: true,
-                href: 'breadcrumbs_link_2'
-            }]
+            totalDesserts: 0,
+            desserts: [],
+            pagination: {},
+            searchDealerships: '',
+            dialog: false,
+            deleteDialog: false
         };
     },
 
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        dealerships: 'getDealerships',
+        trans: 'getFields',
+        headers: 'getDealershipListHeader',
+        totalDealership: 'getTotalDealership',
+        loading: 'getDealershipLoading',
+        rowsPerPage: 'getDealershipListRowsPerPage',
+        selectedDealership: 'getSelectedDealership',
+        themeOption: 'getThemeOption'
+    })),
+
+    watch: {
+        pagination: {
+            handler: function handler() {
+                var paginateOption = _extends({}, this.pagination, {
+                    trans: this.trans,
+                    paginate: true
+                });
+                this.initialize(paginateOption);
+            }
+        },
+
+        searchDealerships: function searchDealerships(value) {
+            var paginateOption = _extends({}, this.pagination, {
+                page: 1, // Setup first page,
+                trans: this.trans,
+                paginate: true,
+                search: value
+            });
+
+            this.initialize(paginateOption);
+        }
+    },
+
     created: function created() {},
+    mounted: function mounted() {},
 
+    methods: {
+        // Initialize data when first render
+        initialize: function initialize() {
+            var paginateOption = _extends({}, this.pagination, {
+                trans: this.trans,
+                themeOption: this.themeOption,
+                paginate: true,
+                search: this.searchDealerships
+            });
 
-    methods: {}
+            this.$store.dispatch('fetchDealerships', paginateOption);
+        },
+        editDealerships: function editDealerships(Dealerships) {
+            this.$router.push({ name: 'editCountries', params: { id: Dealerships.id } });
+        },
+        deleteDealerships: function deleteDealerships(Dealerships) {
+            this.$store.commit('setSelectedDealerships', Dealerships);
+            this.deleteDialog = true;
+        },
+        confirmDeleteDealerships: function confirmDeleteDealerships() {
+            var _this = this;
+
+            var selectedDealerships = this.selectedDealerships;
+            var URL = 'api/countries/' + selectedDealerships.id + '/delete';
+
+            axios.delete(URL).then(function (response) {
+                if (response.data.success) {
+                    _this.initialize();
+                    // reset selectedDealerships in store
+                    _this.$store.commit('setSelectedDealerships', {});
+                    _this.dialog = false;
+                }
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -37153,52 +37827,224 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
+    "div",
     [
       _c(
-        "v-card",
+        "v-toolbar",
+        { attrs: { flat: "" } },
+        [
+          _c("v-toolbar-title", [
+            _c("span", { class: _vm.themeOption.textHeadingColor + "--text" }, [
+              _vm._v(_vm._s(_vm.trans.dealerships))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("v-divider", {
+            staticClass: "mx-2",
+            attrs: { inset: "", vertical: "" }
+          }),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              color: _vm.themeOption.inputColor,
+              label: _vm.trans.search_by_name_or_country
+            },
+            model: {
+              value: _vm.searchDealerships,
+              callback: function($$v) {
+                _vm.searchDealerships = $$v
+              },
+              expression: "searchDealerships"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.dealerships,
+          pagination: _vm.pagination,
+          "no-results-text": _vm.trans.no_dealership_found,
+          "no-data-text": _vm.trans.no_dealership_found,
+          "rows-per-page-text": _vm.trans.rows_per_page,
+          "rows-per-page-items": _vm.rowsPerPage,
+          "total-items": _vm.totalDealership,
+          loading: _vm.loading
+        },
+        on: {
+          "update:pagination": function($event) {
+            _vm.pagination = $event
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("td", [_vm._v(_vm._s(props.item.name))]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.country))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.region))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.group))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(
+                    _vm._s(
+                      props.item.status === 1
+                        ? _vm.trans.active
+                        : _vm.trans.inactive
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "text-xs-right" },
+                  [
+                    _c(
+                      "v-icon",
+                      {
+                        staticClass: "mr-2",
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editDealerships(props.item)
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    edit\n                ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-icon",
+                      {
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteDealerships(props.item)
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    delete\n                ")]
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "290" },
+          model: {
+            value: _vm.deleteDialog,
+            callback: function($$v) {
+              _vm.deleteDialog = $$v
+            },
+            expression: "deleteDialog"
+          }
+        },
         [
           _c(
-            "v-card-text",
+            "v-card",
             [
-              _c("v-breadcrumbs", {
-                staticClass: "pa-0",
-                attrs: { items: _vm.items },
-                scopedSlots: _vm._u([
-                  {
-                    key: "item",
-                    fn: function(props) {
-                      return [
-                        _c(
-                          "a",
-                          {
-                            class: [
-                              props.item.disabled && "disabled",
-                              "white--text"
-                            ],
-                            attrs: { href: props.item.href }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(props.item.text.toUpperCase()) +
-                                "\n                    "
-                            )
-                          ]
-                        )
-                      ]
-                    }
-                  }
+              _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                _c("h2", [
+                  _vm._v(
+                    _vm._s(_vm.trans.delete) +
+                      " " +
+                      _vm._s(_vm.selectedDealership.full_name)
+                  )
                 ])
-              })
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c("v-flex", { attrs: { xs12: "" } }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.trans.delete_confirmation) +
+                        "\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { staticClass: "pa-3" },
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "info", small: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.deleteDialog = false
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.cancel) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", small: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDeleteDealerships()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.delete) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
             ],
             1
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("h2", [_vm._v("Dealership List")])
+      )
     ],
     1
   )
@@ -40019,6 +40865,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_language__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_country__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_snackbar__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_dealership__ = __webpack_require__(453);
+
 
 
 
@@ -40052,7 +40900,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
         user: __WEBPACK_IMPORTED_MODULE_3__modules_user__["a" /* default */],
         navigation: __WEBPACK_IMPORTED_MODULE_4__modules_navigation__["a" /* default */],
         language: __WEBPACK_IMPORTED_MODULE_5__modules_language__["a" /* default */],
-        country: __WEBPACK_IMPORTED_MODULE_6__modules_country__["a" /* default */]
+        country: __WEBPACK_IMPORTED_MODULE_6__modules_country__["a" /* default */],
+        Dealership: __WEBPACK_IMPORTED_MODULE_8__modules_dealership__["a" /* default */]
     }
 });
 
@@ -40152,7 +41001,11 @@ var defaultState = {
         // Snack bar option
         snackBarBgSuccess: 'success',
         snackBarBgError: 'red',
-        snackBarTimeout: 6000
+        snackBarTimeout: 6000,
+
+        //Tab option
+        tabColor: 'dark',
+        tabSliderColor: 'white'
     }
 };
 var state = _extends({}, defaultState);
@@ -40398,7 +41251,7 @@ var state = _extends({}, defaultState);
 var mutations = {
     setCountryListRowsPerPage: function setCountryListRowsPerPage(state, rowsPerPage) {
         // Need to send and array of object
-        state.countryListRowPerPage = rowsPerPage;
+        state.countryListRowPerPage = [].concat(_toConsumableArray(rowsPerPage));
     },
     setCountries: function setCountries(state, countries) {
         state.countries = [].concat(_toConsumableArray(countries));
@@ -75423,6 +76276,2299 @@ module.exports = function (regExp, replace) {
   };
 };
 
+
+/***/ }),
+/* 453 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var defaultState = {
+    dealerships: [],
+    selectedDealership: {},
+    listHeader: [],
+    loading: 'white',
+    totalDealership: 0,
+    dealershipListRowPerPage: [15, 25, 40]
+};
+
+var state = _extends({}, defaultState);
+
+var mutations = {
+    setDealerships: function setDealerships(state, dealerships) {
+        state.dealerships = [].concat(_toConsumableArray(dealerships));
+    },
+    setDealershipLoading: function setDealershipLoading(state, status) {
+        state.loading = status;
+    },
+    setSelectedDealership: function setSelectedDealership(state, dealership) {
+        state.selectedDealership = _extends({}, dealership);
+    },
+    setTotalDealership: function setTotalDealership(state, totalDealership) {
+        state.totalDealership = totalDealership;
+    },
+    resetDealershipStore: function resetDealershipStore(state) {
+        state = _extends({}, defaultState);
+    },
+    setDealershipListHeader: function setDealershipListHeader(state, trans) {
+        var header = [{
+            text: trans.name,
+            align: 'left',
+            sortable: false,
+            value: 'name'
+        }, {
+            text: trans.country,
+            value: 'country'
+        }, {
+            text: trans.region,
+            value: 'region'
+        }, {
+            text: trans.group,
+            value: 'group'
+        }, {
+            text: trans.status,
+            value: 'status'
+        }, {
+            text: trans.action,
+            value: 'action'
+        }];
+
+        state.listHeader = header;
+    }
+};
+
+var getters = {
+    getDealerships: function getDealerships(state) {
+        return state.dealerships;
+    },
+    getDealershipListHeader: function getDealershipListHeader(state) {
+        return state.listHeader;
+    },
+    getDealershipLoading: function getDealershipLoading(state) {
+        return state.loading;
+    },
+    getDealershipListRowsPerPage: function getDealershipListRowsPerPage(state) {
+        return state.dealershipListRowPerPage;
+    },
+    getSelectedDealership: function getSelectedDealership(state) {
+        return state.selectedDealership;
+    },
+    getTotalDealership: function getTotalDealership(state) {
+        return state.totalDealership;
+    }
+};
+
+var actions = {
+    /**
+     * You can filter by status
+     * sent type= 'active' | 'inactive'
+     * ...this.pagination // Default pagination object
+     * trans: translation object, // Important
+     * paginate: true, // If you want all record, do not sent
+     * search: optional | if search by any text
+     * @param commit
+     * @param payload
+     */
+    fetchDealerships: function fetchDealerships(_ref) {
+        var commit = _ref.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+
+        console.log('paginage option is: ', payload);
+
+        // Set loading is true
+        commit('setDealershipLoading', payload.themeOption.loadingColor);
+
+        // Setup header for list view
+        commit('setDealershipListHeader', payload.trans);
+
+        var params = generateParams(payload);
+        var URL = '/api/dealerships' + params;
+
+        axios.get(URL).then(function (response) {
+            if (response.data.dealership) {
+                commit('setDealerships', response.data.dealership);
+                commit('setTotalDealership', response.data.total);
+                commit('setDealershipLoading', false);
+            }
+        });
+    },
+
+
+    /**
+     * Get Selected country & regions
+     * @param id // required
+     */
+    fetchCountry: function fetchCountry(_ref2, payload) {
+        var commit = _ref2.commit;
+
+        var URL = '/api/dealerships/' + payload.id + '/show';
+        axios.get(URL).then(function (response) {
+            if (response.data) {
+                commit('setSelectedDealership', response.data);
+            }
+        }).catch(function (error) {
+            // Generate error message
+        });
+    }
+};
+
+/**
+ * helper function to generate params
+ * @param payload
+ * @returns {string}
+ */
+function generateParams(payload) {
+    var params = '?';
+    if (payload.type && typeof payload.type != 'undefined') {
+        params += 'type=' + payload.type;
+    }
+
+    if (payload.rowsPerPage && typeof payload.rowsPerPage != 'undefined') {
+        params += '&rowsPerPage=' + payload.rowsPerPage;
+    }
+
+    if (payload.paginate && typeof payload.paginate != 'undefined') {
+        params += '&paginate=true';
+    }
+
+    if (payload.page && typeof payload.page != 'undefined') {
+        params += '&page=' + payload.page;
+    }
+
+    if (payload.sortBy && typeof payload.sortBy != 'undefined') {
+        params += '&sortBy=' + payload.sortBy;
+    }
+
+    if (payload.search && typeof payload.search != 'undefined') {
+        params += '&search=' + payload.search;
+    }
+
+    return params;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: state,
+    mutations: mutations,
+    getters: getters,
+    actions: actions
+});
+
+/***/ }),
+/* 454 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(455)
+/* template */
+var __vue_template__ = __webpack_require__(456)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TimePicker.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-424ede34", Component.options)
+  } else {
+    hotAPI.reload("data-v-424ede34", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 455 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_modules_dealership__ = __webpack_require__(453);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            tuesdayStart: false,
+            tuesdayEnd: false,
+            wednesdayStart: false,
+            wednesdayEnd: false,
+            thursdayStart: false,
+            thursdayEnd: false,
+            fridayStart: false,
+            fridayEnd: false,
+            saturdayStart: false,
+            saturdayEnd: false,
+            sundayStart: false,
+            sundayEnd: false,
+            mondayStart: false,
+            mondayEnd: false
+
+        };
+    },
+
+
+    props: {
+        dealership: Object
+    },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        themeOption: 'getThemeOption'
+    })),
+
+    watch: {
+        dealership: function dealership() {
+            this.$emit('sendTimes', this.dealership);
+        }
+    },
+
+    created: function created() {
+        // this.generateTimes();
+    },
+
+
+    methods: {
+        // TODO need to make dynamic
+        generateTimes: function generateTimes() {
+            var times = [{
+                label: this.trans.monday_start,
+                ref: 'mondayStart',
+                value: ''
+            }, {
+                label: this.trans.monday_end,
+                ref: 'mondayEnd',
+                value: ''
+            }, {
+                label: this.trans.tuesday_start,
+                ref: 'tuesdayStart',
+                value: ''
+            }, {
+                label: this.trans.tuesday_end,
+                ref: 'tuesdayEnd',
+                value: ''
+            },, {
+                label: this.trans.wednesday_start,
+                ref: 'wednesdayStart',
+                value: ''
+            }, {
+                label: this.trans.wednesday_end,
+                ref: 'wednesdayEnd',
+                value: ''
+            }, {
+                label: this.trans.thursday_start,
+                ref: 'thursdayStart',
+                value: ''
+            }, {
+                label: this.trans.thursday_end,
+                ref: 'thursdayEnd',
+                value: ''
+            }, {
+                label: this.trans.friday_start,
+                ref: 'fridayStart',
+                value: ''
+            }, {
+                label: this.trans.friday_end,
+                ref: 'fridayEnd',
+                value: ''
+            }, {
+                label: this.trans.saturday_start,
+                ref: 'saturdayStart',
+                value: ''
+            }, {
+                label: this.trans.saturday_end,
+                ref: 'saturdayEnd',
+                value: ''
+            }, {
+                label: this.trans.sunday_start,
+                ref: 'sundayStart',
+                value: ''
+            }, {
+                label: this.trans.sunday_end,
+                ref: 'sundayEnd',
+                value: ''
+            }];
+
+            this.times = [].concat(times);
+            console.log('time is : ', this.times);
+        }
+    }
+});
+
+/***/ }),
+/* 456 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", wrap: "", "pt-3": "" } },
+    [
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "mondayStart",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.monday_start,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "monday_start", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "monday_start", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.monday_start,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.monday_start,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "monday_start", $$v)
+                              },
+                              expression: "dealership.monday_start"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.mondayStart,
+                callback: function($$v) {
+                  _vm.mondayStart = $$v
+                },
+                expression: "mondayStart"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.mondayStart
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.mondayStart.save(
+                          _vm.dealership.monday_start
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.monday_start,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "monday_start", $$v)
+                      },
+                      expression: "dealership.monday_start"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "mondayEnd",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.monday_end,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "monday_end", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "monday_end", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.monday_end,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.monday_end,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "monday_end", $$v)
+                              },
+                              expression: "dealership.monday_end"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.mondayEnd,
+                callback: function($$v) {
+                  _vm.mondayEnd = $$v
+                },
+                expression: "mondayEnd"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.mondayEnd
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.mondayEnd.save(
+                          _vm.dealership.monday_end
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.monday_end,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "monday_end", $$v)
+                      },
+                      expression: "dealership.monday_end"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "tuesdayStart",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.tuesday_start,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "tuesday_start", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "tuesday_start", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.tuesday_start,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.tuesday_start,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "tuesday_start", $$v)
+                              },
+                              expression: "dealership.tuesday_start"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.tuesdayStart,
+                callback: function($$v) {
+                  _vm.tuesdayStart = $$v
+                },
+                expression: "tuesdayStart"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.tuesdayStart
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.tuesdayStart.save(
+                          _vm.dealership.tuesday_start
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.tuesday_start,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "tuesday_start", $$v)
+                      },
+                      expression: "dealership.tuesday_start"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "tuesdayEnd",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.tuesday_end,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "tuesday_end", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "tuesday_end", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.tuesday_end,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.tuesday_end,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "tuesday_end", $$v)
+                              },
+                              expression: "dealership.tuesday_end"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.tuesdayEnd,
+                callback: function($$v) {
+                  _vm.tuesdayEnd = $$v
+                },
+                expression: "tuesdayEnd"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.tuesdayEnd
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.tuesdayEnd.save(
+                          _vm.dealership.tuesday_end
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.tuesday_end,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "tuesday_end", $$v)
+                      },
+                      expression: "dealership.tuesday_end"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "wednesdayStart",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.wednesday_start,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "wednesday_start", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "wednesday_start", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.wednesday_start,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.wednesday_start,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "wednesday_start", $$v)
+                              },
+                              expression: "dealership.wednesday_start"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.wednesdayStart,
+                callback: function($$v) {
+                  _vm.wednesdayStart = $$v
+                },
+                expression: "wednesdayStart"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.wednesdayStart
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.wednesdayStart.save(
+                          _vm.dealership.wednesday_start
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.wednesday_start,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "wednesday_start", $$v)
+                      },
+                      expression: "dealership.wednesday_start"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "wednesdayEnd",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.wednesday_end,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "wednesday_end", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "wednesday_end", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.wednesday_end,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.wednesday_end,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "wednesday_end", $$v)
+                              },
+                              expression: "dealership.wednesday_end"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.wednesdayEnd,
+                callback: function($$v) {
+                  _vm.wednesdayEnd = $$v
+                },
+                expression: "wednesdayEnd"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.wednesdayEnd
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.wednesdayEnd.save(
+                          _vm.dealership.wednesday_end
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.wednesday_end,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "wednesday_end", $$v)
+                      },
+                      expression: "dealership.wednesday_end"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "thursdayStart",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.thursday_start,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "thursday_start", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "thursday_start", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.thursday_start,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.thursday_start,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "thursday_start", $$v)
+                              },
+                              expression: "dealership.thursday_start"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.thursdayStart,
+                callback: function($$v) {
+                  _vm.thursdayStart = $$v
+                },
+                expression: "thursdayStart"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.thursdayStart
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.thursdayStart.save(
+                          _vm.dealership.thursday_start
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.thursday_start,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "thursday_start", $$v)
+                      },
+                      expression: "dealership.thursday_start"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "thursdayEnd",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.thursday_end,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "thursday_end", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "thursday_end", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.thursday_end,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.thursday_end,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "thursday_end", $$v)
+                              },
+                              expression: "dealership.thursday_end"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.thursdayEnd,
+                callback: function($$v) {
+                  _vm.thursdayEnd = $$v
+                },
+                expression: "thursdayEnd"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.thursdayEnd
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.thursdayEnd.save(
+                          _vm.dealership.thursday_end
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.thursday_end,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "thursday_end", $$v)
+                      },
+                      expression: "dealership.thursday_end"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "fridayStart",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.friday_start,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "friday_start", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "friday_start", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.friday_start,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.friday_start,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "friday_start", $$v)
+                              },
+                              expression: "dealership.friday_start"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.fridayStart,
+                callback: function($$v) {
+                  _vm.fridayStart = $$v
+                },
+                expression: "fridayStart"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.fridayStart
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.fridayStart.save(
+                          _vm.dealership.friday_start
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.friday_start,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "friday_start", $$v)
+                      },
+                      expression: "dealership.friday_start"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "fridayEnd",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.friday_end,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "friday_end", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "friday_end", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.friday_end,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.friday_end,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "friday_end", $$v)
+                              },
+                              expression: "dealership.friday_end"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.fridayEnd,
+                callback: function($$v) {
+                  _vm.fridayEnd = $$v
+                },
+                expression: "fridayEnd"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.fridayEnd
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.fridayEnd.save(
+                          _vm.dealership.friday_end
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.friday_end,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "friday_end", $$v)
+                      },
+                      expression: "dealership.friday_end"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "saturdayStart",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.saturday_start,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "saturday_start", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "saturday_start", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.saturday_start,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.saturday_start,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "saturday_start", $$v)
+                              },
+                              expression: "dealership.saturday_start"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.saturdayStart,
+                callback: function($$v) {
+                  _vm.saturdayStart = $$v
+                },
+                expression: "saturdayStart"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.saturdayStart
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.saturdayStart.save(
+                          _vm.dealership.saturday_start
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.saturday_start,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "saturday_start", $$v)
+                      },
+                      expression: "dealership.saturday_start"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "saturdayEnd",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.saturday_end,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "saturday_end", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "saturday_end", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.saturday_end,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.saturday_end,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "saturday_end", $$v)
+                              },
+                              expression: "dealership.saturday_end"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.saturdayEnd,
+                callback: function($$v) {
+                  _vm.saturdayEnd = $$v
+                },
+                expression: "saturdayEnd"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.saturdayEnd
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.saturdayEnd.save(
+                          _vm.dealership.saturday_end
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.saturday_end,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "saturday_end", $$v)
+                      },
+                      expression: "dealership.saturday_end"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "sundayStart",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.sunday_start,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "sunday_start", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "sunday_start", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.sunday_start,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.sunday_start,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "sunday_start", $$v)
+                              },
+                              expression: "dealership.sunday_start"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.sundayStart,
+                callback: function($$v) {
+                  _vm.sundayStart = $$v
+                },
+                expression: "sundayStart"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.sundayStart
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.sundayStart.save(
+                          _vm.dealership.sunday_start
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.sunday_start,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "sunday_start", $$v)
+                      },
+                      expression: "dealership.sunday_start"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs11: "", sm5: "" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "sundayEnd",
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-right": 40,
+                "return-value": _vm.dealership.sunday_end,
+                lazy: "",
+                transition: "scale-transition",
+                "offset-y": "",
+                "full-width": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              on: {
+                "update:returnValue": function($event) {
+                  return _vm.$set(_vm.dealership, "sunday_end", $event)
+                },
+                "update:return-value": function($event) {
+                  return _vm.$set(_vm.dealership, "sunday_end", $event)
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          {
+                            attrs: {
+                              color: _vm.themeOption.inputColor,
+                              label: _vm.trans.sunday_end,
+                              "prepend-icon": "access_time",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.dealership.sunday_end,
+                              callback: function($$v) {
+                                _vm.$set(_vm.dealership, "sunday_end", $$v)
+                              },
+                              expression: "dealership.sunday_end"
+                            }
+                          },
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.sundayEnd,
+                callback: function($$v) {
+                  _vm.sundayEnd = $$v
+                },
+                expression: "sundayEnd"
+              }
+            },
+            [
+              _vm._v(" "),
+              _vm.sundayEnd
+                ? _c("v-time-picker", {
+                    attrs: { format: "24hr", "full-width": "" },
+                    on: {
+                      "click:minute": function($event) {
+                        return _vm.$refs.sundayEnd.save(
+                          _vm.dealership.sunday_end
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.dealership.sunday_end,
+                      callback: function($$v) {
+                        _vm.$set(_vm.dealership, "sunday_end", $$v)
+                      },
+                      expression: "dealership.sunday_end"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-424ede34", module.exports)
+  }
+}
+
+/***/ }),
+/* 457 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(458)
+/* template */
+var __vue_template__ = __webpack_require__(459)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ImageUpload.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e0921fbe", Component.options)
+  } else {
+    hotAPI.reload("data-v-e0921fbe", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 458 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    created: function created() {},
+
+
+    methods: {}
+
+});
+
+/***/ }),
+/* 459 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-layout", { attrs: { row: "", wrap: "" } }, [
+    _c("h2", [_vm._v("Image go here")])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e0921fbe", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
