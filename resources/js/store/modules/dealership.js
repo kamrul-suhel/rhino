@@ -131,16 +131,16 @@ const actions = {
         });
     },
 
-
     /**
-     * Get Selected country & regions
+     * Get Selected Dealership
      * @param id // required
      */
-    fetchCountry({commit}, payload){
+    fetchDealership({commit, dispatch}, payload){
         const URL = `/api/dealerships/${payload.id}/show`
         axios.get(URL).then((response) => {
             if(response.data){
-                commit('setSelectedDealership', response.data)
+                commit('setSelectedDealership', response.data.dealership)
+                dispatch('fetchRegions', {id: response.data.dealership.country_id})
             }
         }).catch((error)=>{
             // Generate error message

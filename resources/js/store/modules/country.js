@@ -4,7 +4,10 @@ const defaultState = {
     listHeader:[],
     totalCountry: 0,
     loading: 'white',
-    countryListRowPerPage: [15,25,40]
+    countryListRowPerPage: [15,25,40],
+
+    regions:[],
+    selectedRegion: {}
 }
 
 const state = {
@@ -73,6 +76,10 @@ const mutations = {
         ]
 
         state.listHeader = header
+    },
+
+    setRegions(state, regions){
+        state.regions = [...regions]
     }
 }
 
@@ -99,6 +106,10 @@ const getters = {
 
     getCountryListRowsPerPage(state){
         return state.countryListRowPerPage
+    },
+
+    getRegions(state){
+        return state.regions
     }
 }
 
@@ -132,6 +143,20 @@ const actions = {
     },
 
     /**
+     * Fetch countries for dropdown
+     * @param commit
+     * @param payload
+     */
+    fetchCountriesForDropdown({commit}, payload = {}){
+        const URL = '/api/countries/dropdown'
+        axios.get(URL).then((response)=>{
+            if(response.data){
+                commit('setCountries', response.data)
+            }
+        });
+    },
+
+    /**
      * Get Selected country & regions
      * @param id // required
      */
@@ -143,6 +168,17 @@ const actions = {
             }
         }).catch((error)=>{
             // Generate error message
+        })
+    },
+
+    /**
+     * Regions based on country
+     */
+
+    fetchRegions({commit}, payload){
+        const URL = `/api/countries/${payload.id}/regions`
+        axios.get(URL).then((response)=>{
+            commit('setRegions', response.data)
         })
     }
 }

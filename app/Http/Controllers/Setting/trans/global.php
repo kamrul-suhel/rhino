@@ -37,6 +37,12 @@ return [
         'identifier' => 'inactive',
         'translation' => 'Inactive'
     ],
+
+    [
+        'label' => 'Successfully created',
+        'identifier' => 'successfully_created',
+        'translation' => 'Successfully created'
+    ],
     [
         'label' => 'Rows Per Page test',
         'identifier' => 'rows_per_page',

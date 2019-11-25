@@ -19,5 +19,17 @@ return [
         'label' => 'Edit Groups',
         'identifier' => 'edit_groups',
         'translation' => 'Edit Groups'
+    ],
+
+    [
+        'label' => 'Select Groups',
+        'identifier' => 'select_groups',
+        'translation' => 'Select Groups'
+    ],
+
+    [
+        'label' => 'Groups fields is required',
+        'identifier' => 'groups_filed_required',
+        'translation' => 'Groups fields is required'
     ]
 ];

@@ -29,6 +29,12 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex';
 
+
+/**
+ * Import plugins
+ */
+import ImageUploader from 'vue-image-upload-resize'
+
 /**
  * Import filter
  */
@@ -36,6 +42,7 @@ import Vuex from 'vuex';
 import router from './router'
 Vue.use(Vuetify);
 Vue.use(Vuex);
+Vue.use(ImageUploader)
 Vue.config.productionTip = true
 
 /**

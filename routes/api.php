@@ -42,7 +42,21 @@ Route::prefix('dealerships')->group(function(){
     Route::get('', 'Dealership\DealershipController@index');
     Route::get('{id}/show', 'Dealership\DealershipController@show');
     Route::put('{id}/update', 'Dealership\DealershipController@update');
+
+    Route::post('', 'Dealership\DealershipController@store');
 });
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Dealership Groups
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('groups')->group(function(){
+    Route::get('', 'Dealership\GroupController@index');
+});
+
 
 
 
@@ -67,7 +81,21 @@ Route::prefix('languages')->group(function(){
 
 Route::prefix('countries')->group(function(){
     Route::get('', 'Country\CountryController@index');
+    Route::get('dropdown', 'Country\CountryController@getCountriesDropDown');
     Route::get('{id}/show', 'Country\CountryController@show');
+    Route::get('{id}/regions', 'Country\CountryController@getCountryRegions');
     Route::post('{id}/update', 'Country\CountryController@update');
     Route::delete('{id}/delete', 'Country\CountryController@destroy');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Upload file
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('uploadfiles')->group(function(){
+    Route::post('', 'File\FileUploaderController@uploadFiles');
 });

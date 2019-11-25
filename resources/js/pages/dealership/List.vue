@@ -22,6 +22,7 @@
         <v-data-table
             :headers="headers"
             :items="dealerships"
+            disable-initial-sort
             :pagination.sync="pagination"
             :no-results-text="trans.no_dealership_found"
             :no-data-text="trans.no_dealership_found"
@@ -174,7 +175,7 @@
             },
 
             editDealerships(Dealerships){
-                this.$router.push({name: 'editCountries', params:{id: Dealerships.id}})
+                this.$router.push({name: 'editDealerships', params:{id: Dealerships.id}})
             },
 
             deleteDealerships(Dealerships){

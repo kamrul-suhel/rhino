@@ -17,6 +17,7 @@ class CreateRegionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('country_id');
+            $table->tinyInteger('status')->default(1)->index();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Country;
 
 use App\Country;
 use App\Http\Controllers\Controller;
+use App\Region;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -30,15 +31,15 @@ class CountryController extends Controller
             'flag'
         );
         // To get the list view populate
-        if($request->has('paginate') && !empty($request->paginate)){
+        if ($request->has('paginate') && !empty($request->paginate)) {
             // Search by name
-            if($request->has('search') && !empty($request->search)){
-                $countries = $countries->where('full_name', 'LIKE', '%'.$request->search.'%');
+            if ($request->has('search') && !empty($request->search)) {
+                $countries = $countries->where('full_name', 'LIKE', '%' . $request->search . '%');
             }
 
             // Get Only active country
-            if($request->has('type') && !empty($request->type)){
-                switch($request->type){
+            if ($request->has('type') && !empty($request->type)) {
+                switch ($request->type) {
                     case 'active':
                         $countries = $countries->where('status', 1);
                         break;
@@ -65,9 +66,44 @@ class CountryController extends Controller
     }
 
     /**
+     * Get the countries dropdown list
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCountriesDropDown()
+    {
+        $countries = Country::select(
+            'id',
+            'name'
+        )->where('status', 1)
+            ->orderBy('name')
+            ->get();
+
+        return response()->json($countries);
+    }
+
+
+    /**
+     * get regions base on country id
+     * @param $countryId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCountryRegions($countryId)
+    {
+        $regions = Region::select('name', 'id')
+            ->where([
+                'country_id' => $countryId,
+                'status' => 1
+            ])
+            ->orderBy('name')
+            ->get();
+
+        return response()->json($regions);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -78,7 +114,7 @@ class CountryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -93,8 +129,8 @@ class CountryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -129,7 +165,7 @@ class CountryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

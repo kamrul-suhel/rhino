@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.create_dealerships }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_dealerships }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -60,7 +60,7 @@
                                         :rules="[v => !!v || trans.region_field_is_required]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_region"
-                                        v-model="dealership.region"
+                                        v-model="dealership.region_id"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -205,7 +205,7 @@
 
                                     <v-tab-item
                                         key="times">
-                                        <TimePicker :dealership="times"
+                                        <TimePicker :dealership="dealership"
                                                     v-on:sendTimes="updateTimes">
                                         </TimePicker>
                                     </v-tab-item>
@@ -218,11 +218,19 @@
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
                             <v-btn
+                                :class="themeOption.buttonPrimaryColor"
+                                small
+                                @click="$router.push({name: 'listDealerships'})"
+                            >
+                                {{ trans.cancel }}
+                            </v-btn>
+
+                            <v-btn
                                 :class="themeOption.buttonSuccess"
                                 small
-                                @click="onCreateDealership()"
+                                @click="onUpdateDealership()"
                             >
-                                {{ trans.create_dealerships }}
+                                {{ trans.update_dealerships }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -247,8 +255,6 @@
         data() {
             return {
                 valid: true,
-                dealership: {},
-                times: {},
                 active: null,
                 model: null,
 
@@ -265,7 +271,8 @@
                 selectedCountry: 'getSelectedCountry',
                 themeOption: 'getThemeOption',
                 regions: 'getRegions',
-                groups: 'getGroups'
+                groups: 'getGroups',
+                dealership: 'getSelectedDealership'
             })
         }),
 
@@ -283,13 +290,17 @@
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
                 this.$store.dispatch('fetchGroups')
+                this.$store.dispatch('fetchDealership', {id: this.$route.params.id})
             },
 
             updateTimes(times) {
                 console.log('time is: ', times);
             },
 
-            onCreateDealership(){
+            onUpdateDealership(){
+
+                console.log('update dealership: ', this.dealership)
+                return
                 if(this.$refs.dealershipForm.validate()){
                     let dealershipForm = new FormData()
 

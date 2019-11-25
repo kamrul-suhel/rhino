@@ -20,7 +20,7 @@ const DealershipRoutes =  {
         {
             path: ':id/edit',
             name: 'editDealerships',
-            component: Dealership.List
+            component: Dealership.Edit
         }
     ]
 }

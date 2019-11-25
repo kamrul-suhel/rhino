@@ -33,6 +33,10 @@ Route::prefix('dealerships')->group(function(){
     Route::get('create', function(){
         return view('welcome');
     });
+
+    Route::get('{id}/edit', function(){
+        return view('welcome');
+    });
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

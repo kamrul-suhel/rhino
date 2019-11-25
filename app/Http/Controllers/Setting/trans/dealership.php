@@ -181,5 +181,30 @@ return [
         'label' => 'Address Line 6',
         'identifier' => 'address_line_6',
         'translation' => 'Address Line 6'
+    ],
+
+    // Validation message
+    [
+        'label' => 'Name is required',
+        'identifier' => 'name_is_required',
+        'translation' => 'Name is required'
+    ],
+
+    [
+        'label' => 'Please select a country',
+        'identifier' => 'select_a_country',
+        'translation' => 'Please select a country'
+    ],
+
+    [
+        'label' => 'Region filed is required',
+        'identifier' => 'region_field_is_required',
+        'translation' => 'Region filed is required'
+    ],
+
+    [
+        'label' => 'Address is required',
+        'identifier' => 'address_is_required',
+        'translation' => 'Address is required'
     ]
 ];
