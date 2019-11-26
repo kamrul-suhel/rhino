@@ -161,9 +161,10 @@ class DealershipController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DealershipRequest $request, $id)
     {
-        //
+        $dealership = $this->saveDealership($request, $id);
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -174,7 +175,9 @@ class DealershipController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dealership = Dealership::findOrFail($id);
+        $dealership->delete();
+        return response()->json(['success' => true]);
     }
 
     private function saveDealership(DealershipRequest $request, $dealershipId = null){
@@ -183,21 +186,22 @@ class DealershipController extends Controller
         $request->has('latitude') ? $dealership->latitude = $request->latitude : null;
         $request->has('longitude') ? $dealership->longitude = $request->longitude : null;
         $request->has('group_id') ? $dealership->group_id = $request->group_id : null;
-        $request->has('region') ? $dealership->region_id = $request->region : null;
-        $request->has('saturday_start') ? $dealership->saturday_start = $request->saturday_start : null;
-        $request->has('saturday_end') ? $dealership->saturday_end = $request->saturday_end : null;
-        $request->has('sunday_start') ? $dealership->sunday_start = $request->sunday_start : null;
-        $request->has('sunday_end') ? $dealership->sunday_end = $request->sunday_end : null;
-        $request->has('monday_start') ? $dealership->monday_start = $request->monday_start : null;
-        $request->has('monday_end') ? $dealership->monday_end = $request->monday_end : null;
-        $request->has('thursday_start') ? $dealership->thursday_start = $request->thursday_start : null;
-        $request->has('thursday_end') ? $dealership->thursday_end = $request->thursday_end : null;
-        $request->has('tuesday_end') ? $dealership->tuesday_end = $request->tuesday_end : null;
-        $request->has('tuesday_start') ? $dealership->tuesday_start = $request->tuesday_start : null;
-        $request->has('wednesday_start') ? $dealership->wednesday_start = $request->wednesday_start : null;
-        $request->has('wednesday_end') ? $dealership->wednesday_end = $request->wednesday_end : null;
-        $request->has('friday_start') ? $dealership->friday_start = $request->friday_start : null;
-        $request->has('friday_end') ? $dealership->friday_end = $request->friday_end : null;
+        $request->has('region_id') ? $dealership->region_id = $request->region_id : null;
+        $request->has('saturday_start') && $request->saturday_start != 'null' ? $dealership->saturday_start = $request->saturday_start  : null;
+        $request->has('saturday_end') && $request->saturday_end != 'null' ? $dealership->saturday_end = $request->saturday_end : null;
+        $request->has('sunday_start') && $request->sunday_start != 'null' ? $dealership->sunday_start = $request->sunday_start : null;
+        $request->has('sunday_end') && $request->sunday_end != 'null' ? $dealership->sunday_end = $request->sunday_end : null;
+        $request->has('monday_start') && $request->monday_start != 'null' ? $dealership->monday_start = $request->monday_start : null;
+        $request->has('monday_end') && $request->monday_end != 'null' ? $dealership->monday_end = $request->monday_end : null;
+        $request->has('thursday_start') && $request->thursday_start != 'null' ? $dealership->thursday_start = $request->thursday_start : null;
+        $request->has('thursday_end') && $request->thursday_end != 'null' ? $dealership->thursday_end = $request->thursday_end : null;
+        $request->has('tuesday_end') && $request->tuesday_end != 'null' ? $dealership->tuesday_end = $request->tuesday_end : null;
+        $request->has('tuesday_start') && $request->tuesday_start != 'null' ? $dealership->tuesday_start = $request->tuesday_start : null;
+        $request->has('wednesday_start') && $request->wednesday_start != 'null' ? $dealership->wednesday_start = $request->wednesday_start : null;
+        $request->has('wednesday_end') && $request->wednesday_end != 'null' ? $dealership->wednesday_end = $request->wednesday_end : null;
+        $request->has('friday_start') && $request->friday_start != 'null' ? $dealership->friday_start = $request->friday_start : null;
+        $request->has('friday_end') && $request->friday_end != 'null'? $dealership->friday_end = $request->friday_end : null;
+        $request->has('status') ? $dealership->status = $request->status === 'true' ? 1: 0 : null;
 
         $dealership->save();
 

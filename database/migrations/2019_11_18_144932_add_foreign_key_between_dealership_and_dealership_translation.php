@@ -19,7 +19,7 @@ class AddForeignKeyBetweenDealershipAndDealershipTranslation extends Migration
         });
 
         Schema::table('dealerships_translation', function (Blueprint $table) {
-            $table->foreign('dealership_id')->references('id')->on('dealerships');
+            $table->foreign('dealership_id')->references('id')->on('dealerships')->onDelete('cascade');
             $table->foreign('language_id')->references('id')->on('languages');
         });
 

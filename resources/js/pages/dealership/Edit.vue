@@ -64,19 +64,6 @@
                                     >
                                     </v-select>
                                 </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="groups"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || trans.groups_filed_required]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
-                                        v-model="dealership.group_id"
-                                    >
-                                    </v-select>
-                                </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
@@ -96,6 +83,27 @@
                                         v-model="dealership.longitude"
                                         :label="trans.longitude">
                                     </v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-select
+                                        :items="groups"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[v => !!v || trans.groups_filed_required]"
+                                        :color="themeOption.inputColor"
+                                        :label="trans.select_groups"
+                                        v-model="dealership.group_id"
+                                    >
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-switch
+                                        :color="themeOption.inputColor"
+                                        v-model="dealership.status"
+                                        :label="trans.status"
+                                    ></v-switch>
                                 </v-flex>
                             </v-layout>
 
@@ -226,6 +234,8 @@
                             </v-btn>
 
                             <v-btn
+                                :loading="themeOption.buttonLoading"
+                                :disabled="themeOption.buttonLoading"
                                 :class="themeOption.buttonSuccess"
                                 small
                                 @click="onUpdateDealership()"
@@ -277,8 +287,8 @@
         }),
 
         watch: {
-            dealership() {
-
+            dealership(value) {
+                console.log('change :', value)
             }
         },
 
@@ -299,9 +309,9 @@
 
             onUpdateDealership(){
 
-                console.log('update dealership: ', this.dealership)
-                return
                 if(this.$refs.dealershipForm.validate()){
+                    this.$store.commit('setThemeOption', {buttonLoading: true})
+
                     let dealershipForm = new FormData()
 
                     // Set form object for dealership
@@ -314,21 +324,30 @@
                         dealershipForm.append(key, value)
                     })
 
+                    dealershipForm.append('_method', 'put')
+
                     // send form data to save
-                    axios.post('/api/dealerships', dealershipForm).then((response)=>{
+                    const URL = `/api/dealerships/${this.dealership.id}/update`
+                    axios.post(URL, dealershipForm).then((response)=>{
                         if(response.data.success){
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.dealership.name}  ${this.trans.successfully_created}`
+                                message: `${this.dealership.name}  ${this.trans.successfully_updated}`
                             })
-                            this.$router.push({name: 'listDealerships'})
+                            this.$store.commit('setThemeOption', {buttonLoading: false})
+                            // this.$router.push({name: 'listDealerships'})
                         }
+                    }).catch((error)=>{
+                        this.$store.commit('setThemeOption', {buttonLoading: false})
                     })
                 }
             },
 
             onCountryChange(value){
+                let newDealership = {...this.dealership}
+                newDealership.region_id = null
+                this.$store.commit('setSelectedDealership', newDealership)
                 this.$store.dispatch('fetchRegions', {id: value.id})
             }
         }

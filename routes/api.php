@@ -40,10 +40,10 @@ Route::prefix('settings')->group(function(){
 
 Route::prefix('dealerships')->group(function(){
     Route::get('', 'Dealership\DealershipController@index');
+    Route::post('', 'Dealership\DealershipController@store');
     Route::get('{id}/show', 'Dealership\DealershipController@show');
     Route::put('{id}/update', 'Dealership\DealershipController@update');
-
-    Route::post('', 'Dealership\DealershipController@store');
+    Route::delete('{id}/delete', 'Dealership\DealershipController@destroy');
 });
 
 /*
@@ -97,5 +97,5 @@ Route::prefix('countries')->group(function(){
 */
 
 Route::prefix('uploadfiles')->group(function(){
-    Route::post('', 'File\FileUploaderController@uploadFiles');
+    Route::post('', 'File\FileUploadController@uploadFiles');
 });

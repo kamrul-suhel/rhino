@@ -60,7 +60,7 @@
                                         :rules="[v => !!v || trans.region_field_is_required]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_region"
-                                        v-model="dealership.region"
+                                        v-model="dealership.region_id"
                                     >
                                     </v-select>
                                 </v-flex>

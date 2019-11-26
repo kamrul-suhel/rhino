@@ -65,8 +65,9 @@
             <v-card>
                 <v-card-title
                     primary-title
+                    class="pa-2 pl-3"
                 >
-                    <h2>{{ trans.delete }} {{ selectedDealership.full_name }}</h2>
+                    <h3>{{ trans.delete }} {{ selectedDealership.name }}</h3>
                 </v-card-title>
 
                 <v-divider></v-divider>
@@ -174,27 +175,35 @@
                 this.$store.dispatch('fetchDealerships', paginateOption)
             },
 
-            editDealerships(Dealerships){
-                this.$router.push({name: 'editDealerships', params:{id: Dealerships.id}})
+            editDealerships(Dealerships) {
+                this.$router.push({name: 'editDealerships', params: {id: Dealerships.id}})
             },
 
-            deleteDealerships(Dealerships){
-                this.$store.commit('setSelectedDealerships', Dealerships)
+            deleteDealerships(Dealerships) {
+                this.$store.commit('setSelectedDealership', Dealerships)
                 this.deleteDialog = true
             },
 
-            confirmDeleteDealerships(){
-                const selectedDealerships = this.selectedDealerships
-                const URL = `api/countries/${selectedDealerships.id}/delete`
+            confirmDeleteDealerships() {
+                const selectedDealership = this.selectedDealership
+                const URL = `/api/dealerships/${selectedDealership.id}/delete`
 
-                axios.delete(URL).then((response)=>{
-                    if(response.data.success){
-                        this.initialize()
-                        // reset selectedDealerships in store
-                        this.$store.commit('setSelectedDealerships', {})
-                        this.dialog = false
-                    }
-                });
+                axios.delete(URL, {_method: 'delete'})
+                    .then((response) => {
+                        if (response.data.success) {
+                            this.$store.commit('setSnackbarMessage', {
+                                openMessage: true,
+                                timeOut: this.themeOption.snackBarTimeout,
+                                message: `${selectedDealership.name}  ${this.trans.successfully_deleted}`
+                            })
+
+                            this.initialize()
+                            // reset selectedDealerships in store
+                            this.$store.commit('setSelectedDealership', {})
+
+                            this.deleteDialog = false
+                        }
+                    });
             }
         }
     }

@@ -12,6 +12,8 @@ const defaultState = {
         buttonSecondaryColor: 'success',
         buttonDangerColor: 'red',
         buttonSuccess: 'success',
+        buttonLoading: false,
+        buttonLoadingStyle: 'loading',
 
         // Header setting
         textHeadingColor: 'cyan',
@@ -55,7 +57,12 @@ const mutations = {
     },
 
     setThemeOption(state, themeOption){
-        state = {...themeOption}
+        console.log(themeOption)
+        state.themeOption = {
+            ...state.themeOption,
+            ...themeOption
+        }
+
     }
 }
 

@@ -75395,11 +75395,15 @@ var render = function() {
                                       label: _vm.trans.select_region
                                     },
                                     model: {
-                                      value: _vm.dealership.region,
+                                      value: _vm.dealership.region_id,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.dealership, "region", $$v)
+                                        _vm.$set(
+                                          _vm.dealership,
+                                          "region_id",
+                                          $$v
+                                        )
                                       },
-                                      expression: "dealership.region"
+                                      expression: "dealership.region_id"
                                     }
                                   })
                                 ],
@@ -76088,6 +76092,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -76157,21 +76162,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.$router.push({ name: 'editDealerships', params: { id: Dealerships.id } });
         },
         deleteDealerships: function deleteDealerships(Dealerships) {
-            this.$store.commit('setSelectedDealerships', Dealerships);
+            this.$store.commit('setSelectedDealership', Dealerships);
             this.deleteDialog = true;
         },
         confirmDeleteDealerships: function confirmDeleteDealerships() {
             var _this = this;
 
-            var selectedDealerships = this.selectedDealerships;
-            var URL = 'api/countries/' + selectedDealerships.id + '/delete';
+            var selectedDealership = this.selectedDealership;
+            var URL = '/api/dealerships/' + selectedDealership.id + '/delete';
 
-            axios.delete(URL).then(function (response) {
+            axios.delete(URL, { _method: 'delete' }).then(function (response) {
                 if (response.data.success) {
+                    _this.$store.commit('setSnackbarMessage', {
+                        openMessage: true,
+                        timeOut: _this.themeOption.snackBarTimeout,
+                        message: selectedDealership.name + '  ' + _this.trans.successfully_deleted
+                    });
+
                     _this.initialize();
                     // reset selectedDealerships in store
-                    _this.$store.commit('setSelectedDealerships', {});
-                    _this.dialog = false;
+                    _this.$store.commit('setSelectedDealership', {});
+
+                    _this.deleteDialog = false;
                 }
             });
         }
@@ -76326,15 +76338,19 @@ var render = function() {
           _c(
             "v-card",
             [
-              _c("v-card-title", { attrs: { "primary-title": "" } }, [
-                _c("h2", [
-                  _vm._v(
-                    _vm._s(_vm.trans.delete) +
-                      " " +
-                      _vm._s(_vm.selectedDealership.full_name)
-                  )
-                ])
-              ]),
+              _c(
+                "v-card-title",
+                { staticClass: "pa-2 pl-3", attrs: { "primary-title": "" } },
+                [
+                  _c("h3", [
+                    _vm._v(
+                      _vm._s(_vm.trans.delete) +
+                        " " +
+                        _vm._s(_vm.selectedDealership.name)
+                    )
+                  ])
+                ]
+              ),
               _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
@@ -79533,6 +79549,8 @@ var defaultState = {
         buttonSecondaryColor: 'success',
         buttonDangerColor: 'red',
         buttonSuccess: 'success',
+        buttonLoading: false,
+        buttonLoadingStyle: 'loading',
 
         // Header setting
         textHeadingColor: 'cyan',
@@ -79569,7 +79587,8 @@ var mutations = {
         state.isLogin = status;
     },
     setThemeOption: function setThemeOption(state, themeOption) {
-        state = _extends({}, themeOption);
+        console.log(themeOption);
+        state.themeOption = _extends({}, state.themeOption, themeOption);
     }
 };
 
@@ -80417,6 +80436,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -80455,7 +80484,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     })),
 
     watch: {
-        dealership: function dealership() {}
+        dealership: function dealership(value) {
+            console.log('change :', value);
+        }
     },
 
     created: function created() {
@@ -80475,9 +80506,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         onUpdateDealership: function onUpdateDealership() {
             var _this2 = this;
 
-            console.log('update dealership: ', this.dealership);
-            return;
             if (this.$refs.dealershipForm.validate()) {
+                this.$store.commit('setThemeOption', { buttonLoading: true });
+
                 var dealershipForm = new FormData();
 
                 // Set form object for dealership
@@ -80490,20 +80521,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     dealershipForm.append(key, value);
                 });
 
+                dealershipForm.append('_method', 'put');
+
                 // send form data to save
-                axios.post('/api/dealerships', dealershipForm).then(function (response) {
+                var URL = "/api/dealerships/" + this.dealership.id + "/update";
+                axios.post(URL, dealershipForm).then(function (response) {
                     if (response.data.success) {
                         _this2.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: _this2.themeOption.snackBarTimeout,
-                            message: _this2.dealership.name + "  " + _this2.trans.successfully_created
+                            message: _this2.dealership.name + "  " + _this2.trans.successfully_updated
                         });
-                        _this2.$router.push({ name: 'listDealerships' });
+                        _this2.$store.commit('setThemeOption', { buttonLoading: false });
+                        // this.$router.push({name: 'listDealerships'})
                     }
+                }).catch(function (error) {
+                    _this2.$store.commit('setThemeOption', { buttonLoading: false });
                 });
             }
         },
         onCountryChange: function onCountryChange(value) {
+            var newDealership = _extends({}, this.dealership);
+            newDealership.region_id = null;
+            this.$store.commit('setSelectedDealership', newDealership);
             this.$store.dispatch('fetchRegions', { id: value.id });
         }
     }
@@ -80683,42 +80723,6 @@ var render = function() {
                                   })
                                 ],
                                 1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
-                                [
-                                  _c("v-select", {
-                                    attrs: {
-                                      items: _vm.groups,
-                                      "item-text": "name",
-                                      "item-value": "id",
-                                      rules: [
-                                        function(v) {
-                                          return (
-                                            !!v ||
-                                            _vm.trans.groups_filed_required
-                                          )
-                                        }
-                                      ],
-                                      color: _vm.themeOption.inputColor,
-                                      label: _vm.trans.select_groups
-                                    },
-                                    model: {
-                                      value: _vm.dealership.group_id,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.dealership,
-                                          "group_id",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "dealership.group_id"
-                                    }
-                                  })
-                                ],
-                                1
                               )
                             ],
                             1
@@ -80774,6 +80778,63 @@ var render = function() {
                                         )
                                       },
                                       expression: "dealership.longitude"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.groups,
+                                      "item-text": "name",
+                                      "item-value": "id",
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v ||
+                                            _vm.trans.groups_filed_required
+                                          )
+                                        }
+                                      ],
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.select_groups
+                                    },
+                                    model: {
+                                      value: _vm.dealership.group_id,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.dealership,
+                                          "group_id",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "dealership.group_id"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-switch", {
+                                    attrs: {
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.status
+                                    },
+                                    model: {
+                                      value: _vm.dealership.status,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.dealership, "status", $$v)
+                                      },
+                                      expression: "dealership.status"
                                     }
                                   })
                                 ],
@@ -81185,7 +81246,11 @@ var render = function() {
                             "v-btn",
                             {
                               class: _vm.themeOption.buttonSuccess,
-                              attrs: { small: "" },
+                              attrs: {
+                                loading: _vm.themeOption.buttonLoading,
+                                disabled: _vm.themeOption.buttonLoading,
+                                small: ""
+                              },
                               on: {
                                 click: function($event) {
                                   return _vm.onUpdateDealership()
