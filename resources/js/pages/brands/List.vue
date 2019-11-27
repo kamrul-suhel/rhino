@@ -60,7 +60,7 @@
             <v-flex xs12 sm4 pt-3 pl-3>
                 <v-card>
                     <v-card-title>
-                        <h3>{{ editBrand ? trans.edit_company : trans.create_company}}</h3>
+                        <h3>{{ editBrand ? trans.edit_brand : trans.create_brand}}</h3>
                     </v-card-title>
                     <v-divider></v-divider>
 
@@ -110,7 +110,7 @@
                             small
                             :color="themeOption.buttonSecondaryColor"
                             @click="onCreateBrand">
-                            {{ editBrand ? trans.update_company : trans.create_company }}
+                            {{ editBrand ? trans.edit : trans.create }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>

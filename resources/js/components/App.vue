@@ -2,7 +2,7 @@
     <div id="app">
         <v-app
             id="inspire"
-            white
+            dark
             v-if="isLoading"
         >
             <template v-if="isAdmin">

@@ -76977,8 +76977,8 @@ var render = function() {
                       _vm._v(
                         _vm._s(
                           _vm.editBrand
-                            ? _vm.trans.edit_company
-                            : _vm.trans.create_company
+                            ? _vm.trans.edit_brand
+                            : _vm.trans.create_brand
                         )
                       )
                     ])
@@ -77088,8 +77088,8 @@ var render = function() {
                             "\n                        " +
                               _vm._s(
                                 _vm.editBrand
-                                  ? _vm.trans.update_company
-                                  : _vm.trans.create_company
+                                  ? _vm.trans.edit
+                                  : _vm.trans.create
                               ) +
                               "\n                    "
                           )
@@ -79716,7 +79716,7 @@ var render = function() {
       _vm.isLoading
         ? _c(
             "v-app",
-            { attrs: { id: "inspire", white: "" } },
+            { attrs: { id: "inspire", dark: "" } },
             [
               _vm.isAdmin
                 ? [
@@ -79946,7 +79946,7 @@ var defaultState = {
     userId: null,
     userName: null,
     userEmail: null,
-    admin: false,
+    admin: true,
     isLogin: false,
     themeOption: {
         theme: 'dark',
@@ -83958,7 +83958,7 @@ var actions = {
         var URL = '/api/brands' + params;
 
         axios.get(URL).then(function (response) {
-            if (response.data.companies) {
+            if (response.data.brands) {
                 commit('setBrands', response.data.brands);
                 commit('setTotalBrands', response.data.total);
                 commit('setBrandLoading', false);

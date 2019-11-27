@@ -108,7 +108,7 @@ const actions = {
         const URL = '/api/brands' + params
 
         axios.get(URL).then((response) => {
-            if (response.data.companies) {
+            if (response.data.brands) {
                 commit('setBrands', response.data.brands)
                 commit('setTotalBrands', response.data.total)
                 commit('setBrandLoading', false)

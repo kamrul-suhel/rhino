@@ -43,6 +43,13 @@ return [
         'identifier' => 'successfully_created',
         'translation' => 'Successfully created'
     ],
+
+    [
+        'label' => 'Create',
+        'identifier' => 'create',
+        'translation' => 'Create'
+    ],
+
     [
         'label' => 'Rows Per Page test',
         'identifier' => 'rows_per_page',

@@ -16,14 +16,25 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::select(
-          'brands.'
-        );
+            'brands.logo',
+            'brands.colour',
+            'brands.company_id',
+            'brands_translation.name',
+            'brands_translation.description'
+        )->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
+            ->where('brands_translation.language_id', $this->languageId)
+            ->get();
+
+        return response()->json([
+            'brands' => $brands,
+            'total' => $brands->count()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -34,7 +45,7 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -45,8 +56,8 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -57,7 +68,7 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
