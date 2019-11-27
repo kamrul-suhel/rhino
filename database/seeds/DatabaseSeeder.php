@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
         // Seed the company & company translation
         $this->call(CompanySeeder::class);
 
+        // Seed Brand table
+        $this->call(BrandSeeder::class);
+
         // Seed dealership group table
 //        $this->call(GroupSeeder::class);
 
         // Seed Dealership table
 //        $this->call(DealershipSeeder::class);
-
-        // Seed Brand table
-//        $this->call(BrandSeeder::class);
     }
 }

@@ -76504,21 +76504,324 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ImageUpload__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_ImageUpload__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {};
+    components: {
+        FileUpload: __WEBPACK_IMPORTED_MODULE_1__components_ImageUpload___default.a
     },
+
+    data: function data() {
+        return {
+            totalDesserts: 0,
+            desserts: [],
+            pagination: {},
+            searchDealerships: '',
+            dialog: false,
+            deleteDialog: false,
+            searchCompany: '',
+            editCompany: false
+        };
+    },
+
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        companies: 'getCompanies',
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        headers: 'getCompanyListHeader',
+        totalCompanies: 'getTotalCompanies',
+        loading: 'getCompanyLoading',
+        rowsPerPage: 'getCompanyListRowsPerPage',
+        selectedCompany: 'getSelectedCompany',
+        companyImage: 'getUploadedImage',
+        languages: 'getLanguages'
+    })),
+
+    watch: {
+        pagination: {
+            handler: function handler() {
+                this.initialize();
+            }
+        },
+
+        searchCompany: function searchCompany() {
+            this.initialize();
+        }
+    },
+
     created: function created() {},
+    mounted: function mounted() {},
 
+    methods: {
 
-    methods: {}
+        // Initialize data when first render
+        initialize: function initialize() {
+            var paginateOption = _extends({}, this.pagination, {
+                trans: this.trans,
+                themeOption: this.themeOption,
+                paginate: true,
+                search: this.searchCompany
+            });
+
+            this.$store.dispatch('fetchCompanies', paginateOption);
+        },
+        onEditCompany: function onEditCompany(company) {
+            this.editCompany = true;
+            // Check if group has logo, then set image
+            if (company.logo) {
+                this.$store.commit('setImage', company.logo);
+            }
+            this.$store.commit('setSelectedCompany', company);
+        },
+        onDeleteCompany: function onDeleteCompany(company) {
+            this.deleteDialog = true;
+            this.$store.commit('setSelectedCompany', company);
+        },
+        onConfirmDeleteCompany: function onConfirmDeleteCompany() {
+            var _this = this;
+
+            var selectedCompany = this.selectedCompany;
+            var URL = '/api/companies/' + selectedCompany.id + '/delete';
+
+            axios.delete(URL, { _method: 'delete' }).then(function (response) {
+                if (response.data.success) {
+                    _this.$store.commit('setSnackbarMessage', {
+                        openMessage: true,
+                        timeOut: _this.themeOption.snackBarTimeout,
+                        message: selectedCompany.name + '  ' + _this.trans.successfully_deleted
+                    });
+
+                    _this.initialize();
+                    // reset selectedDealerships in store
+                    _this.onResetCompany();
+                    _this.deleteDialog = false;
+                }
+            });
+        },
+        onCreateCompany: function onCreateCompany() {
+            var _this2 = this;
+
+            // Check update or create
+            var URL = '/api/companies';
+            var companyForm = new FormData();
+            companyForm.append('name', this.selectedCompany.name);
+            companyForm.append('logo', this.companyImage);
+
+            if (this.editCompany) {
+                var ID = this.selectedCompany.id;
+                // Update the data
+                URL = URL + '/' + ID + '/update';
+                companyForm.append('languageId', this.selectedCompany.language_id);
+                companyForm.append('_method', 'put');
+            } else {
+                // Create new company
+            }
+
+            axios.post(URL, companyForm).then(function (response) {
+                if (response.data.success) {
+                    _this2.initialize();
+                    if (_this2.editCompany) {
+                        _this2.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: _this2.themeOption.snackBarTimeout,
+                            message: _this2.selectedCompany.name + '  ' + _this2.trans.successfully_updated
+                        });
+                    } else {
+                        _this2.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: _this2.themeOption.snackBarTimeout,
+                            message: _this2.selectedCompany.name + '  ' + _this2.trans.successfully_created
+                        });
+                        _this2.onResetCompany();
+                    }
+                }
+            });
+        },
+        onLanguageChange: function onLanguageChange(selectedLanguage) {
+            this.$store.dispatch('fetchCompany', {
+                id: this.selectedCompany.id,
+                languageId: selectedLanguage
+            });
+        },
+        onResetCompany: function onResetCompany() {
+            this.editCompany = false;
+            this.$store.commit('setSelectedCompany', {});
+            this.$store.commit('resetImageUpload');
+        }
+    }
 });
 
 /***/ }),
@@ -76529,7 +76832,383 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-layout", [_c("h2", [_vm._v("List of brands template")])])
+  return _c(
+    "div",
+    [
+      _c(
+        "v-toolbar",
+        { attrs: { flat: "" } },
+        [
+          _c("v-toolbar-title", [
+            _c("span", { class: _vm.themeOption.textHeadingColor + "--text" }, [
+              _vm._v(_vm._s(_vm.trans.brands))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("v-divider", {
+            staticClass: "mx-2",
+            attrs: { inset: "", vertical: "" }
+          }),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              color: _vm.themeOption.inputColor,
+              label: _vm.trans.search_by_name
+            },
+            model: {
+              value: _vm.searchCompany,
+              callback: function($$v) {
+                _vm.searchCompany = $$v
+              },
+              expression: "searchCompany"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm8: "", "pt-3": "" } },
+            [
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.headers,
+                  items: _vm.companies,
+                  "disable-initial-sort": "",
+                  pagination: _vm.pagination,
+                  "no-results-text": _vm.trans.no_group_found,
+                  "no-data-text": _vm.trans.no_group_found,
+                  "rows-per-page-text": _vm.trans.rows_per_page,
+                  "rows-per-page-items": _vm.rowsPerPage,
+                  "total-items": _vm.totalCompanies,
+                  loading: _vm.loading
+                },
+                on: {
+                  "update:pagination": function($event) {
+                    _vm.pagination = $event
+                  }
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "items",
+                    fn: function(props) {
+                      return [
+                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-left" }, [
+                          _vm._v(
+                            _vm._s(
+                              props.item.status === 1
+                                ? _vm.trans.active
+                                : _vm.trans.inactive
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "text-xs-right" },
+                          [
+                            _c(
+                              "v-icon",
+                              {
+                                staticClass: "mr-2",
+                                attrs: { small: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.onEditCompany(props.item)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            edit\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-icon",
+                              {
+                                attrs: { small: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.onDeleteCompany(props.item)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            delete\n                        "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm4: "", "pt-3": "", "pl-3": "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _c("h3", [
+                      _vm._v(
+                        _vm._s(
+                          _vm.editCompany
+                            ? _vm.trans.edit_company
+                            : _vm.trans.create_company
+                        )
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      this.editCompany
+                        ? _c("v-autocomplete", {
+                            attrs: {
+                              label: _vm.trans.languages,
+                              "item-text": "name",
+                              "item-value": "id",
+                              color: _vm.themeOption.inputColor,
+                              items: _vm.languages
+                            },
+                            on: { change: _vm.onLanguageChange },
+                            model: {
+                              value: _vm.selectedCompany.language_id,
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.selectedCompany,
+                                  "language_id",
+                                  $$v
+                                )
+                              },
+                              expression: "selectedCompany.language_id"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: _vm.trans.name,
+                          color: _vm.themeOption.inputColor
+                        },
+                        model: {
+                          value: _vm.selectedCompany.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.selectedCompany, "name", $$v)
+                          },
+                          expression: "selectedCompany.name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c("span", [_vm._v(_vm._s(_vm.trans.logo))]),
+                          _vm._v(" "),
+                          _c("v-img", {
+                            attrs: {
+                              src: _vm.companyImage,
+                              "aspect-ratio": "2.75"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("FileUpload", {
+                            attrs: {
+                              preview: false,
+                              multiple: false,
+                              model: "'groups'"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    { staticClass: "pa-2" },
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            small: "",
+                            color: _vm.themeOption.buttonPrimaryColor
+                          },
+                          on: { click: _vm.onResetCompany }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.trans.cancel) +
+                              "\n                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            small: "",
+                            color: _vm.themeOption.buttonSecondaryColor
+                          },
+                          on: { click: _vm.onCreateCompany }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm.editCompany
+                                  ? _vm.trans.update_company
+                                  : _vm.trans.create_company
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "290" },
+          model: {
+            value: _vm.deleteDialog,
+            callback: function($$v) {
+              _vm.deleteDialog = $$v
+            },
+            expression: "deleteDialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "pa-2 pl-3", attrs: { "primary-title": "" } },
+                [
+                  _c("h3", [
+                    _vm._v(
+                      _vm._s(_vm.trans.delete) +
+                        " " +
+                        _vm._s(_vm.selectedCompany.name)
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c("v-flex", { attrs: { xs12: "" } }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.trans.delete_confirmation) +
+                        "\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { staticClass: "pa-3" },
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "info", small: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.deleteDialog = false
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.cancel) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", small: "" },
+                      on: { click: _vm.onConfirmDeleteCompany }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.delete) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -82090,19 +82769,11 @@ var actions = {};
 var CompanyRoutes = {
     path: '/companies',
     name: 'companies',
-    component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["d" /* Root */],
+    component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["b" /* Root */],
     children: [{
         path: '',
         name: 'listCompanies',
-        component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["c" /* List */]
-    }, {
-        path: 'create',
-        name: 'createCompanies',
-        component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["a" /* Create */]
-    }, {
-        path: ':id/edit',
-        name: 'editCompanies',
-        component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["b" /* Edit */]
+        component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["a" /* List */]
     }]
 };
 
@@ -82115,18 +82786,10 @@ var CompanyRoutes = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__List__ = __webpack_require__(479);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__List__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Edit__ = __webpack_require__(480);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Root__ = __webpack_require__(481);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Root___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Root__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Create__ = __webpack_require__(484);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Create___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Create__);
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__Root___default.a; });
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__List___default.a; });
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__Create___default.a; });
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__Edit___default.a; });
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Root__ = __webpack_require__(481);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Root___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Root__);
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__Root___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__List___default.a; });
 
 
 
@@ -82180,36 +82843,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 480 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var normalizeComponent = __webpack_require__(10)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/pages/company/Edit.vue"
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 480 */,
 /* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -82300,36 +82934,7 @@ if (false) {
 }
 
 /***/ }),
-/* 484 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var normalizeComponent = __webpack_require__(10)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/pages/company/Create.vue"
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 484 */,
 /* 485 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

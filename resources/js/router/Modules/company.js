@@ -9,18 +9,6 @@ const CompanyRoutes = {
             path: '',
             name: 'listCompanies',
             component: Company.List,
-        },
-
-        {
-            path: 'create',
-            name: 'createCompanies',
-            component: Company.Create,
-        },
-
-        {
-            path: ':id/edit',
-            name: 'editCompanies',
-            component: Company.Edit,
         }
     ]
 }

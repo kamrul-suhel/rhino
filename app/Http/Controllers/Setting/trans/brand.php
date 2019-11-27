@@ -7,6 +7,12 @@ return [
     ],
 
     [
+        'label' => 'Brand',
+        'identifier' => 'brand',
+        'translation' => 'Brand'
+    ],
+
+    [
         'label' => 'Create Brand',
         'identifier' => 'create_brand',
         'translation' => 'Create Brand'
@@ -20,8 +26,8 @@ return [
 
     [
         'label' => 'List Of Brands',
-        'identifier' => 'list_of_brand',
-        'translation' => 'List Of Brand'
+        'identifier' => 'list_of_brands',
+        'translation' => 'List Of Brands'
     ],
 
     [
