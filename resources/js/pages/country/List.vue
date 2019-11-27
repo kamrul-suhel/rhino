@@ -243,8 +243,6 @@
                 this.$router.push({name: 'editCountries', params:{id: country.id}})
             },
 
-
-
             deleteCountry(country){
                 this.$store.commit('setSelectedCountry', country)
                 this.deleteDialog = true

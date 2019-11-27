@@ -93,3 +93,20 @@ Route::prefix('brands')->group(function(){
         return view('welcome');
     });
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes for Companies
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('companies')->group(function(){
+    Route::get('/', function(){
+        return view('welcome');
+    });
+
+    Route::get('create', function(){
+        return view('welcome');
+    });
+});

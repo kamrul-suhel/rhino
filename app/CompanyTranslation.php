@@ -10,6 +10,8 @@ class CompanyTranslation extends Model
 
     protected $fillable = [
         'name',
+        'language_id',
+        'company_id',
         'description'
     ];
 }

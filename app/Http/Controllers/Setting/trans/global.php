@@ -65,7 +65,7 @@ return [
     ],
     [
         'label' => 'Successfully updated',
-        'identifier' => 'successfully_updated.',
+        'identifier' => 'successfully_updated',
         'translation' => 'Successfully updated'
     ],
 

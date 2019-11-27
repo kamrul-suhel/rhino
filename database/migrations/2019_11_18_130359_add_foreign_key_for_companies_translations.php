@@ -14,7 +14,11 @@ class AddForeignKeyForCompaniesTranslations extends Migration
     public function up()
     {
         Schema::table('companies_translation', function (Blueprint $table) {
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onDelete('cascade');
+
             $table->foreign('language_id')->references('id')->on('languages');
         });
     }

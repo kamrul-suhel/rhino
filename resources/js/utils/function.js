@@ -25,27 +25,31 @@ export default {
     generateParams(payload) {
         let params = '?'
         if (payload.type && typeof (payload.type) != 'undefined') {
-            params += 'type=' + payload.type
+            params += `type=${payload.type}`
         }
 
         if (payload.rowsPerPage && typeof (payload.rowsPerPage) != 'undefined') {
-            params += '&rowsPerPage=' + payload.rowsPerPage
+            params += `&rowsPerPage=${payload.rowsPerPage}`
         }
 
         if (payload.paginate && typeof (payload.paginate) != 'undefined') {
-            params += '&paginate=true'
+            params += `&paginate=true`
         }
 
         if (payload.page && typeof (payload.page) != 'undefined') {
-            params += '&page=' + payload.page
+            params += `&page=${payload.page}`
         }
 
         if (payload.sortBy && typeof (payload.sortBy) != 'undefined') {
-            params += '&sortBy=' + payload.sortBy
+            params += `&sortBy=${payload.sortBy}`
         }
 
         if (payload.search && typeof (payload.search) != 'undefined') {
-            params += '&search=' + payload.search
+            params += `&search=${payload.search}`
+        }
+
+        if(payload.languageId && typeof (payload.languageId) !== 'undefined'){
+            params += `&languageId=${payload.languageId}`
         }
 
         return params

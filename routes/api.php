@@ -46,6 +46,22 @@ Route::prefix('dealerships')->group(function(){
     Route::delete('{id}/delete', 'Dealership\DealershipController@destroy');
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Companies
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('companies')->group(function(){
+    Route::get('', 'Company\CompanyController@index');
+    Route::post('', 'Company\CompanyController@store');
+    Route::put('{id}/update', 'Company\CompanyController@update');
+    Route::get('{id}/show', 'Company\CompanyController@show');
+    Route::delete('{id}/delete', 'Company\CompanyController@destroy');
+});
+
 /*
 |--------------------------------------------------------------------------
 | API Route for Dealership Groups

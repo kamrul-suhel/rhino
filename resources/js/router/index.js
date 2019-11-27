@@ -6,6 +6,7 @@ import LanguageRoutes from './Modules/languages'
 import BrandsRoutes from './Modules/brands'
 import CountriesRoutes from './Modules/countries'
 import Groups from './Modules/groups'
+import Company from './Modules/company'
 
 Vue.use(Router)
 
@@ -29,7 +30,10 @@ const routes = [
     {...CountriesRoutes},
 
     // Brands routes
-    {...BrandsRoutes}
+    {...BrandsRoutes},
+
+    // Company Routes
+    {...Company}
 
 ]
 

@@ -10,6 +10,7 @@ import SnackBar from "./modules/snackbar";
 import Dealership from './modules/dealership'
 import Group from './modules/group'
 import ImageUpload from "./modules/imageUpload";
+import Company from "./modules/company"
 
 
 Vue.use(Vuex);
@@ -42,7 +43,8 @@ const store = new Vuex.Store({
         country,
         Dealership,
         Group,
-        ImageUpload
+        ImageUpload,
+        Company
     }
 });
 

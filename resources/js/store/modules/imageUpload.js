@@ -33,7 +33,9 @@ const mutations = {
     },
 
     resetImageUpload(state){
-        state = {...defaultState}
+        _.forEach(defaultState, (key, value) =>{
+            state[value] = key
+        })
     },
 
     setHasImage(state, hasImage){

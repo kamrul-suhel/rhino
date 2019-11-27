@@ -18,6 +18,7 @@ class CreateCompaniesTranslationTable extends Migration
             $table->unsignedBigInteger('language_id')->index();
             $table->unsignedBigInteger('company_id');
             $table->string('name');
+            $table->text('overview')->nullable();
             $table->timestamps();
         });
     }

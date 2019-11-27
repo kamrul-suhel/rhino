@@ -90,6 +90,25 @@ const mutations = {
                     }
                 ],
             },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.companies,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.list_of_companies,
+                        link: 'listCompanies',
+                        access: ''
+                    },
+                    {
+                        icon: 'history',
+                        text: trans.create_company,
+                        link: 'createCompanies',
+                        access: ''
+                    }
+                ],
+            },
         ]
 
         state.navigation = [...navItems];

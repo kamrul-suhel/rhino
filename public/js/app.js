@@ -68001,7 +68001,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Modules_brands__ = __webpack_require__(410);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Modules_countries__ = __webpack_require__(424);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Modules_groups__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Modules_company__ = __webpack_require__(477);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 
 
 
@@ -68033,7 +68035,10 @@ _extends({}, __WEBPACK_IMPORTED_MODULE_4__Modules_languages__["a" /* default */]
 _extends({}, __WEBPACK_IMPORTED_MODULE_6__Modules_countries__["a" /* default */]),
 
 // Brands routes
-_extends({}, __WEBPACK_IMPORTED_MODULE_5__Modules_brands__["a" /* default */])];
+_extends({}, __WEBPACK_IMPORTED_MODULE_5__Modules_brands__["a" /* default */]),
+
+// Company Routes
+_extends({}, __WEBPACK_IMPORTED_MODULE_8__Modules_company__["a" /* default */])];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
@@ -79082,6 +79087,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_dealership__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_group__ = __webpack_require__(461);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_imageUpload__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_company__ = __webpack_require__(487);
+
 
 
 
@@ -79121,7 +79128,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
         country: __WEBPACK_IMPORTED_MODULE_6__modules_country__["a" /* default */],
         Dealership: __WEBPACK_IMPORTED_MODULE_8__modules_dealership__["a" /* default */],
         Group: __WEBPACK_IMPORTED_MODULE_9__modules_group__["a" /* default */],
-        ImageUpload: __WEBPACK_IMPORTED_MODULE_10__modules_imageUpload__["a" /* default */]
+        ImageUpload: __WEBPACK_IMPORTED_MODULE_10__modules_imageUpload__["a" /* default */],
+        Company: __WEBPACK_IMPORTED_MODULE_11__modules_company__["a" /* default */]
     }
 });
 
@@ -79359,6 +79367,20 @@ var mutations = {
                 icon: 'history',
                 text: trans.create_brand,
                 link: 'createBrands',
+                access: ''
+            }]
+        }, {
+            icon: 'add_shopping_cart',
+            text: trans.companies,
+            navs: [{
+                icon: 'history',
+                text: trans.list_of_companies,
+                link: 'listCompanies',
+                access: ''
+            }, {
+                icon: 'history',
+                text: trans.create_company,
+                link: 'createCompanies',
                 access: ''
             }]
         }];
@@ -81994,6 +82016,10 @@ module.exports = Component.exports
             params += '&search=' + payload.search;
         }
 
+        if (payload.languageId && typeof payload.languageId !== 'undefined') {
+            params += '&languageId=' + payload.languageId;
+        }
+
         return params;
     }
 });
@@ -82035,7 +82061,9 @@ var mutations = {
         state.images = [].concat(_toConsumableArray(images));
     },
     resetImageUpload: function resetImageUpload(state) {
-        state = _extends({}, defaultState);
+        _.forEach(defaultState, function (key, value) {
+            state[value] = key;
+        });
     },
     setHasImage: function setHasImage(state, hasImage) {
         state.hasImage = hasImage;
@@ -82043,6 +82071,1118 @@ var mutations = {
 };
 
 var actions = {};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: state,
+    mutations: mutations,
+    getters: getters,
+    actions: actions
+});
+
+/***/ }),
+/* 477 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_company__ = __webpack_require__(478);
+
+
+var CompanyRoutes = {
+    path: '/companies',
+    name: 'companies',
+    component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["d" /* Root */],
+    children: [{
+        path: '',
+        name: 'listCompanies',
+        component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["c" /* List */]
+    }, {
+        path: 'create',
+        name: 'createCompanies',
+        component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["a" /* Create */]
+    }, {
+        path: ':id/edit',
+        name: 'editCompanies',
+        component: __WEBPACK_IMPORTED_MODULE_0__pages_company__["b" /* Edit */]
+    }]
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (CompanyRoutes);
+
+/***/ }),
+/* 478 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__List__ = __webpack_require__(479);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__List__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Edit__ = __webpack_require__(480);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Edit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Root__ = __webpack_require__(481);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Root___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Root__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Create__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Create___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Create__);
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__Root___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__List___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__Create___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__Edit___default.a; });
+
+
+
+
+
+
+
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(485)
+/* template */
+var __vue_template__ = __webpack_require__(486)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/pages/company/List.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ad6e460e", Component.options)
+  } else {
+    hotAPI.reload("data-v-ad6e460e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/pages/company/Edit.vue"
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 481 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(482)
+/* template */
+var __vue_template__ = __webpack_require__(483)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/pages/company/Root.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4f21eb3d", Component.options)
+  } else {
+    hotAPI.reload("data-v-4f21eb3d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 482 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    created: function created() {},
+
+
+    methods: {},
+
+    destroyed: function destroyed() {}
+});
+
+/***/ }),
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("router-view")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4f21eb3d", module.exports)
+  }
+}
+
+/***/ }),
+/* 484 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/pages/company/Create.vue"
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 485 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ImageUpload__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_ImageUpload__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        FileUpload: __WEBPACK_IMPORTED_MODULE_1__components_ImageUpload___default.a
+    },
+
+    data: function data() {
+        return {
+            totalDesserts: 0,
+            desserts: [],
+            pagination: {},
+            searchDealerships: '',
+            dialog: false,
+            deleteDialog: false,
+            searchCompany: '',
+            editCompany: false
+        };
+    },
+
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        companies: 'getCompanies',
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        headers: 'getCompanyListHeader',
+        totalCompanies: 'getTotalCompanies',
+        loading: 'getCompanyLoading',
+        rowsPerPage: 'getCompanyListRowsPerPage',
+        selectedCompany: 'getSelectedCompany',
+        companyImage: 'getUploadedImage',
+        languages: 'getLanguages'
+    })),
+
+    watch: {
+        pagination: {
+            handler: function handler() {
+                this.initialize();
+            }
+        },
+
+        searchCompany: function searchCompany() {
+            this.initialize();
+        }
+    },
+
+    created: function created() {},
+    mounted: function mounted() {},
+
+    methods: {
+
+        // Initialize data when first render
+        initialize: function initialize() {
+            var paginateOption = _extends({}, this.pagination, {
+                trans: this.trans,
+                themeOption: this.themeOption,
+                paginate: true,
+                search: this.searchCompany
+            });
+
+            this.$store.dispatch('fetchCompanies', paginateOption);
+        },
+        onEditCompany: function onEditCompany(company) {
+            this.editCompany = true;
+            // Check if group has logo, then set image
+            if (company.logo) {
+                this.$store.commit('setImage', company.logo);
+            }
+            this.$store.commit('setSelectedCompany', company);
+        },
+        onDeleteCompany: function onDeleteCompany(company) {
+            this.deleteDialog = true;
+            this.$store.commit('setSelectedCompany', company);
+        },
+        onConfirmDeleteCompany: function onConfirmDeleteCompany() {
+            var _this = this;
+
+            var selectedCompany = this.selectedCompany;
+            var URL = '/api/companies/' + selectedCompany.id + '/delete';
+
+            axios.delete(URL, { _method: 'delete' }).then(function (response) {
+                if (response.data.success) {
+                    _this.$store.commit('setSnackbarMessage', {
+                        openMessage: true,
+                        timeOut: _this.themeOption.snackBarTimeout,
+                        message: selectedCompany.name + '  ' + _this.trans.successfully_deleted
+                    });
+
+                    _this.initialize();
+                    // reset selectedDealerships in store
+                    _this.onResetCompany();
+                    _this.deleteDialog = false;
+                }
+            });
+        },
+        onCreateCompany: function onCreateCompany() {
+            var _this2 = this;
+
+            // Check update or create
+            var URL = '/api/companies';
+            var companyForm = new FormData();
+            companyForm.append('name', this.selectedCompany.name);
+            companyForm.append('logo', this.companyImage);
+
+            if (this.editCompany) {
+                var ID = this.selectedCompany.id;
+                // Update the data
+                URL = URL + '/' + ID + '/update';
+                companyForm.append('languageId', this.selectedCompany.language_id);
+                companyForm.append('_method', 'put');
+            } else {
+                // Create new company
+            }
+
+            axios.post(URL, companyForm).then(function (response) {
+                if (response.data.success) {
+                    _this2.initialize();
+                    if (_this2.editCompany) {
+                        _this2.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: _this2.themeOption.snackBarTimeout,
+                            message: _this2.selectedCompany.name + '  ' + _this2.trans.successfully_updated
+                        });
+                    } else {
+                        _this2.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: _this2.themeOption.snackBarTimeout,
+                            message: _this2.selectedCompany.name + '  ' + _this2.trans.successfully_created
+                        });
+                        _this2.onResetCompany();
+                    }
+                }
+            });
+        },
+        onLanguageChange: function onLanguageChange(selectedLanguage) {
+            this.$store.dispatch('fetchCompany', {
+                id: this.selectedCompany.id,
+                languageId: selectedLanguage
+            });
+        },
+        onResetCompany: function onResetCompany() {
+            this.editCompany = false;
+            this.$store.commit('setSelectedCompany', {});
+            this.$store.commit('resetImageUpload');
+        }
+    }
+});
+
+/***/ }),
+/* 486 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-toolbar",
+        { attrs: { flat: "" } },
+        [
+          _c("v-toolbar-title", [
+            _c("span", { class: _vm.themeOption.textHeadingColor + "--text" }, [
+              _vm._v(_vm._s(_vm.trans.companies))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("v-divider", {
+            staticClass: "mx-2",
+            attrs: { inset: "", vertical: "" }
+          }),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              color: _vm.themeOption.inputColor,
+              label: _vm.trans.search_by_name
+            },
+            model: {
+              value: _vm.searchCompany,
+              callback: function($$v) {
+                _vm.searchCompany = $$v
+              },
+              expression: "searchCompany"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm8: "", "pt-3": "" } },
+            [
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.headers,
+                  items: _vm.companies,
+                  "disable-initial-sort": "",
+                  pagination: _vm.pagination,
+                  "no-results-text": _vm.trans.no_group_found,
+                  "no-data-text": _vm.trans.no_group_found,
+                  "rows-per-page-text": _vm.trans.rows_per_page,
+                  "rows-per-page-items": _vm.rowsPerPage,
+                  "total-items": _vm.totalCompanies,
+                  loading: _vm.loading
+                },
+                on: {
+                  "update:pagination": function($event) {
+                    _vm.pagination = $event
+                  }
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "items",
+                    fn: function(props) {
+                      return [
+                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-left" }, [
+                          _vm._v(
+                            _vm._s(
+                              props.item.status === 1
+                                ? _vm.trans.active
+                                : _vm.trans.inactive
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "text-xs-right" },
+                          [
+                            _c(
+                              "v-icon",
+                              {
+                                staticClass: "mr-2",
+                                attrs: { small: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.onEditCompany(props.item)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            edit\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-icon",
+                              {
+                                attrs: { small: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.onDeleteCompany(props.item)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            delete\n                        "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm4: "", "pt-3": "", "pl-3": "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _c("h3", [
+                      _vm._v(
+                        _vm._s(
+                          _vm.editCompany
+                            ? _vm.trans.edit_company
+                            : _vm.trans.create_company
+                        )
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      this.editCompany
+                        ? _c("v-autocomplete", {
+                            attrs: {
+                              label: _vm.trans.languages,
+                              "item-text": "name",
+                              "item-value": "id",
+                              color: _vm.themeOption.inputColor,
+                              items: _vm.languages
+                            },
+                            on: { change: _vm.onLanguageChange },
+                            model: {
+                              value: _vm.selectedCompany.language_id,
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.selectedCompany,
+                                  "language_id",
+                                  $$v
+                                )
+                              },
+                              expression: "selectedCompany.language_id"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: _vm.trans.name,
+                          color: _vm.themeOption.inputColor
+                        },
+                        model: {
+                          value: _vm.selectedCompany.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.selectedCompany, "name", $$v)
+                          },
+                          expression: "selectedCompany.name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c("span", [_vm._v(_vm._s(_vm.trans.logo))]),
+                          _vm._v(" "),
+                          _c("v-img", {
+                            attrs: {
+                              src: _vm.companyImage,
+                              "aspect-ratio": "2.75"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("FileUpload", {
+                            attrs: {
+                              preview: false,
+                              multiple: false,
+                              model: "'groups'"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    { staticClass: "pa-2" },
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            small: "",
+                            color: _vm.themeOption.buttonPrimaryColor
+                          },
+                          on: { click: _vm.onResetCompany }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.trans.cancel) +
+                              "\n                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            small: "",
+                            color: _vm.themeOption.buttonSecondaryColor
+                          },
+                          on: { click: _vm.onCreateCompany }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm.editCompany
+                                  ? _vm.trans.update_company
+                                  : _vm.trans.create_company
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "290" },
+          model: {
+            value: _vm.deleteDialog,
+            callback: function($$v) {
+              _vm.deleteDialog = $$v
+            },
+            expression: "deleteDialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "pa-2 pl-3", attrs: { "primary-title": "" } },
+                [
+                  _c("h3", [
+                    _vm._v(
+                      _vm._s(_vm.trans.delete) +
+                        " " +
+                        _vm._s(_vm.selectedCompany.name)
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c("v-flex", { attrs: { xs12: "" } }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.trans.delete_confirmation) +
+                        "\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { staticClass: "pa-3" },
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "info", small: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.deleteDialog = false
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.cancel) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", small: "" },
+                      on: { click: _vm.onConfirmDeleteCompany }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.delete) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ad6e460e", module.exports)
+  }
+}
+
+/***/ }),
+/* 487 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_function__ = __webpack_require__(475);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+var defaultState = {
+    companies: [],
+    selectedCompany: {},
+    listHeader: [],
+    loading: 'white',
+    totalCompanies: 0,
+    companyListRowPerPage: [15, 25, 40]
+};
+
+var state = _extends({}, defaultState);
+
+var mutations = {
+    setCompanies: function setCompanies(state, companies) {
+        state.companies = [].concat(_toConsumableArray(companies));
+    },
+    setCompanyLoading: function setCompanyLoading(state, status) {
+        state.loading = status;
+    },
+    setSelectedCompany: function setSelectedCompany(state, company) {
+        console.log('new company is: ', company);
+        state.selectedCompany = _extends({}, company);
+    },
+    setTotalCompanies: function setTotalCompanies(state, totalCompany) {
+        state.totalCompanies = totalCompany;
+    },
+    resetCompanyStore: function resetCompanyStore(state) {
+        state = _extends({}, defaultState);
+    },
+    setCompanyListHeader: function setCompanyListHeader(state, trans) {
+        var header = [{
+            text: trans.name,
+            align: 'left',
+            sortable: false,
+            value: 'name'
+        }, {
+            text: trans.status,
+            value: 'status'
+        }, {
+            text: trans.actions,
+            value: 'actions'
+        }];
+
+        state.listHeader = header;
+    }
+};
+
+var getters = {
+    getCompanies: function getCompanies(state) {
+        return state.companies;
+    },
+    getCompanyListHeader: function getCompanyListHeader(state) {
+        return state.listHeader;
+    },
+    getCompanyLoading: function getCompanyLoading(state) {
+        return state.loading;
+    },
+    getCompanyListRowsPerPage: function getCompanyListRowsPerPage(state) {
+        return state.companyListRowPerPage;
+    },
+    getSelectedCompany: function getSelectedCompany(state) {
+        return state.selectedCompany;
+    },
+    getTotalCompanies: function getTotalCompanies(state) {
+        return state.totalCompanies;
+    }
+};
+
+var actions = {
+    /**
+     * You can filter by status
+     * sent type= 'active' | 'inactive'
+     * ...this.pagination // Default pagination object
+     * trans: translation object, // Important
+     * paginate: true, // If you want all record, do not sent
+     * search: optional | if search by any text
+     * @param commit
+     * @param payload
+     */
+    fetchCompanies: function fetchCompanies(_ref) {
+        var commit = _ref.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+
+        // Set loading is true
+        commit('setCompanyLoading', payload.themeOption.loadingColor);
+
+        // Setup header for list view
+        commit('setCompanyListHeader', payload.trans);
+
+        var params = __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+        var URL = '/api/companies' + params;
+
+        axios.get(URL).then(function (response) {
+            if (response.data.companies) {
+                commit('setCompanies', response.data.companies);
+                commit('setTotalCompanies', response.data.total);
+                commit('setCompanyLoading', false);
+            }
+        });
+    },
+
+
+    /**
+     * Get Selected company
+     * @param id // required
+     */
+    fetchCompany: function fetchCompany(_ref2, payload) {
+        var commit = _ref2.commit,
+            dispatch = _ref2.dispatch;
+
+        var URL = '/api/companies/' + payload.id + '/show' + __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+        axios.get(URL).then(function (response) {
+            if (response.data) {
+                commit('setSelectedCompany', response.data.company);
+            }
+        }).catch(function (error) {
+            // Generate error message
+        });
+    }
+};
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: state,
