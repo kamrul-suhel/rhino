@@ -1,7 +1,7 @@
 <template>
     <v-layout row wrap>
         <image-uploader
-            :preview="true"
+            :preview="preview"
             :className="['fileinput', { 'fileinput--loaded': hasImage }]"
             capture="environment"
             :debug="0"
@@ -12,7 +12,7 @@
             @input="setImage"
         >
             <label for="fileInput" slot="upload-label">
-                <v-icon right dark>cloud_upload</v-icon>
+                <v-icon right>cloud_upload</v-icon>
 
                 <span class="upload-caption">
                     {{hasImage ? "Replace" : "Click to upload" }}
@@ -25,23 +25,40 @@
 <script>
 
     import {mapGetters} from 'vuex'
+
     export default {
+        props: {
+            preview: {
+                type: Boolean,
+                default: true
+            },
+
+            multiple: {
+                type: Boolean,
+                default: false
+            },
+
+            model: {
+                type: String,
+                required: true
+            }
+        },
         data() {
             return {
-                hasImage: false,
                 image: null
             }
         },
 
-        computed:({
+        computed: ({
             ...mapGetters({
                 trans: 'getFields',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                hasImage: 'getHasImage'
             })
         }),
 
-        watch:{
-            loader () {
+        watch: {
+            loader() {
                 const l = this.loader
                 this[l] = !this[l]
 
@@ -57,16 +74,17 @@
 
         methods: {
             setImage: function (output) {
-                this.hasImage = true
                 this.image = output
                 console.log(this.image)
                 console.log(typeof this.image)
 
                 let formData = new FormData()
                 formData.append('file', this.image)
+                formData.append('model', this.model)
 
-                axios.post('/api/uploadfiles', formData).then((response)=>{
-                    console.log(response);
+                axios.post('/api/uploadfiles', formData).then((response) => {
+                    this.$store.commit('setHasImage', true)
+                    this.$store.commit('setImage', response.data)
                 })
             },
 
@@ -77,39 +95,11 @@
             endImageResize() {
                 console.log('image resize end');
             }
+        },
+
+        destroyed() {
+            this.$store.commit('resetImageUpload')
         }
-
-
     }
 </script>
-
-<style>
-    #fileInput {
-        display: none;
-    }
-
-    h1,
-    h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
-    }
-
-    .my-8 {
-        margin-top: 4rem;
-        margin-bottom: 4rem;
-    }
-</style>
 

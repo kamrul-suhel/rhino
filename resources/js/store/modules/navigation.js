@@ -33,7 +33,7 @@ const mutations = {
                     {
                         icon: 'subscriptions',
                         text: trans.groups,
-                        link: 'groups',
+                        link: 'listDealershipsGroups',
                         access: ''
                     }
                 ],

@@ -1,5 +1,5 @@
 export default {
-    getPaginationParam(pagination){
+    getPaginationParam(pagination) {
         const shopId = this.selectedShop.id
         let params = '';
         params += '?query_type=productPage';
@@ -15,5 +15,39 @@ export default {
             params += `&${key}=${value}`
         })
         return params;
+    },
+
+    /**
+     * helper function to generate params
+     * @param payload
+     * @returns {string}
+     */
+    generateParams(payload) {
+        let params = '?'
+        if (payload.type && typeof (payload.type) != 'undefined') {
+            params += 'type=' + payload.type
+        }
+
+        if (payload.rowsPerPage && typeof (payload.rowsPerPage) != 'undefined') {
+            params += '&rowsPerPage=' + payload.rowsPerPage
+        }
+
+        if (payload.paginate && typeof (payload.paginate) != 'undefined') {
+            params += '&paginate=true'
+        }
+
+        if (payload.page && typeof (payload.page) != 'undefined') {
+            params += '&page=' + payload.page
+        }
+
+        if (payload.sortBy && typeof (payload.sortBy) != 'undefined') {
+            params += '&sortBy=' + payload.sortBy
+        }
+
+        if (payload.search && typeof (payload.search) != 'undefined') {
+            params += '&search=' + payload.search
+        }
+
+        return params
     }
 }

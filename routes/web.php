@@ -37,6 +37,13 @@ Route::prefix('dealerships')->group(function(){
     Route::get('{id}/edit', function(){
         return view('welcome');
     });
+
+    /**
+     * Group routes
+     */
+    Route::get('groups', function(){
+       return view('welcome');
+    });
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

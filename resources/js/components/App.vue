@@ -43,8 +43,16 @@
         computed:{
             ...mapGetters({
                 isLogin: 'getIsLogin',
-                isLoading: 'getIsLoading'
+                isLoading: 'getIsLoading',
+                themeOption: 'getThemeOption'
             })
+        },
+
+        watch: {
+          themeOption(value){
+              console.log('theme option is change', value);
+              this.$vuetify.theme = this.themeOption.theme
+            }
         },
 
         async created() {

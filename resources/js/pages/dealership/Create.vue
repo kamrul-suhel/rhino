@@ -199,7 +199,9 @@
                                         key="dealershipImage"
                                     >
                                         <v-layout row wrap pt-3>
-                                            <ImageUpload></ImageUpload>
+                                            <ImageUpload :preview="true"
+                                                         model="dealership"
+                                            ></ImageUpload>
                                         </v-layout>
                                     </v-tab-item>
 

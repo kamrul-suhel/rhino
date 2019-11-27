@@ -5,20 +5,29 @@ return [
         'identifier' => 'groups',
         'translation' => 'Groups'
     ],
+
     [
-        'label' => 'Add Groups',
-        'identifier' => 'add_groups',
-        'translation' => 'Add Groups'
+        'label' => 'Add Group',
+        'identifier' => 'add_group',
+        'translation' => 'Add Group'
     ],
+
     [
         'label' => 'Create Groups',
         'identifier' => 'create_groups',
         'translation' => 'Create Groups'
     ],
+
     [
-        'label' => 'Edit Groups',
-        'identifier' => 'edit_groups',
-        'translation' => 'Edit Groups'
+        'label' => 'Edit Group',
+        'identifier' => 'edit_group',
+        'translation' => 'Edit Group'
+    ],
+
+    [
+        'label' => 'Update Group',
+        'identifier' => 'update_group',
+        'translation' => 'Update Group'
     ],
 
     [
@@ -31,5 +40,17 @@ return [
         'label' => 'Groups fields is required',
         'identifier' => 'groups_filed_required',
         'translation' => 'Groups fields is required'
-    ]
+    ],
+
+    [
+        'label' => 'No group found',
+        'identifier' => 'no_group_found',
+        'translation' => 'no_group_found'
+    ],
+
+    [
+        'label' => 'Search by name',
+        'identifier' => 'search_by_name',
+        'translation' => 'Search by name'
+    ],
 ];

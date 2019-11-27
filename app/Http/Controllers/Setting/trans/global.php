@@ -147,4 +147,10 @@ return [
         'translation' => 'group'
     ],
 
+    [
+        'label' => 'Logo',
+        'identifier' => 'logo',
+        'translation' => 'Logo'
+    ],
+
 ];

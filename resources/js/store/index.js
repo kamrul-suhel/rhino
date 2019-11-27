@@ -9,6 +9,7 @@ import country from "./modules/country";
 import SnackBar from "./modules/snackbar";
 import Dealership from './modules/dealership'
 import Group from './modules/group'
+import ImageUpload from "./modules/imageUpload";
 
 
 Vue.use(Vuex);
@@ -40,7 +41,8 @@ const store = new Vuex.Store({
         language,
         country,
         Dealership,
-        Group
+        Group,
+        ImageUpload
     }
 });
 
