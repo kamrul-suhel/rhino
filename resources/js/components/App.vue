@@ -2,21 +2,37 @@
     <div id="app">
         <v-app
             id="inspire"
-            dark
+            white
             v-if="isLoading"
         >
-            <navigation-component></navigation-component>
-            <header-component></header-component>
-            <v-content>
-                <v-container fill-height>
-                    <v-layout >
-                        <v-flex>
-                            <SnackBar></SnackBar>
-                            <router-view></router-view>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-            </v-content>
+            <template v-if="isAdmin">
+                <navigation-component></navigation-component>
+                <header-component></header-component>
+                <v-content>
+                    <v-container fill-height>
+                        <v-layout >
+                            <v-flex>
+                                <SnackBar></SnackBar>
+                                <router-view></router-view>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-content>
+            </template>
+
+            <template v-else>
+                <v-content>
+                    <v-container fill-height>
+                        <v-layout >
+                            <v-flex>
+                                <SnackBar></SnackBar>
+                                <router-view></router-view>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-content>
+            </template>
+
         </v-app>
     </div>
 </template>
@@ -44,7 +60,8 @@
             ...mapGetters({
                 isLogin: 'getIsLogin',
                 isLoading: 'getIsLoading',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                isAdmin : 'getIsAdmin'
             })
         },
 

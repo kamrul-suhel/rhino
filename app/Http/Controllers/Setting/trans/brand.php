@@ -40,5 +40,11 @@ return [
         'label' => 'Delete Brand',
         'identifier' => 'delete_brand',
         'translation' => 'Delete Brand'
+    ],
+
+    [
+        'label' => 'No Brand Found',
+        'identifier' => 'no_brand_found',
+        'translation' => 'No Brand Found'
     ]
 ];

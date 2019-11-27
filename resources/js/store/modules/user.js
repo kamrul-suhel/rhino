@@ -3,7 +3,7 @@ const defaultState = {
     userId : null,
     userName: null,
     userEmail: null,
-    admin: null,
+    admin: false,
     isLogin: false,
     themeOption:{
         theme: 'dark',
@@ -93,6 +93,10 @@ const getters = {
 
     getThemeOption(state){
         return state.themeOption
+    },
+
+    getIsAdmin(state){
+        return state.admin
     }
 }
 

@@ -43,9 +43,9 @@ return [
     ],
 
     [
-        'label' => 'No group found',
+        'label' => 'No Group Found',
         'identifier' => 'no_group_found',
-        'translation' => 'no_group_found'
+        'translation' => 'No Group Found'
     ],
 
     [

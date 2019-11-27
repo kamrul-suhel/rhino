@@ -15,7 +15,7 @@
             <v-text-field
                 :color="themeOption.inputColor"
                 :label="trans.search_by_name"
-                v-model="searchCompany">
+                v-model="searchBrands">
             </v-text-field>
         </v-toolbar>
 
@@ -23,14 +23,14 @@
             <v-flex xs12 sm8 pt-3>
                 <v-data-table
                     :headers="headers"
-                    :items="companies"
+                    :items="brands"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_group_found"
-                    :no-data-text="trans.no_group_found"
+                    :no-results-text="trans.no_brand_found"
+                    :no-data-text="trans.no_brand_found"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
-                    :total-items="totalCompanies"
+                    :total-items="totalBrands"
                     :loading="loading"
                     class="elevation-1"
                 >
@@ -41,7 +41,7 @@
                             <v-icon
                                 small
                                 class="mr-2"
-                                @click="onEditCompany(props.item)"
+                                @click="onEditBrand(props.item)"
                             >
                                 edit
                             </v-icon>
@@ -60,15 +60,15 @@
             <v-flex xs12 sm4 pt-3 pl-3>
                 <v-card>
                     <v-card-title>
-                        <h3>{{ editCompany ? trans.edit_company : trans.create_company}}</h3>
+                        <h3>{{ editBrand ? trans.edit_company : trans.create_company}}</h3>
                     </v-card-title>
                     <v-divider></v-divider>
 
                     <v-card-text>
                         <v-autocomplete
-                            v-if="this.editCompany"
+                            v-if="this.editBrand"
                             :label="trans.languages"
-                            v-model="selectedCompany.language_id"
+                            v-model="selectedBrand.language_id"
                             item-text="name"
                             item-value="id"
                             @change="onLanguageChange"
@@ -78,7 +78,7 @@
 
                         <v-text-field
                             :label="trans.name"
-                            v-model="selectedCompany.name"
+                            v-model="selectedBrand.name"
                             :color="themeOption.inputColor"
                         ></v-text-field>
 
@@ -86,7 +86,7 @@
                             <span>{{trans.logo}}</span>
 
                             <v-img
-                                :src="companyImage"
+                                :src="brandImage"
                                 aspect-ratio="2.75"
                             ></v-img>
 
@@ -109,8 +109,8 @@
                         <v-btn
                             small
                             :color="themeOption.buttonSecondaryColor"
-                            @click="onCreateCompany">
-                            {{ editCompany ? trans.update_company : trans.create_company }}
+                            @click="onCreateBrand">
+                            {{ editBrand ? trans.update_company : trans.create_company }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -127,7 +127,7 @@
                     primary-title
                     class="pa-2 pl-3"
                 >
-                    <h3>{{ trans.delete }} {{selectedCompany.name }}</h3>
+                    <h3>{{ trans.delete }} {{selectedBrand.name }}</h3>
                 </v-card-title>
 
                 <v-divider></v-divider>
@@ -153,7 +153,7 @@
                     <v-btn
                         color="red"
                         small
-                        @click="onConfirmDeleteCompany"
+                        @click="onConfirmDeleteBrand"
                     >
                         {{ trans.delete }}
                     </v-btn>
@@ -174,29 +174,26 @@
 
         data() {
             return {
-                totalDesserts: 0,
-                desserts: [],
                 pagination: {},
-                searchDealerships: '',
                 dialog: false,
                 deleteDialog: false,
-                searchCompany:'',
-                editCompany: false
+                searchBrands:'',
+                editBrand: false
             }
         },
 
         computed: ({
             ...mapGetters({
-                companies: 'getCompanies',
+                languages: 'getLanguages',
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                headers: 'getCompanyListHeader',
-                totalCompanies: 'getTotalCompanies',
-                loading: 'getCompanyLoading',
-                rowsPerPage: 'getCompanyListRowsPerPage',
-                selectedCompany: 'getSelectedCompany',
-                companyImage: 'getUploadedImage',
-                languages: 'getLanguages'
+                brands: 'getBrands',
+                headers: 'getBrandListHeader',
+                totalBrands: 'getTotalBrands',
+                loading: 'getBrandLoading',
+                rowsPerPage: 'getBrandListRowsPerPage',
+                selectedBrand: 'getSelectedBrand',
+                brandImage: 'getUploadedImage'
             })
         }),
 
@@ -229,26 +226,26 @@
                     search: this.searchCompany
                 }
 
-                this.$store.dispatch('fetchCompanies', paginateOption)
+                this.$store.dispatch('fetchBrands', paginateOption)
             },
 
-            onEditCompany(company) {
-                this.editCompany = true
+            onEditBrand(company) {
+                this.editBrand = true
                 // Check if group has logo, then set image
                 if(company.logo){
                     this.$store.commit('setImage', company.logo)
                 }
-                this.$store.commit('setSelectedCompany', company)
+                this.$store.commit('setSelectedBrand', company)
             },
 
-            onDeleteCompany(company){
+            onDeleteBrand(company){
                 this.deleteDialog = true
-                this.$store.commit('setSelectedCompany', company)
+                this.$store.commit('setSelectedBrand', company)
             },
 
-            onConfirmDeleteCompany() {
-                const selectedCompany = this.selectedCompany
-                const URL = `/api/companies/${selectedCompany.id}/delete`
+            onConfirmDeleteBrand() {
+                const selectedBrand = this.selectedBrand
+                const URL = `/api/companies/${selectedBrand.id}/delete`
 
                 axios.delete(URL, {_method: 'delete'})
                     .then((response) => {
@@ -256,7 +253,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedCompany.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedBrand.name}  ${this.trans.successfully_deleted}`
                             })
 
                             this.initialize()
@@ -266,18 +263,18 @@
                         }
                     });
             },
-            onCreateCompany() {
+            onCreateBrand() {
                 // Check update or create
                 let URL = '/api/companies'
                 let companyForm = new FormData()
-                companyForm.append('name', this.selectedCompany.name)
-                companyForm.append('logo', this.companyImage)
+                companyForm.append('name', this.selectedBrand.name)
+                companyForm.append('logo', this.brandImage)
 
-                if(this.editCompany){
-                    const ID = this.selectedCompany.id
+                if(this.editBrand){
+                    const ID = this.selectedBrand.id
                     // Update the data
                     URL = `${URL}/${ID}/update`
-                    companyForm.append('languageId', this.selectedCompany.language_id)
+                    companyForm.append('languageId', this.selectedBrand.language_id)
                     companyForm.append('_method', 'put')
                 }else{
                     // Create new company
@@ -286,17 +283,17 @@
                 axios.post(URL, companyForm).then((response) =>{
                     if(response.data.success){
                         this.initialize()
-                        if(this.editCompany){
+                        if(this.editBrand){
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedCompany.name}  ${this.trans.successfully_updated}`
+                                message: `${this.selectedBrand.name}  ${this.trans.successfully_updated}`
                             })
                         }else{
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedCompany.name}  ${this.trans.successfully_created}`
+                                message: `${this.selectedBrand.name}  ${this.trans.successfully_created}`
                             })
                             this.onResetCompany()
                         }
@@ -307,14 +304,14 @@
 
             onLanguageChange(selectedLanguage){
                 this.$store.dispatch('fetchCompany', {
-                    id: this.selectedCompany.id,
+                    id: this.selectedBrand.id,
                     languageId: selectedLanguage
                 })
             },
 
             onResetCompany() {
-                this.editCompany = false
-                this.$store.commit('setSelectedCompany', {})
+                this.editBrand = false
+                this.$store.commit('setSelectedBrand', {})
                 this.$store.commit('resetImageUpload')
             },
         }

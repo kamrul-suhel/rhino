@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/frontend', function () {
+    return view('welcome');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Routes for Dealerships

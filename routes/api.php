@@ -62,6 +62,18 @@ Route::prefix('companies')->group(function(){
     Route::delete('{id}/delete', 'Company\CompanyController@destroy');
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Brands
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('brands')->group(function(){
+    Route::get('', 'Brand\BrandController@index');
+});
+
 /*
 |--------------------------------------------------------------------------
 | API Route for Dealership Groups
