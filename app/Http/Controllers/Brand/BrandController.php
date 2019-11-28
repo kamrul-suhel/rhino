@@ -13,21 +13,63 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data = [];
+        $totalBrand = 0;
         $brands = Brand::select(
             'brands.logo',
             'brands.colour',
             'brands.company_id',
             'brands_translation.name',
             'brands_translation.description'
-        )->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
-            ->where('brands_translation.language_id', $this->languageId)
-            ->get();
+        )
+            ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
+            ->where('brands_translation.language_id', $this->languageId);
+
+        // To get the list view populate
+        if ($request->has('paginate') && !empty($request->paginate)) {
+            // Search dealership name
+            if ($request->has('search') && !empty($request->search)) {
+                $brands = $brands->where('brands_translation.name', 'LIKE', '%' . $request->search . '%');
+            }
+
+            // Get Only active country
+            if ($request->has('type') && !empty($request->type)) {
+                switch ($request->type) {
+                    case 'active':
+                        $brands = $brands->where('status', 1);
+                        break;
+
+                    case 'inactive':
+                        $brands = $brands->where('status', 0);
+                        break;
+                }
+            }
+
+            // If sortBy has set then, sort by region, group, country
+            if ($request->has('sortBy') && !empty($request->sortBy)) {
+                $sortBy = $request->sortBy;
+                switch ($sortBy) {
+                    case 'name':
+                        $brands = $brands->orderBy('brands_translation.name');
+                        break;
+                }
+            } else {
+                $brands = $brands->orderBy('brands.id', 'DESC');
+            }
+
+            $data = $brands->paginate($this->perPage);
+            $totalBrand = $data->total();
+            $data = $data->items();
+        } else {
+            $data = $brands->get();
+            $totalBrand = $brands->count();
+        }
 
         return response()->json([
-            'brands' => $brands,
-            'total' => $brands->count()
+            'brands' => $data,
+            'total' => $totalBrand
         ]);
     }
 

@@ -30,3 +30,32 @@ a {
   margin-bottom: 4rem;
 }
 
+.r-color-picker {
+  position: relative;
+}
+
+.r-color-picker .r-color-picker-content {
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  height: 310px;
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.r-color-picker .r-color-picker-content .vc-chrome {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  position: absolute;
+  top: 0;
+  width: 100% !important;
+  z-index: 1;
+}
+
+.r-color-picker .r-color-picker-content .r-color-choose {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  right: 0;
+}
+

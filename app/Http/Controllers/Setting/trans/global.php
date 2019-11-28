@@ -160,4 +160,16 @@ return [
         'translation' => 'Logo'
     ],
 
+    [
+        'label' => 'Color',
+        'identifier' => 'color',
+        'translation' => 'Color'
+    ],
+
+    [
+        'label' => 'Select',
+        'identifier' => 'select',
+        'translation' => 'Select'
+    ],
+
 ];

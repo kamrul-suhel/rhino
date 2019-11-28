@@ -82,6 +82,25 @@
                             :color="themeOption.inputColor"
                         ></v-text-field>
 
+                        <div class="r-color-picker" v-if="isColorSwatchActive">
+                            <div class="r-color-picker-content">
+                                <chrome v-model="selectedColor"></chrome>
+                                <v-btn small
+                                       class="r-color-choose"
+                                       @click="isColorSwatchActive = false"
+                                       :color="themeOption.buttonPrimaryColor">
+                                    {{ trans.select }}
+                                </v-btn>
+                            </div>
+                        </div>
+
+                        <v-text-field
+                            :label="trans.color"
+                            v-model="color"
+                            @focus="isColorSwatchActive = true"
+                            :color="themeOption.inputColor">
+                        </v-text-field>
+
                         <v-flex xs12>
                             <span>{{trans.logo}}</span>
 
@@ -165,11 +184,13 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import { Chrome } from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
 
     export default {
         components: {
-            FileUpload
+            FileUpload,
+            Chrome
         },
 
         data() {
@@ -178,7 +199,10 @@
                 dialog: false,
                 deleteDialog: false,
                 searchBrands:'',
-                editBrand: false
+                editBrand: false,
+                color:'',
+                isColorSwatchActive: false,
+                selectedColor:''
             }
         },
 
@@ -206,6 +230,10 @@
 
             searchCompany() {
                 this.initialize()
+            },
+
+            selectedColor(value){
+                this.color = value.hex
             }
         },
 

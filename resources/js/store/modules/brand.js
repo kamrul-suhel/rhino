@@ -26,7 +26,7 @@ const mutations = {
         state.selectedBrand = {...brand}
     },
 
-    setTotalCompanies(state, totalBrand){
+    setTotalBrands(state, totalBrand){
         state.totalBrands = totalBrand
     },
 

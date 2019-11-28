@@ -8,6 +8,7 @@ import CountriesRoutes from './Modules/countries'
 import Groups from './Modules/groups'
 import Company from './Modules/company'
 import Frontend from "./Modules/frontend";
+import User from "./Modules/user"
 
 Vue.use(Router)
 
@@ -37,7 +38,10 @@ const routes = [
     {...Company},
 
     // Frontend Routes
-    {...Frontend}
+    {...Frontend},
+
+    // Frontend Routes
+    {...User}
 
 ]
 

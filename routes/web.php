@@ -114,3 +114,21 @@ Route::prefix('companies')->group(function(){
         return view('welcome');
     });
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes for Users
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('users')->group(function(){
+    Route::get('', function(){
+        return view('welcome');
+    });
+
+
+    Route::get('list', function(){
+        return view('welcome');
+    });});
