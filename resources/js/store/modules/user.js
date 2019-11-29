@@ -8,8 +8,8 @@ const defaultState = {
     themeOption:{
         theme: 'dark',
         inputColor: 'white',
-        buttonPrimaryColor: 'dark',
-        buttonSecondaryColor: 'success',
+        buttonPrimaryColor: 'success',
+        buttonSecondaryColor: 'dark',
         buttonDangerColor: 'red',
         buttonSuccess: 'success',
         buttonLoading: false,
@@ -21,12 +21,13 @@ const defaultState = {
 
         // Snack bar option
         snackBarBgSuccess: 'success',
+        snackBarBgDanger: 'red',
         snackBarBgError: 'red',
         snackBarTimeout : 6000,
 
 
         //Tab option
-        tabColor: 'dark',
+        tabColor: 'black',
         tabSliderColor: 'white'
     }
 }

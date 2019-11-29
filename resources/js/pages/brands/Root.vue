@@ -11,7 +11,6 @@
         },
 
         created() {
-
         },
 
         methods: {

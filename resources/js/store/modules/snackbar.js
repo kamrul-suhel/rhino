@@ -58,6 +58,10 @@ const getters = {
 
     getPositionY(state){
         return state.positionY
+    },
+
+    getSnackBarBgColor(state){
+        return state.bgColor
     }
 }
 

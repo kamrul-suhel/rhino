@@ -12,6 +12,7 @@ import Group from './modules/group'
 import ImageUpload from "./modules/imageUpload";
 import Company from "./modules/company"
 import Brand from "./modules/brand"
+import Region from "./modules/region"
 
 
 Vue.use(Vuex);
@@ -46,7 +47,8 @@ const store = new Vuex.Store({
         Group,
         ImageUpload,
         Company,
-        Brand
+        Brand,
+        Region
     }
 });
 

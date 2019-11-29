@@ -46,5 +46,29 @@ return [
         'label' => 'No Brand Found',
         'identifier' => 'no_brand_found',
         'translation' => 'No Brand Found'
+    ],
+
+    [
+        'label' => 'Brand Name Is Required',
+        'identifier' => 'brand_name_is_required',
+        'translation' => 'Brand Name Is Required'
+    ],
+
+    [
+        'label' => 'Please Select A Company',
+        'identifier' => 'select_a_company',
+        'translation' => 'Please Select A Company'
+    ],
+
+    [
+        'label' => 'Please Choose A Color',
+        'identifier' => 'choose_a_color',
+        'translation' => 'Please Choose A Color'
+    ],
+
+    [
+        'label' => 'No Region Added',
+        'identifier' => 'no_region_added',
+        'translation' => 'No Region Added'
     ]
 ];

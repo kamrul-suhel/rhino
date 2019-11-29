@@ -58,12 +58,12 @@ class CompanyController extends Controller
         }
 
         // Get drop down list
-        $companies = $companies->orderBy('companies_translation.', 'ASC');
+        $companies = $companies->orderBy('companies_translation.name', 'ASC');
         $companies = $companies->get();
 
         return response()->json([
             'companies' => $companies,
-            'total' => $companies->total()
+            'total' => $companies->count()
         ]);
     }
 

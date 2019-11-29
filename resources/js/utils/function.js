@@ -52,6 +52,12 @@ export default {
             params += `&languageId=${payload.languageId}`
         }
 
+        if(payload.model && typeof (payload.model) !== 'undefined'){
+            params += `&model=${payload.model}`
+        }
+
+
+
         return params
     }
 }

@@ -58,81 +58,109 @@
             </v-flex>
 
             <v-flex xs12 sm4 pt-3 pl-3>
-                <v-card>
-                    <v-card-title>
-                        <h3>{{ editBrand ? trans.edit_brand : trans.create_brand}}</h3>
-                    </v-card-title>
-                    <v-divider></v-divider>
+                <v-form
+                    ref="createBrand"
+                    v-model="valid"
+                    lazy-validation>
+                    <v-card>
+                        <v-card-title>
+                            <h3>{{ editBrand ? trans.edit_brand : trans.create_brand}}</h3>
+                        </v-card-title>
+                        <v-divider></v-divider>
 
-                    <v-card-text>
-                        <v-autocomplete
-                            v-if="this.editBrand"
-                            :label="trans.languages"
-                            v-model="selectedBrand.language_id"
-                            item-text="name"
-                            item-value="id"
-                            @change="onLanguageChange"
-                            :color="themeOption.inputColor"
-                            :items="languages">
-                        </v-autocomplete>
+                        <v-card-text>
 
-                        <v-text-field
-                            :label="trans.name"
-                            v-model="selectedBrand.name"
-                            :color="themeOption.inputColor"
-                        ></v-text-field>
 
-                        <div class="r-color-picker" v-if="isColorSwatchActive">
-                            <div class="r-color-picker-content">
-                                <chrome v-model="selectedColor"></chrome>
-                                <v-btn small
-                                       class="r-color-choose"
-                                       @click="isColorSwatchActive = false"
-                                       :color="themeOption.buttonPrimaryColor">
-                                    {{ trans.select }}
-                                </v-btn>
+                            <v-autocomplete
+                                v-if="this.editBrand"
+                                :label="trans.languages"
+                                v-model="selectedBrand.language_id"
+                                item-text="name"
+                                item-value="id"
+                                @change="onLanguageChange"
+                                :color="themeOption.inputColor"
+                                :items="languages">
+                            </v-autocomplete>
+
+                            <v-text-field
+                                :label="trans.name"
+                                :rules="[v => !!v || trans.brand_name_is_required]"
+                                required
+                                v-model="selectedBrand.name"
+                                :color="themeOption.inputColor"
+                            ></v-text-field>
+
+                            <v-autocomplete :label="trans.company"
+                                            :color="themeOption.inputColor"
+                                            :rules="[v => !!v || trans.select_a_company]"
+                                            required
+                                            :items="companies"
+                                            item-text="name"
+                                            item-value="id"
+                                            v-model="selectedBrand.company_id">
+                            </v-autocomplete>
+
+                            <div class="r-color-picker" v-if="isColorSwatchActive">
+                                <div class="r-color-picker-content">
+                                    <chrome v-model="selectedColor"></chrome>
+                                    <v-btn small
+                                           class="r-color-choose"
+                                           @click="isColorSwatchActive = false"
+                                           :color="themeOption.buttonPrimaryColor">
+                                        {{ trans.select }}
+                                    </v-btn>
+                                </div>
                             </div>
-                        </div>
 
-                        <v-text-field
-                            :label="trans.color"
-                            v-model="color"
-                            @focus="isColorSwatchActive = true"
-                            :color="themeOption.inputColor">
-                        </v-text-field>
+                            <v-text-field
+                                :label="trans.color"
+                                v-model="color"
+                                :rules="[v => !!v || trans.choose_a_color]"
+                                required
+                                @focus="isColorSwatchActive = true"
+                                :color="themeOption.inputColor">
+                            </v-text-field>
 
-                        <v-flex xs12>
-                            <span>{{trans.logo}}</span>
+                            <v-flex xs12>
+                                <span>{{trans.logo}}</span>
 
-                            <v-img
-                                :src="brandImage"
-                                aspect-ratio="2.75"
-                            ></v-img>
+                                <v-img
+                                    :src="brandImage"
+                                    aspect-ratio="2.75"
+                                ></v-img>
 
-                            <FileUpload :preview="false"
-                                        :multiple="false"
-                                        model="'groups'">
-                            </FileUpload>
-                        </v-flex>
-                    </v-card-text>
+                                <FileUpload :preview="false"
+                                            :multiple="false"
+                                            model="brands">
+                                </FileUpload>
+                            </v-flex>
 
-                    <v-card-actions class="pa-2">
-                        <v-spacer></v-spacer>
-                        <v-btn
-                            small
-                            :color="themeOption.buttonPrimaryColor"
-                            @click="onResetCompany">
-                            {{trans.cancel}}
-                        </v-btn>
+                            <v-flex xs12>
+                                <v-switch
+                                    :label="trans.status"
+                                    true-value="1"
+                                    false-value="0"
+                                    v-model="selectedBrand.status">
+                                </v-switch>
+                            </v-flex>
+                        </v-card-text>
 
-                        <v-btn
-                            small
-                            :color="themeOption.buttonSecondaryColor"
-                            @click="onCreateBrand">
-                            {{ editBrand ? trans.edit : trans.create }}
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
+                        <v-card-actions class="pa-2">
+                            <v-spacer></v-spacer>
+                            <v-btn small
+                                   :color="themeOption.buttonPrimaryColor"
+                                   @click="onResetBrand">
+                                {{trans.cancel}}
+                            </v-btn>
+
+                            <v-btn small
+                                   :color="themeOption.buttonSecondaryColor"
+                                   @click="onCreateBrand">
+                                {{ editBrand ? trans.edit : trans.create }}
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-form>
             </v-flex>
         </v-layout>
 
@@ -184,7 +212,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import { Chrome } from 'vue-color'
+    import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
 
     export default {
@@ -198,11 +226,12 @@
                 pagination: {},
                 dialog: false,
                 deleteDialog: false,
-                searchBrands:'',
+                searchBrands: '',
                 editBrand: false,
-                color:'',
+                color: '',
                 isColorSwatchActive: false,
-                selectedColor:''
+                selectedColor: '',
+                valid: true,
             }
         },
 
@@ -210,6 +239,7 @@
             ...mapGetters({
                 languages: 'getLanguages',
                 trans: 'getFields',
+                companies: 'getCompanies',
                 themeOption: 'getThemeOption',
                 brands: 'getBrands',
                 headers: 'getBrandListHeader',
@@ -228,21 +258,25 @@
                 }
             },
 
-            searchCompany() {
+            searchBrands() {
                 this.initialize()
             },
 
-            selectedColor(value){
+            selectedColor(value) {
                 this.color = value.hex
             }
         },
 
         created() {
+            this.fetchCompany()
         },
 
         mounted() {
         },
         methods: {
+            fetchCompany() {
+                this.$store.dispatch('fetchCompanies', {themeOption: this.themeOption, trans: this.trans});
+            },
 
             // Initialize data when first render
             initialize() {
@@ -251,22 +285,17 @@
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    search: this.searchCompany
+                    search: this.searchBrands
                 }
 
                 this.$store.dispatch('fetchBrands', paginateOption)
             },
 
-            onEditBrand(company) {
-                this.editBrand = true
-                // Check if group has logo, then set image
-                if(company.logo){
-                    this.$store.commit('setImage', company.logo)
-                }
-                this.$store.commit('setSelectedBrand', company)
+            onEditBrand(brand) {
+                this.$router.push({name: 'editBrands', params: {id: brand.id}})
             },
 
-            onDeleteBrand(company){
+            onDeleteBrand(company) {
                 this.deleteDialog = true
                 this.$store.commit('setSelectedBrand', company)
             },
@@ -286,58 +315,46 @@
 
                             this.initialize()
                             // reset selectedDealerships in store
-                            this.onResetCompany()
+                            this.onResetBrand()
                             this.deleteDialog = false
                         }
                     });
             },
             onCreateBrand() {
-                // Check update or create
-                let URL = '/api/companies'
-                let companyForm = new FormData()
-                companyForm.append('name', this.selectedBrand.name)
-                companyForm.append('logo', this.brandImage)
+                if (this.$refs.createBrand.validate()) {
+                    // Check update or create
+                    let URL = '/api/brands'
+                    let brandForm = new FormData()
+                    brandForm.append('name', this.selectedBrand.name)
+                    brandForm.append('logo', this.brandImage)
+                    brandForm.append('colour', this.color)
+                    brandForm.append('company_id', this.selectedBrand.company_id)
+                    brandForm.append('status', this.selectedBrand.status)
 
-                if(this.editBrand){
-                    const ID = this.selectedBrand.id
-                    // Update the data
-                    URL = `${URL}/${ID}/update`
-                    companyForm.append('languageId', this.selectedBrand.language_id)
-                    companyForm.append('_method', 'put')
-                }else{
-                    // Create new company
-                }
-
-                axios.post(URL, companyForm).then((response) =>{
-                    if(response.data.success){
-                        this.initialize()
-                        if(this.editBrand){
-                            this.$store.commit('setSnackbarMessage', {
-                                openMessage: true,
-                                timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedBrand.name}  ${this.trans.successfully_updated}`
-                            })
-                        }else{
+                    axios.post(URL, brandForm).then((response) => {
+                        if (response.data.success) {
+                            this.initialize()
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.selectedBrand.name}  ${this.trans.successfully_created}`
                             })
-                            this.onResetCompany()
+
+                            this.onResetBrand()
                         }
-                    }
-                })
+                    })
+                }
 
             },
 
-            onLanguageChange(selectedLanguage){
+            onLanguageChange(selectedLanguage) {
                 this.$store.dispatch('fetchCompany', {
                     id: this.selectedBrand.id,
                     languageId: selectedLanguage
                 })
             },
 
-            onResetCompany() {
+            onResetBrand() {
                 this.editBrand = false
                 this.$store.commit('setSelectedBrand', {})
                 this.$store.commit('resetImageUpload')

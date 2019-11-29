@@ -10,7 +10,7 @@ const frontendRoute ={
             path:'',
             name: 'frontendIndex',
             component: Frontend.Frontend,
-        },
+        }
     ]
 }
 

@@ -6,7 +6,14 @@ const defaultState = {
     listHeader:[],
     loading: 'white',
     totalBrands: 0,
-    brandListRowPerPage: [15,25,40]
+    brandListRowPerPage: [15,25,40],
+
+    // Regions variable
+    regions:[],
+    totalRegions: 0,
+    brandRegionHeader:[],
+    selectedBrandRegion:{}
+
 }
 
 const state = {
@@ -16,6 +23,18 @@ const state = {
 const mutations = {
     setBrands(state, brands){
         state.brands = [...brands]
+    },
+
+    setSelectedBrandRegion(state, selectedRegion){
+        state.selectedBrandRegion = selectedRegion
+    },
+
+    setRegionsByBrandId(state, regions){
+        state.regions = [...regions]
+    },
+
+    setTotalRegionByBrandId(state, totalRegion){
+        state.totalRegions = totalRegion
     },
 
     setBrandLoading(state, status){
@@ -50,11 +69,36 @@ const mutations = {
 
             {
                 text: trans.actions,
-                value: 'actions'
+                value: 'actions',
+                align:'right'
             }
         ]
 
-        state.listHeader = header
+        state.listHeader = [...header]
+    },
+
+    setBrandRegionsListHeader(state, trans){
+        const header = [
+            {
+                text: trans.name,
+                align: 'left',
+                sortable: false,
+                value: 'name'
+            },
+            {
+                text: trans.country,
+                value: 'country',
+                sortable: false
+            },
+            {
+                text: trans.action,
+                align: 'right',
+                value: 'actions',
+                sortable: false
+            }
+        ]
+
+        state.brandRegionHeader = [...header]
     }
 }
 
@@ -65,6 +109,14 @@ const getters = {
 
     getBrandListHeader(state){
         return state.listHeader
+    },
+
+    getSelectedBrandRegion(state){
+        return state.selectedBrandRegion
+    },
+
+    getBrandRegionListHeader(state){
+      return state.brandRegionHeader
     },
 
     getBrandLoading(state){
@@ -82,6 +134,14 @@ const getters = {
     getTotalBrands(state){
         return state.totalBrands
     },
+
+    getRegionByBrandId(state){
+        return state.regions
+    },
+
+    getTotalRegionByBrandId(state){
+        return state.totalRegions
+    }
 
 }
 
@@ -105,7 +165,7 @@ const actions = {
         commit('setBrandListHeader', payload.trans)
 
         const params = fn.generateParams(payload)
-        const URL = '/api/brands' + params
+        const URL = `/api/brands${params}`
 
         axios.get(URL).then((response) => {
             if (response.data.brands) {
@@ -121,13 +181,32 @@ const actions = {
      * @param id // required
      */
     fetchBrand({commit, dispatch}, payload){
-        const URL = `/api/brand/${payload.id}/show`+ fn.generateParams(payload)
+        const URL = `/api/brands/${payload.id}/show`+ fn.generateParams(payload)
         axios.get(URL).then((response) => {
             if(response.data){
-                commit('setSelectedCompany', response.data.brand)
+                commit('setSelectedBrand', response.data.brand)
             }
         }).catch((error)=>{
             // Generate error message
+        })
+    },
+
+    fetchRegionByBranId({commit}, payload={}){
+        console.log('paginate :', payload)
+
+        // Set loading is true
+        commit('setBrandLoading', payload.themeOption.loadingColor)
+
+        commit('setBrandRegionsListHeader', payload.trans)
+        const params = fn.generateParams(payload)
+
+        const URL = `/api/brands/${payload.id}/regions${params}`
+        axios.get(URL).then((response)=>{
+            if(response.data.regions){
+                commit('setRegionsByBrandId', response.data.regions)
+                commit('setTotalRegionByBrandId', response.data.total)
+                commit('setBrandLoading', false)
+            }
         })
     }
 }

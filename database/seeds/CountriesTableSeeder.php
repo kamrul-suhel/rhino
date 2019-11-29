@@ -45,13 +45,13 @@ class CountriesTableSeeder extends Seeder
             ]);
 
             // Setup regions for each country
-            $regions =  ['North East', 'North West', 'South East', 'South West'];
-            foreach($regions as $region){
-                \App\Region::create([
-                    'country_id' => $country->id,
-                   'name' => $country->name. ' - '. $region
-                ]);
-            }
+//            $regions =  ['North East', 'North West', 'South East', 'South West'];
+//            foreach($regions as $region){
+//                \App\Region::create([
+//                    'country_id' => $country->id,
+//                   'name' => $country->name. ' - '. $region
+//                ]);
+//            }
         }
     }
 }

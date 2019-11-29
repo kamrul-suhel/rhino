@@ -67,7 +67,11 @@
 
         methods: {
             async onPageChange(item) {
-                this.$router.push({name: item.link});
+                if(item.link === this.$route.name){
+                    return
+                }else{
+                    this.$router.push({name: item.link});
+                }
             },
 
             onCloseWindow() {

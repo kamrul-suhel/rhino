@@ -78,16 +78,16 @@ const mutations = {
                 navs: [
                     {
                         icon: 'history',
-                        text: trans.list_of_brand,
+                        text: trans.list_of_brands,
                         link: 'listBrands',
                         access: ''
                     },
-                    {
-                        icon: 'history',
-                        text: trans.create_brand,
-                        link: 'createBrands',
-                        access: ''
-                    }
+                    // {
+                    //     icon: 'history',
+                    //     text: trans.create_brand,
+                    //     link: 'createBrands',
+                    //     access: ''
+                    // }
                 ],
             },
 

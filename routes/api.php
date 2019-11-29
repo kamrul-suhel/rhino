@@ -72,6 +72,9 @@ Route::prefix('companies')->group(function(){
 
 Route::prefix('brands')->group(function(){
     Route::get('', 'Brand\BrandController@index');
+    Route::post('', 'Brand\BrandController@store');
+    Route::get('{id}/show', 'Brand\BrandController@show');
+    Route::get('{id}/regions', 'Brand\BrandController@getRegions');
 });
 
 /*
@@ -114,6 +117,20 @@ Route::prefix('countries')->group(function(){
     Route::get('{id}/regions', 'Country\CountryController@getCountryRegions');
     Route::post('{id}/update', 'Country\CountryController@update');
     Route::delete('{id}/delete', 'Country\CountryController@destroy');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Regions
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('regions')->group(function(){
+    Route::post('', 'Region\RegionController@store');
+    Route::put('{id}', 'Region\RegionController@update');
+    Route::delete('{id}', 'Region\RegionController@destroy');
 });
 
 

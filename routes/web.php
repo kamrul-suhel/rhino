@@ -93,6 +93,10 @@ Route::prefix('brands')->group(function(){
         return view('welcome');
     });
 
+    Route::get('{id}/edit', function(){
+        return view('welcome');
+    });
+
     Route::get('create', function(){
         return view('welcome');
     });

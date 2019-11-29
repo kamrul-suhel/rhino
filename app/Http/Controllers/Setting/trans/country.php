@@ -59,5 +59,17 @@ return [
         'label' => 'Search Country By Name',
         'identifier' => 'search_country_by_name',
         'translation' => 'Search Country By Name'
+    ],
+
+    [
+        'label' => 'Left',
+        'identifier' => 'left',
+        'translation' => 'Left'
+    ],
+
+    [
+        'label' => 'Right',
+        'identifier' => 'right',
+        'translation' => 'Right'
     ]
 ];

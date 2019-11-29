@@ -78,7 +78,7 @@ return [
 
     [
         'label' => 'Successfully deleted',
-        'identifier' => 'successfully_deleted.',
+        'identifier' => 'successfully_deleted',
         'translation' => 'Successfully deleted'
     ],
 
@@ -172,4 +172,15 @@ return [
         'translation' => 'Select'
     ],
 
+    [
+        'label' => 'Actions',
+        'identifier' => 'actions',
+        'translation' => 'Actions'
+    ],
+
+    [
+        'label' => 'Flag',
+        'identifier' => 'flag',
+        'translation' => 'Flag'
+    ]
 ];

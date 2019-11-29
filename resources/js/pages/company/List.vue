@@ -254,6 +254,7 @@
                     .then((response) => {
                         if (response.data.success) {
                             this.$store.commit('setSnackbarMessage', {
+                                bgColor: themeOption.snackBarBgDanger,
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${selectedCompany.name}  ${this.trans.successfully_deleted}`

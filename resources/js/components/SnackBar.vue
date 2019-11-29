@@ -2,7 +2,7 @@
     <v-layout>
         <v-snackbar
             v-model="show"
-            :color="themeOption.snackBarSuccess"
+            :color="bgColor"
             :timeout="themeOption.snackBarTimeout"
             top
             right
@@ -36,7 +36,8 @@
                 message: 'getSnackBarMessage',
                 timeOut: 'getSnackBarTimeOut',
                 positionX: 'getPositionX',
-                positionY: 'getPositionY'
+                positionY: 'getPositionY',
+                bgColor: 'getSnackBarBgColor'
             }),
 
             show: {

@@ -5,6 +5,7 @@ We use Vuejs to build this app.
 ## Dependency Plugin for vue js
 - **[Vuetify](https://v15.vuetifyjs.com/en)**
 - **[Vue image upload](https://www.npmjs.com/package/vue-image-upload-resize)**
+- **[Vue color](https://www.npmjs.com/package/vue-color)**
 
 ## License
 

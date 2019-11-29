@@ -10,6 +10,19 @@ return [
         'identifier' => 'create_region',
         'translation' => 'Create Region'
     ],
+
+    [
+        'label' => 'Add New Region',
+        'identifier' => 'add_region',
+        'translation' => 'Add Region'
+    ],
+
+    [
+        'label' => 'Region Name',
+        'identifier' => 'region_name',
+        'translation' => 'Region Name'
+    ],
+
     [
         'label' => 'Edit Region',
         'identifier' => 'edit_region',
@@ -29,5 +42,10 @@ return [
         'label' => 'List Of Region',
         'identifier' => 'list_of_region',
         'translation' => 'List Of Region'
-    ]
+    ],
+    [
+        'label' => 'Region Name Is Required',
+        'identifier' => 'region_name_required',
+        'translation' => 'Region Name Is Required'
+    ],
 ];

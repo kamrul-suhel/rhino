@@ -9,13 +9,12 @@
                         inset
                         vertical
                     ></v-divider>
-
                     <v-spacer></v-spacer>
                 </v-toolbar>
             </v-flex>
         </v-layout>
 
-        <v-layout>
+        <v-layout row wrap>
             <v-flex xs12>
                 <v-card>
                     <v-card-title
@@ -29,40 +28,90 @@
                     <v-divider></v-divider>
 
                     <v-card-text>
-                        <v-flex xs12>
-                            <v-text-field
-                                :color="themeOption.inputColor"
-                                :label="trans.name"
-                                v-model="selectedCountry.full_name"
-                            ></v-text-field>
-                        </v-flex>
+                        <v-layout row wrap>
+                            <v-flex xs12 sm6 wrap>
+                                <v-text-field
+                                    :color="themeOption.inputColor"
+                                    :label="trans.name"
+                                    v-model="selectedCountry.full_name"
+                                ></v-text-field>
+                            </v-flex>
 
-                        <v-flex xs12>
-                            <v-text-field
-                                :color="themeOption.inputColor"
-                                :label="trans.capital"
-                                v-model="selectedCountry.capital"
-                            ></v-text-field>
-                        </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-text-field
+                                    :color="themeOption.inputColor"
+                                    :label="trans.capital"
+                                    v-model="selectedCountry.capital"
+                                ></v-text-field>
+                            </v-flex>
 
-                        <v-flex xs12>
-                            <v-text-field
-                                :color="themeOption.inputColor"
-                                :label="trans.code"
-                                v-model="selectedCountry.iso_3166_2"
-                            ></v-text-field>
-                        </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-text-field
+                                    :color="themeOption.inputColor"
+                                    :label="trans.code"
+                                    v-model="selectedCountry.iso_3166_2"
+                                ></v-text-field>
+                            </v-flex>
 
-                        <v-flex xs12>
-                            <v-switch
-                                :color="themeOption.inputColor"
-                                v-model="selectedCountry.status"
-                                :label="trans.status"
-                            ></v-switch>
-                        </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-switch
+                                    :color="themeOption.inputColor"
+                                    v-model="selectedCountry.status"
+                                    :label="trans.status"
+                                ></v-switch>
+                            </v-flex>
+
+                            <v-flex xs12 sm6>
+                                <v-select
+                                    :items="seatingPosition"
+                                    :color="themeOption.inputColor"
+                                    v-model="selectedCountry.driver_seating_position"
+                                    :label="trans.seating_position"
+                                ></v-select>
+                            </v-flex>
+                        </v-layout>
+
                     </v-card-text>
 
                     <v-divider></v-divider>
+
+                    <v-layout column wrap>
+                        <v-tabs
+                            v-model="active"
+                            :color="themeOption.tabColor"
+                            :slider-color="themeOption.tabSliderColor"
+                        >
+                            <v-tab
+                                key="regions"
+                                ripple
+                            >
+                                {{ trans.regions}}
+                            </v-tab>
+
+                            <v-tab
+                                key="logo"
+                                ripple
+                            >
+                                {{ trans.logo}}
+                            </v-tab>
+
+                            <v-tab-item
+                                key="regions"
+                            >
+                                <Regions model="country"></Regions>
+                            </v-tab-item>
+
+                            <v-tab-item
+                                key="logo"
+                            >
+                                <v-layout row wrap pt-3>
+                                    <FileUpload model="brands"></FileUpload>
+                                </v-layout>
+                            </v-tab-item>
+                        </v-tabs>
+                    </v-layout>
+
+                    <v-divider class="mt-5 mb-2"></v-divider>
 
                     <v-card-actions class="pa-3">
                         <v-spacer></v-spacer>
@@ -83,13 +132,24 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import Regions from "../../components/Brand/Regions";
+    import FileUpload from '../../components/ImageUpload'
 
     export default {
         components:{
+            Regions,
+            FileUpload
         },
 
         data() {
-            return {}
+            return {
+                active: null,
+                seatingPosition:[]
+            }
+
+        },
+
+        watch:{
         },
 
         computed: ({
@@ -103,6 +163,17 @@
 
         created() {
             this.initialize()
+            const position = [
+                {
+                    text :this.trans.left,
+                    value: 'left'
+                },
+                {
+                    text: this.trans.right,
+                    value: 'right'
+                }
+            ]
+            this.seatingPosition = position
         },
 
         methods: {

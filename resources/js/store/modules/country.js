@@ -108,7 +108,7 @@ const getters = {
         return state.countryListRowPerPage
     },
 
-    getRegions(state){
+    getCountryRegions(state){
         return state.regions
     }
 }
@@ -175,7 +175,7 @@ const actions = {
      * Regions based on country
      */
 
-    fetchRegions({commit}, payload){
+    fetchCountryRegions({commit}, payload){
         const URL = `/api/countries/${payload.id}/regions`
         axios.get(URL).then((response)=>{
             commit('setRegions', response.data)
