@@ -182,5 +182,17 @@ return [
         'label' => 'Flag',
         'identifier' => 'flag',
         'translation' => 'Flag'
+    ],
+
+    [
+        'label' => 'Back',
+        'identifier' => 'back',
+        'translation' => 'Back'
+    ],
+
+    [
+        'label' => 'Dashboard',
+        'identifier' => 'dashboard',
+        'translation' => 'Dashboard'
     ]
 ];

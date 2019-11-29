@@ -26,10 +26,14 @@ class BrandController extends Controller
             'brands.colour',
             'brands.company_id',
             'brands_translation.name',
+            'companies_translation.name as company',
             'brands_translation.description'
         )
             ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
-            ->where('brands_translation.language_id', $this->languageId);
+            ->leftJoin('companies', 'companies.id', '=', 'brands.company_id')
+            ->leftJoin('companies_translation', 'companies.id', '=', 'companies_translation.company_id')
+            ->where('brands_translation.language_id', $this->languageId)
+            ->where('companies_translation.language_id', $this->languageId);
 
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
@@ -112,8 +116,24 @@ class BrandController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        // Check request is edit or only show
+        if($request->has('edit') &&
+            !empty($request->edit) &&
+            $request->edit == 'true'
+        ){
+            BrandTranslation::firstOrCreate([
+                'language_id' => $this->languageId,
+                'brand_id' => $id
+            ],
+                [
+                    'name' => '',
+                    'description' => ''
+                ]);
+        }
+
+
         $brand = Brand::select(
             'brands.id',
             'brands.logo',
@@ -121,6 +141,7 @@ class BrandController extends Controller
             'brands.colour',
             'brands.company_id',
             'brands_translation.name',
+            'brands_translation.language_id',
             'brands_translation.description'
         )
             ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
@@ -184,7 +205,26 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Update brand
+        $brand = Brand::findOrFail($id);
+        $request->has('logo') ? $brand->logo = $request->logo : null;
+        $request->has('company_id') ? $brand->company_id = $request->company_id : null;
+        $request->has('status') ? $brand->status = $request->status : null;
+        $request->has('colour') ? $brand->colour = $request->colour : null;
+        $brand->save();
+
+        // Update brand translation
+        $brandTranslation = BrandTranslation::where([
+            'brand_id' => $brand->id,
+            'language_id' => $this->languageId
+        ])->first();
+
+        $request->has('name') ? $brandTranslation->name = $request->name : null;
+        $request->has('description') ? $brandTranslation->description = $request->description : null;
+
+        $brandTranslation->save();
+
+        return response()->json(['success' => true]);
     }
 
     /**

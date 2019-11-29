@@ -63,6 +63,13 @@ const mutations = {
             },
 
             {
+                text: trans.company,
+                align: 'left',
+                sortable: false,
+                value: 'company'
+            },
+
+            {
                 text: trans.status,
                 value: 'status'
             },

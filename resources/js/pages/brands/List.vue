@@ -36,6 +36,7 @@
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.name }}</td>
+                        <td>{{ props.item.company }}</td>
                         <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-right">
                             <v-icon
@@ -47,8 +48,9 @@
                             </v-icon>
 
                             <v-icon
+                                :color="themeOption.buttonDangerColor"
                                 small
-                                @click="onDeleteCompany(props.item)"
+                                @click="onDeleteBrand(props.item)"
                             >
                                 delete
                             </v-icon>
@@ -148,13 +150,13 @@
                         <v-card-actions class="pa-2">
                             <v-spacer></v-spacer>
                             <v-btn small
-                                   :color="themeOption.buttonPrimaryColor"
+                                   :color="themeOption.buttonSecondaryColor"
                                    @click="onResetBrand">
                                 {{trans.cancel}}
                             </v-btn>
 
                             <v-btn small
-                                   :color="themeOption.buttonSecondaryColor"
+                                   :color="themeOption.buttonPrimaryColor"
                                    @click="onCreateBrand">
                                 {{ editBrand ? trans.edit : trans.create }}
                             </v-btn>
@@ -190,9 +192,9 @@
                 <v-card-actions class="pa-3">
                     <v-spacer></v-spacer>
                     <v-btn
-                        color="info"
+                        :color="themeOption.buttonSecondaryColor"
                         small
-                        @click="deleteDialog = false"
+                        @click="onDeleteCancel"
                     >
                         {{ trans.cancel }}
                     </v-btn>
@@ -280,6 +282,8 @@
 
             // Initialize data when first render
             initialize() {
+                this.$refs.createBrand.resetValidation()
+
                 const paginateOption = {
                     ...this.pagination,
                     trans: this.trans,
@@ -298,6 +302,12 @@
             onDeleteBrand(company) {
                 this.deleteDialog = true
                 this.$store.commit('setSelectedBrand', company)
+            },
+
+            onDeleteCancel(){
+                this.deleteDialog = false
+                this.$refs.createBrand.resetValidation()
+                this.$store.commit('setSelectedBrand', {})
             },
 
             onConfirmDeleteBrand() {

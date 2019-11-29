@@ -58,12 +58,10 @@ const mutations = {
     },
 
     setThemeOption(state, themeOption){
-        console.log(themeOption)
         state.themeOption = {
             ...state.themeOption,
             ...themeOption
         }
-
     }
 }
 
