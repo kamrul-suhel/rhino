@@ -79059,6 +79059,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -79094,12 +79101,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         selectedCountry: 'getSelectedCountry',
         regions: 'getRegions',
         brand: 'getSelectedBrand',
-        selectedLanguage: 'getSubSelectedLanguage'
+        selectedLanguage: 'getSubSelectedLanguage',
+        logo: 'getUploadedImage'
     })),
 
     watch: {
         brand: function brand(value) {
             this.$refs.brandForm.resetValidation();
+            this.$store.commit('setImage', value.logo);
         },
         selectedColor: function selectedColor(value) {
             var brand = _extends({}, this.brand);
@@ -79141,6 +79150,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _.forOwn(this.brand, function (value, key) {
                     brandForm.append(key, value);
                 });
+
+                brandForm.append('logo', this.logo);
 
                 brandForm.append('_method', 'put');
 
@@ -80253,8 +80264,25 @@ var render = function() {
                                           }
                                         },
                                         [
+                                          _c(
+                                            "v-card",
+                                            { attrs: { width: "250px" } },
+                                            [
+                                              _c("v-img", {
+                                                attrs: {
+                                                  src: _vm.logo,
+                                                  "aspect-ratio": "2.75"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
                                           _c("FileUpload", {
-                                            attrs: { model: "country" }
+                                            attrs: {
+                                              preview: false,
+                                              model: "country"
+                                            }
                                           })
                                         ],
                                         1
@@ -83069,6 +83097,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -83334,7 +83363,10 @@ var render = function() {
                             _c(
                               "v-icon",
                               {
-                                attrs: { small: "" },
+                                attrs: {
+                                  color: _vm.themeOption.buttonDangerColor,
+                                  small: ""
+                                },
                                 on: {
                                   click: function($event) {
                                     return _vm.onDeleteCompany(props.item)
@@ -83563,7 +83595,10 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { color: "info", small: "" },
+                      attrs: {
+                        color: _vm.themeOption.buttonSecondaryColor,
+                        small: ""
+                      },
                       on: {
                         click: function($event) {
                           _vm.deleteDialog = false
@@ -85266,8 +85301,8 @@ var defaultState = {
         snackBarTimeout: 6000,
 
         //Tab option
-        tabColor: 'black',
-        tabSliderColor: 'white'
+        tabColor: 'gray',
+        tabSliderColor: 'black'
     }
 };
 var state = _extends({}, defaultState);

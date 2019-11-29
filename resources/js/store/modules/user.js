@@ -27,8 +27,8 @@ const defaultState = {
 
 
         //Tab option
-        tabColor: 'black',
-        tabSliderColor: 'white'
+        tabColor: 'gray',
+        tabSliderColor: 'black'
     }
 }
 const state = {
