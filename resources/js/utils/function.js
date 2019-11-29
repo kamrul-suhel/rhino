@@ -56,7 +56,9 @@ export default {
             params += `&model=${payload.model}`
         }
 
-
+        if(payload.edit && typeof (payload.edit) !== 'undefined'){
+            params += `&edit=${payload.edit}`
+        }
 
         return params
     }

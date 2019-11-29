@@ -18,12 +18,10 @@
                 <v-list-tile-action>
                     <v-icon>home</v-icon>
                 </v-list-tile-action>
-                <v-list-tile-title>{{ home }}</v-list-tile-title>
+                <v-list-tile-title>{{ trans.dashboard }}</v-list-tile-title>
             </v-list-tile>
 
             <v-list-group
-                    dark
-                    color="dark"
                     v-for="(navs, index) in items"
                     :key="index"
                     :prepend-icon="navs.icon"
@@ -53,8 +51,8 @@
     export default {
         computed: {
             ...mapGetters({
-                fields: 'getFields',
-                home: 'getHomeTitle',
+                trans: 'getFields',
+
                 items: 'getNavigationBar'
             })
         },

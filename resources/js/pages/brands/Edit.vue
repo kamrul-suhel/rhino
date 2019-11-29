@@ -14,6 +14,7 @@
                     ></v-divider>
                     <v-spacer></v-spacer>
 
+                    <language-picker :languageId="brand.language_id"></language-picker>
                 </v-toolbar>
             </v-flex>
         </v-layout>
@@ -103,7 +104,7 @@
                                         key="flag"
                                         ripple
                                     >
-                                        {{ trans.flag}}
+                                        {{ trans.logo}}
                                     </v-tab>
 
                                     <v-tab-item
@@ -132,7 +133,7 @@
                                 small
                                 @click="$router.push({name: 'listBrands'})"
                             >
-                                {{ trans.cancel }}
+                                {{ trans.back }}
                             </v-btn>
 
                             <v-btn
@@ -157,12 +158,14 @@
     import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
     import Regions from '../../components/Brand/Regions'
+    import LanguagePicker from '../../components/Language'
 
     export default {
         components: {
             Chrome,
             FileUpload,
-            Regions
+            Regions,
+            LanguagePicker
         },
 
         data() {
@@ -184,18 +187,28 @@
                 countries: 'getCountries',
                 selectedCountry: 'getSelectedCountry',
                 regions: 'getRegions',
-                brand: 'getSelectedBrand'
+                brand: 'getSelectedBrand',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 
         watch: {
             brand(value) {
+                this.$refs.brandForm.resetValidation()
             },
 
             selectedColor(value) {
                 let brand = {...this.brand}
                 brand.colour = value.hex
                 this.$store.commit('setSelectedBrand', brand)
+            },
+
+            selectedLanguage(){
+                this.$store.dispatch('fetchBrand', {
+                    id: this.$route.params.id,
+                    languageId: this.selectedLanguage.id,
+                    edit: true
+                })
             }
         },
 
@@ -215,21 +228,13 @@
 
             onUpdateBrand() {
 
-                console.log(this.brand)
-                return
-
                 if (this.$refs.brandForm.validate()) {
-                    this.$store.commit('setThemeOption', {buttonLoading: true})
+                    // this.$store.commit('setThemeOption', {buttonLoading: true})
 
                     let brandForm = new FormData()
 
                     // Set form object for brand
                     _.forOwn(this.brand, (value, key) => {
-                        brandForm.append(key, value)
-                    })
-
-                    // Set form object for times
-                    _.forOwn(this.times, (value, key) => {
                         brandForm.append(key, value)
                     })
 
@@ -258,7 +263,17 @@
                 newBrand.region_id = null
                 this.$store.commit('setSelectedBrand', newBrand)
                 this.$store.dispatch('fetchRegions', {id: value.id})
+            },
+
+            resetBrands(){
+                this.$store.commit('setSelectedBrand', {})
+                this.$store.commit('setSubSelectedLanguage', {})
+                this.$store.commit('setRegionsByBrandId', [])
             }
+        },
+
+        destroyed() {
+            this.resetBrands()
         }
     }
 </script>

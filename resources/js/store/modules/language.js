@@ -1,6 +1,7 @@
 const state = {
     languages: [],
-    selectedLanguage: {}
+    selectedLanguage: {},
+    subSelectedLanguage:{}
 }
 
 const mutations = {
@@ -10,6 +11,17 @@ const mutations = {
 
     setSelectedLanguage(state, language){
         state.selectedLanguage = {...language}
+    },
+
+    setSubSelectedLanguage(state, language){
+        state.subSelectedLanguage = language
+    },
+
+    setSubSelectedLanguageById(state, languageId){
+        const selectedLanguage = _.find(state.languages,(language)=>{
+            return language.id === languageId
+        })
+        console.log('selectedLangauge', selectedLanguage)
     }
 }
 
@@ -20,6 +32,10 @@ const getters = {
 
     getSelectedLanguages(state){
         return state.selectedLanguage
+    },
+
+    getSubSelectedLanguage(state){
+        return state.subSelectedLanguage
     }
 }
 
@@ -37,6 +53,15 @@ const actions = {
         axios.get(URL).then((response)=> {
             commit('setLanguages', response.data)
         });
+    },
+
+    fetchSubLanguage({commit}, payload={}){
+        const URL = `/api/languages/${payload.id}/show`
+        axios.get(URL).then((response) => {
+            if(response.data){
+                commit('setSubSelectedLanguage', response.data.language)
+            }
+        })
     }
 }
 

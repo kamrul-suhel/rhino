@@ -53,7 +53,11 @@ class LanguageController extends Controller
      */
     public function show($id)
     {
-        //
+        $language = Language::findOrFail($id);
+        return response()->json([
+            'language' => $language,
+            'success' => true
+        ]);
     }
 
     /**

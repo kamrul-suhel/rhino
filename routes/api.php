@@ -74,6 +74,7 @@ Route::prefix('brands')->group(function(){
     Route::get('', 'Brand\BrandController@index');
     Route::post('', 'Brand\BrandController@store');
     Route::get('{id}/show', 'Brand\BrandController@show');
+    Route::put('{id}/update', 'Brand\BrandController@update');
     Route::get('{id}/regions', 'Brand\BrandController@getRegions');
 });
 

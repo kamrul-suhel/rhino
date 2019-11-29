@@ -3784,6 +3784,10 @@ function generateParams(payload) {
             params += '&model=' + payload.model;
         }
 
+        if (payload.edit && typeof payload.edit !== 'undefined') {
+            params += '&edit=' + payload.edit;
+        }
+
         return params;
     }
 });
@@ -77965,6 +77969,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -78033,6 +78039,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
         // Initialize data when first render
         initialize: function initialize() {
+            this.$refs.createBrand.resetValidation();
+
             var paginateOption = _extends({}, this.pagination, {
                 trans: this.trans,
                 themeOption: this.themeOption,
@@ -78048,6 +78056,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         onDeleteBrand: function onDeleteBrand(company) {
             this.deleteDialog = true;
             this.$store.commit('setSelectedBrand', company);
+        },
+        onDeleteCancel: function onDeleteCancel() {
+            this.deleteDialog = false;
+            this.$refs.createBrand.resetValidation();
+            this.$store.commit('setSelectedBrand', {});
         },
         onConfirmDeleteBrand: function onConfirmDeleteBrand() {
             var _this = this;
@@ -78190,6 +78203,8 @@ var render = function() {
                       return [
                         _c("td", [_vm._v(_vm._s(props.item.name))]),
                         _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(props.item.company))]),
+                        _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
                           _vm._v(
                             _vm._s(
@@ -78225,10 +78240,13 @@ var render = function() {
                             _c(
                               "v-icon",
                               {
-                                attrs: { small: "" },
+                                attrs: {
+                                  color: _vm.themeOption.buttonDangerColor,
+                                  small: ""
+                                },
                                 on: {
                                   click: function($event) {
-                                    return _vm.onDeleteCompany(props.item)
+                                    return _vm.onDeleteBrand(props.item)
                                   }
                                 }
                               },
@@ -78485,7 +78503,7 @@ var render = function() {
                             {
                               attrs: {
                                 small: "",
-                                color: _vm.themeOption.buttonPrimaryColor
+                                color: _vm.themeOption.buttonSecondaryColor
                               },
                               on: { click: _vm.onResetBrand }
                             },
@@ -78503,7 +78521,7 @@ var render = function() {
                             {
                               attrs: {
                                 small: "",
-                                color: _vm.themeOption.buttonSecondaryColor
+                                color: _vm.themeOption.buttonPrimaryColor
                               },
                               on: { click: _vm.onCreateBrand }
                             },
@@ -78592,12 +78610,11 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { color: "info", small: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.deleteDialog = false
-                        }
-                      }
+                      attrs: {
+                        color: _vm.themeOption.buttonSecondaryColor,
+                        small: ""
+                      },
+                      on: { click: _vm.onDeleteCancel }
                     },
                     [
                       _vm._v(
@@ -78883,6 +78900,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions__ = __webpack_require__(423);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Language__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Language___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Language__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -79039,6 +79058,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+
 
 
 
@@ -79049,7 +79070,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     components: {
         Chrome: __WEBPACK_IMPORTED_MODULE_1_vue_color__["Chrome"],
         FileUpload: __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default.a,
-        Regions: __WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions___default.a
+        Regions: __WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions___default.a,
+        LanguagePicker: __WEBPACK_IMPORTED_MODULE_4__components_Language___default.a
     },
 
     data: function data() {
@@ -79071,15 +79093,25 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         countries: 'getCountries',
         selectedCountry: 'getSelectedCountry',
         regions: 'getRegions',
-        brand: 'getSelectedBrand'
+        brand: 'getSelectedBrand',
+        selectedLanguage: 'getSubSelectedLanguage'
     })),
 
     watch: {
-        brand: function brand(value) {},
+        brand: function brand(value) {
+            this.$refs.brandForm.resetValidation();
+        },
         selectedColor: function selectedColor(value) {
             var brand = _extends({}, this.brand);
             brand.colour = value.hex;
             this.$store.commit('setSelectedBrand', brand);
+        },
+        selectedLanguage: function selectedLanguage() {
+            this.$store.dispatch('fetchBrand', {
+                id: this.$route.params.id,
+                languageId: this.selectedLanguage.id,
+                edit: true
+            });
         }
     },
 
@@ -79100,21 +79132,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         onUpdateBrand: function onUpdateBrand() {
             var _this = this;
 
-            console.log(this.brand);
-            return;
-
             if (this.$refs.brandForm.validate()) {
-                this.$store.commit('setThemeOption', { buttonLoading: true });
+                // this.$store.commit('setThemeOption', {buttonLoading: true})
 
                 var brandForm = new FormData();
 
                 // Set form object for brand
                 _.forOwn(this.brand, function (value, key) {
-                    brandForm.append(key, value);
-                });
-
-                // Set form object for times
-                _.forOwn(this.times, function (value, key) {
                     brandForm.append(key, value);
                 });
 
@@ -79142,7 +79166,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             newBrand.region_id = null;
             this.$store.commit('setSelectedBrand', newBrand);
             this.$store.dispatch('fetchRegions', { id: value.id });
+        },
+        resetBrands: function resetBrands() {
+            this.$store.commit('setSelectedBrand', {});
+            this.$store.commit('setSubSelectedLanguage', {});
+            this.$store.commit('setRegionsByBrandId', []);
         }
+    },
+
+    destroyed: function destroyed() {
+        this.resetBrands();
     }
 });
 
@@ -79925,7 +79958,11 @@ var render = function() {
                     attrs: { inset: "", vertical: "" }
                   }),
                   _vm._v(" "),
-                  _c("v-spacer")
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c("language-picker", {
+                    attrs: { languageId: _vm.brand.language_id }
+                  })
                 ],
                 1
               )
@@ -80185,7 +80222,7 @@ var render = function() {
                                     [
                                       _vm._v(
                                         "\n                                    " +
-                                          _vm._s(_vm.trans.flag) +
+                                          _vm._s(_vm.trans.logo) +
                                           "\n                                "
                                       )
                                     ]
@@ -80259,7 +80296,7 @@ var render = function() {
                             [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(_vm.trans.cancel) +
+                                  _vm._s(_vm.trans.back) +
                                   "\n                        "
                               )
                             ]
@@ -84613,15 +84650,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
-        fields: 'getFields',
-        home: 'getHomeTitle',
+        trans: 'getFields',
+
         items: 'getNavigationBar'
     })),
 
@@ -84709,7 +84744,7 @@ var render = function() {
             [
               _c("v-list-tile-action", [_c("v-icon", [_vm._v("home")])], 1),
               _vm._v(" "),
-              _c("v-list-tile-title", [_vm._v(_vm._s(_vm.home))])
+              _c("v-list-tile-title", [_vm._v(_vm._s(_vm.trans.dashboard))])
             ],
             1
           ),
@@ -84717,10 +84752,7 @@ var render = function() {
           _vm._l(_vm.items, function(navs, index) {
             return _c(
               "v-list-group",
-              {
-                key: index,
-                attrs: { dark: "", color: "dark", "prepend-icon": navs.icon }
-              },
+              { key: index, attrs: { "prepend-icon": navs.icon } },
               [
                 _c(
                   "v-list-tile",
@@ -85259,7 +85291,6 @@ var mutations = {
         state.isLogin = status;
     },
     setThemeOption: function setThemeOption(state, themeOption) {
-        console.log(themeOption);
         state.themeOption = _extends({}, state.themeOption, themeOption);
     }
 };
@@ -85337,6 +85368,24 @@ var mutations = {
             }]
         }, {
             icon: 'add_shopping_cart',
+            text: trans.brands,
+            navs: [{
+                icon: 'history',
+                text: trans.list_of_brands,
+                link: 'listBrands',
+                access: ''
+            }]
+        }, {
+            icon: 'add_shopping_cart',
+            text: trans.companies,
+            navs: [{
+                icon: 'history',
+                text: trans.list_of_companies,
+                link: 'listCompanies',
+                access: ''
+            }]
+        }, {
+            icon: 'add_shopping_cart',
             text: trans.countries,
             navs: [{
                 icon: 'history',
@@ -85356,29 +85405,6 @@ var mutations = {
                 icon: 'history',
                 text: trans.list_of_languages,
                 link: 'listLanguages',
-                access: ''
-            }]
-        }, {
-            icon: 'add_shopping_cart',
-            text: trans.brands,
-            navs: [{
-                icon: 'history',
-                text: trans.list_of_brands,
-                link: 'listBrands',
-                access: ''
-            }]
-        }, {
-            icon: 'add_shopping_cart',
-            text: trans.companies,
-            navs: [{
-                icon: 'history',
-                text: trans.list_of_companies,
-                link: 'listCompanies',
-                access: ''
-            }, {
-                icon: 'history',
-                text: trans.create_company,
-                link: 'createCompanies',
                 access: ''
             }]
         }];
@@ -85423,7 +85449,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var state = {
     languages: [],
-    selectedLanguage: {}
+    selectedLanguage: {},
+    subSelectedLanguage: {}
 };
 
 var mutations = {
@@ -85432,6 +85459,15 @@ var mutations = {
     },
     setSelectedLanguage: function setSelectedLanguage(state, language) {
         state.selectedLanguage = _extends({}, language);
+    },
+    setSubSelectedLanguage: function setSubSelectedLanguage(state, language) {
+        state.subSelectedLanguage = language;
+    },
+    setSubSelectedLanguageById: function setSubSelectedLanguageById(state, languageId) {
+        var selectedLanguage = _.find(state.languages, function (language) {
+            return language.id === languageId;
+        });
+        console.log('selectedLangauge', selectedLanguage);
     }
 };
 
@@ -85441,6 +85477,9 @@ var getters = {
     },
     getSelectedLanguages: function getSelectedLanguages(state) {
         return state.selectedLanguage;
+    },
+    getSubSelectedLanguage: function getSubSelectedLanguage(state) {
+        return state.subSelectedLanguage;
     }
 };
 
@@ -85460,6 +85499,17 @@ var actions = {
 
         axios.get(URL).then(function (response) {
             commit('setLanguages', response.data);
+        });
+    },
+    fetchSubLanguage: function fetchSubLanguage(_ref2) {
+        var commit = _ref2.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        var URL = '/api/languages/' + payload.id + '/show';
+        axios.get(URL).then(function (response) {
+            if (response.data) {
+                commit('setSubSelectedLanguage', response.data.language);
+            }
         });
     }
 };
@@ -86145,6 +86195,11 @@ var mutations = {
             sortable: false,
             value: 'name'
         }, {
+            text: trans.company,
+            align: 'left',
+            sortable: false,
+            value: 'company'
+        }, {
             text: trans.status,
             value: 'status'
         }, {
@@ -86436,6 +86491,156 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(505)
+/* template */
+var __vue_template__ = __webpack_require__(506)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Language.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c4ff867a", Component.options)
+  } else {
+    hotAPI.reload("data-v-c4ff867a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 505 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(11);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            selectedLanguageId: null
+        };
+    },
+
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        languages: 'getLanguages',
+        selectedLanguage: 'getSubSelectedLanguage'
+    })),
+
+    watch: {
+        languageId: function languageId(value) {
+            this.selectedLanguageId = value;
+        }
+    },
+
+    props: {
+        languageId: {
+            required: true
+        }
+    },
+
+    created: function created() {},
+
+
+    methods: {
+        onSubLanguageChange: function onSubLanguageChange(selectedLanguage) {
+            this.$store.commit('setSubSelectedLanguage', selectedLanguage);
+        }
+    }
+});
+
+/***/ }),
+/* 506 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-autocomplete", {
+    attrs: {
+      items: _vm.languages,
+      "item-text": "name",
+      "item-value": "id",
+      color: _vm.themeOption.inputColor,
+      "return-object": "",
+      label: _vm.trans.select_a_language
+    },
+    on: { change: _vm.onSubLanguageChange },
+    model: {
+      value: _vm.selectedLanguageId,
+      callback: function($$v) {
+        _vm.selectedLanguageId = $$v
+      },
+      expression: "selectedLanguageId"
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c4ff867a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

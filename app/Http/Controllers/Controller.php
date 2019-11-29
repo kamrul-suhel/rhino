@@ -19,8 +19,13 @@ class Controller extends BaseController
     {
 
         // Set language Id if define
-        if($request->has('languageId')){
+        if($request->has('languageId') && !empty($request->languageId)){
             $this->languageId = $request->languageId;
+        }
+
+        if($request->has('language_id')
+            && !empty($request->language_id)){
+            $this->languageId = $request->language_id;
         }
 
         // Set pagination for per page, if exists

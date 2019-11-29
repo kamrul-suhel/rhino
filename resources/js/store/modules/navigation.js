@@ -41,6 +41,44 @@ const mutations = {
 
             {
                 icon: 'add_shopping_cart',
+                text: trans.brands,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.list_of_brands,
+                        link: 'listBrands',
+                        access: ''
+                    },
+                    // {
+                    //     icon: 'history',
+                    //     text: trans.create_brand,
+                    //     link: 'createBrands',
+                    //     access: ''
+                    // }
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.companies,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.list_of_companies,
+                        link: 'listCompanies',
+                        access: ''
+                    },
+                    // {
+                    //     icon: 'history',
+                    //     text: trans.create_company,
+                    //     link: 'createCompanies',
+                    //     access: ''
+                    // }
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
                 text: trans.countries,
                 navs: [
                     {
@@ -70,45 +108,7 @@ const mutations = {
                         access: ''
                     }
                 ],
-            },
-
-            {
-                icon: 'add_shopping_cart',
-                text: trans.brands,
-                navs: [
-                    {
-                        icon: 'history',
-                        text: trans.list_of_brands,
-                        link: 'listBrands',
-                        access: ''
-                    },
-                    // {
-                    //     icon: 'history',
-                    //     text: trans.create_brand,
-                    //     link: 'createBrands',
-                    //     access: ''
-                    // }
-                ],
-            },
-
-            {
-                icon: 'add_shopping_cart',
-                text: trans.companies,
-                navs: [
-                    {
-                        icon: 'history',
-                        text: trans.list_of_companies,
-                        link: 'listCompanies',
-                        access: ''
-                    },
-                    {
-                        icon: 'history',
-                        text: trans.create_company,
-                        link: 'createCompanies',
-                        access: ''
-                    }
-                ],
-            },
+            }
         ]
 
         state.navigation = [...navItems];
