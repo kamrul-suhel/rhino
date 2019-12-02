@@ -81,6 +81,22 @@ Route::prefix('brands')->group(function(){
 
 /*
 |--------------------------------------------------------------------------
+| API Route for Vehicles
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('vehicles')->group(function(){
+    Route::get('', 'Vehicle\VehicleController@index');
+    Route::post('', 'Vehicle\VehicleController@store');
+    Route::get('{id}/show', 'Vehicle\VehicleController@show');
+    Route::put('{id}/update', 'Vehicle\VehicleController@update');
+    Route::get('{id}/brands', 'Vehicle\VehicleController@getBrands');
+});
+
+
+/*
+|--------------------------------------------------------------------------
 | API Route for Dealership Groups
 |--------------------------------------------------------------------------
 |

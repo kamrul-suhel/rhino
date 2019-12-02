@@ -41,6 +41,27 @@ const mutations = {
 
             {
                 icon: 'add_shopping_cart',
+                text: trans.vehicles,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.all_vehicles,
+                        link: 'listVehicles',
+                        access: ''
+                    },
+
+                    {
+                        icon: 'history',
+                        text: trans.create_vehicles,
+                        link: 'addVehicles',
+                        access: ''
+                    },
+
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
                 text: trans.brands,
                 navs: [
                     {

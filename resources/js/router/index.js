@@ -1,14 +1,15 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import LoginComponent from '../pages/login/LoginComponent'
-import DealershipRoutes from './Modules/dealership'
-import LanguageRoutes from './Modules/languages'
-import BrandsRoutes from './Modules/brands'
-import CountriesRoutes from './Modules/countries'
-import Groups from './Modules/groups'
-import Company from './Modules/company'
+import Vue from 'vue';
+import Router from 'vue-router';
+import LoginComponent from '../pages/login/LoginComponent';
+import DealershipRoutes from './Modules/dealership';
+import LanguageRoutes from './Modules/languages';
+import BrandsRoutes from './Modules/brands';
+import VehiclesRoutes from './Modules/vehicles';
+import CountriesRoutes from './Modules/countries';
+import Groups from './Modules/groups';
+import Company from './Modules/company';
 import Frontend from "./Modules/frontend";
-import User from "./Modules/user"
+import User from "./Modules/user";
 
 Vue.use(Router)
 
@@ -33,6 +34,9 @@ const routes = [
 
     // Brands routes
     {...BrandsRoutes},
+
+    // Vehicles routes
+    {...VehiclesRoutes},
 
     // Company Routes
     {...Company},

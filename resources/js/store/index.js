@@ -2,17 +2,18 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import settings from './modules/settings';
-import user from './modules/user'
+import user from './modules/user';
 import navigation from "./modules/navigation";
-import language from './modules/language'
+import language from './modules/language';
 import country from "./modules/country";
 import SnackBar from "./modules/snackbar";
-import Dealership from './modules/dealership'
-import Group from './modules/group'
+import Dealership from './modules/dealership';
+import Group from './modules/group';
 import ImageUpload from "./modules/imageUpload";
-import Company from "./modules/company"
-import Brand from "./modules/brand"
-import Region from "./modules/region"
+import Company from "./modules/company";
+import Brand from "./modules/brand";
+import Vehicle from "./modules/vehicle";
+import Region from "./modules/region";
 
 
 Vue.use(Vuex);
@@ -48,6 +49,7 @@ const store = new Vuex.Store({
         ImageUpload,
         Company,
         Brand,
+        Vehicle,
         Region
     }
 });
