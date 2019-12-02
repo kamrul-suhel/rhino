@@ -105,6 +105,27 @@ Route::prefix('brands')->group(function(){
 
 /*
 |--------------------------------------------------------------------------
+| Routes for Vehicles
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('vehicles')->group(function(){
+    Route::get('/', function(){
+        return view('welcome');
+    });
+
+    Route::get('{id}/edit', function(){
+        return view('welcome');
+    });
+
+    Route::get('create', function(){
+        return view('welcome');
+    });
+});
+
+
+/*
+|--------------------------------------------------------------------------
 | Routes for Companies
 |--------------------------------------------------------------------------
 |
