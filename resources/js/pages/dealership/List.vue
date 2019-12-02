@@ -35,7 +35,6 @@
             <template v-slot:items="props">
                 <td>{{ props.item.name }}</td>
                 <td class="text-xs-left">{{ props.item.country }}</td>
-                <td class="text-xs-left">{{ props.item.region }}</td>
                 <td class="text-xs-left">{{ props.item.group }}</td>
                 <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                 <td class="text-xs-right">
@@ -48,6 +47,7 @@
                     </v-icon>
 
                     <v-icon
+                        :color="themeOption.buttonDangerColor"
                         small
                         @click="deleteDealerships(props.item)"
                     >

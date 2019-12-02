@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class DealershipController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show all dealerships
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -29,18 +29,20 @@ class DealershipController extends Controller
             'dealerships_translation.address_line_6',
             'dealerships_translation.postcode',
             'groups_translation.name as group',
+            'groups_translation.language_id',
             'groups.logo as group_logo',
-            'regions.name as region',
+            'groups.id as group_id',
             'countries.name as country',
             'countries.capital as country_capital'
         )
             ->leftJoin('dealerships_translation', 'dealerships_translation.dealership_id', '=', 'dealerships.id')
-            ->leftJoin('groups', 'groups.id', '=', 'dealerships.group_id')
-            ->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id')
-            ->leftJoin('regions', 'regions.id', '=', 'dealerships.region_id')
-            ->leftJoin('countries', 'countries.id', '=', 'regions.country_id')
-            ->where('dealerships_translation.language_id', $this->languageId)
-            ->where('groups_translation.language_id', $this->languageId);
+            ->leftJoin('groups', function ($group) {
+                $group->on('groups.id', '=', 'dealerships.group_id');
+                $group->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id');
+                $group->where('groups_translation.language_id', '=', $this->languageId);
+            })
+            ->leftJoin('countries', 'countries.id', '=', 'dealerships.country_id')
+            ->where('dealerships_translation.language_id', $this->languageId);
 
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
@@ -49,7 +51,7 @@ class DealershipController extends Controller
                 $dealerships = $dealerships->where('dealerships_translation.name', 'LIKE', '%' . $request->search . '%');
             }
 
-            // Get Only active country
+            //Filter by status
             if ($request->has('type') && !empty($request->type)) {
                 switch ($request->type) {
                     case 'active':
@@ -66,10 +68,6 @@ class DealershipController extends Controller
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;
                 switch ($sortBy) {
-                    case 'region':
-                        $dealerships = $dealerships->orderBy('regions.name');
-                        break;
-
                     case 'group':
                         $dealerships = $dealerships->orderBy('groups_translation.name');
                         break;
@@ -78,7 +76,7 @@ class DealershipController extends Controller
                         $dealerships = $dealerships->orderBy('countries.name');
                         break;
                 }
-            }else{
+            } else {
                 $dealerships = $dealerships->orderBy('id', 'DESC');
             }
         }
@@ -125,25 +123,29 @@ class DealershipController extends Controller
             'dealerships_translation.address_line_5',
             'dealerships_translation.address_line_6',
             'dealerships_translation.postcode',
+            'dealerships_translation.language_id',
+            'groups.id as group_id',
             'groups_translation.name as group',
             'groups.logo as group_logo',
-            'regions.name as region',
             'countries.name as country',
             'countries.id as country_id',
             'countries.capital as country_capital'
         )
-            ->leftJoin('dealerships_translation', 'dealerships_translation.dealership_id', '=', 'dealerships.id')
-            ->leftJoin('groups', 'groups.id', '=', 'dealerships.group_id')
-            ->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id')
-            ->leftJoin('regions', 'regions.id', '=', 'dealerships.region_id')
-            ->leftJoin('countries', 'countries.id', '=', 'regions.country_id')
-            ->where('dealerships_translation.language_id', $this->languageId)
-            ->where('groups_translation.language_id', $this->languageId)
-            ->where('dealerships.id',$id)
+            ->leftJoin('dealerships_translation', function($dealershipTranslation){
+                $dealershipTranslation->on('dealerships_translation.dealership_id', '=', 'dealerships.id');
+                $dealershipTranslation->where('dealerships_translation.language_id', $this->languageId);
+            })
+            ->leftJoin('groups', function ($group) {
+                $group->on('groups.id', '=', 'dealerships.group_id');
+                $group->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id');
+                $group->where('groups_translation.language_id', '=', $this->languageId);
+            })
+            ->leftJoin('countries', 'countries.id', '=', 'dealerships.country_id')
+            ->where('dealerships.id', $id)
             ->first();
 
         $regions = [];
-        if($dealership->country_id){
+        if ($dealership->country_id) {
             $regions = Region::where('country_id', $dealership->country_id)
                 ->get();
         }
@@ -180,14 +182,15 @@ class DealershipController extends Controller
         return response()->json(['success' => true]);
     }
 
-    private function saveDealership(DealershipRequest $request, $dealershipId = null){
+    private function saveDealership(DealershipRequest $request, $dealershipId = null)
+    {
         $dealership = $dealershipId === null ? new Dealership() : Dealership::findOrFail($dealershipId);
 
         $request->has('latitude') ? $dealership->latitude = $request->latitude : null;
         $request->has('longitude') ? $dealership->longitude = $request->longitude : null;
         $request->has('group_id') ? $dealership->group_id = $request->group_id : null;
-        $request->has('region_id') ? $dealership->region_id = $request->region_id : null;
-        $request->has('saturday_start') && $request->saturday_start != 'null' ? $dealership->saturday_start = $request->saturday_start  : null;
+        $request->has('country_id') ? $dealership->country_id = $request->country_id : null;
+        $request->has('saturday_start') && $request->saturday_start != 'null' ? $dealership->saturday_start = $request->saturday_start : null;
         $request->has('saturday_end') && $request->saturday_end != 'null' ? $dealership->saturday_end = $request->saturday_end : null;
         $request->has('sunday_start') && $request->sunday_start != 'null' ? $dealership->sunday_start = $request->sunday_start : null;
         $request->has('sunday_end') && $request->sunday_end != 'null' ? $dealership->sunday_end = $request->sunday_end : null;
@@ -200,8 +203,8 @@ class DealershipController extends Controller
         $request->has('wednesday_start') && $request->wednesday_start != 'null' ? $dealership->wednesday_start = $request->wednesday_start : null;
         $request->has('wednesday_end') && $request->wednesday_end != 'null' ? $dealership->wednesday_end = $request->wednesday_end : null;
         $request->has('friday_start') && $request->friday_start != 'null' ? $dealership->friday_start = $request->friday_start : null;
-        $request->has('friday_end') && $request->friday_end != 'null'? $dealership->friday_end = $request->friday_end : null;
-        $request->has('status') ? $dealership->status = $request->status === 'true' ? 1: 0 : null;
+        $request->has('friday_end') && $request->friday_end != 'null' ? $dealership->friday_end = $request->friday_end : null;
+        $request->has('status') ? $dealership->status = $request->status : null;
 
         $dealership->save();
 
@@ -214,12 +217,12 @@ class DealershipController extends Controller
 
         $dealershipTranslation->dealership_id = $dealership->id;
         $dealershipTranslation->language_id = $this->languageId;
-        $request->has('address_line_1') ? $dealershipTranslation->address_line_1 = $request->address_line_1 : null;
-        $request->has('address_line_2') ? $dealershipTranslation->address_line_2 = $request->address_line_2 : null;
-        $request->has('address_line_3') ? $dealershipTranslation->address_line_3 = $request->address_line_3 : null;
-        $request->has('address_line_4') ? $dealershipTranslation->address_line_4 = $request->address_line_4 : null;
-        $request->has('address_line_5') ? $dealershipTranslation->address_line_5 = $request->address_line_5 : null;
-        $request->has('address_line_6') ? $dealershipTranslation->address_line_6 = $request->address_line_6 : null;
+        $request->has('address_line_1') && $request->address_line_1 != 'null' ? $dealershipTranslation->address_line_1 = $request->address_line_1 : null;
+        $request->has('address_line_2') && $request->address_line_2 != 'null' ? $dealershipTranslation->address_line_2 = $request->address_line_2 : null;
+        $request->has('address_line_3') && $request->address_line_3 != 'null' ? $dealershipTranslation->address_line_3 = $request->address_line_3 : null;
+        $request->has('address_line_4') && $request->address_line_4 != 'null' ? $dealershipTranslation->address_line_4 = $request->address_line_4 : null;
+        $request->has('address_line_5') && $request->address_line_5 != 'null'? $dealershipTranslation->address_line_5 = $request->address_line_5 : null;
+        $request->has('address_line_6') && $request->address_line_6 != 'null'? $dealershipTranslation->address_line_6 = $request->address_line_6 : null;
         $request->has('name') ? $dealershipTranslation->name = $request->name : null;
 
         $dealershipTranslation->save();

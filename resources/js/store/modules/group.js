@@ -102,11 +102,12 @@ const actions = {
      */
     fetchGroups({commit}, payload = {}) {
 
-        // Set loading is true
-        commit('setGroupLoading', payload.themeOption.loadingColor)
-
-        // Setup header for list view
-        commit('setGroupListHeader', payload.trans)
+        // Set loading is true, if not dropdown
+        if (!payload.dropDown && typeof (payload.dropDown) != 'undefined') {
+            commit('setGroupLoading', payload.themeOption.loadingColor)
+            // Setup header for list view
+            commit('setGroupListHeader', payload.trans)
+        }
 
         const params = fn.generateParams(payload)
         const URL = '/api/groups' + params
@@ -118,6 +119,16 @@ const actions = {
                 commit('setGroupLoading', false)
             }
         });
+    },
+
+    fetchGroup({commit}, payload = {}){
+        const URL = `/api/groups/${payload.id}${fn.generateParams(payload)}`
+
+        axios.get(URL).then((response)=>{
+            if(response.data.group){
+                commit('setSelectedGroup', response.data.group)
+            }
+        })
     }
 }
 

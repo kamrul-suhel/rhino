@@ -4,7 +4,11 @@ const defaultState = {
     listHeader:[],
     loading: 'white',
     totalDealership: 0,
-    dealershipListRowPerPage: [15,25,40]
+    dealershipListRowPerPage: [15,25,40],
+
+    // Relation between dealership & brand
+    brands:[],
+    totalBrands: 0
 }
 
 const state = {
@@ -47,11 +51,6 @@ const mutations = {
             },
 
             {
-                text: trans.region ,
-                value: 'region'
-            },
-
-            {
                 text: trans.group,
                 value: 'group'
             },
@@ -63,7 +62,8 @@ const mutations = {
 
             {
                 text: trans.action,
-                value: 'action'
+                value: 'action',
+                align: 'right'
             }
         ]
 

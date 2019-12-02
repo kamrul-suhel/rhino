@@ -268,6 +268,7 @@
                         }
                     });
             },
+
             onCreateCompany() {
                 // Check update or create
                 let URL = '/api/companies'
@@ -281,8 +282,6 @@
                     URL = `${URL}/${ID}/update`
                     companyForm.append('languageId', this.selectedCompany.language_id)
                     companyForm.append('_method', 'put')
-                }else{
-                    // Create new company
                 }
 
                 axios.post(URL, companyForm).then((response) =>{

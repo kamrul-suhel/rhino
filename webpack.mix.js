@@ -10,8 +10,10 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+let productionSourceMaps = false;
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+   .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps(productionSourceMaps, 'source-map');
 
 mix.copy('node_modules/vuetify/dist/vuetify.min.css', 'public/css/vuetify.min.css');

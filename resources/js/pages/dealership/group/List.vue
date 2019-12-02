@@ -49,6 +49,7 @@
 
                             <v-icon
                                 small
+                                :color="themeOption.buttonDangerColor"
                                 @click="onDeleteGroup(props.item)"
                             >
                                 delete
@@ -66,11 +67,19 @@
                     <v-divider></v-divider>
 
                     <v-card-text>
-                        <v-text-field
-                            :label="trans.name"
-                            v-model="selectedGroup.name"
-                            :color="themeOption.inputColor"
-                        ></v-text-field>
+                        <v-flex xs12>
+                            <Language v-if="editGroup"
+                                      :languageId="selectedGroup.language_id">
+                            </Language>
+                        </v-flex>
+
+                        <v-flex xs12>
+                            <v-text-field
+                                :label="trans.name"
+                                v-model="selectedGroup.name"
+                                :color="themeOption.inputColor">
+                            </v-text-field>
+                        </v-flex>
 
                         <v-flex xs12>
                             <span>{{trans.logo}}</span>
@@ -84,6 +93,14 @@
                                         :multiple="false"
                                         model="'groups'">
                             </FileUpload>
+                        </v-flex>
+
+                        <v-flex xs12>
+                            <v-switch
+                                :label="trans.status"
+                                :color="themeOption.inputColor"
+                                v-model="selectedGroup.status">
+                            </v-switch>
                         </v-flex>
                     </v-card-text>
 
@@ -117,7 +134,7 @@
                     primary-title
                     class="pa-2 pl-3"
                 >
-                    <h3>{{ trans.delete }} selectedGroup.name }}</h3>
+                    <h3>{{ trans.delete }} {{ selectedGroup.name }}</h3>
                 </v-card-title>
 
                 <v-divider></v-divider>
@@ -135,7 +152,7 @@
                     <v-btn
                         color="info"
                         small
-                        @click="deleteDialog = false"
+                        @click="onCancelDeleteDialog()"
                     >
                         {{ trans.cancel }}
                     </v-btn>
@@ -156,10 +173,12 @@
 <script>
     import {mapGetters} from 'vuex'
     import FileUpload from '../../../components/ImageUpload'
+    import Language from "../../../components/Language";
 
     export default {
         components: {
-            FileUpload
+            FileUpload,
+            Language
         },
 
         data() {
@@ -184,7 +203,8 @@
                 rowsPerPage: 'getGroupListRowsPerPage',
                 selectedGroup: 'getSelectedGroup',
                 themeOption: 'getThemeOption',
-                groupImage: 'getUploadedImage'
+                groupImage: 'getUploadedImage',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 
@@ -206,6 +226,15 @@
 
             headers(value) {
                 console.log('header is; ', value)
+            },
+
+            // When language is change it will trigger
+            selectedLanguage(value){
+                this.$store.dispatch('fetchGroup', {
+                    id: this.selectedGroup.id,
+                    languageId : value.id,
+                    edit: true
+                })
             }
         },
 
@@ -229,23 +258,27 @@
             },
 
             onEditGroup(group) {
-                this.editGroup = true
-                // Check if group has logo, then set image
                 if(group.logo){
-                    console.log(group.logo)
                     this.$store.commit('setImage', group.logo)
                 }
+                // Check if group has logo, then set image
                 this.$store.commit('setSelectedGroup', group)
+                this.editGroup = true
             },
 
-            onDeleteGroup(Dealerships) {
-                this.$store.commit('setSelectedDealership', Dealerships)
+            onDeleteGroup(Group) {
+                this.$store.commit('setSelectedGroup', Group)
                 this.deleteDialog = true
             },
 
+            onCancelDeleteDialog(){
+                this.deleteDialog = false
+                this.onResetGroup()
+            },
+
             confirmDeleteDealerships() {
-                const selectedDealership = this.selectedDealership
-                const URL = `/api/dealerships/${selectedDealership.id}/delete`
+                const selectedGroup = this.selectedGroup
+                const URL = `/api/groups/${selectedGroup.id}`
 
                 axios.delete(URL, {_method: 'delete'})
                     .then((response) => {
@@ -253,12 +286,12 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedDealership.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedGroup.name}  ${this.trans.successfully_deleted}`
                             })
 
                             this.initialize()
                             // reset selectedDealerships in store
-                            this.$store.commit('setSelectedDealership', {})
+                            this.onResetGroup()
 
                             this.deleteDialog = false
                         }
@@ -266,11 +299,41 @@
             },
 
             onCreateGroup() {
+                let groupForm = new FormData()
+                groupForm.append('name', this.selectedGroup.name)
+                groupForm.append('logo', this.groupImage)
 
+                // Set status value
+                if(this.selectedGroup.status === true){
+                    groupForm.append('status', 1)
+                }else{
+                    groupForm.append('status', 0)
+                }
+
+                let URL = `/api/groups`
+
+                // Check if update or no
+                if(this.editGroup){
+                    URL += `/${this.selectedGroup.id}`
+                    groupForm.append('_method', 'put')
+                    groupForm.append('languageId', this.selectedGroup.language_id)
+                }
+
+                axios.post(URL, groupForm).then((response)=>{
+                    this.initialize()
+                    this.$store.commit('setSnackbarMessage', {
+                        openMessage: true,
+                        timeOut: this.themeOption.snackBarTimeout,
+                        message: `${this.selectedGroup.name}  ${this.editGroup ? this.trans.successfully_updated : trans.successfully_created}`
+                    })
+
+                    this.onResetGroup()
+                })
             },
 
             onResetGroup() {
                 this.editGroup = false
+                this.$store.commit('setImage', '')
                 this.$store.commit('setSelectedGroup', {})
             },
 

@@ -46,7 +46,6 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.select_country"
                                         v-model="dealership.country"
-                                        @change="onCountryChange"
                                         return-object
                                     >
                                     </v-select>
@@ -54,13 +53,13 @@
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
-                                        :items="regions"
+                                        :items="groups"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.region_field_is_required]"
+                                        :rules="[v => !!v || trans.groups_filed_required]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_region"
-                                        v-model="dealership.region_id"
+                                        :label="trans.select_groups"
+                                        v-model="dealership.group_id"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -85,18 +84,7 @@
                                     </v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="groups"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || trans.groups_filed_required]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
-                                        v-model="dealership.group_id"
-                                    >
-                                    </v-select>
-                                </v-flex>
+
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch
@@ -115,6 +103,13 @@
                                     :color="themeOption.tabColor"
                                     :slider-color="themeOption.tabSliderColor"
                                 >
+                                    <v-tab
+                                        key="brands"
+                                        ripple
+                                    >
+                                        {{ trans.brands }}
+                                    </v-tab>
+
                                     <v-tab
                                         key="address"
                                         ripple
@@ -138,6 +133,14 @@
                                         {{ trans.opening_times}}
 
                                     </v-tab>
+
+                                    <v-tab-item
+                                        key="brands"
+                                    >
+                                        <Brands v-if="dealership.id"
+                                                :dealershipId="dealership.id">
+                                        </Brands>
+                                    </v-tab-item>
 
                                     <v-tab-item
                                         key="address"
@@ -207,7 +210,7 @@
                                         key="dealershipImage"
                                     >
                                         <v-layout row wrap pt-3>
-                                            <ImageUpload></ImageUpload>
+                                            <ImageUpload model="dealership"></ImageUpload>
                                         </v-layout>
                                     </v-tab-item>
 
@@ -226,7 +229,7 @@
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
                             <v-btn
-                                :class="themeOption.buttonPrimaryColor"
+                                :class="themeOption.buttonSecondaryColor"
                                 small
                                 @click="$router.push({name: 'listDealerships'})"
                             >
@@ -255,11 +258,13 @@
     import TimePicker from "../../components/TimePicker";
     import ImageUpload from "../../components/ImageUpload";
     import dealership from "../../store/modules/dealership";
+    import Brands from '../../components/Dealership/Brands'
 
     export default {
         components: {
             TimePicker,
-            ImageUpload
+            ImageUpload,
+            Brands
         },
 
         data() {
@@ -288,7 +293,6 @@
 
         watch: {
             dealership(value) {
-                console.log('change :', value)
             }
         },
 
@@ -299,24 +303,29 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
+                this.$store.dispatch('fetchBrandForDropDown')
                 this.$store.dispatch('fetchGroups')
                 this.$store.dispatch('fetchDealership', {id: this.$route.params.id})
             },
 
             updateTimes(times) {
-                console.log('time is: ', times);
             },
 
             onUpdateDealership(){
-
                 if(this.$refs.dealershipForm.validate()){
-                    this.$store.commit('setThemeOption', {buttonLoading: true})
-
                     let dealershipForm = new FormData()
 
                     // Set form object for dealership
                     _.forOwn(this.dealership, (value, key)=>{
-                        dealershipForm.append(key, value)
+                        if(key === 'status'){
+                            if(value){
+                                dealershipForm.append('status', 1)
+                            }else{
+                                dealershipForm.append('status', 0)
+                            }
+                        }else{
+                            dealershipForm.append(key, value)
+                        }
                     })
 
                     // Set form object for times
@@ -335,20 +344,10 @@
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.dealership.name}  ${this.trans.successfully_updated}`
                             })
-                            this.$store.commit('setThemeOption', {buttonLoading: false})
-                            // this.$router.push({name: 'listDealerships'})
                         }
                     }).catch((error)=>{
-                        this.$store.commit('setThemeOption', {buttonLoading: false})
                     })
                 }
-            },
-
-            onCountryChange(value){
-                let newDealership = {...this.dealership}
-                newDealership.region_id = null
-                this.$store.commit('setSelectedDealership', newDealership)
-                this.$store.dispatch('fetchRegions', {id: value.id})
             }
         }
     }

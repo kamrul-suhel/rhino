@@ -21,6 +21,12 @@
             }
         },
 
+        props: {
+            languageId: {
+                required: true
+            }
+        },
+
         computed: {
             ...mapGetters({
                 trans: 'getFields',
@@ -36,18 +42,17 @@
             }
         },
 
-        props: {
-            languageId: {
-                required: true
-            }
-        },
-
         created() {
+            this.initialize()
         },
 
         methods: {
             onSubLanguageChange(selectedLanguage) {
                 this.$store.commit('setSubSelectedLanguage', selectedLanguage)
+            },
+
+            initialize(){
+                this.selectedLanguageId = this.languageId
             }
         }
     }

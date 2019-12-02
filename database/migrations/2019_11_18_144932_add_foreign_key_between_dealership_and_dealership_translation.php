@@ -24,7 +24,7 @@ class AddForeignKeyBetweenDealershipAndDealershipTranslation extends Migration
         });
 
         Schema::table('groups_translation', function (Blueprint $table) {
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->foreign('language_id')->references('id')->on('languages');
         });
     }

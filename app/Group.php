@@ -15,13 +15,14 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
-      'logo'
+        'logo'
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function dealerships(){
+    public function dealerships()
+    {
         return $this->hasMany(Dealership::class, 'dealership_id', 'id');
     }
 }

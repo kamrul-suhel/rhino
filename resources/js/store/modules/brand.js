@@ -8,12 +8,14 @@ const defaultState = {
     totalBrands: 0,
     brandListRowPerPage: [15,25,40],
 
+    // For dropdown
+    brandsDropDown: [],
+
     // Regions variable
     regions:[],
     totalRegions: 0,
     brandRegionHeader:[],
     selectedBrandRegion:{}
-
 }
 
 const state = {
@@ -23,6 +25,10 @@ const state = {
 const mutations = {
     setBrands(state, brands){
         state.brands = [...brands]
+    },
+
+    setBrandsForDropDown(state, brands){
+        state.brandsDropDown = [...brands]
     },
 
     setSelectedBrandRegion(state, selectedRegion){
@@ -114,6 +120,10 @@ const getters = {
         return state.brands
     },
 
+    getBrandsForDropDown(state){
+        return state.brandsDropDown
+    },
+
     getBrandListHeader(state){
         return state.listHeader
     },
@@ -199,8 +209,6 @@ const actions = {
     },
 
     fetchRegionByBranId({commit}, payload={}){
-        console.log('paginate :', payload)
-
         // Set loading is true
         commit('setBrandLoading', payload.themeOption.loadingColor)
 
@@ -215,6 +223,19 @@ const actions = {
                 commit('setBrandLoading', false)
             }
         })
+    },
+
+    fetchBrandForDropDown({commit}, payload = {}){
+        const URL = `/api/brands/dropdown`
+
+        axios.get(URL).then((response)=>{
+            if(response.data){
+                commit('setBrandsForDropDown', response.data)
+            }
+        })
+            .catch((error)=>{
+
+            })
     }
 }
 

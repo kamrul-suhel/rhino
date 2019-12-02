@@ -72,6 +72,7 @@ Route::prefix('companies')->group(function(){
 
 Route::prefix('brands')->group(function(){
     Route::get('', 'Brand\BrandController@index');
+    Route::get('dropdown', 'Brand\BrandDropDownController@getBrandsForDropDown');
     Route::post('', 'Brand\BrandController@store');
     Route::get('{id}/show', 'Brand\BrandController@show');
     Route::put('{id}/update', 'Brand\BrandController@update');
@@ -87,6 +88,10 @@ Route::prefix('brands')->group(function(){
 
 Route::prefix('groups')->group(function(){
     Route::get('', 'Dealership\GroupController@index');
+    Route::post('', 'Dealership\GroupController@store');
+    Route::get('{id}', 'Dealership\GroupController@show');
+    Route::put('{id}', 'Dealership\GroupController@update');
+    Route::delete('{id}', 'Dealership\GroupController@destroy');
 });
 
 
