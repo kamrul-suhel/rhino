@@ -47,6 +47,7 @@
                             </v-icon>
 
                             <v-icon
+                                :color="themeOption.buttonDangerColor"
                                 small
                                 @click="onDeleteCompany(props.item)"
                             >
@@ -143,7 +144,7 @@
                 <v-card-actions class="pa-3">
                     <v-spacer></v-spacer>
                     <v-btn
-                        color="info"
+                        :color="themeOption.buttonSecondaryColor"
                         small
                         @click="deleteDialog = false"
                     >

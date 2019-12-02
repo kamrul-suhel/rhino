@@ -117,7 +117,14 @@
                                         key="logo"
                                     >
                                         <v-layout row wrap pt-3>
-                                            <FileUpload model="country"></FileUpload>
+                                            <v-card width="250px">
+                                                <v-img
+                                                    :src="logo"
+                                                    aspect-ratio="2.75"
+                                                ></v-img>
+                                            </v-card>
+                                            <FileUpload :preview="false"
+                                                        model="country"></FileUpload>
                                         </v-layout>
                                     </v-tab-item>
                                 </v-tabs>
@@ -188,13 +195,15 @@
                 selectedCountry: 'getSelectedCountry',
                 regions: 'getRegions',
                 brand: 'getSelectedBrand',
-                selectedLanguage: 'getSubSelectedLanguage'
+                selectedLanguage: 'getSubSelectedLanguage',
+                logo: 'getUploadedImage'
             })
         }),
 
         watch: {
             brand(value) {
                 this.$refs.brandForm.resetValidation()
+                this.$store.commit('setImage', value.logo)
             },
 
             selectedColor(value) {
@@ -237,6 +246,8 @@
                     _.forOwn(this.brand, (value, key) => {
                         brandForm.append(key, value)
                     })
+
+                    brandForm.append('logo', this.logo)
 
                     brandForm.append('_method', 'put')
 

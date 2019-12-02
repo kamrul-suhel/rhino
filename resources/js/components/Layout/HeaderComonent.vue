@@ -1,10 +1,10 @@
 <template>
     <div>
         <v-toolbar
-                fixed
-                clipped-left
-                app
-                color="dark"
+            fixed
+            clipped-left
+            app
+            color="dark"
         >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-icon class="mx-3">fab fa-youtube</v-icon>
@@ -14,31 +14,31 @@
             <v-spacer></v-spacer>
             <v-layout row align-center style="max-width: 350px">
                 <v-autocomplete
-                        color="white"
-                        :placeholder="trans.select_a_language"
-                        prepend-icon="search"
-                        :items="languages"
-                        item-text="name"
-                        @change="selectedLanguage"
-                        item-value="id"
-                        return-object
+                    color="white"
+                    :placeholder="trans.select_a_language"
+                    prepend-icon="search"
+                    :items="languages"
+                    item-text="name"
+                    @change="selectedLanguage"
+                    item-value="id"
+                    return-object
                 ></v-autocomplete>
             </v-layout>
         </v-toolbar>
 
 
         <v-snackbar
-                v-model="snackbar"
-                right
-                :timeout="timeout"
-                top
-                color="green"
+            v-model="snackbar"
+            right
+            :timeout="timeout"
+            top
+            color="green"
         >
             {{ text }}
             <v-btn
-                    color="white"
-                    flat
-                    @click="snackbar = false"
+                color="white"
+                flat
+                @click="snackbar = false"
             >
                 Close
             </v-btn>
@@ -48,17 +48,17 @@
 
 <script>
     import {mapGetters} from 'vuex';
+
     export default {
         data() {
             return {
                 snackbar: false,
-                text:'',
+                text: '',
                 timeout: 2000,
             }
         },
 
-        watch: {
-        },
+        watch: {},
 
         computed: {
             ...mapGetters({
@@ -76,7 +76,7 @@
              * Language change render all translation
              * @param value
              */
-            selectedLanguage(value){
+            selectedLanguage(value) {
                 this.$store.commit('setSelectedLanguage', value)
             }
         }
