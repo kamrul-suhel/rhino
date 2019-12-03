@@ -111,8 +111,25 @@ class DealershipController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
+        // Create translation if not exists
+        if($request->has('edit') && !empty($request->edit)){
+            DealershipTranslation::firstOrCreate([
+                'language_id' => $this->languageId,
+                'dealership_id' => $id
+            ],[
+                'address_line_1' => '',
+                'address_line_2' => '',
+                'address_line_3' => '',
+                'address_line_4' => '',
+                'address_line_5' => '',
+                'address_line_6' => '',
+                'postcode' => '',
+            ]);
+        }
+
+
         $dealership = Dealership::select(
             'dealerships.*',
             'dealerships_translation.name',
@@ -124,7 +141,6 @@ class DealershipController extends Controller
             'dealerships_translation.address_line_6',
             'dealerships_translation.postcode',
             'dealerships_translation.language_id',
-            'groups.id as group_id',
             'groups_translation.name as group',
             'groups.logo as group_logo',
             'countries.name as country',

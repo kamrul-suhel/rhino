@@ -9,6 +9,8 @@ class DealershipTranslation extends Model
     protected $table = 'dealerships_translation';
 
     protected $fillable = [
+        'language_id',
+        'dealership_id',
         'name',
         'address_line_1',
         'address_line_2',

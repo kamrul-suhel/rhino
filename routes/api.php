@@ -53,6 +53,19 @@ Route::prefix('dealerships')->group(function(){
 
 /*
 |--------------------------------------------------------------------------
+| API Route for Brand Dealership
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('brandDealerships')->group(function(){
+    Route::put('{id}', 'Dealership\BrandDealershipController@update');
+    Route::delete('{id}', 'Dealership\BrandDealershipController@destroy');
+});
+
+
+/*
+|--------------------------------------------------------------------------
 | API Route for Companies
 |--------------------------------------------------------------------------
 |

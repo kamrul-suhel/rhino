@@ -13,6 +13,9 @@
                         vertical
                     ></v-divider>
                     <v-spacer></v-spacer>
+
+                    <language-picker :languageId="dealership.language_id"></language-picker>
+
                 </v-toolbar>
             </v-flex>
         </v-layout>
@@ -259,12 +262,14 @@
     import ImageUpload from "../../components/ImageUpload";
     import dealership from "../../store/modules/dealership";
     import Brands from '../../components/Dealership/Brands'
+    import LanguagePicker from '../../components/Language'
 
     export default {
         components: {
             TimePicker,
             ImageUpload,
-            Brands
+            Brands,
+            LanguagePicker
         },
 
         data() {
@@ -287,12 +292,22 @@
                 themeOption: 'getThemeOption',
                 regions: 'getRegions',
                 groups: 'getGroups',
-                dealership: 'getSelectedDealership'
+                dealership: 'getSelectedDealership',
+                selectedLanguage: 'getSubSelectedLanguage',
             })
         }),
 
         watch: {
             dealership(value) {
+                this.$refs.dealershipForm.resetValidation();
+            },
+
+            selectedLanguage(){
+                this.$store.dispatch('fetchDealership', {
+                        id: this.$route.params.id,
+                        edit: true,
+                        languageId: this.selectedLanguage.id
+                })
             }
         },
 
@@ -332,6 +347,9 @@
                     _.forOwn(this.times, (value, key)=>{
                         dealershipForm.append(key, value)
                     })
+
+                    // Set language id
+                    dealershipForm.append('languageId', this.selectedLanguage.id)
 
                     dealershipForm.append('_method', 'put')
 

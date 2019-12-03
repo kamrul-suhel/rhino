@@ -34,8 +34,6 @@ const mutations = {
         }
 
         state.openDialog = option.openMessage
-
-        console.log('state is : ', state);
     }
 }
 

@@ -35,7 +35,7 @@ export default {
      * @param id // required
      */
     fetchDealership({commit, dispatch}, payload){
-        const URL = `/api/dealerships/${payload.id}/show`
+        const URL = `/api/dealerships/${payload.id}/show${fn.generateParams(payload)}`
         axios.get(URL).then((response) => {
             if(response.data){
                 commit('setSelectedDealership', response.data.dealership)

@@ -3642,7 +3642,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-console.log(__WEBPACK_IMPORTED_MODULE_0__dealership_state__["a" /* default */]);
 var state = _extends({}, __WEBPACK_IMPORTED_MODULE_0__dealership_state__["a" /* default */]);
 
 var mutations = _extends({}, __WEBPACK_IMPORTED_MODULE_1__dealership_mutations__["a" /* default */]);
@@ -79944,6 +79943,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_modules_dealership__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Dealership_Brands__ = __webpack_require__(407);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Dealership_Brands___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Dealership_Brands__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Language__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Language___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Language__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -80201,6 +80202,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -80212,7 +80217,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     components: {
         TimePicker: __WEBPACK_IMPORTED_MODULE_1__components_TimePicker___default.a,
         ImageUpload: __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default.a,
-        Brands: __WEBPACK_IMPORTED_MODULE_4__components_Dealership_Brands___default.a
+        Brands: __WEBPACK_IMPORTED_MODULE_4__components_Dealership_Brands___default.a,
+        LanguagePicker: __WEBPACK_IMPORTED_MODULE_5__components_Language___default.a
     },
 
     data: function data() {
@@ -80237,11 +80243,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         themeOption: 'getThemeOption',
         regions: 'getRegions',
         groups: 'getGroups',
-        dealership: 'getSelectedDealership'
+        dealership: 'getSelectedDealership',
+        selectedLanguage: 'getSubSelectedLanguage'
     })),
 
     watch: {
-        dealership: function dealership(value) {}
+        dealership: function dealership(value) {
+            this.$refs.dealershipForm.resetValidation();
+        },
+        selectedLanguage: function selectedLanguage() {
+            this.$store.dispatch('fetchDealership', {
+                id: this.$route.params.id,
+                edit: true,
+                languageId: this.selectedLanguage.id
+            });
+        }
     },
 
     created: function created() {
@@ -80280,6 +80296,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _.forOwn(this.times, function (value, key) {
                     dealershipForm.append(key, value);
                 });
+
+                // Set language id
+                dealershipForm.append('languageId', this.selectedLanguage.id);
 
                 dealershipForm.append('_method', 'put');
 
@@ -80354,6 +80373,9 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Dealership_CreateForm__ = __webpack_require__(409);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Dealership_CreateForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Dealership_CreateForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(9);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -80376,6 +80398,82 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -80384,6 +80482,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         Create: __WEBPACK_IMPORTED_MODULE_0__components_Dealership_CreateForm___default.a
     },
 
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        brands: 'getBrandsByDealership',
+        headers: 'getListHeaderForBrandDealership',
+        totalBrands: 'getTotalBrandsByDealership',
+        loading: 'getBrandLoading',
+        rowsPerPage: 'getBrandDealershipListRowPerPage',
+        initializeBrands: 'getInitializeBrands',
+        selectedBrand: 'getSelectedBrandDealership'
+    })),
+
+    data: function data() {
+        return {
+            pagination: {},
+            deleteDialog: false
+        };
+    },
+
+
     props: {
         dealershipId: {
             type: Number,
@@ -80391,7 +80509,66 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
-    created: function created() {}
+    watch: {
+        pagination: {
+            handler: function handler() {
+                this.initialize();
+            }
+        },
+
+        initializeBrands: function initializeBrands() {
+            this.initialize();
+        }
+    },
+
+    created: function created() {},
+
+
+    methods: {
+        // Initialize data when first render
+        initialize: function initialize() {
+            // this.$refs.createBrand.resetValidation()
+
+            var paginateOption = _extends({}, this.pagination, {
+                trans: this.trans,
+                themeOption: this.themeOption,
+                paginate: true,
+                dealershipId: this.$route.params.id
+            });
+
+            this.$store.dispatch('fetchBrandsByDealershipId', paginateOption);
+        },
+        onEditBrand: function onEditBrand(brand) {
+            this.$store.commit('setSelectedBrandDealership', brand);
+        },
+        onDeleteBrand: function onDeleteBrand(brand) {
+            this.deleteDialog = true;
+            this.$store.commit('setSelectedBrandDealership', brand);
+        },
+        onCancelDelete: function onCancelDelete() {
+            this.deleteDialog = false;
+            this.$store.commit('setSelectedBrandDealership', {});
+        },
+        onConfirmDeleteBrand: function onConfirmDeleteBrand() {
+            var _this = this;
+
+            var brandDealershipId = this.selectedBrand.id;
+
+            var URL = '/api/brandDealerships/' + brandDealershipId;
+
+            axios.delete(URL, { _method: 'delete' }).then(function (response) {
+                if (response.data.success) {
+                    _this.deleteDialog = false;
+                    _this.$store.commit('setSnackbarMessage', {
+                        openMessage: true,
+                        timeOut: _this.themeOption.snackBarTimeout,
+                        message: _this.selectedBrand.brand + '  ' + _this.trans.successfully_deleted
+                    });
+                    _this.$store.commit('setInitializeBrands');
+                }
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -80506,6 +80683,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -80523,10 +80702,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         brands: 'getBrandsForDropDown',
         dealership: 'getSelectedDealership',
         regions: 'getRegions',
-        selectedBrand: 'getSelectedDealershipBrand'
+        selectedBrand: 'getSelectedBrandDealership',
+        initializeBrands: 'getInitializeBrands'
     })),
 
-    watch: {},
+    watch: {
+        selectedBrand: function selectedBrand() {
+            this.$store.dispatch('fetchRegionsByBrandIdAndCountryId', {
+                countryId: this.dealership.country_id,
+                brandId: this.selectedBrand.brand_id
+            });
+        },
+        initializeBrands: function initializeBrands() {
+            this.reset();
+            this.resetValidation();
+        }
+    },
 
     created: function created() {},
 
@@ -80542,21 +80733,25 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var _this = this;
 
             if (this.$refs.brandDealershipForm.validate()) {
-
                 var brandDealershipFrom = new FormData();
+                var URL = '';
+
+                // Check update or create
+                if (this.selectedBrand.id) {
+                    brandDealershipFrom.append('_method', 'put');
+                    URL = '/api/brandDealerships/' + this.selectedBrand.id;
+                } else {
+                    URL = '/api/dealerships/' + this.dealership.id + '/brands';
+                }
+
                 brandDealershipFrom.append('dealership_id', this.dealership.id);
                 brandDealershipFrom.append('brand_id', this.selectedBrand.brand_id);
                 brandDealershipFrom.append('region_id', this.selectedBrand.region_id);
-
-                var URL = '/api/dealerships/' + this.dealership.id + '/brands';
                 axios.post(URL, brandDealershipFrom).then(function (response) {
                     if (response.data.success) {
-                        _this.$store.dispatch('fetchBrandsByDealershipId', { dealershipId: _this.dealership.id });
+                        _this.$store.commit('setInitializeBrands');
                     }
                 });
-
-                console.log(this.selectedBrand);
-                console.log('send data into ');
             }
         },
         reset: function reset() {
@@ -80564,6 +80759,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         resetValidation: function resetValidation() {
             this.$refs.brandDealershipForm.resetValidation();
+        },
+        onFetchBrands: function onFetchBrands() {
+            this.reset();
+            this.resetValidation();
+            this.$store.commit('setInitializeBrands');
         }
     }
 });
@@ -80594,8 +80794,18 @@ var render = function() {
         "v-card",
         [
           _c("v-card-title", [
-            _vm._v("\n            Make relation between brand\n        ")
+            _c("h3", [
+              _vm._v(
+                _vm._s(
+                  this.selectedBrand.id
+                    ? _vm.trans.edit_brand
+                    : _vm.trans.create_brand
+                )
+              )
+            ])
           ]),
+          _vm._v(" "),
+          _c("v-divider"),
           _vm._v(" "),
           _c(
             "v-card-text",
@@ -80680,7 +80890,8 @@ var render = function() {
                   attrs: {
                     small: "",
                     color: _vm.themeOption.buttonSecondaryColor
-                  }
+                  },
+                  on: { click: _vm.onFetchBrands }
                 },
                 [
                   _vm._v(
@@ -80700,7 +80911,15 @@ var render = function() {
                   },
                   on: { click: _vm.onCreateRelation }
                 },
-                [_vm._v(_vm._s(_vm.trans.add_brand))]
+                [
+                  _vm._v(
+                    _vm._s(
+                      this.selectedBrand.id
+                        ? _vm.trans.update_brand
+                        : _vm.trans.add_brand
+                    )
+                  )
+                ]
               )
             ],
             1
@@ -80745,15 +80964,94 @@ var render = function() {
               _c(
                 "v-card",
                 [
-                  _c("v-card-title", [
-                    _vm._v("\n                    Brand list\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-card-text", [
-                    _vm._v(
-                      "\n                    brand content\n                "
-                    )
-                  ])
+                  _c(
+                    "v-card-text",
+                    [
+                      _c("v-data-table", {
+                        staticClass: "elevation-0",
+                        attrs: {
+                          headers: _vm.headers,
+                          items: _vm.brands,
+                          "disable-initial-sort": "",
+                          pagination: _vm.pagination,
+                          "no-results-text": _vm.trans.no_brand_found,
+                          "no-data-text": _vm.trans.no_brand_found,
+                          "rows-per-page-text": _vm.trans.rows_per_page,
+                          "rows-per-page-items": _vm.rowsPerPage,
+                          "total-items": _vm.totalBrands,
+                          loading: _vm.loading
+                        },
+                        on: {
+                          "update:pagination": function($event) {
+                            _vm.pagination = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "items",
+                            fn: function(props) {
+                              return [
+                                _c("td", [_vm._v(_vm._s(props.item.brand))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(props.item.country))]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.region))
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "text-xs-right" },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        staticClass: "mr-2",
+                                        attrs: { small: "" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.onEditBrand(props.item)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    edit\n                                "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        attrs: {
+                                          color:
+                                            _vm.themeOption.buttonDangerColor,
+                                          small: ""
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.onDeleteBrand(props.item)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    delete\n                                "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ])
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -80765,6 +81063,102 @@ var render = function() {
             "v-flex",
             { attrs: { xs12: "", sm4: "", "pa-2": "" } },
             [_c("Create")],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "290" },
+          model: {
+            value: _vm.deleteDialog,
+            callback: function($$v) {
+              _vm.deleteDialog = $$v
+            },
+            expression: "deleteDialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "pa-2 pl-3", attrs: { "primary-title": "" } },
+                [
+                  _c("h3", [
+                    _vm._v(
+                      _vm._s(_vm.trans.delete) +
+                        " " +
+                        _vm._s(_vm.selectedBrand.name)
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c("v-flex", { attrs: { xs12: "" } }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.trans.delete_confirmation) +
+                        "\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { staticClass: "pa-3" },
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        color: _vm.themeOption.buttonSecondaryColor,
+                        small: ""
+                      },
+                      on: { click: _vm.onCancelDelete }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.cancel) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", small: "" },
+                      on: { click: _vm.onConfirmDeleteBrand }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.trans.delete) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
             1
           )
         ],
@@ -80821,7 +81215,11 @@ var render = function() {
                     attrs: { inset: "", vertical: "" }
                   }),
                   _vm._v(" "),
-                  _c("v-spacer")
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c("language-picker", {
+                    attrs: { languageId: _vm.dealership.language_id }
+                  })
                 ],
                 1
               )
@@ -91591,8 +91989,6 @@ var mutations = {
         }
 
         state.openDialog = option.openMessage;
-
-        console.log('state is : ', state);
     }
 };
 
@@ -92527,7 +92923,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     // Relation between dealership & brand
     brands: [],
     selectedBrands: {},
-    totalBrands: 0
+    totalBrands: 0,
+
+    listHeaderForBrand: [],
+    brandDealershipListRowPerPage: [5, 15, 30],
+
+    initializeBrands: true
 });
 
 /***/ }),
@@ -92615,7 +93016,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         var commit = _ref2.commit,
             dispatch = _ref2.dispatch;
 
-        var URL = '/api/dealerships/' + payload.id + '/show';
+        var URL = '/api/dealerships/' + payload.id + '/show' + __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
         axios.get(URL).then(function (response) {
             if (response.data) {
                 commit('setSelectedDealership', response.data.dealership);
@@ -92636,11 +93037,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     fetchBrandsByDealershipId: function fetchBrandsByDealershipId(_ref, payload) {
         var commit = _ref.commit;
 
+        // Set loading is true
+        commit('setBrandLoading', payload.themeOption.loadingColor);
+
+        commit('setDealershipBrandListHeader', payload.trans);
         var URL = '/api/dealerships/' + payload.dealershipId + '/brands';
 
         axios.get(URL).then(function (response) {
             if (response.data.brands) {
-                commit('getBrandsByDealership', response.data.brands);
+                commit('setBrandsByDealership', response.data.brands);
+                commit('setTotalBrandByDealership', response.data.total);
+                commit('setBrandLoading', false);
             }
         });
     }
@@ -92683,6 +93090,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["a"] = ({
     getBrandsByDealership: function getBrandsByDealership(state) {
         return state.brands;
+    },
+    getTotalBrandsByDealership: function getTotalBrandsByDealership(state) {
+        return state.totalBrands;
+    },
+    getListHeaderForBrandDealership: function getListHeaderForBrandDealership(state) {
+        return state.listHeaderForBrand;
+    },
+    getBrandDealershipListRowPerPage: function getBrandDealershipListRowPerPage(state) {
+        return state.brandDealershipListRowPerPage;
+    },
+    getSelectedBrandDealership: function getSelectedBrandDealership(state) {
+        return state.selectedBrands;
+    },
+    getBrandDealershipLoading: function getBrandDealershipLoading(state) {
+        return state.brandDealershipLoading;
+    },
+    getInitializeBrands: function getInitializeBrands(state) {
+        return state.initializeBrands;
     }
 });
 
@@ -92747,11 +93172,42 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     setBrandsByDealership: function setBrandsByDealership(state, brands) {
         state.brands = [].concat(_toConsumableArray(brands));
+    },
+    setSelectedBrandDealership: function setSelectedBrandDealership(state, brandDealership) {
+        state.selectedBrands = _extends({}, brandDealership);
+    },
+    setTotalBrandByDealership: function setTotalBrandByDealership(state, totalBrands) {
+        state.totalBrands = totalBrands;
+    },
+    setDealershipBrandListHeader: function setDealershipBrandListHeader(state, trans) {
+        var header = [{
+            text: trans.brand,
+            align: 'left',
+            sortable: false,
+            value: 'name'
+        }, {
+            text: trans.country,
+            value: 'country'
+        }, {
+            text: trans.region,
+            value: 'group'
+        }, {
+            text: trans.actions,
+            align: 'right',
+            value: 'actions'
+        }];
+
+        state.listHeaderForBrand = header;
+    },
+    setInitializeBrands: function setInitializeBrands(state) {
+        state.initializeBrands = !state.initializeBrands;
     }
 });
 

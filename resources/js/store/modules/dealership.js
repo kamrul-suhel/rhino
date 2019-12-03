@@ -3,7 +3,6 @@ import dealershipMutations from "./dealership/mutations";
 import dealershipGetters from "./dealership/getters"
 import dealershipActions from "./dealership/actions"
 
-console.log(defaultState)
 const state = {
     ...defaultState
 }

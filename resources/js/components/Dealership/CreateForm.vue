@@ -5,8 +5,9 @@
     >
         <v-card>
             <v-card-title>
-                Make relation between brand
+                <h3>{{ this.selectedBrand.id ?  trans.edit_brand : trans.create_brand }}</h3>
             </v-card-title>
+            <v-divider></v-divider>
 
             <v-card-text>
 
@@ -40,6 +41,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn small
+                       @click="onFetchBrands"
                        :color="themeOption.buttonSecondaryColor"
                 >
                     {{ trans.cancel }}
@@ -48,7 +50,7 @@
                 <v-btn small
                        @click="onCreateRelation"
                        :color="themeOption.buttonPrimaryColor"
-                >{{ trans.add_brand }}</v-btn>
+                >{{ this.selectedBrand.id ? trans.update_brand : trans.add_brand }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-form>
@@ -60,7 +62,7 @@
     export default {
         data() {
             return {
-                valid:true
+                valid: true
             }
         },
 
@@ -71,11 +73,25 @@
                 brands: 'getBrandsForDropDown',
                 dealership: 'getSelectedDealership',
                 regions: 'getRegions',
-                selectedBrand: 'getSelectedDealershipBrand'
+                selectedBrand: 'getSelectedBrandDealership',
+                initializeBrands : 'getInitializeBrands',
             })
         },
 
-        watch: {},
+        watch: {
+            selectedBrand(){
+                this.$store.dispatch('fetchRegionsByBrandIdAndCountryId',
+                    {
+                        countryId: this.dealership.country_id,
+                        brandId: this.selectedBrand.brand_id
+                    })
+            },
+
+            initializeBrands(){
+                this.reset()
+                this.resetValidation()
+            }
+        },
 
         created() {
         },
@@ -91,21 +107,25 @@
 
             onCreateRelation(){
                 if(this.$refs.brandDealershipForm.validate()){
-
                     let brandDealershipFrom = new FormData()
+                    let URL =''
+
+                    // Check update or create
+                    if(this.selectedBrand.id){
+                        brandDealershipFrom.append('_method', 'put')
+                        URL = `/api/brandDealerships/${this.selectedBrand.id}`
+                    }else{
+                        URL = `/api/dealerships/${this.dealership.id}/brands`
+                    }
+
                     brandDealershipFrom.append('dealership_id', this.dealership.id)
                     brandDealershipFrom.append('brand_id', this.selectedBrand.brand_id)
                     brandDealershipFrom.append('region_id', this.selectedBrand.region_id)
-
-                    const URL = `/api/dealerships/${this.dealership.id}/brands`
                     axios.post(URL, brandDealershipFrom).then((response)=>{
                         if(response.data.success){
-                            this.$store.dispatch('fetchBrandsByDealershipId', {dealershipId: this.dealership.id})
+                            this.$store.commit('setInitializeBrands')
                         }
                     })
-
-                    console.log(this.selectedBrand)
-                    console.log('send data into ')
                 }
             },
 
@@ -114,6 +134,12 @@
             },
             resetValidation () {
                 this.$refs.brandDealershipForm.resetValidation()
+            },
+
+            onFetchBrands(){
+                this.reset()
+                this.resetValidation()
+                this.$store.commit('setInitializeBrands')
             }
         }
     }
