@@ -100,7 +100,7 @@
                     const URL = `/api/dealerships/${this.dealership.id}/brands`
                     axios.post(URL, brandDealershipFrom).then((response)=>{
                         if(response.data.success){
-                            console.log(response)
+                            this.$store.dispatch('fetchBrandsByDealershipId', {dealershipId: this.dealership.id})
                         }
                     })
 

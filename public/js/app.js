@@ -3631,184 +3631,25 @@ module.exports = function (COLLECTION) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dealership_state__ = __webpack_require__(531);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dealership_mutations__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dealership_getters__ = __webpack_require__(535);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dealership_actions__ = __webpack_require__(536);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var defaultState = {
-    dealerships: [],
-    selectedDealership: {},
-    listHeader: [],
-    loading: 'white',
-    totalDealership: 0,
-    dealershipListRowPerPage: [15, 25, 40],
-
-    // Relation between dealership & brand
-    brands: [],
-    selectedBrands: {},
-    totalBrands: 0
-};
-
-var state = _extends({}, defaultState);
-
-var mutations = {
-    setDealerships: function setDealerships(state, dealerships) {
-        state.dealerships = [].concat(_toConsumableArray(dealerships));
-    },
-    setDealershipLoading: function setDealershipLoading(state, status) {
-        state.loading = status;
-    },
-    setSelectedDealership: function setSelectedDealership(state, dealership) {
-        state.selectedDealership = _extends({}, dealership);
-    },
-    setSelectedDealershipBrand: function setSelectedDealershipBrand(state, brand) {
-        state.selectedBrands = _extends({}, brand);
-    },
-    setTotalDealership: function setTotalDealership(state, totalDealership) {
-        state.totalDealership = totalDealership;
-    },
-    resetDealershipStore: function resetDealershipStore(state) {
-        state = _extends({}, defaultState);
-    },
-    setDealershipListHeader: function setDealershipListHeader(state, trans) {
-        var header = [{
-            text: trans.name,
-            align: 'left',
-            sortable: false,
-            value: 'name'
-        }, {
-            text: trans.country,
-            value: 'country'
-        }, {
-            text: trans.group,
-            value: 'group'
-        }, {
-            text: trans.status,
-            value: 'status'
-        }, {
-            text: trans.action,
-            value: 'action',
-            align: 'right'
-        }];
-
-        state.listHeader = header;
-    }
-};
-
-var getters = {
-    getDealerships: function getDealerships(state) {
-        return state.dealerships;
-    },
-    getDealershipListHeader: function getDealershipListHeader(state) {
-        return state.listHeader;
-    },
-    getDealershipLoading: function getDealershipLoading(state) {
-        return state.loading;
-    },
-    getSelectedDealershipBrand: function getSelectedDealershipBrand(state) {
-        return state.selectedBrands;
-    },
-    getDealershipListRowsPerPage: function getDealershipListRowsPerPage(state) {
-        return state.dealershipListRowPerPage;
-    },
-    getSelectedDealership: function getSelectedDealership(state) {
-        return state.selectedDealership;
-    },
-    getTotalDealership: function getTotalDealership(state) {
-        return state.totalDealership;
-    }
-};
-
-var actions = {
-    /**
-     * You can filter by status
-     * sent type= 'active' | 'inactive'
-     * ...this.pagination // Default pagination object
-     * trans: translation object, // Important
-     * paginate: true, // If you want all record, do not sent
-     * search: optional | if search by any text
-     * @param commit
-     * @param payload
-     */
-    fetchDealerships: function fetchDealerships(_ref) {
-        var commit = _ref.commit;
-        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 
-        console.log('paginage option is: ', payload);
-
-        // Set loading is true
-        commit('setDealershipLoading', payload.themeOption.loadingColor);
-
-        // Setup header for list view
-        commit('setDealershipListHeader', payload.trans);
-
-        var params = generateParams(payload);
-        var URL = '/api/dealerships' + params;
-
-        axios.get(URL).then(function (response) {
-            if (response.data.dealership) {
-                commit('setDealerships', response.data.dealership);
-                commit('setTotalDealership', response.data.total);
-                commit('setDealershipLoading', false);
-            }
-        });
-    },
 
 
-    /**
-     * Get Selected Dealership
-     * @param id // required
-     */
-    fetchDealership: function fetchDealership(_ref2, payload) {
-        var commit = _ref2.commit,
-            dispatch = _ref2.dispatch;
 
-        var URL = '/api/dealerships/' + payload.id + '/show';
-        axios.get(URL).then(function (response) {
-            if (response.data) {
-                commit('setSelectedDealership', response.data.dealership);
-                dispatch('fetchRegions', { id: response.data.dealership.country_id });
-            }
-        }).catch(function (error) {
-            // Generate error message
-        });
-    }
-};
+console.log(__WEBPACK_IMPORTED_MODULE_0__dealership_state__["a" /* default */]);
+var state = _extends({}, __WEBPACK_IMPORTED_MODULE_0__dealership_state__["a" /* default */]);
 
-/**
- * helper function to generate params
- * @param payload
- * @returns {string}
- */
-function generateParams(payload) {
-    var params = '?';
-    if (payload.type && typeof payload.type != 'undefined') {
-        params += 'type=' + payload.type;
-    }
+var mutations = _extends({}, __WEBPACK_IMPORTED_MODULE_1__dealership_mutations__["a" /* default */]);
 
-    if (payload.rowsPerPage && typeof payload.rowsPerPage != 'undefined') {
-        params += '&rowsPerPage=' + payload.rowsPerPage;
-    }
+var getters = _extends({}, __WEBPACK_IMPORTED_MODULE_2__dealership_getters__["a" /* default */]);
 
-    if (payload.paginate && typeof payload.paginate != 'undefined') {
-        params += '&paginate=true';
-    }
-
-    if (payload.page && typeof payload.page != 'undefined') {
-        params += '&page=' + payload.page;
-    }
-
-    if (payload.sortBy && typeof payload.sortBy != 'undefined') {
-        params += '&sortBy=' + payload.sortBy;
-    }
-
-    if (payload.search && typeof payload.search != 'undefined') {
-        params += '&search=' + payload.search;
-    }
-
-    return params;
-}
+var actions = _extends({}, __WEBPACK_IMPORTED_MODULE_3__dealership_actions__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: state,
@@ -80698,6 +80539,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         onCreateRelation: function onCreateRelation() {
+            var _this = this;
+
             if (this.$refs.brandDealershipForm.validate()) {
 
                 var brandDealershipFrom = new FormData();
@@ -80708,7 +80551,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 var URL = '/api/dealerships/' + this.dealership.id + '/brands';
                 axios.post(URL, brandDealershipFrom).then(function (response) {
                     if (response.data.success) {
-                        console.log(response);
+                        _this.$store.dispatch('fetchBrandsByDealershipId', { dealershipId: _this.dealership.id });
                     }
                 });
 
@@ -92644,6 +92487,328 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__state_index__ = __webpack_require__(543);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__state_index__["a" /* default */]));
+
+/***/ }),
+/* 532 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    dealerships: [],
+    selectedDealership: {},
+    listHeader: [],
+    loading: 'white',
+    totalDealership: 0,
+    dealershipListRowPerPage: [15, 25, 40]
+});
+
+/***/ }),
+/* 533 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    // Relation between dealership & brand
+    brands: [],
+    selectedBrands: {},
+    totalBrands: 0
+});
+
+/***/ }),
+/* 534 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutations_index__ = __webpack_require__(546);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__mutations_index__["a" /* default */]));
+
+/***/ }),
+/* 535 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters_index__ = __webpack_require__(545);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__getters_index__["a" /* default */]));
+
+/***/ }),
+/* 536 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions_index__ = __webpack_require__(544);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__actions_index__["a" /* default */]));
+
+/***/ }),
+/* 537 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_function__ = __webpack_require__(58);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    /**
+     * You can filter by status
+     * sent type= 'active' | 'inactive'
+     * ...this.pagination // Default pagination object
+     * trans: translation object, // Important
+     * paginate: true, // If you want all record, do not sent
+     * search: optional | if search by any text
+     * @param commit
+     * @param payload
+     */
+    fetchDealerships: function fetchDealerships(_ref) {
+        var commit = _ref.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        // Set loading is true
+        commit('setDealershipLoading', payload.themeOption.loadingColor);
+
+        // Setup header for list view
+        commit('setDealershipListHeader', payload.trans);
+
+        var params = __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+        var URL = '/api/dealerships' + params;
+
+        axios.get(URL).then(function (response) {
+            if (response.data.dealership) {
+                commit('setDealerships', response.data.dealership);
+                commit('setTotalDealership', response.data.total);
+                commit('setDealershipLoading', false);
+            }
+        });
+    },
+
+
+    /**
+     * Get Selected Dealership
+     * @param id // required
+     */
+    fetchDealership: function fetchDealership(_ref2, payload) {
+        var commit = _ref2.commit,
+            dispatch = _ref2.dispatch;
+
+        var URL = '/api/dealerships/' + payload.id + '/show';
+        axios.get(URL).then(function (response) {
+            if (response.data) {
+                commit('setSelectedDealership', response.data.dealership);
+                dispatch('fetchRegions', { id: response.data.dealership.country_id });
+            }
+        }).catch(function (error) {
+            // Generate error message
+        });
+    }
+});
+
+/***/ }),
+/* 538 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    fetchBrandsByDealershipId: function fetchBrandsByDealershipId(_ref, payload) {
+        var commit = _ref.commit;
+
+        var URL = '/api/dealerships/' + payload.dealershipId + '/brands';
+
+        axios.get(URL).then(function (response) {
+            if (response.data.brands) {
+                commit('getBrandsByDealership', response.data.brands);
+            }
+        });
+    }
+});
+
+/***/ }),
+/* 539 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    getDealerships: function getDealerships(state) {
+        return state.dealerships;
+    },
+    getDealershipListHeader: function getDealershipListHeader(state) {
+        return state.listHeader;
+    },
+    getDealershipLoading: function getDealershipLoading(state) {
+        return state.loading;
+    },
+    getSelectedDealershipBrand: function getSelectedDealershipBrand(state) {
+        return state.selectedBrands;
+    },
+    getDealershipListRowsPerPage: function getDealershipListRowsPerPage(state) {
+        return state.dealershipListRowPerPage;
+    },
+    getSelectedDealership: function getSelectedDealership(state) {
+        return state.selectedDealership;
+    },
+    getTotalDealership: function getTotalDealership(state) {
+        return state.totalDealership;
+    }
+});
+
+/***/ }),
+/* 540 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    getBrandsByDealership: function getBrandsByDealership(state) {
+        return state.brands;
+    }
+});
+
+/***/ }),
+/* 541 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__state__ = __webpack_require__(531);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    setDealerships: function setDealerships(state, dealerships) {
+        state.dealerships = [].concat(_toConsumableArray(dealerships));
+    },
+    setDealershipLoading: function setDealershipLoading(state, status) {
+        state.loading = status;
+    },
+    setSelectedDealership: function setSelectedDealership(state, dealership) {
+        state.selectedDealership = _extends({}, dealership);
+    },
+    setSelectedDealershipBrand: function setSelectedDealershipBrand(state, brand) {
+        state.selectedBrands = _extends({}, brand);
+    },
+    setTotalDealership: function setTotalDealership(state, totalDealership) {
+        state.totalDealership = totalDealership;
+    },
+    resetDealershipStore: function resetDealershipStore(state) {
+        state = _extends({}, __WEBPACK_IMPORTED_MODULE_0__state__["a" /* default */]);
+    },
+    setDealershipListHeader: function setDealershipListHeader(state, trans) {
+        var header = [{
+            text: trans.name,
+            align: 'left',
+            sortable: false,
+            value: 'name'
+        }, {
+            text: trans.country,
+            value: 'country'
+        }, {
+            text: trans.group,
+            value: 'group'
+        }, {
+            text: trans.status,
+            value: 'status'
+        }, {
+            text: trans.action,
+            value: 'action',
+            align: 'right'
+        }];
+
+        state.listHeader = header;
+    }
+});
+
+/***/ }),
+/* 542 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    setBrandsByDealership: function setBrandsByDealership(state, brands) {
+        state.brands = [].concat(_toConsumableArray(brands));
+    }
+});
+
+/***/ }),
+/* 543 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__brand__ = __webpack_require__(533);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dealership__ = __webpack_require__(532);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__brand__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__dealership__["a" /* default */]));
+
+/***/ }),
+/* 544 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dealership__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__brand__ = __webpack_require__(538);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__dealership__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__brand__["a" /* default */]));
+
+/***/ }),
+/* 545 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__brand__ = __webpack_require__(540);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dealership__ = __webpack_require__(539);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__brand__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__dealership__["a" /* default */]));
+
+/***/ }),
+/* 546 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__brand__ = __webpack_require__(542);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dealership__ = __webpack_require__(541);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_0__brand__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__dealership__["a" /* default */]));
 
 /***/ })
 /******/ ]);
