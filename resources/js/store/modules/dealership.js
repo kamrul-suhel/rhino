@@ -8,6 +8,7 @@ const defaultState = {
 
     // Relation between dealership & brand
     brands:[],
+    selectedBrands:{},
     totalBrands: 0
 }
 
@@ -26,6 +27,10 @@ const mutations = {
 
     setSelectedDealership(state, dealership){
         state.selectedDealership = {...dealership}
+    },
+
+    setSelectedDealershipBrand(state, brand){
+      state.selectedBrands = {...brand}
     },
 
     setTotalDealership(state, totalDealership){
@@ -82,6 +87,10 @@ const getters = {
 
     getDealershipLoading(state){
         return state.loading
+    },
+
+    getSelectedDealershipBrand(state){
+      return state.selectedBrands
     },
 
     getDealershipListRowsPerPage(state){

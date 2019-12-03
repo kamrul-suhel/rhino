@@ -42,11 +42,11 @@
                                     <v-select
                                         :items="countries"
                                         item-text="name"
+                                        item-value="id"
                                         :rules="[v => !!v || trans.select_a_country]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_country"
-                                        v-model="dealership.country"
-                                        return-object
+                                        v-model="dealership.country_id"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -303,7 +303,7 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
-                this.$store.dispatch('fetchBrandForDropDown')
+                this.$store.dispatch('fetchBrandForDropDown',{filterBy: 'country', dealershipId: this.$route.params.id })
                 this.$store.dispatch('fetchGroups')
                 this.$store.dispatch('fetchDealership', {id: this.$route.params.id})
             },

@@ -1,12 +1,12 @@
 import fn from '../../utils/function'
 
 const defaultState = {
-    regions : [],
+    regions: [],
     selectedRegion: {},
-    listHeader:[],
+    listHeader: [],
     loading: 'white',
     totalRegions: 0,
-    brandListRowPerPage: [15,25,40]
+    brandListRowPerPage: [15, 25, 40]
 }
 
 const state = {
@@ -14,27 +14,27 @@ const state = {
 }
 
 const mutations = {
-    setRegions(state, regions){
+    setRegions(state, regions) {
         state.regions = [...regions]
     },
 
-    setRegionLoading(state, status){
+    setRegionLoading(state, status) {
         state.loading = status
     },
 
-    setSelectedRegion(state, brand){
+    setSelectedRegion(state, brand) {
         state.selectedRegion = {...brand}
     },
 
-    setTotalRegions(state, totalRegion){
+    setTotalRegions(state, totalRegion) {
         state.totalRegions = totalRegion
     },
 
-    resetRegionStore(state){
+    resetRegionStore(state) {
         state = {...defaultState}
     },
 
-    setRegionListHeader(state, trans){
+    setRegionListHeader(state, trans) {
         const header = [
             {
                 text: trans.name,
@@ -51,7 +51,7 @@ const mutations = {
             {
                 text: trans.actions,
                 value: 'actions',
-                align:'right'
+                align: 'right'
             }
         ]
 
@@ -60,27 +60,27 @@ const mutations = {
 }
 
 const getters = {
-    getRegions(state){
+    getRegions(state) {
         return state.regions
     },
 
-    getRegionListHeader(state){
+    getRegionListHeader(state) {
         return state.listHeader
     },
 
-    getRegionLoading(state){
+    getRegionLoading(state) {
         return state.loading
     },
 
-    getRegionListRowsPerPage(state){
+    getRegionListRowsPerPage(state) {
         return state.brandListRowPerPage
     },
 
-    getSelectedRegion(state){
+    getSelectedRegion(state) {
         return state.selectedRegion
     },
 
-    getTotalRegions(state){
+    getTotalRegions(state) {
         return state.totalRegions
     },
 
@@ -121,15 +121,27 @@ const actions = {
      * Get Selected company
      * @param id // required
      */
-    fetchRegion({commit, dispatch}, payload){
-        const URL = `/api/regions/${payload.id}/show`+ fn.generateParams(payload)
+    fetchRegion({commit, dispatch}, payload) {
+        const URL = `/api/regions/${payload.id}/show` + fn.generateParams(payload)
         axios.get(URL).then((response) => {
-            if(response.data){
+            if (response.data) {
                 commit('setSelectedRegion', response.data.brand)
             }
-        }).catch((error)=>{
+        }).catch((error) => {
             // Generate error message
         })
+    },
+
+    fetchRegionsByBrandIdAndCountryId({commit}, payload = {}) {
+        const URL = `/api/brands/${payload.brandId}/regions${fn.generateParams(payload)}`
+        axios.get(URL)
+            .then((response) => {
+                if(response.data.regions){
+                    commit('setRegions', response.data.regions)
+                    commit('setTotalRegions', response.data.total)
+                }
+            })
+            .catch()
     }
 }
 

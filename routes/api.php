@@ -44,6 +44,10 @@ Route::prefix('dealerships')->group(function(){
     Route::get('{id}/show', 'Dealership\DealershipController@show');
     Route::put('{id}/update', 'Dealership\DealershipController@update');
     Route::delete('{id}/delete', 'Dealership\DealershipController@destroy');
+
+    // Brand & Dealership relation route
+    Route::post('{id}/brands', 'Dealership\BrandDealershipController@store');
+    Route::get('{id}/brands', 'Dealership\BrandDealershipController@index');
 });
 
 
@@ -76,7 +80,7 @@ Route::prefix('brands')->group(function(){
     Route::post('', 'Brand\BrandController@store');
     Route::get('{id}/show', 'Brand\BrandController@show');
     Route::put('{id}/update', 'Brand\BrandController@update');
-    Route::get('{id}/regions', 'Brand\BrandController@getRegions');
+    Route::get('{id}/regions', 'Brand\BrandRegionController@getRegions');
 });
 
 /*
