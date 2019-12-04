@@ -7,7 +7,7 @@
         v-model="selectedLanguageId"
         return-object
         @change="onSubLanguageChange"
-        :label="trans.select_a_language">
+        :label="trans.language">
     </v-autocomplete>
 </template>
 

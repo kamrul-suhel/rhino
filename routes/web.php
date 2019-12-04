@@ -29,24 +29,24 @@ Route::get('/frontend', function () {
 |
 */
 
-Route::prefix('dealerships')->group(function(){
-    Route::get('/', function(){
+Route::prefix('dealerships')->group(function () {
+    Route::get('/', function () {
         return view('welcome');
     });
 
-    Route::get('create', function(){
+    Route::get('create', function () {
         return view('welcome');
     });
 
-    Route::get('{id}/edit', function(){
+    Route::get('{id}/edit', function () {
         return view('welcome');
     });
 
     /**
      * Group routes
      */
-    Route::get('groups', function(){
-       return view('welcome');
+    Route::get('groups', function () {
+        return view('welcome');
     });
 });
 
@@ -59,12 +59,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 |
 */
 
-Route::prefix('countries')->group(function(){
-    Route::get('', function(){
-       return view('welcome');
+Route::prefix('countries')->group(function () {
+    Route::get('', function () {
+        return view('welcome');
     });
 
-    Route::get('{id}/edit', function(){
+    Route::get('{id}/edit', function () {
         return view('welcome');
     });
 });
@@ -76,8 +76,8 @@ Route::prefix('countries')->group(function(){
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('languages')->group(function(){
-    Route::get('/', function(){
+Route::prefix('languages')->group(function () {
+    Route::get('/', function () {
         return view('welcome');
     });
 });
@@ -88,16 +88,16 @@ Route::prefix('languages')->group(function(){
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('brands')->group(function(){
-    Route::get('/', function(){
+Route::prefix('brands')->group(function () {
+    Route::get('/', function () {
         return view('welcome');
     });
 
-    Route::get('{id}/edit', function(){
+    Route::get('{id}/edit', function () {
         return view('welcome');
     });
 
-    Route::get('create', function(){
+    Route::get('create', function () {
         return view('welcome');
     });
 });
@@ -109,16 +109,16 @@ Route::prefix('brands')->group(function(){
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('vehicles')->group(function(){
-    Route::get('/', function(){
+Route::prefix('vehicles')->group(function () {
+    Route::get('/', function () {
         return view('welcome');
     });
 
-    Route::get('{id}/edit', function(){
+    Route::get('{id}/edit', function () {
         return view('welcome');
     });
 
-    Route::get('create', function(){
+    Route::get('create', function () {
         return view('welcome');
     });
 });
@@ -130,12 +130,12 @@ Route::prefix('vehicles')->group(function(){
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('companies')->group(function(){
-    Route::get('/', function(){
+Route::prefix('companies')->group(function () {
+    Route::get('/', function () {
         return view('welcome');
     });
 
-    Route::get('create', function(){
+    Route::get('create', function () {
         return view('welcome');
     });
 });
@@ -148,12 +148,30 @@ Route::prefix('companies')->group(function(){
 |
 */
 
-Route::prefix('users')->group(function(){
-    Route::get('', function(){
+Route::prefix('users')->group(function () {
+    Route::get('', function () {
         return view('welcome');
     });
 
 
-    Route::get('list', function(){
+    Route::get('list', function () {
         return view('welcome');
-    });});
+    });
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes for Events
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('events')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('types', function () {
+        return view('welcome');
+    });
+});

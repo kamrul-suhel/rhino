@@ -175,6 +175,33 @@ Route::prefix('regions')->group(function(){
 
 /*
 |--------------------------------------------------------------------------
+| API Route for Events
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('events')->group(function(){
+    Route::post('', 'Event\EventController@index');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | API Route for Events types
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::prefix('types')->group(function(){
+        Route::get('', 'Event\Type\TypeController@index');
+        Route::post('', 'Event\Type\TypeController@store');
+        Route::get('{id}', 'Event\Type\TypeController@show');
+        Route::put('{id}', 'Event\Type\TypeController@update');
+        Route::delete('{id}', 'Event\Type\TypeController@destroy');
+    });
+});
+
+
+/*
+|--------------------------------------------------------------------------
 | API Route for Upload file
 |--------------------------------------------------------------------------
 |

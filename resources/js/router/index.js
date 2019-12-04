@@ -10,6 +10,8 @@ import Groups from './Modules/groups';
 import Company from './Modules/company';
 import Frontend from "./Modules/frontend";
 import User from "./Modules/user";
+import Event from "./Modules/event";
+import TypesRoutes from "./Modules/type";
 
 Vue.use(Router)
 
@@ -40,6 +42,12 @@ const routes = [
 
     // Company Routes
     {...Company},
+
+    // Events Routes
+    {...Event},
+
+    // Types routes
+    {...TypesRoutes},
 
     // Frontend Routes
     {...Frontend},
