@@ -119,14 +119,15 @@ class BrandController extends Controller
     public function show(Request $request, $id)
     {
         // Check request is edit or only show
-        if($request->has('edit') &&
+        if ($request->has('edit') &&
             !empty($request->edit) &&
             $request->edit == 'true'
-        ){
-            BrandTranslation::firstOrCreate([
-                'language_id' => $this->languageId,
-                'brand_id' => $id
-            ],
+        ) {
+            BrandTranslation::firstOrCreate(
+                [
+                    'language_id' => $this->languageId,
+                    'brand_id' => $id
+                ],
                 [
                     'name' => '',
                     'description' => ''
@@ -155,46 +156,7 @@ class BrandController extends Controller
     }
 
 
-    /**
-     * Get the regions based on brand id
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getRegions(Request $request, $brandId){
-        $total = 0;
-        $data = [];
 
-        $regions = Region::select(
-            'regions.country_id',
-            'regions.id',
-            'regions.name',
-            'countries.name as country'
-        )
-            ->leftJoin('countries', 'countries.id','=', 'regions.country_id');
-
-        if($request->has('model') && !empty($request->model)){
-            $modelId = $request->model .'_id';
-            $regions = $regions->where($modelId, $brandId);
-        }else{
-            $regions = $regions->where('brand_id', $brandId);
-        }
-
-        if($request->has('paginate') && !empty($request->paginate)){
-            $regions = $regions->paginate($this->perPage);
-            $data = $regions->items();
-            $total = $regions->total();
-        }else{
-            $data = $regions->get();
-            $total = $regions->count();
-        }
-
-        return response()->json(
-            [
-                'regions' => $data,
-                'total' => $total
-            ]
-        );
-    }
 
     /**
      * Update the specified resource in storage.

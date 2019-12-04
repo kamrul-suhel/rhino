@@ -14,10 +14,10 @@ class CreateGroupsTranslationTable extends Migration
     public function up()
     {
         Schema::create('groups_translation', function (Blueprint $table) {
-            $table->bigIncrements('d')->index();
+            $table->bigIncrements('id')->index();
             $table->unsignedBigInteger('group_id')->index();
             $table->unsignedBigInteger('language_id')->index();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

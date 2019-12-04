@@ -60,6 +60,22 @@ export default {
             params += `&edit=${payload.edit}`
         }
 
+        if(payload.filterBy && typeof (payload.filterBy) !== 'undefined'){
+            params += `&filterBy=${payload.filterBy}`
+        }
+
+        if(payload.id && typeof (payload.id) !== 'undefined'){
+            params += `&id=${payload.id}`
+        }
+
+        if(payload.dealershipId && typeof (payload.dealershipId) !== 'undefined'){
+            params += `&dealershipId=${payload.dealershipId}`
+        }
+
+        if(payload.countryId && typeof (payload.countryId) !== 'undefined'){
+            params += `&countryI=${payload.countryId}`
+        }
+
         return params
     }
 }

@@ -51,6 +51,12 @@ return [
     ],
 
     [
+        'label' => 'Add',
+        'identifier' => 'add',
+        'translation' => 'Add'
+    ],
+
+    [
         'label' => 'Rows Per Page test',
         'identifier' => 'rows_per_page',
         'translation' => 'Rows Per Page'
@@ -194,5 +200,17 @@ return [
         'label' => 'Dashboard',
         'identifier' => 'dashboard',
         'translation' => 'Dashboard'
+    ],
+
+    [
+        'label' => 'List Of',
+        'identifier' => 'list_of',
+        'translation' => 'List Of'
+    ],
+
+    [
+        'label' => 'is required',
+        'identifier' => 'is_required',
+        'translation' => 'is required'
     ]
 ];

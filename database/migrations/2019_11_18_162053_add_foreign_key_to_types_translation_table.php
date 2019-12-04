@@ -14,8 +14,14 @@ class AddForeignKeyToTypesTranslationTable extends Migration
     public function up()
     {
         Schema::table('types_translation', function (Blueprint $table) {
-            $table->foreign('type_id')->references('id')->on('types');
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('types')
+                ->onDelete('cascade');
+
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages');
         });
     }
 

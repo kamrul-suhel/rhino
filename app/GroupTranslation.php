@@ -12,6 +12,8 @@ class GroupTranslation extends Model
     protected $table = 'groups_translation';
 
     protected $fillable = [
-        'name'
+        'name',
+        'group_id',
+        'language_id'
     ];
 }

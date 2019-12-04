@@ -21,7 +21,6 @@ const mutations = {
         const selectedLanguage = _.find(state.languages,(language)=>{
             return language.id === languageId
         })
-        console.log('selectedLangauge', selectedLanguage)
     }
 }
 

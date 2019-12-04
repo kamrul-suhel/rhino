@@ -48,4 +48,10 @@ return [
         'identifier' => 'region_name_required',
         'translation' => 'Region Name Is Required'
     ],
+
+    [
+        'label' => 'Select A Region',
+        'identifier' => 'select_a_region',
+        'translation' => 'Select A Region'
+    ],
 ];

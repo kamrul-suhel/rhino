@@ -25,7 +25,7 @@ class DealershipRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'region_id' => 'required|exists:regions,id',
+            'country_id' => 'required',
             'language_id' => 'sometimes|exists:languages,id'
         ];
     }

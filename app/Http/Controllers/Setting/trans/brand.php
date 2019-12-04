@@ -19,6 +19,12 @@ return [
     ],
 
     [
+        'label' => 'Add Brand',
+        'identifier' => 'add_brand',
+        'translation' => 'Add Brand'
+    ],
+
+    [
         'label' => 'Edit Brands',
         'identifier' => 'edit_brand',
         'translation' => 'Edit Brand'
@@ -58,6 +64,12 @@ return [
         'label' => 'Please Select A Company',
         'identifier' => 'select_a_company',
         'translation' => 'Please Select A Company'
+    ],
+
+    [
+        'label' => 'Select A Brand',
+        'identifier' => 'select_a_brand',
+        'translation' => 'Select A Brand'
     ],
 
     [

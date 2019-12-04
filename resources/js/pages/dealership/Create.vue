@@ -42,25 +42,11 @@
                                     <v-select
                                         :items="countries"
                                         item-text="name"
+                                        item-value="id"
                                         :rules="[v => !!v || trans.select_a_country]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_country"
-                                        v-model="dealership.country"
-                                        @change="onCountryChange"
-                                        return-object
-                                    >
-                                    </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="regions"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || trans.region_field_is_required]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.select_region"
-                                        v-model="dealership.region_id"
+                                        v-model="dealership.country_id"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -96,6 +82,14 @@
                                         v-model="dealership.longitude"
                                         :label="trans.longitude">
                                     </v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-switch
+                                        :label="trans.status"
+                                        :color="themeOption.inputColor"
+                                        v-model="dealership.status">
+                                    </v-switch>
                                 </v-flex>
                             </v-layout>
 
@@ -272,9 +266,6 @@
         }),
 
         watch: {
-            dealership() {
-
-            }
         },
 
         created() {
@@ -284,7 +275,7 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
-                this.$store.dispatch('fetchGroups')
+                this.$store.dispatch('fetchGroups', {dropDown: true})
             },
 
             updateTimes(times) {
@@ -297,7 +288,15 @@
 
                     // Set form object for dealership
                     _.forOwn(this.dealership, (value, key)=>{
-                        dealershipForm.append(key, value)
+                        if(key === 'status'){
+                            if(value === 'true'){
+                                dealershipForm.append('status', 1)
+                            }else{
+                                dealershipForm.append('status', 0)
+                            }
+                        }else{
+                            dealershipForm.append(key, value)
+                        }
                     })
 
                     // Set form object for times
@@ -317,10 +316,6 @@
                         }
                     })
                 }
-            },
-
-            onCountryChange(value){
-                this.$store.dispatch('fetchRegions', {id: value.id})
             }
         }
     }

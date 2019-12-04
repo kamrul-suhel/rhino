@@ -7,7 +7,7 @@
         v-model="selectedLanguageId"
         return-object
         @change="onSubLanguageChange"
-        :label="trans.select_a_language">
+        :label="trans.language">
     </v-autocomplete>
 </template>
 
@@ -18,6 +18,12 @@
         data() {
             return {
                 selectedLanguageId: null
+            }
+        },
+
+        props: {
+            languageId: {
+                required: true
             }
         },
 
@@ -36,18 +42,17 @@
             }
         },
 
-        props: {
-            languageId: {
-                required: true
-            }
-        },
-
         created() {
+            this.initialize()
         },
 
         methods: {
             onSubLanguageChange(selectedLanguage) {
                 this.$store.commit('setSubSelectedLanguage', selectedLanguage)
+            },
+
+            initialize(){
+                this.selectedLanguageId = this.languageId
             }
         }
     }
