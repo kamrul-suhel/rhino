@@ -31,51 +31,31 @@ class VehicleController extends Controller
 
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
-            // Search dealership name
+            // Search vehicle name
             if ($request->has('search') && !empty($request->search)) {
-                $brands = $brands->where('brands_translation.name', 'LIKE', '%' . $request->search . '%');
-            }
-
-            // Get Only active country
-            if ($request->has('type') && !empty($request->type)) {
-                switch ($request->type) {
-                    case 'active':
-                        $brands = $brands->where('status', 1);
-                        break;
-
-                    case 'inactive':
-                        $brands = $brands->where('status', 0);
-                        break;
-                }
+                $vehicles = $vehicle->where('vehicle_translation.model', 'LIKE', '%' . $request->search . '%');
             }
 
             // If sortBy has set then, sort by region, group, country
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;
-                switch ($sortBy) {
-                    case 'name':
-                        $brands = $brands->orderBy('brands_translation.name');
-                        break;
-
-                    case 'status':
-                        $brands = $brands->orderBy('brands.status', 'DESC');
-                        break;
-                }
+                $vehicles = $vehicles->orderBy('vehicles_translation.model');
+                
             } else {
-                $brands = $brands->orderBy('brands.id', 'DESC');
+                $vehicles = $vehicles->orderBy('vehicles.id', 'DESC');
             }
 
-            $data = $brands->paginate($this->perPage);
-            $totalBrand = $data->total();
+            $data = $vehicles->paginate($this->perPage);
+            $totalVehicle = $data->total();
             $data = $data->items();
         } else {
-            $data = $brands->get();
-            $totalBrand = $brands->count();
+            $data = $vehicles->get();
+            $totalVehicle = $vehicles->count();
         }
 
         return response()->json([
-            'brands' => $data,
-            'total' => $totalBrand
+            'vehicles' => $data,
+            'total' => $totalVehicle
         ]);
     }
 

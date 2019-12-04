@@ -41,27 +41,6 @@ const mutations = {
 
             {
                 icon: 'add_shopping_cart',
-                text: trans.vehicles,
-                navs: [
-                    {
-                        icon: 'history',
-                        text: trans.all_vehicles,
-                        link: 'listVehicles',
-                        access: ''
-                    },
-
-                    {
-                        icon: 'history',
-                        text: trans.create_vehicles,
-                        link: 'addVehicles',
-                        access: ''
-                    },
-
-                ],
-            },
-
-            {
-                icon: 'add_shopping_cart',
                 text: trans.brands,
                 navs: [
                     {
@@ -69,7 +48,34 @@ const mutations = {
                         text: trans.list_of_brands,
                         link: 'listBrands',
                         access: ''
-                    }
+                    },
+                    // {
+                    //     icon: 'history',
+                    //     text: trans.create_brand,
+                    //     link: 'createBrands',
+                    //     access: ''
+                    // }
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.vehicles,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: trans.list_of_vehicles,
+                        link: 'listVehicles',
+                        access: ''
+                    },
+
+                    {
+                        icon: 'history',
+                        text: trans.create_vehicle,
+                        link: 'addVehicles',
+                        access: ''
+                    },
+
                 ],
             },
 
