@@ -40,6 +40,7 @@ Route::prefix('settings')->group(function(){
 
 Route::prefix('dealerships')->group(function(){
     Route::get('', 'Dealership\DealershipController@index');
+    Route::get('dropdown', 'Dealership\DealershipDropDownController@index');
     Route::post('', 'Dealership\DealershipController@store');
     Route::get('{id}/show', 'Dealership\DealershipController@show');
     Route::put('{id}/update', 'Dealership\DealershipController@update');
@@ -181,7 +182,7 @@ Route::prefix('regions')->group(function(){
 */
 
 Route::prefix('events')->group(function(){
-    Route::post('', 'Event\EventController@index');
+    Route::post('', 'Event\EventController@store');
 
 
     /*
@@ -192,6 +193,7 @@ Route::prefix('events')->group(function(){
     */
     Route::prefix('types')->group(function(){
         Route::get('', 'Event\Type\TypeController@index');
+        Route::get('dropdown', 'Event\Type\TypeDropdownController@index');
         Route::post('', 'Event\Type\TypeController@store');
         Route::get('{id}', 'Event\Type\TypeController@show');
         Route::put('{id}', 'Event\Type\TypeController@update');

@@ -17,12 +17,9 @@ class CreateEventTranslation extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('event_id')->index();
             $table->unsignedBigInteger('language_id')->index();
-            $table->string('name');
-            $table->date('start');
-            $table->date('end');
-            $table->boolean('active');
-            $table->longText('notes');
-            $table->string('greeting');
+            $table->string('name')->nullable()->index();
+            $table->longText('notes')->nullable();
+            $table->string('greeting')->nullable();
         });
     }
 

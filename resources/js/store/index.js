@@ -14,7 +14,7 @@ import Company from "./modules/company"
 import Brand from "./modules/brand"
 import Vehicle from "./modules/vehicle"
 import Region from "./modules/region"
-import Type from "./modules/type"
+import Type from "./modules/eventType"
 
 
 Vue.use(Vuex)

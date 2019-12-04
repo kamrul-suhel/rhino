@@ -32,9 +32,12 @@ class DatabaseSeeder extends Seeder
         $this->call(BrandSeeder::class);
 
         // Seed dealership group table
-//        $this->call(GroupSeeder::class);
+        $this->call(GroupSeeder::class);
 
         // Seed Dealership table
-//        $this->call(DealershipSeeder::class);
+        $this->call(DealershipSeeder::class);
+
+        // Seed Event type table
+        $this->call(EventTypeSeeder::class);
     }
 }

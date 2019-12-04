@@ -167,9 +167,22 @@ Route::prefix('users')->group(function () {
 |
 */
 Route::prefix('events')->group(function () {
-    Route::get('/', function () {
+    Route::get('', function () {
         return view('welcome');
     });
+
+    Route::get('list', function () {
+        return view('welcome');
+    });
+
+    Route::get('create', function () {
+        return view('welcome');
+    });
+
+    Route::get('{id}/edit', function () {
+        return view('welcome');
+    });
+
 
     Route::get('types', function () {
         return view('welcome');

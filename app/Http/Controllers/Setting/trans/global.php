@@ -10,6 +10,13 @@ return [
         'identifier' => 'name',
         'translation' => 'Name'
     ],
+
+    [
+        'label' => 'of',
+        'identifier' => 'of',
+        'translation' => 'of'
+    ],
+
     [
         'label' => 'Edit',
         'identifier' => 'edit',
@@ -125,6 +132,12 @@ return [
     ],
 
     [
+        'label' => 'Select',
+        'identifier' => 'select',
+        'translation' => 'Select'
+    ],
+
+    [
         'label' => 'Select Country',
         'identifier' => 'select_country',
         'translation' => 'Select Country'
@@ -212,5 +225,11 @@ return [
         'label' => 'is required',
         'identifier' => 'is_required',
         'translation' => 'is required'
+    ],
+
+    [
+        'label' => 'Ok',
+        'identifier' => 'ok',
+        'translation' => 'Ok'
     ]
 ];

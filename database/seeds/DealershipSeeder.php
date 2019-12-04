@@ -19,9 +19,9 @@ class DealershipSeeder extends Seeder
 
         $dealerships->each(function($dealership){
             $languages = \App\Language::all();
+            $faker = Faker::create();
 
-            $languages->each(function($language) use ($dealership){
-                $faker = Faker::create();
+            $languages->each(function($language) use ($dealership, $faker){
 
                 \App\DealershipTranslation::create([
                    'language_id' => $language->id,

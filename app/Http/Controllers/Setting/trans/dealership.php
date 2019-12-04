@@ -7,6 +7,12 @@ return [
     ],
 
     [
+        'label' => 'Dealership',
+        'identifier' => 'dealership',
+        'translation' => 'Dealership'
+    ],
+
+    [
         'label' => 'Name Of Dealership',
         'identifier' => 'name_of_dealership',
         'translation' => 'Name of Dealership'

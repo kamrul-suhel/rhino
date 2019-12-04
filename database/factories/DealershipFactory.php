@@ -22,7 +22,7 @@ $factory->define(\App\Dealership::class, function (Faker $faker) {
     $endTime = rand($startTime,54000);
     return [
         'group_id' => \App\Group::all()->random()->id,
-        'region_id' => \App\Region::all()->random()->id,
+        'country_id' => \App\Country::all()->random()->id,
         'longitude' => $faker->longitude,
         'latitude' => $faker->latitude,
         'status' => $faker->randomElement([0,1]),

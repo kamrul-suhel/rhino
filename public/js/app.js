@@ -77445,6 +77445,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }).catch(function (error) {
             // Generate error message
         });
+    },
+
+
+    /**
+     * Generate dealership dropdown
+     * @param commit
+     * @param payload
+     */
+    fetchDealershipsForDropdown: function fetchDealershipsForDropdown(_ref3) {
+        var commit = _ref3.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        console.log('fetch dealership');
+        var URL = '/api/dealerships/dropdown';
+        axios.get(URL).then(function (response) {
+            if (response.data.dealership) {
+                commit('setDealerships', response.data.dealership);
+                commit('setTotalDealership', response.data.total);
+            }
+        });
     }
 });
 
@@ -90752,7 +90772,7 @@ var eventsRoute = {
     name: 'events',
     component: __WEBPACK_IMPORTED_MODULE_0__pages_event__["d" /* Root */],
     children: [{
-        path: '',
+        path: 'list',
         name: 'listEvents',
         component: __WEBPACK_IMPORTED_MODULE_0__pages_event__["c" /* List */]
     }, {
@@ -90826,7 +90846,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_TimePicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_TimePicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_modules_dealership__ = __webpack_require__(60);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -91026,40 +91045,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 
@@ -91075,8 +91060,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         var _this = this;
 
         return {
+            startEvent: false,
+            endEvent: false,
             valid: true,
-            dealership: {},
+            event: {},
             times: {},
             active: null,
             model: null,
@@ -91090,11 +91077,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
         trans: 'getFields',
-        countries: 'getCountries',
-        selectedCountry: 'getSelectedCountry',
         themeOption: 'getThemeOption',
-        regions: 'getRegions',
-        groups: 'getGroups'
+        types: 'getTypes',
+        dealerships: 'getDealerships'
     })),
 
     watch: {},
@@ -91112,39 +91097,39 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         updateTimes: function updateTimes(times) {
             console.log('time is: ', times);
         },
-        onCreateDealership: function onCreateDealership() {
+        onCreateEvent: function onCreateEvent() {
             var _this2 = this;
 
-            if (this.$refs.dealershipForm.validate()) {
-                var dealershipForm = new FormData();
+            if (this.$refs.eventForm.validate()) {
+                var eventForm = new FormData();
 
-                // Set form object for dealership
-                _.forOwn(this.dealership, function (value, key) {
+                // Set form object for event
+                _.forOwn(this.event, function (value, key) {
                     if (key === 'status') {
                         if (value === 'true') {
-                            dealershipForm.append('status', 1);
+                            eventForm.append('status', 1);
                         } else {
-                            dealershipForm.append('status', 0);
+                            eventForm.append('status', 0);
                         }
                     } else {
-                        dealershipForm.append(key, value);
+                        eventForm.append(key, value);
                     }
                 });
 
                 // Set form object for times
                 _.forOwn(this.times, function (value, key) {
-                    dealershipForm.append(key, value);
+                    eventForm.append(key, value);
                 });
 
                 // send form data to save
-                axios.post('/api/dealerships', dealershipForm).then(function (response) {
+                axios.post('/api/events', eventForm).then(function (response) {
                     if (response.data.success) {
                         _this2.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: _this2.themeOption.snackBarTimeout,
-                            message: _this2.dealership.name + "  " + _this2.trans.successfully_created
+                            message: _this2.event.name + "  " + _this2.trans.successfully_created
                         });
-                        _this2.$router.push({ name: 'listDealerships' });
+                        // this.$router.push({name: 'listEvents'})
                     }
                 });
             }
@@ -91180,7 +91165,7 @@ var render = function() {
                     _c(
                       "span",
                       { class: _vm.themeOption.textHeadingColor + "--text" },
-                      [_vm._v(_vm._s(_vm.trans.create_dealerships))]
+                      [_vm._v(_vm._s(_vm.trans.create + " " + _vm.trans.event))]
                     )
                   ]),
                   _vm._v(" "),
@@ -91203,7 +91188,7 @@ var render = function() {
       _c(
         "v-form",
         {
-          ref: "dealershipForm",
+          ref: "eventForm",
           attrs: { row: "", wrap: "", "lazy-validation": "" },
           model: {
             value: _vm.valid,
@@ -91237,16 +91222,57 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     attrs: {
-                                      rules: _vm.nameRules,
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v ||
+                                            _vm.trans.event +
+                                              " " +
+                                              _vm.trans.name +
+                                              " " +
+                                              _vm.trans.is_required
+                                          )
+                                        }
+                                      ],
                                       color: _vm.themeOption.inputColor,
-                                      label: _vm.trans.name_of_dealership
+                                      label:
+                                        _vm.trans.name +
+                                        " " +
+                                        _vm.trans.of +
+                                        " " +
+                                        _vm.trans.event
                                     },
                                     model: {
-                                      value: _vm.dealership.name,
+                                      value: _vm.event.name,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.dealership, "name", $$v)
+                                        _vm.$set(_vm.event, "name", $$v)
                                       },
-                                      expression: "dealership.name"
+                                      expression: "event.name"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      rules: _vm.nameRules,
+                                      color: _vm.themeOption.inputColor,
+                                      label:
+                                        _vm.trans.greeting +
+                                        " " +
+                                        _vm.trans.text
+                                    },
+                                    model: {
+                                      value: _vm.event.greeting,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.event, "greeting", $$v)
+                                      },
+                                      expression: "event.greeting"
                                     }
                                   })
                                 ],
@@ -91266,29 +91292,32 @@ var render = function() {
                                 [
                                   _c("v-select", {
                                     attrs: {
-                                      items: _vm.countries,
+                                      items: _vm.dealerships,
                                       "item-text": "name",
                                       "item-value": "id",
                                       rules: [
                                         function(v) {
                                           return (
-                                            !!v || _vm.trans.select_a_country
+                                            !!v ||
+                                            _vm.trans.dealership +
+                                              " " +
+                                              _vm.trans.is_required
                                           )
                                         }
                                       ],
                                       color: _vm.themeOption.inputColor,
-                                      label: _vm.trans.select_country
+                                      label: _vm.trans.dealership
                                     },
                                     model: {
-                                      value: _vm.dealership.country_id,
+                                      value: _vm.event.dealership_id,
                                       callback: function($$v) {
                                         _vm.$set(
-                                          _vm.dealership,
-                                          "country_id",
+                                          _vm.event,
+                                          "dealership_id",
                                           $$v
                                         )
                                       },
-                                      expression: "dealership.country_id"
+                                      expression: "event.dealership_id"
                                     }
                                   })
                                 ],
@@ -91301,14 +91330,16 @@ var render = function() {
                                 [
                                   _c("v-select", {
                                     attrs: {
-                                      items: _vm.groups,
+                                      items: _vm.types,
                                       "item-text": "name",
                                       "item-value": "id",
                                       rules: [
                                         function(v) {
                                           return (
                                             !!v ||
-                                            _vm.trans.groups_filed_required
+                                            _vm.trans.type +
+                                              " " +
+                                              _vm.trans.is_required
                                           )
                                         }
                                       ],
@@ -91316,15 +91347,11 @@ var render = function() {
                                       label: _vm.trans.select_groups
                                     },
                                     model: {
-                                      value: _vm.dealership.group_id,
+                                      value: _vm.event.type_id,
                                       callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.dealership,
-                                          "group_id",
-                                          $$v
-                                        )
+                                        _vm.$set(_vm.event, "type_id", $$v)
                                       },
-                                      expression: "dealership.group_id"
+                                      expression: "event.type_id"
                                     }
                                   })
                                 ],
@@ -91342,24 +91369,174 @@ var render = function() {
                                 "v-flex",
                                 { attrs: { xs12: "", sm6: "", "pa-2": "" } },
                                 [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      type: "number",
-                                      color: _vm.themeOption.inputColor,
-                                      label: _vm.trans.latitude
-                                    },
-                                    model: {
-                                      value: _vm.dealership.latitude,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.dealership,
-                                          "latitude",
-                                          $$v
-                                        )
+                                  _c(
+                                    "v-menu",
+                                    {
+                                      ref: "startEvent",
+                                      attrs: {
+                                        "close-on-content-click": false,
+                                        "nudge-right": 40,
+                                        "return-value": _vm.event.start,
+                                        lazy: "",
+                                        transition: "scale-transition",
+                                        "offset-y": "",
+                                        "full-width": "",
+                                        "min-width": "290px"
                                       },
-                                      expression: "dealership.latitude"
-                                    }
-                                  })
+                                      on: {
+                                        "update:returnValue": function($event) {
+                                          return _vm.$set(
+                                            _vm.event,
+                                            "start",
+                                            $event
+                                          )
+                                        },
+                                        "update:return-value": function(
+                                          $event
+                                        ) {
+                                          return _vm.$set(
+                                            _vm.event,
+                                            "start",
+                                            $event
+                                          )
+                                        }
+                                      },
+                                      scopedSlots: _vm._u([
+                                        {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            return [
+                                              _c(
+                                                "v-text-field",
+                                                _vm._g(
+                                                  {
+                                                    attrs: {
+                                                      rules: [
+                                                        function(v) {
+                                                          return (
+                                                            !!v ||
+                                                            _vm.trans.start +
+                                                              " " +
+                                                              _vm.trans.date +
+                                                              " " +
+                                                              _vm.trans
+                                                                .is_required
+                                                          )
+                                                        }
+                                                      ],
+                                                      required: "",
+                                                      color:
+                                                        _vm.themeOption
+                                                          .inputColor,
+                                                      label:
+                                                        _vm.trans.start +
+                                                        " " +
+                                                        _vm.trans.date,
+                                                      "prepend-icon": "event",
+                                                      readonly: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.event.start,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.event,
+                                                          "start",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression: "event.start"
+                                                    }
+                                                  },
+                                                  on
+                                                )
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ]),
+                                      model: {
+                                        value: _vm.startEvent,
+                                        callback: function($$v) {
+                                          _vm.startEvent = $$v
+                                        },
+                                        expression: "startEvent"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-date-picker",
+                                        {
+                                          attrs: {
+                                            color: _vm.themeOption.inputColor,
+                                            "no-title": "",
+                                            scrollable: ""
+                                          },
+                                          model: {
+                                            value: _vm.event.start,
+                                            callback: function($$v) {
+                                              _vm.$set(_vm.event, "start", $$v)
+                                            },
+                                            expression: "event.start"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonSecondaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.startEvent = false
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.cancel) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonPrimaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.startEvent.save(
+                                                    _vm.event.start
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.ok) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               ),
@@ -91368,22 +91545,194 @@ var render = function() {
                                 "v-flex",
                                 { attrs: { xs12: "", sm6: "", "pa-2": "" } },
                                 [
-                                  _c("v-text-field", {
+                                  _c(
+                                    "v-menu",
+                                    {
+                                      ref: "endEvent",
+                                      attrs: {
+                                        "close-on-content-click": false,
+                                        "nudge-right": 40,
+                                        "return-value": _vm.event.end,
+                                        lazy: "",
+                                        transition: "scale-transition",
+                                        "offset-y": "",
+                                        "full-width": "",
+                                        "min-width": "290px"
+                                      },
+                                      on: {
+                                        "update:returnValue": function($event) {
+                                          return _vm.$set(
+                                            _vm.event,
+                                            "end",
+                                            $event
+                                          )
+                                        },
+                                        "update:return-value": function(
+                                          $event
+                                        ) {
+                                          return _vm.$set(
+                                            _vm.event,
+                                            "end",
+                                            $event
+                                          )
+                                        }
+                                      },
+                                      scopedSlots: _vm._u([
+                                        {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            return [
+                                              _c(
+                                                "v-text-field",
+                                                _vm._g(
+                                                  {
+                                                    attrs: {
+                                                      rules: [
+                                                        function(v) {
+                                                          return (
+                                                            !!v ||
+                                                            _vm.trans.end +
+                                                              " " +
+                                                              _vm.trans.date +
+                                                              " " +
+                                                              _vm.trans
+                                                                .is_required
+                                                          )
+                                                        }
+                                                      ],
+                                                      required: "",
+                                                      color:
+                                                        _vm.themeOption
+                                                          .inputColor,
+                                                      label:
+                                                        _vm.trans.end +
+                                                        " " +
+                                                        _vm.trans.date,
+                                                      "prepend-icon": "event",
+                                                      readonly: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.event.end,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.event,
+                                                          "end",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression: "event.end"
+                                                    }
+                                                  },
+                                                  on
+                                                )
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ]),
+                                      model: {
+                                        value: _vm.endEvent,
+                                        callback: function($$v) {
+                                          _vm.endEvent = $$v
+                                        },
+                                        expression: "endEvent"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-date-picker",
+                                        {
+                                          attrs: {
+                                            color: _vm.themeOption.inputColor,
+                                            "no-title": "",
+                                            scrollable: ""
+                                          },
+                                          model: {
+                                            value: _vm.event.end,
+                                            callback: function($$v) {
+                                              _vm.$set(_vm.event, "end", $$v)
+                                            },
+                                            expression: "event.end"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonSecondaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.endEvent = false
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.cancel) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonPrimaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.endEvent.save(
+                                                    _vm.event.end
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.ok) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", "pa-2": "" } },
+                                [
+                                  _c("v-textarea", {
                                     attrs: {
-                                      type: "number",
                                       color: _vm.themeOption.inputColor,
-                                      label: _vm.trans.longitude
+                                      label: _vm.trans.notes,
+                                      hint: _vm.trans.notes
                                     },
                                     model: {
-                                      value: _vm.dealership.longitude,
+                                      value: _vm.event.notes,
                                       callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.dealership,
-                                          "longitude",
-                                          $$v
-                                        )
+                                        _vm.$set(_vm.event, "notes", $$v)
                                       },
-                                      expression: "dealership.longitude"
+                                      expression: "event.notes"
                                     }
                                   })
                                 ],
@@ -91400,385 +91749,13 @@ var render = function() {
                                       color: _vm.themeOption.inputColor
                                     },
                                     model: {
-                                      value: _vm.dealership.status,
+                                      value: _vm.event.status,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.dealership, "status", $$v)
+                                        _vm.$set(_vm.event, "status", $$v)
                                       },
-                                      expression: "dealership.status"
+                                      expression: "event.status"
                                     }
                                   })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-divider", { staticClass: "mt-2 mb-2" }),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { column: "", wrap: "" } },
-                            [
-                              _c(
-                                "v-tabs",
-                                {
-                                  attrs: {
-                                    color: _vm.themeOption.tabColor,
-                                    "slider-color":
-                                      _vm.themeOption.tabSliderColor
-                                  },
-                                  model: {
-                                    value: _vm.active,
-                                    callback: function($$v) {
-                                      _vm.active = $$v
-                                    },
-                                    expression: "active"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "v-tab",
-                                    { key: "address", attrs: { ripple: "" } },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(_vm.trans.address) +
-                                          "\n\n                                "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab",
-                                    {
-                                      key: "dealershipImage",
-                                      attrs: { ripple: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(_vm.trans.dealership_banner) +
-                                          "\n\n                                "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab",
-                                    { key: "times", attrs: { ripple: "" } },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(_vm.trans.opening_times) +
-                                          "\n\n                                "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab-item",
-                                    { key: "address" },
-                                    [
-                                      _c(
-                                        "v-layout",
-                                        {
-                                          attrs: {
-                                            row: "",
-                                            wrap: "",
-                                            "pt-3": ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-flex",
-                                            {
-                                              attrs: {
-                                                xs12: "",
-                                                sm6: "",
-                                                "pa-2": ""
-                                              }
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  color:
-                                                    _vm.themeOption.inputColor,
-                                                  rules: [
-                                                    function(v) {
-                                                      return (
-                                                        !!v ||
-                                                        _vm.trans
-                                                          .address_is_required
-                                                      )
-                                                    }
-                                                  ],
-                                                  label:
-                                                    _vm.trans.address_line_1
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.dealership
-                                                      .address_line_1,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.dealership,
-                                                      "address_line_1",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "dealership.address_line_1"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            {
-                                              attrs: {
-                                                xs12: "",
-                                                sm6: "",
-                                                "pa-2": ""
-                                              }
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  color:
-                                                    _vm.themeOption.inputColor,
-                                                  label:
-                                                    _vm.trans.address_line_2
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.dealership
-                                                      .address_line_2,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.dealership,
-                                                      "address_line_2",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "dealership.address_line_2"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-layout",
-                                        {
-                                          attrs: {
-                                            row: "",
-                                            wrap: "",
-                                            "pt-3": ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-flex",
-                                            {
-                                              attrs: {
-                                                xs12: "",
-                                                sm6: "",
-                                                "pa-2": ""
-                                              }
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  color:
-                                                    _vm.themeOption.inputColor,
-                                                  label:
-                                                    _vm.trans.address_line_3
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.dealership
-                                                      .address_line_3,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.dealership,
-                                                      "address_line_3",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "dealership.address_line_3"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            {
-                                              attrs: {
-                                                xs12: "",
-                                                sm6: "",
-                                                "pa-2": ""
-                                              }
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  color:
-                                                    _vm.themeOption.inputColor,
-                                                  label:
-                                                    _vm.trans.address_line_4
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.dealership
-                                                      .address_line_4,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.dealership,
-                                                      "address_line_4",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "dealership.address_line_4"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-layout",
-                                        { attrs: { row: "", wrap: "" } },
-                                        [
-                                          _c(
-                                            "v-flex",
-                                            {
-                                              attrs: {
-                                                xs12: "",
-                                                sm6: "",
-                                                "pa-2": ""
-                                              }
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  color:
-                                                    _vm.themeOption.inputColor,
-                                                  label:
-                                                    _vm.trans.address_line_5
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.dealership
-                                                      .address_line_5,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.dealership,
-                                                      "address_line_5",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "dealership.address_line_5"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            {
-                                              attrs: {
-                                                xs12: "",
-                                                sm6: "",
-                                                "pa-2": ""
-                                              }
-                                            },
-                                            [
-                                              _c("v-text-field", {
-                                                attrs: {
-                                                  color:
-                                                    _vm.themeOption.inputColor,
-                                                  label:
-                                                    _vm.trans.address_line_6
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.dealership
-                                                      .address_line_6,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.dealership,
-                                                      "address_line_6",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "dealership.address_line_6"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab-item",
-                                    { key: "dealershipImage" },
-                                    [
-                                      _c(
-                                        "v-layout",
-                                        {
-                                          attrs: {
-                                            row: "",
-                                            wrap: "",
-                                            "pt-3": ""
-                                          }
-                                        },
-                                        [
-                                          _c("ImageUpload", {
-                                            attrs: {
-                                              preview: true,
-                                              model: "dealership"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab-item",
-                                    { key: "times" },
-                                    [
-                                      _c("TimePicker", {
-                                        attrs: { dealership: _vm.times },
-                                        on: { sendTimes: _vm.updateTimes }
-                                      })
-                                    ],
-                                    1
-                                  )
                                 ],
                                 1
                               )
@@ -91804,14 +91781,16 @@ var render = function() {
                               attrs: { small: "" },
                               on: {
                                 click: function($event) {
-                                  return _vm.onCreateDealership()
+                                  return _vm.onCreateEvent()
                                 }
                               }
                             },
                             [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(_vm.trans.create_dealerships) +
+                                  _vm._s(
+                                    _vm.trans.create + " " + _vm.trans.event
+                                  ) +
                                   "\n                        "
                               )
                             ]
@@ -92872,10 +92851,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    created: function created() {},
+    created: function created() {
+        this.initialize();
+    },
 
 
-    methods: {}
+    methods: {
+        initialize: function initialize() {
+            this.$store.dispatch('fetchDealershipsForDropdown');
+            this.$store.dispatch('fetchTypesForDropdown');
+        }
+    }
 });
 
 /***/ }),
@@ -94700,7 +94686,7 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_brand__ = __webpack_require__(554);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_vehicle__ = __webpack_require__(555);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_region__ = __webpack_require__(556);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modules_type__ = __webpack_require__(569);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modules_eventType__ = __webpack_require__(570);
 
 
 
@@ -94750,7 +94736,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
         Brand: __WEBPACK_IMPORTED_MODULE_12__modules_brand__["a" /* default */],
         Vehicle: __WEBPACK_IMPORTED_MODULE_13__modules_vehicle__["a" /* default */],
         Region: __WEBPACK_IMPORTED_MODULE_14__modules_region__["a" /* default */],
-        Type: __WEBPACK_IMPORTED_MODULE_15__modules_type__["a" /* default */]
+        Type: __WEBPACK_IMPORTED_MODULE_15__modules_eventType__["a" /* default */]
     }
 });
 
@@ -95018,6 +95004,11 @@ var mutations = {
                 icon: 'history',
                 text: trans.list_of + ' ' + trans.events,
                 link: 'listEvents',
+                access: ''
+            }, {
+                icon: 'history',
+                text: trans.create + ' ' + trans.event,
+                link: 'createEvents',
                 access: ''
             }, {
                 icon: 'history',
@@ -97262,7 +97253,8 @@ if (false) {
 }
 
 /***/ }),
-/* 569 */
+/* 569 */,
+/* 570 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -97385,6 +97377,26 @@ var actions = {
         axios.get(URL).then(function (response) {
             if (response.data.type) {
                 commit('setSelectedType', response.data.type);
+            }
+        });
+    },
+
+
+    /**
+     * Get all active event type
+     * @param commit
+     * @param payload
+     */
+    fetchTypesForDropdown: function fetchTypesForDropdown(_ref3) {
+        var commit = _ref3.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        var URL = '/api/events/types/dropdown';
+
+        axios.get(URL).then(function (response) {
+            if (response.data.types) {
+                commit('setTypes', response.data.types);
+                commit('setTotalType', response.data.total);
             }
         });
     }

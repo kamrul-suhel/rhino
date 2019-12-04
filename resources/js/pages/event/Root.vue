@@ -11,10 +11,14 @@
         },
 
         created() {
+            this.initialize()
         },
 
         methods: {
-
+            initialize(){
+                this.$store.dispatch('fetchDealershipsForDropdown')
+                this.$store.dispatch('fetchTypesForDropdown')
+            }
         }
     }
 </script>
