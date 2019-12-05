@@ -153,4 +153,10 @@ return [
         'translation' => 'Logo'
     ],
 
+    [
+        'label' => 'Are you interested in a new or used model?',
+        'identifier' => 'interested_title_new_used_model',
+        'translation' => 'Are you interested in a new or used model?'
+    ],
+
 ];
