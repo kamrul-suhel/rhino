@@ -4,7 +4,8 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.create_dealerships }}</span>
+                        <span
+                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.event}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -19,7 +20,7 @@
 
         <v-form
             row wrap
-            ref="dealershipForm"
+            ref="eventForm"
             v-model="valid"
             lazy-validation>
             <v-layout>
@@ -29,10 +30,19 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
+                                        :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.name} ${trans.of} ${trans.event}`"
+                                        v-model="event.name"
+                                    ></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 pa-2>
+                                    <v-text-field
                                         :rules="nameRules"
                                         :color="themeOption.inputColor"
-                                        :label="trans.name_of_dealership"
-                                        v-model="dealership.name"
+                                        :label="`${trans.greeting} ${trans.text}`"
+                                        v-model="event.greeting"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -40,26 +50,26 @@
                             <v-layout row wrap>
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
-                                        :items="countries"
+                                        :items="dealerships"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.select_a_country]"
+                                        :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_country"
-                                        v-model="dealership.country_id"
+                                        :label="trans.dealership"
+                                        v-model="event.dealership_id"
                                     >
                                     </v-select>
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
-                                        :items="groups"
+                                        :items="types"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.groups_filed_required]"
+                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_groups"
-                                        v-model="dealership.group_id"
+                                        v-model="event.type_id"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -67,145 +77,103 @@
 
                             <v-layout row wrap>
                                 <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        type="number"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.latitude"
-                                        v-model="dealership.latitude">
-                                    </v-text-field>
+                                    <v-menu
+                                        ref="startEvent"
+                                        v-model="startEvent"
+                                        :close-on-content-click="false"
+                                        :nudge-right="40"
+                                        :return-value.sync="event.start"
+                                        lazy
+                                        transition="scale-transition"
+                                        offset-y
+                                        full-width
+                                        min-width="290px"
+                                    >
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field
+                                                :rules="[v => !!v || `${trans.start} ${trans.date} ${trans.is_required}`]"
+                                                required
+                                                v-model="event.start"
+                                                :color="themeOption.inputColor"
+                                                :label="`${trans.start} ${trans.date}`"
+                                                prepend-icon="event"
+                                                readonly
+                                                v-on="on"
+                                            ></v-text-field>
+                                        </template>
+                                        <v-date-picker
+                                            :color="themeOption.inputColor"
+                                            v-model="event.start" no-title scrollable>
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn flat :color="themeOption.buttonSecondaryColor"
+                                                   @click="startEvent = false">{{ trans.cancel }}
+                                            </v-btn>
+
+                                            <v-btn flat :color="themeOption.buttonPrimaryColor"
+                                                   @click="$refs.startEvent.save(event.start)">{{ trans.ok }}
+                                            </v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        type="number"
+                                    <v-menu
+                                        ref="endEvent"
+                                        v-model="endEvent"
+                                        :close-on-content-click="false"
+                                        :nudge-right="40"
+                                        :return-value.sync="event.end"
+                                        lazy
+                                        transition="scale-transition"
+                                        offset-y
+                                        full-width
+                                        min-width="290px"
+                                    >
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field
+                                                :rules="[v => !!v || `${trans.end} ${trans.date} ${trans.is_required}`]"
+                                                required
+                                                v-model="event.end"
+                                                :color="themeOption.inputColor"
+                                                :label="`${trans.end} ${trans.date}`"
+                                                prepend-icon="event"
+                                                readonly
+                                                v-on="on"
+                                            ></v-text-field>
+                                        </template>
+                                        <v-date-picker
+                                            :color="themeOption.inputColor"
+                                            v-model="event.end" no-title scrollable>
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn flat :color="themeOption.buttonSecondaryColor"
+                                                   @click="endEvent = false">{{ trans.cancel }}
+                                            </v-btn>
+
+                                            <v-btn flat :color="themeOption.buttonPrimaryColor"
+                                                   @click="$refs.endEvent.save(event.end)">{{ trans.ok }}
+                                            </v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-flex>
+
+                                <v-flex xs12 pa-2>
+                                    <v-textarea
                                         :color="themeOption.inputColor"
-                                        v-model="dealership.longitude"
-                                        :label="trans.longitude">
-                                    </v-text-field>
+                                        :label="trans.notes"
+                                        v-model="event.notes"
+                                        :hint="trans.notes"
+                                    ></v-textarea>
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch
                                         :label="trans.status"
                                         :color="themeOption.inputColor"
-                                        v-model="dealership.status">
+                                        v-model="event.status">
                                     </v-switch>
                                 </v-flex>
-                            </v-layout>
-
-                            <v-divider class="mt-2 mb-2"></v-divider>
-
-                            <v-layout column wrap>
-                                <v-tabs
-                                    v-model="active"
-                                    :color="themeOption.tabColor"
-                                    :slider-color="themeOption.tabSliderColor"
-                                >
-                                    <v-tab
-                                        key="address"
-                                        ripple
-                                    >
-                                        {{ trans.address}}
-
-                                    </v-tab>
-
-                                    <v-tab
-                                        key="dealershipImage"
-                                        ripple
-                                    >
-                                        {{ trans.dealership_banner}}
-
-                                    </v-tab>
-
-                                    <v-tab
-                                        key="times"
-                                        ripple
-                                    >
-                                        {{ trans.opening_times}}
-
-                                    </v-tab>
-
-                                    <v-tab-item
-                                        key="address"
-                                    >
-                                        <v-layout row wrap pt-3>
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :rules="[v => !!v || trans.address_is_required]"
-                                                    :label="trans.address_line_1"
-                                                    v-model="dealership.address_line_1">
-                                                </v-text-field>
-                                            </v-flex>
-
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="trans.address_line_2"
-                                                    v-model="dealership.address_line_2"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-                                        </v-layout>
-
-                                        <v-layout row wrap pt-3>
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="trans.address_line_3"
-                                                    v-model="dealership.address_line_3"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="trans.address_line_4"
-                                                    v-model="dealership.address_line_4"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-                                        </v-layout>
-
-                                        <v-layout row wrap>
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="trans.address_line_5"
-                                                    v-model="dealership.address_line_5"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="trans.address_line_6"
-                                                    v-model="dealership.address_line_6"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-                                        </v-layout>
-                                    </v-tab-item>
-
-                                    <v-tab-item
-                                        key="dealershipImage"
-                                    >
-                                        <v-layout row wrap pt-3>
-                                            <ImageUpload :preview="true"
-                                                         model="dealership"
-                                            ></ImageUpload>
-                                        </v-layout>
-                                    </v-tab-item>
-
-                                    <v-tab-item
-                                        key="times">
-                                        <TimePicker :dealership="times"
-                                                    v-on:sendTimes="updateTimes">
-                                        </TimePicker>
-                                    </v-tab-item>
-                                </v-tabs>
                             </v-layout>
                         </v-card-text>
 
@@ -213,13 +181,19 @@
 
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
-                            <v-btn
-                                :class="themeOption.buttonSuccess"
-                                small
-                                @click="onCreateDealership()"
-                            >
-                                {{ trans.create_dealerships }}
-                            </v-btn>
+
+                            <r-button :text="`${trans.back}`"
+                                      small
+                                      :loadingBar="false"
+                                      @click="onBackToEventList"
+                                      :color="themeOption.buttonSecondaryColor"/>
+
+                            <r-button :text="`${trans.create} ${trans.event}`"
+                                      small
+                                      :loadingBar="true"
+                                      @click="onCreateEvent"
+                                      :color="themeOption.buttonPrimaryColor"/>
+
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -232,7 +206,6 @@
     import {mapGetters} from 'vuex'
     import TimePicker from "../../components/TimePicker";
     import ImageUpload from "../../components/ImageUpload";
-    import dealership from "../../store/modules/dealership";
 
     export default {
         components: {
@@ -242,8 +215,10 @@
 
         data() {
             return {
+                startEvent: false,
+                endEvent: false,
                 valid: true,
-                dealership: {},
+                event: {},
                 times: {},
                 active: null,
                 model: null,
@@ -257,16 +232,13 @@
         computed: ({
             ...mapGetters({
                 trans: 'getFields',
-                countries: 'getCountries',
-                selectedCountry: 'getSelectedCountry',
                 themeOption: 'getThemeOption',
-                regions: 'getRegions',
-                groups: 'getGroups'
+                types: 'getTypes',
+                dealerships: 'getDealerships'
             })
         }),
 
-        watch: {
-        },
+        watch: {},
 
         created() {
             this.initialize()
@@ -278,44 +250,47 @@
                 this.$store.dispatch('fetchGroups', {dropDown: true})
             },
 
-            updateTimes(times) {
-                console.log('time is: ', times);
-            },
+            onCreateEvent() {
+                if (this.$refs.eventForm.validate()) {
+                    let eventForm = new FormData()
 
-            onCreateDealership(){
-                if(this.$refs.dealershipForm.validate()){
-                    let dealershipForm = new FormData()
-
-                    // Set form object for dealership
-                    _.forOwn(this.dealership, (value, key)=>{
-                        if(key === 'status'){
-                            if(value === 'true'){
-                                dealershipForm.append('status', 1)
-                            }else{
-                                dealershipForm.append('status', 0)
+                    // Set form object for event
+                    _.forOwn(this.event, (value, key) => {
+                        if (key === 'status') {
+                            if (value === 'true') {
+                                eventForm.append('status', 1)
+                            } else {
+                                eventForm.append('status', 0)
                             }
-                        }else{
-                            dealershipForm.append(key, value)
+                        } else {
+                            eventForm.append(key, value)
                         }
                     })
 
                     // Set form object for times
-                    _.forOwn(this.times, (value, key)=>{
-                        dealershipForm.append(key, value)
+                    _.forOwn(this.times, (value, key) => {
+                        eventForm.append(key, value)
                     })
 
                     // send form data to save
-                    axios.post('/api/dealerships', dealershipForm).then((response)=>{
-                        if(response.data.success){
+                    axios.post('/api/events', eventForm).then((response) => {
+                        if (response.data.success) {
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.dealership.name}  ${this.trans.successfully_created}`
+                                message: `${this.event.name}  ${this.trans.successfully_created}`
                             })
-                            this.$router.push({name: 'listDealerships'})
+                            this.$store.commit('setButtonLoading', false)
+                            this.$router.push({name: 'listEvents'})
                         }
                     })
+                }else{
+                    this.$store.commit('setButtonLoading', false)
                 }
+            },
+
+            onBackToEventList(){
+                this.$store.commit('setButtonLoading', false)
             }
         }
     }

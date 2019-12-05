@@ -45,4 +45,20 @@ export default {
             // Generate error message
         })
     },
+
+    /**
+     * Generate dealership dropdown
+     * @param commit
+     * @param payload
+     */
+    fetchDealershipsForDropdown({commit}, payload = {}) {
+        console.log('fetch dealership')
+        const URL = '/api/dealerships/dropdown'
+        axios.get(URL).then((response) => {
+            if (response.data.dealership) {
+                commit('setDealerships', response.data.dealership)
+                commit('setTotalDealership', response.data.total)
+            }
+        });
+    },
 }

@@ -138,6 +138,13 @@ const mutations = {
 
                     {
                         icon: 'history',
+                        text: `${trans.create} ${trans.event}`,
+                        link: 'createEvents',
+                        access: ''
+                    },
+
+                    {
+                        icon: 'history',
                         text: `${trans.types}`,
                         link: 'listEventTypes',
                         access: ''

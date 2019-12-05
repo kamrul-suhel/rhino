@@ -17,6 +17,9 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('dealership_id')->index();
             $table->unsignedBigInteger('type_id')->index();
+            $table->date('start');
+            $table->date('end');
+            $table->tinyInteger('status')->index()->default(1);
             $table->timestamps();
         });
     }

@@ -7,8 +7,6 @@ export default {
         return state.listHeader
     },
 
-
-
     getDealershipLoading(state){
         return state.loading
     },
