@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <h2>Frontend area</h2>
+        <h2>Frontend </h2>
     </v-layout>
 </template>
 
