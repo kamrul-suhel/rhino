@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers\Event;
+
+use App\Event;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class EventListController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $events = Event::select(
+            ''
+        )->leftJoin('events_translation', function($eventT){
+            $eventT->on('events_translation.event_id', '=', 'events.id');
+            $eventT->where('events_translation.language_id', $this->languageId);
+        })->get();
+    }
+}

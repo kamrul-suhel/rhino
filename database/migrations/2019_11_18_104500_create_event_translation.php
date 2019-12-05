@@ -20,6 +20,7 @@ class CreateEventTranslation extends Migration
             $table->string('name')->nullable()->index();
             $table->longText('notes')->nullable();
             $table->string('greeting')->nullable();
+            $table->timestamps();
         });
     }
 

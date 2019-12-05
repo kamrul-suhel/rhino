@@ -31,6 +31,15 @@ import Vuex from 'vuex';
 
 
 /**
+ * Import Global component
+ */
+
+import * as Global from './components/index'
+
+Vue.component('r-button', Global.default.Button)
+Vue.component('r-language', Global.default.Langauge)
+
+/**
  * Import plugins
  */
 import ImageUploader from 'vue-image-upload-resize'
@@ -41,6 +50,7 @@ import i18n from './plugins/i18n/index'
  */
 
 import router from './router'
+
 Vue.use(Vuetify);
 Vue.use(Vuex);
 Vue.use(ImageUploader)
@@ -68,12 +78,12 @@ new Vue({
     },
     template: '<App/>',
 
-    created(){
+    created() {
         this.initSetting();
     },
 
     methods: {
-        initSetting(){
+        initSetting() {
             // Setup translation fields
             this.$store.dispatch('getAllSettingFields');
 

@@ -10,15 +10,7 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -82,7 +74,7 @@ class EventController extends Controller
         $request->has('end') ? $event->end = $request->end : null;
         $request->has('status') ? $event->status = $request->status : null;
 
-        $request->save();
+        $event->save();
 
         // Create or update Event translation
         if($id){

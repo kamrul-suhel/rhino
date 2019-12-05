@@ -4,7 +4,8 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.event}` }}</span>
+                        <span
+                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.event}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -180,13 +181,19 @@
 
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
-                            <v-btn
-                                :class="themeOption.buttonSuccess"
-                                small
-                                @click="onCreateEvent()"
-                            >
-                                {{ `${trans.create} ${trans.event}` }}
-                            </v-btn>
+
+                            <r-button :text="`${trans.back}`"
+                                      small
+                                      :loadingBar="false"
+                                      @click="onBackToEventList"
+                                      :color="themeOption.buttonSecondaryColor"/>
+
+                            <r-button :text="`${trans.create} ${trans.event}`"
+                                      small
+                                      :loadingBar="true"
+                                      @click="onCreateEvent"
+                                      :color="themeOption.buttonPrimaryColor"/>
+
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -231,8 +238,7 @@
             })
         }),
 
-        watch: {
-        },
+        watch: {},
 
         created() {
             this.initialize()
@@ -244,44 +250,47 @@
                 this.$store.dispatch('fetchGroups', {dropDown: true})
             },
 
-            updateTimes(times) {
-                console.log('time is: ', times);
-            },
-
-            onCreateEvent(){
-                if(this.$refs.eventForm.validate()){
+            onCreateEvent() {
+                if (this.$refs.eventForm.validate()) {
                     let eventForm = new FormData()
 
                     // Set form object for event
-                    _.forOwn(this.event, (value, key)=>{
-                        if(key === 'status'){
-                            if(value === 'true'){
+                    _.forOwn(this.event, (value, key) => {
+                        if (key === 'status') {
+                            if (value === 'true') {
                                 eventForm.append('status', 1)
-                            }else{
+                            } else {
                                 eventForm.append('status', 0)
                             }
-                        }else{
+                        } else {
                             eventForm.append(key, value)
                         }
                     })
 
                     // Set form object for times
-                    _.forOwn(this.times, (value, key)=>{
+                    _.forOwn(this.times, (value, key) => {
                         eventForm.append(key, value)
                     })
 
                     // send form data to save
-                    axios.post('/api/events', eventForm).then((response)=>{
-                        if(response.data.success){
+                    axios.post('/api/events', eventForm).then((response) => {
+                        if (response.data.success) {
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.event.name}  ${this.trans.successfully_created}`
                             })
-                            // this.$router.push({name: 'listEvents'})
+                            this.$store.commit('setButtonLoading', false)
+                            this.$router.push({name: 'listEvents'})
                         }
                     })
+                }else{
+                    this.$store.commit('setButtonLoading', false)
                 }
+            },
+
+            onBackToEventList(){
+                this.$store.commit('setButtonLoading', false)
             }
         }
     }

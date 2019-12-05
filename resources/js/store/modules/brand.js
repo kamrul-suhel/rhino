@@ -1,21 +1,21 @@
 import fn from '../../utils/function'
 
 const defaultState = {
-    brands : [],
+    brands: [],
     selectedBrand: {},
-    listHeader:[],
+    listHeader: [],
     loading: 'white',
     totalBrands: 0,
-    brandListRowPerPage: [15,25,40],
+    brandListRowPerPage: [15, 25, 40],
 
     // For dropdown
     brandsDropDown: [],
 
     // Regions variable
-    regions:[],
+    regions: [],
     totalRegions: 0,
-    brandRegionHeader:[],
-    selectedBrandRegion:{}
+    brandRegionHeader: [],
+    selectedBrandRegion: {}
 }
 
 const state = {
@@ -23,43 +23,43 @@ const state = {
 }
 
 const mutations = {
-    setBrands(state, brands){
+    setBrands(state, brands) {
         state.brands = [...brands]
     },
 
-    setBrandsForDropDown(state, brands){
+    setBrandsForDropDown(state, brands) {
         state.brandsDropDown = [...brands]
     },
 
-    setSelectedBrandRegion(state, selectedRegion){
+    setSelectedBrandRegion(state, selectedRegion) {
         state.selectedBrandRegion = selectedRegion
     },
 
-    setRegionsByBrandId(state, regions){
+    setRegionsByBrandId(state, regions) {
         state.regions = [...regions]
     },
 
-    setTotalRegionByBrandId(state, totalRegion){
+    setTotalRegionByBrandId(state, totalRegion) {
         state.totalRegions = totalRegion
     },
 
-    setBrandLoading(state, status){
+    setBrandLoading(state, status) {
         state.loading = status
     },
 
-    setSelectedBrand(state, brand){
+    setSelectedBrand(state, brand) {
         state.selectedBrand = {...brand}
     },
 
-    setTotalBrands(state, totalBrand){
+    setTotalBrands(state, totalBrand) {
         state.totalBrands = totalBrand
     },
 
-    resetBrandStore(state){
+    resetBrandStore(state) {
         state = {...defaultState}
     },
 
-    setBrandListHeader(state, trans){
+    setBrandListHeader(state, trans) {
         const header = [
             {
                 text: trans.name,
@@ -83,14 +83,14 @@ const mutations = {
             {
                 text: trans.actions,
                 value: 'actions',
-                align:'right'
+                align: 'right'
             }
         ]
 
         state.listHeader = [...header]
     },
 
-    setBrandRegionsListHeader(state, trans){
+    setBrandRegionsListHeader(state, trans) {
         const header = [
             {
                 text: trans.name,
@@ -116,47 +116,47 @@ const mutations = {
 }
 
 const getters = {
-    getBrands(state){
+    getBrands(state) {
         return state.brands
     },
 
-    getBrandsForDropDown(state){
+    getBrandsForDropDown(state) {
         return state.brandsDropDown
     },
 
-    getBrandListHeader(state){
+    getBrandListHeader(state) {
         return state.listHeader
     },
 
-    getSelectedBrandRegion(state){
+    getSelectedBrandRegion(state) {
         return state.selectedBrandRegion
     },
 
-    getBrandRegionListHeader(state){
-      return state.brandRegionHeader
+    getBrandRegionListHeader(state) {
+        return state.brandRegionHeader
     },
 
-    getBrandLoading(state){
+    getBrandLoading(state) {
         return state.loading
     },
 
-    getBrandListRowsPerPage(state){
+    getBrandListRowsPerPage(state) {
         return state.brandListRowPerPage
     },
 
-    getSelectedBrand(state){
+    getSelectedBrand(state) {
         return state.selectedBrand
     },
 
-    getTotalBrands(state){
+    getTotalBrands(state) {
         return state.totalBrands
     },
 
-    getRegionByBrandId(state){
+    getRegionByBrandId(state) {
         return state.regions
     },
 
-    getTotalRegionByBrandId(state){
+    getTotalRegionByBrandId(state) {
         return state.totalRegions
     }
 
@@ -197,18 +197,18 @@ const actions = {
      * Get Selected company
      * @param id // required
      */
-    fetchBrand({commit, dispatch}, payload){
-        const URL = `/api/brands/${payload.id}/show`+ fn.generateParams(payload)
+    fetchBrand({commit, dispatch}, payload) {
+        const URL = `/api/brands/${payload.id}/show` + fn.generateParams(payload)
         axios.get(URL).then((response) => {
-            if(response.data){
+            if (response.data) {
                 commit('setSelectedBrand', response.data.brand)
             }
-        }).catch((error)=>{
+        }).catch((error) => {
             // Generate error message
         })
     },
 
-    fetchRegionByBranId({commit}, payload={}){
+    fetchRegionByBranId({commit}, payload = {}) {
         // Set loading is true
         commit('setBrandLoading', payload.themeOption.loadingColor)
 
@@ -216,8 +216,8 @@ const actions = {
         const params = fn.generateParams(payload)
 
         const URL = `/api/brands/${payload.id}/regions${params}`
-        axios.get(URL).then((response)=>{
-            if(response.data.regions){
+        axios.get(URL).then((response) => {
+            if (response.data.regions) {
                 commit('setRegionsByBrandId', response.data.regions)
                 commit('setTotalRegionByBrandId', response.data.total)
                 commit('setBrandLoading', false)
@@ -225,15 +225,15 @@ const actions = {
         })
     },
 
-    fetchBrandForDropDown({commit}, payload = {}){
+    fetchBrandForDropDown({commit}, payload = {}) {
         const URL = `/api/brands/dropdown${fn.generateParams(payload)}`
 
-        axios.get(URL).then((response)=>{
-            if(response.data){
+        axios.get(URL).then((response) => {
+            if (response.data) {
                 commit('setBrandsForDropDown', response.data)
             }
         })
-            .catch((error)=>{
+            .catch((error) => {
 
             })
     }

@@ -15,6 +15,7 @@ import Brand from "./modules/brand"
 import Vehicle from "./modules/vehicle"
 import Region from "./modules/region"
 import Type from "./modules/eventType"
+import Button from "./modules/button"
 
 
 Vue.use(Vuex)
@@ -40,6 +41,7 @@ const store = new Vuex.Store({
 
     modules: {
         SnackBar,
+        Button,
         settings,
         user,
         navigation,
