@@ -82007,19 +82007,301 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            drawer: true,
+            tile: false,
+            e1: 1,
+            e6: 1,
+            languagesTemp: [{ text: 'EN' }, { text: 'DE' }],
+            cars: [null, null, null, null, null, null, null, null],
+            agents: [null, null, null, null, null, null, null, null]
+        };
     },
     created: function created() {},
 
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        languages: 'getLanguages'
+    })),
 
     methods: {}
 });
@@ -82032,7 +82314,460 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-layout", [_c("h2", [_vm._v("Frontend ")])])
+  return _c(
+    "div",
+    [
+       false
+        ? _c(
+            "v-navigation-drawer",
+            {
+              staticClass: "navigation-drawer",
+              attrs: {
+                permanent: "",
+                width: _vm.themeOption.drawerWidthF,
+                fixed: ""
+              },
+              model: {
+                value: _vm.drawer,
+                callback: function($$v) {
+                  _vm.drawer = $$v
+                },
+                expression: "drawer"
+              }
+            },
+            [
+              _c(
+                "v-layout",
+                { attrs: { "align-center": "", "justify-center": "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { "mt-5": "", "mb-3": "", "mx-8": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", "justify-center": "" } },
+                        [
+                          _c(
+                            "v-avatar",
+                            {
+                              attrs: {
+                                tile: _vm.tile,
+                                size: _vm.themeOption.companyIconSizeF,
+                                color: "grey lighten-4"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "https://vuetifyjs.com/apple-touch-icon-180x180.png",
+                                  alt: "avatar"
+                                }
+                              })
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass: "language-select stroke-dropdown",
+                      attrs: { "mr-3": "", "ml-12": "" }
+                    },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.languagesTemp,
+                          "menu-props": "auto",
+                          label: "EN",
+                          "hide-details": "",
+                          "prepend-icon": "map",
+                          "append-icon": "expand_more"
+                        },
+                        model: {
+                          value: _vm.e1,
+                          callback: function($$v) {
+                            _vm.e1 = $$v
+                          },
+                          expression: "e1"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                { attrs: { column: "" } },
+                [
+                  _c("v-flex", { attrs: { "mx-5": "" } }, [
+                    _c(
+                      "h1",
+                      {
+                        staticClass: "font-weight-black event-title",
+                        style: { color: _vm.themeOption.secondaryColor }
+                      },
+                      [_vm._v("Vauxhall Platinum Event")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-flex", { attrs: { "my-3": "", "mx-5": "" } }, [
+                    _c(
+                      "h4",
+                      {
+                        style: { color: _vm.themeOption.brandColor },
+                        attrs: { "mt-4": "" }
+                      },
+                      [_vm._v("XX.XX.XX - XX.XX.XX")]
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-stepper",
+                {
+                  staticClass: "vertical-stepper mt-4 font-weight-bold",
+                  attrs: { vertical: "" }
+                },
+                [
+                  _c("v-stepper-step", { attrs: { step: "1" } }, [
+                    _vm._v("Select an app")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-stepper-step",
+                    {
+                      staticClass: "font-weight-bold",
+                      attrs: { complete: _vm.e6 > 2, step: "2" }
+                    },
+                    [_vm._v("Configure analytics for this app")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-stepper-step",
+                    {
+                      staticClass: "font-weight-bold",
+                      attrs: { complete: _vm.e6 > 3, step: "3" }
+                    },
+                    [_vm._v("Select an ad format and name ad unit")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-stepper-step",
+                    { staticClass: "font-weight-bold", attrs: { step: "4" } },
+                    [_vm._v("View setup instructions")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-stepper-step",
+                    { staticClass: "font-weight-bold", attrs: { step: "4" } },
+                    [_vm._v("View setup instructions")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+       false
+        ? _c(
+            "v-layout",
+            { attrs: { column: "" } },
+            [
+              _c(
+                "v-flex",
+                [
+                  _c(
+                    "v-parallax",
+                    {
+                      attrs: {
+                        src:
+                          "https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG",
+                        alt: "",
+                        height: "240"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-flex",
+                        {
+                          staticClass: "text-center",
+                          attrs: {
+                            align: "center",
+                            justify: "center",
+                            cols: "12"
+                          }
+                        },
+                        [
+                          _c(
+                            "h1",
+                            {
+                              staticClass:
+                                "display-1 font-weight-thin text-lg-right"
+                            },
+                            [_vm._v(_vm._s(_vm.trans.greeting_f))]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                [
+                  _c("h5", { staticClass: "headline mt-5 text-lg-center" }, [
+                    _vm._v(_vm._s(_vm.trans.greeting_f))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { align: "center", justify: "center" } },
+                    [
+                      _c(
+                        "v-layout",
+                        {
+                          attrs: {
+                            row: "",
+                            sm4: "",
+                            "mt-4": "",
+                            "justify-center": ""
+                          }
+                        },
+                        [
+                          _c("v-flex", { staticClass: "grow-0" }, [
+                            _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass:
+                                      "border-medium height-50 rounded-25 light-grey",
+                                    attrs: { depressed: "" }
+                                  },
+                                  [_vm._v("New")]
+                                )
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("v-flex", { staticClass: "grow-0" }, [
+                            _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass:
+                                      "border-medium height-50 rounded-25 light-grey",
+                                    attrs: { depressed: "" }
+                                  },
+                                  [_vm._v("Used")]
+                                )
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("v-flex", { staticClass: "grow-0" }, [
+                            _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass:
+                                      "border-medium height-50 rounded-25 light-grey",
+                                    attrs: { depressed: "" }
+                                  },
+                                  [_vm._v("Unsure")]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                _vm._l(_vm.cars, function(car) {
+                  return _c(
+                    "v-flex",
+                    { key: _vm.trans.cars, attrs: { xs3: "", "pa-5": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { column: "" } },
+                        [
+                          _c("v-flex", [
+                            _c("img", {
+                              staticStyle: { width: "100%" },
+                              attrs: {
+                                src:
+                                  "https://www.enterprise.co.uk/content/dam/global-vehicle-images/cars/OPEL_INSI_2014.png",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "h6",
+                              {
+                                staticClass:
+                                  "title mt-2 font-weight-light text-md-center"
+                              },
+                              [_vm._v("Corsa")]
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { align: "center", justify: "center" } },
+                    [
+                      _c(
+                        "v-layout",
+                        {
+                          attrs: {
+                            row: "",
+                            sm4: "",
+                            "my-5": "",
+                            "justify-center": ""
+                          }
+                        },
+                        [
+                          _c("v-flex", { staticClass: "grow-0" }, [
+                            _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass:
+                                      "border-medium height-50 rounded-25 theme-color padding-l-85 padding-r-45",
+                                    attrs: { depressed: "" }
+                                  },
+                                  [
+                                    _vm._v("Skip this step "),
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        staticClass: "padding-l-35",
+                                        attrs: { small: "", dark: "" }
+                                      },
+                                      [_vm._v("arrow_forward")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { column: "" } },
+        [
+          _c(
+            "v-flex",
+            [
+              _c(
+                "v-parallax",
+                {
+                  attrs: {
+                    src:
+                      "https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG",
+                    alt: "",
+                    height: "240"
+                  }
+                },
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass: "text-center",
+                      attrs: { align: "center", justify: "center", cols: "12" }
+                    },
+                    [
+                      _c(
+                        "h1",
+                        {
+                          staticClass:
+                            "display-1 font-weight-thin text-lg-right"
+                        },
+                        [_vm._v(_vm._s(_vm.trans.greeting_f))]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-flex", [
+            _c("h4", { staticClass: "headline mt-5 text-lg-center" }, [
+              _vm._v("Now book your appo")
+            ])
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -82226,13 +82961,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -83065,36 +83793,7 @@ var render = function() {
                       1
                     )
                   ]
-                : [
-                    _c(
-                      "v-content",
-                      [
-                        _c(
-                          "v-container",
-                          { attrs: { "fill-height": "" } },
-                          [
-                            _c(
-                              "v-layout",
-                              [
-                                _c(
-                                  "v-flex",
-                                  [
-                                    _c("SnackBar"),
-                                    _vm._v(" "),
-                                    _c("router-view")
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]
+                : [_c("router-view")]
             ],
             2
           )
@@ -83281,7 +83980,14 @@ var defaultState = {
 
         //Tab option
         tabColor: 'dark',
-        tabSliderColor: 'white'
+        tabSliderColor: 'white',
+
+        // Frontend
+        drawerWidthF: '280px',
+        companyIconSizeF: '100px',
+        titleWidthF: '400px',
+        brandColor: '#cc0000',
+        secondaryColor: '#444444'
     }
 };
 var state = _extends({}, defaultState);

@@ -114,3 +114,15 @@ Route::prefix('companies')->group(function(){
         return view('welcome');
     });
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes for Frontend
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::get('/frontend', function () {
+    return view('welcome');
+});
