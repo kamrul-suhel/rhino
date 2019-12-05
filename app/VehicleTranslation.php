@@ -10,5 +10,7 @@ class VehicleTranslation extends Model
 
     protected $fillable = [
         'model',
+        'vehicle_id',
+        'language_id'
     ];
 }
