@@ -231,5 +231,23 @@ return [
         'label' => 'Ok',
         'identifier' => 'ok',
         'translation' => 'Ok'
+    ],
+
+    [
+        'label' => 'Start Date',
+        'identifier' => 'startDate',
+        'translation' => 'Start Date'
+    ],
+
+    [
+        'label' => 'End Date',
+        'identifier' => 'endDate',
+        'translation' => 'End Date'
+    ],
+
+    [
+        'label' => 'Search by',
+        'identifier' => 'searchBy',
+        'translation' => 'Search by'
     ]
 ];

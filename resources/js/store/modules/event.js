@@ -69,10 +69,38 @@ const mutations = {
             },
 
             {
-                text: trans.company,
+                text: trans.startDate,
                 align: 'left',
                 sortable: false,
-                value: 'company'
+                value: 'startDate'
+            },
+
+            {
+                text: trans.endDate,
+                align: 'left',
+                sortable: false,
+                value: 'endDate'
+            },
+
+            {
+                text: `${trans.event} ${trans.type}`,
+                align: 'left',
+                sortable: false,
+                value: 'type'
+            },
+
+            {
+                text: trans.dealership,
+                align: 'left',
+                sortable: false,
+                value: 'dealership'
+            },
+
+            {
+                text: trans.country,
+                align: 'left',
+                sortable: false,
+                value: 'country'
             },
 
             {
@@ -186,6 +214,7 @@ const actions = {
 
         axios.get(URL).then((response) => {
             if (response.data.events) {
+                console.log('responseis: ',response)
                 commit('setEvents', response.data.events)
                 commit('setTotalEvents', response.data.total)
                 commit('setEventLoading', false)
@@ -197,8 +226,8 @@ const actions = {
      * Get Selected company
      * @param id // required
      */
-    fetchEvent({commit, dispatch}, payload){
-        const URL = `/api/events/${payload.id}/show`+ fn.generateParams(payload)
+    fetchEvent({commit, dispatch}, payload={}){
+        const URL = `/api/events/${payload.id}`+ fn.generateParams(payload)
         axios.get(URL).then((response) => {
             if(response.data){
                 commit('setSelectedEvent', response.data.event)
