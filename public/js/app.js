@@ -6365,7 +6365,7 @@ window._ = __webpack_require__(154);
 window.axios = __webpack_require__(156);
 
 window.axios.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest'
+    'X-Requested-With': 'XMLHttpRequest'
 };
 
 
@@ -6427,29 +6427,29 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.config.productionTip = true;
 
 /* eslint-disable no-new */
 new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
-  el: '#app',
-  store: __WEBPACK_IMPORTED_MODULE_9__store__["a" /* default */],
-  router: __WEBPACK_IMPORTED_MODULE_7__router__["a" /* default */],
-  i18n: __WEBPACK_IMPORTED_MODULE_6__plugins_i18n_index__["a" /* default */],
-  components: {
-    App: __WEBPACK_IMPORTED_MODULE_8__components_App___default.a
-  },
-  template: '<App/>',
+    el: '#app',
+    store: __WEBPACK_IMPORTED_MODULE_9__store__["a" /* default */],
+    router: __WEBPACK_IMPORTED_MODULE_7__router__["a" /* default */],
+    i18n: __WEBPACK_IMPORTED_MODULE_6__plugins_i18n_index__["a" /* default */],
+    components: {
+        App: __WEBPACK_IMPORTED_MODULE_8__components_App___default.a
+    },
+    template: '<App/>',
 
-  created: function created() {
-    this.initSetting();
-  },
+    created: function created() {
+        this.initSetting();
+    },
 
 
-  methods: {
-    initSetting: function initSetting() {
-      // Setup translation fields
-      this.$store.dispatch('getAllSettingFields');
+    methods: {
+        initSetting: function initSetting() {
+            // Setup translation fields
+            this.$store.dispatch('getAllSettingFields');
 
-      // Initialize language
-      this.$store.dispatch('fetchLanguages');
+            // Initialize language
+            this.$store.dispatch('fetchLanguages');
+        }
     }
-  }
 });
 
 /***/ }),
@@ -77712,7 +77712,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         var commit = _ref3.commit;
         var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-        console.log('fetch dealership');
         var URL = '/api/dealerships/dropdown';
         axios.get(URL).then(function (response) {
             if (response.data.dealership) {
@@ -92175,6 +92174,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -92206,12 +92209,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         trans: 'getFields',
         companies: 'getCompanies',
         themeOption: 'getThemeOption',
-        brands: 'getBrands',
-        headers: 'getBrandListHeader',
-        totalBrands: 'getTotalBrands',
-        loading: 'getBrandLoading',
+        events: 'getEvents',
+        headers: 'getEventListHeader',
+        totalEvents: 'getTotalEvents',
+        loading: 'getEventLoading',
         rowsPerPage: 'getBrandListRowsPerPage',
-        selectedBrand: 'getSelectedBrand',
+        selectedEvent: 'getSelectedEvent',
         brandImage: 'getUploadedImage'
     })),
 
@@ -92250,44 +92253,36 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 search: this.searchBrands
             });
 
-            this.$store.dispatch('fetchBrands', paginateOption);
+            this.$store.dispatch('fetchEvents', paginateOption);
         },
-        onEditBrand: function onEditBrand(brand) {
-            this.$router.push({ name: 'editBrands', params: { id: brand.id } });
+        onEditEvent: function onEditEvent(event) {
+            this.$router.push({ name: 'editEvents', params: { id: event.id } });
         },
-        onDeleteBrand: function onDeleteBrand(company) {
+        onDeleteEvent: function onDeleteEvent(event) {
             this.deleteDialog = true;
-            this.$store.commit('setSelectedBrand', company);
+            this.$store.commit('setSelectedEvent', event);
         },
         onDeleteCancel: function onDeleteCancel() {
             this.deleteDialog = false;
-            this.$store.commit('setSelectedBrand', {});
+            this.$store.commit('setSelectedEvent', {});
         },
-        onConfirmDeleteBrand: function onConfirmDeleteBrand() {
+        onConfirmDeleteEvent: function onConfirmDeleteEvent() {
             var _this = this;
 
-            var selectedBrand = this.selectedBrand;
-            var URL = '/api/companies/' + selectedBrand.id + '/delete';
+            var selectedEvent = this.selectedEvent;
+            var URL = '/api/events/' + selectedEvent.id;
 
             axios.delete(URL, { _method: 'delete' }).then(function (response) {
                 if (response.data.success) {
                     _this.$store.commit('setSnackbarMessage', {
                         openMessage: true,
                         timeOut: _this.themeOption.snackBarTimeout,
-                        message: selectedBrand.name + '  ' + _this.trans.successfully_deleted
+                        message: selectedEvent.name + '  ' + _this.trans.successfully_deleted
                     });
 
                     _this.initialize();
-                    // reset selectedDealerships in store
-                    _this.onResetBrand();
                     _this.deleteDialog = false;
                 }
-            });
-        },
-        onLanguageChange: function onLanguageChange(selectedLanguage) {
-            this.$store.dispatch('fetchCompany', {
-                id: this.selectedBrand.id,
-                languageId: selectedLanguage
             });
         }
     }
@@ -92324,7 +92319,12 @@ var render = function() {
           _c("v-text-field", {
             attrs: {
               color: _vm.themeOption.inputColor,
-              label: _vm.trans.search_by_name
+              label:
+                _vm.trans.searchBy +
+                " " +
+                _vm.trans.event.toLowerCase() +
+                " " +
+                _vm.trans.name.toLowerCase()
             },
             model: {
               value: _vm.searchBrands,
@@ -92350,14 +92350,14 @@ var render = function() {
                 staticClass: "elevation-1",
                 attrs: {
                   headers: _vm.headers,
-                  items: _vm.brands,
+                  items: _vm.events,
                   "disable-initial-sort": "",
                   pagination: _vm.pagination,
                   "no-results-text": _vm.trans.no_brand_found,
                   "no-data-text": _vm.trans.no_brand_found,
                   "rows-per-page-text": _vm.trans.rows_per_page,
                   "rows-per-page-items": _vm.rowsPerPage,
-                  "total-items": _vm.totalBrands,
+                  "total-items": _vm.totalEvents,
                   loading: _vm.loading
                 },
                 on: {
@@ -92370,9 +92370,17 @@ var render = function() {
                     key: "items",
                     fn: function(props) {
                       return [
-                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _c("td", [_vm._v(_vm._s(props.item.event))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(props.item.company))]),
+                        _c("td", [_vm._v(_vm._s(props.item.start))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(props.item.end))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(props.item.type))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(props.item.dealership))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(props.item.country))]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
                           _vm._v(
@@ -92395,7 +92403,7 @@ var render = function() {
                                 attrs: { small: "" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.onEditBrand(props.item)
+                                    return _vm.onEditEvent(props.item)
                                   }
                                 }
                               },
@@ -92415,7 +92423,7 @@ var render = function() {
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.onDeleteBrand(props.item)
+                                    return _vm.onDeleteEvent(props.item)
                                   }
                                 }
                               },
@@ -92464,7 +92472,7 @@ var render = function() {
                     _vm._v(
                       _vm._s(_vm.trans.delete) +
                         " " +
-                        _vm._s(_vm.selectedBrand.name)
+                        _vm._s(_vm.selectedEvent.name)
                     )
                   ])
                 ]
@@ -92516,7 +92524,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "red", small: "" },
-                      on: { click: _vm.onConfirmDeleteBrand }
+                      on: { click: _vm.onConfirmDeleteEvent }
                     },
                     [
                       _vm._v(
@@ -92698,14 +92706,12 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_color__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_color___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_color__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_TimePicker__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_TimePicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_TimePicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Language__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Language___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Language__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Language__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Language___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Language__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -92870,7 +92876,50 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -92879,20 +92928,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        Chrome: __WEBPACK_IMPORTED_MODULE_1_vue_color__["Chrome"],
-        FileUpload: __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default.a,
-        Regions: __WEBPACK_IMPORTED_MODULE_3__components_Brand_Regions___default.a,
-        LanguagePicker: __WEBPACK_IMPORTED_MODULE_4__components_Language___default.a
+        TimePicker: __WEBPACK_IMPORTED_MODULE_1__components_TimePicker___default.a,
+        ImageUpload: __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default.a,
+        LanguagePicker: __WEBPACK_IMPORTED_MODULE_3__components_Language___default.a
     },
 
     data: function data() {
+        var _this = this;
+
         return {
+            startEvent: false,
+            endEvent: false,
             valid: true,
+            event: {},
+            times: {},
             active: null,
             model: null,
 
-            isColorSwatchActive: false,
-            selectedColor: ''
+            nameRules: [function (v) {
+                return !!v || _this.trans.name_is_required;
+            }]
         };
     },
 
@@ -92900,27 +92955,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
         trans: 'getFields',
         themeOption: 'getThemeOption',
-        companies: 'getCompanies',
-        countries: 'getCountries',
-        selectedCountry: 'getSelectedCountry',
-        regions: 'getRegions',
-        brand: 'getSelectedBrand',
-        selectedLanguage: 'getSubSelectedLanguage',
-        logo: 'getUploadedImage'
+        types: 'getTypes',
+        dealerships: 'getDealerships',
+        selectedEvent: 'getSelectedEvent',
+        selectedLanguage: 'getSubSelectedLanguage'
     })),
 
     watch: {
-        brand: function brand(value) {
-            this.$refs.brandForm.resetValidation();
-            this.$store.commit('setImage', value.logo);
-        },
-        selectedColor: function selectedColor(value) {
-            var brand = _extends({}, this.brand);
-            brand.colour = value.hex;
-            this.$store.commit('setSelectedBrand', brand);
-        },
         selectedLanguage: function selectedLanguage() {
-            this.$store.dispatch('fetchBrand', {
+            this.$store.dispatch('fetchEvent', {
                 id: this.$route.params.id,
                 languageId: this.selectedLanguage.id,
                 edit: true
@@ -92930,67 +92973,59 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     created: function created() {
         this.initialize();
-        this.fetchCompany();
     },
 
 
     methods: {
         initialize: function initialize() {
-            this.$store.dispatch('fetchCountriesForDropdown');
-            this.$store.dispatch('fetchBrand', { id: this.$route.params.id });
+            this.$store.dispatch('fetchEvent', { id: this.$route.params.id });
         },
-        fetchCompany: function fetchCompany() {
-            this.$store.dispatch('fetchCompanies', { themeOption: this.themeOption, trans: this.trans });
-        },
-        onUpdateBrand: function onUpdateBrand() {
-            var _this = this;
+        onUpdateEvent: function onUpdateEvent() {
+            var _this2 = this;
 
-            if (this.$refs.brandForm.validate()) {
-                // this.$store.commit('setThemeOption', {buttonLoading: true})
+            if (this.$refs.eventForm.validate()) {
+                var eventForm = new FormData();
+                eventForm.append('_method', 'put');
 
-                var brandForm = new FormData();
-
-                // Set form object for brand
-                _.forOwn(this.brand, function (value, key) {
-                    brandForm.append(key, value);
-                });
-
-                brandForm.append('logo', this.logo);
-
-                brandForm.append('_method', 'put');
-
-                // send form data to save
-                var URL = '/api/brands/' + this.brand.id + '/update';
-                axios.post(URL, brandForm).then(function (response) {
-                    if (response.data.success) {
-                        _this.$store.commit('setSnackbarMessage', {
-                            openMessage: true,
-                            timeOut: _this.themeOption.snackBarTimeout,
-                            message: _this.brand.name + '  ' + _this.trans.successfully_updated
-                        });
-                        _this.$store.commit('setThemeOption', { buttonLoading: false });
-                        // this.$router.push({name: 'listbrands'})
+                // Set form object for event
+                _.forOwn(this.selectedEvent, function (value, key) {
+                    if (key === 'status') {
+                        if (value) {
+                            eventForm.append('status', 1);
+                        } else {
+                            eventForm.append('status', 0);
+                        }
+                    } else {
+                        eventForm.append(key, value);
                     }
-                }).catch(function (error) {
-                    _this.$store.commit('setThemeOption', { buttonLoading: false });
                 });
+
+                // Set form object for times
+                _.forOwn(this.times, function (value, key) {
+                    eventForm.append(key, value);
+                });
+
+                var URL = "/api/events/" + this.selectedEvent.id;
+                // send form data to save
+                axios.post(URL, eventForm).then(function (response) {
+                    if (response.data.success) {
+                        _this2.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: _this2.themeOption.snackBarTimeout,
+                            message: _this2.event.name + "  " + _this2.trans.successfully_created
+                        });
+                        _this2.$store.commit('setButtonLoading', false);
+                        // this.$router.push({name: 'listEvents'})
+                    }
+                });
+            } else {
+                this.$store.commit('setButtonLoading', false);
             }
         },
-        onCountryChange: function onCountryChange(value) {
-            var newBrand = _extends({}, this.brand);
-            newBrand.region_id = null;
-            this.$store.commit('setSelectedBrand', newBrand);
-            this.$store.dispatch('fetchRegions', { id: value.id });
-        },
-        resetBrands: function resetBrands() {
-            this.$store.commit('setSelectedBrand', {});
-            this.$store.commit('setSubSelectedLanguage', {});
-            this.$store.commit('setRegionsByBrandId', []);
+        onBackToEventList: function onBackToEventList() {
+            this.$router.push({ name: 'listEvents' });
+            this.$store.commit('setButtonLoading', false);
         }
-    },
-
-    destroyed: function destroyed() {
-        this.resetBrands();
     }
 });
 
@@ -93022,7 +93057,7 @@ var render = function() {
                     _c(
                       "span",
                       { class: _vm.themeOption.textHeadingColor + "--text" },
-                      [_vm._v(_vm._s(_vm.trans.edit_brand))]
+                      [_vm._v(_vm._s(_vm.trans.edit + " " + _vm.trans.event))]
                     )
                   ]),
                   _vm._v(" "),
@@ -93034,7 +93069,7 @@ var render = function() {
                   _c("v-spacer"),
                   _vm._v(" "),
                   _c("language-picker", {
-                    attrs: { languageId: _vm.brand.language_id }
+                    attrs: { languageId: _vm.selectedEvent.language_id }
                   })
                 ],
                 1
@@ -93049,7 +93084,7 @@ var render = function() {
       _c(
         "v-form",
         {
-          ref: "brandForm",
+          ref: "eventForm",
           attrs: { row: "", wrap: "", "lazy-validation": "" },
           model: {
             value: _vm.valid,
@@ -93087,19 +93122,57 @@ var render = function() {
                                         function(v) {
                                           return (
                                             !!v ||
-                                            _vm.trans.brand_name_is_required
+                                            _vm.trans.event +
+                                              " " +
+                                              _vm.trans.name +
+                                              " " +
+                                              _vm.trans.is_required
                                           )
                                         }
                                       ],
                                       color: _vm.themeOption.inputColor,
-                                      label: _vm.trans.name
+                                      label:
+                                        _vm.trans.name +
+                                        " " +
+                                        _vm.trans.of +
+                                        " " +
+                                        _vm.trans.event
                                     },
                                     model: {
-                                      value: _vm.brand.name,
+                                      value: _vm.selectedEvent.name,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.brand, "name", $$v)
+                                        _vm.$set(_vm.selectedEvent, "name", $$v)
                                       },
-                                      expression: "brand.name"
+                                      expression: "selectedEvent.name"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      rules: _vm.nameRules,
+                                      color: _vm.themeOption.inputColor,
+                                      label:
+                                        _vm.trans.greeting +
+                                        " " +
+                                        _vm.trans.text
+                                    },
+                                    model: {
+                                      value: _vm.selectedEvent.greeting,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.selectedEvent,
+                                          "greeting",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "selectedEvent.greeting"
                                     }
                                   })
                                 ],
@@ -93119,26 +93192,32 @@ var render = function() {
                                 [
                                   _c("v-select", {
                                     attrs: {
-                                      items: _vm.companies,
+                                      items: _vm.dealerships,
                                       "item-text": "name",
+                                      "item-value": "id",
                                       rules: [
                                         function(v) {
                                           return (
-                                            !!v || _vm.trans.select_a_company
+                                            !!v ||
+                                            _vm.trans.dealership +
+                                              " " +
+                                              _vm.trans.is_required
                                           )
                                         }
                                       ],
-                                      "item-value": "id",
                                       color: _vm.themeOption.inputColor,
-                                      label: _vm.trans.company
+                                      label: _vm.trans.dealership
                                     },
-                                    on: { change: _vm.onCountryChange },
                                     model: {
-                                      value: _vm.brand.company_id,
+                                      value: _vm.selectedEvent.dealership_id,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.brand, "company_id", $$v)
+                                        _vm.$set(
+                                          _vm.selectedEvent,
+                                          "dealership_id",
+                                          $$v
+                                        )
                                       },
-                                      expression: "brand.company_id"
+                                      expression: "selectedEvent.dealership_id"
                                     }
                                   })
                                 ],
@@ -93149,81 +93228,431 @@ var render = function() {
                                 "v-flex",
                                 { attrs: { xs12: "", sm6: "", "pa-2": "" } },
                                 [
-                                  _vm.isColorSwatchActive
-                                    ? _c(
-                                        "div",
-                                        { staticClass: "r-color-picker" },
-                                        [
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "r-color-picker-content"
-                                            },
-                                            [
-                                              _c("chrome", {
-                                                model: {
-                                                  value: _vm.selectedColor,
-                                                  callback: function($$v) {
-                                                    _vm.selectedColor = $$v
-                                                  },
-                                                  expression: "selectedColor"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  staticClass: "r-color-choose",
-                                                  attrs: {
-                                                    small: "",
-                                                    color:
-                                                      _vm.themeOption
-                                                        .buttonPrimaryColor
-                                                  },
-                                                  on: {
-                                                    click: function($event) {
-                                                      _vm.isColorSwatchActive = false
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(_vm.trans.select) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
+                                  _c("v-select", {
                                     attrs: {
-                                      label: _vm.trans.color,
+                                      items: _vm.types,
+                                      "item-text": "name",
+                                      "item-value": "id",
                                       rules: [
                                         function(v) {
-                                          return !!v || _vm.trans.choose_a_color
+                                          return (
+                                            !!v ||
+                                            _vm.trans.type +
+                                              " " +
+                                              _vm.trans.is_required
+                                          )
                                         }
                                       ],
-                                      required: "",
-                                      color: _vm.themeOption.inputColor
-                                    },
-                                    on: {
-                                      focus: function($event) {
-                                        _vm.isColorSwatchActive = true
-                                      }
+                                      color: _vm.themeOption.inputColor,
+                                      label: "" + _vm.trans.type
                                     },
                                     model: {
-                                      value: _vm.brand.colour,
+                                      value: _vm.selectedEvent.type_id,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.brand, "colour", $$v)
+                                        _vm.$set(
+                                          _vm.selectedEvent,
+                                          "type_id",
+                                          $$v
+                                        )
                                       },
-                                      expression: "brand.colour"
+                                      expression: "selectedEvent.type_id"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c(
+                                    "v-menu",
+                                    {
+                                      ref: "startEvent",
+                                      attrs: {
+                                        "close-on-content-click": false,
+                                        "nudge-right": 40,
+                                        "return-value": _vm.selectedEvent.start,
+                                        lazy: "",
+                                        transition: "scale-transition",
+                                        "offset-y": "",
+                                        "full-width": "",
+                                        "min-width": "290px"
+                                      },
+                                      on: {
+                                        "update:returnValue": function($event) {
+                                          return _vm.$set(
+                                            _vm.selectedEvent,
+                                            "start",
+                                            $event
+                                          )
+                                        },
+                                        "update:return-value": function(
+                                          $event
+                                        ) {
+                                          return _vm.$set(
+                                            _vm.selectedEvent,
+                                            "start",
+                                            $event
+                                          )
+                                        }
+                                      },
+                                      scopedSlots: _vm._u([
+                                        {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            return [
+                                              _c(
+                                                "v-text-field",
+                                                _vm._g(
+                                                  {
+                                                    attrs: {
+                                                      rules: [
+                                                        function(v) {
+                                                          return (
+                                                            !!v ||
+                                                            _vm.trans.start +
+                                                              " " +
+                                                              _vm.trans.date +
+                                                              " " +
+                                                              _vm.trans
+                                                                .is_required
+                                                          )
+                                                        }
+                                                      ],
+                                                      required: "",
+                                                      color:
+                                                        _vm.themeOption
+                                                          .inputColor,
+                                                      label:
+                                                        _vm.trans.start +
+                                                        " " +
+                                                        _vm.trans.date,
+                                                      "prepend-icon": "event",
+                                                      readonly: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.selectedEvent.start,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.selectedEvent,
+                                                          "start",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "selectedEvent.start"
+                                                    }
+                                                  },
+                                                  on
+                                                )
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ]),
+                                      model: {
+                                        value: _vm.startEvent,
+                                        callback: function($$v) {
+                                          _vm.startEvent = $$v
+                                        },
+                                        expression: "startEvent"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-date-picker",
+                                        {
+                                          attrs: {
+                                            color: _vm.themeOption.inputColor,
+                                            "no-title": "",
+                                            scrollable: ""
+                                          },
+                                          model: {
+                                            value: _vm.selectedEvent.start,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.selectedEvent,
+                                                "start",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "selectedEvent.start"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonSecondaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.startEvent = false
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.cancel) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonPrimaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.startEvent.save(
+                                                    _vm.selectedEvent.start
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.ok) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c(
+                                    "v-menu",
+                                    {
+                                      ref: "endEvent",
+                                      attrs: {
+                                        "close-on-content-click": false,
+                                        "nudge-right": 40,
+                                        "return-value": _vm.selectedEvent.end,
+                                        lazy: "",
+                                        transition: "scale-transition",
+                                        "offset-y": "",
+                                        "full-width": "",
+                                        "min-width": "290px"
+                                      },
+                                      on: {
+                                        "update:returnValue": function($event) {
+                                          return _vm.$set(
+                                            _vm.selectedEvent,
+                                            "end",
+                                            $event
+                                          )
+                                        },
+                                        "update:return-value": function(
+                                          $event
+                                        ) {
+                                          return _vm.$set(
+                                            _vm.selectedEvent,
+                                            "end",
+                                            $event
+                                          )
+                                        }
+                                      },
+                                      scopedSlots: _vm._u([
+                                        {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            return [
+                                              _c(
+                                                "v-text-field",
+                                                _vm._g(
+                                                  {
+                                                    attrs: {
+                                                      rules: [
+                                                        function(v) {
+                                                          return (
+                                                            !!v ||
+                                                            _vm.trans.end +
+                                                              " " +
+                                                              _vm.trans.date +
+                                                              " " +
+                                                              _vm.trans
+                                                                .is_required
+                                                          )
+                                                        }
+                                                      ],
+                                                      required: "",
+                                                      color:
+                                                        _vm.themeOption
+                                                          .inputColor,
+                                                      label:
+                                                        _vm.trans.end +
+                                                        " " +
+                                                        _vm.trans.date,
+                                                      "prepend-icon": "event",
+                                                      readonly: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.selectedEvent.end,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.selectedEvent,
+                                                          "end",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "selectedEvent.end"
+                                                    }
+                                                  },
+                                                  on
+                                                )
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ]),
+                                      model: {
+                                        value: _vm.endEvent,
+                                        callback: function($$v) {
+                                          _vm.endEvent = $$v
+                                        },
+                                        expression: "endEvent"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-date-picker",
+                                        {
+                                          attrs: {
+                                            color: _vm.themeOption.inputColor,
+                                            "no-title": "",
+                                            scrollable: ""
+                                          },
+                                          model: {
+                                            value: _vm.selectedEvent.end,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.selectedEvent,
+                                                "end",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "selectedEvent.end"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonSecondaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.endEvent = false
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.cancel) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color:
+                                                  _vm.themeOption
+                                                    .buttonPrimaryColor
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.endEvent.save(
+                                                    _vm.selectedEvent.end
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.trans.ok) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", "pa-2": "" } },
+                                [
+                                  _c("v-textarea", {
+                                    attrs: {
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.notes,
+                                      hint: _vm.trans.notes
+                                    },
+                                    model: {
+                                      value: _vm.selectedEvent.notes,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.selectedEvent,
+                                          "notes",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "selectedEvent.notes"
                                     }
                                   })
                                 ],
@@ -93240,118 +93669,17 @@ var render = function() {
                                       color: _vm.themeOption.inputColor
                                     },
                                     model: {
-                                      value: _vm.brand.status,
+                                      value: _vm.selectedEvent.status,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.brand, "status", $$v)
+                                        _vm.$set(
+                                          _vm.selectedEvent,
+                                          "status",
+                                          $$v
+                                        )
                                       },
-                                      expression: "brand.status"
+                                      expression: "selectedEvent.status"
                                     }
                                   })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-divider", { staticClass: "mt-2 mb-2" }),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { column: "", wrap: "" } },
-                            [
-                              _c(
-                                "v-tabs",
-                                {
-                                  attrs: {
-                                    color: _vm.themeOption.tabColor,
-                                    "slider-color":
-                                      _vm.themeOption.tabSliderColor
-                                  },
-                                  model: {
-                                    value: _vm.active,
-                                    callback: function($$v) {
-                                      _vm.active = $$v
-                                    },
-                                    expression: "active"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "v-tab",
-                                    { key: "regions", attrs: { ripple: "" } },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(_vm.trans.regions) +
-                                          "\n                                "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab",
-                                    { key: "flag", attrs: { ripple: "" } },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(_vm.trans.logo) +
-                                          "\n                                "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab-item",
-                                    { key: "regions" },
-                                    [
-                                      _c("Regions", {
-                                        attrs: { model: "brand" }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-tab-item",
-                                    { key: "logo" },
-                                    [
-                                      _c(
-                                        "v-layout",
-                                        {
-                                          attrs: {
-                                            row: "",
-                                            wrap: "",
-                                            "pt-3": ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-card",
-                                            { attrs: { width: "250px" } },
-                                            [
-                                              _c("v-img", {
-                                                attrs: {
-                                                  src: _vm.logo,
-                                                  "aspect-ratio": "2.75"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c("FileUpload", {
-                                            attrs: {
-                                              preview: false,
-                                              model: "country"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
                                 ],
                                 1
                               )
@@ -93370,51 +93698,25 @@ var render = function() {
                         [
                           _c("v-spacer"),
                           _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              class: _vm.themeOption.buttonSecondaryColor,
-                              attrs: { small: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.$router.push({
-                                    name: "listBrands"
-                                  })
-                                }
-                              }
+                          _c("r-button", {
+                            attrs: {
+                              text: "" + _vm.trans.back,
+                              small: "",
+                              loadingBar: false,
+                              color: _vm.themeOption.buttonSecondaryColor
                             },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.trans.back) +
-                                  "\n                        "
-                              )
-                            ]
-                          ),
+                            on: { click: _vm.onBackToEventList }
+                          }),
                           _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              class: _vm.themeOption.buttonSuccess,
-                              attrs: {
-                                loading: _vm.themeOption.buttonLoading,
-                                disabled: _vm.themeOption.buttonLoading,
-                                small: ""
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.onUpdateBrand()
-                                }
-                              }
+                          _c("r-button", {
+                            attrs: {
+                              text: _vm.trans.update + " " + _vm.trans.event,
+                              small: "",
+                              loadingBar: true,
+                              color: _vm.themeOption.buttonPrimaryColor
                             },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.trans.update) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
+                            on: { click: _vm.onUpdateEvent }
+                          })
                         ],
                         1
                       )
@@ -95397,21 +95699,24 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_settings__ = __webpack_require__(556);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_user__ = __webpack_require__(557);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_navigation__ = __webpack_require__(558);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_language__ = __webpack_require__(559);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_country__ = __webpack_require__(560);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_snackbar__ = __webpack_require__(561);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_dealership__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_group__ = __webpack_require__(562);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_imageUpload__ = __webpack_require__(563);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_company__ = __webpack_require__(564);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_brand__ = __webpack_require__(565);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_vehicle__ = __webpack_require__(566);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_region__ = __webpack_require__(567);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modules_eventType__ = __webpack_require__(568);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__modules_button__ = __webpack_require__(569);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_button__ = __webpack_require__(569);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_imageUpload__ = __webpack_require__(563);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_settings__ = __webpack_require__(556);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_user__ = __webpack_require__(557);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_navigation__ = __webpack_require__(558);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_language__ = __webpack_require__(559);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_country__ = __webpack_require__(560);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_snackbar__ = __webpack_require__(561);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_dealership__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_group__ = __webpack_require__(562);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_company__ = __webpack_require__(564);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_brand__ = __webpack_require__(565);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_vehicle__ = __webpack_require__(566);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modules_region__ = __webpack_require__(567);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__modules_eventType__ = __webpack_require__(568);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__modules_event__ = __webpack_require__(575);
+
+
 
 
 
@@ -95449,21 +95754,22 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     getters: {},
 
     modules: {
-        SnackBar: __WEBPACK_IMPORTED_MODULE_7__modules_snackbar__["a" /* default */],
-        Button: __WEBPACK_IMPORTED_MODULE_16__modules_button__["a" /* default */],
-        settings: __WEBPACK_IMPORTED_MODULE_2__modules_settings__["a" /* default */],
-        user: __WEBPACK_IMPORTED_MODULE_3__modules_user__["a" /* default */],
-        navigation: __WEBPACK_IMPORTED_MODULE_4__modules_navigation__["a" /* default */],
-        language: __WEBPACK_IMPORTED_MODULE_5__modules_language__["a" /* default */],
-        country: __WEBPACK_IMPORTED_MODULE_6__modules_country__["a" /* default */],
-        Dealership: __WEBPACK_IMPORTED_MODULE_8__modules_dealership__["a" /* default */],
-        Group: __WEBPACK_IMPORTED_MODULE_9__modules_group__["a" /* default */],
-        ImageUpload: __WEBPACK_IMPORTED_MODULE_10__modules_imageUpload__["a" /* default */],
-        Company: __WEBPACK_IMPORTED_MODULE_11__modules_company__["a" /* default */],
-        Brand: __WEBPACK_IMPORTED_MODULE_12__modules_brand__["a" /* default */],
-        Vehicle: __WEBPACK_IMPORTED_MODULE_13__modules_vehicle__["a" /* default */],
-        Region: __WEBPACK_IMPORTED_MODULE_14__modules_region__["a" /* default */],
-        Type: __WEBPACK_IMPORTED_MODULE_15__modules_eventType__["a" /* default */]
+        SnackBar: __WEBPACK_IMPORTED_MODULE_9__modules_snackbar__["a" /* default */],
+        Button: __WEBPACK_IMPORTED_MODULE_2__modules_button__["a" /* default */],
+        settings: __WEBPACK_IMPORTED_MODULE_4__modules_settings__["a" /* default */],
+        user: __WEBPACK_IMPORTED_MODULE_5__modules_user__["a" /* default */],
+        navigation: __WEBPACK_IMPORTED_MODULE_6__modules_navigation__["a" /* default */],
+        language: __WEBPACK_IMPORTED_MODULE_7__modules_language__["a" /* default */],
+        country: __WEBPACK_IMPORTED_MODULE_8__modules_country__["a" /* default */],
+        Dealership: __WEBPACK_IMPORTED_MODULE_10__modules_dealership__["a" /* default */],
+        Group: __WEBPACK_IMPORTED_MODULE_11__modules_group__["a" /* default */],
+        ImageUpload: __WEBPACK_IMPORTED_MODULE_3__modules_imageUpload__["a" /* default */],
+        Company: __WEBPACK_IMPORTED_MODULE_12__modules_company__["a" /* default */],
+        Brand: __WEBPACK_IMPORTED_MODULE_13__modules_brand__["a" /* default */],
+        Vehicle: __WEBPACK_IMPORTED_MODULE_14__modules_vehicle__["a" /* default */],
+        Region: __WEBPACK_IMPORTED_MODULE_15__modules_region__["a" /* default */],
+        Type: __WEBPACK_IMPORTED_MODULE_16__modules_eventType__["a" /* default */],
+        Event: __WEBPACK_IMPORTED_MODULE_17__modules_event__["a" /* default */]
     }
 });
 
@@ -97205,6 +97511,263 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 571 */,
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_function__ = __webpack_require__(49);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+var defaultState = {
+    events: [],
+    selectedEvent: {},
+    listHeader: [],
+    loading: 'white',
+    totalEvents: 0,
+    eventListRowPerPage: [15, 25, 40],
+
+    // For dropdown
+    eventsDropDown: [],
+
+    // Regions variable
+    regions: [],
+    totalRegions: 0,
+    eventRegionHeader: [],
+    selectedEventRegion: {}
+};
+
+var state = _extends({}, defaultState);
+
+var mutations = {
+    setEvents: function setEvents(state, events) {
+        state.events = [].concat(_toConsumableArray(events));
+    },
+    setEventsForDropDown: function setEventsForDropDown(state, events) {
+        state.eventsDropDown = [].concat(_toConsumableArray(events));
+    },
+    setSelectedEventRegion: function setSelectedEventRegion(state, selectedRegion) {
+        state.selectedEventRegion = selectedRegion;
+    },
+    setRegionsByEventId: function setRegionsByEventId(state, regions) {
+        state.regions = [].concat(_toConsumableArray(regions));
+    },
+    setTotalRegionByEventId: function setTotalRegionByEventId(state, totalRegion) {
+        state.totalRegions = totalRegion;
+    },
+    setEventLoading: function setEventLoading(state, status) {
+        state.loading = status;
+    },
+    setSelectedEvent: function setSelectedEvent(state, event) {
+        state.selectedEvent = _extends({}, event);
+    },
+    setTotalEvents: function setTotalEvents(state, totalEvent) {
+        state.totalEvents = totalEvent;
+    },
+    resetEventstore: function resetEventstore(state) {
+        state = _extends({}, defaultState);
+    },
+    setEventListHeader: function setEventListHeader(state, trans) {
+        var header = [{
+            text: trans.name,
+            align: 'left',
+            sortable: false,
+            value: 'name'
+        }, {
+            text: trans.startDate,
+            align: 'left',
+            sortable: false,
+            value: 'startDate'
+        }, {
+            text: trans.endDate,
+            align: 'left',
+            sortable: false,
+            value: 'endDate'
+        }, {
+            text: trans.event + ' ' + trans.type,
+            align: 'left',
+            sortable: false,
+            value: 'type'
+        }, {
+            text: trans.dealership,
+            align: 'left',
+            sortable: false,
+            value: 'dealership'
+        }, {
+            text: trans.country,
+            align: 'left',
+            sortable: false,
+            value: 'country'
+        }, {
+            text: trans.status,
+            value: 'status'
+        }, {
+            text: trans.actions,
+            value: 'actions',
+            align: 'right'
+        }];
+
+        state.listHeader = [].concat(header);
+    },
+    setEventRegionsListHeader: function setEventRegionsListHeader(state, trans) {
+        var header = [{
+            text: trans.name,
+            align: 'left',
+            sortable: false,
+            value: 'name'
+        }, {
+            text: trans.country,
+            value: 'country',
+            sortable: false
+        }, {
+            text: trans.action,
+            align: 'right',
+            value: 'actions',
+            sortable: false
+        }];
+
+        state.eventRegionHeader = [].concat(header);
+    }
+};
+
+var getters = {
+    getEvents: function getEvents(state) {
+        return state.events;
+    },
+    getEventsForDropDown: function getEventsForDropDown(state) {
+        return state.eventsDropDown;
+    },
+    getEventListHeader: function getEventListHeader(state) {
+        return state.listHeader;
+    },
+    getSelectedEventRegion: function getSelectedEventRegion(state) {
+        return state.selectedEventRegion;
+    },
+    getEventRegionListHeader: function getEventRegionListHeader(state) {
+        return state.eventRegionHeader;
+    },
+    getEventLoading: function getEventLoading(state) {
+        return state.loading;
+    },
+    getEventListRowsPerPage: function getEventListRowsPerPage(state) {
+        return state.eventListRowPerPage;
+    },
+    getSelectedEvent: function getSelectedEvent(state) {
+        return state.selectedEvent;
+    },
+    getTotalEvents: function getTotalEvents(state) {
+        return state.totalEvents;
+    },
+    getRegionByEventId: function getRegionByEventId(state) {
+        return state.regions;
+    },
+    getTotalRegionByEventId: function getTotalRegionByEventId(state) {
+        return state.totalRegions;
+    }
+};
+
+var actions = {
+    /**
+     * You can filter by status
+     * sent type= 'active' | 'inactive'
+     * ...this.pagination // Default pagination object
+     * trans: translation object, // Important
+     * paginate: true, // If you want all record, do not sent
+     * search: optional | if search by any text
+     * @param commit
+     * @param payload
+     */
+    fetchEvents: function fetchEvents(_ref) {
+        var commit = _ref.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+
+        // Set loading is true
+        commit('setEventLoading', payload.themeOption.loadingColor);
+
+        // Setup header for list view
+        commit('setEventListHeader', payload.trans);
+
+        var params = __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+        var URL = '/api/events' + params;
+
+        axios.get(URL).then(function (response) {
+            if (response.data.events) {
+                console.log('responseis: ', response);
+                commit('setEvents', response.data.events);
+                commit('setTotalEvents', response.data.total);
+                commit('setEventLoading', false);
+            }
+        });
+    },
+
+
+    /**
+     * Get Selected company
+     * @param id // required
+     */
+    fetchEvent: function fetchEvent(_ref2) {
+        var commit = _ref2.commit,
+            dispatch = _ref2.dispatch;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        var URL = '/api/events/' + payload.id + __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+        axios.get(URL).then(function (response) {
+            if (response.data) {
+                commit('setSelectedEvent', response.data.event);
+            }
+        }).catch(function (error) {
+            // Generate error message
+        });
+    },
+    fetchRegionByBranId: function fetchRegionByBranId(_ref3) {
+        var commit = _ref3.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        // Set loading is true
+        commit('setEventLoading', payload.themeOption.loadingColor);
+
+        commit('setEventRegionsListHeader', payload.trans);
+        var params = __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+
+        var URL = '/api/events/' + payload.id + '/regions' + params;
+        axios.get(URL).then(function (response) {
+            if (response.data.regions) {
+                commit('setRegionsByEventId', response.data.regions);
+                commit('setTotalRegionByEventId', response.data.total);
+                commit('setEventLoading', false);
+            }
+        });
+    },
+    fetchEventForDropDown: function fetchEventForDropDown(_ref4) {
+        var commit = _ref4.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        var URL = '/api/events/dropdown' + __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+
+        axios.get(URL).then(function (response) {
+            if (response.data) {
+                commit('setEventsForDropDown', response.data);
+            }
+        }).catch(function (error) {});
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: state,
+    mutations: mutations,
+    getters: getters,
+    actions: actions
+});
 
 /***/ })
 /******/ ]);

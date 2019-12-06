@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -62,7 +62,12 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::findOrFail($id);
+        $event->delete();
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 
     private function save(EventRequest $request, $id = null){

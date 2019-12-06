@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.event.toLowerCase()} ${trans.name.toLowerCase()}`"
                 v-model="searchBrands">
             </v-text-field>
         </v-toolbar>
@@ -23,26 +23,30 @@
             <v-flex xs12 pt-3>
                 <v-data-table
                     :headers="headers"
-                    :items="brands"
+                    :items="events"
                     disable-initial-sort
                     :pagination.sync="pagination"
                     :no-results-text="trans.no_brand_found"
                     :no-data-text="trans.no_brand_found"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
-                    :total-items="totalBrands"
+                    :total-items="totalEvents"
                     :loading="loading"
                     class="elevation-1"
                 >
                     <template v-slot:items="props">
-                        <td>{{ props.item.name }}</td>
-                        <td>{{ props.item.company }}</td>
+                        <td>{{ props.item.event }}</td>
+                        <td>{{ props.item.start }}</td>
+                        <td>{{ props.item.end }}</td>
+                        <td>{{ props.item.type }}</td>
+                        <td>{{ props.item.dealership }}</td>
+                        <td>{{ props.item.country }}</td>
                         <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small
                                 class="mr-2"
-                                @click="onEditBrand(props.item)"
+                                @click="onEditEvent(props.item)"
                             >
                                 edit
                             </v-icon>
@@ -50,7 +54,7 @@
                             <v-icon
                                 :color="themeOption.buttonDangerColor"
                                 small
-                                @click="onDeleteBrand(props.item)"
+                                @click="onDeleteEvent(props.item)"
                             >
                                 delete
                             </v-icon>
@@ -70,7 +74,7 @@
                     primary-title
                     class="pa-2 pl-3"
                 >
-                    <h3>{{ trans.delete }} {{selectedBrand.name }}</h3>
+                    <h3>{{ trans.delete }} {{selectedEvent.name }}</h3>
                 </v-card-title>
 
                 <v-divider></v-divider>
@@ -96,7 +100,7 @@
                     <v-btn
                         color="red"
                         small
-                        @click="onConfirmDeleteBrand"
+                        @click="onConfirmDeleteEvent"
                     >
                         {{ trans.delete }}
                     </v-btn>
@@ -137,12 +141,12 @@
                 trans: 'getFields',
                 companies: 'getCompanies',
                 themeOption: 'getThemeOption',
-                brands: 'getBrands',
-                headers: 'getBrandListHeader',
-                totalBrands: 'getTotalBrands',
-                loading: 'getBrandLoading',
+                events: 'getEvents',
+                headers: 'getEventListHeader',
+                totalEvents: 'getTotalEvents',
+                loading: 'getEventLoading',
                 rowsPerPage: 'getBrandListRowsPerPage',
-                selectedBrand: 'getSelectedBrand',
+                selectedEvent: 'getSelectedEvent',
                 brandImage: 'getUploadedImage'
             })
         }),
@@ -184,26 +188,26 @@
                     search: this.searchBrands
                 }
 
-                this.$store.dispatch('fetchBrands', paginateOption)
+                this.$store.dispatch('fetchEvents', paginateOption)
             },
 
-            onEditBrand(brand) {
-                this.$router.push({name: 'editBrands', params: {id: brand.id}})
+            onEditEvent(event) {
+                this.$router.push({name: 'editEvents', params: {id: event.id}})
             },
 
-            onDeleteBrand(company) {
+            onDeleteEvent(event) {
                 this.deleteDialog = true
-                this.$store.commit('setSelectedBrand', company)
+                this.$store.commit('setSelectedEvent', event)
             },
 
-            onDeleteCancel(){
+            onDeleteCancel() {
                 this.deleteDialog = false
-                this.$store.commit('setSelectedBrand', {})
+                this.$store.commit('setSelectedEvent', {})
             },
 
-            onConfirmDeleteBrand() {
-                const selectedBrand = this.selectedBrand
-                const URL = `/api/companies/${selectedBrand.id}/delete`
+            onConfirmDeleteEvent() {
+                const selectedEvent = this.selectedEvent
+                const URL = `/api/events/${selectedEvent.id}`
 
                 axios.delete(URL, {_method: 'delete'})
                     .then((response) => {
@@ -211,23 +215,14 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedBrand.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedEvent.name}  ${this.trans.successfully_deleted}`
                             })
 
                             this.initialize()
-                            // reset selectedDealerships in store
-                            this.onResetBrand()
                             this.deleteDialog = false
                         }
                     });
-            },
-
-            onLanguageChange(selectedLanguage) {
-                this.$store.dispatch('fetchCompany', {
-                    id: this.selectedBrand.id,
-                    languageId: selectedLanguage
-                })
-            },
+            }
         }
     }
 </script>

@@ -184,6 +184,10 @@ Route::prefix('regions')->group(function(){
 
 Route::prefix('events')->group(function(){
     Route::post('', 'Event\EventController@store');
+    Route::get('', 'Event\EventListController@index');
+    Route::get('{id}', 'Event\EventShowController@show');
+    Route::put('{id}', 'Event\EventController@update');
+    Route::delete('{id}', 'Event\EventController@destroy');
 
 
     /*

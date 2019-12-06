@@ -4,7 +4,8 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_brand }}</span>
+                        <span
+                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.event}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -14,14 +15,14 @@
                     ></v-divider>
                     <v-spacer></v-spacer>
 
-                    <language-picker :languageId="brand.language_id"></language-picker>
+                    <language-picker :languageId="selectedEvent.language_id"></language-picker>
                 </v-toolbar>
             </v-flex>
         </v-layout>
 
         <v-form
             row wrap
-            ref="brandForm"
+            ref="eventForm"
             v-model="valid"
             lazy-validation>
             <v-layout>
@@ -31,10 +32,19 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || trans.brand_name_is_required]"
+                                        :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.name"
-                                        v-model="brand.name"
+                                        :label="`${trans.name} ${trans.of} ${trans.event}`"
+                                        v-model="selectedEvent.name"
+                                    ></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 pa-2>
+                                    <v-text-field
+                                        :rules="nameRules"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.greeting} ${trans.text}`"
+                                        v-model="selectedEvent.greeting"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -42,92 +52,130 @@
                             <v-layout row wrap>
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
-                                        :items="companies"
+                                        :items="dealerships"
                                         item-text="name"
-                                        :rules="[v => !!v || trans.select_a_company]"
                                         item-value="id"
+                                        :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.company"
-                                        v-model="brand.company_id"
-                                        @change="onCountryChange"
+                                        :label="trans.dealership"
+                                        v-model="selectedEvent.dealership_id"
                                     >
                                     </v-select>
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2>
-                                    <div class="r-color-picker" v-if="isColorSwatchActive">
-                                        <div class="r-color-picker-content">
-                                            <chrome v-model="selectedColor"></chrome>
-                                            <v-btn small
-                                                   class="r-color-choose"
-                                                   @click="isColorSwatchActive = false"
-                                                   :color="themeOption.buttonPrimaryColor">
-                                                {{ trans.select }}
-                                            </v-btn>
-                                        </div>
-                                    </div>
-
-                                    <v-text-field
-                                        :label="trans.color"
-                                        v-model="brand.colour"
-                                        :rules="[v => !!v || trans.choose_a_color]"
-                                        required
-                                        @focus="isColorSwatchActive = true"
-                                        :color="themeOption.inputColor">
-                                    </v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch :label="trans.status"
-                                              :color="themeOption.inputColor"
-                                              v-model="brand.status">
-                                    </v-switch>
+                                    <v-select
+                                        :items="types"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.type}`"
+                                        v-model="selectedEvent.type_id"
+                                    >
+                                    </v-select>
                                 </v-flex>
                             </v-layout>
 
-                            <v-divider class="mt-2 mb-2"></v-divider>
-
-                            <v-layout column wrap>
-                                <v-tabs
-                                    v-model="active"
-                                    :color="themeOption.tabColor"
-                                    :slider-color="themeOption.tabSliderColor"
-                                >
-                                    <v-tab
-                                        key="regions"
-                                        ripple
+                            <v-layout row wrap>
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-menu
+                                        ref="startEvent"
+                                        v-model="startEvent"
+                                        :close-on-content-click="false"
+                                        :nudge-right="40"
+                                        :return-value.sync="selectedEvent.start"
+                                        lazy
+                                        transition="scale-transition"
+                                        offset-y
+                                        full-width
+                                        min-width="290px"
                                     >
-                                        {{ trans.regions}}
-                                    </v-tab>
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field
+                                                :rules="[v => !!v || `${trans.start} ${trans.date} ${trans.is_required}`]"
+                                                required
+                                                v-model="selectedEvent.start"
+                                                :color="themeOption.inputColor"
+                                                :label="`${trans.start} ${trans.date}`"
+                                                prepend-icon="event"
+                                                readonly
+                                                v-on="on"
+                                            ></v-text-field>
+                                        </template>
+                                        <v-date-picker
+                                            :color="themeOption.inputColor"
+                                            v-model="selectedEvent.start" no-title scrollable>
+                                            <v-spacer></v-spacer>
 
-                                    <v-tab
-                                        key="flag"
-                                        ripple
-                                    >
-                                        {{ trans.logo}}
-                                    </v-tab>
+                                            <v-btn flat :color="themeOption.buttonSecondaryColor"
+                                                   @click="startEvent = false">{{ trans.cancel }}
+                                            </v-btn>
 
-                                    <v-tab-item
-                                        key="regions"
-                                    >
-                                        <Regions model="brand"></Regions>
-                                    </v-tab-item>
+                                            <v-btn flat :color="themeOption.buttonPrimaryColor"
+                                                   @click="$refs.startEvent.save(selectedEvent.start)">{{ trans.ok }}
+                                            </v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-flex>
 
-                                    <v-tab-item
-                                        key="logo"
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-menu
+                                        ref="endEvent"
+                                        v-model="endEvent"
+                                        :close-on-content-click="false"
+                                        :nudge-right="40"
+                                        :return-value.sync="selectedEvent.end"
+                                        lazy
+                                        transition="scale-transition"
+                                        offset-y
+                                        full-width
+                                        min-width="290px"
                                     >
-                                        <v-layout row wrap pt-3>
-                                            <v-card width="250px">
-                                                <v-img
-                                                    :src="logo"
-                                                    aspect-ratio="2.75"
-                                                ></v-img>
-                                            </v-card>
-                                            <FileUpload :preview="false"
-                                                        model="country"></FileUpload>
-                                        </v-layout>
-                                    </v-tab-item>
-                                </v-tabs>
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field
+                                                :rules="[v => !!v || `${trans.end} ${trans.date} ${trans.is_required}`]"
+                                                required
+                                                v-model="selectedEvent.end"
+                                                :color="themeOption.inputColor"
+                                                :label="`${trans.end} ${trans.date}`"
+                                                prepend-icon="event"
+                                                readonly
+                                                v-on="on"
+                                            ></v-text-field>
+                                        </template>
+                                        <v-date-picker
+                                            :color="themeOption.inputColor"
+                                            v-model="selectedEvent.end" no-title scrollable>
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn flat :color="themeOption.buttonSecondaryColor"
+                                                   @click="endEvent = false">{{ trans.cancel }}
+                                            </v-btn>
+
+                                            <v-btn flat :color="themeOption.buttonPrimaryColor"
+                                                   @click="$refs.endEvent.save(selectedEvent.end)">{{ trans.ok }}
+                                            </v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-flex>
+
+                                <v-flex xs12 pa-2>
+                                    <v-textarea
+                                        :color="themeOption.inputColor"
+                                        :label="trans.notes"
+                                        v-model="selectedEvent.notes"
+                                        :hint="trans.notes"
+                                    ></v-textarea>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-switch
+                                        :label="trans.status"
+                                        :color="themeOption.inputColor"
+                                        v-model="selectedEvent.status">
+                                    </v-switch>
+                                </v-flex>
                             </v-layout>
                         </v-card-text>
 
@@ -135,23 +183,19 @@
 
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
-                            <v-btn
-                                :class="themeOption.buttonSecondaryColor"
-                                small
-                                @click="$router.push({name: 'listBrands'})"
-                            >
-                                {{ trans.back }}
-                            </v-btn>
 
-                            <v-btn
-                                :loading="themeOption.buttonLoading"
-                                :disabled="themeOption.buttonLoading"
-                                :class="themeOption.buttonSuccess"
-                                small
-                                @click="onUpdateBrand()"
-                            >
-                                {{ trans.update }}
-                            </v-btn>
+                            <r-button :text="`${trans.back}`"
+                                      small
+                                      :loadingBar="false"
+                                      @click="onBackToEventList"
+                                      :color="themeOption.buttonSecondaryColor"/>
+
+                            <r-button :text="`${trans.update} ${trans.event}`"
+                                      small
+                                      :loadingBar="true"
+                                      @click="onUpdateEvent"
+                                      :color="themeOption.buttonPrimaryColor"/>
+
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -162,27 +206,30 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import {Chrome} from 'vue-color'
-    import FileUpload from '../../components/ImageUpload'
-    import Regions from '../../components/Brand/Regions'
-    import LanguagePicker from '../../components/Language'
+    import TimePicker from "../../components/TimePicker";
+    import ImageUpload from "../../components/ImageUpload";
+    import LanguagePicker from "../../components/Language";
 
     export default {
         components: {
-            Chrome,
-            FileUpload,
-            Regions,
+            TimePicker,
+            ImageUpload,
             LanguagePicker
         },
 
         data() {
             return {
+                startEvent: false,
+                endEvent: false,
                 valid: true,
+                event: {},
+                times: {},
                 active: null,
                 model: null,
 
-                isColorSwatchActive: false,
-                selectedColor: '',
+                nameRules: [
+                    v => !!v || this.trans.name_is_required
+                ]
             }
         },
 
@@ -190,30 +237,16 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                companies: 'getCompanies',
-                countries: 'getCountries',
-                selectedCountry: 'getSelectedCountry',
-                regions: 'getRegions',
-                brand: 'getSelectedBrand',
+                types: 'getTypes',
+                dealerships: 'getDealerships',
+                selectedEvent: 'getSelectedEvent',
                 selectedLanguage: 'getSubSelectedLanguage',
-                logo: 'getUploadedImage'
             })
         }),
 
         watch: {
-            brand(value) {
-                this.$refs.brandForm.resetValidation()
-                this.$store.commit('setImage', value.logo)
-            },
-
-            selectedColor(value) {
-                let brand = {...this.brand}
-                brand.colour = value.hex
-                this.$store.commit('setSelectedBrand', brand)
-            },
-
             selectedLanguage(){
-                this.$store.dispatch('fetchBrand', {
+                this.$store.dispatch('fetchEvent', {
                     id: this.$route.params.id,
                     languageId: this.selectedLanguage.id,
                     edit: true
@@ -223,68 +256,58 @@
 
         created() {
             this.initialize()
-            this.fetchCompany()
         },
 
         methods: {
             initialize() {
-                this.$store.dispatch('fetchCountriesForDropdown')
-                this.$store.dispatch('fetchBrand', {id: this.$route.params.id})
-            },
-            fetchCompany() {
-                this.$store.dispatch('fetchCompanies', {themeOption: this.themeOption, trans: this.trans});
+                this.$store.dispatch('fetchEvent', {id: this.$route.params.id})
             },
 
-            onUpdateBrand() {
+            onUpdateEvent() {
+                if (this.$refs.eventForm.validate()) {
+                    let eventForm = new FormData()
+                    eventForm.append('_method', 'put')
 
-                if (this.$refs.brandForm.validate()) {
-                    // this.$store.commit('setThemeOption', {buttonLoading: true})
-
-                    let brandForm = new FormData()
-
-                    // Set form object for brand
-                    _.forOwn(this.brand, (value, key) => {
-                        brandForm.append(key, value)
+                    // Set form object for event
+                    _.forOwn(this.selectedEvent, (value, key) => {
+                        if (key === 'status') {
+                            if (value) {
+                                eventForm.append('status', 1)
+                            } else {
+                                eventForm.append('status', 0)
+                            }
+                        } else {
+                            eventForm.append(key, value)
+                        }
                     })
 
-                    brandForm.append('logo', this.logo)
+                    // Set form object for times
+                    _.forOwn(this.times, (value, key) => {
+                        eventForm.append(key, value)
+                    })
 
-                    brandForm.append('_method', 'put')
-
+                    const URL = `/api/events/${this.selectedEvent.id}`
                     // send form data to save
-                    const URL = `/api/brands/${this.brand.id}/update`
-                    axios.post(URL, brandForm).then((response) => {
+                    axios.post(URL, eventForm).then((response) => {
                         if (response.data.success) {
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.brand.name}  ${this.trans.successfully_updated}`
+                                message: `${this.event.name}  ${this.trans.successfully_created}`
                             })
-                            this.$store.commit('setThemeOption', {buttonLoading: false})
-                            // this.$router.push({name: 'listbrands'})
+                            this.$store.commit('setButtonLoading', false)
+                            // this.$router.push({name: 'listEvents'})
                         }
-                    }).catch((error) => {
-                        this.$store.commit('setThemeOption', {buttonLoading: false})
                     })
+                }else{
+                    this.$store.commit('setButtonLoading', false)
                 }
             },
 
-            onCountryChange(value) {
-                let newBrand = {...this.brand}
-                newBrand.region_id = null
-                this.$store.commit('setSelectedBrand', newBrand)
-                this.$store.dispatch('fetchRegions', {id: value.id})
-            },
-
-            resetBrands(){
-                this.$store.commit('setSelectedBrand', {})
-                this.$store.commit('setSubSelectedLanguage', {})
-                this.$store.commit('setRegionsByBrandId', [])
+            onBackToEventList(){
+                this.$router.push({name: 'listEvents'})
+                this.$store.commit('setButtonLoading', false)
             }
-        },
-
-        destroyed() {
-            this.resetBrands()
         }
     }
 </script>

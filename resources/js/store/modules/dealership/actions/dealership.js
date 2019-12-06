@@ -52,7 +52,6 @@ export default {
      * @param payload
      */
     fetchDealershipsForDropdown({commit}, payload = {}) {
-        console.log('fetch dealership')
         const URL = '/api/dealerships/dropdown'
         axios.get(URL).then((response) => {
             if (response.data.dealership) {

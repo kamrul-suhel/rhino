@@ -16,6 +16,13 @@ class EventTypeSeeder extends Seeder
      */
     public function run()
     {
+        // Empty the table
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        EventType::truncate();
+        EventTypeTranslation::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+
         factory(EventType::class, 30)->create();
 
         $events = EventType::all();
