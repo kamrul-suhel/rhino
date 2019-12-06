@@ -14,7 +14,7 @@ class AddForeignKeyToVehicleTranslationTable extends Migration
     public function up()
     {
         Schema::table('vehicles_translation', function (Blueprint $table) {
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->foreign('language_id')->references('id')->on('languages');
         });
     }

@@ -2,7 +2,7 @@ import fn from '../../utils/function'
 
 const defaultState = {
     vehicles : [],
-    selectedVehicles: {},
+    selectedVehicle: {},
     listHeader:[],
     loading: 'white',
     totalVehicles: 0,
@@ -52,10 +52,10 @@ const mutations = {
     setVehicleListHeader(state, trans){
         const header = [
             {
-                text: trans.brand,
+                text: trans.vehicle,
                 align: 'left',
                 sortable: false,
-                value: 'brand'
+                value: 'vehicle'
             },
 
             {
@@ -102,11 +102,11 @@ const getters = {
     },
 
     getSelectedVehicle(state){
-        return state.selectedBrand
+        return state.selectedVehicle
     },
 
     getTotalVehicles(state){
-        return state.totalBrands
+        return state.totalVehicles
     },
 
     // getBrandByVehicleId(state){
@@ -142,8 +142,9 @@ const actions = {
         const URL = `/api/vehicles${params}`
 
         axios.get(URL).then((response) => {
-            if (response.data.brands) {
-                commit('setVehicles', response.data.brands)
+            if (response.data.vehicles) {
+                console.log(response);
+                commit('setVehicles', response.data.vehicles)
                 commit('setTotalVehicles', response.data.total)
                 commit('setVehicleLoading', false)
             }
