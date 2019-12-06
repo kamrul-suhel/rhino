@@ -1,6 +1,6 @@
 <template>
     <v-btn
-        :loading="loadingBar ? loading : false"
+        :loading="loadingBar && (identifier == buttonIdentifier)  ? loading : false"
         :small="small"
         :flat="flat"
         :color="color"
@@ -19,6 +19,11 @@
         },
 
         props: {
+            identifier: {
+                type: String,
+                required: true
+            },
+
             text: {
                 type: String,
                 required: true
@@ -28,15 +33,15 @@
                 required: true
             },
 
-            small:{
+            small: {
                 type: Boolean
             },
 
-            flat:{
-                type:Boolean
+            flat: {
+                type: Boolean
             },
 
-            loadingBar:{
+            loadingBar: {
                 type: Boolean,
                 default: true
             }
@@ -44,14 +49,16 @@
 
         computed: ({
             ...mapGetters({
-                loading: 'getButtonLoading'
+                loading: 'getButtonLoading',
+                buttonIdentifier: 'getButtonIdentifier'
             }),
         }),
 
-        methods:{
-            onClick(){
-                if(this.loadingBar){
+        methods: {
+            onClick() {
+                if (this.loadingBar) {
                     this.$store.commit('setButtonLoading', true)
+                    this.$store.commit('setButtonIdentifier', this.identifier)
                 }
                 this.$emit('click', true)
             }

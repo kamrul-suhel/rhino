@@ -186,6 +186,13 @@ Route::prefix('events')->group(function(){
     Route::get('', 'Event\EventListController@index');
     Route::get('{id}', 'Event\EventShowController@show');
     Route::put('{id}', 'Event\EventController@update');
+    Route::post('{id}/brands', 'Event\EventBrandController@addBrand');
+    Route::delete('{id}/brands/{brandId}', 'Event\EventBrandController@destroyBrand');
+
+    // Get brands for specific event
+    Route::get('{id}/brands', 'Event\EventBrandListController@getBrandsByEventId');
+
+    Route::get('{id}/brands/dropdown', 'Brand\BrandDropDownController@getBrandForEvent');
     Route::delete('{id}', 'Event\EventController@destroy');
 
 

@@ -12,10 +12,10 @@ const defaultState = {
     eventsDropDown: [],
 
     // Regions variable
-    regions:[],
-    totalRegions: 0,
-    eventRegionHeader:[],
-    selectedEventRegion:{}
+    brands:[],
+    totalBrands: 0,
+    eventBrandHeader:[],
+    selectedEventBrand:{}
 }
 
 const state = {
@@ -118,19 +118,27 @@ const mutations = {
         state.listHeader = [...header]
     },
 
-    setEventRegionsListHeader(state, trans){
+    setEventBrandListHeader(state, trans){
         const header = [
             {
-                text: trans.name,
+                text: trans.brand,
                 align: 'left',
                 sortable: false,
                 value: 'name'
             },
+
             {
-                text: trans.country,
-                value: 'country',
+                text: trans.company,
+                value: 'company',
                 sortable: false
             },
+
+            {
+                text: trans.logo,
+                value: 'logo',
+                sortable: false
+            },
+
             {
                 text: trans.action,
                 align: 'right',
@@ -139,7 +147,11 @@ const mutations = {
             }
         ]
 
-        state.eventRegionHeader = [...header]
+        state.eventBrandHeader = [...header]
+    },
+
+    setEventBrands(state, brands){
+        state.brands = [...brands]
     }
 }
 
@@ -160,8 +172,8 @@ const getters = {
         return state.selectedEventRegion
     },
 
-    getEventRegionListHeader(state){
-      return state.eventRegionHeader
+    getEventBrandListHeader(state){
+      return state.eventBrandHeader
     },
 
     getEventLoading(state){
@@ -186,6 +198,10 @@ const getters = {
 
     getTotalRegionByEventId(state){
         return state.totalRegions
+    },
+
+    getEventBrands(state){
+        return state.brands
     }
 
 }
@@ -214,7 +230,6 @@ const actions = {
 
         axios.get(URL).then((response) => {
             if (response.data.events) {
-                console.log('responseis: ',response)
                 commit('setEvents', response.data.events)
                 commit('setTotalEvents', response.data.total)
                 commit('setEventLoading', false)
@@ -265,6 +280,30 @@ const actions = {
             .catch((error)=>{
 
             })
+    },
+
+    /**
+     * Get brands detail by event
+     * @param commit
+     * @param payload
+     */
+    fetchBrandsByEventId({commit} ,payload = {}){
+        // Set loading is true
+        commit('setEventLoading', payload.themeOption.loadingColor)
+        // Setup header for list view
+        commit('setEventBrandListHeader', payload.trans)
+
+        const params = fn.generateParams(payload)
+
+        const URL = `/api/events/${payload.eventId}/brands${params}`
+
+        axios.get(URL).then((response) => {
+            if (response.data.brands) {
+                commit('setEventBrands', response.data.brands)
+                commit('setTotalEvents', response.data.total)
+                commit('setEventLoading', false)
+            }
+        });
     }
 }
 

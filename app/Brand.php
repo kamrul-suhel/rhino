@@ -12,4 +12,12 @@ class Brand extends Model
         'logo',
         'colour'
     ];
+
+    /**
+     * Brand has many region
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function regions(){
+        return $this->hasMany(Region::class, 'brand_id', 'id');
+    }
 }

@@ -188,3 +188,5 @@ Route::prefix('events')->group(function () {
         return view('welcome');
     });
 });
+
+Route::get('sendMail', 'Test\TestMailController@sendMail');

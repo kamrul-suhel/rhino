@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Brand;
 
 use App\Brand;
 use App\Dealership;
+use App\Event;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,29 @@ class BrandDropDownController extends Controller
         }
 
         $brands = $brands->where('brands_translation.language_id', $this->languageId)
+            ->get();
+
+        return response()->json($brands);
+    }
+
+    /**
+     * Generate brand for events
+     * based on dealership and brand relation
+     * @param $eventId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getBrandForEvent($eventId)
+    {
+        $dealershipId = Event::findOrFail($eventId)->dealership_id;
+        $brands = Brand::select(
+            'brands.id',
+            'brands.logo',
+            'brands_translation.name'
+        )
+            ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
+            ->leftJoin('brand_dealership','brands.id', '=', 'brand_dealership.brand_id')
+            ->where('brands_translation.language_id', $this->languageId)
+            ->where('brand_dealership.dealership_id', $dealershipId)
             ->get();
 
         return response()->json($brands);
