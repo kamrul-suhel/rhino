@@ -183,6 +183,7 @@
                             <v-spacer></v-spacer>
 
                             <r-button :text="`${trans.back}`"
+                                      identifier="'eventList'"
                                       small
                                       :loadingBar="false"
                                       @click="onBackToEventList"
@@ -190,6 +191,7 @@
 
                             <r-button :text="`${trans.create} ${trans.event}`"
                                       small
+                                      identifier="'eventCreate'"
                                       :loadingBar="true"
                                       @click="onCreateEvent"
                                       :color="themeOption.buttonPrimaryColor"/>
