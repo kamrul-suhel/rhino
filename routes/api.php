@@ -110,6 +110,7 @@ Route::prefix('vehicles')->group(function(){
     Route::get('{id}/show', 'Vehicle\VehicleController@show');
     Route::put('{id}/update', 'Vehicle\VehicleController@update');
     Route::get('{id}/brands', 'Vehicle\VehicleController@getBrands');
+    Route::delete('{id}', 'Vehicle\VehicleController@destroy');
 });
 
 

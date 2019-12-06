@@ -17,23 +17,24 @@ class VehicleController extends Controller
     {
         $data = [];
         $totalVehicle = 0;
-        $vehicle = Brand::select(
+        $vehicles = Vehicle::select(
             'vehicles.id',
             'vehicles.driver_seating_position_left_image',
             'vehicles.driver_seating_position_right_image',
             'vehicles_translation.model as model',
+            'brands_translation.name as brand'
         )
-            ->leftJoin('vehicles_translation', 'vehicle_translation.vehicle_id', '=', 'vehicles.id')
-            ->leftJoin('brands', 'brands.id', '=', 'vehicle.brand_id')
+            ->leftJoin('vehicles_translation', 'vehicles_translation.vehicle_id', '=', 'vehicles.id')
+            ->leftJoin('brands', 'brands.id', '=', 'vehicles.brand_id')
             ->leftJoin('brands_translation', 'brands.id', '=', 'brands_translation.brand_id')
             ->where('vehicles_translation.language_id', $this->languageId)
-            ->where('companies_translation.language_id', $this->languageId);
+            ->where('brands_translation.language_id', $this->languageId);
 
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search vehicle name
             if ($request->has('search') && !empty($request->search)) {
-                $vehicles = $vehicle->where('vehicle_translation.model', 'LIKE', '%' . $request->search . '%');
+                $vehicles = $vehicle->where('vehicles_translation.model', 'LIKE', '%' . $request->search . '%');
             }
 
             // If sortBy has set then, sort by region, group, country
@@ -122,7 +123,10 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vehicle = Vehicle::findOrFail($id);
+        $vehicle->delete();
+
+        return response()->json(['success' => true]);
     }
 
     public function getBrands()
