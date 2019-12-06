@@ -85729,66 +85729,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -85849,19 +85789,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     methods: {
         fetchVehicle: function fetchVehicle() {
-            this.$store.dispatch('fetchBrands', { themeOption: this.themeOption, trans: this.trans });
+            this.$store.dispatch('fetchVehicles', { themeOption: this.themeOption, trans: this.trans });
         },
 
 
         // Initialize data when first render
         initialize: function initialize() {
-            this.$refs.createVehicle.resetValidation();
+            //this.$refs.createVehicle.resetValidation()
 
             var paginateOption = _extends({}, this.pagination, {
                 trans: this.trans,
                 themeOption: this.themeOption,
-                paginate: true,
-                search: this.searchVehicles
+                paginate: true
+                //search: this.searchVehicles
             });
 
             this.$store.dispatch('fetchVehicles', paginateOption);
@@ -85878,11 +85818,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.$refs.createVehicle.resetValidation();
             this.$store.commit('setSelectedVehicle', {});
         },
-        onConfirmVehicle: function onConfirmVehicle() {
+        onConfirmDeleteVehicle: function onConfirmDeleteVehicle() {
             var _this = this;
 
             var selectedVehicle = this.selectedVehicle;
-            var URL = '/api/vehicles/' + selectedVehicle.id + '/delete';
+            var URL = '/api/vehicles/' + selectedVehicle.id;
 
             axios.delete(URL, { _method: 'delete' }).then(function (response) {
                 if (response.data.success) {
@@ -85899,43 +85839,39 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 }
             });
         },
-        onCreateVehicle: function onCreateVehicle() {
-            var _this2 = this;
 
-            if (this.$refs.createVehicle.validate()) {
-                // Check update or create
-                var URL = '/api/vehicles';
-                var vehicleForm = new FormData();
-                vehicleForm.append('model', this.selectedVehicle.model);
-                //vehicleForm.append('driver_seating_position_right_image', this.seatingRightImage)
-                //vehicleForm.append('driver_seating_position_left_image', this.seatingLeftImage)
-                vehicleForm.append('brand_id', this.selectedVehicle.brand_id);
-                vehicleForm.append('status', this.selectedVehicle.status);
+        // onCreateVehicle() {
+        //     if (this.$refs.createVehicle.validate()) {
+        //         // Check update or create
+        //         let URL = '/api/vehicles'
+        //         let vehicleForm = new FormData()
+        //         vehicleForm.append('model', this.selectedVehicle.model)
+        //         vehicleForm.append('driver_seating_position_right_image', this.seatingRightImage)
+        //         vehicleForm.append('driver_seating_position_left_image', this.seatingLeftImage)
+        //         vehicleForm.append('brand_id', this.selectedVehicle.brand_id)
+        //         vehicleForm.append('status', this.selectedVehicle.status)
 
-                axios.post(URL, vehicleForm).then(function (response) {
-                    if (response.data.success) {
-                        _this2.initialize();
-                        _this2.$store.commit('setSnackbarMessage', {
-                            openMessage: true,
-                            timeOut: _this2.themeOption.snackBarTimeout,
-                            message: _this2.selectedVehicle.model + '  ' + _this2.trans.successfully_created
-                        });
+        //         axios.post(URL, vehicleForm).then((response) => {
+        //             if (response.data.success) {
+        //                 this.initialize()
+        //                 this.$store.commit('setSnackbarMessage', {
+        //                     openMessage: true,
+        //                     timeOut: this.themeOption.snackBarTimeout,
+        //                     message: `${this.selectedVehicle.model}  ${this.trans.successfully_created}`
+        //                 })
 
-                        _this2.onResetVehicle();
-                    }
-                });
-            }
-        },
+        //                 this.onResetVehicle()
+        //             }
+        //         })
+        //     }
+
+        // },
+
         onLanguageChange: function onLanguageChange(selectedLanguage) {
             this.$store.dispatch('fetchVehicle', {
                 id: this.selectedVehicle.id,
                 languageId: selectedLanguage
             });
-        },
-        onResetVehicle: function onResetVehicle() {
-            this.editVehicle = false;
-            this.$store.commit('setSelectedVehicle', {});
-            // this.$store.commit('resetImageUpload')
         }
     }
 });
@@ -85977,7 +85913,7 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm8: "", "pt-3": "" } },
+            { attrs: { xs12: "", "pt-3": "" } },
             [
               _c("v-data-table", {
                 staticClass: "elevation-1",
@@ -86012,21 +85948,24 @@ var render = function() {
                           { staticClass: "text-xs-right" },
                           [
                             _c(
-                              "v-icon",
+                              "a",
                               {
-                                staticClass: "mr-2",
-                                attrs: { small: "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.onEditVehicle(props.item)
-                                  }
+                                attrs: {
+                                  href: "vehicles/" + props.item.id + "/edit"
                                 }
                               },
                               [
-                                _vm._v(
-                                  "\n                            edit\n                        "
+                                _c(
+                                  "v-icon",
+                                  { staticClass: "mr-2", attrs: { small: "" } },
+                                  [
+                                    _vm._v(
+                                      "\n                            edit\n                        "
+                                    )
+                                  ]
                                 )
-                              ]
+                              ],
+                              1
                             ),
                             _vm._v(" "),
                             _c(
@@ -86056,174 +85995,6 @@ var render = function() {
                   }
                 ])
               })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm4: "", "pt-3": "", "pl-3": "" } },
-            [
-              _c(
-                "v-form",
-                {
-                  ref: "createVehicle",
-                  attrs: { "lazy-validation": "" },
-                  model: {
-                    value: _vm.valid,
-                    callback: function($$v) {
-                      _vm.valid = $$v
-                    },
-                    expression: "valid"
-                  }
-                },
-                [
-                  _c(
-                    "v-card",
-                    [
-                      _c("v-card-title", [
-                        _c("h3", [
-                          _vm._v(
-                            _vm._s(
-                              _vm.editVehicle
-                                ? _vm.trans.edit_vehicle
-                                : _vm.trans.create_vehicle
-                            )
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("v-divider"),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-text",
-                        [
-                          this.editVehicle
-                            ? _c("v-autocomplete", {
-                                attrs: {
-                                  label: _vm.trans.languages,
-                                  "item-text": "model",
-                                  "item-value": "id",
-                                  color: _vm.themeOption.inputColor,
-                                  items: _vm.languages
-                                },
-                                on: { change: _vm.onLanguageChange },
-                                model: {
-                                  value: _vm.selectedVehicle.language_id,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.selectedVehicle,
-                                      "language_id",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "selectedVehicle.language_id"
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            attrs: {
-                              label: _vm.trans.model,
-                              rules: [
-                                function(v) {
-                                  return (
-                                    !!v || _vm.trans.vehicle_model_is_required
-                                  )
-                                }
-                              ],
-                              required: "",
-                              color: _vm.themeOption.inputColor
-                            },
-                            model: {
-                              value: _vm.selectedVehicle.model,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedVehicle, "model", $$v)
-                              },
-                              expression: "selectedVehicle.model"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-autocomplete", {
-                            attrs: {
-                              label: _vm.trans.company,
-                              color: _vm.themeOption.inputColor,
-                              rules: [
-                                function(v) {
-                                  return !!v || _vm.trans.select_a_brand
-                                }
-                              ],
-                              required: "",
-                              items: _vm.brands,
-                              "item-text": "name",
-                              "item-value": "id"
-                            },
-                            model: {
-                              value: _vm.selectedVehicle.brand_id,
-                              callback: function($$v) {
-                                _vm.$set(_vm.selectedVehicle, "brand_id", $$v)
-                              },
-                              expression: "selectedVehicle.brand_id"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-actions",
-                        { staticClass: "pa-2" },
-                        [
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: {
-                                small: "",
-                                color: _vm.themeOption.buttonSecondaryColor
-                              },
-                              on: { click: _vm.onResetVehicle }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.trans.cancel) +
-                                  "\n                        "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: {
-                                small: "",
-                                color: _vm.themeOption.buttonPrimaryColor
-                              },
-                              on: { click: _vm.onCreateVehicle }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.editVehicle
-                                      ? _vm.trans.edit
-                                      : _vm.trans.create
-                                  ) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
             ],
             1
           )
@@ -90716,11 +90487,19 @@ if (false) {
 var brandsRoute = {
     path: '/users',
     name: 'users',
-    component: __WEBPACK_IMPORTED_MODULE_0__pages_user__["b" /* Root */],
+    component: __WEBPACK_IMPORTED_MODULE_0__pages_user__["d" /* Root */],
     children: [{
         path: '/list',
         name: 'listUser',
-        component: __WEBPACK_IMPORTED_MODULE_0__pages_user__["a" /* List */]
+        component: __WEBPACK_IMPORTED_MODULE_0__pages_user__["c" /* List */]
+    }, {
+        path: '/create',
+        name: 'createUser',
+        component: __WEBPACK_IMPORTED_MODULE_0__pages_user__["Create"]
+    }, {
+        path: '/{id}/edit',
+        name: 'editUser',
+        component: __WEBPACK_IMPORTED_MODULE_0__pages_user__["Edit"]
     }]
 };
 
@@ -90735,8 +90514,8 @@ var brandsRoute = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Root___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Root__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__List__ = __webpack_require__(518);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__List__);
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__Root___default.a; });
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__List___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__Root___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__List___default.a; });
 
 
 
@@ -91035,6 +90814,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
 //
 //
 //
@@ -91974,6 +91755,7 @@ var render = function() {
                           _c("r-button", {
                             attrs: {
                               text: "" + _vm.trans.back,
+                              identifier: "'eventList'",
                               small: "",
                               loadingBar: false,
                               color: _vm.themeOption.buttonSecondaryColor
@@ -91985,6 +91767,7 @@ var render = function() {
                             attrs: {
                               text: _vm.trans.create + " " + _vm.trans.event,
                               small: "",
+                              identifier: "'eventCreate'",
                               loadingBar: true,
                               color: _vm.themeOption.buttonPrimaryColor
                             },
@@ -97106,7 +96889,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var defaultState = {
     vehicles: [],
-    selectedVehicles: {},
+    selectedVehicle: {},
     listHeader: [],
     loading: 'white',
     totalVehicles: 0,
@@ -97145,10 +96928,10 @@ var mutations = {
     },
     setVehicleListHeader: function setVehicleListHeader(state, trans) {
         var header = [{
-            text: trans.brand,
+            text: trans.vehicle,
             align: 'left',
             sortable: false,
-            value: 'brand'
+            value: 'vehicle'
         }, {
             text: trans.model,
             align: 'left',
@@ -97184,9 +96967,9 @@ var getters = (_getters = {
         return state.brandListRowPerPage;
     }
 }, _defineProperty(_getters, 'getSelectedVehicle', function getSelectedVehicle(state) {
-    return state.selectedBrand;
+    return state.selectedVehicle;
 }), _defineProperty(_getters, 'getTotalVehicles', function getTotalVehicles(state) {
-    return state.totalBrands;
+    return state.totalVehicles;
 }), _getters);
 
 var actions = {
@@ -97215,8 +96998,9 @@ var actions = {
         var URL = '/api/vehicles' + params;
 
         axios.get(URL).then(function (response) {
-            if (response.data.brands) {
-                commit('setVehicles', response.data.brands);
+            if (response.data.vehicles) {
+                console.log(response);
+                commit('setVehicles', response.data.vehicles);
                 commit('setTotalVehicles', response.data.total);
                 commit('setVehicleLoading', false);
             }
