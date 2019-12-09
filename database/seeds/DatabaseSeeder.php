@@ -48,5 +48,9 @@ class DatabaseSeeder extends Seeder
 
         // Seed Brand Dealership  table
         $this->call(BrandDealershipSeeder::class);
+
+
+        // Seed User  table
+        $this->call(UserSeeder::class);
     }
 }

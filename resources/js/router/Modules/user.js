@@ -6,9 +6,21 @@ const brandsRoute ={
     component: User.Root,
     children:[
         {
-            path:'/list',
-            name: 'listUser',
+            path:'list',
+            name: 'listUsers',
             component: User.List,
+        },
+
+        {
+            path:'create',
+            name: 'createUsers',
+            component: User.Create,
+        },
+
+        {
+            path:'{id}/edit',
+            name: 'editUsers',
+            component: User.Edit,
         }
     ]
 }

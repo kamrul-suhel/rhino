@@ -22,6 +22,7 @@ class CreateAppointmentsTable extends Migration
             $table->tinyInteger('guest_changing_car')->default(0);
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->boolean('is_canceled')->default(0);
             $table->timestamps();
         });
     }

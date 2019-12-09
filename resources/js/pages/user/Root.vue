@@ -1,7 +1,5 @@
 <template>
-    <v-layout>
-        <h2>User component</h2>
-    </v-layout>
+    <router-view></router-view>
 </template>
 
 <script>
@@ -11,7 +9,6 @@
 
             }
         },
-
 
         created() {
 

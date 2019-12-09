@@ -1,114 +1,214 @@
+import fn from '../../utils/function'
+
 const defaultState = {
-    authUser: {},
-    userId : null,
-    userName: null,
-    userEmail: null,
-    admin: true,
-    isLogin: false,
-    themeOption:{
-        theme: 'dark',
-        inputColor: 'white',
-        buttonPrimaryColor: 'success',
-        buttonSecondaryColor: 'dark',
-        buttonDangerColor: 'red',
-        buttonSuccess: 'success',
-        buttonLoading: false,
-        buttonLoadingStyle: 'loading',
+    users: [],
+    selectedUser: {},
+    listHeader: [],
+    loading: 'white',
+    totalUsers: 0,
+    userListRowPerPage: [15, 25, 40],
 
-        // Header setting
-        textHeadingColor: 'cyan',
-        loadingColor: 'white',
+    // For dropdown
+    usersDropDown: [],
 
-        // Snack bar option
-        snackBarBgSuccess: 'success',
-        snackBarBgDanger: 'red',
-        snackBarBgError: 'red',
-        snackBarTimeout : 6000,
-
-
-        //Tab option
-        tabColor: 'gray',
-        tabSliderColor: 'black',
-
-        // Default image
-        brandDefaultImage : '/images/brandPlaceholder.jpg'
-    }
+    // Regions variable
+    regions: [],
+    totalRegions: 0,
+    userRegionHeader: [],
+    selectedUserRegion: {}
 }
+
 const state = {
     ...defaultState
 }
 
 const mutations = {
-    setUser(state, user){
-        state.userId = user.id
-        state.userName = user.name
-        state.userEmail = user.email
-        state.admin = user.role
-        state.isLogin = true
+    setUsers(state, users) {
+        state.users = [...users]
     },
 
-    resetUser(state){
+    setUsersForDropDown(state, users) {
+        state.usersDropDown = [...users]
+    },
+
+    setSelectedUserRegion(state, selectedRegion) {
+        state.selectedUserRegion = selectedRegion
+    },
+
+    setRegionsByUserId(state, regions) {
+        state.regions = [...regions]
+    },
+
+    setTotalRegionByUserId(state, totalRegion) {
+        state.totalRegions = totalRegion
+    },
+
+    setUserLoading(state, status) {
+        state.loading = status
+    },
+
+    setSelectedUser(state, user) {
+        state.selectedUser = {...user}
+    },
+
+    setTotalUsers(state, totalUser) {
+        state.totalUsers = totalUser
+    },
+
+    resetUserstore(state) {
         state = {...defaultState}
     },
 
-    setAuthUser(state, user){
-        state.authUser =  {...user}
-        state.isLogin = true
-    },
+    setUserListHeader(state, trans) {
+        const header = [
+            {
+                text: trans.name,
+                align: 'left',
+                sortable: true,
+                value: 'name'
+            },
 
-    setIsLogin(state, status){
-        state.isLogin = status
-    },
+            {
+                text: trans.email,
+                align: 'left',
+                sortable: true,
+                value: 'email'
+            },
 
-    setThemeOption(state, themeOption){
-        state.themeOption = {
-            ...state.themeOption,
-            ...themeOption
-        }
+            {
+                text: trans.status,
+                value: 'status'
+            },
+
+            {
+                text: trans.role,
+                value: 'lavelAccess',
+                align: 'left',
+                sortable: false
+            },
+
+            {
+                text: trans.actions,
+                value: 'actions',
+                sortable: false,
+                align: 'right'
+            }
+        ]
+
+        state.listHeader = [...header]
     }
 }
 
 const getters = {
-    getUserId(state){
-        return state.userId
+    getUsers(state) {
+        return state.users
     },
 
-    getUserName(state){
-        return state.userName
+    getUsersForDropDown(state) {
+        return state.usersDropDown
     },
 
-    getUserEmail(state){
-        return state.userEmail
+    getUserListHeader(state) {
+        return state.listHeader
     },
 
-    getAuthUser(state){
-        return state.authUser
+    getSelectedUserRegion(state) {
+        return state.selectedUserRegion
     },
 
-    getUserRole(state){
-        return state.admin
+    getUserRegionListHeader(state) {
+        return state.userRegionHeader
     },
 
-    getIsLogin(state){
-        return state.isLogin
+    getUserLoading(state) {
+        return state.loading
     },
 
-    getThemeOption(state){
-        return state.themeOption
+    getUserListRowsPerPage(state) {
+        return state.userListRowPerPage
     },
 
-    getIsAdmin(state){
-        return state.admin
+    getSelectedUser(state) {
+        return state.selectedUser
+    },
+
+    getTotalUsers(state) {
+        return state.totalUsers
+    },
+
+    getRegionByUserId(state) {
+        return state.regions
+    },
+
+    getTotalRegionByUserId(state) {
+        return state.totalRegions
     }
+
 }
 
 const actions = {
+    /**
+     * You can filter by status
+     * sent type= 'active' | 'inactive'
+     * ...this.pagination // Default pagination object
+     * trans: translation object, // Important
+     * paginate: true, // If you want all record, do not sent
+     * search: optional | if search by any text
+     * @param commit
+     * @param payload
+     */
+    fetchUsers({commit}, payload = {}) {
 
+        // Set loading is true
+        commit('setUserLoading', payload.themeOption.loadingColor)
+
+        // Setup header for list view
+        commit('setUserListHeader', payload.trans)
+
+        const params = fn.generateParams(payload)
+        const URL = `/api/users${params}`
+
+        axios.get(URL).then((response) => {
+            if (response.data.users) {
+                commit('setUsers', response.data.users)
+                commit('setTotalUsers', response.data.total)
+                commit('setUserLoading', false)
+            }
+        });
+    },
+
+    /**
+     * Get Selected company
+     * @param id // required
+     */
+    fetchUser({commit, dispatch}, payload) {
+        const URL = `/api/users/${payload.id}/show` + fn.generateParams(payload)
+        axios.get(URL).then((response) => {
+            if (response.data) {
+                commit('setSelectedUser', response.data.user)
+            }
+        }).catch((error) => {
+            // Generate error message
+        })
+    },
+
+    fetchUserForDropDown({commit}, payload = {}) {
+        const URL = `/api/users/dropdown${fn.generateParams(payload)}`
+
+        axios.get(URL).then((response) => {
+            if (response.data) {
+                commit('setUsersForDropDown', response.data)
+            }
+        })
+            .catch((error) => {
+
+            })
+    }
 }
 
 export default {
     state,
-    getters,
     mutations,
+    getters,
     actions
 }

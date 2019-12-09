@@ -38,7 +38,7 @@ class AddForeignKeyToAppointmentsTable extends Migration
     public function down()
     {
         Schema::table('appointments', function (Blueprint $table) {
-            //
+            $table->dropForeign(['event_id','user_id', 'guest_id']);
         });
     }
 }

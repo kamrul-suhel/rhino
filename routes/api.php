@@ -13,8 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/*
+|--------------------------------------------------------------------------
+| API Route for Users
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('users')->group(function(){
+    Route::get('', 'Auth\UserListController@list');
+    Route::delete('{id}', 'Auth\UserDeleteController@destroy');
+});
+
+Route::prefix('settings')->group(function(){
+    Route::post('add', 'Setting\SettingController@generateDefaultSetting');
+    Route::get('/', 'Setting\SettingController@index');
 });
 
 

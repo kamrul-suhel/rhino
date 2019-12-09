@@ -43,15 +43,6 @@ class CountriesTableSeeder extends Seeder
                 'driver_seating_position'      => $faker->randomElement(['right', 'left']),
                 'currency_symbol'   => ((isset($country['currency_symbol'])) ? $country['currency_symbol'] : null),
             ]);
-
-            // Setup regions for each country
-//            $regions =  ['North East', 'North West', 'South East', 'South West'];
-//            foreach($regions as $region){
-//                \App\Region::create([
-//                    'country_id' => $country->id,
-//                   'name' => $country->name. ' - '. $region
-//                ]);
-//            }
         }
     }
 }

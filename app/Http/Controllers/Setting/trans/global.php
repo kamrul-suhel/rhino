@@ -249,5 +249,17 @@ return [
         'label' => 'Search by',
         'identifier' => 'searchBy',
         'translation' => 'Search by'
+    ],
+
+    [
+        'label' => 'Email',
+        'identifier' => 'email',
+        'translation' => 'Email'
+    ],
+
+    [
+        'label' => 'Role',
+        'identifier' => 'role',
+        'translation' => 'Role'
     ]
 ];
