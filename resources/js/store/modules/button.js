@@ -1,5 +1,6 @@
 const defaultState = {
-    loading: false
+    loading: false,
+    identifier: ''
 }
 
 const state = {
@@ -9,12 +10,20 @@ const state = {
 const mutations = {
     setButtonLoading(state, loading){
         state.loading = loading
+    },
+
+    setButtonIdentifier(state, identifier){
+        state.identifier = identifier
     }
 }
 
 const getters = {
     getButtonLoading(state){
         return state.loading
+    },
+
+    getButtonIdentifier(state){
+        return state.identifier
     }
 }
 

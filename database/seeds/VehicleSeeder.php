@@ -3,6 +3,7 @@
 use App\Vehicle;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class VehicleSeeder extends Seeder
 {
@@ -13,7 +14,13 @@ class VehicleSeeder extends Seeder
      */
     public function run()
     {
-        factory(Vehicle::class, 30)->create();
+        // Empty the table
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Vehicle::truncate();
+        \App\VehicleTranslation::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        factory(Vehicle::class, 300)->create();
 
         $vehicles = Vehicle::all();
 

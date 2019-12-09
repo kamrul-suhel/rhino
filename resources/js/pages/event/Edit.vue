@@ -179,18 +179,27 @@
                             </v-layout>
                         </v-card-text>
 
+                        <v-layout row wrap>
+                            <v-flex xs12>
+                                <Brand v-if="selectedEvent.id"
+                                    :event-id="selectedEvent.id"></Brand>
+                            </v-flex>
+                        </v-layout>
+
                         <v-divider></v-divider>
 
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
 
                             <r-button :text="`${trans.back}`"
+                                      identifier="'eventBack'"
                                       small
-                                      :loadingBar="false"
+                                      :loadingBar="true"
                                       @click="onBackToEventList"
                                       :color="themeOption.buttonSecondaryColor"/>
 
                             <r-button :text="`${trans.update} ${trans.event}`"
+                                      identifier="'eventEdit'"
                                       small
                                       :loadingBar="true"
                                       @click="onUpdateEvent"
@@ -209,12 +218,14 @@
     import TimePicker from "../../components/TimePicker";
     import ImageUpload from "../../components/ImageUpload";
     import LanguagePicker from "../../components/Language";
+    import Brand from '../../components/Event/Brand'
 
     export default {
         components: {
             TimePicker,
             ImageUpload,
-            LanguagePicker
+            LanguagePicker,
+            Brand
         },
 
         data() {
@@ -261,6 +272,7 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchEvent', {id: this.$route.params.id})
+                this.$store.dispatch('fetchBrandForEvent', {id: this.$route.params.id})
             },
 
             onUpdateEvent() {
@@ -293,7 +305,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.event.name}  ${this.trans.successfully_created}`
+                                message: `${this.selectedEvent.name}  ${this.trans.successfully_updated}`
                             })
                             this.$store.commit('setButtonLoading', false)
                             // this.$router.push({name: 'listEvents'})
@@ -305,7 +317,7 @@
             },
 
             onBackToEventList(){
-                this.$router.push({name: 'listEvents'})
+                // this.$router.push({name: 'listEvents'})
                 this.$store.commit('setButtonLoading', false)
             }
         }

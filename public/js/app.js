@@ -6356,16 +6356,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_image_upload_resize__ = __webpack_require__(386);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_image_upload_resize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_image_upload_resize__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__plugins_i18n_index__ = __webpack_require__(387);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__router__ = __webpack_require__(390);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_App__ = __webpack_require__(543);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__store__ = __webpack_require__(555);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__filters_index__ = __webpack_require__(583);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__router__ = __webpack_require__(390);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_App__ = __webpack_require__(543);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_App__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__store__ = __webpack_require__(555);
 window._ = __webpack_require__(154);
 
 window.axios = __webpack_require__(156);
 
 window.axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest'
+  'X-Requested-With': 'XMLHttpRequest'
 };
 
 
@@ -6411,6 +6412,8 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('r-language', __WEBPACK_IM
 
 
 
+
+
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a);
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuex__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vue_image_upload_resize___default.a);
@@ -6427,29 +6430,29 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.config.productionTip = true;
 
 /* eslint-disable no-new */
 new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
-    el: '#app',
-    store: __WEBPACK_IMPORTED_MODULE_9__store__["a" /* default */],
-    router: __WEBPACK_IMPORTED_MODULE_7__router__["a" /* default */],
-    i18n: __WEBPACK_IMPORTED_MODULE_6__plugins_i18n_index__["a" /* default */],
-    components: {
-        App: __WEBPACK_IMPORTED_MODULE_8__components_App___default.a
-    },
-    template: '<App/>',
+  el: '#app',
+  store: __WEBPACK_IMPORTED_MODULE_10__store__["a" /* default */],
+  router: __WEBPACK_IMPORTED_MODULE_8__router__["a" /* default */],
+  i18n: __WEBPACK_IMPORTED_MODULE_6__plugins_i18n_index__["a" /* default */],
+  components: {
+    App: __WEBPACK_IMPORTED_MODULE_9__components_App___default.a
+  },
+  template: '<App/>',
 
-    created: function created() {
-        this.initSetting();
-    },
+  created: function created() {
+    this.initSetting();
+  },
 
 
-    methods: {
-        initSetting: function initSetting() {
-            // Setup translation fields
-            this.$store.dispatch('getAllSettingFields');
+  methods: {
+    initSetting: function initSetting() {
+      // Setup translation fields
+      this.$store.dispatch('getAllSettingFields');
 
-            // Initialize language
-            this.$store.dispatch('fetchLanguages');
-        }
+      // Initialize language
+      this.$store.dispatch('fetchLanguages');
     }
+  }
 });
 
 /***/ }),
@@ -68257,6 +68260,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
     props: {
+        identifier: {
+            type: String,
+            required: true
+        },
+
         text: {
             type: String,
             required: true
@@ -68281,13 +68289,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        loading: 'getButtonLoading'
+        loading: 'getButtonLoading',
+        buttonIdentifier: 'getButtonIdentifier'
     })),
 
     methods: {
         onClick: function onClick() {
             if (this.loadingBar) {
                 this.$store.commit('setButtonLoading', true);
+                this.$store.commit('setButtonIdentifier', this.identifier);
             }
             this.$emit('click', true);
         }
@@ -68306,7 +68316,10 @@ var render = function() {
     "v-btn",
     {
       attrs: {
-        loading: _vm.loadingBar ? _vm.loading : false,
+        loading:
+          _vm.loadingBar && _vm.identifier == _vm.buttonIdentifier
+            ? _vm.loading
+            : false,
         small: _vm.small,
         flat: _vm.flat,
         color: _vm.color
@@ -92712,6 +92725,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ImageUpload__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Language__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Language___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Language__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Event_Brand__ = __webpack_require__(576);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Event_Brand___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Event_Brand__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -92920,6 +92935,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -92930,7 +92955,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     components: {
         TimePicker: __WEBPACK_IMPORTED_MODULE_1__components_TimePicker___default.a,
         ImageUpload: __WEBPACK_IMPORTED_MODULE_2__components_ImageUpload___default.a,
-        LanguagePicker: __WEBPACK_IMPORTED_MODULE_3__components_Language___default.a
+        LanguagePicker: __WEBPACK_IMPORTED_MODULE_3__components_Language___default.a,
+        Brand: __WEBPACK_IMPORTED_MODULE_4__components_Event_Brand___default.a
     },
 
     data: function data() {
@@ -92979,6 +93005,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     methods: {
         initialize: function initialize() {
             this.$store.dispatch('fetchEvent', { id: this.$route.params.id });
+            this.$store.dispatch('fetchBrandForEvent', { id: this.$route.params.id });
         },
         onUpdateEvent: function onUpdateEvent() {
             var _this2 = this;
@@ -93012,7 +93039,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                         _this2.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: _this2.themeOption.snackBarTimeout,
-                            message: _this2.event.name + "  " + _this2.trans.successfully_created
+                            message: _this2.selectedEvent.name + "  " + _this2.trans.successfully_updated
                         });
                         _this2.$store.commit('setButtonLoading', false);
                         // this.$router.push({name: 'listEvents'})
@@ -93023,7 +93050,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }
         },
         onBackToEventList: function onBackToEventList() {
-            this.$router.push({ name: 'listEvents' });
+            // this.$router.push({name: 'listEvents'})
             this.$store.commit('setButtonLoading', false);
         }
     }
@@ -93690,6 +93717,26 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _vm.selectedEvent.id
+                                ? _c("Brand", {
+                                    attrs: { "event-id": _vm.selectedEvent.id }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
                       _c("v-divider"),
                       _vm._v(" "),
                       _c(
@@ -93701,8 +93748,9 @@ var render = function() {
                           _c("r-button", {
                             attrs: {
                               text: "" + _vm.trans.back,
+                              identifier: "'eventBack'",
                               small: "",
-                              loadingBar: false,
+                              loadingBar: true,
                               color: _vm.themeOption.buttonSecondaryColor
                             },
                             on: { click: _vm.onBackToEventList }
@@ -93711,6 +93759,7 @@ var render = function() {
                           _c("r-button", {
                             attrs: {
                               text: _vm.trans.update + " " + _vm.trans.event,
+                              identifier: "'eventEdit'",
                               small: "",
                               loadingBar: true,
                               color: _vm.themeOption.buttonPrimaryColor
@@ -95876,7 +95925,10 @@ var defaultState = {
 
         //Tab option
         tabColor: 'gray',
-        tabSliderColor: 'black'
+        tabSliderColor: 'black',
+
+        // Default image
+        brandDefaultImage: '/images/brandPlaceholder.jpg'
     }
 };
 var state = _extends({}, defaultState);
@@ -97006,6 +97058,26 @@ var actions = {
                 commit('setBrandsForDropDown', response.data);
             }
         }).catch(function (error) {});
+    },
+
+
+    /**
+     * Load Brand for event specific
+     * Relation between event dealership
+     * @param commit
+     * @param payload
+     */
+    fetchBrandForEvent: function fetchBrandForEvent(_ref5) {
+        var commit = _ref5.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        var URL = '/api/events/' + payload.id + '/brands/dropdown';
+
+        axios.get(URL).then(function (response) {
+            if (response.data) {
+                commit('setBrandsForDropDown', response.data);
+            }
+        }).catch(function (error) {});
     }
 };
 
@@ -97475,7 +97547,8 @@ var actions = {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var defaultState = {
-    loading: false
+    loading: false,
+    identifier: ''
 };
 
 var state = _extends({}, defaultState);
@@ -97483,12 +97556,18 @@ var state = _extends({}, defaultState);
 var mutations = {
     setButtonLoading: function setButtonLoading(state, loading) {
         state.loading = loading;
+    },
+    setButtonIdentifier: function setButtonIdentifier(state, identifier) {
+        state.identifier = identifier;
     }
 };
 
 var getters = {
     getButtonLoading: function getButtonLoading(state) {
         return state.loading;
+    },
+    getButtonIdentifier: function getButtonIdentifier(state) {
+        return state.identifier;
     }
 };
 
@@ -97540,10 +97619,10 @@ var defaultState = {
     eventsDropDown: [],
 
     // Regions variable
-    regions: [],
-    totalRegions: 0,
-    eventRegionHeader: [],
-    selectedEventRegion: {}
+    brands: [],
+    totalBrands: 0,
+    eventBrandHeader: [],
+    selectedEventBrand: {}
 };
 
 var state = _extends({}, defaultState);
@@ -97618,15 +97697,19 @@ var mutations = {
 
         state.listHeader = [].concat(header);
     },
-    setEventRegionsListHeader: function setEventRegionsListHeader(state, trans) {
+    setEventBrandListHeader: function setEventBrandListHeader(state, trans) {
         var header = [{
-            text: trans.name,
+            text: trans.brand,
             align: 'left',
             sortable: false,
             value: 'name'
         }, {
-            text: trans.country,
-            value: 'country',
+            text: trans.company,
+            value: 'company',
+            sortable: false
+        }, {
+            text: trans.logo,
+            value: 'logo',
             sortable: false
         }, {
             text: trans.action,
@@ -97635,7 +97718,10 @@ var mutations = {
             sortable: false
         }];
 
-        state.eventRegionHeader = [].concat(header);
+        state.eventBrandHeader = [].concat(header);
+    },
+    setEventBrands: function setEventBrands(state, brands) {
+        state.brands = [].concat(_toConsumableArray(brands));
     }
 };
 
@@ -97652,8 +97738,8 @@ var getters = {
     getSelectedEventRegion: function getSelectedEventRegion(state) {
         return state.selectedEventRegion;
     },
-    getEventRegionListHeader: function getEventRegionListHeader(state) {
-        return state.eventRegionHeader;
+    getEventBrandListHeader: function getEventBrandListHeader(state) {
+        return state.eventBrandHeader;
     },
     getEventLoading: function getEventLoading(state) {
         return state.loading;
@@ -97672,6 +97758,9 @@ var getters = {
     },
     getTotalRegionByEventId: function getTotalRegionByEventId(state) {
         return state.totalRegions;
+    },
+    getEventBrands: function getEventBrands(state) {
+        return state.brands;
     }
 };
 
@@ -97702,7 +97791,6 @@ var actions = {
 
         axios.get(URL).then(function (response) {
             if (response.data.events) {
-                console.log('responseis: ', response);
                 commit('setEvents', response.data.events);
                 commit('setTotalEvents', response.data.total);
                 commit('setEventLoading', false);
@@ -97759,6 +97847,34 @@ var actions = {
                 commit('setEventsForDropDown', response.data);
             }
         }).catch(function (error) {});
+    },
+
+
+    /**
+     * Get brands detail by event
+     * @param commit
+     * @param payload
+     */
+    fetchBrandsByEventId: function fetchBrandsByEventId(_ref5) {
+        var commit = _ref5.commit;
+        var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        // Set loading is true
+        commit('setEventLoading', payload.themeOption.loadingColor);
+        // Setup header for list view
+        commit('setEventBrandListHeader', payload.trans);
+
+        var params = __WEBPACK_IMPORTED_MODULE_0__utils_function__["a" /* default */].generateParams(payload);
+
+        var URL = '/api/events/' + payload.eventId + '/brands' + params;
+
+        axios.get(URL).then(function (response) {
+            if (response.data.brands) {
+                commit('setEventBrands', response.data.brands);
+                commit('setTotalEvents', response.data.total);
+                commit('setEventLoading', false);
+            }
+        });
     }
 };
 
@@ -97768,6 +97884,747 @@ var actions = {
     getters: getters,
     actions: actions
 });
+
+/***/ }),
+/* 576 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(577)
+/* template */
+var __vue_template__ = __webpack_require__(578)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Event/Brand.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7c0f8997", Component.options)
+  } else {
+    hotAPI.reload("data-v-7c0f8997", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 577 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddBrand__ = __webpack_require__(579);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddBrand___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddBrand__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        AddBrand: __WEBPACK_IMPORTED_MODULE_0__AddBrand___default.a
+    },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        brands: 'getEventBrands',
+        headers: 'getEventBrandListHeader',
+        totalBrands: 'getTotalEvents',
+        loading: 'getEventLoading',
+        rowsPerPage: 'getEventListRowsPerPage',
+        initializeBrands: 'getInitializeBrands',
+        selectedEvent: 'getSelectedEvent'
+    })),
+
+    data: function data() {
+        return {
+            pagination: {}
+        };
+    },
+
+
+    props: {
+        eventId: {
+            type: Number,
+            required: true
+        }
+    },
+
+    watch: {
+        pagination: {
+            handler: function handler() {
+                this.initialize();
+            }
+        },
+
+        initializeBrands: function initializeBrands() {
+            this.initialize();
+        }
+    },
+
+    created: function created() {},
+
+
+    methods: {
+        // Initialize data when first render
+        initialize: function initialize() {
+            // this.$refs.createBrand.resetValidation()
+            var paginateOption = _extends({}, this.pagination, {
+                trans: this.trans,
+                themeOption: this.themeOption,
+                paginate: true,
+                eventId: this.$route.params.id
+            });
+
+            this.$store.dispatch('fetchBrandsByEventId', paginateOption);
+        },
+        onDeleteBrand: function onDeleteBrand(brandId) {
+            var _this = this;
+
+            var URL = '/api/events/' + this.selectedEvent.id + '/brands/' + brandId;
+            var brandEventFrom = new FormData();
+            brandEventFrom.append('brand_id', brandId);
+            brandEventFrom.append('_method', 'DELETE');
+            brandEventFrom.append('event_id', this.selectedEvent.id);
+            axios.delete(URL, brandEventFrom).then(function (response) {
+                if (response.data.success) {
+                    _this.$store.commit('setInitializeBrands');
+                }
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 578 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "dealership-brands" },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "", "pt-4": "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm8: "", "pa-2": "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c("v-data-table", {
+                        staticClass: "elevation-0",
+                        attrs: {
+                          headers: _vm.headers,
+                          items: _vm.brands,
+                          "disable-initial-sort": "",
+                          pagination: _vm.pagination,
+                          "no-results-text": _vm.trans.no_brand_found,
+                          "no-data-text": _vm.trans.no_brand_found,
+                          "rows-per-page-text": _vm.trans.rows_per_page,
+                          "rows-per-page-items": _vm.rowsPerPage,
+                          "total-items": _vm.totalBrands,
+                          loading: _vm.loading
+                        },
+                        on: {
+                          "update:pagination": function($event) {
+                            _vm.pagination = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "items",
+                            fn: function(props) {
+                              return [
+                                _c("td", [_vm._v(_vm._s(props.item.name))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(props.item.company))]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "text-xs-left" },
+                                  [
+                                    _c(
+                                      "v-avatar",
+                                      {
+                                        attrs: {
+                                          tile: true,
+                                          size: 24,
+                                          color: _vm.themeOption.inputColor
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          attrs: {
+                                            src: _vm._f("image")(
+                                              props.item.logo,
+                                              _vm.themeOption.brandDefaultImage
+                                            ),
+                                            alt: props.item.name
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "text-xs-right" },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        attrs: {
+                                          color:
+                                            _vm.themeOption.buttonDangerColor,
+                                          small: ""
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.onDeleteBrand(
+                                              props.item.id
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    delete\n                                "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ])
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm4: "", "pa-2": "" } },
+            [_c("AddBrand")],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7c0f8997", module.exports)
+  }
+}
+
+/***/ }),
+/* 579 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(580)
+/* template */
+var __vue_template__ = __webpack_require__(581)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Event/AddBrand.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-72830506", Component.options)
+  } else {
+    hotAPI.reload("data-v-72830506", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 580 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            valid: true,
+            brandIds: []
+        };
+    },
+
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        brands: 'getBrandsForDropDown',
+        selectedBrands: 'getEventBrands',
+        initializeBrands: 'getInitializeBrands',
+        selectedEvent: 'getSelectedEvent'
+    })),
+
+    watch: {},
+
+    created: function created() {},
+
+
+    methods: {
+        checkBrandExists: function checkBrandExists(Brand) {
+            var found = _.find(this.selectedBrands, function (brand) {
+                return brand.id === Brand.id;
+            });
+
+            if (found) {
+                return true;
+            }
+            return false;
+        },
+        onCreateRelation: function onCreateRelation(brandId) {
+            var _this = this;
+
+            var URL = '/api/events/' + this.selectedEvent.id + '/brands';
+
+            var brandEventFrom = new FormData();
+            brandEventFrom.append('brand_id', brandId);
+            brandEventFrom.append('event_id', this.selectedEvent.id);
+            axios.post(URL, brandEventFrom).then(function (response) {
+                if (response.data.success) {
+                    _this.$store.commit('setInitializeBrands');
+                }
+            });
+        },
+        onRemoveRelation: function onRemoveRelation(brandId) {
+            var _this2 = this;
+
+            var URL = '/api/events/' + this.selectedEvent.id + '/brands/' + brandId;
+            var brandEventFrom = new FormData();
+            brandEventFrom.append('brand_id', brandId);
+            brandEventFrom.append('_method', 'DELETE');
+            brandEventFrom.append('event_id', this.selectedEvent.id);
+            axios.delete(URL, brandEventFrom).then(function (response) {
+                if (response.data.success) {
+                    _this2.$store.commit('setInitializeBrands');
+                }
+            });
+        },
+        reset: function reset() {
+            this.$refs.brandEventForm.reset();
+        },
+        resetValidation: function resetValidation() {
+            this.$refs.brandEventForm.resetValidation();
+        },
+        onFetchBrands: function onFetchBrands() {
+            this.reset();
+            this.resetValidation();
+            this.$store.commit('setInitializeBrands');
+        }
+    }
+});
+
+/***/ }),
+/* 581 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-form",
+    {
+      ref: "brandEventForm",
+      attrs: { "lazy-validation": "" },
+      model: {
+        value: _vm.valid,
+        callback: function($$v) {
+          _vm.valid = $$v
+        },
+        expression: "valid"
+      }
+    },
+    [
+      _c(
+        "v-card",
+        { attrs: { "min-height": "400", "max-height": "600" } },
+        [
+          _c("v-card-title", [
+            _c("h3", [_vm._v(_vm._s("" + _vm.trans.brands))])
+          ]),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            { staticClass: "pa-0" },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c(
+                        "v-list",
+                        { attrs: { "two-line": "", subheader: "" } },
+                        _vm._l(_vm.brands, function(brand) {
+                          return _c(
+                            "v-list-tile",
+                            {
+                              key: brand.id,
+                              attrs: { avatar: "" },
+                              on: { click: function($event) {} }
+                            },
+                            [
+                              _c(
+                                "v-list-tile-avatar",
+                                [
+                                  _c(
+                                    "v-avatar",
+                                    {
+                                      attrs: {
+                                        tile: false,
+                                        size: 36,
+                                        color: "grey lighten-4"
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
+                                        attrs: {
+                                          src: _vm._f("image")(
+                                            brand.logo,
+                                            _vm.themeOption.brandDefaultImage
+                                          )
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-tile-content",
+                                [
+                                  _c("v-list-tile-title", [
+                                    _vm._v(_vm._s(brand.name))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("v-list-tile-sub-title", [
+                                    _vm._v(_vm._s(brand.subtitle))
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-tile-action",
+                                [
+                                  _vm.checkBrandExists(brand)
+                                    ? _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { icon: "", ripple: "" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.onRemoveRelation(
+                                                brand.id
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            {
+                                              attrs: { color: "red lighten-1" }
+                                            },
+                                            [_vm._v("remove_circle_outline")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { icon: "", ripple: "" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.onCreateRelation(
+                                                brand.id
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            { attrs: { color: "lighten-1" } },
+                                            [_vm._v("add_circle_outline")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-72830506", module.exports)
+  }
+}
+
+/***/ }),
+/* 582 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.filter('image', function (image, defaultImage) {
+    if (image && image !== 'undefined' && image.length > 0) {
+        return image;
+    }
+    return defaultImage;
+});
+
+/***/ }),
+/* 583 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image__ = __webpack_require__(582);
+
 
 /***/ })
 /******/ ]);

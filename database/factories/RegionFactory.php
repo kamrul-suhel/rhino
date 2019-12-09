@@ -3,6 +3,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Brand;
 use App\Country;
 use App\Region;
 use App\User;
@@ -22,7 +23,8 @@ use Illuminate\Support\Str;
 
 $factory->define(Region::class, function (Faker $faker) {
     return [
+        'brand_id' => Brand::all()->random()->id,
         'name' => $faker->name,
-        'country_id' => Country::rendom()->id
+        'country_id' => Country::all()->random()->id
     ];
 });

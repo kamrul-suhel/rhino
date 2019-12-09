@@ -236,6 +236,25 @@ const actions = {
             .catch((error) => {
 
             })
+    },
+
+    /**
+     * Load Brand for event specific
+     * Relation between event dealership
+     * @param commit
+     * @param payload
+     */
+    fetchBrandForEvent({commit}, payload = {}) {
+        const URL = `/api/events/${payload.id}/brands/dropdown`
+
+        axios.get(URL).then((response) => {
+            if (response.data) {
+                commit('setBrandsForDropDown', response.data)
+            }
+        })
+            .catch((error) => {
+
+            })
     }
 }
 

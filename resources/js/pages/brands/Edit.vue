@@ -231,7 +231,6 @@
                 this.$store.dispatch('fetchCountriesForDropdown')
                 this.$store.dispatch('fetchBrand', {id: this.$route.params.id})
             },
-
             fetchCompany() {
                 this.$store.dispatch('fetchCompanies', {themeOption: this.themeOption, trans: this.trans});
             },

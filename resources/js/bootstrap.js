@@ -8,7 +8,6 @@ window.axios.defaults.headers.common = {
 
 import 'babel-polyfill'
 
-
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -48,6 +47,9 @@ import i18n from './plugins/i18n/index'
 /**
  * Import filter
  */
+
+import './filters/index'
+
 
 import router from './router'
 

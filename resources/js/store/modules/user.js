@@ -28,7 +28,10 @@ const defaultState = {
 
         //Tab option
         tabColor: 'gray',
-        tabSliderColor: 'black'
+        tabSliderColor: 'black',
+
+        // Default image
+        brandDefaultImage : '/images/brandPlaceholder.jpg'
     }
 }
 const state = {
