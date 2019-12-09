@@ -13,7 +13,7 @@ const vehiclesRoute ={
 
         {
             path:'create',
-            name: 'createVehicles',
+            name: 'addVehicles',
             component: Vehicles.Create,
         },
 

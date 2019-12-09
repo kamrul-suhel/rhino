@@ -257,11 +257,11 @@
                 })
             },
 
-            // onResetVehicle() {
-            //     this.editVehicle = false
-            //     this.$store.commit('setSelectedVehicle', {})
-            //     // this.$store.commit('resetImageUpload')
-            // },
+            onResetVehicle() {
+                this.editVehicle = false
+                this.$store.commit('setSelectedVehicle', {})
+                // this.$store.commit('resetImageUpload')
+            },
         }
     }
 </script>
