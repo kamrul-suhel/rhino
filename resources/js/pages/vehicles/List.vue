@@ -12,11 +12,11 @@
 
             <v-spacer></v-spacer>
 
-            <!-- <v-text-field
+            <v-text-field
                 :color="themeOption.inputColor"
                 :label="trans.search_by_model"
-                v-model="searchVehicles">
-            </v-text-field> -->
+                v-model="searchVehicle">
+            </v-text-field>
         </v-toolbar>
 
         <v-layout row wrap>
@@ -42,7 +42,7 @@
                                 <v-icon
                                 small
                                 class="mr-2"
-                                
+
                             >
                                 edit
                             </v-icon>
@@ -125,7 +125,7 @@
                 dialog: false,
                 deleteDialog: false,
                 searchVehicle: '',
-                editVehicle: false,                
+                editVehicle: false,
                 valid: true,
             }
         },
@@ -153,9 +153,9 @@
                 }
             },
 
-            // searchVehicles() {
-            //     this.initialize()
-            // },
+            searchVehicle() {
+                this.initialize()
+            },
 
             // selectedColor(value) {
             //     this.color = value.hex
@@ -163,7 +163,6 @@
         },
 
         created() {
-            this.fetchVehicle()
         },
 
         mounted() {
@@ -182,7 +181,7 @@
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    //search: this.searchVehicles
+                    search: this.searchVehicle
                 }
 
                 this.$store.dispatch('fetchVehicles', paginateOption)

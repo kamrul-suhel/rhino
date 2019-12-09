@@ -26,6 +26,14 @@ const getters = {
 
     getHasImage(state){
         return state.hasImage
+    },
+
+    getIdentifier(state){
+        return state.identifier
+    },
+
+    getIdentifier2(state){
+        return state.identifier2
     }
 }
 
@@ -50,8 +58,8 @@ const mutations = {
     },
 
 
-    setIdentifier(state, identfier){
-        state.identfier = identfier
+    setIdentifier(state, identifier){
+        state.identifier = identifier
     },
 
     setIdentifier2(state, identfier){

@@ -59,10 +59,10 @@ const mutations = {
             },
 
             {
-                text: trans.model,
+                text: trans.brand,
                 align: 'left',
                 sortable: false,
-                value: 'model'
+                value: 'brand'
             },
 
             {
@@ -98,11 +98,7 @@ const getters = {
     },
 
     getVehicleListRowsPerPage(state){
-        return state.brandListRowPerPage
-    },
-
-    getSelectedVehicle(state){
-        return state.selectedVehicle
+        return state.vehicleListRowPerPage
     },
 
     getTotalVehicles(state){
@@ -143,7 +139,6 @@ const actions = {
 
         axios.get(URL).then((response) => {
             if (response.data.vehicles) {
-                console.log(response);
                 commit('setVehicles', response.data.vehicles)
                 commit('setTotalVehicles', response.data.total)
                 commit('setVehicleLoading', false)

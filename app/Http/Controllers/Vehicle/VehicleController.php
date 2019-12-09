@@ -37,14 +37,14 @@ class VehicleController extends Controller
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search vehicle name
             if ($request->has('search') && !empty($request->search)) {
-                $vehicles = $vehicle->where('vehicles_translation.model', 'LIKE', '%' . $request->search . '%');
+                $vehicles = $vehicles->where('vehicles_translation.model', 'LIKE', '%' . $request->search . '%');
             }
 
             // If sortBy has set then, sort by region, group, country
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;
                 $vehicles = $vehicles->orderBy('vehicles_translation.model');
-                
+
             } else {
                 $vehicles = $vehicles->orderBy('vehicles.id', 'DESC');
             }
@@ -94,9 +94,9 @@ class VehicleController extends Controller
     public function show(Request $request, $id)
     {
 
-        
 
-        
+
+
     }
 
     /**
@@ -136,23 +136,23 @@ class VehicleController extends Controller
         return response()->json(['success' => true]);
     }
 
-    
+
     private function saveVehicle(VehicleRequest $request, $vehicleId = null)
     {
 
         $vehicle = $vehicleId === null ? new Vehicle() : Vehicle::findOrFail($vehicleId);
 
         $request->has('brand_id') ? $vehicle->brand_id = $request->brand_id : null;
-        
+
         $vehicle->save();
-        
+
         // Translation
         $vehicleTranslation = $vehicleId === null ? new VehicleTranslation() :
             VeicleTranslation::where([
                 'vehicle_id' => $vehicle->id,
                 'language_id' => $this->languageId
             ])->first();
-        
+
         $vehicleTranslation->vehicle_id = $vehicle->id;
         $vehicleTranslation->language_id = $this->languageId;
         $request->has('model') ? $vehicleTranslation->model = $request->model : null;
