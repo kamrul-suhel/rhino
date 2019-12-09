@@ -11,11 +11,7 @@ const defaultState = {
     // For dropdown
     usersDropDown: [],
 
-    // Regions variable
-    regions: [],
-    totalRegions: 0,
-    userRegionHeader: [],
-    selectedUserRegion: {}
+    levels:[]
 }
 
 const state = {
@@ -27,20 +23,43 @@ const mutations = {
         state.users = [...users]
     },
 
+    setLevel(state, trans){
+        const levels =[
+            {
+                'text' : trans.dealership,
+                'value': 'dealership'
+            },
+            {
+                'text' : trans.group,
+                'value': 'group'
+            },
+
+            {
+                'text' : trans.region,
+                'value': 'region'
+            },
+
+            {
+                'text' : trans.country,
+                'value': 'country'
+            },
+
+            {
+                'text' : trans.brand,
+                'value': 'brand'
+            },
+
+            {
+                'text' : trans.company,
+                'value': 'company'
+            }
+        ]
+
+        state.levels = [...levels]
+    },
+
     setUsersForDropDown(state, users) {
         state.usersDropDown = [...users]
-    },
-
-    setSelectedUserRegion(state, selectedRegion) {
-        state.selectedUserRegion = selectedRegion
-    },
-
-    setRegionsByUserId(state, regions) {
-        state.regions = [...regions]
-    },
-
-    setTotalRegionByUserId(state, totalRegion) {
-        state.totalRegions = totalRegion
     },
 
     setUserLoading(state, status) {
@@ -102,6 +121,10 @@ const mutations = {
 const getters = {
     getUsers(state) {
         return state.users
+    },
+
+    getUserLevels(state){
+        return state.levels
     },
 
     getUsersForDropDown(state) {

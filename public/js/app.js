@@ -91193,21 +91193,343 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            valid: true,
+            user: {},
+            password: false,
+            confirmPassword: false,
+            accessLevels: []
+        };
     },
-    created: function created() {},
 
 
-    methods: {}
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        trans: 'getFields',
+        themeOption: 'getThemeOption',
+        levels: 'getUserLevels',
+        dealerships: 'getDealerships'
+    }), {
+        passwordRule: function passwordRule() {
+            var _this = this;
+
+            return [function (v) {
+                return !!v || _this.trans.password + ' ' + _this.trans.is_required;
+            }, function (v) {
+                return v && v.length <= 8 || _this.trans.password + ' ' + _this.trans.minimum8Character;
+            }];
+        },
+        confirmRule: function confirmRule() {
+            var _this2 = this;
+
+            return function () {
+                return _this2.user.password === _this2.user.confirmPassword || _this2.trans.password + ' ' + _this2.trans.notMatch;
+            };
+        }
+    }),
+
+    watch: {},
+
+    created: function created() {
+        this.initialize();
+    },
+
+
+    methods: {
+        initialize: function initialize() {
+            this.$store.commit('setLevel', this.trans);
+        },
+        fetchData: function fetchData() {
+            var level = this.user.level;
+
+            switch (level) {
+                case 'dealership':
+                    this.$store.dispatch('fetchDealershipsForDropdown');
+                    break;
+            }
+        }
+    }
 });
 
 /***/ }),
@@ -91218,7 +91540,456 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-layout", [_c("h2", [_vm._v("User List")])])
+  return _c(
+    "v-container",
+    { attrs: { "pa-0": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", warp: "", "pb-4": "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-toolbar",
+                { attrs: { flat: "" } },
+                [
+                  _c("v-toolbar-title", [
+                    _c(
+                      "span",
+                      { class: _vm.themeOption.textHeadingColor + "--text" },
+                      [_vm._v(_vm._s(_vm.trans.create + " " + _vm.trans.user))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-divider", {
+                    staticClass: "mx-2",
+                    attrs: { inset: "", vertical: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("v-spacer")
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-form",
+        {
+          ref: "dealershipForm",
+          attrs: { row: "", wrap: "", "lazy-validation": "" },
+          model: {
+            value: _vm.valid,
+            callback: function($$v) {
+              _vm.valid = $$v
+            },
+            expression: "valid"
+          }
+        },
+        [
+          _c(
+            "v-layout",
+            [
+              _c(
+                "v-flex",
+                { attrs: { xs12: "" } },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c(
+                        "v-card-text",
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v ||
+                                            _vm.trans.firstName +
+                                              " " +
+                                              _vm.trans.is_required
+                                          )
+                                        }
+                                      ],
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.firstName
+                                    },
+                                    model: {
+                                      value: _vm.user.firstname,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "firstname", $$v)
+                                      },
+                                      expression: "user.firstname"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v ||
+                                            _vm.trans.surName +
+                                              " " +
+                                              _vm.trans.is_required
+                                          )
+                                        }
+                                      ],
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.surName
+                                    },
+                                    model: {
+                                      value: _vm.user.surname,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "surname", $$v)
+                                      },
+                                      expression: "user.surname"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v ||
+                                            _vm.trans.email +
+                                              " " +
+                                              _vm.trans.is_required
+                                          )
+                                        }
+                                      ],
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.email,
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.user.email,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "email", $$v)
+                                      },
+                                      expression: "user.email"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": _vm.password
+                                        ? "visibility"
+                                        : "visibility_off",
+                                      rules: _vm.passwordRule,
+                                      required: "",
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.password,
+                                      type: _vm.password ? "text" : "password",
+                                      hint:
+                                        _vm.trans.password +
+                                        " " +
+                                        _vm.trans.minimum8Character
+                                    },
+                                    on: {
+                                      "click:append": function($event) {
+                                        _vm.password = !_vm.password
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.user.password,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "password", $$v)
+                                      },
+                                      expression: "user.password"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": _vm.confirmPassword
+                                        ? "visibility"
+                                        : "visibility_off",
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v ||
+                                            _vm.trans.confirm +
+                                              " " +
+                                              _vm.trans.is_required
+                                          )
+                                        },
+                                        _vm.confirmRule
+                                      ],
+                                      required: "",
+                                      color: _vm.themeOption.inputColor,
+                                      label:
+                                        _vm.trans.confirm +
+                                        " " +
+                                        _vm.trans.password,
+                                      type: _vm.confirmPassword
+                                        ? "text"
+                                        : "password"
+                                    },
+                                    on: {
+                                      "click:append": function($event) {
+                                        _vm.confirmPassword = !_vm.confirmPassword
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.user.confirmPassword,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.user,
+                                          "confirmPassword",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "user.confirmPassword"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.levels,
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v || _vm.trans.select_a_country
+                                          )
+                                        }
+                                      ],
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.rule
+                                    },
+                                    on: { change: _vm.fetchData },
+                                    model: {
+                                      value: _vm.user.level,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "level", $$v)
+                                      },
+                                      expression: "user.level"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.dealerships,
+                                      "item-text": "name",
+                                      "item-value": "id",
+                                      rules: [
+                                        function(v) {
+                                          return (
+                                            !!v ||
+                                            _vm.trans.dealership +
+                                              " " +
+                                              _vm.trans.is_required
+                                          )
+                                        }
+                                      ],
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.dealership
+                                    },
+                                    model: {
+                                      value: _vm.user.group_id,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "group_id", $$v)
+                                      },
+                                      expression: "user.group_id"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      type: "number",
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.latitude
+                                    },
+                                    model: {
+                                      value: _vm.user.latitude,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "latitude", $$v)
+                                      },
+                                      expression: "user.latitude"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      type: "number",
+                                      color: _vm.themeOption.inputColor,
+                                      label: _vm.trans.longitude
+                                    },
+                                    model: {
+                                      value: _vm.user.longitude,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "longitude", $$v)
+                                      },
+                                      expression: "user.longitude"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", "pa-2": "" } },
+                                [
+                                  _c("v-switch", {
+                                    attrs: {
+                                      label: _vm.trans.status,
+                                      color: _vm.themeOption.inputColor
+                                    },
+                                    model: {
+                                      value: _vm.user.status,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "status", $$v)
+                                      },
+                                      expression: "user.status"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-divider", { staticClass: "mt-2 mb-2" }),
+                          _vm._v(" "),
+                          _c("v-layout", { attrs: { column: "", wrap: "" } })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-divider"),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        { staticClass: "pa-3" },
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              class: _vm.themeOption.buttonSuccess,
+                              attrs: { small: "" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.onCreateDealership()
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.trans.create_dealerships) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -99045,11 +99816,7 @@ var defaultState = {
     // For dropdown
     usersDropDown: [],
 
-    // Regions variable
-    regions: [],
-    totalRegions: 0,
-    userRegionHeader: [],
-    selectedUserRegion: {}
+    levels: []
 };
 
 var state = _extends({}, defaultState);
@@ -99058,17 +99825,31 @@ var mutations = {
     setUsers: function setUsers(state, users) {
         state.users = [].concat(_toConsumableArray(users));
     },
+    setLevel: function setLevel(state, trans) {
+        var levels = [{
+            'text': trans.dealership,
+            'value': 'dealership'
+        }, {
+            'text': trans.group,
+            'value': 'group'
+        }, {
+            'text': trans.region,
+            'value': 'region'
+        }, {
+            'text': trans.country,
+            'value': 'country'
+        }, {
+            'text': trans.brand,
+            'value': 'brand'
+        }, {
+            'text': trans.company,
+            'value': 'company'
+        }];
+
+        state.levels = [].concat(levels);
+    },
     setUsersForDropDown: function setUsersForDropDown(state, users) {
         state.usersDropDown = [].concat(_toConsumableArray(users));
-    },
-    setSelectedUserRegion: function setSelectedUserRegion(state, selectedRegion) {
-        state.selectedUserRegion = selectedRegion;
-    },
-    setRegionsByUserId: function setRegionsByUserId(state, regions) {
-        state.regions = [].concat(_toConsumableArray(regions));
-    },
-    setTotalRegionByUserId: function setTotalRegionByUserId(state, totalRegion) {
-        state.totalRegions = totalRegion;
     },
     setUserLoading: function setUserLoading(state, status) {
         state.loading = status;
@@ -99115,6 +99896,9 @@ var mutations = {
 var getters = {
     getUsers: function getUsers(state) {
         return state.users;
+    },
+    getUserLevels: function getUserLevels(state) {
+        return state.levels;
     },
     getUsersForDropDown: function getUsersForDropDown(state) {
         return state.usersDropDown;

@@ -261,5 +261,11 @@ return [
         'label' => 'Role',
         'identifier' => 'role',
         'translation' => 'Role'
+    ],
+
+    [
+        'label' => 'Confirm',
+        'identifier' => 'confirm',
+        'translation' => 'Confirm'
     ]
 ];
