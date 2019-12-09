@@ -31,6 +31,12 @@ return [
     ],
 
     [
+        'label' => 'Model Of Vehicle',
+        'identifier' => 'model_of_vehicle',
+        'translation' => 'Model Of Vehicle'
+    ],
+
+    [
         'label' => 'Update Vehicle',
         'identifier' => 'update_vehicle',
         'translation' => 'Update Vehicle'
@@ -58,5 +64,10 @@ return [
         'label' => 'Please Select A Brand',
         'identifier' => 'select_a_brand',
         'translation' => 'Please Select A Brand'
-    ]
+    ],
+    [
+        'label' => 'Vehicle Brand Is Required',
+        'identifier' => 'vehicle_brand_is_required',
+        'translation' => 'Vehicle Brand Is Required'
+    ],
 ];

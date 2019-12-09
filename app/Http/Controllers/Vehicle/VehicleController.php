@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Vehicle;
 
 use App\Vehicle;
-use Illuminate\Http\Request;
+use App\VehicleTranslation;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VehicleRequest;
+use Illuminate\Http\Request;
+
 
 class VehicleController extends Controller
 {
@@ -76,9 +79,10 @@ class VehicleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VehicleRequest $request)
     {
-        //
+        $vehicle = $this->saveVehicle($request);
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -87,8 +91,11 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+
+        
+
         
     }
 
@@ -129,8 +136,31 @@ class VehicleController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function getBrands()
+    
+    private function saveVehicle(VehicleRequest $request, $vehicleId = null)
     {
+
+        $vehicle = $vehicleId === null ? new Vehicle() : Vehicle::findOrFail($vehicleId);
+
+        $request->has('brand_id') ? $vehicle->brand_id = $request->brand_id : null;
         
+        $vehicle->save();
+        
+        // Translation
+        $vehicleTranslation = $vehicleId === null ? new VehicleTranslation() :
+            VeicleTranslation::where([
+                'vehicle_id' => $vehicle->id,
+                'language_id' => $this->languageId
+            ])->first();
+        
+        $vehicleTranslation->vehicle_id = $vehicle->id;
+        $vehicleTranslation->language_id = $this->languageId;
+        $request->has('model') ? $vehicleTranslation->model = $request->model : null;
+
+        $vehicleTranslation->save();
+
+        return true;
+
     }
+
 }
