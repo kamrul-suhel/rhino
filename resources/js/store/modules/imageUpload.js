@@ -1,7 +1,10 @@
 const defaultState ={
     image:'',
+    image2:'',
     images:[],
-    hasImage: false
+    hasImage: false,
+    identifier: '',
+    identifier2: ''
 }
 
 const state = {
@@ -11,6 +14,10 @@ const state = {
 const getters = {
     getUploadedImage(state){
         return state.image
+    },
+
+    getUploadedImage2(state){
+        return state.image2
     },
 
     getUploadedImages(state){
@@ -28,6 +35,10 @@ const mutations = {
         state.image = image
     },
 
+    setImage2(state, image){
+        state.image2 = image
+    },
+
     setImages(state, images){
         state.images = [...images]
     },
@@ -36,6 +47,15 @@ const mutations = {
         _.forEach(defaultState, (key, value) =>{
             state[value] = key
         })
+    },
+
+
+    setIdentifier(state, identfier){
+        state.identfier = identfier
+    },
+
+    setIdentifier2(state, identfier){
+        state.identifier2 = identfier
     },
 
     setHasImage(state, hasImage){

@@ -41,7 +41,11 @@
             model: {
                 type: String,
                 required: true
-            }
+            },
+            identifier: {
+                type: String,
+                required: false
+            },
         },
         data() {
             return {
@@ -70,10 +74,15 @@
 
         created() {
 
+            console.log(this.identifier)
+
         },
 
         methods: {
             setImage: function (output) {
+
+                console.log(this.identifier)
+                return
                 this.image = output
                 console.log(this.image)
                 console.log(typeof this.image)
@@ -84,7 +93,15 @@
 
                 axios.post('/api/uploadfiles', formData).then((response) => {
                     this.$store.commit('setHasImage', true)
-                    this.$store.commit('setImage', response.data)
+                    
+                    console.log(this.identifier);
+                    if(this.identifier == 'leftImage'){
+                        this.$store.commit('setIdentifier', this.identifier)
+                        this.$store.commit('setImage', response.data)
+                    }else{
+                        this.$store.commit('setIdentifier2', this.identifier)
+                        this.$store.commit('setImage2', response.data)
+                    }
                 })
             },
 
