@@ -48,4 +48,16 @@ return [
         'translation' => 'Rule'
     ],
 
+    [
+        'label' => 'Profile',
+        'identifier' => 'profile',
+        'translation' => 'Profile'
+    ],
+
+    [
+        'label' => 'Image',
+        'identifier' => 'image',
+        'translation' => 'Image'
+    ],
+
 ];

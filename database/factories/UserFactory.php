@@ -44,6 +44,7 @@ $factory->define(User::class, function (Faker $faker) {
         'manufacturer_id' => $accessLevel == 'brand' ? \App\Brand::all()->random()->id : null,
         'company_id' => $accessLevel == 'company' ? \App\Company::all()->random()->id : null,
         'notes' => $faker->paragraph,
+        'profile_image' => $faker->imageUrl(40,40, 'people'),
         'send_mail' => $faker->randomElement([0,1]),
         'status' => $faker->randomElement([0,1])
     ];

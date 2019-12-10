@@ -43,7 +43,7 @@
                             <v-icon
                                 small
                                 class="mr-2"
-                                @click="onEditUser(props.item)"
+                                @click="$router.push({name: 'editUsers', params:{id: props.item.id}})"
                             >
                                 edit
                             </v-icon>
@@ -178,6 +178,17 @@
 
             onDeleteConfirm(){
                 // Delete user
+                const URL = `/api/users/${this.selectedUser.id}`
+                axios.delete(URL).then((response)=>{
+                    this.deleteDialog = false
+                    this.initialize()
+
+                    this.$store.commit('setSnackbarMessage', {
+                        openMessage: true,
+                        timeOut: this.themeOption.snackBarTimeout,
+                        message: `${this.selectedUser.firstname}  ${this.trans.successfully_deleted}`
+                    })
+                })
             }
         }
     }

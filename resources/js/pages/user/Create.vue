@@ -20,7 +20,7 @@
 
         <v-form
             row wrap
-            ref="dealershipForm"
+            ref="userForm"
             v-model="valid"
             lazy-validation>
             <v-layout>
@@ -33,7 +33,7 @@
                                         :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.firstName"
-                                        v-model="user.firstname"
+                                        v-model="user.name"
                                     ></v-text-field>
                                 </v-flex>
 
@@ -67,6 +67,7 @@
                                         v-model="user.password"
                                         @click:append="password = !password"
                                         :hint="`${trans.password} ${trans.minimum8Character}`"
+                                        counter
                                     ></v-text-field>
                                 </v-flex>
 
@@ -79,7 +80,8 @@
                                         :label="`${trans.confirm} ${trans.password}`"
                                         :type="confirmPassword ? `text` : `password`"
                                         @click:append="confirmPassword = !confirmPassword"
-                                        v-model="user.confirmPassword"
+                                        v-model="user.password_confirmation"
+                                        counter
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -92,12 +94,13 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.rule"
                                         v-model="user.level"
-                                        @change="fetchData"
+                                        @change="onFetchData"
                                     >
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm6 pa-2
+                                        v-if="user.level==='dealership'">
                                     <v-select
                                         :items="dealerships"
                                         item-text="name"
@@ -110,7 +113,8 @@
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm6 pa-2
+                                        v-if="user.level === 'group'">
                                     <v-select
                                         :items="groups"
                                         item-text="name"
@@ -122,7 +126,9 @@
                                     ></v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm6 pa-2
+                                        v-if="user.level ==='country' || user.level === 'region'"
+                                >
                                     <v-autocomplete
                                         :items="countries"
                                         item-text="name"
@@ -135,7 +141,8 @@
                                     ></v-autocomplete>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm6 pa-2
+                                        v-if="user.level === 'brand' || user.level === 'region'">
                                     <v-autocomplete
                                         :items="brands"
                                         item-text="name"
@@ -148,7 +155,8 @@
                                     ></v-autocomplete>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm6 pa-2
+                                        v-if="user.level === 'region'">
                                     <v-select :items="regions"
                                               item-text="name"
                                               item-value="id"
@@ -159,14 +167,16 @@
                                     ></v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select :items="companies"
-                                              item-text="name"
-                                              item-value="id"
-                                              :color="themeOption.inputColor"
-                                              :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
-                                              :label="trans.company"
-                                              v-model="user.company_id"
+                                <v-flex xs12 sm6 pa-2
+                                        v-if="user.level === 'company'">
+                                    <v-select
+                                        :items="companies"
+                                        item-text="name"
+                                        item-value="id"
+                                        :color="themeOption.inputColor"
+                                        :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
+                                        :label="trans.company"
+                                        v-model="user.company_id"
                                     ></v-select>
                                 </v-flex>
                             </v-layout>
@@ -181,15 +191,42 @@
                                 </v-flex>
                             </v-layout>
 
+                            <v-divider class="my-3"></v-divider>
+
+                            <v-layout row wrap>
+                                <v-flex xs12 sm6 pa-2>
+                                    <div class="my-2">{{ `${trans.profile} ${trans.image}` }}</div>
+                                    <v-card class="pa-3">
+                                        <input type="file"
+                                               class="mb-3"
+                                               accept="image/*"
+                                               ref="profileImage"
+                                               @change="onProfileImageUpload"/>
+
+                                        <v-img
+                                            :src="profileImage"
+                                            aspect-ratio="2"
+                                        ></v-img>
+                                    </v-card>
+                                </v-flex>
+                            </v-layout>
                             <v-divider class="mt-2 mb-2"></v-divider>
                         </v-card-text>
 
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
                             <v-btn
+                                :class="themeOption.buttonSecondaryColor"
+                                small
+                                @click="$router.push({name: 'listUsers'})"
+                            >
+                                {{ `${trans.back}`}}
+                            </v-btn>
+
+                            <v-btn
                                 :class="themeOption.buttonSuccess"
                                 small
-                                @click="onCreateDealership()"
+                                @click="onCreateUser()"
                             >
                                 {{ `${trans.create} ${trans.user}` }}
                             </v-btn>
@@ -211,7 +248,8 @@
                 user: {},
                 password: false,
                 confirmPassword: false,
-                accessLevels: []
+                accessLevels: [],
+                profileImage: ''
             }
         },
 
@@ -231,12 +269,12 @@
             passwordRule() {
                 return [
                     v => !!v || `${this.trans.password} ${this.trans.is_required}`,
-                    v => v && v.length <= 8 || `${this.trans.password} ${this.trans.minimum8Character}`
+                    v => v && v.length >= 8 || `${this.trans.password} ${this.trans.minimum8Character}`
                 ]
             },
 
             confirmRule() {
-                return () => (this.user.password === this.user.confirmPassword) || `${this.trans.password} ${this.trans.notMatch}`
+                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatch}`
             }
         }),
 
@@ -251,10 +289,8 @@
                 this.$store.commit('setLevel', this.trans)
             },
 
-            fetchData() {
+            onFetchData() {
                 const level = this.user.level
-                console.log(level)
-
                 switch (level) {
                     case 'dealership':
                         this.$store.dispatch('fetchDealershipsForDropdown')
@@ -290,6 +326,46 @@
                         countryId: this.user.country_id
                     })
                 }
+            },
+
+            onCreateUser() {
+                if (this.$refs.userForm.validate()) {
+                    console.log(this.user)
+                    return
+
+                    // Set form object for dealership
+                    let userForm = new FormData()
+                    _.forOwn(this.user, (value, key) => {
+                        if (key === 'status') {
+                            if (value === 'true') {
+                                userForm.append('status', 1)
+                            } else {
+                                userForm.append('status', 0)
+                            }
+                        } else {
+                            userForm.append(key, value)
+                        }
+                    })
+
+                    // add user profile image
+                    userForm.append('profile_image', this.profileImage)
+                    const URL = `/api/users`
+                    axios.post(URL, userForm).then((response) => {
+
+                    })
+                }
+            },
+
+            onProfileImageUpload() {
+                const image = this.$refs.profileImage.files[0]
+
+                let formData = new FormData()
+                formData.append('file', image)
+                formData.append('model', 'users')
+
+                axios.post('/api/uploadfiles', formData).then((response) => {
+                    this.profileImage = response.data
+                })
             }
         }
     }

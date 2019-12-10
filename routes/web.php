@@ -161,6 +161,10 @@ Route::prefix('users')->group(function () {
     Route::get('create', function () {
         return view('welcome');
     });
+
+    Route::get('{id}/edit', function () {
+        return view('welcome');
+    });
 });
 
 

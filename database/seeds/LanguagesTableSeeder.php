@@ -22,7 +22,7 @@ class LanguagesTableSeeder extends Seeder
 
         $count = 1;
         foreach ($JSON_languages as $language) {
-            if($count < 41){
+            if($count > 41){
                break;
             }
 

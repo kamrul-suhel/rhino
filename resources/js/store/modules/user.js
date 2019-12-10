@@ -26,9 +26,15 @@ const mutations = {
     setLevel(state, trans){
         const levels =[
             {
+                'text' : trans.admin,
+                'value': 'admin'
+            },
+
+            {
                 'text' : trans.dealership,
                 'value': 'dealership'
             },
+
             {
                 'text' : trans.group,
                 'value': 'group'
@@ -205,7 +211,7 @@ const actions = {
      * @param id // required
      */
     fetchUser({commit, dispatch}, payload) {
-        const URL = `/api/users/${payload.id}/show` + fn.generateParams(payload)
+        const URL = `/api/users/${payload.id}/show${fn.generateParams(payload)}`
         axios.get(URL).then((response) => {
             if (response.data) {
                 commit('setSelectedUser', response.data.user)

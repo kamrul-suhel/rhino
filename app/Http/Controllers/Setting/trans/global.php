@@ -267,5 +267,11 @@ return [
         'label' => 'Confirm',
         'identifier' => 'confirm',
         'translation' => 'Confirm'
+    ],
+
+    [
+        'label' => 'Admin',
+        'identifier' => 'admin',
+        'translation' => 'Admin'
     ]
 ];
