@@ -43,6 +43,9 @@ class DatabaseSeeder extends Seeder
         // Seed Event type table
         $this->call(EventTypeSeeder::class);
 
+        // Seed Event table
+        $this->call(EventSeeder::class);
+
         // Seed Region table
         $this->call(RegionSeeder::class);
 
