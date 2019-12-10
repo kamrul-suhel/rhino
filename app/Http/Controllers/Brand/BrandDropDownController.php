@@ -20,7 +20,10 @@ class BrandDropDownController extends Controller
             'brands.id',
             'brands_translation.name'
         )
-            ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id');
+            ->leftJoin('brands_translation', function($brandT){
+                $brandT->on('brands_translation.brand_id', '=', 'brands.id');
+                $brandT->where('brands_translation.language_id', $this->languageId);
+            });
 
         if ($request->has('filterBy') && $request->has('dealershipId')) {
 
@@ -37,8 +40,7 @@ class BrandDropDownController extends Controller
                 ->orderBy('brands_translation.name');
         }
 
-        $brands = $brands->where('brands_translation.language_id', $this->languageId)
-            ->get();
+        $brands = $brands->get();
 
         return response()->json($brands);
     }
@@ -57,10 +59,13 @@ class BrandDropDownController extends Controller
             'brands.logo',
             'brands_translation.name'
         )
-            ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
+            ->leftJoin('brands_translation', function($brandT){
+                $brandT->on('brands_translation.brand_id', '=', 'brands.id');
+                $brandT->where('brands_translation.language_id', $this->languageId);
+            })
             ->leftJoin('brand_dealership','brands.id', '=', 'brand_dealership.brand_id')
-            ->where('brands_translation.language_id', $this->languageId)
             ->where('brand_dealership.dealership_id', $dealershipId)
+            ->groupBy('brands.id')
             ->get();
 
         return response()->json($brands);
