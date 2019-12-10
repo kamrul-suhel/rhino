@@ -65,25 +65,11 @@
                                                 ></v-img>
                                             </v-card>
 
-                                            <image-uploader
-                                                :preview="false"
-                                                :className="['fileinput', { 'fileinput--loaded': hasLeftImage }]"
-                                                capture="environment"
-                                                :debug="0"
-                                                accept="image/*"
-                                                doNotResize="gif"
-                                                :autoRotate="true"
-                                                outputFormat="file"
-                                                @input="setLeftImage"
-                                            >
-                                                <label for="fileInput" slot="upload-label">
-                                                    <v-icon right>cloud_upload</v-icon>
-
-                                                    <span class="upload-caption">
-                                                {{hasLeftImage ? "Replace" : "Click to upload" }}
-                                            </span>
-                                                </label>
-                                            </image-uploader>
+                                            <input
+                                                ref="leftImage"
+                                                type="file"
+                                                @change="setLeftImage"
+                                            />
                                         </v-flex>
                                     </v-layout>
                                 </v-flex>
@@ -103,25 +89,11 @@
                                                ></v-img>
                                            </v-card>
 
-                                           <image-uploader
-                                               :preview="false"
-                                               :className="['fileinput', { 'fileinput--loaded': hasRightImage }]"
-                                               capture="environment"
-                                               :debug="0"
-                                               accept="image/*"
-                                               doNotResize="gif"
-                                               :autoRotate="true"
-                                               outputFormat="file"
-                                               @input="setRightImage"
-                                           >
-                                               <label for="fileInput" slot="upload-label">
-                                                   <v-icon right>cloud_upload</v-icon>
-
-                                                   <span class="upload-caption">
-                                                {{hasRightImage ? "Replace" : "Click to upload" }}
-                                            </span>
-                                               </label>
-                                           </image-uploader>
+                                           <input
+                                               ref="rightImage"
+                                               type="file"
+                                               @change="setRightImage"
+                                           />
                                        </v-flex>
                                     </v-layout>
                                 </v-flex>
@@ -228,12 +200,14 @@
                 }
             },
 
-            setLeftImage(image) {
+            setLeftImage() {
+                const image = this.$refs.leftImage.files[0]
                 this.uploadImage(image, 'vehicles', 'leftImage')
                 this.hasLeftImage = true
             },
 
-            setRightImage(image){
+            setRightImage(){
+                const image = this.$refs.rightImage.files[0]
                 this.uploadImage(image, 'vehicles', 'rightImage')
                 this.hasRightImage = true
             },
@@ -246,7 +220,6 @@
                 axios.post('/api/uploadfiles', formData).then((response) => {
                     if(image === 'leftImage'){
                         this.leftImage = response.data
-                        console.log(this.leftImage)
                     }
 
                     if(image === 'rightImage'){

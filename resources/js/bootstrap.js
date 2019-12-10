@@ -53,8 +53,8 @@ import './filters/index'
 
 import router from './router'
 
-Vue.use(Vuetify);
-Vue.use(Vuex);
+Vue.use(Vuetify)
+Vue.use(Vuex)
 Vue.use(ImageUploader)
 Vue.config.productionTip = true
 
