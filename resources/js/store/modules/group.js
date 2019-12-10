@@ -129,6 +129,17 @@ const actions = {
                 commit('setSelectedGroup', response.data.group)
             }
         })
+    },
+
+    fetchGroupsForDropdown({commit}, payload ={}){
+        const URL = `/api/groups/dropdown${fn.generateParams(payload)}`
+
+        axios.get(URL).then((response)=>{
+            if(response.data.groups){
+                commit('setGroups', response.data.groups)
+                commit('setTotalGroup', response.data.total)
+            }
+        })
     }
 }
 

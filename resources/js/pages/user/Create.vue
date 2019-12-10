@@ -4,7 +4,8 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.user}` }}</span>
+                        <span
+                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.user}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -104,31 +105,73 @@
                                         :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
-                                        v-model="user.group_id"
+                                        v-model="user.dealership_id"
                                     >
                                     </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-select
+                                        :items="groups"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[ v => !!v || `${trans.group} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="trans.group"
+                                        v-model="user.group_id"
+                                    ></v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-autocomplete
+                                        :items="countries"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[ v => !!v || `${trans.country} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="trans.country"
+                                        v-model="user.country_id"
+                                        @change="getRegion"
+                                    ></v-autocomplete>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-autocomplete
+                                        :items="brands"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[ v => !!v || `${trans.brand} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="trans.brand"
+                                        v-model="user.brand_id"
+                                        @change="getRegion"
+                                    ></v-autocomplete>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-select :items="regions"
+                                              item-text="name"
+                                              item-value="id"
+                                              :color="themeOption.inputColor"
+                                              :rules="[v => !!v || `${trans.region} ${trans.is_required}`]"
+                                              :label="trans.region"
+                                              v-model="user.region_id"
+                                    ></v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-select :items="companies"
+                                              item-text="name"
+                                              item-value="id"
+                                              :color="themeOption.inputColor"
+                                              :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
+                                              :label="trans.company"
+                                              v-model="user.company_id"
+                                    ></v-select>
                                 </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        type="number"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.latitude"
-                                        v-model="user.latitude">
-                                    </v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        type="number"
-                                        :color="themeOption.inputColor"
-                                        v-model="user.longitude"
-                                        :label="trans.longitude">
-                                    </v-text-field>
-                                </v-flex>
-
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch
                                         :label="trans.status"
@@ -139,122 +182,7 @@
                             </v-layout>
 
                             <v-divider class="mt-2 mb-2"></v-divider>
-
-                            <v-layout column wrap>
-<!--                                <v-tabs-->
-<!--                                    v-model="active"-->
-<!--                                    :color="themeOption.tabColor"-->
-<!--                                    :slider-color="themeOption.tabSliderColor"-->
-<!--                                >-->
-<!--                                    <v-tab-->
-<!--                                        key="address"-->
-<!--                                        ripple-->
-<!--                                    >-->
-<!--                                        {{ trans.address}}-->
-
-<!--                                    </v-tab>-->
-
-<!--                                    <v-tab-->
-<!--                                        key="dealershipImage"-->
-<!--                                        ripple-->
-<!--                                    >-->
-<!--                                        {{ trans.dealership_banner}}-->
-
-<!--                                    </v-tab>-->
-
-<!--                                    <v-tab-->
-<!--                                        key="times"-->
-<!--                                        ripple-->
-<!--                                    >-->
-<!--                                        {{ trans.opening_times}}-->
-
-<!--                                    </v-tab>-->
-
-<!--                                    <v-tab-item-->
-<!--                                        key="address"-->
-<!--                                    >-->
-<!--                                        <v-layout row wrap pt-3>-->
-<!--                                            <v-flex xs12 sm6 pa-2>-->
-<!--                                                <v-text-field-->
-<!--                                                    :color="themeOption.inputColor"-->
-<!--                                                    :rules="[v => !!v || trans.address_is_required]"-->
-<!--                                                    :label="trans.address_line_1"-->
-<!--                                                    v-model="dealership.address_line_1">-->
-<!--                                                </v-text-field>-->
-<!--                                            </v-flex>-->
-
-<!--                                            <v-flex xs12 sm6 pa-2>-->
-<!--                                                <v-text-field-->
-<!--                                                    :color="themeOption.inputColor"-->
-<!--                                                    :label="trans.address_line_2"-->
-<!--                                                    v-model="dealership.address_line_2"-->
-<!--                                                >-->
-<!--                                                </v-text-field>-->
-<!--                                            </v-flex>-->
-<!--                                        </v-layout>-->
-
-<!--                                        <v-layout row wrap pt-3>-->
-<!--                                            <v-flex xs12 sm6 pa-2>-->
-<!--                                                <v-text-field-->
-<!--                                                    :color="themeOption.inputColor"-->
-<!--                                                    :label="trans.address_line_3"-->
-<!--                                                    v-model="dealership.address_line_3"-->
-<!--                                                >-->
-<!--                                                </v-text-field>-->
-<!--                                            </v-flex>-->
-
-<!--                                            <v-flex xs12 sm6 pa-2>-->
-<!--                                                <v-text-field-->
-<!--                                                    :color="themeOption.inputColor"-->
-<!--                                                    :label="trans.address_line_4"-->
-<!--                                                    v-model="dealership.address_line_4"-->
-<!--                                                >-->
-<!--                                                </v-text-field>-->
-<!--                                            </v-flex>-->
-<!--                                        </v-layout>-->
-
-<!--                                        <v-layout row wrap>-->
-<!--                                            <v-flex xs12 sm6 pa-2>-->
-<!--                                                <v-text-field-->
-<!--                                                    :color="themeOption.inputColor"-->
-<!--                                                    :label="trans.address_line_5"-->
-<!--                                                    v-model="dealership.address_line_5"-->
-<!--                                                >-->
-<!--                                                </v-text-field>-->
-<!--                                            </v-flex>-->
-
-<!--                                            <v-flex xs12 sm6 pa-2>-->
-<!--                                                <v-text-field-->
-<!--                                                    :color="themeOption.inputColor"-->
-<!--                                                    :label="trans.address_line_6"-->
-<!--                                                    v-model="dealership.address_line_6"-->
-<!--                                                >-->
-<!--                                                </v-text-field>-->
-<!--                                            </v-flex>-->
-<!--                                        </v-layout>-->
-<!--                                    </v-tab-item>-->
-
-<!--                                    <v-tab-item-->
-<!--                                        key="dealershipImage"-->
-<!--                                    >-->
-<!--                                        <v-layout row wrap pt-3>-->
-<!--                                            <ImageUpload :preview="true"-->
-<!--                                                         model="dealership"-->
-<!--                                            ></ImageUpload>-->
-<!--                                        </v-layout>-->
-<!--                                    </v-tab-item>-->
-
-<!--                                    <v-tab-item-->
-<!--                                        key="times">-->
-<!--                                        <TimePicker :dealership="times"-->
-<!--                                                    v-on:sendTimes="updateTimes">-->
-<!--                                        </TimePicker>-->
-<!--                                    </v-tab-item>-->
-<!--                                </v-tabs>-->
-                            </v-layout>
                         </v-card-text>
-
-                        <v-divider></v-divider>
 
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
@@ -263,7 +191,7 @@
                                 small
                                 @click="onCreateDealership()"
                             >
-                                {{ trans.create_dealerships }}
+                                {{ `${trans.create} ${trans.user}` }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -275,56 +203,92 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    export default{
-        data(){
-            return{
+
+    export default {
+        data() {
+            return {
                 valid: true,
-                user:{},
+                user: {},
                 password: false,
                 confirmPassword: false,
-                accessLevels:[]
+                accessLevels: []
             }
         },
 
-        computed:({
-           ...mapGetters({
-               trans: 'getFields',
-               themeOption: 'getThemeOption',
-               levels: 'getUserLevels',
-               dealerships: 'getDealerships'
-           }),
+        computed: ({
+            ...mapGetters({
+                trans: 'getFields',
+                themeOption: 'getThemeOption',
+                levels: 'getUserLevels',
+                dealerships: 'getDealerships',
+                groups: 'getGroups',
+                brands: 'getBrandsForDropDown',
+                countries: 'getCountries',
+                regions: 'getRegions',
+                companies: 'getCompanies'
+            }),
 
-            passwordRule(){
+            passwordRule() {
                 return [
                     v => !!v || `${this.trans.password} ${this.trans.is_required}`,
                     v => v && v.length <= 8 || `${this.trans.password} ${this.trans.minimum8Character}`
                 ]
             },
 
-            confirmRule(){
+            confirmRule() {
                 return () => (this.user.password === this.user.confirmPassword) || `${this.trans.password} ${this.trans.notMatch}`
             }
         }),
 
-        watch: {
-        },
+        watch: {},
 
         created() {
             this.initialize()
         },
 
-        methods:{
-            initialize(){
+        methods: {
+            initialize() {
                 this.$store.commit('setLevel', this.trans)
             },
 
-            fetchData(){
+            fetchData() {
                 const level = this.user.level
+                console.log(level)
 
-                switch(level){
+                switch (level) {
                     case 'dealership':
                         this.$store.dispatch('fetchDealershipsForDropdown')
-                        break;
+                        break
+
+                    case 'group':
+                        this.$store.dispatch('fetchGroupsForDropdown')
+                        break
+
+                    case 'region':
+                        this.$store.dispatch('fetchBrandForDropDown')
+                        this.$store.dispatch('fetchCountriesForDropdown')
+                        break
+
+                    case 'countries':
+                        this.$store.dispatch('fetchCountriesForDropdown')
+                        break
+
+                    case 'brand':
+                        this.$store.dispatch('fetchBrandForDropDown')
+                        break
+
+                    case 'company':
+                        this.$store.dispatch('fetchCompanyForDropdown')
+
+                }
+            },
+
+            getRegion() {
+                if (this.user.country_id && this.user.brand_id) {
+                    this.$store.dispatch('fetchRegionsByBrandIdAndCountryId', {
+                        brandId: this.user.brand_id,
+                        countryId: this.user.country_id
+                    })
                 }
             }
         }

@@ -12,7 +12,7 @@ class GroupDropdownController extends Controller
         $groups = Group::select(
             'groups.*',
             'groups_translation.name',
-            'groups_translation.language_id'
+            'groups_tr.nslation.language_id'
         )
             ->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id')
             ->where('groups_translation.language_id', $this->languageId);

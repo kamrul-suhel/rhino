@@ -130,6 +130,18 @@ const actions = {
         }).catch((error)=>{
             // Generate error message
         })
+    },
+
+    fetchCompanyForDropdown({commit}, payload ={}){
+        const URL = `/api/companies/dropdown${fn.generateParams(payload)}`
+        axios.get(URL).then((response) => {
+            if(response.data.companies){
+                commit('setCompanies', response.data.companies)
+                commit('setTotalCompanies', response.data.total)
+            }
+        }).catch((error)=>{
+            // Generate error message
+        })
     }
 }
 
