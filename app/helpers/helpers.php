@@ -9,7 +9,7 @@ if (! function_exists('generateUniqueIdForGuest')) {
             $exists = Guest::where('unique', $unique)
                 ->first();
             if($exists){
-                $unique = md5(uniqid(rand(), true));
+                $unique = md5(microtime().rand());
             }else{
                 break;
             }

@@ -164,6 +164,26 @@ const mutations = {
                         access: ''
                     }
                 ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.guests,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: `${trans.list_of} ${trans.guests}`,
+                        link: 'listGuest',
+                        access: ''
+                    },
+
+                    {
+                        icon: 'history',
+                        text: `${trans.create} ${trans.guest}`,
+                        link: 'createGuest',
+                        access: ''
+                    }
+                ],
             }
         ]
 

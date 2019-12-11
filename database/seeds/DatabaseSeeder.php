@@ -55,5 +55,8 @@ class DatabaseSeeder extends Seeder
 
         // Seed User  table
         $this->call(UserSeeder::class);
+
+        // Seed Guest  table
+        $this->call(GuestSeeder::class);
     }
 }

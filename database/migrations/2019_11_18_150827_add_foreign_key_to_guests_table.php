@@ -15,7 +15,6 @@ class AddForeignKeyToGuestsTable extends Migration
     {
         Schema::table('guests', function (Blueprint $table) {
             $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('appointment_id')->references('id')->on('appointments');
         });
     }
 
@@ -27,7 +26,7 @@ class AddForeignKeyToGuestsTable extends Migration
     public function down()
     {
         Schema::table('guests', function (Blueprint $table) {
-            $table->dropForeign(['event_id', 'appointment_id']);
+            $table->dropForeign(['event_id']);
         });
     }
 }

@@ -16,9 +16,10 @@ class CreateGuestsTable extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('event_id')->index();
-            $table->string('unique');
+            $table->string('unique', 120)->unique();
             $table->string('first_name');
             $table->string('surname');
+            $table->string('email', 70)->index()->nullable();
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
             $table->string('address_line_3')->nullable();
@@ -39,6 +40,7 @@ class CreateGuestsTable extends Migration
             $table->string('method')->nullable();
             $table->dateTime('last_logged_in')->nullable();
             $table->smallInteger('stage')->default(1);
+            $table->tinyInteger('status')->index()->default(1);
             $table->timestamps();
         });
     }

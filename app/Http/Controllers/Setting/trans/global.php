@@ -273,5 +273,11 @@ return [
         'label' => 'Admin',
         'identifier' => 'admin',
         'translation' => 'Admin'
+    ],
+
+    [
+        'label' => 'Mobile',
+        'identifier' => 'mobile',
+        'translation' => 'Mobile'
     ]
 ];

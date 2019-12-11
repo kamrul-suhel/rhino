@@ -19,6 +19,7 @@ import Vehicle from "./modules/vehicle"
 import Region from "./modules/region"
 import Type from "./modules/eventType"
 import Event from "./modules/event"
+import Guest from "./modules/guest"
 
 
 Vue.use(Vuex)
@@ -59,7 +60,8 @@ const store = new Vuex.Store({
         Vehicle,
         Region,
         Type,
-        Event
+        Event,
+        Guest
     }
 })
 
