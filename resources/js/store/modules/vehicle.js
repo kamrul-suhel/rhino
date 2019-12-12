@@ -147,6 +147,24 @@ const actions = {
     },
 
     /**
+     * Get Selected Dealership
+     * @param id // required
+     */
+    fetchVehicle({commit, dispatch}, payload){
+        const URL = `/api/vehicles/${payload.id}/show${fn.generateParams(payload)}`
+        axios.get(URL).then((response) => {
+            if(response.data){
+                console.log(response.data);
+                commit('setSelectedVehicle', response.data.vehicle)
+                dispatch('fetchBrands', {id: response.data.brand.id})
+            }
+        }).catch((error)=>{
+            // Generate error message
+        })
+    },
+
+
+    /**
      * Get Selected company
      * @param id // required
      */

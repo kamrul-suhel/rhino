@@ -38,15 +38,14 @@
                         <td>{{ props.item.model }}</td>
                         <td>{{ props.item.brand }}</td>
                         <td class="text-xs-right">
-                            <a :href="('vehicles/'+props.item.id+'/edit')">
                                 <v-icon
                                 small
                                 class="mr-2"
+                                @click="$router.push({name: 'editVehicles', params:{id: props.item.id}})"
 
-                            >
-                                edit
-                            </v-icon>
-                            </a>
+                                >
+                                    edit
+                                </v-icon>
 
                             <v-icon
                                 :color="themeOption.buttonDangerColor"

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Vehicle;
 
+use App\Brand;
 use App\Vehicle;
 use App\VehicleTranslation;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VehicleRequest;
-use Illuminate\Http\Request;
 
 
 class VehicleController extends Controller
@@ -93,7 +94,51 @@ class VehicleController extends Controller
      */
     public function show(Request $request, $id)
     {
+        // Create translation if not exists
+        if($request->has('edit') && !empty($request->edit)){
+            VehicleTranslation::firstOrCreate([
+                'language_id' => $this->languageId,
+                'vehicle_id' => $id
+            ],[
+                'model' => '',
+            ]);
+        }
 
+        $vehicle = Vehicle::select(
+            'vehicles.*',
+            'vehicles_translation.model',
+            'brands_translation.name as brand',
+            'brands.logo as brand_logo',
+        )
+            ->leftJoin('vehicles_translation', function($vehicleTranslation){
+                $vehicleTranslation->on('vehicles_translation.vehicle_id', '=', 'vehicles.id');
+                $vehicleTranslation->where('vehicles_translation.language_id', $this->languageId);
+            })
+            ->leftJoin('brands', function ($brand) {
+                $brand->on('brands.id', '=', 'vehicles.brand_id');
+                $brand->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id');
+                $brand->where('brands_translation.language_id', '=', $this->languageId);
+            })
+            ->where('vehicles.id', $id)
+            ->first();
+
+        $brand = [];
+        if ($vehicle->brand_id) {
+            $brand = Brand::select(
+                'brands.*',
+                'brands_translation.name'
+            )
+                ->leftJoin('brands_translation', function($brandTranslation){
+                    $brandTranslation->on('brands_translation.brand_id', '=', 'brands.id');
+                    $brandTranslation->where('brands_translation.language_id', $this->languageId);
+                })
+                ->where('brands.id', $vehicle->brand_id)
+                ->first();
+        }
+        return response()->json([
+            'vehicle' => $vehicle,
+            'brand' => $brand
+        ]);
 
 
 
@@ -117,9 +162,10 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VehicleRequest $request, $id)
     {
-        //
+        $vehicle = $this->saveVehicle($request, $id);
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -143,12 +189,14 @@ class VehicleController extends Controller
         $vehicle = $vehicleId === null ? new Vehicle() : Vehicle::findOrFail($vehicleId);
 
         $request->has('brand_id') ? $vehicle->brand_id = $request->brand_id : null;
+        $request->has('leftImage') ? $vehicle->driver_seating_position_left_image = $request->leftImage : '';
+        $request->has('rightImage') ? $vehicle->driver_seating_position_right_image = $request->rightImage : '';
 
         $vehicle->save();
 
         // Translation
         $vehicleTranslation = $vehicleId === null ? new VehicleTranslation() :
-            VeicleTranslation::where([
+            VehicleTranslation::where([
                 'vehicle_id' => $vehicle->id,
                 'language_id' => $this->languageId
             ])->first();

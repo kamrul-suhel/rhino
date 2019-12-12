@@ -31,6 +31,7 @@
                                     <v-text-field
                                         :rules="nameRules"
                                         :label="trans.model_of_vehicle"
+                                        :color="themeOption.inputColor"
                                         v-model="vehicle.model"
                                     ></v-text-field>
                                 </v-flex>
@@ -157,12 +158,17 @@
         }),
 
         created() {
-            this.initialize()
+            this.initialize();
+            this.fetchVehicle()
         },
 
         methods: {
             initialize() {
                 this.$store.dispatch('fetchBrandForDropDown');
+            },
+
+            fetchVehicle() {
+                this.$store.dispatch('fetchVehicle', {themeOption: this.themeOption, trans: this.trans});
             },
 
             onCreateVehicle() {
@@ -174,6 +180,9 @@
                     console.log('Passed validate');
 
                     let vehicleForm = new FormData()
+
+                    this.vehicle.leftImage = this.leftImage;
+                    this.vehicle.rightImage = this.rightImage;
 
                     // Set form object for vehicle
                     _.forOwn(this.vehicle, (value, key) => {

@@ -94,6 +94,7 @@ Route::prefix('brands')->group(function(){
     Route::post('', 'Brand\BrandController@store');
     Route::get('{id}/show', 'Brand\BrandController@show');
     Route::put('{id}/update', 'Brand\BrandController@update');
+    Route::delete('{id}/delete', 'Brand\BrandController@destroy');
     Route::get('{id}/regions', 'Brand\BrandRegionController@getRegions');
 });
 

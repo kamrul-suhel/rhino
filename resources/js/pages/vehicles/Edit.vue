@@ -4,7 +4,8 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_vehicle }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_vehicle }}:</span>
+                        <span>{{ vehicle.brand }}</span> <span>{{ vehicle.model }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -34,7 +35,7 @@
                                         :rules="[v => !!v || trans.vehicle_model_is_required]"
                                         :color="themeOption.inputColor"
                                         :label="trans.model"
-                                        v-model="brand.model"
+                                        v-model="vehicle.model"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -49,13 +50,61 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.brand"
                                         v-model="vehicle.brand_id"
-                                        @change="onBrandChange"
                                     >
                                     </v-select>
                                 </v-flex>
                             </v-layout>
 
                             <v-divider class="mt-2 mb-2"></v-divider>
+
+
+                            <v-layout>
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-layout row wrap pt-3>
+                                        <v-flex xs12>
+                                            <label class="mb-3">Left hand drive image</label>
+                                            <v-divider class="my-2"></v-divider>
+
+                                            <v-card class="pa-2 my-3">
+                                                <v-img
+                                                    :src="leftImage"
+                                                    aspect-ratio="2.75"
+                                                ></v-img>
+                                            </v-card>
+
+                                            <input
+                                                ref="leftImage"
+                                                type="file"
+                                                @change="setLeftImage"
+                                            />
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
+
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-layout row wrap pt-3>
+                                       <v-flex xs12>
+                                           <label for="">Right hand drive image</label>
+
+                                           <v-divider class="my-2"></v-divider>
+
+                                           <v-card class="pa-2 my-3">
+                                               <v-img
+                                                   :src="rightImage"
+                                                   aspect-ratio="2.75"
+                                               ></v-img>
+                                           </v-card>
+
+                                           <input
+                                               ref="rightImage"
+                                               type="file"
+                                               @change="setRightImage"
+                                           />
+                                       </v-flex>
+                                    </v-layout>
+                                </v-flex>
+                            </v-layout>
                         </v-card-text>
 
                         <v-divider></v-divider>
@@ -91,14 +140,12 @@
     import {mapGetters} from 'vuex'
     import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
-    //import Brands from '../../components/Brand'
+    import vehicle from "../../store/modules/vehicle";
     import LanguagePicker from '../../components/Language'
 
     export default {
         components: {
-            Chrome,
             FileUpload,
-            //Brands,
             LanguagePicker
         },
 
@@ -106,6 +153,9 @@
             return {
                 valid: true,
                 model: null,
+
+                leftImage: '',
+                rightImage: '',
             }
         },
 
@@ -113,19 +163,22 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                brands: 'getBrands',
+                brands: 'getBrandsForDropDown',
                 brand: 'getSelectedBrand',
-                selectedLanguage: 'getSubSelectedLanguage'
+                selectedLanguage: 'getSubSelectedLanguage',
+                vehicle: 'getSelectedVehicle',
             })
         }),
 
         watch: {
-            brand(value) {
-                this.$refs.brandForm.resetValidation()
+            vehicle(value) {
+                this.$refs.vehicleForm.resetValidation();
+                this.leftImage = this.vehicle.driver_seating_position_left_image;
+                this.rightImage = this.vehicle.driver_seating_position_right_image;
             },
 
             selectedLanguage(){
-                this.$store.dispatch('fetchBrand', {
+                this.$store.dispatch('fetchVehicle', {
                     id: this.$route.params.id,
                     languageId: this.selectedLanguage.id,
                     edit: true
@@ -135,66 +188,76 @@
 
         created() {
             this.initialize()
-            this.fetchCompany()
         },
 
         methods: {
             initialize() {
-                this.$store.dispatch('fetchBrandsForDropdown')
-                this.$store.dispatch('fetchBrand', {id: this.$route.params.id})
-            },
-            fetchCompany() {
-                this.$store.dispatch('fetchCompanies', {themeOption: this.themeOption, trans: this.trans});
+                this.$store.dispatch('fetchBrandForDropDown');
+                this.$store.dispatch('fetchVehicle', {id: this.$route.params.id})
             },
 
-            onUpdateBrand() {
+            onUpdateVehicle(){
+                if (this.$refs.vehicleForm.validate()) {
 
-                if (this.$refs.brandForm.validate()) {
-                    // this.$store.commit('setThemeOption', {buttonLoading: true})
+                    console.log('Passed validate');
 
-                    let brandForm = new FormData()
+                    let vehicleForm = new FormData()
 
-                    // Set form object for brand
-                    _.forOwn(this.brand, (value, key) => {
-                        brandForm.append(key, value)
+                    this.vehicle.leftImage = this.leftImage;
+                    this.vehicle.rightImage = this.rightImage;
+
+                    // Set form object for vehicle
+                    _.forOwn(this.vehicle, (value, key) => {
+                        vehicleForm.append(key, value)
                     })
 
-                    brandForm.append('_method', 'put')
+                    vehicleForm.append('_method', 'put')
 
                     // send form data to save
-                    const URL = `/api/brands/${this.brand.id}/update`
-                    axios.post(URL, brandForm).then((response) => {
-                        if (response.data.success) {
+                    const URL = `/api/vehicles/${this.vehicle.id}/update`
+                    axios.post(URL, vehicleForm).then((response)=>{
+                        if(response.data.success){
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.brand.name}  ${this.trans.successfully_updated}`
+                                message: `${this.vehicle.model}  ${this.trans.successfully_updated}`
                             })
-                            this.$store.commit('setThemeOption', {buttonLoading: false})
-                            // this.$router.push({name: 'listbrands'})
                         }
-                    }).catch((error) => {
-                        this.$store.commit('setThemeOption', {buttonLoading: false})
+                    }).catch((error)=>{
                     })
                 }
             },
 
-            onCountryChange(value) {
-                let newBrand = {...this.brand}
-                newBrand.region_id = null
-                this.$store.commit('setSelectedBrand', newBrand)
-                this.$store.dispatch('fetchRegions', {id: value.id})
+
+            setLeftImage() {
+                const image = this.$refs.leftImage.files[0]
+                this.uploadImage(image, 'vehicles', 'leftImage')
+                this.hasLeftImage = true
             },
 
-            resetBrands(){
-                this.$store.commit('setSelectedBrand', {})
-                this.$store.commit('setSubSelectedLanguage', {})
-                this.$store.commit('setRegionsByBrandId', [])
+            setRightImage(){
+                const image = this.$refs.rightImage.files[0]
+                this.uploadImage(image, 'vehicles', 'rightImage')
+                this.hasRightImage = true
+            },
+
+           uploadImage(file, identifier, image){
+                let formData = new FormData()
+                formData.append('file', file)
+                formData.append('model', identifier)
+
+                axios.post('/api/uploadfiles', formData).then((response) => {
+                    if(image === 'leftImage'){
+                        this.leftImage = response.data
+                    }
+
+                    if(image === 'rightImage'){
+                        this.rightImage = response.data
+                    }
+                })
             }
+
         },
 
-        destroyed() {
-            this.resetBrands()
-        }
     }
 </script>
