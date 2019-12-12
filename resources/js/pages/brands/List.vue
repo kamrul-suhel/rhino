@@ -312,7 +312,7 @@
 
             onConfirmDeleteBrand() {
                 const selectedBrand = this.selectedBrand
-                const URL = `/api/companies/${selectedBrand.id}/delete`
+                const URL = `/api/brands/${selectedBrand.id}/delete`
 
                 axios.delete(URL, {_method: 'delete'})
                     .then((response) => {

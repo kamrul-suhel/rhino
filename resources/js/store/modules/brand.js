@@ -229,7 +229,7 @@ const actions = {
         const URL = `/api/brands/dropdown${fn.generateParams(payload)}`
 
         axios.get(URL).then((response) => {
-            if (response.data) {
+            if (response.data) {                
                 commit('setBrandsForDropDown', response.data)
             }
         })
