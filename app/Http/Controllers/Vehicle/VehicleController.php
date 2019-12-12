@@ -108,7 +108,7 @@ class VehicleController extends Controller
             'vehicles.*',
             'vehicles_translation.model',
             'brands_translation.name as brand',
-            'brands.logo as brand_logo',
+            'brands.logo as brand_logo'
         )
             ->leftJoin('vehicles_translation', function($vehicleTranslation){
                 $vehicleTranslation->on('vehicles_translation.vehicle_id', '=', 'vehicles.id');

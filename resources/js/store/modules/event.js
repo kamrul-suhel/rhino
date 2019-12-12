@@ -252,23 +252,6 @@ const actions = {
         })
     },
 
-    fetchRegionByBranId({commit}, payload={}){
-        // Set loading is true
-        commit('setEventLoading', payload.themeOption.loadingColor)
-
-        commit('setEventRegionsListHeader', payload.trans)
-        const params = fn.generateParams(payload)
-
-        const URL = `/api/events/${payload.id}/regions${params}`
-        axios.get(URL).then((response)=>{
-            if(response.data.regions){
-                commit('setRegionsByEventId', response.data.regions)
-                commit('setTotalRegionByEventId', response.data.total)
-                commit('setEventLoading', false)
-            }
-        })
-    },
-
     fetchEventForDropDown({commit}, payload = {}){
         const URL = `/api/events/dropdown${fn.generateParams(payload)}`
 
