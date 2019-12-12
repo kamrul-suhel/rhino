@@ -179,7 +179,6 @@
         }),
 
         created() {
-            this.initialize();
         },
 
         watch: {
