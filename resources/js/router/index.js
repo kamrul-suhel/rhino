@@ -14,6 +14,9 @@ import Event from "./Modules/event";
 import TypesRoutes from "./Modules/type";
 import Guest from "./Modules/guest";
 
+// Remove in product please
+import Test from "./Modules/test"
+
 Vue.use(Router)
 
 const routes = [
@@ -57,7 +60,10 @@ const routes = [
     {...User},
 
     // Guest Routes
-    {...Guest}
+    {...Guest},
+
+    // Test Routes
+    {...Test}
 ]
 
 export default new Router({

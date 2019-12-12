@@ -242,3 +242,10 @@ Route::prefix('guests')->group(function () {
 */
 
 Route::get('sendMail', 'Test\TestMailController@sendMail');
+
+
+Route::prefix('test')->group(function(){
+   Route::get('datetime', function(){
+       return view('welcome');
+   });
+});
