@@ -48,13 +48,7 @@ const mutations = {
                         text: trans.list_of_brands,
                         link: 'listBrands',
                         access: ''
-                    },
-                    // {
-                    //     icon: 'history',
-                    //     text: trans.create_brand,
-                    //     link: 'createBrands',
-                    //     access: ''
-                    // }
+                    }
                 ],
             },
 
@@ -147,6 +141,46 @@ const mutations = {
                         icon: 'history',
                         text: `${trans.types}`,
                         link: 'listEventTypes',
+                        access: ''
+                    }
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.users,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: `${trans.list_of} ${trans.users}`,
+                        link: 'listUsers',
+                        access: ''
+                    },
+
+                    {
+                        icon: 'history',
+                        text: `${trans.create} ${trans.user}`,
+                        link: 'createUsers',
+                        access: ''
+                    }
+                ],
+            },
+
+            {
+                icon: 'add_shopping_cart',
+                text: trans.guests,
+                navs: [
+                    {
+                        icon: 'history',
+                        text: `${trans.list_of} ${trans.guests}`,
+                        link: 'listGuest',
+                        access: ''
+                    },
+
+                    {
+                        icon: 'history',
+                        text: `${trans.create} ${trans.guest}`,
+                        link: 'createGuest',
                         access: ''
                     }
                 ],

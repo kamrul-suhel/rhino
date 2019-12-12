@@ -13,8 +13,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/*
+|--------------------------------------------------------------------------
+| API Route for Users
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('users')->group(function(){
+    Route::post('', 'Auth\RegisterController@store');
+    Route::put('{id}', 'Auth\RegisterController@update');
+    Route::get('', 'Auth\UserListController@list');
+    Route::get('{id}/show', 'Auth\UserShowController@show');
+    Route::get('dropdown', 'Auth\UserDropdownController@list');
+    Route::delete('{id}', 'Auth\UserDeleteController@destroy');
+});
+
+Route::prefix('settings')->group(function(){
+    Route::post('add', 'Setting\SettingController@generateDefaultSetting');
+    Route::get('/', 'Setting\SettingController@index');
 });
 
 
@@ -74,6 +91,7 @@ Route::prefix('brandDealerships')->group(function(){
 
 Route::prefix('companies')->group(function(){
     Route::get('', 'Company\CompanyController@index');
+    Route::get('dropdown', 'Company\CompanyDropdownController@index');
     Route::post('', 'Company\CompanyController@store');
     Route::put('{id}/update', 'Company\CompanyController@update');
     Route::get('{id}/show', 'Company\CompanyController@show');
@@ -124,6 +142,7 @@ Route::prefix('vehicles')->group(function(){
 
 Route::prefix('groups')->group(function(){
     Route::get('', 'Dealership\GroupController@index');
+    Route::get('dropdown', 'Dealership\Group\GroupDropdownController@index');
     Route::post('', 'Dealership\GroupController@store');
     Route::get('{id}', 'Dealership\GroupController@show');
     Route::put('{id}', 'Dealership\GroupController@update');
@@ -186,6 +205,7 @@ Route::prefix('regions')->group(function(){
 Route::prefix('events')->group(function(){
     Route::post('', 'Event\EventController@store');
     Route::get('', 'Event\EventListController@index');
+    Route::get('dropdown', 'Event\EventDropdownController@index');
     Route::get('{id}', 'Event\EventShowController@show');
     Route::put('{id}', 'Event\EventController@update');
     Route::post('{id}/brands', 'Event\EventBrandController@addBrand');
@@ -212,6 +232,20 @@ Route::prefix('events')->group(function(){
         Route::put('{id}', 'Event\Type\TypeController@update');
         Route::delete('{id}', 'Event\Type\TypeController@destroy');
     });
+});
+
+/*
+    |--------------------------------------------------------------------------
+    | API Route for Guest
+    |--------------------------------------------------------------------------
+    |
+    */
+Route::prefix('guests')->group(function(){
+    Route::get('', 'Guest\GuestListController@list');
+    Route::get('{id}', 'Guest\GuestShowController@show');
+    Route::post('', 'Guest\GuestStoreController@store');
+    Route::put('{id}', 'Guest\GuestStoreController@update');
+    Route::delete('{id}', 'Guest\GuestDestroyController@destroy');
 });
 
 

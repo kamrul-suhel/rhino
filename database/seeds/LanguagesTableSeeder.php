@@ -20,13 +20,20 @@ class LanguagesTableSeeder extends Seeder
         // Get all from the JSON file
         $JSON_languages = Languages::allJSON();
 
+        $count = 1;
         foreach ($JSON_languages as $language) {
+            if($count > 41){
+               break;
+            }
+
             Languages::create([
                 'code2'    => ((isset($language['alpha2'])) ? $language['alpha2'] : null),
                 'code3'    => ((isset($language['alpha3'])) ? $language['alpha3'] : null),
                 'status'    => 1,
                 'name'   => ((isset($language['english'])) ? $language['english'] : null),
             ]);
+
+            $count++;
         }
     }
 }

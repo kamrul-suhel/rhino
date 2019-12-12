@@ -43,10 +43,20 @@ class DatabaseSeeder extends Seeder
         // Seed Event type table
         $this->call(EventTypeSeeder::class);
 
+        // Seed Event table
+        $this->call(EventSeeder::class);
+
         // Seed Region table
         $this->call(RegionSeeder::class);
 
         // Seed Brand Dealership  table
         $this->call(BrandDealershipSeeder::class);
+
+
+        // Seed User  table
+        $this->call(UserSeeder::class);
+
+        // Seed Guest  table
+        $this->call(GuestSeeder::class);
     }
 }

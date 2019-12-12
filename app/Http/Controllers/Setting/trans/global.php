@@ -249,5 +249,47 @@ return [
         'label' => 'Search by',
         'identifier' => 'searchBy',
         'translation' => 'Search by'
+    ],
+
+    [
+        'label' => 'Email',
+        'identifier' => 'email',
+        'translation' => 'Email'
+    ],
+
+    [
+        'label' => 'Role',
+        'identifier' => 'role',
+        'translation' => 'Role'
+    ],
+
+    [
+        'label' => 'Confirm',
+        'identifier' => 'confirm',
+        'translation' => 'Confirm'
+    ],
+
+    [
+        'label' => 'Admin',
+        'identifier' => 'admin',
+        'translation' => 'Admin'
+    ],
+
+    [
+        'label' => 'Mobile',
+        'identifier' => 'mobile',
+        'translation' => 'Mobile'
+    ],
+
+    [
+        'label' => 'Landline',
+        'identifier' => 'landline',
+        'translation' => 'Landline'
+    ],
+
+    [
+        'label' => 'Method',
+        'identifier' => 'method',
+        'translation' => 'Method'
     ]
 ];

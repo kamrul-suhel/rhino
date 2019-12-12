@@ -8,7 +8,20 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
+
+    /**
+     * Available rule for user
+     */
+    const USERADMIN = 'admin';
+    const USERDEALERSHIP = 'dealership';
+    const USERGROUP = 'group';
+    const USERREGION = 'region';
+    const USERRCOUNTRY = 'country';
+    const USERBRAND = 'brand';
+    const USERSALEEXECUTIVE = 'sale_executive';
+
 
     /**
      * The attributes that are mass assignable.

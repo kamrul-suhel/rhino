@@ -12,6 +12,7 @@ import Frontend from "./Modules/frontend";
 import User from "./Modules/user";
 import Event from "./Modules/event";
 import TypesRoutes from "./Modules/type";
+import Guest from "./Modules/guest";
 
 Vue.use(Router)
 
@@ -53,8 +54,10 @@ const routes = [
     {...Frontend},
 
     // Frontend Routes
-    {...User}
+    {...User},
 
+    // Guest Routes
+    {...Guest}
 ]
 
 export default new Router({

@@ -157,6 +157,14 @@ Route::prefix('users')->group(function () {
     Route::get('list', function () {
         return view('welcome');
     });
+
+    Route::get('create', function () {
+        return view('welcome');
+    });
+
+    Route::get('{id}/edit', function () {
+        return view('welcome');
+    });
 });
 
 
@@ -188,5 +196,42 @@ Route::prefix('events')->group(function () {
         return view('welcome');
     });
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes for Guests
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('guests')->group(function () {
+    Route::get('', function () {
+        return view('welcome');
+    });
+
+    Route::get('list', function () {
+        return view('welcome');
+    });
+
+    Route::get('create', function () {
+        return view('welcome');
+    });
+
+    Route::get('{id}/edit', function () {
+        return view('welcome');
+    });
+
+});
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes for Testing
+| Disable when it is on production
+|--------------------------------------------------------------------------
+|
+*/
 
 Route::get('sendMail', 'Test\TestMailController@sendMail');

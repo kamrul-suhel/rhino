@@ -5,6 +5,7 @@ import Button from "./modules/button"
 import ImageUpload from "./modules/imageUpload"
 
 import settings from './modules/settings'
+import authUser from './modules/authUser'
 import user from './modules/user'
 import navigation from "./modules/navigation"
 import language from './modules/language'
@@ -18,6 +19,7 @@ import Vehicle from "./modules/vehicle"
 import Region from "./modules/region"
 import Type from "./modules/eventType"
 import Event from "./modules/event"
+import Guest from "./modules/guest"
 
 
 Vue.use(Vuex)
@@ -45,6 +47,7 @@ const store = new Vuex.Store({
         SnackBar,
         Button,
         settings,
+        authUser,
         user,
         navigation,
         language,
@@ -57,7 +60,8 @@ const store = new Vuex.Store({
         Vehicle,
         Region,
         Type,
-        Event
+        Event,
+        Guest
     }
 })
 

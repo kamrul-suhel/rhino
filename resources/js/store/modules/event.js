@@ -274,7 +274,7 @@ const actions = {
 
         axios.get(URL).then((response)=>{
             if(response.data){
-                commit('setEventsForDropDown', response.data)
+                commit('setEventsForDropDown', response.data.events)
             }
         })
             .catch((error)=>{

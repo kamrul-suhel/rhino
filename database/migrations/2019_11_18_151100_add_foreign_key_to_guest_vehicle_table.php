@@ -14,8 +14,15 @@ class AddForeignKeyToGuestVehicleTable extends Migration
     public function up()
     {
         Schema::table('guest_vehicle', function (Blueprint $table) {
-            $table->foreign('guest_id')->references('id')->on('guests');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->foreign('guest_id')
+                ->references('id')
+                ->on('guests')
+                ->onDelete('cascade');
+
+            $table->foreign('vehicle_id')
+                ->references('id')
+                ->on('vehicles')
+                ->onDelete('cascade');
         });
     }
 
