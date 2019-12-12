@@ -14,7 +14,10 @@ class AddForeignKeyToGuestsTable extends Migration
     public function up()
     {
         Schema::table('guests', function (Blueprint $table) {
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events')
+                ->onDelete('cascade');
         });
     }
 

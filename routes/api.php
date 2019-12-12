@@ -25,6 +25,7 @@ Route::prefix('users')->group(function(){
     Route::put('{id}', 'Auth\RegisterController@update');
     Route::get('', 'Auth\UserListController@list');
     Route::get('{id}/show', 'Auth\UserShowController@show');
+    Route::get('dropdown', 'Auth\UserDropdownController@list');
     Route::delete('{id}', 'Auth\UserDeleteController@destroy');
 });
 
@@ -203,6 +204,7 @@ Route::prefix('regions')->group(function(){
 Route::prefix('events')->group(function(){
     Route::post('', 'Event\EventController@store');
     Route::get('', 'Event\EventListController@index');
+    Route::get('dropdown', 'Event\EventDropdownController@index');
     Route::get('{id}', 'Event\EventShowController@show');
     Route::put('{id}', 'Event\EventController@update');
     Route::post('{id}/brands', 'Event\EventBrandController@addBrand');
@@ -239,6 +241,10 @@ Route::prefix('events')->group(function(){
     */
 Route::prefix('guests')->group(function(){
     Route::get('', 'Guest\GuestListController@list');
+    Route::get('{id}', 'Guest\GuestShowController@show');
+    Route::post('', 'Guest\GuestStoreController@store');
+    Route::put('{id}', 'Guest\GuestStoreController@update');
+    Route::delete('{id}', 'Guest\GuestDestroyController@destroy');
 });
 
 

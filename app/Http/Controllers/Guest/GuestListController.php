@@ -19,7 +19,7 @@ class GuestListController extends Controller
         $totalGuest = 0;
         $guests = Guest::select(
             'guests.*',
-            'events_translation.name'
+            'events_translation.name as event'
         )
             ->leftJoin('events', function ($eventT) {
                 $eventT->on('events.id', '=', 'guests.event_id');

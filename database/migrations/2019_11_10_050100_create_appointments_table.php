@@ -22,7 +22,15 @@ class CreateAppointmentsTable extends Migration
             $table->tinyInteger('guest_changing_car')->default(0);
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->string('part_ex_vrm')->nullable();
+            $table->string('part_ex_vehicle')->nullable();
+            $table->string('part_ex_distance')->nullable();
+            $table->boolean('part_ex_settlement')->nullable();
             $table->boolean('is_canceled')->default(0);
+            $table->boolean('confirmation_letter_sent')->default(0);
+            $table->boolean('postal_contact')->default(0);
+            $table->boolean('email_contact')->default(0);
+            $table->boolean('sms_contact')->default(0);
             $table->timestamps();
         });
     }

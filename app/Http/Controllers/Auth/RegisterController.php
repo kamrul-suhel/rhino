@@ -71,6 +71,10 @@ class RegisterController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request){
         $validator = $this->validator($request->all());
 
@@ -85,10 +89,19 @@ class RegisterController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @param $userId
+     */
     public function update(Request $request, $userId){
         $user = $this->save($request, $userId);
     }
 
+    /**
+     * @param Request $request
+     * @param null $id
+     * @return mixed
+     */
     protected function save(Request $request, $id = null){
         $user = $id ? User::findOrFail($id) : new User() ;
         $request->has('name') ? $user->firstname = $request->name : null;
@@ -104,9 +117,14 @@ class RegisterController extends Controller
         return $user->save();
     }
 
+    /**
+     * @param $user
+     * @param $request
+     * @return mixed
+     */
     protected function updateUserLevel($user, $request){
         switch($request->level){
-            case 'admin':
+            case User::USERADMIN:
                 $user->dealership_id = null;
                 $user->group_id = null;
                 $user->region_id = null;
@@ -115,7 +133,7 @@ class RegisterController extends Controller
                 $user->company_id = null;
                 break;
 
-            case 'dealership':
+            case User::USERDEALERSHIP:
                 $user->dealership_id = $request->dealership_id;
                 $user->group_id = null;
                 $user->region_id = null;
@@ -124,7 +142,16 @@ class RegisterController extends Controller
                 $user->company_id = null;
                 break;
 
-            case 'group':
+            case User::USERSALEEXECUTIVE:
+                $user->dealership_id = $request->dealership_id;
+                $user->group_id = null;
+                $user->region_id = null;
+                $user->country_id = null;
+                $user->manufacturer_id = null;
+                $user->company_id = null;
+                break;
+
+            case User::USERGROUP:
                 $user->dealership_id = null;
                 $user->group_id = $request->group_id;
                 $user->region_id = null;
@@ -133,7 +160,7 @@ class RegisterController extends Controller
                 $user->company_id = null;
                 break;
 
-            case 'region':
+            case User::USERREGION:
                 $user->dealership_id = null;
                 $user->group_id = null;
                 $user->region_id = $request->region_id;
@@ -142,7 +169,7 @@ class RegisterController extends Controller
                 $user->company_id = null;
                 break;
 
-            case 'country':
+            case User::USERRCOUNTRY:
                 $user->dealership_id = null;
                 $user->group_id = null;
                 $user->region_id = null;
@@ -151,7 +178,7 @@ class RegisterController extends Controller
                 $user->company_id = null;
                 break;
 
-            case 'brand':
+            case User::USERBRAND:
                 $user->dealership_id = null;
                 $user->group_id = null;
                 $user->region_id = null;

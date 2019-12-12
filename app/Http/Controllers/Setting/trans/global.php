@@ -279,5 +279,17 @@ return [
         'label' => 'Mobile',
         'identifier' => 'mobile',
         'translation' => 'Mobile'
+    ],
+
+    [
+        'label' => 'Landline',
+        'identifier' => 'landline',
+        'translation' => 'Landline'
+    ],
+
+    [
+        'label' => 'Method',
+        'identifier' => 'method',
+        'translation' => 'Method'
     ]
 ];

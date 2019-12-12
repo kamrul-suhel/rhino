@@ -5,7 +5,7 @@
                 <v-toolbar flat>
                     <v-toolbar-title>
                         <span
-                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.user}` }}</span>
+                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.guest}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -20,7 +20,7 @@
 
         <v-form
             row wrap
-            ref="userForm"
+            ref="guestForm"
             v-model="valid"
             lazy-validation>
             <v-layout>
@@ -29,168 +29,145 @@
                         <v-card-text>
                             <v-layout row wrap>
                                 <v-flex xs12 sm6 pa-2>
+                                    <v-select
+                                        :color="themeOption.inputColor"
+                                        :items="events"
+                                        :rules="[v => !!v || `${trans.event} ${trans.is_required}`]"
+                                        item-value="id"
+                                        item-text="event"
+                                        :label="`${trans.event}`"
+                                        v-model="guest.event_id"
+                                        required
+                                    ></v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.firstName"
-                                        v-model="user.firstname"
+                                        v-model="guest.first_name"
                                     ></v-text-field>
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.surname} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.surName"
-                                        v-model="user.surname"
+                                        :label="trans.surname"
+                                        v-model="guest.surname"
+                                        required
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 pa-2>
+                                <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.email"
-                                        v-model="user.email"
+                                        v-model="guest.email"
                                         required
                                     ></v-text-field>
                                 </v-flex>
-                            </v-layout>
 
-                            <v-layout row wrap>
                                 <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="levels"
-                                        :rules="[v => !!v || trans.select_a_country]"
+                                    <v-text-field
+                                        :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.rule"
-                                        v-model="user.level"
-                                        @change="onFetchData"
-                                    >
-                                    </v-select>
+                                        :label="trans.address_line_1"
+                                        v-model="guest.address_line_1"
+                                        required
+                                    ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level==='dealership'">
-                                    <v-select
-                                        :items="dealerships"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.dealership"
-                                        v-model="user.dealership_id"
-                                    >
-                                    </v-select>
+                                        :label="trans.address_line_2"
+                                        v-model="guest.address_line_2"
+                                    ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'group'">
-                                    <v-select
-                                        :items="groups"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[ v => !!v || `${trans.group} ${trans.is_required}`]"
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.group"
-                                        v-model="user.group_id"
-                                    ></v-select>
+                                        :label="trans.address_line_3"
+                                        v-model="guest.address_line_3"
+                                    ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level ==='country' || user.level === 'region'"
-                                >
-                                    <v-autocomplete
-                                        :items="countries"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[ v => !!v || `${trans.country} ${trans.is_required}`]"
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.country"
-                                        v-model="user.country_id"
-                                        @change="getRegion"
-                                    ></v-autocomplete>
+                                        :label="trans.address_line_4"
+                                        v-model="guest.address_line_4"
+                                    ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'brand' || user.level === 'region'">
-                                    <v-autocomplete
-                                        :items="brands"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[ v => !!v || `${trans.brand} ${trans.is_required}`]"
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.brand"
-                                        v-model="user.brand_id"
-                                        @change="getRegion"
-                                    ></v-autocomplete>
+                                        :label="trans.address_line_5"
+                                        v-model="guest.address_line_5"
+                                    ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'region'">
-                                    <v-select :items="regions"
-                                              item-text="name"
-                                              item-value="id"
-                                              :color="themeOption.inputColor"
-                                              :rules="[v => !!v || `${trans.region} ${trans.is_required}`]"
-                                              :label="trans.region"
-                                              v-model="user.region_id"
-                                    ></v-select>
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
+                                        :color="themeOption.inputColor"
+                                        :label="trans.address_line_6"
+                                        v-model="guest.address_line_6"
+                                    ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'company'">
-                                    <v-select
-                                        :items="companies"
-                                        item-text="name"
-                                        item-value="id"
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
+                                        :rules="[v => !!v || `${trans.postcode} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
-                                        :label="trans.company"
-                                        v-model="user.company_id"
-                                    ></v-select>
+                                        :label="trans.postcode"
+                                        v-model="guest.postcode"
+                                        required
+                                    ></v-text-field>
                                 </v-flex>
-                            </v-layout>
 
-                            <v-layout row wrap>
-                                <v-flex xs12>
-                                    <v-textarea
-                                        :label="`${trans.notes}`"
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
+                                        type="number"
                                         :color="themeOption.inputColor"
-                                        v-model="user.notes"
-                                    ></v-textarea>
+                                        :label="trans.landline"
+                                        v-model="guest.landline"
+                                    ></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
+                                        type="number"
+                                        :rules="[v => !!v || `${trans.mobile} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="trans.mobile"
+                                        v-model="guest.mobile"
+                                        required
+                                    ></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-text-field
+                                        :color="themeOption.inputColor"
+                                        :label="trans.method"
+                                        v-model="guest.method"
+                                    ></v-text-field>
                                 </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch
-                                        :false-value="0"
-                                        :true-value="1"
                                         :label="trans.status"
+                                        :true-value="1"
+                                        :false-value="0"
                                         :color="themeOption.inputColor"
-                                        v-model="user.status">
+                                        v-model="guest.status">
                                     </v-switch>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-divider class="my-3"></v-divider>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <div class="my-2">{{ `${trans.profile} ${trans.image}` }}</div>
-                                    <v-card class="pa-3">
-                                        <input type="file"
-                                               class="mb-3"
-                                               accept="image/*"
-                                               ref="profileImage"
-                                               @change="onProfileImageUpload"/>
-
-                                        <v-img
-                                            :src="profileImage"
-                                            aspect-ratio="2"
-                                        ></v-img>
-                                    </v-card>
                                 </v-flex>
                             </v-layout>
                             <v-divider class="mt-2 mb-2"></v-divider>
@@ -199,21 +176,20 @@
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
                             <v-btn
-                                :color="themeOption.buttonSecondaryColor"
+                                :class="themeOption.buttonSecondaryColor"
                                 small
-                                @click="$router.push({name: 'listUsers'})"
+                                @click="$router.push({name: 'listGuest'})"
                             >
                                 {{ `${trans.back}`}}
                             </v-btn>
 
                             <v-btn
-                                :loading="processing"
-                                :disabled="buttonDisabled"
-                                :color="themeOption.buttonSuccess"
+                                :loading="loading"
+                                :class="themeOption.buttonSuccess"
                                 small
-                                @click="onCreateUser()"
+                                @click="onUpdateGuest()"
                             >
-                                {{ `${trans.update} ${trans.user}` }}
+                                {{ `${trans.update} ${trans.guest}` }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -230,12 +206,7 @@
         data() {
             return {
                 valid: true,
-                password: false,
-                confirmPassword: false,
-                accessLevels: [],
-                profileImage: '',
-                processing: false,
-                buttonDisabled: false
+                loading: false
             }
         },
 
@@ -243,38 +214,12 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                levels: 'getUserLevels',
-                dealerships: 'getDealerships',
-                groups: 'getGroups',
-                brands: 'getBrandsForDropDown',
-                countries: 'getCountries',
-                regions: 'getRegions',
-                companies: 'getCompanies',
-                user: 'getSelectedUser'
-            }),
-
-            passwordRule() {
-                return [
-                    v => !!v || `${this.trans.password} ${this.trans.is_required}`,
-                    v => v && v.length >= 8 || `${this.trans.password} ${this.trans.minimum8Character}`
-                ]
-            },
-
-            confirmRule() {
-                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatch}`
-            }
+                events: 'getEventsForDropDown',
+                guest: 'getSelectedGuest'
+            })
         }),
 
-        watch: {
-            user(){
-                if(this.user.profile_image && this.user.profile_image.length > 0){
-                    this.profileImage = this.user.profile_image
-                }
-
-                console.log(this.user)
-                this.onFetchData()
-            }
-        },
+        watch: {},
 
         created() {
             this.initialize()
@@ -282,92 +227,36 @@
 
         methods: {
             initialize() {
-                this.$store.commit('setLevel', this.trans)
-                // Fetch user info
-                this.$store.dispatch('fetchUser', {id: this.$route.params.id})
+                this.$store.dispatch('fetchEventForDropDown')
+                this.$store.dispatch('fetchGuest', {id: this.$route.params.id})
             },
 
-            onFetchData() {
-                const level = this.user.level
-                switch (level) {
-                    case 'dealership':
-                        this.$store.dispatch('fetchDealershipsForDropdown')
-                        break
 
-                    case 'group':
-                        this.$store.dispatch('fetchGroupsForDropdown')
-                        break
-
-                    case 'region':
-                        this.$store.dispatch('fetchBrandForDropDown')
-                        this.$store.dispatch('fetchCountriesForDropdown')
-                        break
-
-                    case 'countries':
-                        this.$store.dispatch('fetchCountriesForDropdown')
-                        break
-
-                    case 'brand':
-                        this.$store.dispatch('fetchBrandForDropDown')
-                        break
-
-                    case 'company':
-                        this.$store.dispatch('fetchCompanyForDropdown')
-
-                }
-            },
-
-            getRegion() {
-                if (this.user.country_id && this.user.brand_id) {
-                    this.$store.dispatch('fetchRegionsByBrandIdAndCountryId', {
-                        brandId: this.user.brand_id,
-                        countryId: this.user.country_id
-                    })
-                }
-            },
-
-            onCreateUser() {
-                if (this.$refs.userForm.validate()) {
-                    this.buttonDisabled = true
-                    this.processing = this.themeOption.buttonLoadingStyle
-
+            onUpdateGuest() {
+                if (this.$refs.guestForm.validate()) {
+                    this.loading = this.themeOption.buttonLoadingStyle
                     // Set form object for dealership
-                    let userForm = new FormData()
-                    userForm.append('_method', 'put')
-                    _.forOwn(this.user, (value, key) => {
-                        if(key === 'firstname'){
-                            userForm.append('name', this.user.firstname)
-                            return
-                        }
-                        userForm.append(key, value)
+                    let guestForm = new FormData()
+                    _.forOwn(this.guest, (value, key) => {
+                        guestForm.append(key, value)
                     })
 
-                    // add user profile image
-                    userForm.append('profile_image', this.profileImage)
-                    const URL = `/api/users/${this.user.id}`
-                    axios.post(URL, userForm).then((response) => {
-                        this.$store.commit('setSnackbarMessage', {
-                            openMessage: true,
-                            timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.user.firstname}  ${this.trans.successfully_updated}`
-                        })
+                    guestForm.append('_method', 'put')
 
-                        this.processing = false
-                        this.buttonDisabled = false
+                    const URL = `/api/guests/${this.guest.id}`
+                    axios.post(URL, guestForm).then((response) => {
+                        if(response.data.success){
+                            this.$store.commit('setSnackbarMessage', {
+                                openMessage: true,
+                                timeOut: this.themeOption.snackBarTimeout,
+                                message: `${this.guest.first_name}  ${this.trans.successfully_updated}`
+                            })
+                        }
+                        this.loading = false
+                    }).catch(()=>{
+                        this.loading = false
                     })
                 }
-            },
-
-            onProfileImageUpload() {
-                const image = this.$refs.profileImage.files[0]
-
-                let formData = new FormData()
-                formData.append('file', image)
-                formData.append('model', 'users')
-
-                axios.post('/api/uploadfiles', formData).then((response) => {
-                    this.profileImage = response.data
-                })
             }
         }
     }

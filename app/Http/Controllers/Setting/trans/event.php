@@ -46,5 +46,11 @@ return [
         'label' => 'Date',
         'identifier' => 'date',
         'translation' => 'Date'
+    ],
+
+    [
+        'label' => 'Surname',
+        'identifier' => 'surname',
+        'translation' => 'Surname'
     ]
 ];

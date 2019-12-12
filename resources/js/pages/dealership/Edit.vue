@@ -107,6 +107,13 @@
                                     :slider-color="themeOption.tabSliderColor"
                                 >
                                     <v-tab
+                                        key="users"
+                                        ripple
+                                    >
+                                        {{ trans.users }}
+                                    </v-tab>
+
+                                    <v-tab
                                         key="brands"
                                         ripple
                                     >
@@ -136,6 +143,14 @@
                                         {{ trans.opening_times}}
 
                                     </v-tab>
+
+                                    <v-tab-item
+                                        key="users"
+                                    >
+                                        <v-layout row wrap pt-3>
+                                            <dealership-user></dealership-user>
+                                        </v-layout>
+                                    </v-tab-item>
 
                                     <v-tab-item
                                         key="brands"
@@ -258,18 +273,19 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import TimePicker from "../../components/TimePicker";
-    import ImageUpload from "../../components/ImageUpload";
-    import dealership from "../../store/modules/dealership";
+    import TimePicker from "../../components/TimePicker"
+    import ImageUpload from "../../components/ImageUpload"
     import Brands from '../../components/Dealership/Brands'
     import LanguagePicker from '../../components/Language'
+    import DealershipUser from '../../components/DealershipUser/index'
 
     export default {
         components: {
             TimePicker,
             ImageUpload,
             Brands,
-            LanguagePicker
+            LanguagePicker,
+            DealershipUser
         },
 
         data() {

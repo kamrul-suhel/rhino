@@ -40,12 +40,11 @@
                         <td class="text-xs-left">{{ `${props.item.mobile}` }}</td>
                         <td class="text-xs-left">{{ `${props.item.address_line_1} ${props.item.address_line_2}` }}</td>
                         <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
-                        <td class="text-xs-left">{{ props.item.level }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small
                                 class="mr-2"
-                                @click="$router.push({name: 'editGuests', params:{id: props.item.id}})"
+                                @click="$router.push({name: 'editGuest', params:{id: props.item.id}})"
                             >
                                 edit
                             </v-icon>
@@ -186,7 +185,7 @@
                     this.$store.commit('setSnackbarMessage', {
                         openMessage: true,
                         timeOut: this.themeOption.snackBarTimeout,
-                        message: `${this.selectedGuest.firstname}  ${this.trans.successfully_deleted}`
+                        message: `${this.selectedGuest.first_name}  ${this.trans.successfully_deleted}`
                     })
                 })
             }

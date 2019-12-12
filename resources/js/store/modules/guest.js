@@ -150,7 +150,7 @@ const actions = {
      * @param id // required
      */
     fetchGuest({commit, dispatch}, payload) {
-        const URL = `/api/guests/${payload.id}/show` + fn.generateParams(payload)
+        const URL = `/api/guests/${payload.id}` + fn.generateParams(payload)
         axios.get(URL).then((response) => {
             if (response.data) {
                 commit('setSelectedGuest', response.data.guest)

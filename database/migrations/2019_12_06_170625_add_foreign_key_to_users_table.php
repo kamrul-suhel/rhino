@@ -16,19 +16,23 @@ class AddForeignKeyToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('dealership_id')
                 ->on('dealerships')
-                ->references('id');
+                ->references('id')
+            ->onDelete('cascade');
 
             $table->foreign('group_id')
                 ->on('groups')
-                ->references('id');
+                ->references('id')
+                ->onDelete('set null');
 
             $table->foreign('region_id')
                 ->on('regions')
-                ->references('id');
+                ->references('id')
+                ->onDelete('set null');
 
             $table->foreign('country_id')
                 ->on('countries')
-                ->references('id');
+                ->references('id')
+                ->onDelete('set null');
         });
     }
 

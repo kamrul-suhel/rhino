@@ -29,14 +29,6 @@ class CreateGuestsTable extends Migration
             $table->string('postcode');
             $table->string('landline')->nullable();
             $table->string('mobile');
-            $table->string('part_ex_vrm')->nullable();
-            $table->string('part_ex_vehicle')->nullable();
-            $table->string('part_ex_distance')->nullable();
-            $table->boolean('part_ex_settlement')->nullable();
-            $table->boolean('confirmation_letter_sent')->default(0);
-            $table->boolean('postal_contact')->default(0);
-            $table->boolean('email_contact')->default(0);
-            $table->boolean('sms_contact')->default(0);
             $table->string('method')->nullable();
             $table->dateTime('last_logged_in')->nullable();
             $table->smallInteger('stage')->default(1);
