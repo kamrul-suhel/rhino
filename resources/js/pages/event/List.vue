@@ -208,7 +208,6 @@
                     search: this.searchBrands,
                     ...paramObject
                 }
-                console.log(paginateOption)
 
                 this.$store.dispatch('fetchEvents', paginateOption)
             },
@@ -220,12 +219,9 @@
             onEditEvent(event) {
                 if(this.subComponent){
                     this.$router.push({
-                        name: 'editEvents',
+                        name: 'editDealershipsEvent',
                         params: {
-                            id: event.id
-                        },
-                        query:{
-                            previousPage: 'dealership',
+                            eventId: event.id,
                             dealershipId: this.$route.params.id
                         }
                     })

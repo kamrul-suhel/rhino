@@ -186,6 +186,17 @@
             }
         },
 
+        props:{
+          subComponent: {
+              type: Boolean,
+              default: false
+          },
+
+          model: {
+              type: String
+          }
+        },
+
         computed: ({
             ...mapGetters({
                 trans: 'getFields',

@@ -179,10 +179,16 @@
                             </v-layout>
                         </v-card-text>
 
-                        <v-layout row wrap>
+                        <v-layout row wrap v-if="!subComponent">
                             <v-flex xs12>
                                 <Brand v-if="selectedEvent.id"
                                     :event-id="selectedEvent.id"></Brand>
+                            </v-flex>
+                        </v-layout>
+
+                        <v-layout row wrap v-if="subComponent && model==='dealership'">
+                            <v-flex xs12>
+                                <h2>Vehicle</h2>
                             </v-flex>
                         </v-layout>
 
@@ -228,6 +234,18 @@
             Brand
         },
 
+        props: {
+            subComponent: {
+                type: Boolean,
+                default: false
+            },
+
+            model: {
+                type: String,
+                default: null
+            }
+        },
+
         data() {
             return {
                 startEvent: false,
@@ -236,7 +254,6 @@
                 event: {},
                 times: {},
                 active: null,
-                model: null,
 
                 nameRules: [
                     v => !!v || this.trans.name_is_required
@@ -257,8 +274,20 @@
 
         watch: {
             selectedLanguage(){
+                let id = null
+                if(this.subComponent){
+                    switch(this.model){
+                        case 'dealership':
+                            id = this.$route.params.eventId
+                            break
+
+                        default:
+                            id = this.$route.params.id
+                    }
+                }
+
                 this.$store.dispatch('fetchEvent', {
-                    id: this.$route.params.id,
+                    id: id,
                     languageId: this.selectedLanguage.id,
                     edit: true
                 })
@@ -271,8 +300,21 @@
 
         methods: {
             initialize() {
-                this.$store.dispatch('fetchEvent', {id: this.$route.params.id})
-                this.$store.dispatch('fetchBrandForEvent', {id: this.$route.params.id})
+                let id = null
+                if(this.subComponent){
+                    switch(this.model){
+                        case 'dealership':
+                            id = this.$route.params.eventId
+                            break
+
+                        default:
+                            id = this.$route.params.id
+                    }
+                }else{
+                    id = this.$route.params.id
+                }
+                this.$store.dispatch('fetchEvent', {id: id})
+                this.$store.dispatch('fetchBrandForEvent', {id: id})
             },
 
             onUpdateEvent() {
@@ -317,9 +359,19 @@
             },
 
             onBackToEventList(){
-                if(this.$route.query.previousPage){
-                    this.$router.push({name: 'editDealerships', params: {id: this.$route.query.dealershipId}})
-                    this.$store.commit('setButtonLoading', false)
+                if(this.subComponent){
+                    switch(this.model){
+                        case 'dealership':
+                            this.$router.push({
+                                name: 'editDealerships',
+                                params: {
+                                    id: this.$route.params.dealershipId
+                                }
+                            })
+
+                            this.$store.commit('setButtonLoading', false)
+                            break
+                    }
                 }else{
                     this.$router.push({name: 'listEvents'})
                     this.$store.commit('setButtonLoading', false)

@@ -21,6 +21,13 @@ const DealershipRoutes =  {
             path: ':id/edit',
             name: 'editDealerships',
             component: Dealership.Edit
+        },
+
+        // Edit event for dealership
+        {
+            path: ':dealershipId/events/:eventId/edit',
+            name: 'editDealershipsEvent',
+            component: Dealership.Event
         }
     ]
 }

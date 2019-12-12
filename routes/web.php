@@ -48,6 +48,13 @@ Route::prefix('dealerships')->group(function () {
     Route::get('groups', function () {
         return view('welcome');
     });
+
+    /**
+     * Dealership event routes
+     */
+    Route::get('{dealershipId}/events/{id}/edit', function () {
+        return view('welcome');
+    });
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
