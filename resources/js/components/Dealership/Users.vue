@@ -1,45 +1,49 @@
 <template>
-    <v-card>
-        <v-card-text>
-            <v-data-table
-                :headers="headers"
-                :items="brands"
-                disable-initial-sort
-                :pagination.sync="pagination"
-                :no-results-text="trans.no_brand_found"
-                :no-data-text="trans.no_brand_found"
-                :rows-per-page-text="trans.rows_per_page"
-                :rows-per-page-items="rowsPerPage"
-                :total-items="totalBrands"
-                :loading="loading"
-                class="elevation-0"
-            >
-                <template v-slot:items="props">
-                    <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.company }}</td>
-                    <td class="text-xs-left">
-                        <v-avatar
-                            :tile="true"
-                            :size="24"
-                            :color="themeOption.inputColor"
-                        >
-                            <img :src="props.item.logo | image(themeOption.brandDefaultImage)" :alt="props.item.name">
-                        </v-avatar>
-                    </td>
+    <v-layout row wrap>
+        <v-flex xs12>
+            <v-card flat>
+                <v-card-text>
+                    <v-data-table
+                        :headers="headers"
+                        :items="users"
+                        disable-initial-sort
+                        :pagination.sync="pagination"
+                        :no-results-text="trans.no_brand_found"
+                        :no-data-text="trans.no_brand_found"
+                        :rows-per-page-text="trans.rows_per_page"
+                        :rows-per-page-items="rowsPerPage"
+                        :total-items="totalUsers"
+                        :loading="loading"
+                        class="elevation-0"
+                    >
+                        <template v-slot:items="props">
+                            <td>{{ props.item.firstname }}</td>
+                            <td>{{ props.item.email }}</td>
+                            <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
+                            <td class="text-xs-left">{{ props.item.level }}</td>
+                            <td class="text-xs-right">
+                                <v-icon
+                                    small
+                                    class="mr-2"
+                                    @click="$router.push({name: 'editUsers', params:{id: props.item.id}})"
+                                >
+                                    edit
+                                </v-icon>
 
-                    <td class="text-xs-right">
-                        <v-icon
-                            :color="themeOption.buttonDangerColor"
-                            small
-                            @click="onDeleteBrand(props.item.id)"
-                        >
-                            delete
-                        </v-icon>
-                    </td>
-                </template>
-            </v-data-table>
-        </v-card-text>
-    </v-card>
+                                <v-icon
+                                    :color="themeOption.buttonDangerColor"
+                                    small
+                                    @click="onDeleteUser(props.item)"
+                                >
+                                    delete
+                                </v-icon>
+                            </td>
+                        </template>
+                    </v-data-table>
+                </v-card-text>
+            </v-card>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
@@ -52,11 +56,11 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                brands: 'getEventBrands',
-                headers: 'getEventBrandListHeader',
-                totalBrands: 'getTotalEvents',
-                loading: 'getEventLoading',
-                rowsPerPage: 'getEventListRowsPerPage',
+                users: 'getUsers',
+                headers: 'getUserListHeader',
+                totalUsers: 'getTotalUsers',
+                loading: 'getUserLoading',
+                rowsPerPage: 'getUserListRowsPerPage',
                 initializeBrands: 'getInitializeBrands',
                 selectedEvent: 'getSelectedEvent'
             })
@@ -65,13 +69,6 @@
         data() {
             return {
                 pagination: {},
-            }
-        },
-
-        props: {
-            eventId: {
-                type: Number,
-                required: true
             }
         },
 
@@ -100,11 +97,11 @@
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    eventId: this.$route.params.id
+                    filterBy: 'dealership',
+                    dealershipId: this.$route.params.id
                 }
 
-
-                this.$store.dispatch('fetchBrandsByEventId', paginateOption)
+                this.$store.dispatch('fetchUsers', paginateOption)
             },
 
             onDeleteBrand(brandId) {

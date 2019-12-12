@@ -1,11 +1,7 @@
 <template>
     <v-layout row wrap>
-        <v-flex xs12 sm8 pr-4>
+        <v-flex xs12 pr-4>
             <Users></Users>
-        </v-flex>
-
-        <v-flex xs12 sm4>
-            <AddUser></AddUser>
         </v-flex>
     </v-layout>
 </template>

@@ -74,6 +74,14 @@ class EventListController extends Controller
                 }
             }
 
+            if($request->has('filterBy') && !empty($request->filterBy)){
+                switch($request->filterBy){
+                    case 'dealership':
+                        $events = $events->where('dealerships.id', $request->dealershipId);
+                        break;
+                }
+            }
+
             // If sortBy has set then, sort by region, group, country
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;

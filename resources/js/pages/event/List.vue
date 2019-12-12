@@ -1,13 +1,14 @@
 <template>
     <div>
-        <v-toolbar flat>
-            <v-toolbar-title>
+        <v-toolbar flat :class="{'mt-4' : subComponent}">
+            <v-toolbar-title v-if="!subComponent">
                 <span :class="themeOption.textHeadingColor+'--text'">{{ trans.events }}</span>
             </v-toolbar-title>
             <v-divider
                 class="mx-2"
                 inset
                 vertical
+                v-if="!subComponent"
             ></v-divider>
 
             <v-spacer></v-spacer>
@@ -121,6 +122,18 @@
             Chrome
         },
 
+        props: {
+            subComponent: {
+                type: Boolean,
+                default: false
+            },
+
+            model: {
+                type: String,
+                default: null
+            }
+        },
+
         data() {
             return {
                 pagination: {},
@@ -174,25 +187,51 @@
         mounted() {
         },
         methods: {
-            fetchCompany() {
-                this.$store.dispatch('fetchCompanies', {themeOption: this.themeOption, trans: this.trans});
-            },
-
             // Initialize data when first render
             initialize() {
+                let paramObject = {}
+
+                if(this.subComponent){
+                    switch(this.model){
+                        case 'dealership':
+                            paramObject = {
+                                'dealershipId': this.$route.params.id,
+                                'filterBy' : 'dealership'
+                            }
+                    }
+                }
                 const paginateOption = {
                     ...this.pagination,
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    search: this.searchBrands
+                    search: this.searchBrands,
+                    ...paramObject
                 }
+                console.log(paginateOption)
 
                 this.$store.dispatch('fetchEvents', paginateOption)
             },
 
+            fetchCompany() {
+                this.$store.dispatch('fetchCompanies', {themeOption: this.themeOption, trans: this.trans});
+            },
+
             onEditEvent(event) {
-                this.$router.push({name: 'editEvents', params: {id: event.id}})
+                if(this.subComponent){
+                    this.$router.push({
+                        name: 'editEvents',
+                        params: {
+                            id: event.id
+                        },
+                        query:{
+                            previousPage: 'dealership',
+                            dealershipId: this.$route.params.id
+                        }
+                    })
+                }else{
+                    this.$router.push({name: 'editEvents', params: {id: event.id}})
+                }
             },
 
             onDeleteEvent(event) {

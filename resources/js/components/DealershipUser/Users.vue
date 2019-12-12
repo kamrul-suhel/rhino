@@ -100,11 +100,12 @@
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    eventId: this.$route.params.id
+                    eventId: this.$route.params.id,
+                    filterBy: 'dealership',
+                    dealershipId: this.$route.params.id
                 }
 
-
-                this.$store.dispatch('fetchBrandsByEventId', paginateOption)
+                this.$store.dispatch('fetchUsers', paginateOption)
             },
 
             onDeleteBrand(brandId) {

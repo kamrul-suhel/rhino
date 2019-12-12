@@ -61,6 +61,17 @@ class UserListController extends Controller
                 }
             }
 
+            // Filter by dealership, group, country & region based on
+            if($request->has('filterBy') && !empty($request->filterBy)){
+                switch($request->filterBy){
+                    case 'dealership':
+                        $users = $users->where([
+                            'users.dealership_id' => $request->dealershipId,
+                            'users.level' => User::USERSALEEXECUTIVE
+                        ]);
+                }
+            }
+
             // If sortBy has set then, sort by region, group, country
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;

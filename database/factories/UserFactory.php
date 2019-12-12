@@ -24,7 +24,8 @@ $factory->define(User::class, function (Faker $faker) {
         'region',
         'country',
         'brand',
-        'company'
+        'company',
+        'sale_executive'
     ];
 
     $accessLevel = $faker->randomElement($accessLevels);
@@ -37,7 +38,7 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
         'level'=>$accessLevel,
-        'dealership_id' => $accessLevel == 'dealership' ? \App\Dealership::all()->random()->id : null,
+        'dealership_id' => $accessLevel == 'dealership' || $accessLevel == 'sale_executive' ? \App\Dealership::all()->random()->id : null,
         'group_id' => $accessLevel == 'group' ? \App\Group::all()->random()->id : null,
         'region_id' => $accessLevel == 'region' ? \App\Region::all()->random()->id : null,
         'country_id' => $accessLevel == 'country' ? \App\Country::all()->random()->id : null,

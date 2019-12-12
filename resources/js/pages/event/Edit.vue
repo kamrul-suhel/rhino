@@ -317,8 +317,13 @@
             },
 
             onBackToEventList(){
-                // this.$router.push({name: 'listEvents'})
-                this.$store.commit('setButtonLoading', false)
+                if(this.$route.query.previousPage){
+                    this.$router.push({name: 'editDealerships', params: {id: this.$route.query.dealershipId}})
+                    this.$store.commit('setButtonLoading', false)
+                }else{
+                    this.$router.push({name: 'listEvents'})
+                    this.$store.commit('setButtonLoading', false)
+                }
             }
         }
     }

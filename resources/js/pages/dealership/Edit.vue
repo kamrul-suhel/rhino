@@ -107,6 +107,13 @@
                                     :slider-color="themeOption.tabSliderColor"
                                 >
                                     <v-tab
+                                        key="events"
+                                        ripple
+                                    >
+                                        {{ trans.events}}
+                                    </v-tab>
+
+                                    <v-tab
                                         key="users"
                                         ripple
                                     >
@@ -125,15 +132,6 @@
                                         ripple
                                     >
                                         {{ trans.address}}
-
-                                    </v-tab>
-
-                                    <v-tab
-                                        key="dealershipImage"
-                                        ripple
-                                    >
-                                        {{ trans.dealership_banner}}
-
                                     </v-tab>
 
                                     <v-tab
@@ -141,14 +139,20 @@
                                         ripple
                                     >
                                         {{ trans.opening_times}}
-
                                     </v-tab>
+
+                                    <v-tab-item
+                                        key="events">
+                                        <EventList subComponent
+                                                   model="dealership"
+                                        ></EventList>
+                                    </v-tab-item>
 
                                     <v-tab-item
                                         key="users"
                                     >
                                         <v-layout row wrap pt-3>
-                                            <dealership-user></dealership-user>
+                                            <dealership-users></dealership-users>
                                         </v-layout>
                                     </v-tab-item>
 
@@ -225,14 +229,6 @@
                                     </v-tab-item>
 
                                     <v-tab-item
-                                        key="dealershipImage"
-                                    >
-                                        <v-layout row wrap pt-3>
-                                            <ImageUpload model="dealership"></ImageUpload>
-                                        </v-layout>
-                                    </v-tab-item>
-
-                                    <v-tab-item
                                         key="times">
                                         <TimePicker :dealership="dealership"
                                                     v-on:sendTimes="updateTimes">
@@ -277,7 +273,8 @@
     import ImageUpload from "../../components/ImageUpload"
     import Brands from '../../components/Dealership/Brands'
     import LanguagePicker from '../../components/Language'
-    import DealershipUser from '../../components/DealershipUser/index'
+    import DealershipUsers from '../../components/Dealership/Users'
+    import EventList from '../event/List'
 
     export default {
         components: {
@@ -285,7 +282,8 @@
             ImageUpload,
             Brands,
             LanguagePicker,
-            DealershipUser
+            DealershipUsers,
+            EventList
         },
 
         data() {
