@@ -112,9 +112,10 @@
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
                             <v-btn
+                                identifier="'vehicleBack'"
                                 :class="themeOption.buttonSecondaryColor"
                                 small
-                                @click="$router.push({name: 'listVehicles'})"
+                                @click="onBackToBrand"
                             >
                                 {{ trans.back }}
                             </v-btn>
@@ -226,6 +227,27 @@
                     }).catch((error)=>{
                     })
                 }
+            },
+
+            onBackToBrand(){
+                if(this.subComponent){
+                    switch(this.model){
+                        case 'brand':
+                            this.$router.push({
+                                name: 'editBrand',
+                                params: {
+                                    id: this.$route.params.BrandId
+                                }
+                            })
+
+                            this.$store.commit('setButtonLoading', false)
+                            break
+                    }
+                }else{
+                    this.$router.push({name: 'listBrands'})
+                    this.$store.commit('setButtonLoading', false)
+                }
+                
             },
 
 

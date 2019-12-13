@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-toolbar flat>
+        <v-toolbar flat v-if="!subComponent">
             <v-toolbar-title>
                 <span :class="themeOption.textHeadingColor+'--text'">{{ trans.vehicles }}</span>
             </v-toolbar-title>
@@ -36,7 +36,7 @@
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.model }}</td>
-                        <td>{{ props.item.brand }}</td>
+                        <td v-if="!subComponent">{{ props.item.brand }}</td>
                         <td class="text-xs-right">
                                 <v-icon
                                 small
@@ -129,6 +129,17 @@
             }
         },
 
+        props:{
+          subComponent: {
+              type: Boolean,
+              default: false
+          },
+
+          model: {
+              type: String
+          }
+        },
+
         computed: ({
             ...mapGetters({
                 languages: 'getLanguages',
@@ -173,14 +184,24 @@
 
             // Initialize data when first render
             initialize() {
-                //this.$refs.createVehicle.resetValidation()
+                console.log(this.subComponent)
+            
+                let extraOption = {}
+                if(this.subComponent){
+                    extraOption = {
+                        filterBy: this.model,
+                        brandId: this.$route.params.id
+                    }
+                }
 
                 const paginateOption = {
                     ...this.pagination,
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    search: this.searchVehicle
+                    search: this.searchVehicle,
+                    subComponent: true,
+                    ...extraOption
                 }
 
                 this.$store.dispatch('fetchVehicles', paginateOption)
