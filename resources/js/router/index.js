@@ -13,6 +13,7 @@ import User from "./Modules/user";
 import Event from "./Modules/event";
 import TypesRoutes from "./Modules/type";
 import Guest from "./Modules/guest";
+import Settings from "./Modules/settings";
 
 // Remove in product please
 import Test from "./Modules/test"
@@ -61,6 +62,9 @@ const routes = [
 
     // Guest Routes
     {...Guest},
+
+    // Settings Routes
+    {...Settings},
 
     // Test Routes
     {...Test}
