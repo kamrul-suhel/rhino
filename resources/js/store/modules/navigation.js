@@ -12,18 +12,18 @@ const mutations = {
         console.log('navigation', trans);
         const navItems = [
             {
-                icon: 'add_shopping_cart',
+                icon: 'emoji_transportation',
                 text: trans.dealerships,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: trans.all_dealerships,
                         link: 'listDealerships',
                         access: ''
                     },
 
                     {
-                        icon: 'history',
+                        icon: 'post_add',
                         text: trans.create_dealerships,
                         link: 'addDealerships',
                         access: ''
@@ -31,7 +31,7 @@ const mutations = {
 
 
                     {
-                        icon: 'subscriptions',
+                        icon: 'bookmarks',
                         text: trans.groups,
                         link: 'listDealershipsGroups',
                         access: ''
@@ -40,11 +40,11 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'donut_small',
                 text: trans.brands,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: trans.list_of_brands,
                         link: 'listBrands',
                         access: ''
@@ -53,18 +53,18 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'directions_car',
                 text: trans.vehicles,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: trans.list_of_vehicles,
                         link: 'listVehicles',
                         access: ''
                     },
 
                     {
-                        icon: 'history',
+                        icon: 'add',
                         text: trans.create_vehicle,
                         link: 'addVehicles',
                         access: ''
@@ -74,11 +74,11 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'business_center',
                 text: trans.companies,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: trans.list_of_companies,
                         link: 'listCompanies',
                         access: ''
@@ -87,18 +87,18 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'map',
                 text: trans.countries,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: trans.list_of_country,
                         link: 'listCountries',
                         access: ''
                     },
 
                     {
-                        icon: 'map',
+                        icon: 'add',
                         text: trans.create_country,
                         link: 'createCountries',
                         access: ''
@@ -107,11 +107,11 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'language',
                 text: trans.languages,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: trans.list_of_languages,
                         link: 'listLanguages',
                         access: ''
@@ -120,25 +120,25 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'event_note',
                 text: trans.events,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: `${trans.list_of} ${trans.events}`,
                         link: 'listEvents',
                         access: ''
                     },
 
                     {
-                        icon: 'history',
+                        icon: 'add',
                         text: `${trans.create} ${trans.event}`,
                         link: 'createEvents',
                         access: ''
                     },
 
                     {
-                        icon: 'history',
+                        icon: 'emohi_events',
                         text: `${trans.types}`,
                         link: 'listEventTypes',
                         access: ''
@@ -147,18 +147,18 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'person',
                 text: trans.users,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: `${trans.list_of} ${trans.users}`,
                         link: 'listUsers',
                         access: ''
                     },
 
                     {
-                        icon: 'history',
+                        icon: 'person_add',
                         text: `${trans.create} ${trans.user}`,
                         link: 'createUsers',
                         access: ''
@@ -167,24 +167,38 @@ const mutations = {
             },
 
             {
-                icon: 'add_shopping_cart',
+                icon: 'people',
                 text: trans.guests,
                 navs: [
                     {
-                        icon: 'history',
+                        icon: 'list',
                         text: `${trans.list_of} ${trans.guests}`,
                         link: 'listGuest',
                         access: ''
                     },
 
                     {
-                        icon: 'history',
+                        icon: 'person_add',
                         text: `${trans.create} ${trans.guest}`,
                         link: 'createGuest',
                         access: ''
                     }
                 ],
-            }
+            },
+            {
+                icon: 'build',
+                text: 'Settings',
+                navs: [
+                    {
+                        icon: 'keyboard_arrow_right',
+                        text: `Edit`,
+                        link: 'testDateTime',
+                        access: ''
+                    },
+                ],
+            },
+
+
         ]
 
         state.navigation = [...navItems];
