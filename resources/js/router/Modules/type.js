@@ -6,7 +6,7 @@ const EventTypesRoutes =  {
     component: Type.Root,
     children: [
         {
-            path: '',
+            path: 'list',
             name: 'listEventTypes',
             component: Type.List
         }

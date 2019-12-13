@@ -6,7 +6,7 @@ const DealershipGroupsRoutes =  {
     component: Groups.Root,
     children: [
         {
-            path: '',
+            path: 'list',
             name: 'listDealershipsGroups',
             component: Groups.List
         },

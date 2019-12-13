@@ -7,7 +7,7 @@ const frontendRoute ={
     component: Frontend.Root,
     children:[
         {
-            path:'',
+            path:'list',
             name: 'frontendIndex',
             component: Frontend.Frontend,
         }
