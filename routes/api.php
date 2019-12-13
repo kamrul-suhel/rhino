@@ -214,6 +214,9 @@ Route::prefix('events')->group(function(){
     // Get brands for specific event
     Route::get('{id}/brands', 'Event\EventBrandListController@getBrandsByEventId');
 
+    // Get Vehicle for specific event
+    Route::get('{id}/vehicles', 'Event\EventVehicleController@getVehicleByEventId');
+
     Route::get('{id}/brands/dropdown', 'Brand\BrandDropDownController@getBrandForEvent');
     Route::delete('{id}', 'Event\EventController@destroy');
 

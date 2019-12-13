@@ -22,11 +22,14 @@ use Faker\Generator as Faker;
 $factory->define(Event::class, function (Faker $faker) {
     $startDate = Carbon::now()->addDay($faker->randomElement([5,10,15]));
     $endDate = Carbon::parse($startDate)->addDay($faker->randomElement([15,20,25]));
+
+    $appointmentDuration = [30, 60, 90,120];
     return [
         'dealership_id' => \App\Dealership::all()->random()->id,
         'type_id' => EventType::all()->random()->id,
         'start' => $startDate,
         'end' => $endDate,
+        'appointment_duration' => $faker->randomElement($appointmentDuration),
         'status' => $faker->randomElement([0,1])
     ];
 });

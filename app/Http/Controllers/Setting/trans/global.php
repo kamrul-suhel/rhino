@@ -291,5 +291,47 @@ return [
         'label' => 'Method',
         'identifier' => 'method',
         'translation' => 'Method'
+    ],
+
+    [
+        'label' => 'Appointment Duration',
+        'identifier' => 'appointment_duration',
+        'translation' => 'Appointment Duration'
+    ],
+
+    [
+        'label' => 'Minutes',
+        'identifier' => 'minutes',
+        'translation' => 'Minutes'
+    ],
+
+    [
+        'label' => 'Hours',
+        'identifier' => 'Hours',
+        'translation' => 'Hours'
+    ],
+
+    [
+        'label' => 'New',
+        'identifier' => 'new',
+        'translation' => 'New'
+    ],
+
+    [
+        'label' => 'Used',
+        'identifier' => 'used',
+        'translation' => 'Used'
+    ],
+
+    [
+        'label' => 'Model',
+        'identifier' => 'model',
+        'translation' => 'Model'
+    ],
+
+    [
+        'label' => 'Order',
+        'identifier' => 'order',
+        'translation' => 'Order'
     ]
 ];

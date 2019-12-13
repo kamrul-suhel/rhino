@@ -73,6 +73,25 @@
                                     >
                                     </v-select>
                                 </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-select
+                                        :items="appointmentDuration"
+                                        item-value="value"
+                                        item-text="text"
+                                        :label="trans.appointment_duration"
+                                        :color="themeOption.inputColor"
+                                        v-model="event.appointment_duration">
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-switch
+                                        :label="trans.status"
+                                        :color="themeOption.inputColor"
+                                        v-model="event.status">
+                                    </v-switch>
+                                </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
@@ -166,14 +185,6 @@
                                         :hint="trans.notes"
                                     ></v-textarea>
                                 </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :color="themeOption.inputColor"
-                                        v-model="event.status">
-                                    </v-switch>
-                                </v-flex>
                             </v-layout>
                         </v-card-text>
 
@@ -223,11 +234,10 @@
                 event: {},
                 times: {},
                 active: null,
-                model: null,
-
                 nameRules: [
                     v => !!v || this.trans.name_is_required
-                ]
+                ],
+                appointmentDuration:[]
             }
         },
 
@@ -240,9 +250,11 @@
             })
         }),
 
-        watch: {},
+        watch: {
+        },
 
         created() {
+            this.setAppointmentDuration()
             this.initialize()
         },
 
@@ -292,7 +304,26 @@
             },
 
             onBackToEventList(){
-                this.$store.commit('setButtonLoading', false)
+                this.$router.push({name: 'listEvents'})
+            },
+
+            setAppointmentDuration(){
+                this.appointmentDuration = [
+                    {
+                        text: `60 ${this.trans.minutes}`,
+                        value: 60
+                    },
+
+                    {
+                        text: `90 ${this.trans.minutes}`,
+                        value: 90
+                    },
+
+                    {
+                        text: `120 ${this.trans.minutes}`,
+                        value: 120
+                    }
+                ]
             }
         }
     }

@@ -77,6 +77,7 @@ class EventController extends Controller
         $request->has('type_id') ? $event->type_id = $request->type_id : null;
         $request->has('start') ? $event->start = $request->start : null;
         $request->has('end') ? $event->end = $request->end : null;
+        $request->has('appointment_duration') ? $event->appointment_duration = $request->appointment_duration : null;
         $request->has('status') ? $event->status = $request->status : null;
 
         $event->save();

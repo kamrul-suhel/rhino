@@ -75,6 +75,25 @@
                                     >
                                     </v-select>
                                 </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-select
+                                        :items="appointmentDuration"
+                                        item-value="value"
+                                        item-text="text"
+                                        :label="trans.appointment_duration"
+                                        :color="themeOption.inputColor"
+                                        v-model="selectedEvent.appointment_duration">
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-switch
+                                        :label="trans.status"
+                                        :color="themeOption.inputColor"
+                                        v-model="selectedEvent.status">
+                                    </v-switch>
+                                </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
@@ -168,14 +187,6 @@
                                         :hint="trans.notes"
                                     ></v-textarea>
                                 </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :color="themeOption.inputColor"
-                                        v-model="selectedEvent.status">
-                                    </v-switch>
-                                </v-flex>
                             </v-layout>
                         </v-card-text>
 
@@ -186,9 +197,10 @@
                             </v-flex>
                         </v-layout>
 
+                        <!-- Dealership Admin can see -->
                         <v-layout row wrap v-if="subComponent && model==='dealership'">
                             <v-flex xs12>
-                                <h2>Vehicle</h2>
+                                <vehicle></vehicle>
                             </v-flex>
                         </v-layout>
 
@@ -225,13 +237,15 @@
     import ImageUpload from "../../components/ImageUpload";
     import LanguagePicker from "../../components/Language";
     import Brand from '../../components/Event/Brand'
+    import Vehicle from '../../components/Event/EventVehicle'
 
     export default {
         components: {
             TimePicker,
             ImageUpload,
             LanguagePicker,
-            Brand
+            Brand,
+            Vehicle
         },
 
         props: {
@@ -257,7 +271,9 @@
 
                 nameRules: [
                     v => !!v || this.trans.name_is_required
-                ]
+                ],
+
+                appointmentDuration:[]
             }
         },
 
@@ -296,6 +312,7 @@
 
         created() {
             this.initialize()
+            this.setAppointmentDuration()
         },
 
         methods: {
@@ -376,6 +393,25 @@
                     this.$router.push({name: 'listEvents'})
                     this.$store.commit('setButtonLoading', false)
                 }
+            },
+
+            setAppointmentDuration(){
+                this.appointmentDuration = [
+                    {
+                        text: `60 ${this.trans.minutes}`,
+                        value: 60
+                    },
+
+                    {
+                        text: `90 ${this.trans.minutes}`,
+                        value: 90
+                    },
+
+                    {
+                        text: `120 ${this.trans.minutes}`,
+                        value: 120
+                    }
+                ]
             }
         }
     }
