@@ -28,14 +28,25 @@
                 <v-flex xs12>
                     <v-card>
                         <v-card-text>
-                            <v-layout row wrap>
-                                <v-flex xs12 pa-2>
+                            <v-layout justify-space-between row>
+                                <v-flex xs12 sm6 md6 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || trans.brand_name_is_required]"
                                         :color="themeOption.inputColor"
                                         :label="trans.name"
                                         v-model="brand.name"
                                     ></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md4 wrap pt-3 row justify-center >
+                                    <v-card width="250px">
+                                        <v-img
+                                            :src="logo"
+                                            aspect-ratio="2.75"
+                                        ></v-img>
+                                    </v-card>
+                                    <FileUpload :preview="false"
+                                        model="country"></FileUpload>
                                 </v-flex>
                             </v-layout>
 
@@ -54,18 +65,20 @@
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <div class="r-color-picker" v-if="isColorSwatchActive">
-                                        <div class="r-color-picker-content">
-                                            <chrome v-model="selectedColor"></chrome>
-                                            <v-btn small
-                                                   class="r-color-choose"
-                                                   @click="isColorSwatchActive = false"
-                                                   :color="themeOption.buttonPrimaryColor">
-                                                {{ trans.select }}
-                                            </v-btn>
+                                <v-flex xs12 sm6 md6 pa-2 row justify-center>
+                                    <v-flex xs12 sm12 md8 align-self-center>
+                                        <div class="r-color-picker mx-auto" v-if="isColorSwatchActive">
+                                            <div class="r-color-picker-content mx-auto">
+                                                <chrome v-model="selectedColor"></chrome>
+                                                <v-btn small
+                                                    class="r-color-choose"
+                                                    @click="isColorSwatchActive = false"
+                                                    :color="themeOption.buttonPrimaryColor">
+                                                    {{ trans.select }}
+                                                </v-btn>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </v-flex>
 
                                     <v-text-field
                                         :label="trans.color"
@@ -107,25 +120,33 @@
                                         {{ trans.logo}}
                                     </v-tab>
 
+                                    <v-tab
+                                        key="vehicles"
+                                        ripple
+                                    >
+                                        {{ trans.vehicles }}
+                                    </v-tab>
+
                                     <v-tab-item
                                         key="regions"
                                     >
-                                        <Regions model="brand"></Regions>
+                                    <Regions model="brand"></Regions>
                                     </v-tab-item>
 
                                     <v-tab-item
                                         key="logo"
                                     >
-                                        <v-layout row wrap pt-3>
-                                            <v-card width="250px">
-                                                <v-img
-                                                    :src="logo"
-                                                    aspect-ratio="2.75"
-                                                ></v-img>
-                                            </v-card>
-                                            <FileUpload :preview="false"
-                                                        model="country"></FileUpload>
-                                        </v-layout>
+                                        
+                                    </v-tab-item>
+                                    
+                                    <v-tab-item
+                                        key="Vehicles"
+                                    >
+                                         
+                                    <vehicles 
+                                        model="brand"
+                                        subComponent></vehicles>
+
                                     </v-tab-item>
                                 </v-tabs>
                             </v-layout>
@@ -166,20 +187,21 @@
     import FileUpload from '../../components/ImageUpload'
     import Regions from '../../components/Brand/Regions'
     import LanguagePicker from '../../components/Language'
+    import Vehicles from '../vehicles/List'
 
     export default {
         components: {
             Chrome,
             FileUpload,
             Regions,
-            LanguagePicker
+            LanguagePicker,
+            Vehicles
         },
 
         data() {
             return {
                 valid: true,
                 active: null,
-                model: null,
 
                 isColorSwatchActive: false,
                 selectedColor: '',
@@ -207,7 +229,8 @@
                 regions: 'getRegions',
                 brand: 'getSelectedBrand',
                 selectedLanguage: 'getSubSelectedLanguage',
-                logo: 'getUploadedImage'
+                logo: 'getUploadedImage',
+                vehicles: 'getVehicles'
             })
         }),
 

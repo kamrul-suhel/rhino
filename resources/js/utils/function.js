@@ -68,6 +68,10 @@ export default {
             params += `&id=${payload.id}`
         }
 
+        if(payload.brandId && typeof (payload.brandId) !== 'undefined'){
+            params += `&brandId=${payload.brandId}`
+        }
+
         if(payload.dealershipId && typeof (payload.dealershipId) !== 'undefined'){
             params += `&dealershipId=${payload.dealershipId}`
         }

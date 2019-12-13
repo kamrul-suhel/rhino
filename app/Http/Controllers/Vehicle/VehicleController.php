@@ -23,6 +23,7 @@ class VehicleController extends Controller
         $totalVehicle = 0;
         $vehicles = Vehicle::select(
             'vehicles.id',
+            'vehicles.brand_id',
             'vehicles.driver_seating_position_left_image',
             'vehicles.driver_seating_position_right_image',
             'vehicles_translation.model as model',
@@ -48,6 +49,12 @@ class VehicleController extends Controller
 
             } else {
                 $vehicles = $vehicles->orderBy('vehicles.id', 'DESC');
+            }
+
+            // If  filterBy Brand is set
+            if ( $request->has('filterBy') && !empty($request->filterBy) ) {
+                $brandId = $request->brandId;
+                $vehicles = $vehicles->where('vehicles.brand_id', $request->brandId);
             }
 
             $data = $vehicles->paginate($this->perPage);

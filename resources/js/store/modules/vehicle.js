@@ -49,7 +49,19 @@ const mutations = {
         state = {...defaultState}
     },
 
-    setVehicleListHeader(state, trans){
+    setVehicleListHeader(state, trans, subComponent){
+
+        let extraParams = {}
+
+        if(subComponent){
+            extraParams = {
+                text: trans.brand,
+                align: 'left',
+                sortable: false,
+                value: 'brand'
+            }
+        }
+        
         const header = [
             {
                 text: trans.vehicle,
@@ -57,13 +69,8 @@ const mutations = {
                 sortable: false,
                 value: 'vehicle'
             },
-
-            {
-                text: trans.brand,
-                align: 'left',
-                sortable: false,
-                value: 'brand'
-            },
+            
+            ...extraParams,
 
             {
                 text: trans.actions,
@@ -132,7 +139,7 @@ const actions = {
         commit('setVehicleLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        commit('setVehicleListHeader', payload.trans)
+        commit('setVehicleListHeader', payload.trans, payload.subComponent)
 
         const params = fn.generateParams(payload)
         const URL = `/api/vehicles${params}`

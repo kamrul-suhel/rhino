@@ -191,7 +191,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'keyboard_arrow_right',
-                        text: `Edit`,
+                        text: 'Language/Date Demo',
                         link: 'testDateTime',
                         access: ''
                     },
