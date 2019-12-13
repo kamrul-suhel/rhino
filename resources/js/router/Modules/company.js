@@ -6,7 +6,7 @@ const CompanyRoutes = {
     component: Company.Root,
     children: [
         {
-            path: '',
+            path: 'list',
             name: 'listCompanies',
             component: Company.List,
         }

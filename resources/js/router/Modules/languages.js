@@ -6,7 +6,7 @@ const LanguageRoutes = {
     component: Language.Root,
     children:[
         {
-            path:'',
+            path:'list',
             name: 'listLanguages',
             component: Language.List,
         }

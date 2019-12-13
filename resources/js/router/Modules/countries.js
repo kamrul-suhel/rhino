@@ -6,7 +6,7 @@ const CountriesRoutes = {
     component: Countries.Root,
     children: [
         {
-            path: '',
+            path: 'list',
             name: 'listCountries',
             component: Countries.List,
         },

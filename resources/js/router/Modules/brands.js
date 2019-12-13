@@ -6,7 +6,7 @@ const brandsRoute ={
     component: Brands.Root,
     children:[
         {
-            path:'',
+            path:'list',
             name: 'listBrands',
             component: Brands.List,
         },

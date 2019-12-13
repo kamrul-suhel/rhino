@@ -6,7 +6,7 @@ const SettingsRoutes = {
     component: Settings.Root,
     children:[
         {
-            path:'',
+            path:'list',
             name: 'listSettings',
             component: Settings.List,
         }
