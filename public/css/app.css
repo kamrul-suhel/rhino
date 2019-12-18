@@ -30,6 +30,10 @@ a {
   margin-bottom: 4rem;
 }
 
+.frontend-container {
+  padding: 0;
+}
+
 .navigation-drawer {
   z-index: 100;
   /* LANGUAGE SELECTOR */
@@ -73,7 +77,6 @@ a {
 }
 
 .navigation-drawer .vertical-stepper .v-stepper__step--active .v-stepper__step__step {
-  background-color: #cc0000 !important;
   color: white;
 }
 
@@ -126,7 +129,145 @@ a {
   color: #cc0000;
 }
 
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
+  background: none;
+}
+
 /* END OF REMOVE ONCE DYNAMIC */
 
+/* TODO REMOVE CALENDAR STYLING */
 
-/*# sourceMappingURL=app.css.map*/
+.theme--light.v-calendar-weekly,
+.theme--light.v-sheet {
+  background: none;
+  border: none;
+}
+
+.theme--light.v-calendar-weekly .v-calendar-weekly__day-month,
+.theme--light.v-sheet .v-calendar-weekly__day-month {
+  display: none;
+}
+
+.theme--light.v-calendar-weekly .v-calendar-weekly__day,
+.theme--light.v-sheet .v-calendar-weekly__day {
+  border-radius: 50%;
+  border: none;
+  padding-top: calc(14.3% - 10px);
+  width: calc(14.3% - 10px);
+  padding-bottom: 0;
+  height: 0;
+  margin: 5px;
+  text-align: center;
+  background: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.theme--light.v-calendar-weekly .v-calendar-weekly__day .v-calendar-weekly__day-label,
+.theme--light.v-sheet .v-calendar-weekly__day .v-calendar-weekly__day-label {
+  width: auto;
+  height: auto;
+  margin: auto;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.theme--light.v-calendar-weekly .v-calendar-weekly__head .v-calendar-weekly__head-weekday,
+.theme--light.v-sheet .v-calendar-weekly__head .v-calendar-weekly__head-weekday {
+  border: none;
+  text-align: center;
+  margin: 5px;
+  height: auto;
+  width: calc(14.3% - 10px);
+}
+
+/* END OF REMOVE CALENDAR STYLING */
+
+.body-3 {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.padding-x-85 {
+  padding-right: 85px;
+  padding-left: 85px;
+}
+
+/* TODO REMOVE PART EXCHANGE STYLING */
+
+.registration-input {
+  width: 330px;
+  height: 70px;
+  background-color: #ffb400;
+  border: 1px solid #a07800;
+  border-radius: 7px;
+  text-transform: uppercase;
+  color: black;
+  font-size: 25px;
+  line-height: 25px;
+  padding: 22.5px;
+}
+
+.registration-input::-webkit-input-placeholder {
+  color: black;
+}
+
+.registration-input::-moz-placeholder {
+  color: black;
+}
+
+.registration-input::-ms-input-placeholder {
+  color: black;
+}
+
+.registration-input::placeholder {
+  color: black;
+}
+
+.car-icon {
+  padding: 15px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+/* END OF REMOVE PART EXCHANGE STYLING */
+
+/* TODO REMOVE PERSONAL DETAILS STYLING */
+
+.details-step {
+  width: 70%;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  border: 1px solid #f0f0f0;
+}
+
+.rounded-20 {
+  border-radius: 20px;
+}
+
+.theme-fill {
+  background-color: #cc0000 !important;
+}
+
+/* END OF REMOVE PERSONAL DETAILS STYLING */
+
+/* TODO REMOVE BOOKING CONFIRMATION STYLING */
+
+.confirmation-step {
+  width: 70%;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+
+/* END OF REMOVE PERSONAL DETAILS STYLING */
+
