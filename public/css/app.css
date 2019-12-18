@@ -201,55 +201,6 @@ a {
   padding-left: 85px;
 }
 
-/* TODO REMOVE PART EXCHANGE STYLING */
-
-.registration-input {
-  width: 330px;
-  height: 70px;
-  background-color: #ffb400;
-  border: 1px solid #a07800;
-  border-radius: 7px;
-  text-transform: uppercase;
-  color: black;
-  font-size: 25px;
-  line-height: 25px;
-  padding: 22.5px;
-}
-
-.registration-input::-webkit-input-placeholder {
-  color: black;
-}
-
-.registration-input::-moz-placeholder {
-  color: black;
-}
-
-.registration-input::-ms-input-placeholder {
-  color: black;
-}
-
-.registration-input::placeholder {
-  color: black;
-}
-
-.car-icon {
-  padding: 15px;
-  border-radius: 50%;
-  background-color: #f0f0f0;
-}
-
-/* END OF REMOVE PART EXCHANGE STYLING */
-
-/* TODO REMOVE PERSONAL DETAILS STYLING */
-
-.details-step {
-  width: 70%;
-  -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-  border: 1px solid #f0f0f0;
-}
-
 .rounded-20 {
   border-radius: 20px;
 }
@@ -257,17 +208,4 @@ a {
 .theme-fill {
   background-color: #cc0000 !important;
 }
-
-/* END OF REMOVE PERSONAL DETAILS STYLING */
-
-/* TODO REMOVE BOOKING CONFIRMATION STYLING */
-
-.confirmation-step {
-  width: 70%;
-  -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-}
-
-/* END OF REMOVE PERSONAL DETAILS STYLING */
 

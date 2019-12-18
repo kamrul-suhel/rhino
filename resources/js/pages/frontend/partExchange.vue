@@ -32,7 +32,7 @@
                 </v-layout>
 
                 <v-layout column align-center justify-center style="width: calc(50% - 20px); margin: 10px; border: 1px solid rgb(240,240,240)">
-                    <v-icon :style="{color:themeOption.brandColor}" large class="car-icon">directions_car</v-icon>
+                    <v-icon :style="{color:themeOption.brandColor}" large class="car-icon" style="padding: 15px; border-radius: 50%; background-color: rgb(240,240,240);">directions_car</v-icon>
                     <h2 class="headline text-lg-center mt-4" style="width:50%; white-space:normal; text-align:center">Click here if you don't have a part exchange vehicle</h2>
                 </v-layout>
 

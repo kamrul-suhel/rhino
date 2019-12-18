@@ -83893,6 +83893,11 @@ var render = function() {
                     "v-icon",
                     {
                       staticClass: "car-icon",
+                      staticStyle: {
+                        padding: "15px",
+                        "border-radius": "50%",
+                        "background-color": "rgb(240,240,240)"
+                      },
                       style: { color: _vm.themeOption.brandColor },
                       attrs: { large: "" }
                     },
@@ -84142,7 +84147,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            checkbox1: false,
+            checkbox2: false,
+            checkbox3: false,
+            checkbox4: false
+        };
     },
     created: function created() {},
 
@@ -84236,7 +84246,7 @@ var render = function() {
             [
               _c(
                 "v-layout",
-                { staticClass: "confirmation-step" },
+                { staticStyle: { width: "70%", "flex-grow": "0" } },
                 [
                   _c(
                     "v-layout",
@@ -84410,11 +84420,11 @@ var render = function() {
                                 staticClass: "mt-1",
                                 staticStyle: { "flex-grow": "0" },
                                 model: {
-                                  value: _vm.checkbox,
+                                  value: _vm.checkbox1,
                                   callback: function($$v) {
-                                    _vm.checkbox = $$v
+                                    _vm.checkbox1 = $$v
                                   },
-                                  expression: "checkbox"
+                                  expression: "checkbox1"
                                 }
                               })
                             ],
@@ -84435,11 +84445,11 @@ var render = function() {
                                 staticClass: "mt-1",
                                 staticStyle: { "flex-grow": "0" },
                                 model: {
-                                  value: _vm.checkbox,
+                                  value: _vm.checkbox2,
                                   callback: function($$v) {
-                                    _vm.checkbox = $$v
+                                    _vm.checkbox2 = $$v
                                   },
-                                  expression: "checkbox"
+                                  expression: "checkbox2"
                                 }
                               })
                             ],
@@ -84460,11 +84470,11 @@ var render = function() {
                                 staticClass: "mt-1",
                                 staticStyle: { "flex-grow": "0" },
                                 model: {
-                                  value: _vm.checkbox,
+                                  value: _vm.checkbox3,
                                   callback: function($$v) {
-                                    _vm.checkbox = $$v
+                                    _vm.checkbox3 = $$v
                                   },
-                                  expression: "checkbox"
+                                  expression: "checkbox3"
                                 }
                               })
                             ],
@@ -84485,11 +84495,11 @@ var render = function() {
                                 staticClass: "mt-1",
                                 staticStyle: { "flex-grow": "0" },
                                 model: {
-                                  value: _vm.checkbox,
+                                  value: _vm.checkbox4,
                                   callback: function($$v) {
-                                    _vm.checkbox = $$v
+                                    _vm.checkbox4 = $$v
                                   },
-                                  expression: "checkbox"
+                                  expression: "checkbox4"
                                 }
                               })
                             ],
@@ -84752,7 +84762,13 @@ var render = function() {
             [
               _c(
                 "v-layout",
-                { staticClass: "details-step" },
+                {
+                  staticStyle: {
+                    width: "70%",
+                    "flex-grow": "0",
+                    border: "1px solid rgb(240,240,240)"
+                  }
+                },
                 [
                   _c(
                     "v-layout",
@@ -84947,16 +84963,11 @@ var render = function() {
                         _c(
                           "v-layout",
                           [
-                            _c(
-                              "v-flex",
-                              {
-                                style: {
-                                  marginLeft: _vm.themeOption.drawerWidthF
-                                }
-                              },
-                              [_c("FBookAppointment")],
-                              1
-                            )
+                            _c("v-flex", {
+                              style: {
+                                marginLeft: _vm.themeOption.drawerWidthF
+                              }
+                            })
                           ],
                           1
                         )

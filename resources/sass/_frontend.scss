@@ -162,47 +162,6 @@
     padding-left: 85px;
 }
 
-
-
-/* TODO REMOVE PART EXCHANGE STYLING */
-
-.registration-input {
-    width: 330px;
-    height: 70px;
-    background-color: rgb(255,180,0);
-    border: 1px solid rgb(160,120,0);
-    border-radius: 7px;
-    text-transform: uppercase;
-    color: black;
-    font-size: 25px;
-    line-height: 25px;
-    padding: 22.5px;
-
-    &::placeholder {
-        color: black;
-    }
-}
-
-.car-icon {
-    padding: 15px;
-    border-radius: 50%;
-    background-color: rgb(240,240,240);
-}
-
-/* END OF REMOVE PART EXCHANGE STYLING */
-
-
-
-
-/* TODO REMOVE PERSONAL DETAILS STYLING */
-
-
-.details-step {
-    width: 70%;
-    flex-grow: 0;
-    border: 1px solid rgb(240,240,240);
-}
-
 .rounded-20 {
     border-radius: 20px;
 }
@@ -210,20 +169,3 @@
 .theme-fill {
     background-color: #cc0000 !important;
 }
-
-
-/* END OF REMOVE PERSONAL DETAILS STYLING */
-
-
-
-
-/* TODO REMOVE BOOKING CONFIRMATION STYLING */
-
-
-.confirmation-step {
-    width: 70%;
-    flex-grow: 0;
-}
-
-
-/* END OF REMOVE PERSONAL DETAILS STYLING */

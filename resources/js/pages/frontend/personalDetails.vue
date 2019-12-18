@@ -14,7 +14,7 @@
                 <h4 class="display-1 mt-5 text-lg-center">Your Account Details</h4>
             </v-flex>
             <v-layout row no-wrap xs12 mt-5 justify-center>
-                <v-layout class="confirmation-step">
+                <v-layout style="width: 70%; flex-grow: 0">
                     <v-layout row wrap class="mt-4 ml-4" justify-center>
                         <v-flex style="width:25%; flex-grow:0; margin-left:20%; margin-right:5%" class="mt-2">
                             <h6 class="body-1"><b>First name</b></h6>
@@ -62,25 +62,25 @@
                             <v-layout column style="flex-grow:0" class="mr-5">
                                 <label>Mailing</label>
                                 <v-checkbox class="mt-1" style="flex-grow:0"
-                                            v-model="checkbox"
+                                            v-model="checkbox1"
                                 ></v-checkbox>
                             </v-layout>
                             <v-layout column style="flex-grow:0" class="mr-5">
                                 <label>Email</label>
                                 <v-checkbox class="mt-1" style="flex-grow:0"
-                                            v-model="checkbox"
+                                            v-model="checkbox2"
                                 ></v-checkbox>
                             </v-layout>
                             <v-layout column style="flex-grow:0" class="mr-5">
                                 <label>SMS</label>
                                 <v-checkbox class="mt-1" style="flex-grow:0"
-                                            v-model="checkbox"
+                                            v-model="checkbox3"
                                 ></v-checkbox>
                             </v-layout>
                             <v-layout column style="flex-grow:0" class="mr-5">
                                 <label>Phone</label>
                                 <v-checkbox class="mt-1" style="flex-grow:0"
-                                            v-model="checkbox"
+                                            v-model="checkbox4"
                                 ></v-checkbox>
                             </v-layout>
                         </v-layout>
@@ -102,6 +102,10 @@
     export default {
         data(){
             return {
+                checkbox1: false,
+                checkbox2: false,
+                checkbox3: false,
+                checkbox4: false,
             }
         },
 

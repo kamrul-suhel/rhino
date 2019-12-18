@@ -15,7 +15,7 @@
                 <h5 class="headline mt-2 text-lg-center">Are these details still correct?</h5>
             </v-flex>
             <v-layout row no-wrap xs12 mt-5 justify-center>
-                <v-layout class="details-step">
+                <v-layout style="width: 70%; flex-grow: 0; border: 1px solid rgb(240,240,240);">
                     <v-layout row wrap class="mt-4 ml-4" justify-center>
                         <v-flex style="width:20%; flex-shrink:0; margin-left:30%" class="mt-5">
                             <h6 class="body-1"><b>First name</b></h6>

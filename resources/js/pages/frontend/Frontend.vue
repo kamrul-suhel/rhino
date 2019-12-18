@@ -15,7 +15,7 @@
                                 <!-- step 1 -->
                                 <!--<FSelectCar></FSelectCar>-->
                                 <!-- step 2 -->
-                                <FBookAppointment></FBookAppointment>
+                                <!--<FBookAppointment></FBookAppointment>-->
                                 <!-- step 3 -->
                                 <!--<FPartExchange></FPartExchange>-->
                                 <!-- step 4 -->
