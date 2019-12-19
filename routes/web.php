@@ -107,6 +107,14 @@ Route::prefix('brands')->group(function () {
     Route::get('create', function () {
         return view('welcome');
     });
+
+    Route::get('{id}/vehicle/{vehicleId}', function () {
+        return view('welcome');
+    });
+
+    Route::get('{id}/vehicle/create', function () {
+        return view('welcome');
+    });
 });
 
 

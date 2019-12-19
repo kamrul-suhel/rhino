@@ -21,7 +21,7 @@ const vehiclesRoute ={
             path:':id/edit',
             name: 'editVehicles',
             component: Vehicles.Edit,
-        }
+        },
     ]
 }
 

@@ -41,12 +41,13 @@
                                 <v-flex xs12 sm6 md4 wrap pt-3 row justify-center >
                                     <v-card width="250px">
                                         <v-img
+                                            
                                             :src="logo"
                                             aspect-ratio="2.75"
                                         ></v-img>
                                     </v-card>
-                                    <FileUpload :preview="false"
-                                        model="country"></FileUpload>
+                                    <FileUpload :label="trans.logo" :preview="false"
+                                        model="brand"></FileUpload>
                                 </v-flex>
                             </v-layout>
 
@@ -66,7 +67,7 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm6 md6 pa-2 row justify-center>
-                                    <v-flex xs12 sm12 md8 align-self-center>
+                                    <v-flex xs12 sm12 md8 align-self-center >
                                         <div class="r-color-picker mx-auto" v-if="isColorSwatchActive">
                                             <div class="r-color-picker-content mx-auto">
                                                 <chrome v-model="selectedColor"></chrome>
@@ -106,19 +107,6 @@
                                     :color="themeOption.tabColor"
                                     :slider-color="themeOption.tabSliderColor"
                                 >
-                                    <v-tab
-                                        key="regions"
-                                        ripple
-                                    >
-                                        {{ trans.regions}}
-                                    </v-tab>
-
-                                    <v-tab
-                                        key="flag"
-                                        ripple
-                                    >
-                                        {{ trans.logo}}
-                                    </v-tab>
 
                                     <v-tab
                                         key="vehicles"
@@ -127,26 +115,23 @@
                                         {{ trans.vehicles }}
                                     </v-tab>
 
-                                    <v-tab-item
+                                    <v-tab
                                         key="regions"
+                                        ripple
                                     >
-                                    <Regions model="brand"></Regions>
-                                    </v-tab-item>
-
-                                    <v-tab-item
-                                        key="logo"
-                                    >
-                                        
-                                    </v-tab-item>
+                                        {{ trans.regions}}
+                                    </v-tab>
                                     
                                     <v-tab-item
                                         key="Vehicles"
                                     >
-                                         
-                                    <vehicles 
-                                        model="brand"
-                                        subComponent></vehicles>
+                                        <vehicles model="brand" subComponent></vehicles>
+                                    </v-tab-item>
 
+                                    <v-tab-item
+                                        key="regions"
+                                    >
+                                        <Regions model="brand"></Regions>
                                     </v-tab-item>
                                 </v-tabs>
                             </v-layout>
