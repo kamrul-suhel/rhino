@@ -14,6 +14,7 @@ class CreateEventsUsersRelationshipTable extends Migration
     public function up()
     {
         Schema::create('event_user', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('event_id')->index();
             $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
