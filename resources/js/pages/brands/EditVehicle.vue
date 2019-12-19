@@ -3,13 +3,13 @@
         <v-flex xs12 md4 justify-center >
             <v-card width="90%" height="auto">
                 <v-img
-                    
-                    :src="brand.logo"
+
+                    :src="brand.logo|image(themeOption.brandDefaultImage)"
                     aspect-ratio="2.75"
                 ></v-img>
             </v-card>
         </v-flex>
-        
+
         <v-flex xs12 md8>
             <vehicle model="brand" subComponent></vehicle>
         </v-flex>
@@ -29,7 +29,7 @@
 
         data(){
             return {
-            
+
             }
         },
         computed: ({

@@ -20,7 +20,7 @@ const eventsRoute ={
         {
             path:':id/edit',
             name: 'editEvents',
-            component: Event.Edit,
+            component: Event.Edit
         }
     ]
 }

@@ -363,5 +363,23 @@ return [
         'label' => 'Sales executives',
         'identifier' => 'sales_executives',
         'translation' => 'Sales executives'
+    ],
+
+    [
+        'label' => 'Has been added',
+        'identifier' => 'has_been_added',
+        'translation' => 'Has been added'
+    ],
+
+    [
+        'label' => 'Settings',
+        'identifier' => 'settings',
+        'translation' => 'Settings'
+    ],
+
+    [
+        'label' => 'To',
+        'identifier' => 'to',
+        'translation' => 'To'
     ]
 ];

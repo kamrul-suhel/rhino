@@ -19,7 +19,9 @@ class EventUserListController extends Controller
         $totalUsers = 0;
         $users = User::select(
             'users.*',
-            'event_user.*'
+            'event_user.id as event_user_id',
+            'event_user.user_id',
+            'event_user.event_id'
         )
             ->leftJoin('event_user', 'event_user.user_id', '=', 'users.id');
 
