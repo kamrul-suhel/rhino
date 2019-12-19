@@ -187,7 +187,7 @@ const mutations = {
             },
             {
                 icon: 'build',
-                text: 'Settings',
+                text: `${trans.settings}`,
                 navs: [
                     {
                         icon: 'keyboard_arrow_right',

@@ -64,10 +64,8 @@
     import {mapGetters} from "vuex";
 
     export default {
-        data(){
-            return{
-
-            }
+        data() {
+            return {}
         },
 
         computed: ({
@@ -80,27 +78,31 @@
             })
         }),
 
-        watch:{
-          update(){
-              this.initialize()
-          }
+        watch: {
+            update() {
+                this.initialize()
+            },
+
+            selectedUsers() {
+                this.initialize()
+            }
         },
 
         created() {
             this.initialize()
         },
 
-        methods:{
-            initialize(){
-                this.$store.dispatch('fetchUsersByDealershipId',{dealershipId: this.$route.params.dealershipId})
+        methods: {
+            initialize() {
+                this.$store.dispatch('fetchUsersByDealershipId', {dealershipId: this.$route.params.dealershipId})
             },
 
-            checkUserExists(user){
-                const found = _.find(this.selectedUsers, (selectedUser)=>{
+            checkUserExists(user) {
+                const found = _.find(this.selectedUsers, (selectedUser) => {
                     return user.id === selectedUser.id
                 })
 
-                if(found){
+                if (found) {
                     return true
                 }
                 return false
@@ -115,19 +117,29 @@
                 eventUserFrom.append('user_id', userId)
                 axios.post(URL, eventUserFrom).then((response) => {
                     if (response.data.success) {
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.user}  ${this.trans.has_been_added.toLowerCase()} ${this.trans.to.toLowerCase()} ${this.trans.event}`
+                        })
                         this.$store.commit('setInitialize')
                     }
                 })
             },
 
-            onRemoveRelation(brandId){
-                const URL = `/api/events/${this.selectedEvent.id}/brands/${brandId}`
+            onRemoveRelation(userId) {
+                const URL = `/api/events/${eventId}/users/${userId}`
                 let brandEventFrom = new FormData()
-                brandEventFrom.append(`brand_id`, brandId)
+                brandEventFrom.append(`event_id`, eventId)
                 brandEventFrom.append(`_method`, 'DELETE')
-                brandEventFrom.append('event_id', this.selectedEvent.id)
+                brandEventFrom.append('user_id', userId)
                 axios.delete(URL, brandEventFrom).then((response) => {
                     if (response.data.success) {
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                        })
                         this.$store.commit('setInitializeBrands')
                     }
                 })

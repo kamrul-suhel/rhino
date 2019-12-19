@@ -14,8 +14,8 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import UserList from '../../pages/user/List'
-    import AddUser from '../../components/Dealership/AddUser'
+    import UserList from '@/pages/user/List'
+    import AddUser from '@/components/Dealership/AddUser'
 
     export default {
         components:{

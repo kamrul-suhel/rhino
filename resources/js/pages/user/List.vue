@@ -112,10 +112,6 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import {Chrome} from 'vue-color'
-    import FileUpload from '../../components/ImageUpload'
-    import eventsRoute from "../../router/Modules/event";
-
     export default {
         props:{
             subComponent:{
@@ -165,6 +161,10 @@
 
             searchUsers() {
                 this.initialize()
+            },
+
+            users(){
+                console.log('Event user is: ', this.users)
             }
         },
 
@@ -226,18 +226,36 @@
             },
 
             onDeleteConfirm(){
-                // Delete user
-                const URL = `/api/users/${this.selectedUser.id}`
-                axios.delete(URL).then((response)=>{
-                    this.deleteDialog = false
-                    this.initialize()
+                if(this.subComponent){
+                    const eventId = this.$route.params.eventId
+                    switch(this.model){
+                        case 'dealership':
+                            const URL = `/api/events/${eventId}/users/${user.id}`
+                            axios.delete(URL).then((response)=>{
+                                if(response.data.success){
+                                    this.$store.commit('setSnackbarMessage', {
+                                        openMessage: true,
+                                        timeOut: this.themeOption.snackBarTimeout,
+                                        message: `${this.selectedUser.firstname}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                                    })
+                                    this.$store.commit('setInitialize')
+                                }
+                            })
+                    }
+                }else{
+                    // Delete user
+                    const URL = `/api/users/${this.selectedUser.id}`
+                    axios.delete(URL).then((response)=>{
+                        this.deleteDialog = false
+                        this.initialize()
 
-                    this.$store.commit('setSnackbarMessage', {
-                        openMessage: true,
-                        timeOut: this.themeOption.snackBarTimeout,
-                        message: `${this.selectedUser.firstname}  ${this.trans.successfully_deleted}`
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.selectedUser.firstname}  ${this.trans.successfully_deleted}`
+                        })
                     })
-                })
+                }
             }
         }
     }

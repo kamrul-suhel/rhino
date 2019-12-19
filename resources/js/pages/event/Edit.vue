@@ -268,12 +268,12 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import TimePicker from "../../components/TimePicker";
-    import ImageUpload from "../../components/ImageUpload";
-    import LanguagePicker from "../../components/Language";
-    import Brand from '../../components/Event/Brand'
-    import Vehicle from '../../components/Event/EventVehicle'
-    import EventUsers from '../../components/Event/EventUsers'
+    import TimePicker from "@/components/TimePicker"
+    import ImageUpload from "@/components/ImageUpload"
+    import LanguagePicker from "@/components/Language"
+    import Brand from '@/components/Event/Brand'
+    import Vehicle from '@/components/Event/EventVehicle'
+    import EventUsers from '@/components/Event/EventUsers'
 
     export default {
         components: {
@@ -293,7 +293,7 @@
 
             model: {
                 type: String,
-                default: null
+                default: ''
             }
         },
 
@@ -349,6 +349,7 @@
 
         created() {
             this.initialize()
+
             this.setAppointmentDuration()
         },
 

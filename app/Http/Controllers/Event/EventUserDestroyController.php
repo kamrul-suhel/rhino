@@ -18,8 +18,7 @@ class EventUserDestroyController extends Controller
         $eventUser = EventUser::where([
             'event_id'=> $eventId,
             'user_id' => $userId
-        ])->first();
-        $eventUser->delete();
+        ])->delete();
 
         return response()->json([
             'success' => true
