@@ -97,7 +97,7 @@
 
 <script>
     import Create from '../../components/Dealership/CreateForm'
-    import {mapGetters} from "vuex";
+    import {mapGetters} from "vuex"
 
     export default {
         components:{

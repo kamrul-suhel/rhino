@@ -27,12 +27,16 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        products:[],
+        initialize: true
     },
 
     mutations: {
         resetProductTransition(state){
             state.products = []
+        },
+
+        setInitialize(state){
+            state.initialize = !state.initialize
         }
     },
 
@@ -41,7 +45,9 @@ const store = new Vuex.Store({
     },
 
     getters: {
-
+        getInitialize(state){
+            return state.initialize
+        }
     },
 
     modules: {

@@ -11,7 +11,7 @@ const defaultState = {
     // For dropdown
     usersDropDown: [],
 
-    levels:[]
+    levels: []
 }
 
 const state = {
@@ -23,40 +23,40 @@ const mutations = {
         state.users = [...users]
     },
 
-    setLevel(state, trans){
-        const levels =[
+    setLevel(state, trans) {
+        const levels = [
             {
-                'text' : trans.admin,
+                'text': trans.admin,
                 'value': 'admin'
             },
 
             {
-                'text' : trans.dealership,
+                'text': trans.dealership,
                 'value': 'dealership'
             },
 
             {
-                'text' : trans.group,
+                'text': trans.group,
                 'value': 'group'
             },
 
             {
-                'text' : trans.region,
+                'text': trans.region,
                 'value': 'region'
             },
 
             {
-                'text' : trans.country,
+                'text': trans.country,
                 'value': 'country'
             },
 
             {
-                'text' : trans.brand,
+                'text': trans.brand,
                 'value': 'brand'
             },
 
             {
-                'text' : trans.company,
+                'text': trans.company,
                 'value': 'company'
             }
         ]
@@ -84,7 +84,26 @@ const mutations = {
         state = {...defaultState}
     },
 
-    setUserListHeader(state, trans) {
+    setUserListHeader(state, options) {
+        const trans = options.trans
+        const subComponent = options.subComponent
+        let userColumn = {}
+        if (!subComponent) {
+            userColumn = [
+                {
+                    text: trans.status,
+                    value: 'status'
+                },
+
+                {
+                    text: trans.role,
+                    value: 'lavelAccess',
+                    align: 'left',
+                    sortable: false
+                }
+            ]
+        }
+
         const header = [
             {
                 text: trans.name,
@@ -100,17 +119,7 @@ const mutations = {
                 value: 'email'
             },
 
-            {
-                text: trans.status,
-                value: 'status'
-            },
-
-            {
-                text: trans.role,
-                value: 'lavelAccess',
-                align: 'left',
-                sortable: false
-            },
+            ...userColumn,
 
             {
                 text: trans.actions,
@@ -129,7 +138,7 @@ const getters = {
         return state.users
     },
 
-    getUserLevels(state){
+    getUserLevels(state) {
         return state.levels
     },
 
@@ -192,10 +201,29 @@ const actions = {
         commit('setUserLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        commit('setUserListHeader', payload.trans)
+        commit('setUserListHeader', {trans: payload.trans})
 
         const params = fn.generateParams(payload)
         const URL = `/api/users${params}`
+
+        axios.get(URL).then((response) => {
+            if (response.data.users) {
+                commit('setUsers', response.data.users)
+                commit('setTotalUsers', response.data.total)
+                commit('setUserLoading', false)
+            }
+        });
+    },
+
+    fetchUsersForEvent({commit}, payload = {}) {
+        // Set loading is true
+        commit('setUserLoading', payload.themeOption.loadingColor)
+
+        // Setup header for list view
+        commit('setUserListHeader', {trans: payload.trans, subComponent: payload.subComponent})
+
+        const params = fn.generateParams(payload)
+        const URL = `/api/users/events/${payload.eventId}/dealerships/${payload.dealershipId}${params}`
 
         axios.get(URL).then((response) => {
             if (response.data.users) {

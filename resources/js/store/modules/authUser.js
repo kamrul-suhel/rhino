@@ -25,6 +25,9 @@ const defaultState = {
         snackBarBgError: 'red',
         snackBarTimeout : 6000,
 
+        // Toolbar backgroun color
+        toolbarColor: '#424242',
+
 
         //Tab option
         tabColor: 'gray',

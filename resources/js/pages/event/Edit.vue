@@ -200,7 +200,42 @@
                         <!-- Dealership Admin can see -->
                         <v-layout row wrap v-if="subComponent && model==='dealership'">
                             <v-flex xs12>
-                                <vehicle></vehicle>
+                                <v-divider></v-divider>
+
+                                <v-card flat>
+                                    <v-card-text>
+                                        <v-tabs
+                                            dark
+                                            :slider-color="themeOption.tabSliderColor"
+                                        >
+                                            <v-tab
+                                                key="saleExecutives"
+                                                ripple
+                                            >
+                                                {{ trans.sales_executives }}
+                                            </v-tab>
+
+                                            <v-tab
+                                                key="vehicle"
+                                                ripple
+                                            >
+                                                {{ trans.vehicles }}
+                                            </v-tab>
+
+                                            <v-tab-item
+                                                key="saleExecutives"
+                                            >
+                                                <EventUsers></EventUsers>
+                                            </v-tab-item>
+
+                                            <v-tab-item
+                                                key="vehicle"
+                                            >
+                                                <vehicle></vehicle>
+                                            </v-tab-item>
+                                        </v-tabs>
+                                    </v-card-text>
+                                </v-card>
                             </v-flex>
                         </v-layout>
 
@@ -238,6 +273,7 @@
     import LanguagePicker from "../../components/Language";
     import Brand from '../../components/Event/Brand'
     import Vehicle from '../../components/Event/EventVehicle'
+    import EventUsers from '../../components/Event/EventUsers'
 
     export default {
         components: {
@@ -245,7 +281,8 @@
             ImageUpload,
             LanguagePicker,
             Brand,
-            Vehicle
+            Vehicle,
+            EventUsers
         },
 
         props: {

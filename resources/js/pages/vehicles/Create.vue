@@ -56,7 +56,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label class="mb-3">Left hand drive image</label>
+                                            <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
                                             <v-divider class="my-2"></v-divider>
 
                                             <v-card class="pa-2 my-3">
@@ -79,7 +79,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                        <v-flex xs12>
-                                           <label for="">Right hand drive image</label>
+                                           <label for="">{{ trans.right_hand_drive_image }}</label>
 
                                            <v-divider class="my-2"></v-divider>
 

@@ -1,13 +1,15 @@
 <template>
     <div >
-        <v-toolbar flat>
-            <v-toolbar-title>
+        <v-toolbar flat
+            :color="themeOption.toolbarColor">
+            <v-toolbar-title v-if="!subComponent">
                 <span :class="themeOption.textHeadingColor+'--text'">{{ trans.users }}</span>
             </v-toolbar-title>
             <v-divider
                 class="mx-2"
                 inset
                 vertical
+                v-if="!subComponent"
             ></v-divider>
 
             <v-spacer></v-spacer>
@@ -27,7 +29,7 @@
                     disable-initial-sort
                     :pagination.sync="pagination"
                     :no-results-text="trans.no_brand_found"
-                    :no-data-text="trans.no_brand_found"
+                    :no-data-text="`${trans.no} ${trans.users} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalUsers"
@@ -37,10 +39,11 @@
                     <template v-slot:items="props">
                         <td>{{ props.item.firstname }}</td>
                         <td>{{ props.item.email }}</td>
-                        <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
-                        <td class="text-xs-left">{{ props.item.level }}</td>
+                        <td class="text-xs-left" v-if="!subComponent">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
+                        <td class="text-xs-left" v-if="!subComponent">{{ props.item.level }}</td>
                         <td class="text-xs-right">
                             <v-icon
+                                v-if="!subComponent"
                                 small
                                 class="mr-2"
                                 @click="$router.push({name: 'editUsers', params:{id: props.item.id}})"
@@ -111,8 +114,20 @@
     import {mapGetters} from 'vuex'
     import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
+    import eventsRoute from "../../router/Modules/event";
 
     export default {
+        props:{
+            subComponent:{
+                type: Boolean,
+                default: false
+            },
+
+            model:{
+                type: String
+            }
+        },
+
         data() {
             return {
                 pagination: {},
@@ -132,7 +147,8 @@
                 headers: 'getUserListHeader',
                 totalUsers: 'getTotalUsers',
                 loading: 'getUserLoading',
-                rowsPerPage: 'getUserListRowsPerPage'
+                rowsPerPage: 'getUserListRowsPerPage',
+                update: 'getInitialize'
             })
         }),
 
@@ -141,6 +157,10 @@
                 handler() {
                     this.initialize()
                 }
+            },
+
+            update(){
+              this.initialize()
             },
 
             searchUsers() {
@@ -164,7 +184,23 @@
                     search: this.searchUsers
                 }
 
-                this.$store.dispatch('fetchUsers', paginateOption)
+                // Check component load as a sub component
+                if(this.subComponent){
+                    switch(this.model){
+                        case 'dealership':
+                            const pagination = {
+                                ...paginateOption,
+                                dealershipId: this.$route.params.dealershipId,
+                                eventId: this.$route.params.eventId,
+                                subComponent: this.subComponent,
+                                model: this.model
+                            }
+                            this.$store.dispatch('fetchUsersForEvent', pagination)
+                            break;
+                    }
+                }else{
+                    this.$store.dispatch('fetchUsers', paginateOption)
+                }
             },
 
             onEditUser(user){
@@ -172,8 +208,21 @@
             },
 
             onDeleteUser(user){
-                this.selectedUser = {...user}
-                this.deleteDialog = true
+                if(this.subComponent){
+                    const eventId = this.$route.params.eventId
+                    switch(this.model){
+                        case 'dealership':
+                            const URL = `/api/events/${eventId}/users/${user.id}`
+                            axios.delete(URL).then((response)=>{
+                                if(response.data.success){
+                                    this.$store.commit('setInitialize')
+                                }
+                            })
+                    }
+                }else{
+                    this.selectedUser = {...user}
+                    this.deleteDialog = true
+                }
             },
 
             onDeleteConfirm(){

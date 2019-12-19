@@ -333,5 +333,35 @@ return [
         'label' => 'Order',
         'identifier' => 'order',
         'translation' => 'Order'
+    ],
+
+    [
+        'label' => 'Upload',
+        'identifier' => 'upload',
+        'translation' => 'Upload'
+    ],
+
+    [
+        'label' => 'image',
+        'identifier' => 'image',
+        'translation' => 'image'
+    ],
+
+    [
+        'label' => 'Left hand drive image',
+        'identifier' => 'left_hand_drive_image',
+        'translation' => 'Left hand drive image'
+    ],
+
+    [
+        'label' => 'Right hand drive image',
+        'identifier' => 'right_hand_drive_image',
+        'translation' => 'Right hand drive image'
+    ],
+
+    [
+        'label' => 'Sales executives',
+        'identifier' => 'sales_executives',
+        'translation' => 'Sales executives'
     ]
 ];

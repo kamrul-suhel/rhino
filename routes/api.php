@@ -20,16 +20,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('users')->group(function(){
+Route::prefix('users')->group(function () {
     Route::post('', 'Auth\RegisterController@store');
     Route::put('{id}', 'Auth\RegisterController@update');
     Route::get('', 'Auth\UserListController@list');
     Route::get('{id}/show', 'Auth\UserShowController@show');
     Route::get('dropdown', 'Auth\UserDropdownController@list');
     Route::delete('{id}', 'Auth\UserDeleteController@destroy');
+
+    // Event User
+    Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list');
 });
 
-Route::prefix('settings')->group(function(){
+Route::prefix('settings')->group(function () {
     Route::post('add', 'Setting\SettingController@generateDefaultSetting');
     Route::get('/', 'Setting\SettingController@index');
 });
@@ -42,7 +45,7 @@ Route::prefix('settings')->group(function(){
 |
 */
 
-Route::prefix('settings')->group(function(){
+Route::prefix('settings')->group(function () {
     Route::post('add', 'Setting\SettingController@generateDefaultSetting');
     Route::get('/', 'Setting\SettingController@index');
 });
@@ -55,7 +58,7 @@ Route::prefix('settings')->group(function(){
 |
 */
 
-Route::prefix('dealerships')->group(function(){
+Route::prefix('dealerships')->group(function () {
     Route::get('', 'Dealership\DealershipController@index');
     Route::get('dropdown', 'Dealership\DealershipDropDownController@index');
     Route::post('', 'Dealership\DealershipController@store');
@@ -66,6 +69,9 @@ Route::prefix('dealerships')->group(function(){
     // Brand & Dealership relation route
     Route::post('{id}/brands', 'Dealership\BrandDealershipController@store');
     Route::get('{id}/brands', 'Dealership\BrandDealershipController@index');
+
+    // Dealership users route
+    Route::get('{id}/users', 'Dealership\DealershipUserController@list');
 });
 
 
@@ -76,7 +82,7 @@ Route::prefix('dealerships')->group(function(){
 |
 */
 
-Route::prefix('brandDealerships')->group(function(){
+Route::prefix('brandDealerships')->group(function () {
     Route::put('{id}', 'Dealership\BrandDealershipController@update');
     Route::delete('{id}', 'Dealership\BrandDealershipController@destroy');
 });
@@ -89,7 +95,7 @@ Route::prefix('brandDealerships')->group(function(){
 |
 */
 
-Route::prefix('companies')->group(function(){
+Route::prefix('companies')->group(function () {
     Route::get('', 'Company\CompanyController@index');
     Route::get('dropdown', 'Company\CompanyDropdownController@index');
     Route::post('', 'Company\CompanyController@store');
@@ -106,7 +112,7 @@ Route::prefix('companies')->group(function(){
 |
 */
 
-Route::prefix('brands')->group(function(){
+Route::prefix('brands')->group(function () {
     Route::get('', 'Brand\BrandController@index');
     Route::get('dropdown', 'Brand\BrandDropDownController@getBrandsForDropDown');
     Route::post('', 'Brand\BrandController@store');
@@ -123,7 +129,7 @@ Route::prefix('brands')->group(function(){
 |
 */
 
-Route::prefix('vehicles')->group(function(){
+Route::prefix('vehicles')->group(function () {
     Route::get('', 'Vehicle\VehicleController@index');
     Route::post('', 'Vehicle\VehicleController@store');
     Route::get('{id}/show', 'Vehicle\VehicleController@show');
@@ -140,7 +146,7 @@ Route::prefix('vehicles')->group(function(){
 |
 */
 
-Route::prefix('groups')->group(function(){
+Route::prefix('groups')->group(function () {
     Route::get('', 'Dealership\GroupController@index');
     Route::get('dropdown', 'Dealership\Group\GroupDropdownController@index');
     Route::post('', 'Dealership\GroupController@store');
@@ -150,8 +156,6 @@ Route::prefix('groups')->group(function(){
 });
 
 
-
-
 /*
 |--------------------------------------------------------------------------
 | API Route for Languages
@@ -159,7 +163,7 @@ Route::prefix('groups')->group(function(){
 |
 */
 
-Route::prefix('languages')->group(function(){
+Route::prefix('languages')->group(function () {
     Route::get('/', 'Language\LanguageController@index');
 });
 
@@ -171,7 +175,7 @@ Route::prefix('languages')->group(function(){
 |
 */
 
-Route::prefix('countries')->group(function(){
+Route::prefix('countries')->group(function () {
     Route::get('', 'Country\CountryController@index');
     Route::get('dropdown', 'Country\CountryController@getCountriesDropDown');
     Route::get('{id}/show', 'Country\CountryController@show');
@@ -188,7 +192,7 @@ Route::prefix('countries')->group(function(){
 |
 */
 
-Route::prefix('regions')->group(function(){
+Route::prefix('regions')->group(function () {
     Route::post('', 'Region\RegionController@store');
     Route::put('{id}', 'Region\RegionController@update');
     Route::delete('{id}', 'Region\RegionController@destroy');
@@ -202,7 +206,7 @@ Route::prefix('regions')->group(function(){
 |
 */
 
-Route::prefix('events')->group(function(){
+Route::prefix('events')->group(function () {
     Route::post('', 'Event\EventController@store');
     Route::get('', 'Event\EventListController@index');
     Route::get('dropdown', 'Event\EventDropdownController@index');
@@ -220,6 +224,10 @@ Route::prefix('events')->group(function(){
     Route::get('{id}/brands/dropdown', 'Brand\BrandDropDownController@getBrandForEvent');
     Route::delete('{id}', 'Event\EventController@destroy');
 
+    // Relation between event user route
+    Route::post('{id}/users', 'Event\EventUserStoreController@store');
+    Route::delete('{eventId}/users/{userId}', 'Event\EventUserDestroyController@destroy');
+
 
     /*
     |--------------------------------------------------------------------------
@@ -227,7 +235,7 @@ Route::prefix('events')->group(function(){
     |--------------------------------------------------------------------------
     |
     */
-    Route::prefix('types')->group(function(){
+    Route::prefix('types')->group(function () {
         Route::get('', 'Event\Type\TypeController@index');
         Route::get('dropdown', 'Event\Type\TypeDropdownController@index');
         Route::post('', 'Event\Type\TypeController@store');
@@ -238,12 +246,23 @@ Route::prefix('events')->group(function(){
 });
 
 /*
-    |--------------------------------------------------------------------------
-    | API Route for Guest
-    |--------------------------------------------------------------------------
-    |
-    */
-Route::prefix('guests')->group(function(){
+|--------------------------------------------------------------------------
+| API Route for EventVehicle
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('eventvehicle')->group(function () {
+    Route::put('{eventVehicleId}', 'Event\EventVehicleUpdateController@update');
+    Route::delete('{eventVehicleId}', 'Event\EventVehicleDestroyController@destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Guest
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('guests')->group(function () {
     Route::get('', 'Guest\GuestListController@list');
     Route::get('{id}', 'Guest\GuestShowController@show');
     Route::post('', 'Guest\GuestStoreController@store');
@@ -259,6 +278,6 @@ Route::prefix('guests')->group(function(){
 |
 */
 
-Route::prefix('uploadfiles')->group(function(){
+Route::prefix('uploadfiles')->group(function () {
     Route::post('', 'File\FileUploadController@uploadFiles');
 });
