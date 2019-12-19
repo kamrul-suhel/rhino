@@ -185,8 +185,7 @@ import { log } from 'util'
 
             // Initialize data when first render
             initialize() {
-                console.log(this.subComponent)
-            
+                
                 let extraOption = {}
                 if(this.subComponent){
                     extraOption = {

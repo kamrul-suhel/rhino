@@ -7,6 +7,12 @@
                     :src="brand.logo"
                     aspect-ratio="2.75"
                 ></v-img>
+
+                <v-card-title primary-title>
+                    <div>
+                        <h4 class="headline mb-0">{{brand.name}}</h4>
+                    </div>
+                </v-card-title>
             </v-card>
         </v-flex>
         

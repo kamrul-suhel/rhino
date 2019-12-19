@@ -32,7 +32,7 @@
             class="elevation-1"
         >
             <template v-slot:items="props">
-                <td>{{ props.item.full_name }}</td>
+                <td>{{ props.item.name }}</td>
                 <td class="text-xs-left">{{ props.item.capital }}</td>
                 <td class="text-xs-left">{{ props.item.iso_3166_2 }}</td>
                 <td class="text-xs-left">{{ props.item.driver_seating_position }}</td>
@@ -250,14 +250,14 @@
 
             confirmDeleteCountry(){
                 const selectedCountry = this.selectedCountry
-                const URL = `api/countries/${selectedCountry.id}/delete`
+                const URL = `/api/countries/${selectedCountry.id}/delete`
 
                 axios.delete(URL).then((response)=>{
                     if(response.data.success){
                         this.initialize()
                         // reset selectedCountry in store
                         this.$store.commit('setSelectedCountry', {})
-                        this.dialog = false
+                        this.deleteDialog = false
                     }
                 });
             }

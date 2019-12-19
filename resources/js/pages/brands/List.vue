@@ -94,8 +94,6 @@
 
                             <v-autocomplete :label="trans.company"
                                             :color="themeOption.inputColor"
-                                            :rules="[v => !!v || trans.select_a_company]"
-                                            required
                                             :items="companies"
                                             item-text="name"
                                             item-value="id"
@@ -133,6 +131,7 @@
 
                                 <FileUpload :preview="false"
                                             :multiple="false"
+                                            identifier="brand"
                                             model="brands">
                                 </FileUpload>
                             </v-flex>
@@ -338,7 +337,11 @@
                     brandForm.append('name', this.selectedBrand.name)
                     brandForm.append('logo', this.brandImage)
                     brandForm.append('colour', this.color)
-                    brandForm.append('company_id', this.selectedBrand.company_id)
+
+                    console.log(this.selectedBrand)
+                    this.selectedBrand.company_id ? brandForm.append('company_id', this.selectedBrand.company_id) : null
+
+                
                     brandForm.append('status', this.selectedBrand.status)
 
                     axios.post(URL, brandForm).then((response) => {

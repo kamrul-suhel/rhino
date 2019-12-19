@@ -30,10 +30,12 @@ class BrandController extends Controller
             'brands_translation.description'
         )
             ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
-            ->leftJoin('companies', 'companies.id', '=', 'brands.company_id')
-            ->leftJoin('companies_translation', 'companies.id', '=', 'companies_translation.company_id')
-            ->where('brands_translation.language_id', $this->languageId)
-            ->where('companies_translation.language_id', $this->languageId);
+            ->leftJoin('companies', function($company){
+                $company->on('companies.id', '=', 'brands.company_id');
+                $company->leftJoin('companies_translation', 'companies.id', '=', 'companies_translation.company_id');
+                $company->where('companies_translation.language_id', $this->languageId);
+            })
+            ->where('brands_translation.language_id', $this->languageId);
 
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {

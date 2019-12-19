@@ -23,7 +23,7 @@ class CountryController extends Controller
     {
         $countries = Country::select(
             'id',
-            'full_name',
+            'name',
             'capital',
             'iso_3166_2',
             'driver_seating_position',
@@ -34,7 +34,7 @@ class CountryController extends Controller
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search by name
             if ($request->has('search') && !empty($request->search)) {
-                $countries = $countries->where('full_name', 'LIKE', '%' . $request->search . '%');
+                $countries = $countries->where('name', 'LIKE', '%' . $request->search . '%');
             }
 
             // Get Only active country
@@ -50,6 +50,8 @@ class CountryController extends Controller
                 }
             }
 
+            $countries = $countries->orderBy('name');
+
             $countries = $countries->paginate($this->perPage);
             $data = $countries->items();
             $total = $countries->total();
@@ -60,6 +62,7 @@ class CountryController extends Controller
                 'total' => $total
             ]);
         }
+        $countries = $countries->orderBy('name');
         $countries = $countries->get();
 
         return response()->json($countries);

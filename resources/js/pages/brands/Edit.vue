@@ -125,9 +125,21 @@
                                     <v-tab-item
                                         key="Vehicles"
                                     >
-                                        <vehicles model="brand" subComponent></vehicles>
-                                    </v-tab-item>
-
+                                        <v-layout>
+                                            <v-flex xs12 md8 lg10>
+                                                <vehicles model="brand" subComponent></vehicles>
+                                            </v-flex>
+                                            <v-flex xs12 md4 lg2 pt-3 class="text-xs-right">
+                                                <v-btn
+                                                    :class="themeOption.buttonSuccess"
+                                                    small
+                                                    @click="$router.push({name: 'addBrandVehicle'})"
+                                                >
+                                                    {{ trans.create_vehicle }}
+                                                </v-btn>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-tab-item> 
                                     <v-tab-item
                                         key="regions"
                                     >

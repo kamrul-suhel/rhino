@@ -14,7 +14,7 @@ class AddForeignKeyBetweenDealershipAndDealershipTranslation extends Migration
     public function up()
     {
         Schema::table('dealerships', function(Blueprint $table){
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('set null');
             $table->foreign('group_id')->references('id')->on('groups');
         });
 

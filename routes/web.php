@@ -71,6 +71,10 @@ Route::prefix('countries')->group(function () {
         return view('welcome');
     });
 
+    Route::get('/list', function () {
+        return view('welcome');
+    });
+
     Route::get('{id}/edit', function () {
         return view('welcome');
     });
@@ -113,6 +117,10 @@ Route::prefix('brands')->group(function () {
     });
 
     Route::get('{id}/vehicle/create', function () {
+        return view('welcome');
+    });
+
+    Route::get('list', function () {
         return view('welcome');
     });
 });

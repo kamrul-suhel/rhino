@@ -25,7 +25,7 @@ class BrandRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'company_id' => 'required|exists:companies,id',
+            'company_id' => 'sometimes|exists:companies,id',
             'colour' => 'required',
             'status' => 'required'
         ];

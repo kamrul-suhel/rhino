@@ -16,7 +16,8 @@ class AddForeignKeyToRegionsTable extends Migration
         Schema::table('regions', function (Blueprint $table) {
             $table->foreign('country_id')
                 ->references('id')
-                ->on('countries');
+                ->on('countries')
+                ->onDelete('set null');
 
             $table->foreign('brand_id')
                 ->references('id')
