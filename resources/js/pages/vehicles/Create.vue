@@ -37,7 +37,7 @@
                                 </v-flex>
                             </v-layout>
 
-                            <v-layout row wrap>
+                            <v-layout row wrap v-if="!subComponent">
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
                                         :items="brands"
@@ -148,29 +148,39 @@
             }
         },
 
+        props:{
+          subComponent: {
+              type: Boolean,
+              default: false
+          },
+
+          model: {
+              type: String
+          }
+        },
+
         computed: ({
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 brands: 'getBrandsForDropDown',
+                brand: 'getSelectedBrand',
                 image: 'getUploadedImage',
             })
         }),
 
         created() {
             this.initialize();
-            this.fetchVehicle()
+            
         },
 
         methods: {
             initialize() {
                 this.$store.dispatch('fetchBrandForDropDown');
+                this.$store.dispatch('fetchBrand', {id: this.$route.params.brandId});
             },
 
-            fetchVehicle() {
-                this.$store.dispatch('fetchVehicle', {themeOption: this.themeOption, trans: this.trans});
-            },
-
+            
             onCreateVehicle() {
 
                 console.log('create vehicle');
@@ -186,9 +196,12 @@
 
                     // Set form object for vehicle
                     _.forOwn(this.vehicle, (value, key) => {
-                        vehicleForm.append(key, value)
-                    })
-
+                            vehicleForm.append(key, value)
+                    });          
+                    
+                    if(this.subComponent){
+                        vehicleForm.append('brand_id', this.$route.params.brandId)
+                    }
 
                     // send form data to save
                     axios.post('/api/vehicles', vehicleForm).then((response) => {
@@ -201,7 +214,13 @@
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.vehicle.model}  ${this.trans.successfully_created}`
                             })
-                            this.$router.push({name: 'listVehicles'})
+                            
+                            // check if vehicle created from brand or vehicle
+                            if ( this.subComponent ){
+                                this.$router.push({name: 'editBrands', params:{id: this.$route.params.brandId}});
+                            } else {
+                                this.$router.push({name: 'listVehicles'});
+                            }
                         }
                     })
                 } else {

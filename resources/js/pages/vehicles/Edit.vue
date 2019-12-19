@@ -5,7 +5,7 @@
                 <v-toolbar flat>
                     <v-toolbar-title>
                         <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_vehicle }}:</span>
-                        <span>{{ vehicle.brand }}</span> <span>{{ vehicle.model }}</span>
+                        <span v-if="!subComponent">{{ vehicle.brand }}</span> <span>{{ vehicle.model }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -40,7 +40,7 @@
                                 </v-flex>
                             </v-layout>
 
-                            <v-layout row wrap>
+                            <v-layout row wrap v-if="!subComponent">
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
                                         :items="brands"
@@ -153,10 +153,19 @@
         data() {
             return {
                 valid: true,
-                model: null,
 
                 leftImage: '',
                 rightImage: '',
+            }
+        },
+
+        props: {
+            subComponent: {
+                type: Boolean,
+                default: false
+            },
+            model: {
+                type: String,
             }
         },
 
@@ -194,14 +203,16 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchBrandForDropDown');
-                this.$store.dispatch('fetchVehicle', {id: this.$route.params.id})
+
+                if ( this.subComponent) {
+                    this.$store.dispatch('fetchVehicle', {id: this.$route.params.vehicleId})
+                } else {
+                    this.$store.dispatch('fetchVehicle', {id: this.$route.params.id})
+                }
             },
 
             onUpdateVehicle(){
                 if (this.$refs.vehicleForm.validate()) {
-
-                    console.log('Passed validate');
-
                     let vehicleForm = new FormData()
 
                     this.vehicle.leftImage = this.leftImage;
@@ -231,6 +242,7 @@
 
             onBackToBrand(){
                 if(this.subComponent){
+                    console.log('is subComponent');
                     switch(this.model){
                         case 'brand':
                             this.$router.push({
@@ -244,6 +256,7 @@
                             break
                     }
                 }else{
+                    console.log("isn't subComponent");
                     this.$router.push({name: 'listBrands'})
                     this.$store.commit('setButtonLoading', false)
                 }

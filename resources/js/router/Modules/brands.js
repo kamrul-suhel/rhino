@@ -21,7 +21,20 @@ const brandsRoute ={
             path:':id/edit',
             name: 'editBrands',
             component: Brands.Edit,
+        },
+        
+        {
+            path: ':brandId/vehicle/create',
+            name: 'addBrandVehicle',
+            component: Brands.CreateVehicle,
+        },
+
+        {
+            path: ':brandId/vehicle/:vehicleId',
+            name: 'editBrandVehicle',
+            component: Brands.EditVehicle,
         }
+
     ]
 }
 

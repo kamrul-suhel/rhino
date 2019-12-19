@@ -38,14 +38,14 @@
                         <td>{{ props.item.model }}</td>
                         <td v-if="!subComponent">{{ props.item.brand }}</td>
                         <td class="text-xs-right">
-                                <v-icon
-                                small
-                                class="mr-2"
-                                @click="$router.push({name: 'editVehicles', params:{id: props.item.id}})"
+                            <v-icon
+                            small
+                            class="mr-2"
+                            @click="onEditVehicle(props.item)"
 
-                                >
-                                    edit
-                                </v-icon>
+                            >
+                                edit
+                            </v-icon>
 
                             <v-icon
                                 :color="themeOption.buttonDangerColor"
@@ -111,6 +111,7 @@
     import {mapGetters} from 'vuex'
     import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
+import { log } from 'util'
 
     export default {
         components: {
@@ -208,7 +209,18 @@
             },
 
             onEditVehicle(vehicle) {
-                this.$router.push({model: 'editVehicles', params: {id: vehicle.id}})
+                // $router.push({name: 'editVehicles', params:{id: props.item.id}})
+                if (this.subComponent){
+
+                    switch(this.model){
+                        case 'brand':
+                            this.$router.push({name: 'editBrandVehicle', params:{brandId: this.$route.params.id, vehicleId: vehicle.id}})
+                            break
+                    }
+
+                } else {
+                    this.$router.push({name: 'editVehicles', params: {id: vehicle.id}})
+                }
             },
 
             onDeleteVehicle(vehicle) {
