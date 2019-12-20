@@ -371,6 +371,7 @@
                 this.$store.dispatch('fetchDealershipsForDropdown')
                 this.$store.dispatch('fetchTypesForDropdown')
                 this.$store.dispatch('fetchDealership', {id: this.$route.params.dealershipId})
+                this.$store.dispatch('fetchAppointmentByEventId', {eventId: this.$route.params.eventId})
             }
         },
 

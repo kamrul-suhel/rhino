@@ -270,6 +270,16 @@ Route::prefix('guests')->group(function () {
     Route::delete('{id}', 'Guest\GuestDestroyController@destroy');
 });
 
+/*
+|--------------------------------------------------------------------------
+| API Route for Appointments
+|--------------------------------------------------------------------------
+|
+*/
+Route::prefix('appointments')->group(function () {
+    Route::get('{eventId}', 'Appointment\AppointmentListController@list');
+});
+
 
 /*
 |--------------------------------------------------------------------------

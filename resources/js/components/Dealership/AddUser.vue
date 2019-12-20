@@ -12,7 +12,7 @@
                 <v-flex xs12>
                     <v-list two-line subheader>
                         <v-list-tile
-                            v-for="user in users"
+                            v-for="user in (subComponent ? selectedUsers : users)"
                             :key="user.id"
                             avatar
                             @click=""
@@ -165,8 +165,8 @@
             },
 
             onSelectUser(user) {
-                this.$store.commit('setSelectedUser', user)
-                this.$store.commit('setInitializeAppointment')
+                const selectedUser = [{...user}]
+                this.$store.commit('setAppointmentUsers', selectedUser)
             },
 
             reset() {

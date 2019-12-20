@@ -19,34 +19,67 @@
                             <v-text-field
                                 :color="themeOption.inputColor"
                                 v-model="date"
-                                label="Picker in menu"
+                                :label="`${trans.select} ${trans.date}`"
                                 prepend-icon="event"
                                 readonly
                                 v-on="on"
                             ></v-text-field>
                         </template>
                         <v-date-picker v-model="date"
+                                       :date="date"
                                        :color="themeOption.inputColor"
+                                       :min="selectedEvent.start"
+                                       :max="selectedEvent.end"
                                        no-title
                                        scrollable>
                             <v-spacer></v-spacer>
                             <v-btn flat
                                    :color="themeOption.buttonSecondaryColor"
                                    @click="menu = false"
-                            >Cancel</v-btn>
+                            >{{ trans.cancel }}</v-btn>
 
                             <v-btn flat
                                    :color="themeOption.buttonPrimaryColor"
-                                   @click="$refs.menu.save(date)"
-                            >OK</v-btn>
+                                   @click="onChangeDate(date)"
+                            >{{ trans.ok }}</v-btn>
                         </v-date-picker>
                     </v-menu>
                 </v-card-text>
             </v-card>
+
+            <v-layout row wrap class="pt-3">
+                <v-flex xs12>
+                    <v-expansion-panel
+                        v-model="appointmentOpen"
+                        >
+                        <v-expansion-panel-content
+                            v-for="user in appointmentUsers"
+                            :key="user.id"
+                        >
+                            <template v-slot:header>
+                                <v-avatar
+                                    class="appointmentAvatar"
+                                    :tile="false"
+                                    :size="36"
+                                    color="grey lighten-4"
+                                >
+                                    <img :src="user.profile_image | image(themeOption.brandDefaultImage)">
+                                </v-avatar>
+
+                                <div>{{ user.firstname }}</div>
+                            </template>
+
+                           <appointment-user :user="user"></appointment-user>
+                        </v-expansion-panel-content>
+                    </v-expansion-panel>
+                </v-flex>
+            </v-layout>
         </v-flex>
 
         <v-flex xs12 md4 pl-2>
-            <AddUser subComponent></AddUser>
+            <AddUser subComponent
+                model="appointment"
+            ></AddUser>
         </v-flex>
     </v-layout>
 </template>
@@ -54,16 +87,19 @@
 <script>
     import {mapGetters} from "vuex";
     import AddUser from '@/components/Dealership/AddUser'
+    import AppointmentUser from './User'
 
     export default {
         components:{
-            AddUser
+            AddUser,
+            AppointmentUser
         },
 
         data(){
             return {
                 date: null,
-                menu: false
+                menu: false,
+                appointmentOpen: null
             }
         },
 
@@ -72,9 +108,10 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 dealership: 'getSelectedDealership',
-                selectedUser: 'getSelectedUser',
+                selectedUsers: 'getUsers',
                 selectedEvent: 'getSelectedEvent',
-                update: 'getInitializeAppointment'
+                update: 'getInitializeAppointment',
+                appointmentUsers: 'getAppointmentUsers'
             })
         }),
 
@@ -85,6 +122,18 @@
         watch:{
             update(){
                 console.log('update now generate appointment')
+            },
+
+            appointmentOpen(index){
+                const user = {...this.selectedUsers[index]}
+            },
+
+            selectedEvent(){
+                this.date = this.selectedEvent.start
+            },
+
+            selectedUsers(){
+                this.$store.commit('setAppointmentUsers', this.selectedUsers)
             }
         },
 
@@ -93,7 +142,10 @@
         },
 
         methods:{
-
+            onChangeDate(date){
+                this.$refs.menu.save(date)
+                this.$store.commit('setAppointmentUsers', this.selectedUsers)
+            }
         }
     }
 </script>

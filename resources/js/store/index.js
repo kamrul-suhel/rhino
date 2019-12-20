@@ -21,6 +21,7 @@ import Type from './modules/eventType'
 import Event from './modules/event'
 import Guest from './modules/guest'
 import EventVehicle from './modules/eventVehicle'
+import Appointment from './modules/appointment'
 
 
 Vue.use(Vuex)
@@ -79,7 +80,8 @@ const store = new Vuex.Store({
         Type,
         Event,
         Guest,
-        EventVehicle
+        EventVehicle,
+        Appointment
     }
 })
 
