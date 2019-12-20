@@ -209,6 +209,13 @@
                                             :slider-color="themeOption.tabSliderColor"
                                         >
                                             <v-tab
+                                                key="appointments"
+                                                ripple
+                                            >
+                                                {{ trans.appointments }}
+                                            </v-tab>
+
+                                            <v-tab
                                                 key="saleExecutives"
                                                 ripple
                                             >
@@ -221,6 +228,12 @@
                                             >
                                                 {{ trans.vehicles }}
                                             </v-tab>
+
+                                            <v-tab-item
+                                                key="appointments"
+                                            >
+                                                <Appointment></Appointment>
+                                            </v-tab-item>
 
                                             <v-tab-item
                                                 key="saleExecutives"
@@ -274,6 +287,7 @@
     import Brand from '@/components/Event/Brand'
     import Vehicle from '@/components/Event/EventVehicle'
     import EventUsers from '@/components/Event/EventUsers'
+    import Appointment from "@/components/Appointment/Appointment";
 
     export default {
         components: {
@@ -282,7 +296,8 @@
             LanguagePicker,
             Brand,
             Vehicle,
-            EventUsers
+            EventUsers,
+            Appointment
         },
 
         props: {
@@ -349,8 +364,14 @@
 
         created() {
             this.initialize()
-
             this.setAppointmentDuration()
+
+            // Load dealership & type when it is subcomponent
+            if(this.subComponent){
+                this.$store.dispatch('fetchDealershipsForDropdown')
+                this.$store.dispatch('fetchTypesForDropdown')
+                this.$store.dispatch('fetchDealership', {id: this.$route.params.dealershipId})
+            }
         },
 
         methods: {

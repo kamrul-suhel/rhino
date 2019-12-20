@@ -27,7 +27,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        initialize: true
+        initialize: true,
+        initializeAppointment: true
     },
 
     mutations: {
@@ -37,7 +38,12 @@ const store = new Vuex.Store({
 
         setInitialize(state){
             state.initialize = !state.initialize
+        },
+
+        setInitializeAppointment(state){
+            state.initializeAppointment = !state.initializeAppointment
         }
+
     },
 
     actions: {
@@ -47,6 +53,10 @@ const store = new Vuex.Store({
     getters: {
         getInitialize(state){
             return state.initialize
+        },
+
+        getInitializeAppointment(state){
+            return state.initializeAppointment
         }
     },
 

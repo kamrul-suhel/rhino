@@ -161,10 +161,6 @@
 
             searchUsers() {
                 this.initialize()
-            },
-
-            users(){
-                console.log('Event user is: ', this.users)
             }
         },
 

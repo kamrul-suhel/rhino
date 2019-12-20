@@ -40,17 +40,25 @@
                             </v-list-tile-content>
 
                             <v-list-tile-action>
-                                <v-btn icon ripple
-                                       v-if="checkUserExists(user)"
-                                       @click="onRemoveRelation(user.id)">
-                                    <v-icon color="red lighten-1">remove_circle_outline</v-icon>
-                                </v-btn>
+                                <template v-if="!subComponent">
+                                    <v-btn icon ripple
+                                           v-if="checkUserExists(user)"
+                                           @click="onRemoveRelation(user.id)">
+                                        <v-icon color="red lighten-1">remove_circle_outline</v-icon>
+                                    </v-btn>
 
-                                <v-btn icon ripple
-                                       v-else
-                                       @click="onCreateRelation(user.id)">
-                                    <v-icon color="lighten-1">add_circle_outline</v-icon>
-                                </v-btn>
+                                    <v-btn icon ripple
+                                           v-else
+                                           @click="onCreateRelation(user.id)">
+                                        <v-icon color="lighten-1">add_circle_outline</v-icon>
+                                    </v-btn>
+                                </template>
+                                <template v-else>
+                                    <v-btn icon ripple
+                                           @click="onSelectUser(user)">
+                                        <v-icon color="lighten-1">perm_contact_calendar</v-icon>
+                                    </v-btn>
+                                </template>
                             </v-list-tile-action>
                         </v-list-tile>
                     </v-list>
@@ -66,6 +74,18 @@
     export default {
         data() {
             return {}
+        },
+
+        props: {
+            subComponent: {
+                type: Boolean,
+                default: false
+            },
+
+            model: {
+                type: String,
+                default: null
+            }
         },
 
         computed: ({
@@ -109,7 +129,6 @@
             },
 
             onCreateRelation(userId) {
-
                 const URL = `/api/events/${this.$route.params.eventId}/users`
 
                 let eventUserFrom = new FormData()
@@ -143,6 +162,11 @@
                         this.$store.commit('setInitializeBrands')
                     }
                 })
+            },
+
+            onSelectUser(user) {
+                this.$store.commit('setSelectedUser', user)
+                this.$store.commit('setInitializeAppointment')
             },
 
             reset() {

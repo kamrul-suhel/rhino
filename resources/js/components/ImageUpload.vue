@@ -80,9 +80,6 @@
             setImage(output) {
                 this.image = output
 
-                console.log(this.identifier)
-                return
-
                 let formData = new FormData()
                 formData.append('file', this.image)
                 formData.append('model', this.model)

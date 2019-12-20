@@ -9,7 +9,7 @@ const mutations = {
     },
 
     setNavigation(state, trans){
-        console.log('navigation', trans);
+        console.log('Available translation field: ', trans);
         const navItems = [
             {
                 icon: 'emoji_transportation',

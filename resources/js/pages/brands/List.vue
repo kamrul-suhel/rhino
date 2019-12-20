@@ -71,8 +71,6 @@
                         <v-divider></v-divider>
 
                         <v-card-text>
-
-
                             <v-autocomplete
                                 v-if="this.editBrand"
                                 :label="trans.languages"
@@ -125,12 +123,12 @@
                                 <span>{{trans.logo}}</span>
 
                                 <v-img
+                                    contain
                                     :src="brandImage"
-                                    aspect-ratio="2.75"
+                                    aspect-ratio="2"
                                 ></v-img>
 
                                 <FileUpload :preview="false"
-                                            :multiple="false"
                                             identifier="brand"
                                             model="brands">
                                 </FileUpload>
@@ -341,7 +339,7 @@
                     console.log(this.selectedBrand)
                     this.selectedBrand.company_id ? brandForm.append('company_id', this.selectedBrand.company_id) : null
 
-                
+
                     brandForm.append('status', this.selectedBrand.status)
 
                     axios.post(URL, brandForm).then((response) => {

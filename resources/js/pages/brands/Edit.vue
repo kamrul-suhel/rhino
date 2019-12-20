@@ -41,9 +41,9 @@
                                 <v-flex xs12 sm6 md4 wrap pt-3 row justify-center >
                                     <v-card width="250px">
                                         <v-img
-                                            
-                                            :src="logo"
-                                            aspect-ratio="2.75"
+                                            contain
+                                            :src="logo|image(themeOption.brandDefaultImage)"
+                                            aspect-ratio="2"
                                         ></v-img>
                                     </v-card>
                                     <FileUpload :label="trans.logo" :preview="false"
@@ -121,7 +121,7 @@
                                     >
                                         {{ trans.regions}}
                                     </v-tab>
-                                    
+
                                     <v-tab-item
                                         key="Vehicles"
                                     >
@@ -139,7 +139,7 @@
                                                 </v-btn>
                                             </v-flex>
                                         </v-layout>
-                                    </v-tab-item> 
+                                    </v-tab-item>
                                     <v-tab-item
                                         key="regions"
                                     >
