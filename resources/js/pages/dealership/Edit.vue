@@ -59,7 +59,6 @@
                                         :items="groups"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.groups_filed_required]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_groups"
                                         v-model="dealership.group_id"
@@ -91,6 +90,8 @@
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch
+                                        :true-value="1"
+                                        :false-value="0"
                                         :color="themeOption.inputColor"
                                         v-model="dealership.status"
                                         :label="trans.status"
@@ -332,7 +333,7 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
-                this.$store.dispatch('fetchBrandForDropDown',{filterBy: 'country', dealershipId: this.$route.params.id })
+                this.$store.dispatch('fetchBrandForDropDown')
                 this.$store.dispatch('fetchGroups')
                 this.$store.dispatch('fetchDealership', {id: this.$route.params.id})
             },
@@ -346,11 +347,11 @@
 
                     // Set form object for dealership
                     _.forOwn(this.dealership, (value, key)=>{
-                        if(key === 'status'){
-                            if(value){
-                                dealershipForm.append('status', 1)
+                        if(key === 'group_id'){
+                            if(value == 'null'){
+                                
                             }else{
-                                dealershipForm.append('status', 0)
+                                dealershipForm.append(key, value)
                             }
                         }else{
                             dealershipForm.append(key, value)

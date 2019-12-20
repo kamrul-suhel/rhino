@@ -96,7 +96,7 @@
 </template>
 
 <script>
-    import Create from '../../components/Dealership/CreateForm'
+    import Create from '@/components/Dealership/CreateForm'
     import {mapGetters} from "vuex"
 
     export default {

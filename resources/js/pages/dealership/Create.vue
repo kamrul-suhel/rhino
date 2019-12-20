@@ -56,7 +56,6 @@
                                         :items="groups"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.groups_filed_required]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_groups"
                                         v-model="dealership.group_id"
@@ -243,7 +242,9 @@
         data() {
             return {
                 valid: true,
-                dealership: {},
+                dealership: {
+                    country_id: 48
+                },
                 times: {},
                 active: null,
                 model: null,

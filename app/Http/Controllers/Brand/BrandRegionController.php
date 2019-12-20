@@ -30,11 +30,11 @@ class BrandRegionController extends Controller
             $modelId = $request->model . '_id';
             $regions = $regions->where($modelId, $brandId);
         } else {
-            $regions = $regions->where('brand_id', $brandId);
+            $regions = $regions->where('regions.brand_id', $brandId);
         }
 
         if($request->has('countryId')){
-            $regions = $regions->where('country_id', $request->country_id);
+            $regions = $regions->where('regions.country_id', $request->countryId);
         }
 
         if ($request->has('paginate') && !empty($request->paginate)) {

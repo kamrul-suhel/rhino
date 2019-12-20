@@ -204,7 +204,7 @@ class DealershipController extends Controller
 
         $request->has('latitude') ? $dealership->latitude = $request->latitude : null;
         $request->has('longitude') ? $dealership->longitude = $request->longitude : null;
-        $request->has('group_id') ? $dealership->group_id = $request->group_id : null;
+        $request->has('group_id') && $request->group_id != 'null' ? $dealership->group_id = $request->group_id : null;
         $request->has('country_id') ? $dealership->country_id = $request->country_id : null;
         $request->has('saturday_start') && $request->saturday_start != 'null' ? $dealership->saturday_start = $request->saturday_start : null;
         $request->has('saturday_end') && $request->saturday_end != 'null' ? $dealership->saturday_end = $request->saturday_end : null;

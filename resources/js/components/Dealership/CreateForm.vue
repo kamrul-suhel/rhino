@@ -5,7 +5,7 @@
     >
         <v-card>
             <v-card-title>
-                <h3>{{ this.selectedBrand.id ?  trans.edit_brand : trans.create_brand }}</h3>
+                <h3>{{ `${trans.add} ${trans.brand}` }}</h3>
             </v-card-title>
             <v-divider></v-divider>
 
