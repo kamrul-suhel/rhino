@@ -111,7 +111,11 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO Need to implement latter, reason all the country will generate from seed.
+        $data = $request->all();
+        $data['message'] = 'Yeahhhhhhhhhh';
+
+        return $data;
+
     }
 
     /**

@@ -177,6 +177,7 @@ Route::prefix('languages')->group(function () {
 
 Route::prefix('countries')->group(function () {
     Route::get('', 'Country\CountryController@index');
+    Route::post('', 'Country\CountryController@store');
     Route::get('dropdown', 'Country\CountryController@getCountriesDropDown');
     Route::get('{id}/show', 'Country\CountryController@show');
     Route::get('{id}/regions', 'Country\CountryController@getCountryRegions');
