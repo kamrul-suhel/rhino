@@ -237,7 +237,7 @@ Route::prefix('events')->group(function () {
     |
     */
     Route::prefix('types')->group(function () {
-        Route::get('', 'Event\Type\TypeController@index');
+        Route::get('list', 'Event\Type\TypeController@index');
         Route::get('dropdown', 'Event\Type\TypeDropdownController@index');
         Route::post('', 'Event\Type\TypeController@store');
         Route::get('{id}', 'Event\Type\TypeController@show');

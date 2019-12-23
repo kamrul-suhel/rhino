@@ -106,7 +106,7 @@ const actions = {
         }
 
         const params = fn.generateParams(payload)
-        const URL = '/api/events/types' + params
+        const URL = `/api/events/types/list${params}`
 
         axios.get(URL).then((response) => {
             if (response.data.types) {
