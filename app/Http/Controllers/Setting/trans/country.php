@@ -71,5 +71,5 @@ return [
         'label' => 'Right',
         'identifier' => 'right',
         'translation' => 'Right'
-    ]
+    ],
 ];

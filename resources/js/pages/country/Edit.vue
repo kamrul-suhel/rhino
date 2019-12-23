@@ -75,43 +75,6 @@
 
                     <v-divider></v-divider>
 
-                    <v-layout column wrap>
-                        <v-tabs
-                            v-model="active"
-                            :color="themeOption.tabColor"
-                            :slider-color="themeOption.tabSliderColor"
-                        >
-                            <v-tab
-                                key="regions"
-                                ripple
-                            >
-                                {{ trans.regions}}
-                            </v-tab>
-
-                            <v-tab
-                                key="logo"
-                                ripple
-                            >
-                                {{ trans.logo}}
-                            </v-tab>
-
-                            <v-tab-item
-                                key="regions"
-                            >
-                                <Regions model="country"></Regions>
-                            </v-tab-item>
-
-                            <v-tab-item
-                                key="logo"
-                            >
-                                <v-layout row wrap pt-3>
-                                    <FileUpload model="brands"></FileUpload>
-                                </v-layout>
-                            </v-tab-item>
-                        </v-tabs>
-                    </v-layout>
-
-                    <v-divider class="mt-5 mb-2"></v-divider>
 
                     <v-card-actions class="pa-3">
                         <v-spacer></v-spacer>
