@@ -10,5 +10,11 @@ return [
         'label' => 'Appointments',
         'identifier' => 'appointments',
         'translation' => 'Appointments'
+    ],
+
+    [
+        'label' => 'Time',
+        'identifier' => 'time',
+        'translation' => 'Time'
     ]
 ];

@@ -381,5 +381,11 @@ return [
         'label' => 'To',
         'identifier' => 'to',
         'translation' => 'To'
+    ],
+
+    [
+        'label' => 'Break',
+        'identifier' => 'break',
+        'translation' => 'Break'
     ]
 ];
