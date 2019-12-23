@@ -99,7 +99,7 @@ const actions = {
     fetchTypes({commit}, payload = {}) {
 
         // Check is dropdown or no
-        if (!payload.dropDown && typeof (payload.dropDown) === 'undefined') {
+        if (!payload.dropDown || typeof (payload.dropDown) === 'undefined') {
             commit('setTypeLoading', payload.themeOption.loadingColor)
             // Setup header for list view
             commit('setTypeListHeader', payload.trans)

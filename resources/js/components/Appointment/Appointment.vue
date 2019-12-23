@@ -103,6 +103,28 @@
             }
         },
 
+        watch:{
+            update(){
+                console.log('update now generate appointment')
+            },
+
+            appointmentOpen(index){
+                const user = {...this.selectedUsers[index]}
+            },
+
+            selectedEvent(){
+                // this.date = this.selectedEvent.start
+            },
+
+            selectedUsers(){
+                this.$store.commit('setAppointmentUsers', this.selectedUsers)
+            },
+
+            date(){
+                this.$store.commit('setAppointmentDate', this.date)
+            }
+        },
+
         computed: ({
             ...mapGetters({
                 trans: 'getFields',
@@ -117,24 +139,6 @@
 
         props:{
 
-        },
-
-        watch:{
-            update(){
-                console.log('update now generate appointment')
-            },
-
-            appointmentOpen(index){
-                const user = {...this.selectedUsers[index]}
-            },
-
-            selectedEvent(){
-                this.date = this.selectedEvent.start
-            },
-
-            selectedUsers(){
-                this.$store.commit('setAppointmentUsers', this.selectedUsers)
-            }
         },
 
         created() {

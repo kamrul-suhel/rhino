@@ -217,11 +217,6 @@
         watch: {
             pagination: {
                 handler() {
-                    const paginateOption = {
-                        ...this.pagination,
-                        trans: this.trans,
-                        paginate: true
-                    }
                     this.initialize()
                 }
             },

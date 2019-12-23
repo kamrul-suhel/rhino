@@ -4,6 +4,7 @@
             <v-flex
                 v-for="(date, n) in dates"
                 :key="date"
+                v-if="selectedAppointmentDate == date || selectedAppointmentDate === null"
                 xs12
             >
                 <v-layout row wrap>
@@ -21,7 +22,12 @@
                         </v-toolbar>
                     </v-flex>
 
-                    <v-flex xs12>
+                    <v-flex xs12 v-if="isClosed(date)">
+                        <h2>close date</h2>
+                        <h2>{{ trans.close }}</h2>
+                    </v-flex>
+
+                    <v-flex xs12 v-else>
                         <user-appointment :date="date"></user-appointment>
                     </v-flex>
                 </v-layout>
@@ -63,7 +69,8 @@
                 selectedUsers: 'getUsers',
                 selectedEvent: 'getSelectedEvent',
                 update: 'getInitializeAppointment',
-                appointmentUsers: 'getAppointmentUsers'
+                appointmentUsers: 'getAppointmentUsers',
+                selectedAppointmentDate: 'getAppointmentDate'
             }),
 
         }),
@@ -99,6 +106,19 @@
                     currentDate = moment(currentDate).add(1, 'days');
                 }
                 return dateArray;
+            },
+
+            /**
+             * Get the open & close day based on dealership opening times
+             * @param curDate
+             * @returns {boolean}
+             */
+            isClosed(curDate){
+                const date = `${moment(curDate).format('dddd').toLowerCase()}_start`
+                if(this.dealership[date] === '00:00:00'){
+                    return true
+                }
+                return false
             }
         }
     }
