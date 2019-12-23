@@ -46,8 +46,8 @@ import ImageUploader from 'vue-image-upload-resize'
 import i18n from './plugins/i18n/index'
 
 /**
- * Import filter
- */
+* Import filter
+*/
 
 import './filters/index'
 

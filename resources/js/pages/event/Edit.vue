@@ -88,6 +88,17 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2>
+                                    <v-select
+                                        :items="breakTime"
+                                        item-value="value"
+                                        item-text="text"
+                                        :label="`${trans.break} ${trans.time}`"
+                                        :color="themeOption.inputColor"
+                                        v-model="selectedEvent.appointment_duration">
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 pa-2>
                                     <v-switch
                                         :label="trans.status"
                                         :color="themeOption.inputColor"
@@ -290,6 +301,24 @@
     import Appointment from "@/components/Appointment/Appointment";
 
     export default {
+        data() {
+            return {
+                startEvent: false,
+                endEvent: false,
+                valid: true,
+                event: {},
+                times: {},
+                active: null,
+
+                nameRules: [
+                    v => !!v || this.trans.name_is_required
+                ],
+
+                appointmentDuration:[],
+                breakTime:[]
+            }
+        },
+
         components: {
             TimePicker,
             ImageUpload,
@@ -309,23 +338,6 @@
             model: {
                 type: String,
                 default: ''
-            }
-        },
-
-        data() {
-            return {
-                startEvent: false,
-                endEvent: false,
-                valid: true,
-                event: {},
-                times: {},
-                active: null,
-
-                nameRules: [
-                    v => !!v || this.trans.name_is_required
-                ],
-
-                appointmentDuration:[]
             }
         },
 
@@ -470,6 +482,18 @@
                     {
                         text: `120 ${this.trans.minutes}`,
                         value: 120
+                    }
+                ]
+
+                // set user break time
+                this.breakTime = [
+                    {
+                        text: `30 ${this.trans.minutes}`,
+                        value: 30
+                    },
+                    {
+                        text: `60 ${this.trans.minutes}`,
+                        value: 60
                     }
                 ]
             }

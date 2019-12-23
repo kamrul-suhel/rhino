@@ -65,18 +65,18 @@
                 let newMoment = new moment()
                 newMoment.locale(this.selectedLanguage.code2)
 
-                this.date = newMoment.format('LT');   // 18:15
-                this.date2 = newMoment.format('LTS');  // 18:15:31
-                this.date3 = newMoment.format('L');    // 12.12.2019
-                this.date4 = newMoment.format('l');    // 12.12.2019
-                this.date5 = newMoment.format('LL');   // 12 снежня 2019 г.
-                this.date6 = newMoment.format('ll');   // 12 снеж 2019 г.
-                this.date7 = newMoment.format('LLL');  // 12 снежня 2019 г., 18:15
-                this.date8 = newMoment.format('lll');  // 12 снеж 2019 г., 18:15
-                this.date9 = newMoment.format('LLLL'); // чацвер, 12 снежня 2019 г., 18:15
-                this.date10 = newMoment.format('llll');
-                this.date11 = newMoment.format('MMMM Do YYYY, h:mm:ss a');;
-                this.date12 = newMoment.format('MMMM Do YYYY, h:mm:ss a');;
+                this.date = newMoment.format('LT')   // 18:15
+                this.date2 = newMoment.format('LTS') // 18:15:31
+                this.date3 = newMoment.format('L')    // 12.12.2019
+                this.date4 = newMoment.format('l')   // 12.12.2019
+                this.date5 = newMoment.format('LL')   // 12 снежня 2019 г.
+                this.date6 = newMoment.format('ll')   // 12 снеж 2019 г.
+                this.date7 = newMoment.format('LLL')  // 12 снежня 2019 г., 18:15
+                this.date8 = newMoment.format('lll')  // 12 снеж 2019 г., 18:15
+                this.date9 = newMoment.format('LLLL') // чацвер, 12 снежня 2019 г., 18:15
+                this.date10 = newMoment.format('llll')
+                this.date11 = newMoment.format('MMMM Do YYYY, h:mm:ss a')
+                this.date12 = newMoment.format('MMMM Do YYYY, h:mm:ss a')
             }
         }
 

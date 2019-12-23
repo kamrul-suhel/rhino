@@ -12,7 +12,7 @@
                                    dense
                                    tabs
                                    dark>
-                            <v-toolbar-title><h2>{{ date }}</h2></v-toolbar-title>
+                            <v-toolbar-title>{{ date|dateFormat('LL') }}</v-toolbar-title>
                             <v-spacer></v-spacer>
 
                             <v-btn icon>
@@ -82,7 +82,6 @@
                 const start = moment(this.selectedEvent.start)
                 const end = moment(this.selectedEvent.end)
                 const dates = this.getDates(start, end)
-                console.log(dates)
                 this.dates = [...dates]
             },
 
