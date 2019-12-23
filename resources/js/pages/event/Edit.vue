@@ -94,7 +94,7 @@
                                         item-text="text"
                                         :label="`${trans.break} ${trans.time}`"
                                         :color="themeOption.inputColor"
-                                        v-model="selectedEvent.appointment_duration">
+                                        v-model="selectedEvent.break_time">
                                     </v-select>
                                 </v-flex>
 
