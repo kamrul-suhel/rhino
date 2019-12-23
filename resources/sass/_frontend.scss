@@ -1,0 +1,171 @@
+.frontend-container {
+    padding: 0;
+}
+
+.navigation-drawer {
+
+    z-index: 100;
+
+    /* LANGUAGE SELECTOR */
+
+    .language-select {
+        width: 68px;
+        flex-grow: 0;
+
+        .v-input__slot::before, .v-input__slot::after {
+            display: none;
+        }
+
+        label {
+            font-size: 9pt;
+        }
+
+        .v-input__icon--append .v-icon {
+            font-size: 10px;
+        }
+    }
+
+    /* TODO REMOVE THIS ONCE DYNAMIC */
+
+    .event-title {
+        font-size: 25px;
+    }
+
+    .vertical-stepper {
+        box-shadow: none;
+
+        .v-stepper__step--inactive .v-stepper__step__step {
+            border: 1px solid #cc0000;
+            color: #cc0000;
+            background: none !important;
+        }
+
+        .v-stepper__step--active {
+            .v-stepper__step__step {
+                color: white;
+            }
+
+            .v-stepper__label {
+                color: #cc0000;
+                font-size: 16px;
+            }
+        }
+    }
+
+    /* END OF REMOVE ONCE DYNAMIC */
+
+
+}
+
+.light-grey {
+    background-color: rgb(230,230,230);
+}
+
+.border-medium {
+    border: 1px solid rgb(210,210,210);
+}
+
+.rounded-25 {
+    border-radius: 25px;
+}
+
+.height-50 {
+    height: 50px;
+}
+
+.grow-0 {
+    flex-grow: 0;
+}
+
+.padding-l-85 {
+    padding-left: 85px;
+}
+
+.padding-r-45 {
+    padding-right: 45px;
+}
+
+.padding-l-35 {
+    padding-left: 35px;
+}
+
+/* TODO REMOVE THIS ONCE DYNAMIC */
+
+.theme-color {
+    border-color: #cc0000;
+
+    .v-btn__content {
+        color: #cc0000;
+    }
+}
+
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
+    background: none;
+}
+
+/* END OF REMOVE ONCE DYNAMIC */
+
+
+/* TODO REMOVE CALENDAR STYLING */
+
+.theme--light.v-calendar-weekly, .theme--light.v-sheet {
+    background: none;
+    border: none;
+
+    .v-calendar-weekly__day-month {
+        display: none;
+    }
+
+    .v-calendar-weekly__day {
+        border-radius: 50%;
+        border: none;
+        padding-top: calc(14.3% - 10px);
+        width: calc(14.3% - 10px);
+        padding-bottom: 0;
+        height: 0;
+        margin: 5px;
+        text-align: center;
+        background: none;
+        display: flex;
+        flex-flow: column nowrap;
+
+        .v-calendar-weekly__day-label {
+            width: auto;
+            height: auto;
+            margin: auto;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .v-calendar-weekly__head .v-calendar-weekly__head-weekday {
+        border: none;
+        text-align: center;
+        margin: 5px;
+        height: auto;
+        width: calc(14.3% - 10px);
+    }
+}
+
+/* END OF REMOVE CALENDAR STYLING */
+
+
+.body-3 {
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.padding-x-85 {
+    padding-right: 85px;
+    padding-left: 85px;
+}
+
+.rounded-20 {
+    border-radius: 20px;
+}
+
+.theme-fill {
+    background-color: #cc0000 !important;
+}

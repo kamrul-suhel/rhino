@@ -273,3 +273,15 @@ Route::prefix('test')->group(function(){
        return view('welcome');
    });
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes for Frontend
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::get('/frontend', function () {
+    return view('welcome');
+});

@@ -21,16 +21,9 @@
             </template>
 
             <template v-else>
-                <v-content>
-                    <v-container fill-height>
-                        <v-layout >
-                            <v-flex>
-                                <SnackBar></SnackBar>
-                                <router-view></router-view>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-content>
+
+                    <router-view></router-view>
+
             </template>
 
         </v-app>

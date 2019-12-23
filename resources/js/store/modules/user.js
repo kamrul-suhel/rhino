@@ -14,6 +14,19 @@ const defaultState = {
     levels: []
 }
 
+
+        //Tab option
+        tabColor: 'dark',
+        tabSliderColor: 'white',
+
+        // Frontend
+        drawerWidthF: '280px',
+        companyIconSizeF: '100px',
+        titleWidthF: '400px',
+        brandColor: '#cc0000',
+        secondaryColor: '#444444',
+    }
+}
 const state = {
     ...defaultState
 }
