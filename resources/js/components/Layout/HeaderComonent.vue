@@ -6,7 +6,7 @@
             app
             color="dark"
         >
-            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-side-icon @click.stop="onNavigationToggle()"></v-toolbar-side-icon>
             <v-icon class="mx-3">fab fa-youtube</v-icon>
             <v-toolbar-title class="mr-5 align-center">
                 <span class="title">Rhino</span>
@@ -78,6 +78,10 @@
              */
             selectedLanguage(value) {
                 this.$store.commit('setSelectedLanguage', value)
+            },
+
+            onNavigationToggle(){
+                this.$store.commit('setIsNavigationOpen')
             }
         }
     }

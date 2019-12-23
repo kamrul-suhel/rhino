@@ -1,11 +1,16 @@
 const state = {
     navigation:[],
-    home: ''
+    home: '',
+    isNavigationOpen: true
 };
 
 const mutations = {
     setHome(state, trans){
         state.home = trans.home
+    },
+
+    setIsNavigationOpen(state){
+        state.isNavigationOpen = !state.isNavigationOpen
     },
 
     setNavigation(state, trans){
@@ -208,6 +213,10 @@ const mutations = {
 const getters = {
     getNavigationBar(state){
         return state.navigation;
+    },
+
+    getIsNavigationOpen(state){
+        return state.isNavigationOpen
     },
 
     getHomeTitle(state){

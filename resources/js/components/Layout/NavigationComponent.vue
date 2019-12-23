@@ -52,7 +52,7 @@
         computed: {
             ...mapGetters({
                 trans: 'getFields',
-
+                openNavigation: 'getIsNavigationOpen',
                 items: 'getNavigationBar'
             })
         },
@@ -60,6 +60,12 @@
         data() {
             return {
                 drawer: true
+            }
+        },
+
+        watch:{
+            openNavigation(){
+                this.drawer = this.openNavigation
             }
         },
 
