@@ -1,7 +1,7 @@
 import * as Company from "../../pages/company";
 
 const CompanyRoutes = {
-    path: '/companies',
+    path: '/admin/companies',
     name: 'companies',
     component: Company.Root,
     children: [

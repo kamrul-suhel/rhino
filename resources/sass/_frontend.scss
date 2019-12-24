@@ -52,6 +52,24 @@
         }
     }
 
+    /**
+
+     */
+    .rhinoNavigationStepper{
+        width:100%;
+
+        .v-tabs__container{
+            display:flex;
+            flex-direction:column;
+            align-items:start;
+            justify-content: flex-start;
+        }
+
+        .v-tabs__slider-wrapper{
+            display:none;
+        }
+    }
+
     /* END OF REMOVE ONCE DYNAMIC */
 
 

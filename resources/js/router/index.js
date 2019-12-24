@@ -8,7 +8,7 @@ import VehiclesRoutes from './Modules/vehicles';
 import CountriesRoutes from './Modules/countries';
 import Groups from './Modules/groups';
 import Company from './Modules/company';
-import Frontend from "./Modules/frontend";
+import Booking from "./Modules/booking";
 import User from "./Modules/user";
 import Event from "./Modules/event";
 import TypesRoutes from "./Modules/type";
@@ -55,7 +55,7 @@ const routes = [
     {...TypesRoutes},
 
     // Frontend Routes
-    {...Frontend},
+    {...Booking},
 
     // Frontend Routes
     {...User},

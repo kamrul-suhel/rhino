@@ -3,7 +3,7 @@ const defaultState = {
     userId : null,
     userName: null,
     userEmail: null,
-    admin: true,
+    admin: false,
     isLogin: false,
     themeOption:{
         theme: 'dark',
@@ -34,7 +34,14 @@ const defaultState = {
         tabSliderColor: 'black',
 
         // Default image
-        brandDefaultImage : '/images/brandPlaceholder.jpg'
+        brandDefaultImage : '/images/brandPlaceholder.jpg',
+
+        // Frontend
+        drawerWidthF: '280',
+        companyIconSizeF: '100',
+        titleWidthF: '400px',
+        brandColor: '#cc0000',
+        secondaryColor: '#444444'
     }
 }
 const state = {

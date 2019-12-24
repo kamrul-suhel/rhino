@@ -1,7 +1,7 @@
 import * as Dealership from "../../pages/dealership";
 
 const DealershipRoutes =  {
-    path: '/dealerships',
+    path: '/admin/dealerships',
     name: 'dealerships',
     component: Dealership.Root,
     children: [

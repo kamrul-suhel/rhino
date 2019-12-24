@@ -1,7 +1,7 @@
 import * as Type from "../../pages/event/type/index";
 
 const EventTypesRoutes =  {
-    path: '/events/types',
+    path: '/admin/events/types',
     name: 'eventTypes',
     component: Type.Root,
     children: [

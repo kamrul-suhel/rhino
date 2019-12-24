@@ -1,7 +1,7 @@
 import * as Event from "../../pages/event";
 
 const eventsRoute ={
-    path: '/events',
+    path: 'admin/events',
     name: 'events',
     component: Event.Root,
     children:[
