@@ -13,10 +13,10 @@
 
                 <v-layout row wrap>
                     <v-flex xs12>
-                        <v-select :label="trans.select_a_brand"
+                        <v-select :label="`${trans.select_a} ${trans.brand}`"
                                   :color="themeOption.inputColor"
                                   item-text="name"
-                                  :rules="[v => !!v || trans.select_a_brand]"
+                                  :rules="[v => !!v || `${trans.select_a} ${trans.brand}`]"
                                   item-value="id"
                                   v-model="selectedBrand.brand_id"
                                   @change="onBrandChange"
@@ -28,7 +28,7 @@
                     <v-flex xs12>
                         <v-select :label="trans.region"
                                   :items="regions"
-                                  :rules="[v => !!v || trans.select_a_region]"
+                                  :rules="[v => !!v || `${trans.select_a} ${trans.region}`]"
                                   item-text="name"
                                   v-model="selectedBrand.region_id"
                                   item-value="id"
@@ -50,7 +50,7 @@
                 <v-btn small
                        @click="onCreateRelation"
                        :color="themeOption.buttonPrimaryColor"
-                >{{ this.selectedBrand.id ? trans.update_brand : trans.add_brand }}</v-btn>
+                >{{ this.selectedBrand.id ? `${trans.update}` : `${trans.brand}` }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-form>

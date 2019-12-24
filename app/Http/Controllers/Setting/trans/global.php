@@ -138,6 +138,12 @@ return [
     ],
 
     [
+        'label' => 'Select A',
+        'identifier' => 'select_a',
+        'translation' => 'Select A'
+    ],
+
+    [
         'label' => 'Select Country',
         'identifier' => 'select_country',
         'translation' => 'Select Country'
@@ -381,6 +387,18 @@ return [
         'label' => 'To',
         'identifier' => 'to',
         'translation' => 'To'
+    ],
+
+    [
+        'label' => 'No',
+        'identifier' => 'no',
+        'translation' => 'No'
+    ],
+
+    [
+        'label' => 'Found',
+        'identifier' => 'found',
+        'translation' => 'Found'
     ],
 
     [
