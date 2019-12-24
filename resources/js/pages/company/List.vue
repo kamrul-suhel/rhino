@@ -251,11 +251,11 @@
                 const selectedCompany = this.selectedCompany
                 const URL = `/api/companies/${selectedCompany.id}/delete`
 
-                axios.delete(URL, {_method: 'delete'})
+                axios.delete(URL)
                     .then((response) => {
                         if (response.data.success) {
                             this.$store.commit('setSnackbarMessage', {
-                                bgColor: themeOption.snackBarBgDanger,
+                                bgColor: this.themeOption.snackBarBgDanger,
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${selectedCompany.name}  ${this.trans.successfully_deleted}`
