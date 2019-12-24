@@ -179,6 +179,10 @@ Route::prefix('admin')->group(function(){
             return view('welcome');
         });
 
+        Route::get('list', function () {
+            return view('welcome');
+        });
+
         Route::get('create', function () {
             return view('welcome');
         });

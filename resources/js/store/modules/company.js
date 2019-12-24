@@ -23,7 +23,6 @@ const mutations = {
     },
 
     setSelectedCompany(state, company){
-        console.log('new company is: ', company)
         state.selectedCompany = {...company}
     },
 
