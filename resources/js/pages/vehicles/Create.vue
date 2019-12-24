@@ -30,7 +30,7 @@
                                 <v-flex xs12 pa-2>
                                     <v-text-field
                                         :rules="nameRules"
-                                        :label="trans.model_of_vehicle"
+                                        :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
                                         :color="themeOption.inputColor"
                                         v-model="vehicle.model"
                                     ></v-text-field>
@@ -43,9 +43,9 @@
                                         :items="brands"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.vehicle_brand_is_required]"
+                                        :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_a_brand"
+                                        :label="`${trans.select_a} ${trans.brand}`"
                                         v-model="vehicle.brand_id"
                                     >
                                     </v-select>

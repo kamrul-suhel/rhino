@@ -135,7 +135,14 @@ const actions = {
         const URL = `/api/companies/dropdown${fn.generateParams(payload)}`
         axios.get(URL).then((response) => {
             if(response.data.companies){
-                commit('setCompanies', response.data.companies)
+                let companies = [...response.data.companies]
+                const noCompany = {
+                    id: null,
+                    name: `${payload.trans.no} ${payload.trans.company}`
+                }
+                companies.unshift(noCompany)
+
+                commit('setCompanies', companies)
                 commit('setTotalCompanies', response.data.total)
             }
         }).catch((error)=>{

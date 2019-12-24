@@ -115,9 +115,9 @@ Route::prefix('companies')->group(function () {
 Route::prefix('brands')->group(function () {
     Route::get('', 'Brand\BrandController@index');
     Route::get('dropdown', 'Brand\BrandDropDownController@getBrandsForDropDown');
-    Route::post('', 'Brand\BrandController@store');
+    Route::post('', 'Brand\BrandStoreController@store');
     Route::get('{id}/show', 'Brand\BrandController@show');
-    Route::put('{id}/update', 'Brand\BrandController@update');
+    Route::put('{id}/update', 'Brand\BrandStoreController@update');
     Route::delete('{id}/delete', 'Brand\BrandController@destroy');
     Route::get('{id}/regions', 'Brand\BrandRegionController@getRegions');
 });

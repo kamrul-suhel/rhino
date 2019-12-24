@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_brand }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.brand}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -31,7 +31,7 @@
                             <v-layout justify-space-between row>
                                 <v-flex xs12 sm6 md6 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || trans.brand_name_is_required]"
+                                        :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.name"
                                         v-model="brand.name"
@@ -56,7 +56,7 @@
                                     <v-select
                                         :items="companies"
                                         item-text="name"
-                                        :rules="[v => !!v || trans.select_a_company]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.company}`]"
                                         item-value="id"
                                         :color="themeOption.inputColor"
                                         :label="trans.company"

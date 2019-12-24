@@ -26,8 +26,8 @@
                     :items="brands"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_brand_found"
-                    :no-data-text="trans.no_brand_found"
+                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalBrands"
@@ -66,7 +66,7 @@
                     lazy-validation>
                     <v-card>
                         <v-card-title>
-                            <h3>{{ editBrand ? trans.edit_brand : trans.create_brand}}</h3>
+                            <h3>{{ editBrand ? `${trans.edit} ${trans.brand}` : `${trans.create} ${trans.brand}`}}</h3>
                         </v-card-title>
                         <v-divider></v-divider>
 
@@ -84,7 +84,7 @@
 
                             <v-text-field
                                 :label="trans.name"
-                                :rules="[v => !!v || trans.brand_name_is_required]"
+                                :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
                                 required
                                 v-model="selectedBrand.name"
                                 :color="themeOption.inputColor"

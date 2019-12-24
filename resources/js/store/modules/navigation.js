@@ -22,14 +22,14 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.all_dealerships,
+                        text: `${trans.list_of} ${trans.dealerships}`,
                         link: 'listDealerships',
                         access: ''
                     },
 
                     {
                         icon: 'post_add',
-                        text: trans.create_dealerships,
+                        text: `${trans.create} ${trans.dealership}`,
                         link: 'addDealerships',
                         access: ''
                     },
@@ -37,7 +37,7 @@ const mutations = {
 
                     {
                         icon: 'bookmarks',
-                        text: trans.groups,
+                        text: `${trans.list_of} ${trans.groups}`,
                         link: 'listDealershipsGroups',
                         access: ''
                     }
@@ -50,7 +50,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.list_of_brands,
+                        text: `${trans.list_of} ${trans.brands}`,
                         link: 'listBrands',
                         access: ''
                     }
@@ -63,14 +63,14 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.list_of_vehicles,
+                        text: `${trans.list_of} ${trans.vehicles}`,
                         link: 'listVehicles',
                         access: ''
                     },
 
                     {
                         icon: 'add',
-                        text: trans.create_vehicle,
+                        text: `${trans.create} ${trans.vehicle}`,
                         link: 'addVehicles',
                         access: ''
                     },
