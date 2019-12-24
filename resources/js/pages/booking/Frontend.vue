@@ -1,47 +1,101 @@
-
 <template>
-    <div id="app">
-        <v-app
-            id="inspire"
-            white
-            v-if="isLoading"
-        >
-            <template>
-                <v-content>
-                    <FDrawer></FDrawer>
-                    <v-container class="frontend-container" fill-height fluid>
-                        <v-layout>
-                            <v-flex :style="{marginLeft: themeOption.drawerWidthF}">
+    <v-app
+        id="inspire"
+        white
+        class="rhinoFrontend"
+    >
+        <FDrawer></FDrawer>
+        <v-content class="rhinoFrontend">
+            <v-container class="content">
+                <v-layout row wrap>
+                    <v-flex xs12>
+                        <v-parallax :src="`https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG`" alt="" height="240">
+                            <v-layout align-center justify-end class="text-center" cols="12">
+                                <v-flex align-self-center>
+                                    <h1 class="display-1 font-weight-thin text-lg-right">{{trans.greeting_f}}</h1>
+                                </v-flex>
+                            </v-layout>
+                        </v-parallax>
+                    </v-flex>
 
-                                <v-tabs-items v-model="model">
-                                    <v-tab-item
-                                        v-for="i in 3"
-                                        :key="i"
-                                        :value="`tab-${i}`"
-                                    >
-                                        <v-card flat>
-                                            <v-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, aspernatur dolorum eaque eum ipsum nihil omnis quam qui quia quis quisquam quo, quod recusandae sapiente veniam voluptate voluptatem. Maiores, molestias?</v-card-text>
-                                        </v-card>
-                                    </v-tab-item>
-                                </v-tabs-items>
+                    <v-flex xs12>
+                        <v-tabs
+                            v-model="active"
+                            color="black"
+                            dark
+                            slider-color="yellow"
+                        >
+                            <v-tab
+                                key="selectCar"
+                                ripple
+                            >
+                                Select Car
+                            </v-tab>
 
-                                <!-- step 1 -->
+                            <v-tab
+                                key="appointment"
+                                ripple
+                            >
+                                Appointment
+                            </v-tab>
+
+                            <v-tab
+                                key="partExchange"
+                                ripple
+                            >
+                                Part exchange
+                            </v-tab>
+
+                            <v-tab
+                                key="personalDetail"
+                                ripple
+                            >
+                                Personal Detail
+                            </v-tab>
+
+                            <v-tab
+                                key="confirmDetail"
+                                ripple
+                            >
+                                Confirm Detail
+                            </v-tab>
+
+                            <v-tab-item
+                                key="selectCar"
+                            >
                                 <FSelectCar></FSelectCar>
-                                <!-- step 2 -->
-                                <!--<FBookAppointment></FBookAppointment>-->
-                                <!-- step 3 -->
-                                <!--<FPartExchange></FPartExchange>-->
-                                <!-- step 4 -->
-                                <!--<FPersonalDetails></FPersonalDetails>-->
-                                <!-- step 5 -->
-                                <!--<FConfirmDetails></FConfirmDetails>-->
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-content>
-            </template>
-        </v-app>
-    </div>
+                            </v-tab-item>
+
+                            <v-tab-item
+                                key="appointment"
+                            >
+                                <FBookAppointment></FBookAppointment>
+                            </v-tab-item>
+
+                            <v-tab-item
+                                key="partExchange"
+                            >
+                                <FPartExchange></FPartExchange>
+                            </v-tab-item>
+
+                            <v-tab-item
+                                key="personalDetail"
+                            >
+                                <FPersonalDetails></FPersonalDetails>
+                            </v-tab-item>
+
+                            <v-tab-item
+                                key="confirmDetail"
+                            >
+                                <FConfirmDetails></FConfirmDetails>
+                            </v-tab-item>
+
+                        </v-tabs>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
@@ -66,20 +120,22 @@
         },
 
         data: () => ({
-            model: 'tab-2'
+            model: 'tab-2',
+            active: null
         }),
 
-        computed:{
+        computed: {
             ...mapGetters({
                 isLogin: 'getIsLogin',
                 isLoading: 'getIsLoading',
                 themeOption: 'getThemeOption',
-                isAdmin : 'getIsAdmin'
+                isAdmin: 'getIsAdmin',
+                trans: 'getFields'
             })
         },
 
         watch: {
-            themeOption(value){
+            themeOption(value) {
                 console.log('theme option is change', value);
                 this.$vuetify.theme = this.themeOption.theme
             }
@@ -88,8 +144,7 @@
         async created() {
         },
 
-        methods: {
-        }
+        methods: {}
     }
 
 </script>

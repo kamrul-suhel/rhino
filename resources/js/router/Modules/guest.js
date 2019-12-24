@@ -1,7 +1,7 @@
 import * as Guest from "../../pages/guest";
 
 const guestsRoute ={
-    path: 'admin/guests',
+    path: '/admin/guests',
     name: 'guests',
     component: Guest.Root,
     children:[
