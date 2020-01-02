@@ -14,25 +14,12 @@
             <v-flex xs12>
                 <v-layout>
                     <v-flex xs6>
-                        <v-avatar
-                            :tile="tile"
-                            :size="themeOption.companyIconSizeF"
-                            color="grey lighten-4"
-                        >
-                            <v-img src="http://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar"></v-img>
-                        </v-avatar>
+                        <brand-carousel-component></brand-carousel-component>
                     </v-flex>
 
-                    <v-flex xs6 class="language-select stroke-dropdown">
-                        <v-select
-                            v-model="e1"
-                            :items="languages"
-                            menu-props="auto"
-                            :label="trans.language"
-                            hide-details
-                            prepend-icon="map"
-                            append-icon="expand_more"
-                        ></v-select>
+                    <v-flex xs6 class="language-select stroke-dropdown"
+                            v-if="guest.id">
+                       <language-picker :languageId="guest.language_id"></language-picker>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -104,22 +91,21 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import BrandCarouselComponent from "./BrandCarouselComponent";
+    import LanguagePicker from '@/components/Language'
 
     export default {
+        components: {
+            BrandCarouselComponent,
+            LanguagePicker
+        },
+
         data() {
             return {
                 drawer: true,
                 tile: false,
-                e1: 1,
                 e6: 1,
-                model: 'tab-2',
-
-                items: [
-                    {title: 'Book your slot', icon: 'dashboard'},
-                    {title: 'Part exchange', icon: 'question_answer'},
-                    {title: 'Confirm your details', icon: 'question_answer'},
-                    {title: 'Booking confirmation', icon: 'question_answer'}
-                ]
+                model: 'tab-2'
             }
         },
 
@@ -132,6 +118,8 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
+                guest: 'getSelectedGuest'
+
             })
         }),
 

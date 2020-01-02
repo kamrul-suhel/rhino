@@ -292,3 +292,15 @@ Route::prefix('appointments')->group(function () {
 Route::prefix('uploadfiles')->group(function () {
     Route::post('', 'File\FileUploadController@uploadFiles');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Booking, guest journey
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('booking')->group(function(){
+    Route::get('{eventId}', 'Booking\BookingController@getData');
+});

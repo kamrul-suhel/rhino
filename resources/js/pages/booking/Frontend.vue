@@ -100,12 +100,12 @@
 
 <script>
 
-    import FDrawer from './drawer'
-    import FSelectCar from './selectModel'
+    import FDrawer from './Drawer'
+    import FSelectCar from './SelectModel'
     import FBookAppointment from './bookAppointment'
-    import FPartExchange from './partExchange'
-    import FPersonalDetails from './personalDetails'
-    import FConfirmDetails from './confirmDetails'
+    import FPartExchange from './PartExchange'
+    import FPersonalDetails from './PersonalDetails'
+    import FConfirmDetails from './ConfirmDetails'
     import {mapGetters} from 'vuex';
 
     export default {
@@ -136,12 +136,12 @@
 
         watch: {
             themeOption(value) {
-                console.log('theme option is change', value);
                 this.$vuetify.theme = this.themeOption.theme
             }
         },
 
-        async created() {
+        created() {
+            this.$store.dispatch('fetchGuest', {id: 4})
         },
 
         methods: {}

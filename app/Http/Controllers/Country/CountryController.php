@@ -115,7 +115,6 @@ class CountryController extends Controller
         $data['message'] = 'Yeahhhhhhhhhh';
 
         return $data;
-
     }
 
     /**
