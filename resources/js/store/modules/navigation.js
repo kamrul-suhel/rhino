@@ -84,7 +84,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.list_of_companies,
+                        text: `${trans.list_of} ${trans.companies}`,
                         link: 'listCompanies',
                         access: ''
                     }
@@ -97,7 +97,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.list_of_country,
+                        text: `${trans.list_of} ${trans.countries}`,
                         link: 'listCountries',
                         access: ''
                     },

@@ -96,15 +96,39 @@ return [
     ],
 
     [
-        'label' => 'Name',
-        'identifier' => 'name',
-        'translation' => 'Name'
+        'label' => 'Dealerships',
+        'identifier' => 'dealerships',
+        'translation' => 'Dealerships'
+    ],
+
+    [
+        'label' => 'Dealership',
+        'identifier' => 'dealership',
+        'translation' => 'Dealership'
+    ],
+
+    [
+        'label' => 'Brands',
+        'identifier' => 'brands',
+        'translation' => 'Brands'
+    ],
+
+    [
+        'label' => 'Brand',
+        'identifier' => 'brand',
+        'translation' => 'Brand'
     ],
 
     [
         'label' => 'Country',
         'identifier' => 'country',
         'translation' => 'Country'
+    ],
+
+    [
+        'label' => 'Countries',
+        'identifier' => 'countries',
+        'translation' => 'Countries'
     ],
 
     [
@@ -388,6 +412,12 @@ return [
         'identifier' => 'to',
         'translation' => 'To'
     ],
+    
+    [
+        'label' => 'Or',
+        'identifier' => 'or',
+        'translation' => 'Or'
+    ],
 
     [
         'label' => 'No',
@@ -411,5 +441,132 @@ return [
         'label' => 'Code',
         'identifier' => 'code',
         'translation' => 'Code'
+    ],
+
+    [
+        'label' => 'Company',
+        'identifier' => 'company',
+        'translation' => 'Company'
+    ],
+
+    [
+        'label' => 'Companies',
+        'identifier' => 'companies',
+        'translation' => 'Companies'
+    ],
+
+    [
+        'label' => 'Seating Position',
+        'identifier' => 'seating_position',
+        'translation' => 'Seating Position'
+    ],
+
+    [
+        'label' => 'Left',
+        'identifier' => 'left',
+        'translation' => 'Left'
+    ],
+
+    [
+        'label' => 'Right',
+        'identifier' => 'right',
+        'translation' => 'Right'
+    ],
+
+    [
+        'label' => 'Banner',
+        'identifier' => 'banner',
+        'translation' => 'Banner'
+    ],
+
+    [
+        'label' => 'Latitude',
+        'identifier' => 'latitude',
+        'translation' => 'Latitude'
+    ],
+
+    [
+        'label' => 'Longitude',
+        'identifier' => 'longitude',
+        'translation' => 'Longitude'
+    ],
+
+    [
+        'label' => 'Monday',
+        'identifier' => 'monday',
+        'translation' => 'Monday'
+    ],
+
+    [
+        'label' => 'Tuesday',
+        'identifier' => 'tuesday',
+        'translation' => 'Tuesday'
+    ],
+
+    [
+        'label' => 'Wednesday',
+        'identifier' => 'wednesday_',
+        'translation' => 'Wednesday'
+    ],
+
+
+    [
+        'label' => 'Thursday',
+        'identifier' => 'thursday',
+        'translation' => 'Thursday'
+    ],
+
+    [
+        'label' => 'Friday',
+        'identifier' => 'friday',
+        'translation' => 'Friday'
+    ],
+
+    [
+        'label' => 'Saturday',
+        'identifier' => 'saturday',
+        'translation' => 'Saturday'
+    ],
+
+    [
+        'label' => 'Sunday',
+        'identifier' => 'sunday',
+        'translation' => 'Sunday'
+    ],
+
+    [
+        'label' => 'Start',
+        'identifier' => 'start',
+        'translation' => 'Start'
+    ],
+
+    [
+        'label' => 'End',
+        'identifier' => 'end',
+        'translation' => 'End'
+    ],
+
+    [
+        'label' => 'Address Line',
+        'identifier' => 'address_line',
+        'translation' => 'Address Line'
+    ],
+
+    [
+        'label' => 'Appointment',
+        'identifier' => 'appointment',
+        'translation' => 'Appointment'
+    ],
+
+    [
+        'label' => 'Appointments',
+        'identifier' => 'appointments',
+        'translation' => 'Appointments'
+    ],
+
+    [
+        'label' => 'Time',
+        'identifier' => 'time',
+        'translation' => 'Time'
     ]
 ];

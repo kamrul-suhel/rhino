@@ -61,7 +61,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
                                         :items="levels"
-                                        :rules="[v => !!v || trans.select_a_country]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.rule"
                                         v-model="user.level"

@@ -29,7 +29,7 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="nameRules"
+                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
                                         :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
                                         :color="themeOption.inputColor"
                                         v-model="vehicle.model"
@@ -136,10 +136,6 @@
             return {
                 valid: true,
                 vehicle: {},
-
-                nameRules: [
-                    v => !!v || this.trans.vehicle_model_is_required
-                ],
 
                 leftImage: '',
                 rightImage: '',

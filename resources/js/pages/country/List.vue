@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_country_by_name"
+                :label="`${trans.search_by} ${trans.country} ${trans.name}`"
                 v-model="searchCountry">
             </v-text-field>
         </v-toolbar>
@@ -23,8 +23,8 @@
             :headers="headers"
             :items="countries"
             :pagination.sync="pagination"
-            :no-results-text="trans.no_country_found"
-            :no-data-text="trans.no_country_found"
+            :no-results-text="`${trans.no} ${trans.country} ${trans.found}`"
+            :no-data-text="`${trans.no} ${trans.country} ${trans.found}`"
             :rows-per-page-text="trans.rows_per_page"
             :rows-per-page-items="rowsPerPage"
             :total-items="totalCountry"
