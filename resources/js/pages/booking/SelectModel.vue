@@ -2,15 +2,6 @@
     <div>
         <v-layout column>
             <v-flex>
-                <v-parallax :src="`https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG`" alt="" height="240">
-                    <v-layout align-center justify-end class="text-center" cols="12">
-                        <v-flex align-self-center>
-                            <h1 class="display-1 font-weight-thin text-lg-right">{{trans.greeting_f}}</h1>
-                        </v-flex>
-                    </v-layout>
-                </v-parallax>
-            </v-flex>
-            <v-flex>
                 <h5 class="headline mt-5 text-lg-center">{{trans.greeting_f}}</h5>
                 <v-flex align="center" justify="center">
                     <v-layout row sm4 mt-4 justify-center>

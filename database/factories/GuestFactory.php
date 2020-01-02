@@ -23,6 +23,7 @@ $factory->define(Guest::class, function (Faker $faker) {
         'unique' => generateUniqueIdForGuest(),
         'first_name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
+        'language_id' => 40,
         'surname' => $faker->lastName,
         'address_line_1' => $faker->streetAddress,
         'address_line_2' => $faker->streetName,

@@ -1,15 +1,6 @@
 <template>
     <div>
-        <v-layout column>
-            <v-flex>
-                <v-parallax :src="`https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG`" alt="" height="240">
-                    <v-layout align-center justify-end class="text-center" cols="12">
-                        <v-flex align-self-center>
-                            <h1 class="display-1 font-weight-thin text-lg-right">{{trans.greeting_f}}</h1>
-                        </v-flex>
-                    </v-layout>
-                </v-parallax>
-            </v-flex>
+        <v-layout row wrap>
             <v-flex align-center>
                 <h4 class="display-1 mt-5 text-lg-center">Please confirm or amend your contact details</h4>
                 <h5 class="headline mt-2 text-lg-center">Are these details still correct?</h5>

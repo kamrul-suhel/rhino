@@ -18,16 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('booking')->group(function () {
-    Route::get('', function(){
-        return view('welcome');
-    });
-
-    Route::get('list', function(){
-        return view('welcome');
-    });
-});
-
 /*
 |--------------------------------------------------------------------------
 | Routes for Dealerships
@@ -311,7 +301,13 @@ Route::prefix('admin')->group(function(){
  * Frontend route
  */
 
-Route::get('/booking', function () {
-    return view('welcome');
+Route::middleware(['guestAuth'])->prefix('booking')->group(function () {
+    Route::get('', function(){
+        return view('welcome');
+    });
+
+    Route::get('list', function(){
+        return view('welcome');
+    });
 });
 

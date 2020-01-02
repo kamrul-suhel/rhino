@@ -1,7 +1,7 @@
 import * as Countries from "../../pages/country";
 
 const CountriesRoutes = {
-    path: 'admin/countries',
+    path: '/admin/countries',
     name: 'countries',
     component: Countries.Root,
     children: [

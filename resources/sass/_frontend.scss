@@ -1,13 +1,27 @@
+.rhinoFrontend{
+    .content{
+        padding:0 0 0 280px;
+        margin:0;
+        width:100%;
+        max-width:100%;
+    }
+
+    @media only screen and (max-width:960px){
+        .content{
+            padding-left:0;
+        }
+    }
+
+}
+
 .frontend-container {
     padding: 0;
 }
 
 .navigation-drawer {
-
-    z-index: 100;
+    padding:15px;
 
     /* LANGUAGE SELECTOR */
-
     .language-select {
         width: 68px;
         flex-grow: 0;
@@ -70,8 +84,16 @@
         }
     }
 
-    /* END OF REMOVE ONCE DYNAMIC */
+    /**
+    Nav footer
+     */
+    .navFooter{
+        position: absolute;
+        bottom: 0;
+        width: 280px;
+    }
 
+    /* END OF REMOVE ONCE DYNAMIC */
 
 }
 
