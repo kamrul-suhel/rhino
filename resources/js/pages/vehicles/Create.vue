@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.create_vehicle }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.vehicle}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -112,7 +112,7 @@
                             small
                             @click="onCreateVehicle()"
                         >
-                            {{ trans.create_vehicle }}
+                            {{ `${trans.create} ${trans.vehicle}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-flex>

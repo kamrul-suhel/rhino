@@ -261,7 +261,7 @@
             },
 
             confirmRule() {
-                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatch}`
+                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatching}`
             }
         }),
 

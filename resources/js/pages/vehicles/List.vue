@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_model"
+                :label="`${trans.searchBy} ${trans.model}`"
                 v-model="searchVehicle">
             </v-text-field>
         </v-toolbar>
@@ -26,8 +26,8 @@
                     :items="vehicles"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_vehicle_found"
-                    :no-data-text="trans.no_vehicle_found"
+                    :no-results-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalVehicles"

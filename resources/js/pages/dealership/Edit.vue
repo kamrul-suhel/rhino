@@ -60,7 +60,7 @@
                                         item-text="name"
                                         item-value="id"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
+                                        :label="`${trans.select_a} ${trans.group}`"
                                         v-model="dealership.group_id"
                                     >
                                     </v-select>

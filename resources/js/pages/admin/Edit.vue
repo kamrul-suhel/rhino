@@ -135,7 +135,7 @@
                                                     small
                                                     @click="$router.push({name: 'addBrandVehicle'})"
                                                 >
-                                                    {{ trans.create_vehicle }}
+                                                    {{ `${trans.create} ${trans.vehicle}` }}
                                                 </v-btn>
                                             </v-flex>
                                         </v-layout>

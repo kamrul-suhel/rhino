@@ -68,7 +68,7 @@
                                         item-value="id"
                                         :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
+                                        :label="`${trans.select_a} ${trans.group}`"
                                         v-model="event.type_id"
                                     >
                                     </v-select>

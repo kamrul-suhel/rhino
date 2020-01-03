@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchCompany">
             </v-text-field>
         </v-toolbar>
@@ -26,8 +26,8 @@
                     :items="companies"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_group_found"
-                    :no-data-text="trans.no_group_found"
+                    :no-results-text="`${trans.no} ${trans.group} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.group} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalCompanies"

@@ -50,7 +50,7 @@
             >
                 <v-card>
                     <v-card-title>
-                        <h3>{{ editRegion ? trans.edit_region : trans.create_region }}</h3>
+                        <h3>{{ editRegion ? `${trans.edit} ${trans.region}` : `${trans.create} ${trans.region}` }}</h3>
                     </v-card-title>
                     <v-card-text>
 
@@ -89,7 +89,7 @@
                         <v-btn small
                                @click="onCreateRegion()"
                                :color="themeOption.buttonPrimaryColor">
-                            {{ editRegion ? trans.update : trans.add_region }}
+                            {{ editRegion ? `${trans.update}` : `${trans.add} ${trans.region}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>
