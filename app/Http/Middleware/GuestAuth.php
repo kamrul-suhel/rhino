@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class GuestAuth
@@ -16,12 +17,12 @@ class GuestAuth
      */
     public function handle($request, Closure $next)
     {
-        $uniqueId = Session::get('key');
-
-        if($uniqueId){
+        if(session()->has('uniqueId')){
+            $uniqueId = session()->get('uniqueId');
+            $request->merge(compact('uniqueId'));
             return $next($request);
         }else{
-            return route('login');
+            return redirect('/');
         }
     }
 }

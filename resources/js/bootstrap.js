@@ -3,7 +3,10 @@ window._ = require('lodash');
 window.axios = require('axios');
 window.moment = require('moment');
 
+const token = document.head.querySelector('meta[name="csrf-token"]');
+console.log(token.content)
 window.axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': token.content,
     'X-Requested-With': 'XMLHttpRequest'
 };
 

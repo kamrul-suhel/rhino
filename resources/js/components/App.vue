@@ -3,7 +3,7 @@
         <v-app
             id="inspire"
             dark
-            v-if="isLoading && isAdmin"
+            v-if="isAdmin"
         >
             <navigation-component></navigation-component>
             <header-component></header-component>

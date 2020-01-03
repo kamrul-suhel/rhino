@@ -119,7 +119,6 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 guest: 'getSelectedGuest'
-
             })
         }),
 

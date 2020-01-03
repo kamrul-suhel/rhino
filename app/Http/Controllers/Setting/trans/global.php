@@ -411,5 +411,17 @@ return [
         'label' => 'Code',
         'identifier' => 'code',
         'translation' => 'Code'
+    ],
+
+    [
+        'label' => 'Welcome',
+        'identifier' => 'welcome',
+        'translation' => 'Welcome'
+    ],
+
+    [
+        'label' => 'Login',
+        'identifier' => 'login',
+        'translation' => 'Login'
     ]
 ];
