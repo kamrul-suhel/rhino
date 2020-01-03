@@ -34,4 +34,9 @@ return [
         'identifier' => 'e.gnchfge23sxs',
         'translation' => 'e.g nchfge23sxs'
     ],
+    [
+        'label' => 'login',
+        'identifier' => 'login',
+        'translation' => 'login'
+    ],
 ];
