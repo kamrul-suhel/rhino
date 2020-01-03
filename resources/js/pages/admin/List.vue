@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchBrands">
             </v-text-field>
         </v-toolbar>
@@ -113,7 +113,7 @@
                             <v-text-field
                                 :label="trans.color"
                                 v-model="color"
-                                :rules="[v => !!v || trans.choose_a_color]"
+                                :rules="[v => !!v || `${trans.select_a} ${trans.color}`]"
                                 required
                                 @focus="isColorSwatchActive = true"
                                 :color="themeOption.inputColor">

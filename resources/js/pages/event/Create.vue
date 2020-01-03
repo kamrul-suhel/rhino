@@ -39,7 +39,7 @@
 
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="nameRules"
+                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="`${trans.greeting} ${trans.text}`"
                                         v-model="event.greeting"
@@ -68,7 +68,7 @@
                                         item-value="id"
                                         :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
+                                        :label="`${trans.select_a} ${trans.group}`"
                                         v-model="event.type_id"
                                     >
                                     </v-select>
@@ -234,9 +234,6 @@
                 event: {},
                 times: {},
                 active: null,
-                nameRules: [
-                    v => !!v || this.trans.name_is_required
-                ],
                 appointmentDuration:[]
             }
         },

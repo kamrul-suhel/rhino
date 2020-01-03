@@ -61,7 +61,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
                                         :items="levels"
-                                        :rules="[v => !!v || trans.select_a_country]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.rule"
                                         v-model="user.level"
@@ -261,7 +261,7 @@
             },
 
             confirmRule() {
-                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatch}`
+                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatching}`
             }
         }),
 

@@ -1,6 +1,6 @@
 <template>
     <v-select
-        :rules="[v => !!v || trans.select_a_country]"
+        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
         :color="themeOption.inputColor"
         :label="trans.select_country"
         v-model="dealership.country"

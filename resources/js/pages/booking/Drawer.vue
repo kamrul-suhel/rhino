@@ -57,7 +57,7 @@
                         key="confirmYourDetail"
                     >
                         <v-avatar>3</v-avatar>
-                        {{ `${trans.confirmYourDetails}` }}
+                        {{ `${trans.confirm} ${trans.your_details}` }}
                     </v-tab>
 
                     <v-tab

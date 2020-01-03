@@ -84,7 +84,7 @@
                                     <v-text-field
                                         :label="trans.color"
                                         v-model="brand.colour"
-                                        :rules="[v => !!v || trans.choose_a_color]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.color}`]" 
                                         required
                                         @focus="isColorSwatchActive = true"
                                         :color="themeOption.inputColor">
@@ -135,7 +135,7 @@
                                                     small
                                                     @click="$router.push({name: 'addBrandVehicle'})"
                                                 >
-                                                    {{ trans.create_vehicle }}
+                                                    {{ `${trans.create} ${trans.vehicle}` }}
                                                 </v-btn>
                                             </v-flex>
                                         </v-layout>

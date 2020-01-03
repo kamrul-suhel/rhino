@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchCompany">
             </v-text-field>
         </v-toolbar>
@@ -26,8 +26,8 @@
                     :items="companies"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_group_found"
-                    :no-data-text="trans.no_group_found"
+                    :no-results-text="`${trans.no} ${trans.group} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.group} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalCompanies"
@@ -61,7 +61,7 @@
             <v-flex xs12 sm4 pt-3 pl-3>
                 <v-card>
                     <v-card-title>
-                        <h3>{{ editCompany ? trans.edit_company : trans.create_company}}</h3>
+                        <h3>{{ editCompany ? `${trans.edit} ${trans.company}` : `${trans.create} ${trans.company}`}}</h3>
                     </v-card-title>
                     <v-divider></v-divider>
 
@@ -111,7 +111,7 @@
                             small
                             :color="themeOption.buttonSecondaryColor"
                             @click="onCreateCompany">
-                            {{ editCompany ? trans.update_company : trans.create_company }}
+                            {{ editCompany ? `${trans.update} ${trans.company}` : `${trans.create} ${trans.company}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>

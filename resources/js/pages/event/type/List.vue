@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchType">
             </v-text-field>
         </v-toolbar>

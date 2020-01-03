@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.create_dealerships }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.dealership}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -29,9 +29,9 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="nameRules"
+                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.name_of_dealership"
+                                        :label="`${trans.name} ${trans.of} ${trans.dealership}`"
                                         v-model="dealership.name"
                                     ></v-text-field>
                                 </v-flex>
@@ -43,7 +43,7 @@
                                         :items="countries"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.select_a_country]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_country"
                                         v-model="dealership.country_id"
@@ -57,7 +57,7 @@
                                         item-text="name"
                                         item-value="id"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
+                                        :label="`${trans.select_a} ${trans.group}`"
                                         v-model="dealership.group_id"
                                     >
                                     </v-select>
@@ -112,7 +112,7 @@
                                         key="dealershipImage"
                                         ripple
                                     >
-                                        {{ trans.dealership_banner}}
+                                        {{ `${trans.dealership} ${trans.banner}`}}
 
                                     </v-tab>
 
@@ -131,8 +131,8 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :rules="[v => !!v || trans.address_is_required]"
-                                                    :label="trans.address_line_1"
+                                                    :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
+                                                    :label="`${trans.address_line} 2`"
                                                     v-model="dealership.address_line_1">
                                                 </v-text-field>
                                             </v-flex>
@@ -217,7 +217,7 @@
                                 small
                                 @click="onCreateDealership()"
                             >
-                                {{ trans.create_dealerships }}
+                                {{ `${trans.create} ${trans.dealership}` }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -248,10 +248,6 @@
                 times: {},
                 active: null,
                 model: null,
-
-                nameRules: [
-                    v => !!v || this.trans.name_is_required
-                ]
             }
         },
 

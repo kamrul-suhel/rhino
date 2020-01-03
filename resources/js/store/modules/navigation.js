@@ -22,7 +22,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: `${trans.list_of} ${trans.dealerships}`,
+                        text: `${trans.dealership} ${trans.list}`,
                         link: 'listDealerships',
                         access: ''
                     },
@@ -50,7 +50,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: `${trans.list_of} ${trans.brands}`,
+                        text: `${trans.brand} ${trans.list}`,
                         link: 'listBrands',
                         access: ''
                     }
@@ -63,7 +63,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: `${trans.list_of} ${trans.vehicles}`,
+                        text: `${trans.vehicle} ${trans.list}`,
                         link: 'listVehicles',
                         access: ''
                     },
@@ -84,7 +84,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.list_of_companies,
+                        text: `${trans.company} ${trans.list}`,
                         link: 'listCompanies',
                         access: ''
                     }
@@ -97,14 +97,14 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.list_of_country,
+                        text: `${trans.countries} ${trans.list}`,
                         link: 'listCountries',
                         access: ''
                     },
 
                     {
                         icon: 'add',
-                        text: trans.create_country,
+                        text: `${trans.create} ${trans.country}`,
                         link: 'createCountries',
                         access: ''
                     }

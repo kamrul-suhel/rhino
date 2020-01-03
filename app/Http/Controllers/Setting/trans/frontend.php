@@ -7,18 +7,6 @@ return [
     ],
 
     [
-        'label' => 'Book your slot',
-        'identifier' => 'bookYourSlot',
-        'translation' => 'Book your slot'
-    ],
-
-    [
-        'label' => 'Part exchange',
-        'identifier' => 'partExchange',
-        'translation' => 'Part exchange'
-    ],
-
-    [
         'label' => 'Confirm your details',
         'identifier' => 'confirmYourDetails',
         'translation' => 'Confirm your details'
@@ -46,5 +34,4 @@ return [
         'identifier' => 'e.gnchfge23sxs',
         'translation' => 'e.g nchfge23sxs'
     ],
-
 ];

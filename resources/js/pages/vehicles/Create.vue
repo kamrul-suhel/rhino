@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.create_vehicle }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.vehicle}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -29,7 +29,7 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="nameRules"
+                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
                                         :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
                                         :color="themeOption.inputColor"
                                         v-model="vehicle.model"
@@ -112,7 +112,7 @@
                             small
                             @click="onCreateVehicle()"
                         >
-                            {{ trans.create_vehicle }}
+                            {{ `${trans.create} ${trans.vehicle}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-flex>
@@ -136,10 +136,6 @@
             return {
                 valid: true,
                 vehicle: {},
-
-                nameRules: [
-                    v => !!v || this.trans.vehicle_model_is_required
-                ],
 
                 leftImage: '',
                 rightImage: '',
