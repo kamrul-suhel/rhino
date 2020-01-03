@@ -39,4 +39,10 @@ return [
         'identifier' => 'login',
         'translation' => 'login'
     ],
+
+    [
+        'label' => 'welcome',
+        'identifier' => 'welcome',
+        'translation' => 'welcome'
+    ]
 ];

@@ -60,4 +60,11 @@ export default {
             }
         });
     },
+
+    /**
+     * Booking for frontend
+     */
+    setSelectedDealershipForFrontend({commit}, payload){
+        commit('setSelectedDealership', payload.dealership)
+    }
 }
