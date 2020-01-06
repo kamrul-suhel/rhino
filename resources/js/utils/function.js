@@ -80,6 +80,10 @@ export default {
             params += `&countryId=${payload.countryId}`
         }
 
+        if(payload.vehicleType && typeof (payload.vehicleType) !== 'undefined'){
+            params += `&vehicleType=${payload.vehicleType}`
+        }
+
         return params
     }
 }

@@ -1,38 +1,65 @@
 <template>
     <div>
-        <v-layout column>
+        <v-layout row wrap>
             <v-flex>
-                <h4 class="display-1 mt-5 text-lg-center">Now book your appointment</h4>
+                <h4 class="display-1 mt-5 text-lg-center">
+                    {{ trans.nowBookYourAppointment }}
+                </h4>
             </v-flex>
-            <v-layout row no-wrap xs12 mt-5>
-                <v-flex md4 xs12>
-                    <v-layout column class="book-step" align-center style="border-right: 1px solid rgb(240,240,240)">
+
+            <v-layout row wrap mt-5>
+                <v-flex xs12 md4>
+                    <v-layout row wrap class="book-step"
+                              align-center style="border-right: 1px solid rgb(240,240,240)">
                         <v-layout style="flex-grow:0">
-                            <h6 class="headline text-lg-center">July <b>2019</b></h6>
-                            <label class="caption text-lg-center font-weight-bold ml-2 mt-1" :style="{color:themeOption.brandColor}">12th - 18th March</label>
+                            <v-flex xs12>
+                                <h6 class="headline text-lg-center">July <b>2019</b></h6>
+
+                                <label class="caption text-lg-center font-weight-bold ml-2 mt-1"
+                                       :style="{color:themeOption.brandColor}">12th - 18th March
+                                </label>
+                            </v-flex>
+
                         </v-layout>
-                        <v-layout row style="width:70%; flex-grow:0" class="mt-4">
-                            <label class="body-2">Available Dates</label>
-                            <div style="width:12px;height:12px;border:1px solid rgb(100,0,0); border-radius:6px; margin:4px"></div>
-                            <label class="body-2 ml-2">No available times</label>
-                            <div style="width:12px;height:12px; background-color:rgb(160,160,160); border-radius:6px; margin:4px"></div>
-                            <v-layout justify-end>
-                                <button :style="{color:themeOption.brandColor}" style="opacity:0.7">Clear</button>
-                            </v-layout>
+
+                        <v-layout row wrap
+                                  style="width:70%; flex-grow:0"
+                                  class="mt-4">
+                            <v-flex xs4>
+                                <label class="body-2">Available Dates</label>
+                            </v-flex>
+
+                            <v-flex xs4>
+                                <div style="width:12px;height:12px;border:1px solid rgb(100,0,0); border-radius:6px; margin:4px"></div>
+                                <label class="body-2 ml-2">No available times</label>
+                            </v-flex>
+
+                            <v-flex xs4>
+                                <div style="width:12px;height:12px; background-color:rgb(160,160,160); border-radius:6px; margin:4px"></div>
+
+                                <v-layout justify-end>
+                                    <button :style="{color:themeOption.brandColor}" style="opacity:0.7">Clear</button>
+                                </v-layout>
+                            </v-flex>
                         </v-layout>
-                        <v-sheet width="70%" class="mt-4">
-                            <v-calendar
-                                ref="calendar"
-                                v-model="start"
-                                :type="type"
-                                :end="end"
-                                color="primary"
-                            ></v-calendar>
-                        </v-sheet>
+
+                        <v-layout row wrap>
+                            <v-flex xs12>
+                                <v-calendar
+                                    ref="calendar"
+                                    v-model="selectedEvent.start"
+                                    :type="type"
+                                    :end="selectedEvent.end"
+                                    :start="selectedEvent.start"
+                                    @click=""
+                                    color="primary"
+                                ></v-calendar>
+                            </v-flex>
+                        </v-layout>
                     </v-layout>
                 </v-flex>
 
-                <v-flex md4 xs12 ml-4>
+                <v-flex xs12 md4>
                     <v-layout column class="book-step" align-center style="border-right: 1px solid rgb(240,240,240)">
                         <v-layout>
                             <h6 class="headline text-lg-center">Choose a <b>sales person</b></h6>
@@ -51,7 +78,7 @@
                     </v-layout>
                 </v-flex>
 
-                <v-flex md4 xs12 mx-4>
+                <v-flex xs12 md4>
                     <v-layout column class="book-step" align-center>
                         <h6 class="headline text-lg-center">Choose a <b>time</b></h6>
                         <v-layout row justify-end style="width:70%" class="mt-4">
@@ -139,6 +166,10 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
+                dealership: 'getSelectedDealership',
+                selectedVehicles: 'getBookingSelectedVehicles',
+                color: 'getFrontendColor',
+                selectedEvent: 'getSelectedEvent'
             })
         }),
 

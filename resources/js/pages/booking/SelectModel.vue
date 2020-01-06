@@ -2,12 +2,18 @@
     <div class="model-section">
         <v-layout column>
             <v-flex>
-                <h5 class="headline mt-5 text-lg-center">{{trans.greeting_f}}</h5>
-                <v-flex align="center" justify="center">
+                <h5 class="headline mt-5 text-lg-center"
+                    :style="{color: color}">{{trans.greeting_f}}
+                </h5>
+
+                <v-flex justify="center">
                     <v-layout row sm4 mt-4 justify-center>
                         <v-flex class="grow-0">
                             <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey" depressed>
+                                <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                       @click="onFilterVehicle('new')"
+                                       :class="{selected: vehicleType === 'new'} "
+                                       depressed>
                                     {{ trans.new }}
                                 </v-btn>
                             </div>
@@ -15,7 +21,10 @@
 
                         <v-flex class="grow-0">
                             <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey" depressed>
+                                <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                       :class="{selected: vehicleType === 'used'} "
+                                       @click="onFilterVehicle('used')"
+                                       depressed>
                                     {{ trans.used }}
                                 </v-btn>
                             </div>
@@ -23,7 +32,10 @@
 
                         <v-flex class="grow-0">
                             <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey" depressed>
+                                <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                       :class="{selected: vehicleType === 'unsure'} "
+                                       @click="onFilterVehicle('unsure')"
+                                       depressed>
                                     {{ trans.unsure }}
                                 </v-btn>
                             </div>
@@ -104,10 +116,12 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
-                vehicles: 'getVehicles',
+                vehicles: 'getEventVehicles',
                 dealership: 'getSelectedDealership',
                 selectedVehicles: 'getBookingSelectedVehicles',
-                color: 'getFrontendColor'
+                color: 'getFrontendColor',
+                selectedEvent: 'getSelectedEvent',
+                vehicleType: 'getBookingVehicleType'
             })
         }),
 
@@ -118,6 +132,16 @@
 
             onVehicleSelected(vehicle) {
                 return this.color
+            },
+
+            onFilterVehicle(type){
+                this.$store.commit('setBookingVehicleType', type)
+                this.$store.dispatch('fetchEventVehicles', {
+                    id: this.selectedEvent.id,
+                    vehicleType: type,
+                    themeOption: this.themeOption,
+                    trans: this.trans
+                })
             }
         }
     }

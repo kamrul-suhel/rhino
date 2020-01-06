@@ -779,6 +779,12 @@ return [
         'label' => 'Unsure',
         'identifier' => 'unsure',
         'translation' => 'Unsure'
+    ],
+
+    [
+        'label' => 'Now book your appointment',
+        'identifier' => 'nowBookYourAppointment',
+        'translation' => 'Now book your appointment'
     ]
 
 ];

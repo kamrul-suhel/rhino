@@ -21,11 +21,25 @@ class EventVehicleController extends Controller
             'vehicles_translation.model'
         )->leftJoin('vehicles', function($vehicle){
             $vehicle->on('vehicles.id', '=', 'event_vehicle.vehicle_id');
-            $vehicle->leftJoin('vehicles_translation', 'vehicles_translation.vehicle_id', '=', 'vehicles.id');
-            $vehicle->where('vehicles_translation.language_id', $this->languageId);
+            $vehicle->leftJoin('vehicles_translation', function($vehicleTranslation){
+                $vehicleTranslation->on('vehicles_translation.vehicle_id', '=', 'vehicles.id');
+                $vehicleTranslation->where('vehicles_translation.language_id', $this->languageId);
+            });
         })
         ->where('event_vehicle.event_id', $request->id);
 
+        // Filter by Vehicle type
+        if($request->has('vehicleType') && !empty($request->vehicleType)){
+            switch($request->vehicleType){
+                case 'new':
+                    $eventVehicles = $eventVehicles->where('event_vehicle.new', 1);
+                    break;
+                case 'used':
+                    $eventVehicles = $eventVehicles->where('event_vehicle.used', 1);
+                    break;
+                default:
+            }
+        }
 
         // Filter Events if exists
         if ($request->has('paginate') && !empty($request->paginate)) {

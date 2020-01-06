@@ -168,13 +168,6 @@ const actions = {
         }).catch((error)=>{
             // Generate error message
         })
-    },
-
-    /**
-     * Vehicle for frontend
-     */
-    fetchVehicleForFrontend({commit}, payload){
-      commit('setVehicles', payload.vehicles)
     }
 }
 

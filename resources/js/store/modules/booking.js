@@ -1,7 +1,8 @@
 const defaultState = {
     guest: {},
     selectedVehicles:[],
-    color: '#000'
+    color: '#000',
+    vehicleType: ''
 }
 
 const state = {
@@ -26,7 +27,12 @@ const mutations = {
         if(brands.length === 1){
             state.color = brands[0].colour
         }
+    },
+
+    setBookingVehicleType(state, type){
+        state.vehicleType = type
     }
+
 }
 
 const getters = {
@@ -40,6 +46,10 @@ const getters = {
 
     getFrontendColor(state){
         return state.color
+    },
+
+    getBookingVehicleType(state){
+        return state.vehicleType
     }
 }
 

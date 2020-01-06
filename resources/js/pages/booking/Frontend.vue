@@ -26,17 +26,17 @@
                             slider-color="yellow"
                         >
                             <v-tab
-                                key="selectCar"
-                                ripple
-                            >
-                                Select Car
-                            </v-tab>
-
-                            <v-tab
                                 key="appointment"
                                 ripple
                             >
                                 Appointment
+                            </v-tab>
+
+                            <v-tab
+                                key="selectCar"
+                                ripple
+                            >
+                                Select Car
                             </v-tab>
 
                             <v-tab
@@ -61,15 +61,15 @@
                             </v-tab>
 
                             <v-tab-item
-                                key="selectCar"
-                            >
-                                <FSelectCar></FSelectCar>
-                            </v-tab-item>
-
-                            <v-tab-item
                                 key="appointment"
                             >
                                 <FBookAppointment></FBookAppointment>
+                            </v-tab-item>
+
+                            <v-tab-item
+                                key="selectCar"
+                            >
+                                <FSelectCar></FSelectCar>
                             </v-tab-item>
 
                             <v-tab-item
@@ -102,7 +102,7 @@
 
     import FDrawer from './Drawer'
     import FSelectCar from './SelectModel'
-    import FBookAppointment from './bookAppointment'
+    import FBookAppointment from './BookAppointment'
     import FPartExchange from './PartExchange'
     import FPersonalDetails from './PersonalDetails'
     import FConfirmDetails from './ConfirmDetails'
