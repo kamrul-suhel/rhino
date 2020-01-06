@@ -35,8 +35,8 @@ return [
         'translation' => 'e.g nchfge23sxs'
     ],
     [
-        'label' => 'login',
-        'identifier' => 'login',
-        'translation' => 'login'
+        'label' => 'Sign in',
+        'identifier' => 'signin',
+        'translation' => 'signin'
     ],
 ];

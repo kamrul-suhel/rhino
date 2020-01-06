@@ -7,14 +7,23 @@
     <v-container fill-height
                  justify-center
                  align-content-center>
-            <v-card width="450px">
+            <v-card width="600px">
                 <v-card-text class="login-section">
                     <v-form method="post" v-model="valid" ref="guestLoginGorm">
                         <v-container grid-list-xs>
+
+                            <v-layout row nowrap justify-right>
+
+                                <v-flex>
+
+                                </v-flex>
+
+                            </v-layout>
+
                             <v-layout row wrap id="login-section">
 
                                 <v-flex xs12>
-                                    <h2 class="login-title">{{ trans.welcome }}</h2>
+                                    <h2 class="login-title"><!--{{ trans.welcome }}-->Welcome Back</h2>
                                     <h3>{{ trans.EnterYourUniqueCode }}</h3>
                                 </v-flex>
 
@@ -46,13 +55,27 @@
                                 <v-flex xs12>
                                     <input type="hidden" name="_token"/>
                                     <v-btn
-                                        class="ma-0"
+                                        class="ma-0 login-button"
                                         raised
                                         dark
                                         :loading="loading"
                                         :disabled="loading"
                                         @click="onSubmit()">
-                                        {{ trans.login }}
+                                        <v-icon>account_circle</v-icon>
+                                        {{ trans.signin }}
+                                    </v-btn>
+                                </v-flex>
+
+                                <v-flex xs12 class="multi-container">
+                                    <input type="hidden" name="_token"/>
+                                    <v-btn
+                                        class="ma-0 multi-button"
+                                        raised
+                                        dark
+                                        :loading="loading"
+                                        :disabled="loading"
+                                        @click="onSubmit()">
+                                        <!--{{ trans.login }}-->multi brand
                                     </v-btn>
                                 </v-flex>
                             </v-layout>

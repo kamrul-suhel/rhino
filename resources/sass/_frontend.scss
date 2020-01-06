@@ -5,6 +5,68 @@
 .guest-login{
     background-repeat:no-repeat !important;
     background-size: cover !important;
+
+    .v-card {
+        background-color: white !important;
+        border-radius: 6px !important;
+        box-shadow: 0px 3px 6px #00000029;
+
+        .container {
+            padding-left: 45px;
+            padding-right: 45px;
+        }
+
+
+        h2 {
+            font-size: 39px;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .theme--light.v-text-field>.v-input__control>.v-input__slot:before {
+            opacity: 0.18;
+        }
+
+        .login-button {
+            height: 50px;
+            padding: 13px 40px 13px 20px;
+            font-size: 18px;
+            background-color: #000000;
+            box-shadow: none;
+            border-radius: 25px;
+            opacity: 1;
+            margin: 20px auto auto 0 !important;
+
+            .v-icon {
+                margin-right: 15px;
+            }
+        }
+
+        .multi-container {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-end;
+
+            .multi-button {
+                height: 36px;
+                padding: 5px 20px;
+                font-size: 12px;
+                background-color: #F4F4F4 !important;
+                color: #000000;
+                box-shadow: 0px 9px 44px #0000000F;
+                border: 1px solid #707070;
+                border-radius: 18px;
+                margin: 20px 0 0 auto !important;
+
+                .v-icon {
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
 }
 
 .rhinoFrontend{
