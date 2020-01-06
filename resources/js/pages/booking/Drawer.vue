@@ -18,7 +18,10 @@
                     </v-flex>
 
                     <v-flex xs6 class="language-select stroke-dropdown">
-                       <language-picker :languageId="guest.language_id"></language-picker>
+                       <language-picker
+                           :languageId="guest.language_id"
+                           isFrontend
+                       ></language-picker>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -41,28 +44,31 @@
                     <v-tab
                         key="selectModel"
                     >
-                        <v-avatar>1</v-avatar>
+                        <v-avatar :style="{borderColor: color, color:color}">1</v-avatar>
                         {{ `${trans.bookYourSlot}` }}
+                        <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
                     <v-tab
                         key="partExchange"
                     >
-                        <v-avatar>2</v-avatar>
+                        <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
                         {{ `${trans.partExchange}` }}
+                        <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
                     <v-tab
                         key="confirmYourDetail"
                     >
-                        <v-avatar>3</v-avatar>
+                        <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
                         {{ `${trans.confirm} ${trans.your_details}` }}
+                        <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
                     <v-tab
                         key="BookingConfirmation"
                     >
-                        <v-avatar>4</v-avatar>
+                        <v-avatar :style="{borderColor: color, color:color}">4</v-avatar>
                         {{ `${trans.bookingConfirmation}` }}
                     </v-tab>
                 </v-tabs>
@@ -71,9 +77,9 @@
             <v-flex class="navFooter">
                 <v-layout row wrap>
                     <v-flex xs6>
-                        <h2 class="my-1 mr-4" :style="{color: color}">
+                        <h2 class="my-1 mr-4 name-button" :style="{color: color}">
                             {{ guest.first_name }}
-                            <v-icon medium :color="color">settings</v-icon>
+                            <v-icon small :color="color">settings</v-icon>
                         </h2>
                     </v-flex>
 

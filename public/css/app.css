@@ -128,16 +128,12 @@ a {
 }
 
 .navigation-drawer {
-  padding: 15px;
+  padding: 30px;
   /* LANGUAGE SELECTOR */
-  /* TODO REMOVE THIS ONCE DYNAMIC */
-  /**
-
-     */
+  /* BRAND CAROUSEL */
   /**
     Nav footer
      */
-  /* END OF REMOVE ONCE DYNAMIC */
 }
 
 .navigation-drawer .language-select {
@@ -145,6 +141,26 @@ a {
   -webkit-box-flex: 0;
       -ms-flex-positive: 0;
           flex-grow: 0;
+}
+
+.navigation-drawer .language-select .v-input {
+  cursor: pointer;
+}
+
+.navigation-drawer .language-select .v-input .v-select__slot {
+  cursor: pointer;
+}
+
+.navigation-drawer .language-select .v-input .v-select__slot .v-label {
+  display: none;
+}
+
+.navigation-drawer .language-select .v-input .v-select__slot .v-icon {
+  font-size: 20px;
+}
+
+.navigation-drawer .language-select .v-input input {
+  cursor: pointer;
 }
 
 .navigation-drawer .language-select .v-input__slot::before,
@@ -160,8 +176,23 @@ a {
   font-size: 10px;
 }
 
+.navigation-drawer .brand-carousel {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.navigation-drawer .brand-carousel .v-carousel__controls {
+  display: none;
+}
+
 .navigation-drawer .event-title {
-  font-size: 25px;
+  font-size: 22px;
+  line-height: 28px;
+  margin-top: 25px;
+}
+
+.navigation-drawer h4 {
+  margin-top: 20px;
 }
 
 .navigation-drawer .vertical-stepper {
@@ -202,6 +233,34 @@ a {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  margin-top: 50px;
+  height: auto;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div {
+  margin-bottom: 50px;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item {
+  padding-left: 0;
+  position: relative;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item .v-avatar {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  margin-right: 10px;
+  height: 26px !important;
+  width: 26px !important;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item .link {
+  height: 62px;
+  content: '';
+  width: 1px;
+  position: absolute;
+  top: 32px;
+  left: 12.5px;
 }
 
 .navigation-drawer .rhinoNavigationStepper .v-tabs__slider-wrapper {
@@ -210,8 +269,25 @@ a {
 
 .navigation-drawer .navFooter {
   position: absolute;
-  bottom: 0;
-  width: 280px;
+  bottom: 50px;
+  width: calc(100% - 60px);
+}
+
+.navigation-drawer .navFooter .flex:first-of-type {
+  height: 28px;
+  margin: auto 0;
+  padding-bottom: 8px;
+}
+
+.navigation-drawer .navFooter .flex:first-of-type h2 {
+  margin: 0 !important;
+  height: 20px;
+  font-size: 20px;
+}
+
+.navigation-drawer .navFooter .flex:first-of-type h2 .v-icon {
+  margin: 0px auto 2px 2px;
+  font-size: 18px !important;
 }
 
 .light-grey {

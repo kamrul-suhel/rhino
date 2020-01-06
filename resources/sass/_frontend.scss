@@ -90,12 +90,32 @@
 }
 
 .navigation-drawer {
-    padding:15px;
+    padding:30px;
 
     /* LANGUAGE SELECTOR */
     .language-select {
         width: 68px;
         flex-grow: 0;
+
+        .v-input {
+            cursor: pointer;
+
+            .v-select__slot {
+                cursor: pointer;
+
+                .v-label {
+                    display: none;
+                }
+
+                .v-icon {
+                    font-size: 20px;
+                }
+            }
+
+            input {
+                cursor: pointer;
+            }
+        }
 
         .v-input__slot::before, .v-input__slot::after {
             display: none;
@@ -110,10 +130,25 @@
         }
     }
 
-    /* TODO REMOVE THIS ONCE DYNAMIC */
+    /* BRAND CAROUSEL */
+
+    .brand-carousel {
+        box-shadow: none;
+
+        .v-carousel__controls {
+            display: none;
+        }
+    }
+
 
     .event-title {
-        font-size: 25px;
+        font-size: 22px;
+        line-height: 28px;
+        margin-top: 25px;
+    }
+
+    h4 {
+        margin-top: 20px;
     }
 
     .vertical-stepper {
@@ -137,9 +172,6 @@
         }
     }
 
-    /**
-
-     */
     .rhinoNavigationStepper{
         width:100%;
 
@@ -148,6 +180,34 @@
             flex-direction:column;
             align-items:start;
             justify-content: flex-start;
+            margin-top: 50px;
+            height: auto;
+
+            .v-tabs__div {
+                margin-bottom: 50px;
+
+                .v-tabs__item {
+                    padding-left: 0;
+                    position: relative;
+
+                    .v-avatar {
+                        border-radius: 50%;
+                        border: 1px solid transparent;
+                        margin-right: 10px;
+                        height: 26px !important;
+                        width: 26px !important;
+                    }
+
+                    .link {
+                        height: 62px;
+                        content: '';
+                        width: 1px;
+                        position: absolute;
+                        top: 32px;
+                        left: 12.5px;
+                    }
+                }
+            }
         }
 
         .v-tabs__slider-wrapper{
@@ -158,13 +218,29 @@
     /**
     Nav footer
      */
+
     .navFooter{
         position: absolute;
-        bottom: 0;
-        width: 280px;
-    }
+        bottom: 50px;
+        width: calc(100% - 60px);
 
-    /* END OF REMOVE ONCE DYNAMIC */
+        .flex:first-of-type {
+            height: 28px;
+            margin: auto 0;
+            padding-bottom: 8px;
+
+            h2 {
+                margin: 0 !important;
+                height: 20px;
+                font-size: 20px;
+
+                .v-icon {
+                    margin: 0px auto 2px 2px;
+                    font-size: 18px !important;
+                }
+            }
+        }
+    }
 
 }
 
