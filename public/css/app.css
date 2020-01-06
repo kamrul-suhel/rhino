@@ -110,6 +110,48 @@ a {
   margin-right: 15px;
 }
 
+/*
+    Choose time in frontend
+ */
+
+.appointmentSlot .slot .available:hover {
+  cursor: pointer;
+}
+
+.appointmentSlot .slot .selected:hover {
+  cursor: default;
+}
+
+.appointmentSlot .slot .selected h6 {
+  color: #fff;
+}
+
+/**
+*   End choose time section
+*/
+
+/*
+*****************************************
+    Calender Component
+*****************************************
+*/
+
+.calenderComponent .calender.v-card {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: transparent;
+}
+
+.calenderComponent .calender.v-card .v-picker__body {
+  background: transparent;
+}
+
+/*
+*****************************************
+    End Calender Component
+*****************************************
+*/
+
 .rhinoFrontend .content {
   padding: 0 0 0 280px;
   margin: 0;

@@ -85,5 +85,61 @@ export default {
         }
 
         return params
-    }
+    },
+
+
+    /**
+     *
+     * @param time
+     * @param event
+     * @returns {*[]}
+     */
+    getTimeSlotsForDay(time, event) {
+        const appointmentDuration = event.appointment_duration
+        const breakTime = event.break_time
+
+        let timeSlots = []
+        let dayStart = moment(time.start)
+        let dayEnd = moment(time.end)
+
+        do {
+            let newDate = moment(dayStart).add(appointmentDuration, 'minutes')
+            const times = {
+                start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
+                end: newDate.format('YYYY-MM-DD HH:mm:ss'),
+                slotId: timeSlots.length
+            }
+
+            dayStart.add(appointmentDuration, 'minutes')
+            timeSlots.push(times)
+        } while (dayStart <= dayEnd);
+
+        return [...timeSlots]
+    },
+
+    getStartTimeEndTime(date , dealership) {
+        const startTime = `${moment(date).format('dddd').toLowerCase()}_start`
+        const endTime = `${moment(date).format('dddd').toLowerCase()}_end`
+
+        return {
+            start: `${date} ${dealership[startTime]}`,
+            end: `${date} ${dealership[endTime]}`
+        }
+    },
+
+    /**
+     * Generate dates between start date & end dates
+     * @param startDate
+     * @param stopDate
+     * @returns {[]}
+     */
+    getDates(startDate, stopDate) {
+        let dateArray = [];
+        let currentDate = startDate;
+        while (currentDate <= stopDate) {
+            dateArray.push(moment(currentDate).format('YYYY-MM-DD'))
+            currentDate = moment(currentDate).add(1, 'days');
+        }
+        return dateArray;
+    },
 }

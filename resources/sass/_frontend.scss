@@ -69,6 +69,59 @@
     }
 }
 
+/*
+    Choose time in frontend
+ */
+.appointmentSlot{
+    .slot{
+        .available{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .selected{
+            &:hover{
+                cursor: default;
+            }
+
+            h6{
+                color:#fff;
+            }
+        }
+    }
+}
+
+/**
+*   End choose time section
+*/
+
+/*
+*****************************************
+    Calender Component
+*****************************************
+*/
+
+.calenderComponent{
+    .calender{
+        &.v-card{
+            box-shadow:none;
+            background:transparent;
+
+            .v-picker__body{
+                background:transparent;
+            }
+        }
+    }
+}
+
+/*
+*****************************************
+    End Calender Component
+*****************************************
+*/
+
+
 .rhinoFrontend{
     .content{
         padding:0 0 0 280px;

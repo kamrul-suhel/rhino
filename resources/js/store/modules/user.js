@@ -263,6 +263,10 @@ const actions = {
             .catch((error) => {
 
             })
+    },
+
+    fetchSaleExecutivesForBooking({commit}, payload){
+        commit('setUsers', payload.users)
     }
 }
 

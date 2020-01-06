@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Booking;
 
+use App\Appointment;
 use App\Brand;
 use App\Dealership;
 use App\Event;
 use App\EventVehicle;
 use App\Guest;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -50,6 +52,16 @@ class BookingController extends Controller
                 ->leftJoin('events', 'events.id', '=', 'brand_event.event_id')
                 ->where('events.id', $event->id)
                 ->get();
+
+            $saleExecutives = User::select(
+                'users.*'
+            )
+                ->where('dealership_id', $dealership->id)
+                ->get();
+
+            $appointments = Appointment::select()
+                ->where('appointments.event_id', $event->id)
+                ->get();
         }
 
         return response()->json(
@@ -58,7 +70,9 @@ class BookingController extends Controller
                 'event' => $event,
                 'dealership' => $dealership,
                 'vehicles' => $vehicles,
-                'brands' => $brands
+                'brands' => $brands,
+                'saleExecutives' => $saleExecutives,
+                'appointments' => $appointments
             ]
         );
     }

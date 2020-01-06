@@ -785,6 +785,78 @@ return [
         'label' => 'Now book your appointment',
         'identifier' => 'nowBookYourAppointment',
         'translation' => 'Now book your appointment'
+    ],
+
+    [
+        'label' => 'Choose',
+        'identifier' => 'choose',
+        'translation' => 'Choose'
+    ],
+
+    [
+        'label' => 'a',
+        'identifier' => 'a',
+        'translation' => 'a'
+    ],
+
+    [
+        'label' => 'time',
+        'identifier' => 'time',
+        'translation' => 'Time'
+    ],
+
+    [
+        'label' => 'Sales',
+        'identifier' => 'sales',
+        'translation' => 'Sales'
+    ],
+
+    [
+        'label' => 'Person',
+        'identifier' => 'person',
+        'translation' => 'Person'
+    ],
+
+    [
+        'label' => 'Would you like to bring guest?',
+        'identifier' => 'wouldYouLikeToBringGuest',
+        'translation' => 'Would you like to bring guest?'
+    ],
+
+    [
+        'label' => 'Might your guest also be interested in changing their car?',
+        'identifier' => 'mightYourGuestAlsoBeInterested',
+        'translation' => 'Might your guest also be interested in changing their car?'
+    ],
+
+    [
+        'label' => 'Yes',
+        'identifier' => 'yes',
+        'translation' => 'Yes'
+    ],
+
+    [
+        'label' => 'Available',
+        'identifier' => 'available',
+        'translation' => 'Available'
+    ],
+
+    [
+        'label' => 'Dates',
+        'identifier' => 'dates',
+        'translation' => 'dates'
+    ],
+
+    [
+        'label' => 'Times',
+        'identifier' => 'times',
+        'translation' => 'times'
+    ],
+
+    [
+        'label' => 'Continue',
+        'identifier' => 'continue',
+        'translation' => 'Continue'
     ]
 
 ];
