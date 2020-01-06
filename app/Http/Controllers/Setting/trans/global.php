@@ -761,6 +761,24 @@ return [
         'label' => 'Booking confirmation',
         'identifier' => 'bookingConfirmation',
         'translation' => 'Booking confirmation'
+    ],
+
+    [
+        'label' => 'Logout',
+        'identifier' => 'logOut',
+        'translation' => 'Logout'
+    ],
+
+    [
+        'label' => 'Skip this step',
+        'identifier' => 'SkipThisStep',
+        'translation' => 'Skip this step'
+    ],
+
+    [
+        'label' => 'Unsure',
+        'identifier' => 'unsure',
+        'translation' => 'Unsure'
     ]
 
 ];

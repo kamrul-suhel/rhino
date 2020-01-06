@@ -66,7 +66,6 @@ const actions = {
             if (response.data.appointments) {
                 commit('setAppointments', response.data.appointments)
                 commit('setTotalAppointment', response.data.total)
-
             }
         });
     }

@@ -204,10 +204,6 @@
 
 .theme-color {
     border-color: #cc0000;
-
-    .v-btn__content {
-        color: #cc0000;
-    }
 }
 
 .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
@@ -279,4 +275,11 @@
 
 .theme-fill {
     background-color: #cc0000 !important;
+}
+
+.model-section{
+    .vehicle{
+        border:2px solid transparent;
+        border-radius:5px;
+    }
 }

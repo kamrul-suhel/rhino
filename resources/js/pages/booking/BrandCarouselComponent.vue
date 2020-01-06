@@ -1,11 +1,12 @@
 <template>
     <v-carousel hide-controls
                 class="brand-carousel"
+                v-if="brands.length > 0"
                 height="120">
         <v-carousel-item
-            v-for="(item,i) in items"
-            :key="i"
-            :src="item.src"
+            v-for="brand in brands"
+            :key="brand.id"
+            :src="brand.logo"
         ></v-carousel-item>
     </v-carousel>
 </template>
@@ -16,30 +17,14 @@
     export default {
         data() {
             return {
-                items: [
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
-                    },
-
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
-                    },
-
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
-                    },
-
-                    {
-                        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-                    }
-                ]
             }
         },
 
         computed: {
             ...mapGetters({
                 trans: 'getFields',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                brands: 'getBrands'
             })
         },
 

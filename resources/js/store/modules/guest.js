@@ -168,9 +168,9 @@ const actions = {
                 commit('setGuestsForDropDown', response.data)
             }
         })
-            .catch((error) => {
+        .catch((error) => {
 
-            })
+        })
     }
 }
 
