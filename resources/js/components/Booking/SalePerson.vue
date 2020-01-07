@@ -1,12 +1,12 @@
 <template>
     <v-layout column class="book-step sales-person" align-center style="border-right: 1px solid rgb(240,240,240)">
         <v-layout>
-            <h6 class="headline text-lg-center">Choose a <b>sales person</b></h6>
+            <h6 class="headline text-lg-center">{{ trans.ChooseA }} <b>{{ trans.saleperson }}</b></h6>
         </v-layout>
 
         <v-layout row justify-end style="width:70%" class="mt-4">
             <button :style="{color:color}"
-                    style="opacity:0.7">Clear
+                    style="opacity:0.7">{{ trans.clear }}
             </button>
         </v-layout>
 
@@ -19,7 +19,9 @@
                     max-height="250px"
                     height="250px">
                 <v-card-text>
-                    <v-flex class="salesperson-container" xs12 mt-3
+                    <v-flex xs12 mt-3
+                            class="salesperson-container"
+                            @click="onSelectSaleExecutive(saleExecutive)"
                             v-for="saleExecutive in saleExecutives"
                             :key="saleExecutive.id">
                         <v-layout row>
@@ -67,7 +69,9 @@
         }),
 
         methods:{
-
+            onSelectSaleExecutive(saleExecutive){
+                console.log(saleExecutive)
+            }
         }
     }
 </script>

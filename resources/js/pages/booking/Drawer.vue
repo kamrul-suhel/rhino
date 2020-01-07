@@ -50,7 +50,7 @@
                     </v-tab>
 
                     <v-tab
-                        key="selectModel"
+                        key="bookYourSlot"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
                         {{ `${trans.bookYourSlot}` }}

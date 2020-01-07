@@ -75,6 +75,10 @@ const mutations = {
             ...state.themeOption,
             ...themeOption
         }
+    },
+
+    setUserRole(state, role){
+        state.isAdmin = role
     }
 }
 
