@@ -4,9 +4,9 @@ window.axios = require('axios');
 window.moment = require('moment');
 
 const token = document.head.querySelector('meta[name="csrf-token"]');
-console.log(token.content)
+
 window.axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': token.content,
+    'X-CSRF-Token': token.content,
     'X-Requested-With': 'XMLHttpRequest'
 };
 
@@ -30,7 +30,7 @@ import 'babel-polyfill'
 
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 
 
 /**

@@ -5,6 +5,12 @@ use Illuminate\Http\Request;
 
 Auth::routes();
 
+/**
+ * AUth route
+ */
+
+Route::get('auth/me', 'Auth\LoginController@getLoginUser');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -322,4 +328,3 @@ Route::middleware(['guestAuth'])->prefix('booking')->group(function () {
         return view('welcome');
     });
 });
-

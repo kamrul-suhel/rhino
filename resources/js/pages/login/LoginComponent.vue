@@ -147,6 +147,10 @@
                         .then(response => {
                             if(response.data.success){
                                 this.$router.push({name: 'booking'});
+                            }else{
+                                this.errorLogin = true
+                                this.login_progress = true
+                                this.loading = false
                             }
                         })
                         .catch(error => {
