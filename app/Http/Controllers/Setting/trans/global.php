@@ -323,7 +323,7 @@ return [
         'identifier' => 'surName',
         'translation' => 'Surname'
     ],
-    
+
     [
         'label' => 'Passwords',
         'identifier' => 'passwords',
@@ -341,7 +341,7 @@ return [
         'identifier' => 'minimum8Character',
         'translation' => 'minimum 8 character'
     ],
-    
+
     [
         'label' => 'not matching',
         'identifier' => 'notMatching',
@@ -551,7 +551,7 @@ return [
         'identifier' => 'to',
         'translation' => 'To'
     ],
-    
+
     [
         'label' => 'Or',
         'identifier' => 'or',
@@ -644,7 +644,7 @@ return [
 
     [
         'label' => 'Wednesday',
-        'identifier' => 'wednesday_',
+        'identifier' => 'wednesday',
         'translation' => 'Wednesday'
     ],
 
@@ -714,7 +714,7 @@ return [
         'identifier' => 'greeting',
         'translation' => 'Greeting'
     ],
-    
+
     [
         'label' => 'Notes',
         'identifier' => 'notes',
@@ -750,7 +750,13 @@ return [
         'identifier' => 'partExchange',
         'translation' => 'Part exchange'
     ],
-    
+
+    [
+        'label' => 'Select model',
+        'identifier' => 'selectModel',
+        'translation' => 'Select model'
+    ],
+
     [
         'label' => 'Book your slot',
         'identifier' => 'bookYourSlot',
@@ -761,6 +767,102 @@ return [
         'label' => 'Booking confirmation',
         'identifier' => 'bookingConfirmation',
         'translation' => 'Booking confirmation'
+    ],
+
+    [
+        'label' => 'Logout',
+        'identifier' => 'logOut',
+        'translation' => 'Logout'
+    ],
+
+    [
+        'label' => 'Skip this step',
+        'identifier' => 'SkipThisStep',
+        'translation' => 'Skip this step'
+    ],
+
+    [
+        'label' => 'Unsure',
+        'identifier' => 'unsure',
+        'translation' => 'Unsure'
+    ],
+
+    [
+        'label' => 'Now book your appointment',
+        'identifier' => 'nowBookYourAppointment',
+        'translation' => 'Now book your appointment'
+    ],
+
+    [
+        'label' => 'Choose',
+        'identifier' => 'choose',
+        'translation' => 'Choose'
+    ],
+
+    [
+        'label' => 'a',
+        'identifier' => 'a',
+        'translation' => 'a'
+    ],
+
+    [
+        'label' => 'time',
+        'identifier' => 'time',
+        'translation' => 'Time'
+    ],
+
+    [
+        'label' => 'Sales',
+        'identifier' => 'sales',
+        'translation' => 'Sales'
+    ],
+
+    [
+        'label' => 'Person',
+        'identifier' => 'person',
+        'translation' => 'Person'
+    ],
+
+    [
+        'label' => 'Would you like to bring guest?',
+        'identifier' => 'wouldYouLikeToBringGuest',
+        'translation' => 'Would you like to bring guest?'
+    ],
+
+    [
+        'label' => 'Might your guest also be interested in changing their car?',
+        'identifier' => 'mightYourGuestAlsoBeInterested',
+        'translation' => 'Might your guest also be interested in changing their car?'
+    ],
+
+    [
+        'label' => 'Yes',
+        'identifier' => 'yes',
+        'translation' => 'Yes'
+    ],
+
+    [
+        'label' => 'Available',
+        'identifier' => 'available',
+        'translation' => 'Available'
+    ],
+
+    [
+        'label' => 'Dates',
+        'identifier' => 'dates',
+        'translation' => 'dates'
+    ],
+
+    [
+        'label' => 'Times',
+        'identifier' => 'times',
+        'translation' => 'times'
+    ],
+
+    [
+        'label' => 'Continue',
+        'identifier' => 'continue',
+        'translation' => 'Continue'
     ]
 
 ];

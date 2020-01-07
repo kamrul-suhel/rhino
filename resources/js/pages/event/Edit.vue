@@ -204,7 +204,7 @@
                         <v-layout row wrap v-if="!subComponent">
                             <v-flex xs12>
                                 <Brand v-if="selectedEvent.id"
-                                    :event-id="selectedEvent.id"></Brand>
+                                    :eventId="selectedEvent.id"></Brand>
                             </v-flex>
                         </v-layout>
 

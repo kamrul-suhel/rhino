@@ -1,37 +1,71 @@
 <template>
-    <div>
+    <div class="model-section">
         <v-layout column>
             <v-flex>
-                <h5 class="headline mt-5 text-lg-center">{{trans.greeting_f}}</h5>
-                <v-flex align="center" justify="center">
+                <h5 class="headline mt-5 text-lg-center"
+                    :style="{color: color}">{{trans.greeting_f}}
+                </h5>
+
+                <v-flex justify="center">
                     <v-layout row sm4 mt-4 justify-center>
                         <v-flex class="grow-0">
                             <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey" depressed>New</v-btn>
+                                <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                       @click="onFilterVehicle('new')"
+                                       :class="{selected: vehicleType === 'new'} "
+                                       depressed>
+                                    {{ trans.new }}
+                                </v-btn>
                             </div>
                         </v-flex>
+
                         <v-flex class="grow-0">
                             <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey" depressed>Used</v-btn>
+                                <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                       :class="{selected: vehicleType === 'used'} "
+                                       @click="onFilterVehicle('used')"
+                                       depressed>
+                                    {{ trans.used }}
+                                </v-btn>
                             </div>
                         </v-flex>
+
                         <v-flex class="grow-0">
                             <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey" depressed>Unsure</v-btn>
+                                <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                       :class="{selected: vehicleType === 'unsure'} "
+                                       @click="onFilterVehicle('unsure')"
+                                       depressed>
+                                    {{ trans.unsure }}
+                                </v-btn>
                             </div>
                         </v-flex>
                     </v-layout>
                 </v-flex>
             </v-flex>
 
-            <v-layout row wrap>
-                <v-flex xs12 sm6 md4 lg3 xl2 pa-5 v-for="car in cars" v-bind:key="trans.cars">
-                    <v-layout column>
-                        <v-flex>
-                            <img style="width:100%" src="https://www.enterprise.co.uk/content/dam/global-vehicle-images/cars/OPEL_INSI_2014.png" alt="">
-                            <h6 class="title mt-2 font-weight-light text-md-center">Corsa</h6>
-                        </v-flex>
-                    </v-layout>
+            <v-layout row wrap pa-5>
+                <v-flex xs12 sm6 md4 lg3 xl2 pa-3
+                        v-for="vehicle in vehicles"
+                        :key="vehicle.id">
+
+                    <div class="vehicle"
+                         :style="{borderColor: onVehicleSelected(vehicle)}">
+                        <v-card
+                            @click="onSelectVehicle(vehicle)"
+                            flat
+                        >
+                            <v-img
+                                contain
+                                :aspect-ratio="16/12"
+                                :src="vehicle.driver_seating_position_left_image"
+                            ></v-img>
+                            <v-card-text class="text-xs-center">
+                                {{ vehicle.model }}
+                            </v-card-text>
+                        </v-card>
+                    </div>
+
                 </v-flex>
 
             </v-layout>
@@ -41,7 +75,16 @@
                     <v-layout row sm4 my-5 justify-center>
                         <v-flex class="grow-0">
                             <div>
-                                <v-btn class="border-medium height-50 rounded-25 theme-color padding-l-85 padding-r-45" depressed>Skip this step <v-icon class="padding-l-35" small dark>arrow_forward</v-icon></v-btn>
+                                <v-btn class="border-medium height-50 rounded-25 theme-color padding-l-85 padding-r-45"
+                                       outline
+                                       :color="color"
+                                       depressed>
+                                    {{ trans.SkipThisStep }}
+                                    <v-icon class="padding-l-35"
+                                            :color="color"
+                                            small dark>arrow_forward
+                                    </v-icon>
+                                </v-btn>
                             </div>
                         </v-flex>
                     </v-layout>
@@ -52,19 +95,20 @@
 </template>
 
 
-
 <script>
     import {mapGetters} from 'vuex'
 
     export default {
-        data(){
+        data() {
             return {
-                cars: [null,null,null,null,null,null,null,null],
             }
         },
 
-        created(){
+        created() {
 
+        },
+
+        watch: {
         },
 
         computed: ({
@@ -72,11 +116,33 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
+                vehicles: 'getEventVehicles',
+                dealership: 'getSelectedDealership',
+                selectedVehicles: 'getBookingSelectedVehicles',
+                color: 'getFrontendColor',
+                selectedEvent: 'getSelectedEvent',
+                vehicleType: 'getBookingVehicleType'
             })
         }),
 
-        methods:{
+        methods: {
+            onSelectVehicle(vehicle) {
+                console.log('set selected vehicle')
+            },
 
+            onVehicleSelected(vehicle) {
+                return this.color
+            },
+
+            onFilterVehicle(type){
+                this.$store.commit('setBookingVehicleType', type)
+                this.$store.dispatch('fetchEventVehicles', {
+                    id: this.selectedEvent.id,
+                    vehicleType: type,
+                    themeOption: this.themeOption,
+                    trans: this.trans
+                })
+            }
         }
     }
 </script>

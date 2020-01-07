@@ -287,6 +287,15 @@ const actions = {
                 commit('setEventLoading', false)
             }
         });
+    },
+
+
+    /**
+     * Booking for frontend set selected event
+     */
+
+    setSelectedEventForFrontend({commit}, payload){
+        commit('setSelectedEvent', payload.event)
     }
 }
 

@@ -2,7 +2,7 @@ import * as Frontend from "../../pages/booking"
 
 const booking ={
     path: '/booking',
-    name: 'frontendIndex',
+    name: 'booking',
     component: Frontend.Frontend
 }
 

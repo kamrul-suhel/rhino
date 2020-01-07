@@ -51,6 +51,26 @@ Vue.filter('dateFormat', (date, format, locale='en') => {
             filterDate = newMoment.format('llll') // Mon, Dec 23, 2019 9:57 AM
             break
 
+        case 'HH':
+            filterDate = newMoment.format('HH:mm') // 0..23:0..60
+            break
+
+        case 'YYYY':
+            filterDate = newMoment.format('YYYY') // 2014
+            break
+
+        case 'MMMM':
+            filterDate = newMoment.format('MMMM') // Jan..December
+            break
+
+        case 'Do':
+            filterDate = newMoment.format('Do') // 1st..31st
+            break
+
+        case 'MMMM Do':
+            filterDate = newMoment.format('MMMM Do') // 1st..31st
+            break
+
         default:
             filterDate = newMoment.format('MMMM Do YYYY, h:mm:ss a')  // December 23rd 2019, 9:59:26 am
     }

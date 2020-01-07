@@ -6,6 +6,8 @@
         :color="themeOption.inputColor"
         v-model="selectedLanguageId"
         return-object
+        :append-icon="isFrontend ? 'expand_more' : 'arrow_drop_down'"
+        :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
         @change="onSubLanguageChange"
         :label="trans.language">
     </v-autocomplete>
@@ -24,6 +26,11 @@
         props: {
             languageId: {
                 required: true
+            },
+            isFrontend: {
+                required: false,
+                type: Boolean,
+                default: false
             }
         },
 
@@ -36,8 +43,8 @@
             }),
         },
 
-        watch:{
-            languageId(value){
+        watch: {
+            languageId(value) {
                 this.selectedLanguageId = value
             }
         },
@@ -51,7 +58,7 @@
                 this.$store.commit('setSubSelectedLanguage', selectedLanguage)
             },
 
-            initialize(){
+            initialize() {
                 this.selectedLanguageId = this.languageId
             }
         }

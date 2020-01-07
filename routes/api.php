@@ -19,7 +19,6 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 |
 */
-
 Route::prefix('users')->group(function () {
     Route::post('', 'Auth\RegisterController@store');
     Route::put('{id}', 'Auth\RegisterController@update');
@@ -264,6 +263,7 @@ Route::prefix('eventvehicle')->group(function () {
 |
 */
 Route::prefix('guests')->group(function () {
+
     Route::get('', 'Guest\GuestListController@list');
     Route::get('{id}', 'Guest\GuestShowController@show');
     Route::post('', 'Guest\GuestStoreController@store');
@@ -302,5 +302,5 @@ Route::prefix('uploadfiles')->group(function () {
 */
 
 Route::prefix('booking')->group(function(){
-    Route::get('{eventId}', 'Booking\BookingController@getData');
+    Route::get('{uniqueId}', 'Booking\BookingController@getData');
 });

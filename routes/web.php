@@ -1,6 +1,8 @@
 <?php
 
 
+use Illuminate\Http\Request;
+
 Auth::routes();
 
 /*
@@ -16,7 +18,10 @@ Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('guestLogin');
+
+Route::post('guests/login', 'Guest\GuestLoginController@login');
+Route::post('guests/logout', 'Guest\GuestLoginController@logOut');
 
 /*
 |--------------------------------------------------------------------------
@@ -302,7 +307,14 @@ Route::prefix('admin')->group(function(){
  */
 
 Route::middleware(['guestAuth'])->prefix('booking')->group(function () {
-    Route::get('', function(){
+    Route::get('', function(Request $request){
+        if($request->ajax()){
+            return response()->json([
+                'success' => true,
+                'uniqueId' => session()->get('uniqueId')
+            ]);
+        }
+
         return view('welcome');
     });
 

@@ -30,6 +30,208 @@ a {
   margin-bottom: 4rem;
 }
 
+/**
+ Frontend Login
+ */
+
+.guest-login {
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+.guest-login .v-card {
+  background-color: white !important;
+  border-radius: 6px !important;
+  -webkit-box-shadow: 0px 3px 6px #00000029;
+          box-shadow: 0px 3px 6px #00000029;
+}
+
+.guest-login .v-card .container {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.guest-login .v-card h2 {
+  font-size: 39px;
+}
+
+.guest-login .v-card h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.guest-login .v-card .theme--light.v-text-field > .v-input__control > .v-input__slot:before {
+  opacity: 0.18;
+}
+
+.guest-login .v-card .login-button {
+  height: 50px;
+  padding: 13px 40px 13px 20px;
+  font-size: 18px;
+  background-color: #000000;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-radius: 25px;
+  opacity: 1;
+  margin: 20px auto auto 0 !important;
+}
+
+.guest-login .v-card .login-button .v-icon {
+  margin-right: 15px;
+}
+
+.guest-login .v-card .multi-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.guest-login .v-card .multi-container .multi-button {
+  height: 36px;
+  padding: 5px 20px;
+  font-size: 12px;
+  background-color: #F4F4F4 !important;
+  color: #000000;
+  -webkit-box-shadow: 0px 9px 44px #0000000F;
+          box-shadow: 0px 9px 44px #0000000F;
+  border: 1px solid #707070;
+  border-radius: 18px;
+  margin: 20px 0 0 auto !important;
+}
+
+.guest-login .v-card .multi-container .multi-button .v-icon {
+  margin-right: 15px;
+}
+
+/*
+    Model Section
+ */
+
+.model-section button.selected {
+  background-color: #333C42 !important;
+  color: white !important;
+}
+
+/**
+*   End model section
+*/
+
+/*
+    Choose time in frontend
+ */
+
+.appointmentSlot .slot .v-responsive__content > div {
+  min-height: calc(100% - 10px);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px !important;
+  margin: 5px !important;
+  position: relative;
+}
+
+.appointmentSlot .slot .available:hover {
+  cursor: pointer;
+}
+
+.appointmentSlot .slot .unavailable::before,
+.appointmentSlot .slot .unavailable::after {
+  content: '';
+  width: 141%;
+  height: 2px;
+  position: absolute;
+  left: -20.5%;
+  top: calc(50% - 1px);
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  background-color: #C3C3C3;
+}
+
+.appointmentSlot .slot .unavailable::after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.appointmentSlot .slot .unavailable h6 {
+  color: #C3C3C3;
+}
+
+.appointmentSlot .slot .selected:hover {
+  cursor: default;
+}
+
+.appointmentSlot .slot .selected h6 {
+  color: #fff;
+}
+
+/**
+*   End choose time section
+*/
+
+/*
+*****************************************
+    Calender Component
+*****************************************
+*/
+
+.calenderComponent .calender.v-card {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: transparent;
+}
+
+.calenderComponent .calender.v-card .v-picker__body {
+  background: transparent;
+}
+
+/*
+*****************************************
+    End Calender Component
+*****************************************
+*/
+
+/*
+*****************************************
+    SalesPerson Component
+*****************************************
+*/
+
+.sales-person .v-card {
+  width: 100%;
+}
+
+.sales-person .v-card .v-card__text {
+  padding: 0;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container {
+  padding: 5px;
+  border-radius: 19px;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container .avatar-flex {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  margin-right: 10px;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container .text-flex {
+  margin: 3.5px 0;
+}
+
+/*
+*****************************************
+    SalesPerson Component
+*****************************************
+*/
+
 .rhinoFrontend .content {
   padding: 0 0 0 280px;
   margin: 0;
@@ -48,16 +250,12 @@ a {
 }
 
 .navigation-drawer {
-  padding: 15px;
+  padding: 30px;
   /* LANGUAGE SELECTOR */
-  /* TODO REMOVE THIS ONCE DYNAMIC */
-  /**
-
-     */
+  /* BRAND CAROUSEL */
   /**
     Nav footer
      */
-  /* END OF REMOVE ONCE DYNAMIC */
 }
 
 .navigation-drawer .language-select {
@@ -65,6 +263,26 @@ a {
   -webkit-box-flex: 0;
       -ms-flex-positive: 0;
           flex-grow: 0;
+}
+
+.navigation-drawer .language-select .v-input {
+  cursor: pointer;
+}
+
+.navigation-drawer .language-select .v-input .v-select__slot {
+  cursor: pointer;
+}
+
+.navigation-drawer .language-select .v-input .v-select__slot .v-label {
+  display: none;
+}
+
+.navigation-drawer .language-select .v-input .v-select__slot .v-icon {
+  font-size: 20px;
+}
+
+.navigation-drawer .language-select .v-input input {
+  cursor: pointer;
 }
 
 .navigation-drawer .language-select .v-input__slot::before,
@@ -80,28 +298,23 @@ a {
   font-size: 10px;
 }
 
-.navigation-drawer .event-title {
-  font-size: 25px;
-}
-
-.navigation-drawer .vertical-stepper {
+.navigation-drawer .brand-carousel {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.navigation-drawer .vertical-stepper .v-stepper__step--inactive .v-stepper__step__step {
-  border: 1px solid #cc0000;
-  color: #cc0000;
-  background: none !important;
+.navigation-drawer .brand-carousel .v-carousel__controls {
+  display: none;
 }
 
-.navigation-drawer .vertical-stepper .v-stepper__step--active .v-stepper__step__step {
-  color: white;
+.navigation-drawer .event-title {
+  font-size: 22px;
+  line-height: 28px;
+  margin-top: 25px;
 }
 
-.navigation-drawer .vertical-stepper .v-stepper__step--active .v-stepper__label {
-  color: #cc0000;
-  font-size: 16px;
+.navigation-drawer h4 {
+  margin-top: 20px;
 }
 
 .navigation-drawer .rhinoNavigationStepper {
@@ -122,6 +335,36 @@ a {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  margin-top: 50px;
+  height: auto;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div {
+  margin-bottom: 50px;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item {
+  padding-left: 0;
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item .v-avatar {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  margin-right: 10px;
+  height: 26px !important;
+  width: 26px !important;
+}
+
+.navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item .link {
+  height: 62px;
+  content: '';
+  width: 1px;
+  position: absolute;
+  top: 32px;
+  left: 12.5px;
 }
 
 .navigation-drawer .rhinoNavigationStepper .v-tabs__slider-wrapper {
@@ -130,8 +373,25 @@ a {
 
 .navigation-drawer .navFooter {
   position: absolute;
-  bottom: 0;
-  width: 280px;
+  bottom: 50px;
+  width: calc(100% - 60px);
+}
+
+.navigation-drawer .navFooter .flex:first-of-type {
+  height: 28px;
+  margin: auto 0;
+  padding-bottom: 8px;
+}
+
+.navigation-drawer .navFooter .flex:first-of-type h2 {
+  margin: 0 !important;
+  height: 20px;
+  font-size: 20px;
+}
+
+.navigation-drawer .navFooter .flex:first-of-type h2 .v-icon {
+  margin: 0px auto 2px 2px;
+  font-size: 18px !important;
 }
 
 .light-grey {
@@ -172,10 +432,6 @@ a {
 
 .theme-color {
   border-color: #cc0000;
-}
-
-.theme-color .v-btn__content {
-  color: #cc0000;
 }
 
 .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
@@ -256,6 +512,11 @@ a {
 
 .theme-fill {
   background-color: #cc0000 !important;
+}
+
+.model-section .vehicle {
+  border: 2px solid transparent;
+  border-radius: 5px;
 }
 
 .r-color-picker {

@@ -61,7 +61,7 @@ const mutations = {
                 value: 'brand'
             }
         }
-        
+
         const header = [
             {
                 text: trans.vehicle,
@@ -69,7 +69,7 @@ const mutations = {
                 sortable: false,
                 value: 'vehicle'
             },
-            
+
             ...extraParams,
 
             {
@@ -168,42 +168,7 @@ const actions = {
         }).catch((error)=>{
             // Generate error message
         })
-    },
-
-
-    /**
-     * Get Selected company
-     * @param id // required
-     */
-    // fetchBrand({commit, dispatch}, payload){
-    //     const URL = `/api/brands/${payload.id}/show`+ fn.generateParams(payload)
-    //     axios.get(URL).then((response) => {
-    //         if(response.data){
-    //             commit('setSelectedBrand', response.data.brand)
-    //         }
-    //     }).catch((error)=>{
-    //         // Generate error message
-    //     })
-    // },
-
-    // fetchRegionByBranId({commit}, payload={}){
-    //     console.log('paginate :', payload)
-
-    //     // Set loading is true
-    //     commit('setBrandLoading', payload.themeOption.loadingColor)
-
-    //     commit('setBrandRegionsListHeader', payload.trans)
-    //     const params = fn.generateParams(payload)
-
-    //     const URL = `/api/brands/${payload.id}/regions${params}`
-    //     axios.get(URL).then((response)=>{
-    //         if(response.data.regions){
-    //             commit('setRegionsByBrandId', response.data.regions)
-    //             commit('setTotalRegionByBrandId', response.data.total)
-    //             commit('setBrandLoading', false)
-    //         }
-    //     })
-    // }
+    }
 }
 
 export default {

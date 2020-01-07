@@ -12,7 +12,7 @@
                         <v-parallax :src="`https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG`" alt="" height="240">
                             <v-layout align-center justify-end class="text-center" cols="12">
                                 <v-flex align-self-center>
-                                    <h1 class="display-1 font-weight-thin text-lg-right">{{trans.greeting_f}}</h1>
+                                    <h1 class="display-1 font-weight-thin text-lg-right">{{trans.hello}}</h1>
                                 </v-flex>
                             </v-layout>
                         </v-parallax>
@@ -26,17 +26,17 @@
                             slider-color="yellow"
                         >
                             <v-tab
-                                key="selectCar"
-                                ripple
-                            >
-                                Select Car
-                            </v-tab>
-
-                            <v-tab
                                 key="appointment"
                                 ripple
                             >
                                 Appointment
+                            </v-tab>
+
+                            <v-tab
+                                key="selectCar"
+                                ripple
+                            >
+                                Select Car
                             </v-tab>
 
                             <v-tab
@@ -61,15 +61,15 @@
                             </v-tab>
 
                             <v-tab-item
-                                key="selectCar"
-                            >
-                                <FSelectCar></FSelectCar>
-                            </v-tab-item>
-
-                            <v-tab-item
                                 key="appointment"
                             >
                                 <FBookAppointment></FBookAppointment>
+                            </v-tab-item>
+
+                            <v-tab-item
+                                key="selectCar"
+                            >
+                                <FSelectCar></FSelectCar>
                             </v-tab-item>
 
                             <v-tab-item
@@ -102,7 +102,7 @@
 
     import FDrawer from './Drawer'
     import FSelectCar from './SelectModel'
-    import FBookAppointment from './bookAppointment'
+    import FBookAppointment from './BookAppointment'
     import FPartExchange from './PartExchange'
     import FPersonalDetails from './PersonalDetails'
     import FConfirmDetails from './ConfirmDetails'
@@ -141,7 +141,7 @@
         },
 
         created() {
-            this.$store.dispatch('fetchGuest', {id: 4})
+            this.$store.dispatch('fetchGuestBookingData')
         },
 
         methods: {}
