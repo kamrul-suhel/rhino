@@ -1,4 +1,4 @@
-import List from "./List"
+import List from "./Root"
 import Create from "./Create"
 import Root from "./Root"
 import Edit from "./Edit"

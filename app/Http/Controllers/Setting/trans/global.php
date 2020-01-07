@@ -644,7 +644,7 @@ return [
 
     [
         'label' => 'Wednesday',
-        'identifier' => 'wednesday_',
+        'identifier' => 'wednesday',
         'translation' => 'Wednesday'
     ],
 

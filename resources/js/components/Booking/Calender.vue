@@ -53,7 +53,7 @@
                     no-title
                     :color="color"
                     v-model="selectedDate"
-                    allowed-dates="allowedDates()"
+                    :allowed-dates="val => allowDates.indexOf(val) !== -1"
                     :min="selectedEvent.start"
                     :max="selectedEvent.end"
                 ></v-date-picker>
@@ -70,7 +70,8 @@
         data() {
             return {
                 type: 'month',
-                selectedDate: ''
+                selectedDate: '',
+                allowDates:[]
             }
         },
 
@@ -81,6 +82,10 @@
 
             selectedDate() {
                 this.$store.commit('setBookingSelectedDate', this.selectedDate)
+            },
+
+            selectedEvent(){
+                this.allowedDates()
             }
         },
 
@@ -90,14 +95,18 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 color: 'getFrontendColor',
-                selectedEvent: 'getSelectedEvent'
+                selectedEvent: 'getSelectedEvent',
+                dealership: 'getSelectedDealership'
             })
         }),
 
         methods: {
             allowedDates() {
-                const start = moment(this.selectedEvent.start)
-                const end = moment(this.selectedEvent.end)
+                let start = moment(this.selectedEvent.start)
+                let end = moment(this.selectedEvent.end)
+
+                const dates = fn.getDates(start, end, this.dealership)
+                this.allowDates = [...dates]
             }
         }
     }

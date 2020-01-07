@@ -24,8 +24,7 @@ class CountryController extends Controller
         $countries = Country::select(
             'id',
             'name',
-            'capital',
-            'iso_3166_2',
+            'country_code',
             'driver_seating_position',
             'status',
             'flag'
@@ -111,10 +110,16 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data['message'] = 'Yeahhhhhhhhhh';
 
-        return $data;
+        $country = new Country;
+
+        $request->has('name') ? $country->name = $request->name : null;
+        $request->has('code') ? $country->country_code = $request->code : null;
+        $request->has('seating_position') ? $country->driver_seating_position = $request->seating_position : null;
+        $request->has('status') ? $country->status = $request->status  : $country->status = 0;
+        $country->save();
+
+        return $country;
     }
 
     /**
@@ -125,9 +130,7 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $country = Country::with('regions')
-            ->where('id', $id)
-            ->first();
+        $country = Country::find($id);
 
         return response()->json($country);
     }
@@ -144,8 +147,6 @@ class CountryController extends Controller
         $country = Country::findOrFail($id);
 
         $request->has('name') ? $country->name = $request->name : null;
-        $request->has('capital') ? $country->capital = $request->capital : null;
-        $request->has('citizenship') ? $country->citizenship = $request->citizenship : null;
         $request->has('country_code') ? $country->country_code = $request->country_code : null;
         $request->has('currency') ? $country->currency = $request->currency : null;
         $request->has('currency_code') ? $country->currency_code = $request->currency_code : null;
@@ -160,7 +161,7 @@ class CountryController extends Controller
         $request->has('currency_symbol') ? $country->currency_symbol = $request->currency_symbol : null;
         $request->has('flag') ? $country->flag = $request->flag : null;
         $request->has('driver_seating_position') ? $country->driver_seating_position = $request->driver_seating_position : null;
-        $request->has('status') ? $country->status = $request->status : null;
+        $request->has('status') ? $country->status = 1 : 0;
 
         // Save country
         $country->save();

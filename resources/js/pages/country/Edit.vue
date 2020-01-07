@@ -33,23 +33,16 @@
                                 <v-text-field
                                     :color="themeOption.inputColor"
                                     :label="trans.name"
-                                    v-model="selectedCountry.full_name"
+                                    v-model="selectedCountry.name"
                                 ></v-text-field>
                             </v-flex>
 
-                            <v-flex xs12 sm6>
-                                <v-text-field
-                                    :color="themeOption.inputColor"
-                                    :label="trans.capital"
-                                    v-model="selectedCountry.capital"
-                                ></v-text-field>
-                            </v-flex>
 
                             <v-flex xs12 sm6>
                                 <v-text-field
                                     :color="themeOption.inputColor"
                                     :label="trans.code"
-                                    v-model="selectedCountry.iso_3166_2"
+                                    v-model="selectedCountry.country_code"
                                 ></v-text-field>
                             </v-flex>
 
