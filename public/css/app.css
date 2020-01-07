@@ -111,11 +111,55 @@ a {
 }
 
 /*
+    Model Section
+ */
+
+.model-section button.selected {
+  background-color: #333C42 !important;
+  color: white !important;
+}
+
+/**
+*   End model section
+*/
+
+/*
     Choose time in frontend
  */
 
+.appointmentSlot .slot .v-responsive__content > div {
+  min-height: calc(100% - 10px);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px !important;
+  margin: 5px !important;
+  position: relative;
+}
+
 .appointmentSlot .slot .available:hover {
   cursor: pointer;
+}
+
+.appointmentSlot .slot .unavailable::before,
+.appointmentSlot .slot .unavailable::after {
+  content: '';
+  width: 141%;
+  height: 2px;
+  position: absolute;
+  left: -20.5%;
+  top: calc(50% - 1px);
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  background-color: #C3C3C3;
+}
+
+.appointmentSlot .slot .unavailable::after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.appointmentSlot .slot .unavailable h6 {
+  color: #C3C3C3;
 }
 
 .appointmentSlot .slot .selected:hover {
@@ -149,6 +193,42 @@ a {
 /*
 *****************************************
     End Calender Component
+*****************************************
+*/
+
+/*
+*****************************************
+    SalesPerson Component
+*****************************************
+*/
+
+.sales-person .v-card {
+  width: 100%;
+}
+
+.sales-person .v-card .v-card__text {
+  padding: 0;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container {
+  padding: 5px;
+  border-radius: 19px;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container .avatar-flex {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  margin-right: 10px;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container .text-flex {
+  margin: 3.5px 0;
+}
+
+/*
+*****************************************
+    SalesPerson Component
 *****************************************
 */
 
@@ -237,26 +317,6 @@ a {
   margin-top: 20px;
 }
 
-.navigation-drawer .vertical-stepper {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.navigation-drawer .vertical-stepper .v-stepper__step--inactive .v-stepper__step__step {
-  border: 1px solid #cc0000;
-  color: #cc0000;
-  background: none !important;
-}
-
-.navigation-drawer .vertical-stepper .v-stepper__step--active .v-stepper__step__step {
-  color: white;
-}
-
-.navigation-drawer .vertical-stepper .v-stepper__step--active .v-stepper__label {
-  color: #cc0000;
-  font-size: 16px;
-}
-
 .navigation-drawer .rhinoNavigationStepper {
   width: 100%;
 }
@@ -286,6 +346,8 @@ a {
 .navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item {
   padding-left: 0;
   position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
 }
 
 .navigation-drawer .rhinoNavigationStepper .v-tabs__container .v-tabs__div .v-tabs__item .v-avatar {

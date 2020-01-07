@@ -22,22 +22,24 @@
                       class="appointmentSlot"
                       style="width:100%; flex-grow:0"
                       mx-1>
-                <v-flex xs6 md3
-                        class="slot"
-                        v-for="slot in slots"
-                        :key="slot.slotId">
-                    <v-layout align-center row wrap
-                              justify-center
-                              class="pa-2 ma-2"
-                              :class="slot.status"
-                              @click="onSelectSlot(slot)"
-                              :style="{
-                                border: '1px solid rgb(220,220,220)',
-                                 backgroundColor: slot.status === 'selected' ? color: ''
-                              }">
-                        <h6 class="body-2">{{ slot.start | dateFormat('HH')}}-<br>{{ slot.end | dateFormat('HH')}}</h6>
-                    </v-layout>
-                </v-flex>
+                    <v-flex xs6 md3
+                            class="slot"
+                            v-for="slot in slots"
+                            :key="slot.slotId">
+                            <v-responsive aspect-ratio="1">
+                                <v-layout align-center row wrap
+                                          justify-center
+                                          class="pa-2 ma-2"
+                                          :class="slot.status"
+                                          @click="onSelectSlot(slot)"
+                                          :style="{
+                                        border: '1px solid rgb(220,220,220)',
+                                         backgroundColor: slot.status === 'selected' ? color: ''
+                                      }">
+                                    <h6 class="body-2">{{ slot.start | dateFormat('HH')}}-<br>{{ slot.end | dateFormat('HH')}}</h6>
+                                </v-layout>
+                            </v-responsive>
+                    </v-flex>
             </v-layout>
         </v-flex>
 

@@ -45,6 +45,14 @@
                         key="selectModel"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">1</v-avatar>
+                        {{ `${trans.selectModel}` }}
+                        <span class="link" :style="{backgroundColor: color}"></span>
+                    </v-tab>
+
+                    <v-tab
+                        key="selectModel"
+                    >
+                        <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
                         {{ `${trans.bookYourSlot}` }}
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
@@ -52,7 +60,7 @@
                     <v-tab
                         key="partExchange"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
+                        <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
                         {{ `${trans.partExchange}` }}
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
@@ -60,7 +68,7 @@
                     <v-tab
                         key="confirmYourDetail"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
+                        <v-avatar :style="{borderColor: color, color:color}">4</v-avatar>
                         {{ `${trans.confirm} ${trans.your_details}` }}
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
@@ -68,7 +76,7 @@
                     <v-tab
                         key="BookingConfirmation"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">4</v-avatar>
+                        <v-avatar :style="{borderColor: color, color:color}">5</v-avatar>
                         {{ `${trans.bookingConfirmation}` }}
                     </v-tab>
                 </v-tabs>

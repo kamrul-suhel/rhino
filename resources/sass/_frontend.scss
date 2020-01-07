@@ -70,13 +70,58 @@
 }
 
 /*
+    Model Section
+ */
+
+.model-section {
+
+    button.selected {
+        background-color: #333C42 !important;
+        color: white !important;
+    }
+}
+
+/**
+*   End model section
+*/
+
+
+/*
     Choose time in frontend
  */
 .appointmentSlot{
     .slot{
+        .v-responsive__content>div {
+            min-height: calc(100% - 10px);
+            box-sizing: border-box;
+            padding: 5px !important;
+            margin: 5px !important;
+            position: relative;
+        }
         .available{
             &:hover{
                 cursor: pointer;
+            }
+        }
+
+        .unavailable {
+            &::before, &::after {
+                content: '';
+                width: 141%;
+                height: 2px;
+                position: absolute;
+                left: -20.5%;
+                top: calc(50% - 1px);
+                transform: rotate(45deg);
+                background-color: #C3C3C3;
+            }
+
+            &::after {
+                transform: rotate(-45deg);
+            }
+
+            h6 {
+                color: #C3C3C3;
             }
         }
 
@@ -120,6 +165,45 @@
     End Calender Component
 *****************************************
 */
+
+
+
+/*
+*****************************************
+    SalesPerson Component
+*****************************************
+*/
+
+.sales-person {
+    .v-card {
+        width: 100%;
+
+        .v-card__text {
+            padding: 0;
+
+            .salesperson-container {
+                padding: 5px;
+                border-radius: 19px;
+
+                .avatar-flex {
+                    flex-grow: 0;
+                    margin-right: 10px;
+                }
+
+                .text-flex {
+                    margin: 3.5px 0;
+                }
+            }
+        }
+    }
+}
+
+/*
+*****************************************
+    SalesPerson Component
+*****************************************
+*/
+
 
 
 .rhinoFrontend{
@@ -204,26 +288,6 @@
         margin-top: 20px;
     }
 
-    .vertical-stepper {
-        box-shadow: none;
-
-        .v-stepper__step--inactive .v-stepper__step__step {
-            border: 1px solid #cc0000;
-            color: #cc0000;
-            background: none !important;
-        }
-
-        .v-stepper__step--active {
-            .v-stepper__step__step {
-                color: white;
-            }
-
-            .v-stepper__label {
-                color: #cc0000;
-                font-size: 16px;
-            }
-        }
-    }
 
     .rhinoNavigationStepper{
         width:100%;
@@ -242,6 +306,8 @@
                 .v-tabs__item {
                     padding-left: 0;
                     position: relative;
+                    text-transform: capitalize;
+                    font-weight: 600;
 
                     .v-avatar {
                         border-radius: 50%;

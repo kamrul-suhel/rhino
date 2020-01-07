@@ -1,5 +1,5 @@
 <template>
-    <v-layout column class="book-step" align-center style="border-right: 1px solid rgb(240,240,240)">
+    <v-layout column class="book-step sales-person" align-center style="border-right: 1px solid rgb(240,240,240)">
         <v-layout>
             <h6 class="headline text-lg-center">Choose a <b>sales person</b></h6>
         </v-layout>
@@ -19,17 +19,23 @@
                     max-height="250px"
                     height="250px">
                 <v-card-text>
-                    <v-flex xs12 mt-3
+                    <v-flex class="salesperson-container" xs12 mt-3
                             v-for="saleExecutive in saleExecutives"
                             :key="saleExecutive.id">
-                        <v-avatar
-                            size="28"
-                            color="grey lighten-4">
-                            <img :src="saleExecutive.profile_image"
-                                 :alt="saleExecutive.firstname">
-                        </v-avatar>
+                        <v-layout row>
+                            <v-flex class="avatar-flex">
+                                <v-avatar
+                                    size="28"
+                                    color="grey lighten-4">
+                                    <img :src="saleExecutive.profile_image"
+                                         :alt="saleExecutive.firstname">
+                                </v-avatar>
+                            </v-flex>
+                            <v-flex class="text-flex">
+                                <label>{{ saleExecutive.firstname}}</label>
+                            </v-flex>
+                        </v-layout>
 
-                        <div>{{ saleExecutive.firstname}}</div>
                     </v-flex>
                 </v-card-text>
             </v-card>
