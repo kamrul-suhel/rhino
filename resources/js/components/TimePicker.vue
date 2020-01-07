@@ -404,7 +404,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.saturday_end"
-                        :label="`${trans.tuesday} ${trans.end}`"
+                        :label="`${trans.saturday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"

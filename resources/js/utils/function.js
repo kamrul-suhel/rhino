@@ -48,39 +48,39 @@ export default {
             params += `&search=${payload.search}`
         }
 
-        if(payload.languageId && typeof (payload.languageId) !== 'undefined'){
+        if (payload.languageId && typeof (payload.languageId) !== 'undefined') {
             params += `&languageId=${payload.languageId}`
         }
 
-        if(payload.model && typeof (payload.model) !== 'undefined'){
+        if (payload.model && typeof (payload.model) !== 'undefined') {
             params += `&model=${payload.model}`
         }
 
-        if(payload.edit && typeof (payload.edit) !== 'undefined'){
+        if (payload.edit && typeof (payload.edit) !== 'undefined') {
             params += `&edit=${payload.edit}`
         }
 
-        if(payload.filterBy && typeof (payload.filterBy) !== 'undefined'){
+        if (payload.filterBy && typeof (payload.filterBy) !== 'undefined') {
             params += `&filterBy=${payload.filterBy}`
         }
 
-        if(payload.id && typeof (payload.id) !== 'undefined'){
+        if (payload.id && typeof (payload.id) !== 'undefined') {
             params += `&id=${payload.id}`
         }
 
-        if(payload.brandId && typeof (payload.brandId) !== 'undefined'){
+        if (payload.brandId && typeof (payload.brandId) !== 'undefined') {
             params += `&brandId=${payload.brandId}`
         }
 
-        if(payload.dealershipId && typeof (payload.dealershipId) !== 'undefined'){
+        if (payload.dealershipId && typeof (payload.dealershipId) !== 'undefined') {
             params += `&dealershipId=${payload.dealershipId}`
         }
 
-        if(payload.countryId && typeof (payload.countryId) !== 'undefined'){
+        if (payload.countryId && typeof (payload.countryId) !== 'undefined') {
             params += `&countryId=${payload.countryId}`
         }
 
-        if(payload.vehicleType && typeof (payload.vehicleType) !== 'undefined'){
+        if (payload.vehicleType && typeof (payload.vehicleType) !== 'undefined') {
             params += `&vehicleType=${payload.vehicleType}`
         }
 
@@ -117,7 +117,7 @@ export default {
         return [...timeSlots]
     },
 
-    getStartTimeEndTime(date , dealership) {
+    getStartTimeEndTime(date, dealership) {
         const startTime = `${moment(date).format('dddd').toLowerCase()}_start`
         const endTime = `${moment(date).format('dddd').toLowerCase()}_end`
 
@@ -127,19 +127,34 @@ export default {
         }
     },
 
+
     /**
      * Generate dates between start date & end dates
      * @param startDate
      * @param stopDate
+     * @param dealership
      * @returns {[]}
      */
-    getDates(startDate, stopDate) {
-        let dateArray = [];
-        let currentDate = startDate;
+    getDates(startDate, stopDate, dealership = null) {
+        let dateArray = []
+        let currentDate = startDate
         while (currentDate <= stopDate) {
-            dateArray.push(moment(currentDate).format('YYYY-MM-DD'))
-            currentDate = moment(currentDate).add(1, 'days');
+            if (dealership) {
+                // Check day dealership is closed or not
+                const day = `${moment(currentDate).format('dddd').toLowerCase()}_start`
+
+                if (dealership[day] === '00:00:00') {
+                    currentDate = moment(currentDate).add(1, 'days')
+                    continue
+                }
+
+                dateArray.push(moment(currentDate).format('YYYY-MM-DD'))
+                currentDate = moment(currentDate).add(1, 'days')
+            } else {
+                dateArray.push(moment(currentDate).format('YYYY-MM-DD'))
+                currentDate = moment(currentDate).add(1, 'days')
+            }
         }
-        return dateArray;
+        return dateArray
     },
 }
