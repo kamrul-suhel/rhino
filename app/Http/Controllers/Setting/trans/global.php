@@ -752,6 +752,12 @@ return [
     ],
 
     [
+        'label' => 'Select model',
+        'identifier' => 'selectModel',
+        'translation' => 'Select model'
+    ],
+
+    [
         'label' => 'Book your slot',
         'identifier' => 'bookYourSlot',
         'translation' => 'Book your slot'
