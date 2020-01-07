@@ -2,20 +2,15 @@
  Frontend Login
  */
 
-.guest-login{
+.guest-login {
     background-repeat:no-repeat !important;
     background-size: cover !important;
 
-    .v-card {
-        background-color: white !important;
+    .login-section {
         border-radius: 6px !important;
         box-shadow: 0px 3px 6px #00000029;
-
-        .container {
-            padding-left: 45px;
-            padding-right: 45px;
-        }
-
+        padding-left: 45px;
+        padding-right: 20px;
 
         h2 {
             font-size: 39px;
@@ -24,6 +19,10 @@
         h3 {
             font-size: 20px;
             font-weight: 400;
+        }
+
+        .flex {
+            margin-right: 25px;
         }
 
         .theme--light.v-text-field>.v-input__control>.v-input__slot:before {
@@ -49,6 +48,7 @@
             display: flex;
             flex-flow: row nowrap;
             justify-content: flex-end;
+            margin-right: 0;
 
             .multi-button {
                 height: 36px;
@@ -200,7 +200,7 @@
 
 /*
 *****************************************
-    SalesPerson Component
+    End SalesPerson Component
 *****************************************
 */
 
@@ -228,44 +228,6 @@
 
 .navigation-drawer {
     padding:30px;
-
-    /* LANGUAGE SELECTOR */
-    .language-select {
-        width: 68px;
-        flex-grow: 0;
-
-        .v-input {
-            cursor: pointer;
-
-            .v-select__slot {
-                cursor: pointer;
-
-                .v-label {
-                    display: none;
-                }
-
-                .v-icon {
-                    font-size: 20px;
-                }
-            }
-
-            input {
-                cursor: pointer;
-            }
-        }
-
-        .v-input__slot::before, .v-input__slot::after {
-            display: none;
-        }
-
-        label {
-            font-size: 9pt;
-        }
-
-        .v-input__icon--append .v-icon {
-            font-size: 10px;
-        }
-    }
 
     /* BRAND CAROUSEL */
 
@@ -395,8 +357,6 @@
     padding-left: 35px;
 }
 
-/* TODO REMOVE THIS ONCE DYNAMIC */
-
 .theme-color {
     border-color: #cc0000;
 }
@@ -408,11 +368,7 @@
 /* END OF REMOVE ONCE DYNAMIC */
 
 
-/* TODO REMOVE CALENDAR STYLING */
-
 .theme--light.v-calendar-weekly, .theme--light.v-sheet {
-    background: none;
-    border: none;
 
     .v-calendar-weekly__day-month {
         display: none;
@@ -451,8 +407,6 @@
     }
 }
 
-/* END OF REMOVE CALENDAR STYLING */
-
 
 .body-3 {
     font-size: 18px;
@@ -478,3 +432,54 @@
         border-radius:5px;
     }
 }
+
+
+
+
+
+/*
+*****************************************
+    Frontend Language Select Component
+*****************************************
+*/
+
+
+.frontend-language.v-input {
+    width: 68px;
+    flex-grow: 0;
+    cursor: pointer;
+
+    .v-select__slot {
+        cursor: pointer;
+
+        .v-label {
+            display: none;
+        }
+
+        .v-icon {
+            font-size: 20px;
+        }
+    }
+
+    input {
+        cursor: pointer;
+    }
+
+    .v-input__slot::before, .v-input__slot::after {
+        display: none;
+    }
+
+    label {
+        font-size: 9pt;
+    }
+
+    .v-input__icon--append .v-icon {
+        font-size: 10px;
+    }
+}
+
+/*
+*****************************************
+    End Frontend Language Select Component
+*****************************************
+*/

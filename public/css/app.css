@@ -39,32 +39,32 @@ a {
   background-size: cover !important;
 }
 
-.guest-login .v-card {
-  background-color: white !important;
+.guest-login .login-section {
   border-radius: 6px !important;
   -webkit-box-shadow: 0px 3px 6px #00000029;
           box-shadow: 0px 3px 6px #00000029;
-}
-
-.guest-login .v-card .container {
   padding-left: 45px;
-  padding-right: 45px;
+  padding-right: 20px;
 }
 
-.guest-login .v-card h2 {
+.guest-login .login-section h2 {
   font-size: 39px;
 }
 
-.guest-login .v-card h3 {
+.guest-login .login-section h3 {
   font-size: 20px;
   font-weight: 400;
 }
 
-.guest-login .v-card .theme--light.v-text-field > .v-input__control > .v-input__slot:before {
+.guest-login .login-section .flex {
+  margin-right: 25px;
+}
+
+.guest-login .login-section .theme--light.v-text-field > .v-input__control > .v-input__slot:before {
   opacity: 0.18;
 }
 
-.guest-login .v-card .login-button {
+.guest-login .login-section .login-button {
   height: 50px;
   padding: 13px 40px 13px 20px;
   font-size: 18px;
@@ -76,11 +76,11 @@ a {
   margin: 20px auto auto 0 !important;
 }
 
-.guest-login .v-card .login-button .v-icon {
+.guest-login .login-section .login-button .v-icon {
   margin-right: 15px;
 }
 
-.guest-login .v-card .multi-container {
+.guest-login .login-section .multi-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -91,9 +91,10 @@ a {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  margin-right: 0;
 }
 
-.guest-login .v-card .multi-container .multi-button {
+.guest-login .login-section .multi-container .multi-button {
   height: 36px;
   padding: 5px 20px;
   font-size: 12px;
@@ -106,7 +107,7 @@ a {
   margin: 20px 0 0 auto !important;
 }
 
-.guest-login .v-card .multi-container .multi-button .v-icon {
+.guest-login .login-section .multi-container .multi-button .v-icon {
   margin-right: 15px;
 }
 
@@ -228,7 +229,7 @@ a {
 
 /*
 *****************************************
-    SalesPerson Component
+    End SalesPerson Component
 *****************************************
 */
 
@@ -251,51 +252,10 @@ a {
 
 .navigation-drawer {
   padding: 30px;
-  /* LANGUAGE SELECTOR */
   /* BRAND CAROUSEL */
   /**
     Nav footer
      */
-}
-
-.navigation-drawer .language-select {
-  width: 68px;
-  -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-}
-
-.navigation-drawer .language-select .v-input {
-  cursor: pointer;
-}
-
-.navigation-drawer .language-select .v-input .v-select__slot {
-  cursor: pointer;
-}
-
-.navigation-drawer .language-select .v-input .v-select__slot .v-label {
-  display: none;
-}
-
-.navigation-drawer .language-select .v-input .v-select__slot .v-icon {
-  font-size: 20px;
-}
-
-.navigation-drawer .language-select .v-input input {
-  cursor: pointer;
-}
-
-.navigation-drawer .language-select .v-input__slot::before,
-.navigation-drawer .language-select .v-input__slot::after {
-  display: none;
-}
-
-.navigation-drawer .language-select label {
-  font-size: 9pt;
-}
-
-.navigation-drawer .language-select .v-input__icon--append .v-icon {
-  font-size: 10px;
 }
 
 .navigation-drawer .brand-carousel {
@@ -428,8 +388,6 @@ a {
   padding-left: 35px;
 }
 
-/* TODO REMOVE THIS ONCE DYNAMIC */
-
 .theme-color {
   border-color: #cc0000;
 }
@@ -439,14 +397,6 @@ a {
 }
 
 /* END OF REMOVE ONCE DYNAMIC */
-
-/* TODO REMOVE CALENDAR STYLING */
-
-.theme--light.v-calendar-weekly,
-.theme--light.v-sheet {
-  background: none;
-  border: none;
-}
 
 .theme--light.v-calendar-weekly .v-calendar-weekly__day-month,
 .theme--light.v-sheet .v-calendar-weekly__day-month {
@@ -494,8 +444,6 @@ a {
   width: calc(14.3% - 10px);
 }
 
-/* END OF REMOVE CALENDAR STYLING */
-
 .body-3 {
   font-size: 18px;
   line-height: 18px;
@@ -518,6 +466,55 @@ a {
   border: 2px solid transparent;
   border-radius: 5px;
 }
+
+/*
+*****************************************
+    Frontend Language Select Component
+*****************************************
+*/
+
+.frontend-language.v-input {
+  width: 68px;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  cursor: pointer;
+}
+
+.frontend-language.v-input .v-select__slot {
+  cursor: pointer;
+}
+
+.frontend-language.v-input .v-select__slot .v-label {
+  display: none;
+}
+
+.frontend-language.v-input .v-select__slot .v-icon {
+  font-size: 20px;
+}
+
+.frontend-language.v-input input {
+  cursor: pointer;
+}
+
+.frontend-language.v-input .v-input__slot::before,
+.frontend-language.v-input .v-input__slot::after {
+  display: none;
+}
+
+.frontend-language.v-input label {
+  font-size: 9pt;
+}
+
+.frontend-language.v-input .v-input__icon--append .v-icon {
+  font-size: 10px;
+}
+
+/*
+*****************************************
+    End Frontend Language Select Component
+*****************************************
+*/
 
 .r-color-picker {
   position: relative;

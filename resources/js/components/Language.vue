@@ -6,6 +6,7 @@
         :color="themeOption.inputColor"
         v-model="selectedLanguageId"
         return-object
+        :class="isFrontend ? 'frontend-language' : ''"
         :append-icon="isFrontend ? 'expand_more' : 'arrow_drop_down'"
         :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
         @change="onSubLanguageChange"

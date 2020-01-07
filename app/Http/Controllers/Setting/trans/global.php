@@ -863,6 +863,21 @@ return [
         'label' => 'Continue',
         'identifier' => 'continue',
         'translation' => 'Continue'
+    ],
+    [
+        'label' => 'Sign in',
+        'identifier' => 'signin',
+        'translation' => 'Sign in'
+    ],
+    [
+        'label' => 'Welcome',
+        'identifier' => 'welcome',
+        'translation' => 'Welcome'
+    ],
+    [
+        'label' => 'Multi',
+        'identifier' => 'multi',
+        'translation' => 'Multi'
     ]
 
 ];

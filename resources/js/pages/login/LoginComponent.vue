@@ -4,94 +4,90 @@
         class="guest-login"
         style="background-image:url('images/guest-login.png')"
     >
-    <v-container fill-height
-                 justify-center
-                 align-content-center>
-            <v-card width="600px">
-                <v-card-text class="login-section">
+    <v-container>
+        <v-layout fill-height
+                  justify-center
+                  align-center column nowrap>
+            <v-flex>
+                <v-card width="600">
                     <v-form method="post" v-model="valid" ref="guestLoginGorm">
-                        <v-container grid-list-xs>
+                        <v-layout column nowrap class="login-section">
+                            <v-flex mt-4 align-self-end xs6 class="language-select stroke-dropdown">
+                                <language-picker
+                                    :languageId="40"
+                                    isFrontend
+                                ></language-picker>
+                            </v-flex>
 
-                            <v-layout row nowrap justify-right>
+                            <v-flex xs12>
+                                <h2 class="login-title">{{ trans.welcome + ' ' + trans.back }}!</h2>
+                                <h3>{{ trans.EnterYourUniqueCode }}</h3>
+                            </v-flex>
 
-                                <v-flex>
+                            <v-flex xs12>
+                                <v-text-field
+                                    color="dark"
+                                    :hint="trans.egnchfge23sxs"
+                                    v-model="user.unique"
+                                    :rules="[v => !!v || `${trans.uniqueId} ${trans.is_required}`]"
+                                    required
+                                    validate-on-blur
+                                    :error="validation.error"
+                                >
+                                </v-text-field>
+                            </v-flex>
 
-                                </v-flex>
+                            <v-flex v-if="validation.error">
+                                <div class="red--text text-xs-center">{{validation.message}}</div>
+                            </v-flex>
 
-                            </v-layout>
+                            <v-flex xs12 v-if="errorLogin">
+                                <p class="mb-0 red--text">Access denied user email & password is not match.</p>
+                            </v-flex>
 
-                            <v-layout row wrap id="login-section">
+                            <v-flex xs12>
+                                <input type="hidden" name="_token"/>
+                                <v-btn
+                                    class="ma-0 login-button"
+                                    raised
+                                    dark
+                                    :loading="loading"
+                                    :disabled="loading"
+                                    @click="onSubmit()">
+                                    <v-icon>account_circle</v-icon>
+                                    {{ trans.signin }}
+                                </v-btn>
+                            </v-flex>
 
-                                <v-flex xs12>
-                                    <h2 class="login-title"><!--{{ trans.welcome }}-->Welcome Back</h2>
-                                    <h3>{{ trans.EnterYourUniqueCode }}</h3>
-                                </v-flex>
-
-                                <v-flex xs12>
-                                    <v-text-field
-                                        color="dark"
-                                        :hint="trans.egnchfge23sxs"
-                                        v-model="user.unique"
-                                        :rules="[v => !!v || `${trans.uniqueId} ${trans.is_required}`]"
-                                        required
-                                        validate-on-blur
-                                        :error="validation.error"
-                                    >
-                                    </v-text-field>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row justify-center v-if="validation.error">
-                                <v-flex>
-                                    <div class="red--text text-xs-center">{{validation.message}}</div>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row wrap fluid>
-                                <v-flex xs12 v-if="errorLogin">
-                                    <p class="mb-0 red--text">Access denied user email & password is not match.</p>
-                                </v-flex>
-
-                                <v-flex xs12>
-                                    <input type="hidden" name="_token"/>
-                                    <v-btn
-                                        class="ma-0 login-button"
-                                        raised
-                                        dark
-                                        :loading="loading"
-                                        :disabled="loading"
-                                        @click="onSubmit()">
-                                        <v-icon>account_circle</v-icon>
-                                        {{ trans.signin }}
-                                    </v-btn>
-                                </v-flex>
-
-                                <v-flex xs12 class="multi-container">
-                                    <input type="hidden" name="_token"/>
-                                    <v-btn
-                                        class="ma-0 multi-button"
-                                        raised
-                                        dark
-                                        :loading="loading"
-                                        :disabled="loading"
-                                        @click="onSubmit()">
-                                        <!--{{ trans.login }}-->multi brand
-                                    </v-btn>
-                                </v-flex>
-                            </v-layout>
-
-                        </v-container>
-
+                            <v-flex xs12 mb-4 class="multi-container">
+                                <input type="hidden" name="_token"/>
+                                <v-btn
+                                    class="ma-0 multi-button"
+                                    raised
+                                    dark
+                                    :loading="loading"
+                                    :disabled="loading"
+                                    @click="onSubmit()">
+                                    {{ trans.multi }} {{ trans.brand }}
+                                </v-btn>
+                            </v-flex>
+                        </v-layout>
                     </v-form>
-                </v-card-text>
-            </v-card>
+                </v-card>
+            </v-flex>
+        </v-layout>
     </v-container>
     </v-app>
 </template>
 <script>
     import {mapGetters} from 'vuex'
+    import LanguagePicker from '@/components/Language'
 
     export default {
+        components: {
+            LanguagePicker
+        },
+
         data() {
             return {
                 errorLogin: false,
