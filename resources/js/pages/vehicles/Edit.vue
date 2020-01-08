@@ -242,7 +242,6 @@
 
             onBackToBrand(){
                 if(this.subComponent){
-                    console.log('is subComponent');
                     switch(this.model){
                         case 'brand':
                             this.$router.push({
@@ -256,7 +255,6 @@
                             break
                     }
                 }else{
-                    console.log("isn't subComponent");
                     this.$router.push({name: 'listBrands'})
                     this.$store.commit('setButtonLoading', false)
                 }

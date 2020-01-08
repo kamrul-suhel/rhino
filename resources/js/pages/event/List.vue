@@ -250,7 +250,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedEvent.name}  ${this.trans.successfully_deleted}`
+                                message: `${this.trans.event}  ${this.trans.successfully_deleted}`
                             })
 
                             this.initialize()

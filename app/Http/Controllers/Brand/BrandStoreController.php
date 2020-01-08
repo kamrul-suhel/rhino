@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Brand;
 
+use App\Brand;
 use App\BrandTranslation;
 use Illuminate\Http\Request;
 use App\Http\Requests\BrandRequest;

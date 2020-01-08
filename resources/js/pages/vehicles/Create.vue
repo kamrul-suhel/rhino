@@ -213,7 +213,7 @@
                             
                             // check if vehicle created from brand or vehicle
                             if ( this.subComponent ){
-                                this.$router.push({name: 'editBrands', params:{id: this.$route.params.brandId}});
+                                this.$router.push({name: 'editBrand', params:{id: this.$route.params.brandId}});
                             } else {
                                 this.$router.push({name: 'listVehicles'});
                             }

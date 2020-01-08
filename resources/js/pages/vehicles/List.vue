@@ -35,26 +35,28 @@
                     class="elevation-1"
                 >
                     <template v-slot:items="props">
-                        <td>{{ props.item.model }}</td>
-                        <td v-if="!subComponent">{{ props.item.brand }}</td>
-                        <td class="text-xs-right">
-                            <v-icon
-                            small
-                            class="mr-2"
-                            @click="onEditVehicle(props.item)"
-
-                            >
-                                edit
-                            </v-icon>
-
-                            <v-icon
-                                :color="themeOption.buttonDangerColor"
+                        <tr @click="onEditVehicle(props.item)">
+                            <td>{{ props.item.model }}</td>
+                            <td v-if="!subComponent">{{ props.item.brand }}</td>
+                            <td class="text-xs-right">
+                                <v-icon
                                 small
-                                @click="onDeleteVehicle(props.item)"
-                            >
-                                delete
-                            </v-icon>
-                        </td>
+                                class="mr-2"
+                                @click="onEditVehicle(props.item)"
+
+                                >
+                                    edit
+                                </v-icon>
+
+                                <v-icon
+                                    :color="themeOption.buttonDangerColor"
+                                    small
+                                    @click.stop="onDeleteVehicle(props.item)"
+                                >
+                                    delete
+                                </v-icon>
+                            </td>
+                        </tr>
                     </template>
                 </v-data-table>
             </v-flex>
