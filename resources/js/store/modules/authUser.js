@@ -78,7 +78,7 @@ const mutations = {
     },
 
     setUserRole(state, role){
-        state.isAdmin = role
+        state.admin = role
     }
 }
 
