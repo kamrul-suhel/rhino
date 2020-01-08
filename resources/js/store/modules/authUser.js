@@ -3,7 +3,7 @@ const defaultState = {
     userId : null,
     userName: null,
     userEmail: null,
-    admin: false,
+    admin: true,
     isLogin: true,
     themeOption:{
         theme: 'dark',
@@ -78,7 +78,7 @@ const mutations = {
     },
 
     setUserRole(state, role){
-        state.isAdmin = role
+        state.admin = role
     }
 }
 

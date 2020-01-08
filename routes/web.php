@@ -5,6 +5,12 @@ use Illuminate\Http\Request;
 
 Auth::routes();
 
+/**
+ * AUth route
+ */
+
+Route::get('auth/me', 'Auth\LoginController@getLoginUser');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +23,7 @@ Auth::routes();
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 })->name('guestLogin');
 
 Route::post('guests/login', 'Guest\GuestLoginController@login');
@@ -32,20 +38,24 @@ Route::post('guests/logout', 'Guest\GuestLoginController@logOut');
 Route::prefix('admin')->group(function(){
 
     Route::get('', function(){
-       return view('welcome');
-    });
+       return view('index');
+    })->name('admin');
+
+    Route::get('dashboard', function(){
+        return view('index')->name('dashboard');
+     })->middleware('auth');
 
     Route::prefix('dealerships')->group(function () {
         Route::get('/', function () {
-            return view('welcome');
-        });
+            return view('index');
+        })->middleware('auth');
 
         Route::get('create', function () {
-            return view('welcome');
-        });
+            return view('index');
+        })->middleware('auth');
 
         Route::get('{id}/edit', function () {
-            return view('welcome');
+            return view('index');
         });
 
         /**
@@ -53,11 +63,11 @@ Route::prefix('admin')->group(function(){
          */
         Route::prefix('groups')->group(function(){
             Route::get('', function () {
-                return view('welcome');
+                return view('index');
             });
 
             Route::get('list', function () {
-                return view('welcome');
+                return view('index');
             });
         });
 
@@ -65,7 +75,7 @@ Route::prefix('admin')->group(function(){
          * Dealership event routes
          */
         Route::get('{dealershipId}/events/{id}/edit', function () {
-            return view('welcome');
+            return view('index');
         });
     });
 
@@ -80,19 +90,19 @@ Route::prefix('admin')->group(function(){
 
     Route::prefix('countries')->group(function () {
         Route::get('', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('/create', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('/list', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('{id}/edit', function () {
-            return view('welcome');
+            return view('index');
         });
     });
 
@@ -105,7 +115,7 @@ Route::prefix('admin')->group(function(){
     */
     Route::prefix('languages')->group(function () {
         Route::get('/', function () {
-            return view('welcome');
+            return view('index');
         });
     });
 
@@ -117,27 +127,27 @@ Route::prefix('admin')->group(function(){
     */
     Route::prefix('brands')->group(function () {
         Route::get('/', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('{id}/edit', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('create', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('{id}/vehicle/{vehicleId}', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('{id}/vehicle/create', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('list', function () {
-            return view('welcome');
+            return view('index');
         });
     });
 
@@ -150,15 +160,19 @@ Route::prefix('admin')->group(function(){
     */
     Route::prefix('vehicles')->group(function () {
         Route::get('/', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('{id}/edit', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('create', function () {
-            return view('welcome');
+            return view('index');
+        });
+
+        Route::get('list', function () {
+            return view('index');
         });
     });
 
@@ -171,15 +185,15 @@ Route::prefix('admin')->group(function(){
     */
     Route::prefix('companies')->group(function () {
         Route::get('/', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('list', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('create', function () {
-            return view('welcome');
+            return view('index');
         });
     });
 
@@ -193,20 +207,22 @@ Route::prefix('admin')->group(function(){
 
     Route::prefix('users')->group(function () {
         Route::get('', function () {
-            return view('welcome');
+            return view('index');
         });
 
 
         Route::get('list', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('create', function () {
-            return view('welcome');
+            return view('index');
         });
 
-        Route::get('{id}/edit', function () {
-            return view('welcome');
+        Route::get('{id}/edit', function ($id) {
+            $user = User::find($id);
+            $title = $user->surname;
+            return view('index')->compact('title');
         });
     });
 
@@ -219,28 +235,28 @@ Route::prefix('admin')->group(function(){
     */
     Route::prefix('events')->group(function () {
         Route::get('', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('list', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('create', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('{id}/edit', function () {
-            return view('welcome');
+            return view('index');
         });
 
 
         Route::get('types', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('types/list', function () {
-            return view('welcome');
+            return view('index');
         });
     });
 
@@ -253,19 +269,19 @@ Route::prefix('admin')->group(function(){
     */
     Route::prefix('guests')->group(function () {
         Route::get('', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('list', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('create', function () {
-            return view('welcome');
+            return view('index');
         });
 
         Route::get('{id}/edit', function () {
-            return view('welcome');
+            return view('index');
         });
 
     });
@@ -284,7 +300,7 @@ Route::prefix('admin')->group(function(){
 
     Route::prefix('test')->group(function(){
         Route::get('datetime', function(){
-            return view('welcome');
+            return view('index');
         });
     });
 
@@ -297,7 +313,7 @@ Route::prefix('admin')->group(function(){
     */
 
     Route::get('/booking', function () {
-        return view('welcome');
+        return view('index');
     });
 });
 
@@ -315,11 +331,10 @@ Route::middleware(['guestAuth'])->prefix('booking')->group(function () {
             ]);
         }
 
-        return view('welcome');
+        return view('index');
     });
 
     Route::get('list', function(){
-        return view('welcome');
+        return view('index');
     });
 });
-

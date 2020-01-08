@@ -1,14 +1,17 @@
 <template>
-    <AdminLoginComponent></AdminLoginComponent>
+    <div>
+
+        <h2>Admin Dashboard</h2>
+
+    </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
-    import AdminLoginComponent from '@/components/Login/AdminLogin'
 
     export default {
         components: {
-            AdminLoginComponent
+            
         },
 
         data() {

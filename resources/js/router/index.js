@@ -14,6 +14,7 @@ import Event from "./Modules/event";
 import TypesRoutes from "./Modules/type";
 import Guest from "./Modules/guest";
 import Settings from "./Modules/settings";
+import Admin from "./Modules/admin";
 
 // Remove in product please
 import Test from "./Modules/test"
@@ -67,7 +68,10 @@ const routes = [
     {...Settings},
 
     // Test Routes
-    {...Test}
+    {...Test},
+
+    // Admin Routes
+    {...Admin}
 ]
 
 export default new Router({
