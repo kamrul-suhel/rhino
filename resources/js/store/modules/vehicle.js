@@ -66,7 +66,7 @@ const mutations = {
             {
                 text: trans.vehicle,
                 align: 'left',
-                sortable: false,
+                sortable: true,
                 value: 'vehicle'
             },
 

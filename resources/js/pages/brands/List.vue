@@ -35,26 +35,28 @@
                     class="elevation-1"
                 >
                     <template v-slot:items="props">
-                        <td>{{ props.item.name }}</td>
-                        <td>{{ props.item.company }}</td>
-                        <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
-                        <td class="text-xs-right">
-                            <v-icon
-                                small
-                                class="mr-2"
-                                @click="onEditBrand(props.item)"
-                            >
-                                edit
-                            </v-icon>
+                        <tr @click="onEditBrand(props.item)">
+                            <td>{{ props.item.name }}</td>
+                            <td>{{ props.item.company }}</td>
+                            <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
+                            <td class="text-xs-right">
+                                <v-icon
+                                    small
+                                    class="mr-2"
+                                    @click="onEditBrand(props.item)"
+                                >
+                                    edit
+                                </v-icon>
 
-                            <v-icon
-                                :color="themeOption.buttonDangerColor"
-                                small
-                                @click="onDeleteBrand(props.item)"
-                            >
-                                delete
-                            </v-icon>
-                        </td>
+                                <v-icon
+                                    :color="themeOption.buttonDangerColor"
+                                    small
+                                    @click="onDeleteBrand(props.item)"
+                                >
+                                    delete
+                                </v-icon>
+                            </td>
+                        </tr>
                     </template>
                 </v-data-table>
             </v-flex>
@@ -293,7 +295,7 @@
             },
 
             onEditBrand(brand) {
-                this.$router.push({name: 'editBrands', params: {id: brand.id}})
+                this.$router.push({name: 'editBrand', params: {id: brand.id}})
             },
 
             onDeleteBrand(company) {

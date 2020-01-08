@@ -19,7 +19,7 @@ const brandsRoute ={
 
         {
             path:':id/edit',
-            name: 'editBrands',
+            name: 'editBrand',
             component: Brands.Edit,
         },
 
