@@ -23,6 +23,10 @@ export default {
      * @returns {string}
      */
     generateParams(payload) {
+        if(payload === null){
+            return ''
+        }
+
         let params = '?'
         if (payload.type && typeof (payload.type) != 'undefined') {
             params += `type=${payload.type}`

@@ -91,7 +91,7 @@ new Vue({
     methods: {
         initSetting() {
             // Setup translation fields
-            this.$store.dispatch('getAllSettingFields');
+            this.$store.dispatch('fetchSettingFields');
 
             // Initialize language
             this.$store.dispatch('fetchLanguages')

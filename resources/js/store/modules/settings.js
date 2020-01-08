@@ -1,3 +1,5 @@
+import fn from "../../utils/function";
+
 const state = {
     theme:'dark',
     fields: {},
@@ -45,11 +47,13 @@ const getters = {
 }
 
 const actions = {
-    getAllSettingFields({commit,dispatch}, payload){
-        axios.get('/api/settings').then((response) => {
+    fetchSettingFields({commit,dispatch}, payload = null){
+        const URL = `/api/settings${fn.generateParams(payload)}`
+        commit('setIsLoading', true)
+        axios.get(URL).then((response) => {
             commit('setFieldsItem', response.data);
             dispatch('dispatchNavigation', response.data) // Dispatch to navigation store
-            commit('setIsLoading', true)
+            commit('setIsLoading', false)
         });
     }
 }
