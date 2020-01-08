@@ -337,6 +337,12 @@ return [
     ],
 
     [
+        'label' => 'Enter your password',
+        'identifier' => 'enterYourPassword',
+        'translation' => 'Enter your password'
+    ],
+
+    [
         'label' => 'minimum 8 character',
         'identifier' => 'minimum8Character',
         'translation' => 'minimum 8 character'
@@ -773,6 +779,12 @@ return [
         'label' => 'Logout',
         'identifier' => 'logOut',
         'translation' => 'Logout'
+    ],
+
+    [
+        'label' => 'Login',
+        'identifier' => 'login',
+        'translation' => 'Login'
     ],
 
     [

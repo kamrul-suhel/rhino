@@ -33,7 +33,7 @@
                                     <v-text-field
                                         class="email"
                                         color="dark"
-                                        :label="`${trans.enter} ${trans.your} ${trans.password}`"
+                                        :label="`${trans.enterYourPassword}`"
                                         v-model="user.password"
                                         :append-icon="showpassword ? 'visibility' : 'visibility_off'"
                                         @click:append="showpassword = !showpassword"
@@ -155,13 +155,13 @@
                     // submit data with ajax request
                     axios.post('/login', loginForm)
                         .then(response => {
-                            this.loginProgress = true;
-                            this.loading = true;
+                            this.loginProgress = true
+                            this.loading = true
                         })
                         .catch(error => {
-                            this.loading = false;
-                            this.errorLogin = true;
-                            this.loginProgress = false;
+                            this.loading = false
+                            this.errorLogin = true
+                            this.loginProgress = false
                         });
                 }
             },
