@@ -156,7 +156,8 @@
                     axios.post('/login', loginForm)
                         .then(response => {
                             if(response.success){
-                                this.$router.push({name: 'dashboard'});
+                                this.$store.commit('admin')
+                                this.$router.push({name: 'dashboard'})
                             }
                             this.loginProgress = true
                             this.loading = true
@@ -170,7 +171,7 @@
             },
 
             onForgotPassword() {
-                this.open_login_dialog = false;
+                this.open_login_dialog = false
             },
         }
     }
