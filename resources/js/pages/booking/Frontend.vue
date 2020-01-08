@@ -141,6 +141,7 @@
         },
 
         created() {
+            this.$store.commit('setUserRole', false)
             this.$store.dispatch('fetchGuestBookingData')
         },
 

@@ -41,6 +41,13 @@
                     </v-list-tile-action>
                 </v-list-tile>
             </v-list-group>
+
+            <v-list-tile @click="onLogout">
+                <v-list-tile-action>
+                    <v-icon>power_settings_new</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-title>{{ trans.logOut }}</v-list-tile-title>
+            </v-list-tile>
         </v-list>
     </v-navigation-drawer>
 </template>
@@ -78,8 +85,15 @@
                 }
             },
 
-            onCloseWindow() {
-                window.close();
+            onLogout() {
+                axios.post('/logout').then((response) => {
+
+                    if(response.data.success){
+                        // reset auth user
+                        this.$store.commit('setAuthUser', {})
+                        window.location = '/admin'
+                    }
+                })
             }
         }
     }

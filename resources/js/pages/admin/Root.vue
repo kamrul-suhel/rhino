@@ -30,6 +30,7 @@
         },
 
         created() {
+            this.$store.commit('setUserRole', false)
         },
 
         methods: {

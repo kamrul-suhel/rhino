@@ -11,7 +11,7 @@
         },
 
         created() {
-            this.$store.dispatch('fetchGuest', {id: 4})
+            // this.$store.dispatch('fetchGuest', {id: 4})
         }
     }
 </script>

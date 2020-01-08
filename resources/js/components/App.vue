@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" v-if="initialize">
         <v-app
             id="inspire"
             dark
@@ -39,8 +39,7 @@
         },
 
         data: () => ({
-            login: false,
-            initialize: false
+
         }),
 
         computed: {
@@ -48,7 +47,8 @@
                 isLogin: 'getIsLogin',
                 isLoading: 'getIsLoading',
                 themeOption: 'getThemeOption',
-                isAdmin: 'getIsAdmin'
+                isAdmin: 'getIsAdmin',
+                initialize: 'getInitializeApp'
             })
         },
 
@@ -59,6 +59,16 @@
         },
 
         async created() {
+            axios.get('/auth/me').then((response) => {
+                if(response.data.success){
+                    this.$store.commit('setAuthUser', response.data.authUser)
+                    this.$store.commit('setUserRole', true)
+                    this.$store.commit('setInitialize', true)
+                }else{
+                    this.$store.commit('setUserRole', false)
+                    this.$store.commit('setInitialize', true)
+                }
+            })
         },
 
         methods: {}
