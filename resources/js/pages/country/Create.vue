@@ -45,14 +45,6 @@
                                 <v-flex xs12 sm6>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.capital"
-                                        v-model="country.capital"
-                                    ></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6>
-                                    <v-text-field
-                                        :color="themeOption.inputColor"
                                         :label="trans.code"
                                         v-model="country.code"
                                         :rules="[v => !!v || `${trans.country} ${trans.code} ${trans.is_required}`]"
@@ -64,7 +56,8 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.status"
                                         v-model="country.status"
-                                        :rules="[v => !!v ||  `${trans.status} ${trans.is_required}`]"
+                                        :true-value="1"
+                                        :false-value="0"
                                     ></v-switch>
                                 </v-flex>
 
@@ -73,7 +66,7 @@
                                         :items="seatingPosition"
                                         :color="themeOption.inputColor"
                                         :label="trans.seating_position"
-                                        v-model="country.seat_position"
+                                        v-model="country.seating_position"
                                         :rules="[v => !!v ||  `${trans.seating_positions} ${trans.is_required}`]"
                                     ></v-select>
                                 </v-flex>
@@ -113,7 +106,9 @@
                 valid: true,
                 active: null,
                 seatingPosition:[],
-                country: {}
+                country: {
+                    status: 1
+                }
             }
 
         },
@@ -149,11 +144,11 @@
             },
 
             createCountry(){
+
                 // const selectedCountry = this.selectedCountry
                 // const ID = selectedCountry.id
 
                 if(this.$refs.countryForm.validate()){
-                    console.log('validates');
                     let countryForm = new FormData()
 
                     // Set form object for Country

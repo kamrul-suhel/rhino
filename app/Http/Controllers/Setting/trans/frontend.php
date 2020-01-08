@@ -33,15 +33,5 @@ return [
         'label' => 'e.g nchfge23sxs',
         'identifier' => 'e.gnchfge23sxs',
         'translation' => 'e.g nchfge23sxs'
-    ],
-    [
-        'label' => 'Sign in',
-        'identifier' => 'signin',
-        'translation' => 'signin'
-    ],
-    [
-        'label' => 'welcome',
-        'identifier' => 'welcome',
-        'translation' => 'welcome'
     ]
 ];
