@@ -4,7 +4,7 @@ const defaultState = {
     userName: null,
     userEmail: null,
     admin: false,
-    isLogin: true,
+    isLogin: false,
     themeOption:{
         theme: 'dark',
         inputColor: 'white',
