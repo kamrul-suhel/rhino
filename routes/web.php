@@ -42,7 +42,7 @@ Route::prefix('admin')->group(function(){
     })->name('admin');
 
     Route::get('dashboard', function(){
-        return view('index');
+        return view('index')->name('dashboard');
      })->middleware('auth');
 
     Route::prefix('dealerships')->group(function () {

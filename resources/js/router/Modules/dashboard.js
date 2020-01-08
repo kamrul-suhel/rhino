@@ -1,9 +1,9 @@
-import * as Admin from "../../pages/admin"
+import * as Dashboard from "../../pages/dashboard";
 
 const dashboard ={
-    path: '/dashboard',
+    path: '/admin/dashboard',
     name: 'dashboard',
-    component: Admin.Root
+    component: Dashboard.Root
 }
 
 export default dashboard

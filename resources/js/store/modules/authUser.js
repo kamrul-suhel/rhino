@@ -3,8 +3,8 @@ const defaultState = {
     userId : null,
     userName: null,
     userEmail: null,
-    admin: false,
-    isLogin: false,
+    admin: true,
+    isLogin: true,
     themeOption:{
         theme: 'dark',
         inputColor: 'white',
