@@ -211,8 +211,10 @@ Route::prefix('admin')->group(function(){
             return view('welcome');
         });
 
-        Route::get('{id}/edit', function () {
-            return view('welcome');
+        Route::get('{id}/edit', function ($id) {
+            $user = User::find($id);
+            $title = $user->surname;
+            return view('welcome')->compact('title');
         });
     });
 

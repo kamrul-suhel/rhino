@@ -155,6 +155,9 @@
                     // submit data with ajax request
                     axios.post('/login', loginForm)
                         .then(response => {
+                            if(response.success){
+                                this.$router.push({name: 'dashboard'});
+                            }
                             this.loginProgress = true
                             this.loading = true
                         })
