@@ -22,12 +22,22 @@ Route::get('auth/me', 'Auth\LoginController@getLoginUser');
 |
 */
 
-Route::get('/', function () {
+Route::get('', function(){
     return view('index');
-})->name('guestLogin');
+})->name('admin');
 
 Route::post('guests/login', 'Guest\GuestLoginController@login');
 Route::post('guests/logout', 'Guest\GuestLoginController@logOut');
+
+/*
+|--------------------------------------------------------------------------
+| Unprotected route
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/admin', function () {
+    return view('index');
+})->name('admin');
 
 /*
 |--------------------------------------------------------------------------
@@ -35,24 +45,24 @@ Route::post('guests/logout', 'Guest\GuestLoginController@logOut');
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('admin')->group(function(){
-
-    Route::get('', function(){
-       return view('index');
-    })->name('admin');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
 
     Route::get('dashboard', function(){
-        return view('index')->name('dashboard');
-     })->middleware('auth');
+        return view('index');
+     })->name('dashboard');
 
     Route::prefix('dealerships')->group(function () {
         Route::get('/', function () {
             return view('index');
-        })->middleware('auth');
+        });
+
+        Route::get('/list', function () {
+            return view('index');
+        });
 
         Route::get('create', function () {
             return view('index');
-        })->middleware('auth');
+        });
 
         Route::get('{id}/edit', function () {
             return view('index');

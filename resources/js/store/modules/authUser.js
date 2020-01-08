@@ -42,13 +42,18 @@ const defaultState = {
         titleWidthF: '400px',
         brandColor: '#cc0000',
         secondaryColor: '#444444'
-    }
+    },
+    initialize: false
 }
 const state = {
     ...defaultState
 }
 
 const mutations = {
+    setInitialize(state, status){
+        state.initialize = status
+    },
+
     setUser(state, user){
         state.userId = user.id
         state.userName = user.name
@@ -63,7 +68,6 @@ const mutations = {
 
     setAuthUser(state, user){
         state.authUser =  {...user}
-        state.isLogin = true
     },
 
     setIsLogin(state, status){
@@ -113,6 +117,10 @@ const getters = {
 
     getIsAdmin(state){
         return state.admin
+    },
+
+    getInitializeApp(state){
+        return state.initialize
     }
 }
 

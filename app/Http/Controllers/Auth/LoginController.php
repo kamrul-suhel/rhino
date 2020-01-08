@@ -52,6 +52,10 @@ class LoginController extends Controller
                 return redirect()->intended('dashboard');
             }
         }
+
+        return response()->json([
+            'success' => false
+        ]);
     }
 
     /**
@@ -60,15 +64,37 @@ class LoginController extends Controller
      */
     public function getLoginUser(){
         $user = Auth::user();
+
         if($user){
-            return response()->josn([
+            return response()->json([
                 'success' => true,
                 'authUser' => $user
             ]);
         }
-        
+
         return response()->json([
             'success' => false
         ]);
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        if($request->ajax()){
+            return response()->json([
+                'success' => true
+            ]);
+        }
+
+        return $this->loggedOut($request) ?: redirect('/admin');
     }
 }
