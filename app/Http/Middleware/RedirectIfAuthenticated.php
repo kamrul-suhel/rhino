@@ -18,8 +18,10 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-       
-           return redirect('/admin');
+
+            if(!$request->ajax()){
+               return redirect('/admin');
+            }
         }
 
         return $next($request);

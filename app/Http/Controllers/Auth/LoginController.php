@@ -52,6 +52,10 @@ class LoginController extends Controller
                 return redirect()->intended('dashboard');
             }
         }
+
+        return response()->json([
+            'success' => false
+        ]);
     }
 
     /**
@@ -66,7 +70,7 @@ class LoginController extends Controller
                 'authUser' => $user
             ]);
         }
-        
+
         return response()->json([
             'success' => false
         ]);
