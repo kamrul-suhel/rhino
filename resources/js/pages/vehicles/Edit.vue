@@ -245,9 +245,9 @@
                     switch(this.model){
                         case 'brand':
                             this.$router.push({
-                                name: 'editBrand',
+                                name: 'editBrands',
                                 params: {
-                                    id: this.$route.params.BrandId
+                                    id: this.$route.params.brandId
                                 }
                             })
 
