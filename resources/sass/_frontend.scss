@@ -325,10 +325,7 @@
     Nav footer
      */
 
-    .navFooter{
-        position: absolute;
-        bottom: 50px;
-        width: calc(100% - 60px);
+    .flex:last-of-type {
 
         .flex:first-of-type {
             height: 28px;
