@@ -136,6 +136,8 @@
                 eventUserFrom.append('user_id', userId)
                 axios.post(URL, eventUserFrom).then((response) => {
                     if (response.data.success) {
+                        console.log('suerld')
+                        return;
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
@@ -147,6 +149,7 @@
             },
 
             onRemoveRelation(userId) {
+                const eventId = this.$route.params.eventId
                 const URL = `/api/events/${eventId}/users/${userId}`
                 let brandEventFrom = new FormData()
                 brandEventFrom.append(`event_id`, eventId)

@@ -127,7 +127,14 @@
 
         methods: {
             onSelectVehicle(vehicle) {
-                console.log('set selected vehicle')
+                let vehicles = [...this.vehicles]
+
+                _.map(vehicles, (currentVehicle) => {
+                    currentVehicle = {
+                        ...currentVehicle,
+
+                    }
+                })
             },
 
             onVehicleSelected(vehicle) {

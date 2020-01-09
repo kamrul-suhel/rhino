@@ -89,7 +89,7 @@
             generateDate(){
                 const start = moment(this.selectedEvent.start)
                 const end = moment(this.selectedEvent.end)
-                const dates = fn.getDate(start, end, this.dealership)
+                const dates = fn.getDates(start, end, this.dealership)
                 this.dates = [...dates]
             },
 

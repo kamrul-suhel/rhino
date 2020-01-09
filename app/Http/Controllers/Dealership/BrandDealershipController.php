@@ -24,7 +24,8 @@ class BrandDealershipController extends Controller
             $brand->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id');
             $brand->where('brands_translation.language_id', $this->languageId);
         })->leftJoin('regions', 'regions.id', '=', 'brand_dealership.region_id')
-            ->leftJoin('countries', 'regions.country_id', '=', 'countries.id');
+            ->leftJoin('countries', 'regions.country_id', '=', 'countries.id')
+            ->where('brand_dealership.dealership_id', $dealershipId);
 
         if ($request->has('paginate')) {
             $brands = $brands->paginate($this->perPage);

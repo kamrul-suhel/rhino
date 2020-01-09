@@ -89,7 +89,6 @@
                             >
                                 <FConfirmDetails></FConfirmDetails>
                             </v-tab-item>
-
                         </v-tabs>
                     </v-flex>
                 </v-layout>
