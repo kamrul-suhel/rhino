@@ -2,7 +2,8 @@
     <div>
         <v-layout row wrap align-center justify-center class="personal-details">
             <v-flex class="xs12" align-center>
-                <h4 class="display-1 mt-5 mx-2 text-xs-center">Your Account Details</h4>
+                <h4 class="display-1 mt-5 mx-2 text-xs-center">Please confirm or amend your contact details</h4>
+                <h5 class="headline mt-2 mx-4 text-xs-center">Are these details still correct?</h5>
             </v-flex>
             <v-flex row nowrap mt-5 justify-center class="details-container xs11 md8">
                 <v-container mt-4 grid-list-xl>
@@ -12,8 +13,9 @@
                                 <v-flex md8 sm12>
                                     <h6 class="body-1"><b>First name</b></h6>
                                     <v-text-field
-                                        label="First name"
+                                        value="Test First name"
                                         outline
+                                        :disabled="isEditable ? false : true"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -23,8 +25,9 @@
                                 <v-flex md8 sm12>
                                     <h6 class="body-1"><b>Surname</b></h6>
                                     <v-text-field
-                                        label="Surname"
+                                        value="Test Surname"
                                         outline
+                                        :disabled="isEditable ? false : true"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -34,8 +37,9 @@
                                 <v-flex md8 sm12>
                                     <h6 class="body-1"><b>Phone Number</b></h6>
                                     <v-text-field
-                                        label="Phone Number"
+                                        value="Test Phone Number"
                                         outline
+                                        :disabled="isEditable ? false : true"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -45,65 +49,17 @@
                                 <v-flex md8 sm12>
                                     <h6 class="body-1"><b>Email Address</b></h6>
                                     <v-text-field
-                                        label="Email Address"
+                                        value="Test Email Address"
                                         outline
+                                        :disabled="isEditable ? false : true"
                                     ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                        </v-flex>
-                        <v-flex my-2 xs12 sm6>
-                            <v-layout row wrap justify-end>
-                                <v-flex md8 sm12>
-                                    <h6 class="body-1"><b>Mailing Address</b></h6>
-                                    <v-textarea
-                                        outline
-                                        labebl="Mailing Address"
-                                    ></v-textarea>
-                                </v-flex>
-                            </v-layout>
-                        </v-flex>
-                        <v-flex my-2 xs12 sm6>
-                            <v-layout row wrap justify-start>
-                                <v-flex md8 sm12>
-                                    <h6 class="body-1"><b>Postcode</b></h6>
-                                    <v-text-field
-                                        label="Postcode"
-                                        outline
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                        </v-flex>
-                        <v-flex my-2 xs12 md8>
-                            <v-layout row wrap justify-start>
-                                <v-flex column class="mr-5">
-                                    <label>Mailing</label>
-                                    <v-checkbox class="mt-1"
-                                                v-model="checkbox1"
-                                    ></v-checkbox>
-                                </v-flex>
-                                <v-flex column class="mr-5">
-                                    <label>Email</label>
-                                    <v-checkbox class="mt-1"
-                                                v-model="checkbox2"
-                                    ></v-checkbox>
-                                </v-flex>
-                                <v-flex column class="mr-5">
-                                    <label>SMS</label>
-                                    <v-checkbox class="mt-1"
-                                                v-model="checkbox3"
-                                    ></v-checkbox>
-                                </v-flex>
-                                <v-flex column class="mr-5">
-                                    <label>Phone</label>
-                                    <v-checkbox class="mt-1"
-                                                v-model="checkbox4"
-                                    ></v-checkbox>
                                 </v-flex>
                             </v-layout>
                         </v-flex>
                         <v-flex xs12 my-2>
                             <v-layout row justify-center>
-                                <v-btn class="height-40 rounded-20 blue-grey darken-4 mb-3" style="color:white; padding-right:45px; padding-left:45px" depressed>SAVE</v-btn>
+                                <v-btn v-if="isEditable === true" class="height-40 rounded-20 blue-grey darken-4 mb-3" style="color:white; padding-right:45px; padding-left:45px" depressed>SAVE</v-btn>
+                                <v-btn v-else class="border-medium height-40 rounded-25 light-grey">EDIT DETAILS</v-btn>
                             </v-layout>
                         </v-flex>
                     </v-layout>
@@ -126,10 +82,7 @@
     export default {
         data(){
             return {
-                checkbox1: false,
-                checkbox2: false,
-                checkbox3: false,
-                checkbox4: false,
+                isEditable: true
             }
         },
 
