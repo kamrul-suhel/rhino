@@ -10,7 +10,7 @@
                   align-center column nowrap>
             <v-flex>
                 <v-card width="600" class="login-section">
-                    <v-form method="post" v-model="valid" ref="guestLoginGorm">
+                    <v-form method="post" v-model="valid" ref="guestLoginForm">
                         <v-layout column nowrap>
                             <v-flex mt-4 align-self-end xs6 class="language-select stroke-dropdown">
                                 <language-picker
