@@ -7,7 +7,8 @@ const defaultState = {
     allAppointmentTime:[],
     allSlot:[],
     selectedSlot:{},
-    selectedDate:''
+    selectedDate:'',
+    selectedSaleExecutive: {}
 }
 
 const state = {
@@ -56,6 +57,10 @@ const mutations = {
 
     setBookingAppointments(state, appointments){
         state.allAppointments = [...appointments]
+    },
+
+    setBookingSelectedSaleExecutive(state, saleExecutive){
+        state.selectedSaleExecutive = {...saleExecutive}
     }
 
 }
@@ -95,6 +100,10 @@ const getters = {
 
     getAllBookingAppointments(state){
         return state.allAppointments
+    },
+
+    getBookingSelectedSaleExecutive(sate){
+        return sate.selectedSaleExecutive
     }
 }
 
