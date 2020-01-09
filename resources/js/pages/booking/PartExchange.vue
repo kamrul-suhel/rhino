@@ -1,6 +1,6 @@
 <template>
     <div class="part-exchange">
-        <v-layout column nowrap>
+        <v-layout row wrap>
             <v-flex xs12>
                 <h4 class="display-1 mt-5 mx-3 text-xs-center">Do you have a car to part exchange?</h4>
             </v-flex>
@@ -38,7 +38,7 @@
                 </v-layout>
             </v-flex>
 
-            <flex>
+            <v-flex>
                 <v-layout>
                     <v-flex align="center" justify="center">
                         <v-layout row sm4 my-5 justify-center>
@@ -50,7 +50,7 @@
                         </v-layout>
                     </v-flex>
                 </v-layout>
-            </flex>
+            </v-flex>
         </v-layout>
     </div>
 </template>
