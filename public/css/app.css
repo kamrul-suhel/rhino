@@ -614,7 +614,7 @@ a {
 *****************************************
 */
 
-.personal-details .details-container > .flex {
+.personal-details .details-container {
   border: 1px solid #f0f0f0;
 }
 
