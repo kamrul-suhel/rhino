@@ -608,3 +608,72 @@
     End Personal Details Page
 *****************************************
 */
+
+
+
+/*
+*****************************************
+    Booking Confirmation Page
+*****************************************
+*/
+
+.booking-confirmation {
+
+    .v-card {
+        background-color: transparent;
+        border: 1px solid rgb(220,220,220);
+        box-shadow: none;
+
+        .v-card__text {
+            padding: 0;
+        }
+    }
+
+    .v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+        box-shadow: none;
+    }
+
+    .registration-confirmation {
+        width: 120px;
+        height: 30px;
+        background-color: rgb(255, 180, 0);
+        border: 1px solid rgb(160, 120, 0);
+        border-radius: 3px;
+        text-transform: uppercase;
+        text-align: center;
+        color: black;
+        font-size: 16px;
+        line-height: 16px;
+        padding: 7px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .v-carousel {
+        box-shadow: none;
+
+        .v-window__container {
+            height: 200px !important;
+
+            .v-window-item, .v-carousel__item {
+                height: 200px !important;
+            }
+        }
+
+        .v-window-item {
+            width: calc(100% - 120px);
+            margin: 0 60px;
+        }
+
+        .v-carousel__controls {
+            background: none;
+        }
+    }
+
+}
+
+/*
+*****************************************
+    End Booking Confirmation Page
+*****************************************
+*/
