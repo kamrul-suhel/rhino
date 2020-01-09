@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container grid-list-l>
-            <v-layout row wrap align-center justify-center class="booking-confirmation">
+            <!--<v-layout row wrap align-center justify-center class="booking-confirmation">
                 <v-flex class="xs12" align-center>
                     <h4 class="display-1 mt-5 mx-2 text-xs-center">Please check the following details are correct</h4>
                     <h5 class="headline mt-2 mx-4 text-xs-center">Are these details still correct?</h5>
@@ -90,7 +90,7 @@
                         </v-btn>
                     </v-layout>
                 </v-flex>
-            </v-layout>
+            </v-layout>-->
         </v-container>
     </div>
 </template>
