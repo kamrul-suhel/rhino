@@ -42,7 +42,7 @@
                                 <v-icon
                                 small
                                 class="mr-2"
-                                @click="onEditVehicle(props.item)"
+                                @click.stop="onEditVehicle(props.item)"
 
                                 >
                                     edit
@@ -182,7 +182,7 @@ import { log } from 'util'
         },
         methods: {
             fetchVehicle() {
-                this.$store.dispatch('fetchVehicles', {themeOption: this.themeOption, trans: this.trans});
+                this.$store.dispatch('fetchVehicles', {themeOption: this.themeOption, trans: this.trans, subComponent: this.subComponent});
             },
 
             // Initialize data when first render
@@ -202,9 +202,10 @@ import { log } from 'util'
                     themeOption: this.themeOption,
                     paginate: true,
                     search: this.searchVehicle,
-                    subComponent: true,
+                    subComponent: this.subComponent,
                     ...extraOption
                 }
+                console.log(this.subComponent)
 
                 this.$store.dispatch('fetchVehicles', paginateOption)
             },
@@ -212,7 +213,8 @@ import { log } from 'util'
             onEditVehicle(vehicle) {
                 // $router.push({name: 'editVehicles', params:{id: props.item.id}})
                 if (this.subComponent){
-
+                    
+                  
                     switch(this.model){
                         case 'brand':
                             this.$router.push({name: 'editBrandVehicle', params:{brandId: this.$route.params.id, vehicleId: vehicle.id}})
