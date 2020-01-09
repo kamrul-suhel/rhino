@@ -26,50 +26,50 @@
                             slider-color="yellow"
                         >
                             <v-tab
-                                key="appointment"
+                                key="selectModel"
                                 ripple
                             >
-                                Appointment
+                                Select Model
                             </v-tab>
 
                             <v-tab
-                                key="selectCar"
+                                key="appointment"
                                 ripple
                             >
-                                Select Car
+                                Book your Slot
                             </v-tab>
 
                             <v-tab
                                 key="partExchange"
                                 ripple
                             >
-                                Part exchange
+                                Part Exchange
                             </v-tab>
 
                             <v-tab
                                 key="personalDetail"
                                 ripple
                             >
-                                Personal Detail
+                                Confirm your Details
                             </v-tab>
 
                             <v-tab
                                 key="confirmDetail"
                                 ripple
                             >
-                                Confirm Detail
+                                Booking Confirmation
                             </v-tab>
+
+                            <v-tab-item
+                                key="selectModel"
+                            >
+                                <FSelectModel></FSelectModel>
+                            </v-tab-item>
 
                             <v-tab-item
                                 key="appointment"
                             >
                                 <FBookAppointment></FBookAppointment>
-                            </v-tab-item>
-
-                            <v-tab-item
-                                key="selectCar"
-                            >
-                                <FSelectCar></FSelectCar>
                             </v-tab-item>
 
                             <v-tab-item
@@ -87,7 +87,7 @@
                             <v-tab-item
                                 key="confirmDetail"
                             >
-                                <FConfirmDetails></FConfirmDetails>
+                                <FBookingConfirmation></FBookingConfirmation>
                             </v-tab-item>
 
                         </v-tabs>
@@ -101,26 +101,26 @@
 <script>
 
     import FDrawer from './Drawer'
-    import FSelectCar from './SelectModel'
+    import FSelectModel from './SelectModel'
     import FBookAppointment from './BookAppointment'
     import FPartExchange from './PartExchange'
     import FPersonalDetails from './PersonalDetails'
-    import FConfirmDetails from './ConfirmDetails'
+    import FBookingConfirmation from './BookingConfirmation'
     import {mapGetters} from 'vuex';
 
     export default {
         name: 'App',
         components: {
             FDrawer,
-            FSelectCar,
+            FSelectModel,
             FBookAppointment,
             FPartExchange,
             FPersonalDetails,
-            FConfirmDetails
+            FBookingConfirmation
         },
 
         data: () => ({
-            model: 'tab-2',
+            model: 'tab-1',
             active: null
         }),
 
