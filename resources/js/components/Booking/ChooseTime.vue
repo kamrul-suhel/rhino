@@ -63,14 +63,16 @@
                         {{ trans.mightYourGuestAlsoBeInterested }}
                     </h6>
 
-                    <v-checkbox class="mt-1" style="flex-grow:0"
-                    ></v-checkbox>
-
-                    <label class="body-2 mt-2 mr-5">{{ trans.yes }}</label>
-                    <v-checkbox class="mt-1" style="flex-grow:0"
-                    ></v-checkbox>
-
-                    <label class="body-2 mt-2 mr-4">{{ trans.no }}</label>
+                    <v-layout row class="checkboxes">
+                        <v-flex>
+                            <v-checkbox></v-checkbox>
+                            <label class="body-2 mr-5 ml-2">{{ trans.yes }}</label>
+                        </v-flex>
+                        <v-flex>
+                            <v-checkbox style="flex-grow:0"></v-checkbox>
+                            <label class="body-2 mr-5 ml-2">{{ trans.no }}</label>
+                        </v-flex>
+                    </v-layout>
                 </v-flex>
             </v-layout>
         </v-flex>

@@ -17,3 +17,4 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 yarn.lock
+resources/js/store/modules/authUser.js

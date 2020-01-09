@@ -177,6 +177,7 @@
 .sales-person {
     .v-card {
         width: 100%;
+        background: none;
 
         .v-card__text {
             padding: 0;
@@ -201,6 +202,37 @@
 /*
 *****************************************
     End SalesPerson Component
+*****************************************
+*/
+
+
+
+/*
+*****************************************
+    Time Booking Component
+*****************************************
+*/
+
+.book-step .checkboxes .flex {
+    flex-grow: 0;
+    position: relative;
+    justify-content: left;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-top: 5px;
+
+    .v-input {
+        width: 32px;
+        height: 32px;
+        margin: 0;
+        padding: 5px 0 0 0;
+    }
+}
+
+/*
+*****************************************
+    End Time Booking Component
 *****************************************
 */
 
@@ -481,5 +513,87 @@
 /*
 *****************************************
     End Frontend Language Select Component
+*****************************************
+*/
+
+
+
+
+
+/*
+*****************************************
+    Part Exchange Page
+*****************************************
+*/
+
+.part-exchange {
+
+    .registration-input {
+        width: 330px;
+        height: 70px;
+        background-color: rgb(255, 180, 0);
+        border: 1px solid rgb(160, 120, 0);
+        border-radius: 7px;
+        text-transform: uppercase;
+        color: black;
+        font-size: 25px;
+        line-height: 25px;
+        padding: 22.5px;
+        max-width: 100%;
+    }
+
+    .exchange-details, .no-part-exchange {
+        box-sizing: border-box;
+        position: relative;
+        min-height: 400px;
+
+        > .layout {
+            border: 1px solid rgb(240, 240, 240);
+        }
+
+        .flex {
+            flex-grow: 0;
+        }
+
+    }
+
+    .no-part-exchange {
+        cursor: pointer;
+
+        h2 {
+            width: 300px;
+            max-width: 100%;
+            white-space: normal;
+            text-align: center;
+        }
+    }
+}
+
+/*
+*****************************************
+    End Part Exchange Page
+*****************************************
+*/
+
+
+
+
+
+/*
+*****************************************
+    Personal Details Page
+*****************************************
+*/
+
+.personal-details {
+
+    .details-container > .flex {
+        border: 1px solid rgb(240,240,240);
+    }
+}
+
+/*
+*****************************************
+    End Personal Details Page
 *****************************************
 */
