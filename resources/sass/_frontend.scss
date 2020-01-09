@@ -580,6 +580,27 @@
     .details-container {
         border: 1px solid rgb(240,240,240);
     }
+
+    .v-text-field--outline input {
+        margin: 11px 0;
+    }
+
+    .v-input--is-disabled {
+        pointer-events: none;
+
+        .v-input__slot {
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .v-text-field__details {
+            display: none;
+        }
+    }
+
+    .v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+        box-shadow: none;
+    }
 }
 
 /*
