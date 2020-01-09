@@ -94,11 +94,18 @@
 
         watch: {
             event(){
-                this.generateTime()
+                this.generateSlots()
             },
 
             selectedDate(){
-                this.generateTime()
+                // generate slot
+                this.generateSlots()
+            },
+
+            selectedSaleExecutive(){
+                // generate slot
+                console.log('generate slot')
+                this.generateSlots()
             }
         },
 
@@ -113,15 +120,41 @@
                 dealership: 'getSelectedDealership',
                 slots: 'getAllAppointmentSlot',
                 vehicleType : 'getBookingVehicleType',
-                selectedDate : 'getBookingSelectedDate'
+                selectedDate : 'getBookingSelectedDate',
+                selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
+                existingAppointments: 'getAllBookingAppointments'
             })
         }),
 
         methods:{
-            generateTime(){
+            generateSlots(){
                 const start = moment(this.event.start)
                 const end = moment(this.event.end)
-                const dates = fn.getDates(start, end)
+                const dates = fn.getDates(start, end, this.dealership)
+
+                // If select sale executive
+                if(this.selectedSaleExecutive.id){
+                    // get the user existing appointments
+                    const existingAppointments = _.filter(this.existingAppointments, (existingAppointment) => {
+                        return existingAppointment.user_id === this.selectedSaleExecutive.id
+                    })
+
+                    if(this.selectedDate === ''){
+                        let appointmentSlots = []
+                        // not selected date, iterate all open date
+                        _.forEach(dates, (date)=>{
+                            const time = fn.getStartTimeEndTime(date, this.dealership)
+
+                            const daysSlot = fn.getTimeSlotsForDay(time, this.event)
+                            appointmentSlots.push([...daysSlot])
+                        })
+
+                        console.log('Appointment slot in array: ', appointmentSlots)
+                    }else{
+                        // selected date
+                    }
+                    return
+                }
 
                 let appointmentSlots = []
                 let allSlots = []

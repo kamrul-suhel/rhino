@@ -26,6 +26,27 @@ const mutations = {
         state.users = [...users]
     },
 
+    updateUserForBooking(state, selectedUser){
+        const updatedUsers = _.map(state.users, (currentUser)=>{
+
+            let user = {
+                ...currentUser,
+                selected: ''
+            }
+
+            if(selectedUser.id === user.id){
+                user = {
+                    ...user,
+                    selected: 'selected'
+                }
+            }
+
+            return user
+        })
+
+        state.users = [...updatedUsers]
+    },
+
     setLevel(state, trans) {
         const levels = [
             {
@@ -83,7 +104,7 @@ const mutations = {
         state.totalUsers = totalUser
     },
 
-    resetUserstore(state) {
+    resetUserStore(state) {
         state = {...defaultState}
     },
 

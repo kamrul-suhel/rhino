@@ -80,28 +80,14 @@ a {
   margin-right: 15px;
 }
 
-.guest-login .login-section .multi-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  margin-right: 0;
-}
-
 .guest-login .login-section .multi-container .multi-button {
   height: 36px;
   padding: 5px 20px;
   font-size: 12px;
   background-color: #F4F4F4 !important;
   color: #000000;
-  -webkit-box-shadow: 0px 9px 44px #0000000F;
-          box-shadow: 0px 9px 44px #0000000F;
+  -webkit-box-shadow: 0 9px 44px #0000000F;
+          box-shadow: 0 9px 44px #0000000F;
   border: 1px solid #707070;
   border-radius: 18px;
   margin: 20px 0 0 auto !important;
@@ -215,6 +201,14 @@ a {
 .sales-person .v-card .v-card__text .salesperson-container {
   padding: 5px;
   border-radius: 19px;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container:hover {
+  cursor: pointer;
+}
+
+.sales-person .v-card .v-card__text .salesperson-container.active {
+  color: #fff;
 }
 
 .sales-person .v-card .v-card__text .salesperson-container .avatar-flex {

@@ -1,4 +1,4 @@
-import * as Frontend from "../../pages/booking"
+import * as Frontend from "@/pages/booking"
 
 const booking ={
     path: '/booking',
