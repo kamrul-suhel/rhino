@@ -81,7 +81,7 @@
                 </v-tabs>
             </v-flex>
 
-            <v-flex my-5>
+            <v-flex my-5 xs12>
                 <v-layout row wrap align-bottom>
                     <v-flex xs6>
                         <h2 class="my-1 mr-4 name-button" :style="{color: color}">
