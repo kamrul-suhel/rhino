@@ -8,7 +8,6 @@
         class="navigation-drawer">
 
         <v-layout row wrap
-                  align-content-start
                   fill-height
         >
             <v-flex xs12>
@@ -82,8 +81,8 @@
                 </v-tabs>
             </v-flex>
 
-            <v-flex class="navFooter">
-                <v-layout row wrap>
+            <v-flex my-5>
+                <v-layout row wrap align-bottom>
                     <v-flex xs6>
                         <h2 class="my-1 mr-4 name-button" :style="{color: color}">
                             {{ guest.first_name }}
