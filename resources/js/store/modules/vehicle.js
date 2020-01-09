@@ -54,23 +54,23 @@ const mutations = {
         let extraParams = {}
 
         if(!subComponent){
+            console.log('vehicle component isnt subcomponent');
             extraParams = {
                 text: trans.brand,
                 align: 'left',
-                sortable: false,
                 value: 'brand'
             }
         }
 
+        console.log('trans: ', trans)
         const header = [
             {
                 text: trans.vehicle,
                 align: 'left',
-                sortable: true,
                 value: 'vehicle'
             },
 
-            ...extraParams,
+            {...extraParams},
 
             {
                 text: trans.actions,
@@ -79,6 +79,7 @@ const mutations = {
             }
         ]
 
+        console.log(header)
         state.listHeader = [...header]
     },
 }
@@ -134,6 +135,8 @@ const actions = {
      * @param payload
      */
     fetchVehicles({commit}, payload = {}) {
+
+        console.log(payload.subComponent)
 
         // Set loading is true
         commit('setVehicleLoading', payload.themeOption.loadingColor)
