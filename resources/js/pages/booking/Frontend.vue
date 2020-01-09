@@ -89,7 +89,6 @@
                             >
                                 <FBookingConfirmation></FBookingConfirmation>
                             </v-tab-item>
-
                         </v-tabs>
                     </v-flex>
                 </v-layout>

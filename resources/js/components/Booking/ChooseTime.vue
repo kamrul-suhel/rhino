@@ -178,8 +178,10 @@
                             modifySlots.push(currentSlot)
                         })
 
+                        console.log('selected field:', modifySlots)
                         this.$store.commit('setAllAppointmentSlots', modifySlots)
                     }
+
                     return
                 }
 
@@ -222,6 +224,7 @@
                     }
                 })
 
+                console.log('all slot is: ',allSlots)
                 this.$store.commit('setAllAppointmentSlots', allSlots)
             },
 
