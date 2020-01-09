@@ -53,7 +53,7 @@ const mutations = {
 
         let extraParams = {}
 
-        if(subComponent){
+        if(!subComponent){
             extraParams = {
                 text: trans.brand,
                 align: 'left',

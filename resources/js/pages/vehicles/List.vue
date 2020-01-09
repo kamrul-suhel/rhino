@@ -42,9 +42,7 @@
                                 <v-icon
                                 small
                                 class="mr-2"
-                                @click="onEditVehicle(props.item)"
-
-                                >
+                                @click="onEditVehicle(props.item)">
                                     edit
                                 </v-icon>
 
@@ -181,13 +179,9 @@ import { log } from 'util'
         mounted() {
         },
         methods: {
-            fetchVehicle() {
-                this.$store.dispatch('fetchVehicles', {themeOption: this.themeOption, trans: this.trans});
-            },
-
             // Initialize data when first render
             initialize() {
-                
+
                 let extraOption = {}
                 if(this.subComponent){
                     extraOption = {
@@ -202,7 +196,7 @@ import { log } from 'util'
                     themeOption: this.themeOption,
                     paginate: true,
                     search: this.searchVehicle,
-                    subComponent: true,
+                    subComponent: this.subComponent,
                     ...extraOption
                 }
 
