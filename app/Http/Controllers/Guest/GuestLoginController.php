@@ -15,26 +15,35 @@ class GuestLoginController extends Controller
      * @param GuestLoginRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $guest = Guest::where('unique', $request->uniqueId)
             ->first();
 
-        if($guest){
+        if ($guest) {
             // Found user, set session variable
-            $request->session()->put('uniqueId',  $request->uniqueId);
+            $request->session()->put('uniqueId', $request->uniqueId);
 
             return response()->json([
-               'success' => true,
-               'guest' => $guest
+                'success' => true,
+                'guest' => $guest
             ]);
-        }else{
+        } else {
             return response()->json([
                 'success' => false
             ]);
         }
     }
 
-    public function logOut(){
-        session()->forget('guestAuthId');
+    /**
+     * Guest logout
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logOut()
+    {
+        session()->forget('uniqueId');
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

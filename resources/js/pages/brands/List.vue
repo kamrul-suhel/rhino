@@ -51,7 +51,7 @@
                                 <v-icon
                                     :color="themeOption.buttonDangerColor"
                                     small
-                                    @click="onDeleteBrand(props.item)"
+                                    @click.stop="onDeleteBrand(props.item)"
                                 >
                                     delete
                                 </v-icon>

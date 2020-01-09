@@ -21,6 +21,8 @@
                 <v-card-text>
                     <v-flex xs12 mt-3
                             class="salesperson-container"
+                            :class="saleExecutive.selected && saleExecutive.selected === 'selected' ? 'active' : ''"
+                            :style="{backgroundColor: saleExecutive.selected && saleExecutive.selected === 'selected' ? color : ''}"
                             @click="onSelectSaleExecutive(saleExecutive)"
                             v-for="saleExecutive in saleExecutives"
                             :key="saleExecutive.id">
@@ -70,7 +72,8 @@
 
         methods:{
             onSelectSaleExecutive(saleExecutive){
-                console.log(saleExecutive)
+                this.$store.commit('setBookingSelectedSaleExecutive', saleExecutive)
+                this.$store.commit('updateUserForBooking', saleExecutive)
             }
         }
     }

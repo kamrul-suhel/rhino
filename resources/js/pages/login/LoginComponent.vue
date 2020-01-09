@@ -4,20 +4,18 @@
         class="guest-login"
         style="background-image:url('images/guest-login.png')"
     >
-    <v-container>
-        <v-layout fill-height
-                  justify-center
-                  align-center column nowrap>
-            <v-flex>
-                <v-card width="600" class="login-section">
-                    <v-form method="post" v-model="valid" ref="guestLoginForm">
-                        <v-layout column nowrap>
-                            <v-flex mt-4 align-self-end xs6 class="language-select stroke-dropdown">
-                                <language-picker
-                                    :languageId="40"
-                                    isFrontend
-                                ></language-picker>
-                            </v-flex>
+        <v-container fill-height
+                     justify-center
+                     align-content-center>
+            <v-card width="600" class="login-section px-4">
+                <v-form method="post" v-model="valid" ref="guestLoginGorm">
+                    <v-layout row wrap pa-4>
+                        <v-layout row justify-end mt-4 class="language-select stroke-dropdown">
+                            <language-picker
+                                :languageId="40"
+                                isFrontend
+                            ></language-picker>
+                        </v-layout>
 
                             <v-flex xs12>
                                 <h2 class="login-title">{{ trans.welcome + ' ' + trans.back }}!</h2>
