@@ -4,17 +4,17 @@
         class="guest-login"
         style="background-image:url('images/guest-login.png')"
     >
-        <v-container fill-height
-                     justify-center
-                     align-content-center>
-            <v-card width="600" class="login-section">
+        <v-layout row justify-center align-center>
+            <v-card width="600" class="login-section px-4">
                 <v-form method="post" v-model="valid" ref="guestLoginGorm">
                     <v-layout row wrap pa-4>
-                        <v-flex mt-4 align-self-end xs6 class="language-select stroke-dropdown">
-                            <language-picker
-                                :languageId="40"
-                                isFrontend
-                            ></language-picker>
+                        <v-flex>
+                            <v-layout row justify-end mt-4 class="language-select stroke-dropdown">
+                                <language-picker
+                                    :languageId="40"
+                                    isFrontend
+                                ></language-picker>
+                            </v-layout>
                         </v-flex>
 
                         <v-flex xs12>
@@ -43,7 +43,7 @@
                             <p class="mb-0 red--text">Access denied user email & password is not match.</p>
                         </v-flex>
 
-                        <v-flex xs12>
+                        <v-flex xs12 mt-2>
                             <input type="hidden" name="_token"/>
                             <v-btn
                                 class="ma-0 login-button"
@@ -57,28 +57,24 @@
                             </v-btn>
                         </v-flex>
 
-                        <v-flex xs12
-                                class="">
-                            <v-layout row wrap
-                                      justify-end>
-                                <div>
-                                    <input type="hidden" name="_token"/>
-                                    <v-btn
-                                        class="ma-0 multi-button"
-                                        raised
-                                        dark
-                                        :loading="loading"
-                                        :disabled="loading"
-                                        @click="onSubmit()">
-                                        {{ trans.multi }} {{ trans.brand }}
-                                    </v-btn>
-                                </div>
+                        <v-flex xs12>
+                            <v-layout row justify-end xs12 mb-4>
+                                <input type="hidden" name="_token"/>
+                                <v-btn
+                                    class="ma-0 multi-button"
+                                    raised
+                                    dark
+                                    :loading="loading"
+                                    :disabled="loading"
+                                    @click="onSubmit()">
+                                    {{ trans.multi }} {{ trans.brand }}
+                                </v-btn>
                             </v-layout>
                         </v-flex>
                     </v-layout>
                 </v-form>
             </v-card>
-        </v-container>
+        </v-layout>
     </v-app>
 </template>
 <script>
@@ -111,16 +107,17 @@
             }
         },
 
-        computed: {
-            ...mapGetters({
-                languages: 'getLanguages',
-                trans: 'getFields',
-                companies: 'getCompanies',
-                themeOption: 'getThemeOption'
-            })
+        computed:{
+          ...mapGetters({
+              languages: 'getLanguages',
+              trans: 'getFields',
+              companies: 'getCompanies',
+              themeOption: 'getThemeOption'
+          })
         },
 
-        watch: {},
+        watch: {
+        },
 
         created() {
             this.$store.commit('setUserRole', false)
@@ -142,9 +139,9 @@
                     // submit data with ajax request
                     await axios.post('/guests/login', guestLogin)
                         .then(response => {
-                            if (response.data.success) {
+                            if(response.data.success){
                                 this.$router.push({name: 'booking'});
-                            } else {
+                            }else{
                                 this.errorLogin = true
                                 this.login_progress = true
                                 this.loading = false

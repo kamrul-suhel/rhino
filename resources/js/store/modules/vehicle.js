@@ -49,37 +49,45 @@ const mutations = {
         state = {...defaultState}
     },
 
-    setVehicleListHeader(state, trans, subComponent){
+    setVehicleListHeader(state, payload){
 
-        let extraParams = {}
+        let header = []
 
-        if(!subComponent){
-            console.log('vehicle component isnt subcomponent');
-            extraParams = {
-                text: trans.brand,
-                align: 'left',
-                value: 'brand'
-            }
+        if(!payload.subComponent){
+            header = [
+                {
+                    text: payload.trans.vehicle,
+                    align: 'left',
+                    value: 'vehicle'
+                },
+
+                {
+                    text: payload.trans.brand,
+                    align: 'left',
+                    value: 'brand'
+                },
+
+                {
+                    text: payload.trans.actions,
+                    value: 'actions',
+                    align:'right'
+                }
+            ]
+        }else{
+            header = [
+                {
+                    text: payload.trans.vehicle,
+                    align: 'left',
+                    value: 'vehicle'
+                },
+                {
+                    text: payload.trans.actions,
+                    value: 'actions',
+                    align:'right'
+                }
+            ]
         }
 
-        console.log('trans: ', trans)
-        const header = [
-            {
-                text: trans.vehicle,
-                align: 'left',
-                value: 'vehicle'
-            },
-
-            {...extraParams},
-
-            {
-                text: trans.actions,
-                value: 'actions',
-                align:'right'
-            }
-        ]
-
-        console.log(header)
         state.listHeader = [...header]
     },
 }
@@ -135,14 +143,14 @@ const actions = {
      * @param payload
      */
     fetchVehicles({commit}, payload = {}) {
-
-        console.log(payload.subComponent)
-
         // Set loading is true
         commit('setVehicleLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        commit('setVehicleListHeader', payload.trans, payload.subComponent)
+        commit('setVehicleListHeader', {
+            trans: payload.trans,
+            subComponent:  payload.subComponent
+        })
 
         const params = fn.generateParams(payload)
         const URL = `/api/vehicles${params}`
@@ -164,7 +172,6 @@ const actions = {
         const URL = `/api/vehicles/${payload.id}/show${fn.generateParams(payload)}`
         axios.get(URL).then((response) => {
             if(response.data){
-                console.log(response.data);
                 commit('setSelectedVehicle', response.data.vehicle)
                 dispatch('fetchBrands', {id: response.data.brand.id})
             }

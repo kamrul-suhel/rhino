@@ -43,8 +43,6 @@ a {
   border-radius: 6px !important;
   -webkit-box-shadow: 0px 3px 6px #00000029;
           box-shadow: 0px 3px 6px #00000029;
-  padding-left: 45px;
-  padding-right: 20px;
 }
 
 .guest-login .login-section h2 {
@@ -54,10 +52,6 @@ a {
 .guest-login .login-section h3 {
   font-size: 20px;
   font-weight: 400;
-}
-
-.guest-login .login-section .flex {
-  margin-right: 25px;
 }
 
 .guest-login .login-section .theme--light.v-text-field > .v-input__control > .v-input__slot:before {
@@ -73,14 +67,13 @@ a {
           box-shadow: none;
   border-radius: 25px;
   opacity: 1;
-  margin: 20px auto auto 0 !important;
 }
 
 .guest-login .login-section .login-button .v-icon {
   margin-right: 15px;
 }
 
-.guest-login .login-section .multi-container .multi-button {
+.guest-login .login-section .multi-button {
   height: 36px;
   padding: 5px 20px;
   font-size: 12px;
@@ -90,10 +83,9 @@ a {
           box-shadow: 0 9px 44px #0000000F;
   border: 1px solid #707070;
   border-radius: 18px;
-  margin: 20px 0 0 auto !important;
 }
 
-.guest-login .login-section .multi-container .multi-button .v-icon {
+.guest-login .login-section .multi-button .v-icon {
   margin-right: 15px;
 }
 
@@ -366,25 +358,19 @@ a {
   display: none;
 }
 
-.navigation-drawer .navFooter {
-  position: absolute;
-  bottom: 50px;
-  width: calc(100% - 60px);
-}
-
-.navigation-drawer .navFooter .flex:first-of-type {
+.navigation-drawer .flex:last-of-type .flex:first-of-type {
   height: 28px;
   margin: auto 0;
   padding-bottom: 8px;
 }
 
-.navigation-drawer .navFooter .flex:first-of-type h2 {
+.navigation-drawer .flex:last-of-type .flex:first-of-type h2 {
   margin: 0 !important;
   height: 20px;
   font-size: 20px;
 }
 
-.navigation-drawer .navFooter .flex:first-of-type h2 .v-icon {
+.navigation-drawer .flex:last-of-type .flex:first-of-type h2 .v-icon {
   margin: 0px auto 2px 2px;
   font-size: 18px !important;
 }
@@ -614,7 +600,7 @@ a {
 *****************************************
 */
 
-.personal-details .details-container > .flex {
+.personal-details .details-container {
   border: 1px solid #f0f0f0;
 }
 

@@ -104,7 +104,6 @@
 
             selectedSaleExecutive(){
                 // generate slot
-                console.log('generate slot')
                 this.generateSlots()
             }
         },
@@ -149,9 +148,37 @@
                             appointmentSlots.push([...daysSlot])
                         })
 
-                        console.log('Appointment slot in array: ', appointmentSlots)
                     }else{
                         // selected date
+                        const selectedDate = this.selectedDate
+                        const selectedSaleExecutiveId = this.selectedSaleExecutive.id
+                        const time = fn.getStartTimeEndTime(selectedDate, this.dealership)
+                        const slots = fn.getTimeSlotsForDay(time, this.event)
+                        let modifySlots = []
+
+                        _.map(slots, (slot) => {
+                            let currentSlot = {...slot}
+                            // iterate into appointment
+                            if(this.existingAppointments.length > 0){
+                                _.map(this.existingAppointments, (appointment) => {
+                                    if(appointment.start === slot.start){
+                                        currentSlot = {
+                                            ...currentSlot,
+                                            status: 'unavailable'
+                                        }
+                                    }
+                                })
+                            }else{
+                                currentSlot = {
+                                    ...currentSlot,
+                                    status: 'available'
+                                }
+                            }
+
+                            modifySlots.push(currentSlot)
+                        })
+
+                        this.$store.commit('setAllAppointmentSlots', modifySlots)
                     }
                     return
                 }
