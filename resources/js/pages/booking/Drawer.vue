@@ -96,6 +96,7 @@
                             <v-btn class="border-medium rounded-25"
                                    outline
                                    :color="color"
+                                   @click="onGuestLogout()"
                                    depressed>
                                 {{ trans.logOut }}
                             </v-btn>
@@ -140,7 +141,6 @@
 
         watch:{
           guest(){
-              console.log(this.guest)
           }
         },
 
@@ -148,6 +148,14 @@
 
         },
 
-        methods: {}
+        methods: {
+            onGuestLogout(){
+                axios.post('guests/logout').then((response) => {
+                    if(response.data.success){
+                        this.$router.push({name: 'login'})
+                    }
+                });
+            }
+        }
     }
 </script>

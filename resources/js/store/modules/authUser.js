@@ -3,7 +3,7 @@ const defaultState = {
     userId : null,
     userName: null,
     userEmail: null,
-    admin: true,
+    admin: false,
     isLogin: true,
     themeOption:{
         theme: 'dark',
