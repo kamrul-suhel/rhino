@@ -67,7 +67,6 @@ a {
           box-shadow: none;
   border-radius: 25px;
   opacity: 1;
-  margin: 20px auto auto 0 !important;
 }
 
 .guest-login .login-section .login-button .v-icon {
@@ -84,7 +83,6 @@ a {
           box-shadow: 0 9px 44px #0000000F;
   border: 1px solid #707070;
   border-radius: 18px;
-  margin: 20px 0 0 auto !important;
 }
 
 .guest-login .login-section .multi-button .v-icon {

@@ -4,60 +4,61 @@
         class="guest-login"
         style="background-image:url('images/guest-login.png')"
     >
-        <v-container fill-height
-                     justify-center
-                     align-content-center>
+        <v-layout row justify-center align-center>
             <v-card width="600" class="login-section px-4">
                 <v-form method="post" v-model="valid" ref="guestLoginGorm">
                     <v-layout row wrap pa-4>
-                        <v-layout row justify-end mt-4 class="language-select stroke-dropdown">
-                            <language-picker
-                                :languageId="40"
-                                isFrontend
-                            ></language-picker>
-                        </v-layout>
+                        <v-flex>
+                            <v-layout row justify-end mt-4 class="language-select stroke-dropdown">
+                                <language-picker
+                                    :languageId="40"
+                                    isFrontend
+                                ></language-picker>
+                            </v-layout>
+                        </v-flex>
 
-                            <v-flex xs12>
-                                <h2 class="login-title">{{ trans.welcome + ' ' + trans.back }}!</h2>
-                                <h3>{{ trans.EnterYourUniqueCode }}</h3>
-                            </v-flex>
+                        <v-flex xs12>
+                            <h2 class="login-title">{{ trans.welcome + ' ' + trans.back }}!</h2>
+                            <h3>{{ trans.EnterYourUniqueCode }}</h3>
+                        </v-flex>
 
-                            <v-flex xs12>
-                                <v-text-field
-                                    color="dark"
-                                    :hint="trans.egnchfge23sxs"
-                                    v-model="user.unique"
-                                    :rules="[v => !!v || `${trans.uniqueId} ${trans.is_required}`]"
-                                    required
-                                    validate-on-blur
-                                    :error="validation.error"
-                                >
-                                </v-text-field>
-                            </v-flex>
+                        <v-flex xs12>
+                            <v-text-field
+                                color="dark"
+                                :hint="trans.egnchfge23sxs"
+                                v-model="user.unique"
+                                :rules="[v => !!v || `${trans.uniqueId} ${trans.is_required}`]"
+                                required
+                                validate-on-blur
+                                :error="validation.error"
+                            >
+                            </v-text-field>
+                        </v-flex>
 
-                            <v-flex v-if="validation.error">
-                                <div class="red--text text-xs-center">{{validation.message}}</div>
-                            </v-flex>
+                        <v-flex v-if="validation.error">
+                            <div class="red--text text-xs-center">{{validation.message}}</div>
+                        </v-flex>
 
-                            <v-flex xs12 v-if="errorLogin">
-                                <p class="mb-0 red--text">Access denied user email & password is not match.</p>
-                            </v-flex>
+                        <v-flex xs12 v-if="errorLogin">
+                            <p class="mb-0 red--text">Access denied user email & password is not match.</p>
+                        </v-flex>
 
-                            <v-flex xs12>
-                                <input type="hidden" name="_token"/>
-                                <v-btn
-                                    class="ma-0 login-button"
-                                    raised
-                                    dark
-                                    :loading="loading"
-                                    :disabled="loading"
-                                    @click="onSubmit()">
-                                    <v-icon>account_circle</v-icon>
-                                    {{ trans.signin }}
-                                </v-btn>
-                            </v-flex>
+                        <v-flex xs12 mt-2>
+                            <input type="hidden" name="_token"/>
+                            <v-btn
+                                class="ma-0 login-button"
+                                raised
+                                dark
+                                :loading="loading"
+                                :disabled="loading"
+                                @click="onSubmit()">
+                                <v-icon>account_circle</v-icon>
+                                {{ trans.signin }}
+                            </v-btn>
+                        </v-flex>
 
-                            <v-flex xs12 mb-4 class="multi-container">
+                        <v-flex xs12>
+                            <v-layout row justify-end xs12 mb-4>
                                 <input type="hidden" name="_token"/>
                                 <v-btn
                                     class="ma-0 multi-button"
@@ -68,13 +69,12 @@
                                     @click="onSubmit()">
                                     {{ trans.multi }} {{ trans.brand }}
                                 </v-btn>
-                            </v-flex>
-                        </v-layout>
-                    </v-form>
-                </v-card>
-            </v-flex>
+                            </v-layout>
+                        </v-flex>
+                    </v-layout>
+                </v-form>
+            </v-card>
         </v-layout>
-    </v-container>
     </v-app>
 </template>
 <script>
