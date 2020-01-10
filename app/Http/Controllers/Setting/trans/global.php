@@ -890,6 +890,100 @@ return [
         'label' => 'Multi',
         'identifier' => 'multi',
         'translation' => 'Multi'
+    ],
+    [
+        'label' => 'Do you have a car to part exchange?',
+        'identifier' => 'DoYouHaveACarToPartExchange',
+        'translation' => 'Do you have a car to part exchange?'
+    ],
+
+    [
+        'label' => 'Enter your',
+        'identifier' => 'enterYour',
+        'translation' => 'Enter your'
+    ],
+
+    [
+        'label' => 'Details',
+        'identifier' => 'details',
+        'translation' => 'Details'
+    ],
+
+    [
+        'label' => 'Registration Number',
+        'identifier' => 'registrationNumber',
+        'translation' => 'Registration Number'
+    ],
+
+    [
+        'label' => 'Make and Model',
+        'identifier' => 'makeAndModel',
+        'translation' => 'Make and Model'
+    ],
+
+    [
+        'label' => 'Current Mileage',
+        'identifier' => 'currentMileage',
+        'translation' => 'Current Mileage'
+    ],
+
+    [
+        'label' => 'By checking this box, you agree to us obtaining a settlement figure for your part exchange vehicle',
+        'identifier' => 'byCheckingThisBox',
+        'translation' => 'By checking this box, you agree to us obtaining a settlement figure for your part exchange vehicle'
+    ],
+    [
+        'label' => 'Click here if you don\'t have a part exchange vehicle',
+        'identifier' => 'clickHereDoNotExchangeVehicle',
+        'translation' => 'Click here if you don\'t have a part exchange vehicle'
+    ],
+
+    [
+        'label' => 'Please confirm or amend your contact details',
+        'identifier' => 'pleaseConfirmAmendYourContactDetails',
+        'translation' => 'Please confirm or amend your contact details'
+    ],
+
+    [
+        'label' => 'Are these details still correct?',
+        'identifier' => 'areTheseDetailsStillCorrect',
+        'translation' => 'Are these details still correct?'
+    ],
+
+    [
+        'label' => 'Phone Number',
+        'identifier' => 'phoneNumber',
+        'translation' => 'Phone Number'
+    ],
+
+    [
+        'label' => 'Save',
+        'identifier' => 'save',
+        'translation' => 'Save'
+    ],
+
+    [
+        'label' => 'Please check the following details are correct',
+        'identifier' => 'followingDetailsAreCorrect',
+        'translation' => 'Please check the following details are correct'
+    ],
+
+    [
+        'label' => 'Are these details still correct?',
+        'identifier' => 'areTheseDetailsStillCorrect',
+        'translation' => 'Are these details still correct?'
+    ],
+
+    [
+        'label' => 'Your model(s) of interest:',
+        'identifier' => 'modelsOfInterest',
+        'translation' => 'Your model(s) of interest:'
+    ],
+
+    [
+        'label' => 'Amend',
+        'identifier' => 'amend',
+        'translation' => 'Amend'
     ]
 
 ];

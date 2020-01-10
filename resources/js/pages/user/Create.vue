@@ -330,9 +330,6 @@
 
             onCreateUser() {
                 if (this.$refs.userForm.validate()) {
-                    console.log(this.user)
-                    return
-
                     // Set form object for dealership
                     let userForm = new FormData()
                     _.forOwn(this.user, (value, key) => {

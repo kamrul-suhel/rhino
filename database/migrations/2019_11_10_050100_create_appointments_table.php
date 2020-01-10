@@ -28,10 +28,6 @@ class CreateAppointmentsTable extends Migration
             $table->string('part_ex_distance')->nullable();
             $table->boolean('part_ex_settlement')->nullable();
             $table->boolean('is_canceled')->default(0);
-            $table->boolean('confirmation_letter_sent')->default(0);
-            $table->boolean('postal_contact')->default(0);
-            $table->boolean('email_contact')->default(0);
-            $table->boolean('sms_contact')->default(0);
             $table->timestamps();
         });
     }
