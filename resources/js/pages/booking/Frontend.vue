@@ -9,7 +9,9 @@
             <v-container class="content">
                 <v-layout row wrap>
                     <v-flex xs12>
-                        <v-parallax :src="`https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG`" alt="" height="240">
+                        <v-parallax
+                            :src="`https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG`"
+                            alt="" height="240">
                             <v-layout align-center justify-end class="text-center" cols="12">
                                 <v-flex align-self-center>
                                     <h1 class="display-1 font-weight-thin text-lg-right">{{trans.hello}}</h1>
@@ -25,19 +27,19 @@
                             dark
                             slider-color="yellow"
                         >
-                            <v-tab
-                                key="selectModel"
-                                ripple
-                            >
-                                Select Model
-                            </v-tab>
+<!--                            <v-tab-->
+<!--                                key="selectModel"-->
+<!--                                ripple-->
+<!--                            >-->
+<!--                                Select Model-->
+<!--                            </v-tab>-->
 
-                            <v-tab
-                                key="appointment"
-                                ripple
-                            >
-                                Book your Slot
-                            </v-tab>
+<!--                            <v-tab-->
+<!--                                key="appointment"-->
+<!--                                ripple-->
+<!--                            >-->
+<!--                                Book your Slot-->
+<!--                            </v-tab>-->
 
                             <v-tab
                                 key="partExchange"
@@ -60,17 +62,17 @@
                                 Booking Confirmation
                             </v-tab>
 
-                            <v-tab-item
-                                key="selectModel"
-                            >
-                                <FSelectModel></FSelectModel>
-                            </v-tab-item>
+<!--                            <v-tab-item-->
+<!--                                key="selectModel"-->
+<!--                            >-->
+<!--                                <FSelectModel></FSelectModel>-->
+<!--                            </v-tab-item>-->
 
-                            <v-tab-item
-                                key="appointment"
-                            >
-                                <FBookAppointment></FBookAppointment>
-                            </v-tab-item>
+<!--                            <v-tab-item-->
+<!--                                key="appointment"-->
+<!--                            >-->
+<!--                                <FBookAppointment></FBookAppointment>-->
+<!--                            </v-tab-item>-->
 
                             <v-tab-item
                                 key="partExchange"
@@ -98,7 +100,6 @@
 </template>
 
 <script>
-
     import FDrawer from './Drawer'
     import FSelectModel from './SelectModel'
     import FBookAppointment from './BookAppointment'

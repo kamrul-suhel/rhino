@@ -127,18 +127,19 @@
 
         methods: {
             onSelectVehicle(vehicle) {
-                let vehicles = [...this.vehicles]
-
-                _.map(vehicles, (currentVehicle) => {
-                    currentVehicle = {
-                        ...currentVehicle,
-
-                    }
-                })
+               this.$store.commit('setOrRemoveVehicle', vehicle)
             },
 
             onVehicleSelected(vehicle) {
-                return this.color
+                let selected = ''
+                _.map(this.selectedVehicles, (currentVehicle) => {
+                    if(vehicle.id === currentVehicle.id){
+                        selected = this.color
+                        console.log('selected : ', selected)
+                    }
+                })
+
+                return selected
             },
 
             onFilterVehicle(type){

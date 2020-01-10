@@ -53,6 +53,7 @@
                     <v-text-field
                         :label="`${trans.guest} ${trans.name}`"
                         :color="color"
+                        v-model="bringGuest.name"
                         outline
                         style="width:100%"
                     ></v-text-field>
@@ -65,11 +66,18 @@
 
                     <v-layout row class="checkboxes">
                         <v-flex>
-                            <v-checkbox></v-checkbox>
+                            <v-checkbox :color="color"
+                                        value="yes"
+                                        v-model="guestInterestedYes"
+                            ></v-checkbox>
                             <label class="body-2 mr-5 ml-2">{{ trans.yes }}</label>
                         </v-flex>
                         <v-flex>
-                            <v-checkbox style="flex-grow:0"></v-checkbox>
+                            <v-checkbox :color="color"
+                                        value="no"
+                                        v-model="guestInterestedNo"
+                                        style="flex-grow:0"
+                            ></v-checkbox>
                             <label class="body-2 mr-5 ml-2">{{ trans.no }}</label>
                         </v-flex>
                     </v-layout>
@@ -86,6 +94,8 @@
     export default {
         data(){
             return {
+                guestInterestedYes: false,
+                guestInterestedNo: false
             }
         },
 
@@ -93,6 +103,29 @@
         },
 
         watch: {
+            guestInterestedYes(){
+                if(this.guestInterestedYes){
+                    const guest = {
+                        name: this.bringGuest.name,
+                        changingCar: true
+                    }
+
+                    this.$store.commit('setBookingBringGuest', guest)
+                    this.guestInterestedNo = false
+                }
+            },
+
+            guestInterestedNo(){
+                if(this.guestInterestedNo){
+                    const guest = {
+                        name: this.bringGuest.name,
+                        changingCar: false
+                    }
+                    this.$store.commit('setBookingBringGuest', guest)
+                   this.guestInterestedYes = false
+                }
+            },
+
             event(){
                 this.generateSlots()
             },
@@ -121,7 +154,8 @@
                 vehicleType : 'getBookingVehicleType',
                 selectedDate : 'getBookingSelectedDate',
                 selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
-                existingAppointments: 'getAllBookingAppointments'
+                existingAppointments: 'getAllBookingAppointments',
+                bringGuest: 'getBookingBringGuest'
             })
         }),
 
@@ -249,6 +283,10 @@
                 })
                 this.$store.commit('setSelectedSlot', selectedSlot)
                 this.$store.commit('setAllAppointmentSlots', totalSlot)
+            },
+
+            onClick(){
+                console.log(this.bringGuest)
             }
         }
     }
