@@ -27,19 +27,19 @@
                             dark
                             slider-color="yellow"
                         >
-<!--                            <v-tab-->
-<!--                                key="selectModel"-->
-<!--                                ripple-->
-<!--                            >-->
-<!--                                Select Model-->
-<!--                            </v-tab>-->
+                            <v-tab
+                                key="selectModel"
+                                ripple
+                            >
+                                Select Model
+                            </v-tab>
 
-<!--                            <v-tab-->
-<!--                                key="appointment"-->
-<!--                                ripple-->
-<!--                            >-->
-<!--                                Book your Slot-->
-<!--                            </v-tab>-->
+                            <v-tab
+                                key="appointment"
+                                ripple
+                            >
+                                Book your Slot
+                            </v-tab>
 
                             <v-tab
                                 key="partExchange"
@@ -62,17 +62,17 @@
                                 Booking Confirmation
                             </v-tab>
 
-<!--                            <v-tab-item-->
-<!--                                key="selectModel"-->
-<!--                            >-->
-<!--                                <FSelectModel></FSelectModel>-->
-<!--                            </v-tab-item>-->
+                            <v-tab-item
+                                key="selectModel"
+                            >
+                                <FSelectModel></FSelectModel>
+                            </v-tab-item>
 
-<!--                            <v-tab-item-->
-<!--                                key="appointment"-->
-<!--                            >-->
-<!--                                <FBookAppointment></FBookAppointment>-->
-<!--                            </v-tab-item>-->
+                            <v-tab-item
+                                key="appointment"
+                            >
+                                <FBookAppointment></FBookAppointment>
+                            </v-tab-item>
 
                             <v-tab-item
                                 key="partExchange"

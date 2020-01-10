@@ -135,7 +135,6 @@
                 _.map(this.selectedVehicles, (currentVehicle) => {
                     if(vehicle.id === currentVehicle.id){
                         selected = this.color
-                        console.log('selected : ', selected)
                     }
                 })
 

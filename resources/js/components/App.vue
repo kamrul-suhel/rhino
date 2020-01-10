@@ -19,6 +19,7 @@
             </v-content>
         </v-app>
         <template v-else>
+            <SnackBar></SnackBar>
             <router-view></router-view>
         </template>
     </div>

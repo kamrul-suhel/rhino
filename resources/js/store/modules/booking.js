@@ -12,7 +12,9 @@ const defaultState = {
     bringGuest: {},
     partExchange:{
         vehicleExchange: false
-    }
+    },
+
+    confirmDetail:{}
 }
 
 const state = {
