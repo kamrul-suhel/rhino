@@ -143,6 +143,16 @@
             }
         }
     }
+
+    .keys {
+        label {
+            flex-grow: 0;
+        }
+
+        div {
+            flex-grow: 0;
+        }
+    }
 }
 
 /*
@@ -150,7 +160,6 @@
     End Calender Component
 *****************************************
 */
-
 
 
 /*
@@ -168,8 +177,9 @@
             padding: 0;
 
             .salesperson-container {
-                padding: 5px;
+                padding: 5px 40px 5px 5px;
                 border-radius: 19px;
+                cursor: pointer;
 
                 &:hover{
                     cursor:pointer;
@@ -186,6 +196,7 @@
 
                 .text-flex {
                     margin: 3.5px 0;
+                    pointer-events: none;
                 }
             }
         }

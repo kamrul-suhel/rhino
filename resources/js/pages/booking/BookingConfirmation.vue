@@ -1,11 +1,11 @@
 <template>
     <div>
-        <v-layout row wrap align-center justify-center class="booking-confirmation">
+        <v-layout row wrap align-center justify-center class="booking-confirmation" px-5>
             <v-flex class="xs12" align-center>
                 <h4 class="display-1 mt-5 mx-2 text-xs-center">Please check the following details are correct</h4>
                 <h5 class="headline mt-2 mx-4 text-xs-center">Are these details still correct?</h5>
             </v-flex>
-            <v-flex row nowrap mt-5 justify-center class="confirmation-container xs11">
+            <v-flex row nowrap mt-5 justify-center class="confirmation-container xs12">
                 <v-container>
                     <v-layout row wrap justify-center>
                         <v-flex sm12 md5 d-flex child-flex pa-2>

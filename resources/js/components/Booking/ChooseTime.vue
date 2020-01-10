@@ -4,8 +4,8 @@
               v-if="vehicleType !== 'unsure'"
               align-center>
         <v-flex xs12>
-            <h6 class="headline text-lg-center">
-                {{ `${trans.choose} ${trans.a} ${trans.time}`}}
+            <h6 class="headline text-xs-center">
+                {{ `${trans.choose} ${trans.a}` }} <b> {{ `${trans.time}`}} </b>
             </h6>
         </v-flex>
 
@@ -22,7 +22,7 @@
                       class="appointmentSlot"
                       style="width:100%; flex-grow:0"
                       mx-1>
-                    <v-flex xs6 md3
+                    <v-flex xs6 sm3 md4 xl3
                             class="slot"
                             v-for="slot in slots"
                             :key="slot.slotId">

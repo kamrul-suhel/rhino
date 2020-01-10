@@ -3,62 +3,70 @@
               align-center
               class="book-step calenderComponent"
               style="border-right: 1px solid rgb(240,240,240)">
-        <v-layout style="flex-grow:0">
-            <v-flex xs12>
-                <h6 class="headline text-lg-center">{{ selectedEvent.start | dateFormat('MMMM')}} <b>{{
-                    selectedEvent.start | dateFormat('YYYY')}}</b></h6>
+        <v-flex xs12>
+            <v-layout style="flex-grow:0" row wrap xs12>
+                <v-flex xs12>
+                    <h6 class="headline text-xs-center">{{ selectedEvent.start | dateFormat('MMMM')}} <b>{{
+                        selectedEvent.start | dateFormat('YYYY')}}</b></h6>
+                </v-flex>
+                <v-flex xs12>
+                    <h6 class="xs12 caption text-xs-center font-weight-bold mt-1"
+                           :style="{color:color}">
+                        {{ selectedEvent.start | dateFormat('MMMM Do')}} -
+                        {{ selectedEvent.end | dateFormat('MMMM Do') }}
+                    </h6>
+                </v-flex>
+            </v-layout>
+        </v-flex>
 
-                <label class="caption text-lg-center font-weight-bold ml-2 mt-1"
-                       :style="{color:color}">
-                    {{ selectedEvent.start | dateFormat('MMMM Do')}} -
-                    {{ selectedEvent.end | dateFormat('MMMM Do') }}
-                </label>
-            </v-flex>
-        </v-layout>
+        <v-flex>
+            <v-layout row nowrap class="mt-4 keys">
+                <v-flex>
+                    <label class="body-2">
+                        {{ trans.available }}
+                        {{ trans.dates }}
+                    </label>
+                </v-flex>
+                <v-flex>
+                    <div style="width:12px;height:12px;border:1px solid rgb(100,0,0); border-radius:6px; margin:4px"></div>
+                </v-flex>
 
-        <v-layout row wrap
-                  style="width:70%; flex-grow:0"
-                  class="mt-4">
-            <v-flex xs4>
-                <label class="body-2">
-                    {{ trans.available }}
-                    {{ trans.dates }}
-                </label>
-            </v-flex>
+                <v-flex ml-2>
+                    <label class="body-2">
+                        {{ trans.no }}
+                        {{ trans.available }}
+                        {{ trans.times }}
+                    </label>
+                </v-flex>
+                <v-flex>
+                    <div style="width:12px;height:12px; background-color:rgb(160,160,160); border-radius:6px; margin:4px"></div>
+                </v-flex>
 
-            <v-flex xs4>
-                <div style="width:12px;height:12px;border:1px solid rgb(100,0,0); border-radius:6px; margin:4px"></div>
-                <label class="body-2 ml-2">
-                    {{ trans.no }}
-                    {{ trans.available }}
-                    {{ trans.times }}
-                </label>
-            </v-flex>
+                <v-flex>
 
-            <v-flex xs4>
-                <div
-                    style="width:12px;height:12px; background-color:rgb(160,160,160); border-radius:6px; margin:4px"></div>
+                    <v-layout justify-end>
+                        <button :style="{color:color}" style="opacity:0.7">{{ trans.clear }}</button>
+                    </v-layout>
+                </v-flex>
+            </v-layout>
+        </v-flex>
 
-                <v-layout justify-end>
-                    <button :style="{color:color}" style="opacity:0.7">{{ trans.clear }}</button>
-                </v-layout>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row wrap>
-            <v-flex xs12>
-                <v-date-picker
-                    class="calender mt-3"
-                    full-width
-                    no-title
-                    :color="color"
-                    v-model="selectedDate"
-                    :allowed-dates="val => allowDates.indexOf(val) !== -1"
-                    :min="selectedEvent.start"
-                    :max="selectedEvent.end"
-                ></v-date-picker>
-            </v-flex>
-        </v-layout>
+        <v-flex>
+            <v-layout row wrap>
+                <v-flex xs12>
+                    <v-date-picker
+                        class="calender mt-3"
+                        full-width
+                        no-title
+                        :color="color"
+                        v-model="selectedDate"
+                        :allowed-dates="val => allowDates.indexOf(val) !== -1"
+                        :min="selectedEvent.start"
+                        :max="selectedEvent.end"
+                    ></v-date-picker>
+                </v-flex>
+            </v-layout>
+        </v-flex>
     </v-layout>
 </template>
 
