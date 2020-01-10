@@ -984,6 +984,12 @@ return [
         'label' => 'Amend',
         'identifier' => 'amend',
         'translation' => 'Amend'
+    ],
+
+    [
+        'label' => 'your reservation has been confirmed',
+        'identifier' => 'yourReservationConfirmed',
+        'translation' => 'your reservation has been confirmed'
     ]
 
 ];

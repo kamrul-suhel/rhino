@@ -164,7 +164,9 @@
                                                             </h6>
                                                         </v-flex>
                                                         <v-flex mt-1>
-                                                            <h6 class="registration-confirmation">TT11 T11</h6>
+                                                            <h6 class="registration-confirmation">
+                                                                {{ partExchange.registrationNumber }}
+                                                            </h6>
                                                         </v-flex>
                                                         <v-flex xs12>
                                                             <v-layout justify-center row nowrap mt-3>
@@ -197,7 +199,9 @@
                                                         </v-flex>
 
                                                         <v-flex mt-1>
-                                                            <h6 class="xs12 body-2 text-xs-center">Sandra Koning</h6>
+                                                            <h6 class="xs12 body-2 text-xs-center">
+                                                                {{ bringGuest.name }}
+                                                            </h6>
                                                         </v-flex>
 
                                                         <v-flex xs12>
@@ -275,22 +279,37 @@
                 bookingForm.append('user_id', this.saleExecutive.id)
                 bookingForm.append('guest_id', this.guest.id)
                 bookingForm.append('slot_id', this.slot.slotId)
-                bookingForm.append('bring_guest', '')
-                bookingForm.append('guest_changing_car', '')
+                bookingForm.append('bring_guest', this.bringGuest.name)
+
+                if(this.bringGuest.changingCar){
+                    bookingForm.append('guest_changing_car', 1)
+                }else{
+                    bookingForm.append('guest_changing_car', 0)
+                }
+
                 bookingForm.append('start', this.slot.start)
                 bookingForm.append('end', this.slot.end)
                 bookingForm.append('part_ex_vrm', this.partExchange.registrationNumber)
                 bookingForm.append('part_ex_vehicle', this.partExchange.makeAndModel)
                 bookingForm.append('part_ex_distance', this.partExchange.currentMilege)
+                bookingForm.append('_method', 'post')
 
+                _.map(this.vehicles, function(vehicle, index){
+                    bookingForm.append(`vehicles[${index}][id]`,vehicle.vehicle_id)
+                    bookingForm.append(`vehicles[${index}][condition]`, vehicle.condition)
+                })
 
-
-                console.log('selected date', this.date)
-                console.log('selected Vehicles : ', this.vehicles)
-                console.log('selected slot: ', this.slot)
-                console.log('partExchange: ', this.partExchange)
-                console.log('booking bring guest info: ', this.guest)
-                console.log('Selected sale executive: ', this.saleExecutive)
+                const URL = `/api/booking`
+                axios.post(URL, bookingForm).then((response) => {
+                    if(response.data.success){
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            bgColor: this.themeOption.snackBarBgSuccess,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.yourReservationConfirmed}`
+                        })
+                    }
+                })
             }
         }
     }

@@ -9,7 +9,9 @@ const defaultState = {
     selectedSlot:{},
     selectedDate:'',
     selectedSaleExecutive: {},
-    bringGuest: {},
+    bringGuest: {
+
+    },
     partExchange:{
         vehicleExchange: false
     },

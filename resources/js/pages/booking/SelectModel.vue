@@ -52,6 +52,8 @@
                     <div class="vehicle"
                          :style="{borderColor: onVehicleSelected(vehicle)}">
                         <v-card
+                            hover
+                            raised
                             @click="onSelectVehicle(vehicle)"
                             flat
                         >
