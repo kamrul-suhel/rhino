@@ -1,14 +1,11 @@
 <template>
     <div>
-        <v-layout row wrap align-center justify-center class="personal-details">
+        <v-layout row wrap align-center justify-center class="personal-details" px-5>
             <v-flex class="xs12" align-center>
                 <h4 class="display-1 mt-5 mx-2 text-xs-center">{{ trans.pleaseConfirmAmendYourContactDetails }}</h4>
                 <h5 class="headline mt-2 mx-4 text-xs-center">{{ trans.areTheseDetailsStillCorrect }}</h5>
             </v-flex>
-            <v-flex row nowrap mt-5
-                    justify-center
-                    class="details-container xs11 md8">
-
+            <v-flex row nowrap mt-5 justify-center class="details-container xs12 md8">
                 <v-container mt-4 grid-list-xl>
                     <v-layout row wrap justify-center>
                         <v-flex my-2 xs12 sm6>

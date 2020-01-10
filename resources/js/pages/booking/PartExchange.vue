@@ -1,5 +1,5 @@
 <template>
-    <div class="part-exchange">
+    <div class="part-exchange px-5">
         <v-layout row wrap>
             <v-flex xs12>
                 <h4 class="display-1 mt-5 mx-3 text-xs-center">{{ trans.DoYouHaveACarToPartExchange }}</h4>

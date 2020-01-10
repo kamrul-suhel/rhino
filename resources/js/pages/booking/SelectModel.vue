@@ -1,5 +1,5 @@
 <template>
-    <div class="model-section">
+    <div class="model-section" px-5>
         <v-layout column>
             <v-flex>
                 <h5 class="headline mt-5 text-lg-center"
