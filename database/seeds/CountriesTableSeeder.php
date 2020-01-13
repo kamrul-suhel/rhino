@@ -32,9 +32,12 @@ class CountriesTableSeeder extends Seeder
                 $country = Countries::create([
                     'name'                      => ((isset($country['name'])) ? $country['name'] : null),
                     'country_code'              => ((isset($country['iso_3166_2'])) ? $country['country_code'] : null),
+                    'iso_3166_2'              => ((isset($country['iso_3166_2'])) ? $country['country_code'] : null),
+                    'iso_3166_3'              => ((isset($country['iso_3166_3'])) ? $country['country_code'] : null),
                     'driver_seating_position'   => $faker->randomElement(['right', 'left']),
                 ]);
             }
+
         }
 
     }
