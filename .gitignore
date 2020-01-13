@@ -5,6 +5,9 @@
 /public/js/app.js.map
 /public/css/app.css.map
 /public/storage
+/public/css/app.css
+/public/css/vuetify.min.css
+/public/mix-manifest.json
 /storage/*.key
 /vendor
 .idea/
