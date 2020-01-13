@@ -535,6 +535,12 @@ return [
     ],
 
     [
+        'label' => 'Sales executive',
+        'identifier' => 'sales_executive',
+        'translation' => 'Sales executive'
+    ],
+
+    [
         'label' => 'Sales executives',
         'identifier' => 'sales_executives',
         'translation' => 'Sales executives'
@@ -890,6 +896,23 @@ return [
         'label' => 'Multi',
         'identifier' => 'multi',
         'translation' => 'Multi'
+    ],
+    [
+        'label' => 'Access Level',
+        'identifier' => 'access_level',
+        'translation' => 'Access Level'
+    ],
+    
+    [
+        'label' => 'Staff',
+        'identifier' => 'staff',
+        'translation' => 'Staff'
+    ],
+
+    [
+        'label' => 'Member',
+        'identifier' => 'member',
+        'translation' => 'Member'
     ]
 
 ];
