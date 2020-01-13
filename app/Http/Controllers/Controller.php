@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public $languageId = 40; // By default it will be english
+    public $languageId = 1; // By default it will be english
     public $perPage = 20;
 
     public function __construct(Request $request)

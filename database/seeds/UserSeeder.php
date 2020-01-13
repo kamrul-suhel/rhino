@@ -19,6 +19,6 @@ class UserSeeder extends Seeder
         User::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        factory(User::class, 300)->create();
+        factory(User::class, 1)->create();
     }
 }

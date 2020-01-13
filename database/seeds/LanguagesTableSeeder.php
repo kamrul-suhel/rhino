@@ -17,23 +17,28 @@ class LanguagesTableSeeder extends Seeder
         Languages::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        // Get all from the JSON file
-        $JSON_languages = Languages::allJSON();
 
-        $count = 1;
-        foreach ($JSON_languages as $language) {
-            if($count > 41){
-               break;
-            }
+        Languages::create([
+            'code2'    => 'GB',
+            'code3'    => 'GBR',
+            'status'    => 1,
+            'name'   => 'English (UK)'
+        ]);
+        
 
-            Languages::create([
-                'code2'    => ((isset($language['alpha2'])) ? $language['alpha2'] : null),
-                'code3'    => ((isset($language['alpha3'])) ? $language['alpha3'] : null),
-                'status'    => 1,
-                'name'   => ((isset($language['english'])) ? $language['english'] : null),
-            ]);
+        Languages::create([
+            'code2'    => 'US',
+            'code3'    => 'USA',
+            'status'    => 1,
+            'name'   => 'English (US)'
+        ]);
 
-            $count++;
-        }
+        
+        Languages::create([
+            'code2'    => 'FR',
+            'code3'    => 'FRA',
+            'status'    => 1,
+            'name'   => 'French'
+        ]);
     }
 }

@@ -27,7 +27,6 @@ class CountryController extends Controller
             'country_code',
             'driver_seating_position',
             'status',
-            'flag'
         );
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {

@@ -11,7 +11,7 @@
                         <v-flex>
                             <v-layout row justify-end mt-4 class="language-select stroke-dropdown">
                                 <language-picker
-                                    :languageId="40"
+                                    :languageId="1"
                                     isFrontend
                                 ></language-picker>
                             </v-layout>
