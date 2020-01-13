@@ -27,17 +27,19 @@
 
             <v-flex xs12>
                 <h1 :style="{color:color}"
-                    class='font-weight-black event-title'>Vauxhall Platinum Event
+                    class='font-weight-black event-title'>
+                    {{ event.name }}
                 </h1>
             </v-flex>
 
             <v-flex xs12>
-                <h4 :style="{color:color}">XX.XX.XX - XX.XX.XX</h4>
+                <h4 :style="{color:color}">{{ event.start | dateFormat('LL') }} - {{ event.end| dateFormat('LL') }}</h4>
             </v-flex>
 
             <v-flex xs12>
                 <v-tabs
                     v-model="model"
+                    @change="onChangeTab(model)"
                     class="rhinoNavigationStepper"
                 >
                     <v-tab
@@ -134,7 +136,8 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 guest: 'getBookingGuest',
-                color: 'getFrontendColor'
+                color: 'getFrontendColor',
+                event: 'getSelectedEvent'
             })
         }),
 
@@ -154,6 +157,10 @@
                         this.$router.push({name: 'login'})
                     }
                 });
+            },
+
+            onChangeTab(key){
+                console.log('key is : ', key)
             }
         }
     }
