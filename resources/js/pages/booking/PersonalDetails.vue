@@ -84,6 +84,8 @@
             <v-flex xs12 my-5>
                 <v-layout xs12 row justify-center>
                     <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
+                           :color="color"
+                           @click="onContinue"
                            depressed>{{ trans.continue }}
                     </v-btn>
                 </v-layout>
@@ -149,6 +151,10 @@
                     })
 
                 }
+            },
+
+            onContinue(){
+                this.$store.commit('setBookingStep', 4)
             }
         }
     }

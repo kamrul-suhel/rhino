@@ -12,6 +12,7 @@ const defaultState = {
     bringGuest: {
 
     },
+    step:'selectModel',
     partExchange:{
         vehicleExchange: false
     },
@@ -91,6 +92,28 @@ const mutations = {
 
     setPartExchange(state, partExchange){
         state.partExchange = {...partExchange}
+    },
+
+    setBookingStep(state, step){
+        switch(step){
+            case 0:
+                state.step = 'selectModel'
+                break
+            case 1:
+                state.step = 'bookYourSlot'
+                break
+
+            case 2:
+                state.step = 'partExchange'
+                break
+
+            case 3:
+                state.step = 'confirmYourDetail'
+                break
+            case 4:
+                state.step = 'bookingConfirmation'
+                break
+        }
     }
 
 }
@@ -142,6 +165,10 @@ const getters = {
 
     getBookingPartExchange(state){
         return state.partExchange
+    },
+
+    getBookingStep(state){
+        return state.step
     }
 }
 

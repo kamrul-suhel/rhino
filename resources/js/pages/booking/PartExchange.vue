@@ -69,6 +69,8 @@
                             <v-flex class="grow-0">
                                 <div>
                                     <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
+                                           :color="color"
+                                           @click="onContinue()"
                                            depressed
                                     >{{ trans.continue }}
                                     </v-btn>
@@ -116,6 +118,10 @@
                 }
 
                 this.$store.commit('setPartExchange', partExchange)
+            },
+
+            onContinue(){
+                this.$store.commit('setBookingStep', 3)
             }
         }
     }

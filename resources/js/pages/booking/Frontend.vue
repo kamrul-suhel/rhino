@@ -21,78 +21,47 @@
                     </v-flex>
 
                     <v-flex xs12>
-                        <v-tabs
-                            v-model="active"
-                            @change="onChangeTab(active)"
+                        <v-tabs-items
+                            v-model="step"
                             color="black"
-                            dark
+                            light
                             slider-color="yellow"
                         >
-                            <v-tab
-                                key="selectModel"
-                                ripple
-                            >
-                                Select Model
-                            </v-tab>
-
-                            <v-tab
-                                key="appointment"
-                                ripple
-                            >
-                                Book your Slot
-                            </v-tab>
-
-                            <v-tab
-                                key="partExchange"
-                                ripple
-                            >
-                                Part Exchange
-                            </v-tab>
-
-                            <v-tab
-                                key="personalDetail"
-                                ripple
-                            >
-                                Confirm your Details
-                            </v-tab>
-
-                            <v-tab
-                                key="confirmDetail"
-                                ripple
-                            >
-                                Booking Confirmation
-                            </v-tab>
-
                             <v-tab-item
                                 key="selectModel"
+                                value="selectModel"
                             >
                                 <FSelectModel></FSelectModel>
                             </v-tab-item>
 
                             <v-tab-item
-                                key="appointment"
+                                key="bookYourSlot"
+                                value="bookYourSlot"
                             >
                                 <FBookAppointment></FBookAppointment>
                             </v-tab-item>
 
                             <v-tab-item
                                 key="partExchange"
+                                value="partExchange"
                             >
                                 <FPartExchange></FPartExchange>
                             </v-tab-item>
 
                             <v-tab-item
-                                key="personalDetail"
+                                key="confirmYourDetail"
+                                value="confirmYourDetail"
                             >
                                 <FPersonalDetails></FPersonalDetails>
                             </v-tab-item>
 
                             <v-tab-item
-                                key="confirmDetail"
+                                key="bookingConfirmation"
+                                value="bookingConfirmation"
                             >
                                 <FBookingConfirmation></FBookingConfirmation>
                             </v-tab-item>
-                        </v-tabs>
+                        </v-tabs-items>
                     </v-flex>
                 </v-layout>
             </v-container>
@@ -121,8 +90,7 @@
         },
 
         data: () => ({
-            model: 'tab-1',
-            active: null
+            currentStep: ''
         }),
 
         computed: {
@@ -131,7 +99,8 @@
                 isLoading: 'getIsLoading',
                 themeOption: 'getThemeOption',
                 isAdmin: 'getIsAdmin',
-                trans: 'getFields'
+                trans: 'getFields',
+                step: 'getBookingStep'
             })
         },
 
@@ -147,9 +116,6 @@
         },
 
         methods: {
-            onChangeTab(key){
-
-            }
         }
     }
 

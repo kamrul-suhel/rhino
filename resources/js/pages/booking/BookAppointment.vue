@@ -32,6 +32,7 @@
                                 <div>
                                     <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
                                            outline
+                                           @click="onContinue()"
                                            :color="color"
                                            depressed>{{ trans.continue }}
                                     </v-btn>
@@ -82,7 +83,9 @@
         }),
 
         methods:{
-
+            onContinue(){
+                this.$store.commit('setBookingStep', 2)
+            }
         }
     }
 </script>

@@ -795,7 +795,7 @@ return [
 
     [
         'label' => 'Skip this step',
-        'identifier' => 'SkipThisStep',
+        'identifier' => 'skipThisStep',
         'translation' => 'Skip this step'
     ],
 
@@ -902,7 +902,7 @@ return [
         'identifier' => 'access_level',
         'translation' => 'Access Level'
     ],
-    
+
     [
         'label' => 'Staff',
         'identifier' => 'staff',

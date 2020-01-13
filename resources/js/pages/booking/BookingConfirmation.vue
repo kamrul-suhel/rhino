@@ -2,10 +2,12 @@
     <div>
         <v-layout row wrap align-center justify-center class="booking-confirmation" px-5>
             <v-flex class="xs12" align-center>
-                <h4 class="display-1 mt-5 mx-2 text-xs-center">{{ trans.FollowingDetailsAreCorrect }}
+                <h4 class="display-1 mt-5 mx-2 text-xs-center">
+                    {{ trans.FollowingDetailsAreCorrect }}
                 </h4>
 
-                <h5 class="headline mt-2 mx-4 text-xs-center">{{ trans.areTheseDetailsStillCorrect }}
+                <h5 class="headline mt-2 mx-4 text-xs-center">
+                    {{ trans.areTheseDetailsStillCorrect }}
                 </h5>
             </v-flex>
             <v-flex row nowrap mt-5 justify-center class="confirmation-container xs12">
@@ -48,7 +50,8 @@
 
                                         <v-flex xs12>
                                             <v-layout justify-center my-3>
-                                                <v-btn class="border-medium height-40 mx-1 rounded-25 light-grey">
+                                                <v-btn class="border-medium height-40 mx-1 rounded-25 light-grey"
+                                                    @click="onAmend(0)">
                                                     {{ trans.amend }}
                                                 </v-btn>
                                             </v-layout>
@@ -121,7 +124,7 @@
 
                                                         <v-flex xs12 mt-2>
                                                             <h6 class="xs12 body-2 text-xs-center">
-                                                                {{ trans.date|dateFormat('l') }}
+                                                                {{ trans.date }}
                                                             </h6>
                                                         </v-flex>
 
@@ -135,7 +138,8 @@
 
                                                 <v-flex xs12>
                                                     <v-layout justify-center row nowrap mt-4>
-                                                        <v-btn class="border-medium height-40 rounded-25 light-grey">
+                                                        <v-btn class="border-medium height-40 rounded-25 light-grey"
+                                                               @click="onAmend(1)">
                                                             {{ trans.amend }}
                                                         </v-btn>
                                                     </v-layout>
@@ -169,7 +173,7 @@
                                                         </v-flex>
                                                         <v-flex xs12>
                                                             <v-layout justify-center row nowrap mt-3>
-                                                                <v-btn
+                                                                <v-btn @click="onAmend(2)"
                                                                     class="border-medium height-40 rounded-25 light-grey">
                                                                     {{ trans.amend }}
                                                                 </v-btn>
@@ -205,7 +209,7 @@
 
                                                         <v-flex xs12>
                                                             <v-layout justify-center row nowrap mt-3>
-                                                                <v-btn
+                                                                <v-btn @click="onAmend(1)"
                                                                     class="border-medium height-40 rounded-25 light-grey">
                                                                     {{ trans.amend }}
                                                                 </v-btn>
@@ -309,6 +313,10 @@
                         })
                     }
                 })
+            },
+
+            onAmend(step){
+                this.$store.commit('setBookingStep', step)
             }
         }
     }

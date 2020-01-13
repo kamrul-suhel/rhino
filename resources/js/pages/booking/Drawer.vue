@@ -17,10 +17,10 @@
                     </v-flex>
 
                     <v-flex xs6 class="language-select stroke-dropdown">
-                       <language-picker
-                           :languageId="guest.language_id"
-                           isFrontend
-                       ></language-picker>
+                        <language-picker
+                            :languageId="guest.language_id"
+                            isFrontend
+                        ></language-picker>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -38,12 +38,12 @@
 
             <v-flex xs12>
                 <v-tabs
-                    v-model="model"
-                    @change="onChangeTab(model)"
+                    v-model="step"
                     class="rhinoNavigationStepper"
                 >
                     <v-tab
                         key="selectModel"
+                        value="selectModel"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">1</v-avatar>
                         {{ `${trans.selectModel}` }}
@@ -52,6 +52,7 @@
 
                     <v-tab
                         key="bookYourSlot"
+                        value="bookYourSlot"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
                         {{ `${trans.bookYourSlot}` }}
@@ -60,6 +61,7 @@
 
                     <v-tab
                         key="partExchange"
+                        value="partExchange"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
                         {{ `${trans.partExchange}` }}
@@ -68,6 +70,7 @@
 
                     <v-tab
                         key="confirmYourDetail"
+                        value="confirmYourDetail"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">4</v-avatar>
                         {{ `${trans.confirm} ${trans.your_details}` }}
@@ -75,7 +78,8 @@
                     </v-tab>
 
                     <v-tab
-                        key="BookingConfirmation"
+                        key="bookingConfirmation"
+                        value="bookingConfirmation"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">5</v-avatar>
                         {{ `${trans.bookingConfirmation}` }}
@@ -123,10 +127,7 @@
 
         data() {
             return {
-                drawer: true,
-                tile: false,
-                e6: 1,
-                model: 'tab-2'
+                drawer: true
             }
         },
 
@@ -138,12 +139,41 @@
                 guest: 'getBookingGuest',
                 color: 'getFrontendColor',
                 event: 'getSelectedEvent'
-            })
+            }),
+
+            step: {
+                get(){
+                    switch(this.$store.getters.getBookingStep){
+                        case 'selectModel':
+                            return 0
+                            break
+                        case 'bookYourSlot':
+                            return 1
+                            break
+
+                        case 'partExchange':
+                            return 2
+                            break
+
+                        case 'confirmYourDetail':
+                            return 3
+                            break
+                        case 'bookingConfirmation':
+                            return 4
+                            break
+                    }
+                    return this.$store.getters.getBookingStep
+                },
+
+                set(value){
+                    this.$store.commit('setBookingStep', value)
+                }
+            }
         }),
 
-        watch:{
-          guest(){
-          }
+        watch: {
+            guest() {
+            }
         },
 
         created() {
@@ -151,16 +181,12 @@
         },
 
         methods: {
-            onGuestLogout(){
+            onGuestLogout() {
                 axios.post('guests/logout').then((response) => {
-                    if(response.data.success){
+                    if (response.data.success) {
                         this.$router.push({name: 'login'})
                     }
                 });
-            },
-
-            onChangeTab(key){
-                console.log('key is : ', key)
             }
         }
     }

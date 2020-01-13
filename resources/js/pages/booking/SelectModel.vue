@@ -79,9 +79,10 @@
                             <div>
                                 <v-btn class="border-medium height-50 rounded-25 theme-color padding-l-85 padding-r-45"
                                        outline
+                                       @click="onContinue"
                                        :color="color"
                                        depressed>
-                                    {{ trans.SkipThisStep }}
+                                    {{ skipStep ? trans.continue : trans.skipThisStep }}
                                     <v-icon class="padding-l-35"
                                             :color="color"
                                             small dark>arrow_forward
@@ -103,6 +104,7 @@
     export default {
         data() {
             return {
+                skipStep: false
             }
         },
 
@@ -111,6 +113,13 @@
         },
 
         watch: {
+            selectedVehicles(){
+                if(this.vehicles.length > 0){
+                    this.skipStep = true
+                }else{
+                    this.skipStep = false
+                }
+            }
         },
 
         computed: ({
@@ -151,6 +160,10 @@
                     themeOption: this.themeOption,
                     trans: this.trans
                 })
+            },
+
+            onContinue(){
+                this.$store.commit('setBookingStep', 1)
             }
         }
     }
