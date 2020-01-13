@@ -23,7 +23,18 @@ class BookingController extends Controller
         $brands = [];
 
         if($guest){
-            $event = Event::find($guest->event_id);
+            $event = Event::select(
+                'events.*',
+                'events_translation.name',
+                'events_translation.notes'
+            )
+                ->leftJoin('events_translation', function($eventT){
+                    $eventT->on('events_translation.event_id', '=', 'events.id')
+                        ->where('events_translation.language_id', $this->languageId);
+                })
+                ->where('events.id', $guest->event_id)
+                ->first();
+
             $dealership = Dealership::select(
                 'dealerships.*',
                 'countries.driver_seating_position'

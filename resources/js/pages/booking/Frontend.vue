@@ -23,6 +23,7 @@
                     <v-flex xs12>
                         <v-tabs
                             v-model="active"
+                            @change="onChangeTab(active)"
                             color="black"
                             dark
                             slider-color="yellow"
@@ -145,7 +146,11 @@
             this.$store.dispatch('fetchGuestBookingData')
         },
 
-        methods: {}
+        methods: {
+            onChangeTab(key){
+
+            }
+        }
     }
 
 </script>
