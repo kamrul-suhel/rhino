@@ -1,6 +1,6 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
+        <v-layout row warp pb-4 >
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
@@ -86,11 +86,11 @@
                                 </v-flex>
                             </v-layout>
 
-                            <v-layout row wrap>
+                            <v-layout row wrap v-if="!subComponent">
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
                                         :items="levels"
-                                        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.rule}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.rule"
                                         v-model="user.level"
@@ -108,7 +108,7 @@
                                         :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
-                                        v-model="user.dealership_id"
+                                        v-model="user.dealershipId"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -240,6 +240,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
+import { log } from 'util'
 
     export default {
         data() {
@@ -251,6 +252,18 @@
                 accessLevels: [],
                 profileImage: ''
             }
+        },
+
+
+        props:{
+          subComponent: {
+              type: Boolean,
+              default: false
+          },
+
+          model: {
+              type: String
+          }
         },
 
         computed: ({
@@ -330,12 +343,17 @@
 
             onCreateUser() {
                 if (this.$refs.userForm.validate()) {
-                    console.log(this.user)
-                    return
 
                     // Set form object for dealership
                     let userForm = new FormData()
+
+                    if(this.subComponent){
+                        userForm.append('dealershipId', this.$route.params.dealershipId)
+                        userForm.append('level', 'sales_executive')
+                    }
+
                     _.forOwn(this.user, (value, key) => {
+
                         if (key === 'status') {
                             if (value === 'true') {
                                 userForm.append('status', 1)
@@ -351,6 +369,18 @@
                     userForm.append('profile_image', this.profileImage)
                     const URL = `/api/users`
                     axios.post(URL, userForm).then((response) => {
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.user}  ${this.trans.successfully_created}`
+                        })
+
+                        if ( this.subComponent ) {
+                            this.$router.push({name: 'editDealerships', params: {id: this.$route.params.dealershipId} });
+                        } else {
+                            this.$router.push({name: 'listUsers'});
+                        }
+                        
 
                     })
                 }

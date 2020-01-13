@@ -1,6 +1,7 @@
 <?php
 
 
+use App\User;
 use Illuminate\Http\Request;
 
 Auth::routes();
@@ -65,6 +66,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
         });
 
         Route::get('{id}/edit', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/user/create', function () {
             return view('index');
         });
 
@@ -231,8 +236,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
 
         Route::get('{id}/edit', function ($id) {
             $user = User::find($id);
-            $title = $user->surname;
-            return view('index')->compact('title');
+            $title = "$user->firstname $user->surname";
+            return view('index')->with('title', "User - $title");
         });
     });
 

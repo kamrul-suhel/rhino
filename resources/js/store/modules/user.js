@@ -82,6 +82,11 @@ const mutations = {
             {
                 'text': trans.company,
                 'value': 'company'
+            },
+
+            {
+                'text': trans.sales_executive,
+                'value': 'sales_executive'
             }
         ]
 

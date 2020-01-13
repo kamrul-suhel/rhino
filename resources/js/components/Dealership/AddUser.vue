@@ -15,7 +15,6 @@
                             v-for="user in (subComponent ? selectedUsers : users)"
                             :key="user.id"
                             avatar
-                            @click=""
                         >
                             <v-list-tile-avatar>
                                 <v-avatar

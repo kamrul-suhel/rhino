@@ -274,7 +274,7 @@
                 this.hasRightImage = true
             },
 
-           uploadImage(file, identifier, image){
+            uploadImage(file, identifier, image){
                 let formData = new FormData()
                 formData.append('file', file)
                 formData.append('model', identifier)

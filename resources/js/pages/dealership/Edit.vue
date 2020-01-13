@@ -154,6 +154,19 @@
                                     >
                                         <v-layout row wrap pt-3>
                                             <dealership-users></dealership-users>
+
+                                            
+                                            <v-flex xs12 sm6 pa-2>
+                                                <v-btn
+                                                    :class="themeOption.buttonSuccess"
+                                                    small
+                                                    @click="$router.push({name: 'createDealershipUser', params: {dealershipId: dealership.id}})"
+                                                >
+                                                
+                                                    {{ trans.add }} {{ trans.user }}
+                                                </v-btn>
+                                            </v-flex>
+
                                         </v-layout>
                                     </v-tab-item>
 

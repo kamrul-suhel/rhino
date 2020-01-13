@@ -28,7 +28,15 @@ const DealershipRoutes =  {
             path: ':dealershipId/events/:eventId/edit',
             name: 'editDealershipsEvent',
             component: Dealership.Event
+        },
+        
+        // Add staff member to dealership
+        {
+            path: ':dealershipId/user/create',
+            name: 'createDealershipUser',
+            component: Dealership.AddUser
         }
+
     ]
 }
 

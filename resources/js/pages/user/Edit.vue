@@ -61,9 +61,9 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
                                         :items="levels"
-                                        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.role}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.rule"
+                                        :label="trans.access_level"
                                         v-model="user.level"
                                         @change="onFetchData"
                                     >
