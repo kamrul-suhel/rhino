@@ -175,16 +175,19 @@
                     }
                 })
             },
+
             cancel () {
                 this.snack = true
                 this.snackColor = 'error'
                 this.snackText = 'Canceled'
             },
+
             open () {
                 this.snack = true
                 this.snackColor = 'info'
                 this.snackText = `${this.trans.update} ${this.trans.translation}`
             },
+
             close () {
             }
         }

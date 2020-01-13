@@ -132,6 +132,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
         Route::get('/', function () {
             return view('index');
         });
+
+        Route::get('list', function () {
+            return view('index');
+        });
     });
 
     /*
