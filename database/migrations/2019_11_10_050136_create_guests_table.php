@@ -33,6 +33,10 @@ class CreateGuestsTable extends Migration
             $table->string('method')->nullable();
             $table->dateTime('last_logged_in')->nullable();
             $table->smallInteger('stage')->default(1);
+            $table->boolean('confirmation_letter_sent')->default(0);
+            $table->boolean('postal_contact')->default(0);
+            $table->boolean('email_contact')->default(0);
+            $table->boolean('sms_contact')->default(0);
             $table->tinyInteger('status')->index()->default(1);
             $table->timestamps();
         });

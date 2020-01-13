@@ -1,5 +1,5 @@
 <template>
-    <div class="model-section">
+    <div class="model-section" px-5>
         <v-layout column>
             <v-flex>
                 <h5 class="headline mt-5 text-lg-center"
@@ -52,6 +52,8 @@
                     <div class="vehicle"
                          :style="{borderColor: onVehicleSelected(vehicle)}">
                         <v-card
+                            hover
+                            raised
                             @click="onSelectVehicle(vehicle)"
                             flat
                         >
@@ -127,18 +129,18 @@
 
         methods: {
             onSelectVehicle(vehicle) {
-                let vehicles = [...this.vehicles]
-
-                _.map(vehicles, (currentVehicle) => {
-                    currentVehicle = {
-                        ...currentVehicle,
-
-                    }
-                })
+               this.$store.commit('setOrRemoveVehicle', vehicle)
             },
 
             onVehicleSelected(vehicle) {
-                return this.color
+                let selected = ''
+                _.map(this.selectedVehicles, (currentVehicle) => {
+                    if(vehicle.id === currentVehicle.id){
+                        selected = this.color
+                    }
+                })
+
+                return selected
             },
 
             onFilterVehicle(type){

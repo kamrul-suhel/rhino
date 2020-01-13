@@ -343,7 +343,7 @@ import { log } from 'util'
 
             onCreateUser() {
                 if (this.$refs.userForm.validate()) {
-
+                    
                     // Set form object for dealership
                     let userForm = new FormData()
 

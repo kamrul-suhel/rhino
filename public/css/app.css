@@ -169,6 +169,18 @@ a {
   background: transparent;
 }
 
+.calenderComponent .keys label {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+
+.calenderComponent .keys div {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+
 /*
 *****************************************
     End Calender Component
@@ -191,8 +203,9 @@ a {
 }
 
 .sales-person .v-card .v-card__text .salesperson-container {
-  padding: 5px;
+  padding: 5px 40px 5px 5px;
   border-radius: 19px;
+  cursor: pointer;
 }
 
 .sales-person .v-card .v-card__text .salesperson-container:hover {
@@ -212,6 +225,7 @@ a {
 
 .sales-person .v-card .v-card__text .salesperson-container .text-flex {
   margin: 3.5px 0;
+  pointer-events: none;
 }
 
 /*
@@ -567,7 +581,7 @@ a {
 
 .part-exchange .exchange-details > .layout,
 .part-exchange .no-part-exchange > .layout {
-  border: 1px solid #f0f0f0;
+  border: 4px solid #f0f0f0;
 }
 
 .part-exchange .exchange-details .flex,
@@ -629,6 +643,73 @@ a {
 /*
 *****************************************
     End Personal Details Page
+*****************************************
+*/
+
+/*
+*****************************************
+    Booking Confirmation Page
+*****************************************
+*/
+
+.booking-confirmation .v-card {
+  background-color: transparent;
+  border: 1px solid gainsboro;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.booking-confirmation .v-card .v-card__text {
+  padding: 0;
+}
+
+.booking-confirmation .v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.booking-confirmation .registration-confirmation {
+  width: 120px;
+  height: 30px;
+  background-color: #ffb400;
+  border: 1px solid #a07800;
+  border-radius: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 7px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.booking-confirmation .v-carousel {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.booking-confirmation .v-carousel .v-window__container {
+  height: 200px !important;
+}
+
+.booking-confirmation .v-carousel .v-window__container .v-window-item,
+.booking-confirmation .v-carousel .v-window__container .v-carousel__item {
+  height: 200px !important;
+}
+
+.booking-confirmation .v-carousel .v-window-item {
+  width: calc(100% - 120px);
+  margin: 0 60px;
+}
+
+.booking-confirmation .v-carousel .v-carousel__controls {
+  background: none;
+}
+
+/*
+*****************************************
+    End Booking Confirmation Page
 *****************************************
 */
 

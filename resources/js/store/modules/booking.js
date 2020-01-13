@@ -8,7 +8,15 @@ const defaultState = {
     allSlot:[],
     selectedSlot:{},
     selectedDate:'',
-    selectedSaleExecutive: {}
+    selectedSaleExecutive: {},
+    bringGuest: {
+
+    },
+    partExchange:{
+        vehicleExchange: false
+    },
+
+    confirmDetail:{}
 }
 
 const state = {
@@ -21,8 +29,22 @@ const mutations = {
     },
 
     setOrRemoveVehicle(state, vehicle){
-        const selectedVehicles = state.selectedVehicles
+        const selectedVehicles = [...state.selectedVehicles]
 
+        const isExists = _.findIndex(selectedVehicles, (currVehicle) => {
+            return currVehicle.id === vehicle.id
+        })
+
+        if(isExists === -1){
+            selectedVehicles.push({...vehicle})
+        }else{
+            _.remove(selectedVehicles, function(currentVehicle) {
+                if(vehicle.id === currentVehicle.id){
+                    return currentVehicle
+                }
+            })
+        }
+        state.selectedVehicles = [...selectedVehicles]
     },
 
     setFrontendColor(state, brands){
@@ -61,6 +83,14 @@ const mutations = {
 
     setBookingSelectedSaleExecutive(state, saleExecutive){
         state.selectedSaleExecutive = {...saleExecutive}
+    },
+
+    setBookingBringGuest(state, guest){
+        state.bringGuest = {...guest}
+    },
+
+    setPartExchange(state, partExchange){
+        state.partExchange = {...partExchange}
     }
 
 }
@@ -104,6 +134,14 @@ const getters = {
 
     getBookingSelectedSaleExecutive(sate){
         return sate.selectedSaleExecutive
+    },
+
+    getBookingBringGuest(state){
+        return state.bringGuest
+    },
+
+    getBookingPartExchange(state){
+        return state.partExchange
     }
 }
 

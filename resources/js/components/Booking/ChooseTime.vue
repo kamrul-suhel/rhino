@@ -4,8 +4,8 @@
               v-if="vehicleType !== 'unsure'"
               align-center>
         <v-flex xs12>
-            <h6 class="headline text-lg-center">
-                {{ `${trans.choose} ${trans.a} ${trans.time}`}}
+            <h6 class="headline text-xs-center">
+                {{ `${trans.choose} ${trans.a}` }} <b> {{ `${trans.time}`}} </b>
             </h6>
         </v-flex>
 
@@ -22,7 +22,7 @@
                       class="appointmentSlot"
                       style="width:100%; flex-grow:0"
                       mx-1>
-                    <v-flex xs6 md3
+                    <v-flex xs6 sm3 md4 xl3
                             class="slot"
                             v-for="slot in slots"
                             :key="slot.slotId">
@@ -36,10 +36,11 @@
                                         border: '1px solid rgb(220,220,220)',
                                          backgroundColor: slot.status === 'selected' ? color: ''
                                       }">
-                                    <h6 class="body-2">{{ slot.start | dateFormat('HH')}}-<br>{{ slot.end | dateFormat('HH')}}</h6>
-                                </v-layout>
-                            </v-responsive>
-                    </v-flex>
+                            <h6 class="body-2">{{ slot.start | dateFormat('HH')}}-<br>{{ slot.end | dateFormat('HH')}}
+                            </h6>
+                        </v-layout>
+                    </v-responsive>
+                </v-flex>
             </v-layout>
         </v-flex>
 
@@ -53,6 +54,7 @@
                     <v-text-field
                         :label="`${trans.guest} ${trans.name}`"
                         :color="color"
+                        v-model="bringGuest.name"
                         outline
                         style="width:100%"
                     ></v-text-field>
@@ -65,11 +67,18 @@
 
                     <v-layout row class="checkboxes">
                         <v-flex>
-                            <v-checkbox></v-checkbox>
+                            <v-checkbox :color="color"
+                                        value="yes"
+                                        v-model="guestInterestedYes"
+                            ></v-checkbox>
                             <label class="body-2 mr-5 ml-2">{{ trans.yes }}</label>
                         </v-flex>
                         <v-flex>
-                            <v-checkbox style="flex-grow:0"></v-checkbox>
+                            <v-checkbox :color="color"
+                                        value="no"
+                                        v-model="guestInterestedNo"
+                                        style="flex-grow:0"
+                            ></v-checkbox>
                             <label class="body-2 mr-5 ml-2">{{ trans.no }}</label>
                         </v-flex>
                     </v-layout>
@@ -84,25 +93,50 @@
     import fn from '@/utils/function'
 
     export default {
-        data(){
+        data() {
             return {
+                guestInterestedYes: false,
+                guestInterestedNo: false
             }
         },
 
-        created(){
+        created() {
         },
 
         watch: {
-            event(){
+            guestInterestedYes() {
+                if (this.guestInterestedYes) {
+                    const guest = {
+                        name: this.bringGuest.name,
+                        changingCar: true
+                    }
+
+                    this.$store.commit('setBookingBringGuest', guest)
+                    this.guestInterestedNo = false
+                }
+            },
+
+            guestInterestedNo() {
+                if (this.guestInterestedNo) {
+                    const guest = {
+                        name: this.bringGuest.name,
+                        changingCar: false
+                    }
+                    this.$store.commit('setBookingBringGuest', guest)
+                    this.guestInterestedYes = false
+                }
+            },
+
+            event() {
                 this.generateSlots()
             },
 
-            selectedDate(){
+            selectedDate() {
                 // generate slot
                 this.generateSlots()
             },
 
-            selectedSaleExecutive(){
+            selectedSaleExecutive() {
                 // generate slot
                 this.generateSlots()
             }
@@ -118,37 +152,38 @@
                 event: 'getSelectedEvent',
                 dealership: 'getSelectedDealership',
                 slots: 'getAllAppointmentSlot',
-                vehicleType : 'getBookingVehicleType',
-                selectedDate : 'getBookingSelectedDate',
+                vehicleType: 'getBookingVehicleType',
+                selectedDate: 'getBookingSelectedDate',
                 selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
-                existingAppointments: 'getAllBookingAppointments'
+                existingAppointments: 'getAllBookingAppointments',
+                bringGuest: 'getBookingBringGuest'
             })
         }),
 
-        methods:{
-            generateSlots(){
+        methods: {
+            generateSlots() {
                 const start = moment(this.event.start)
                 const end = moment(this.event.end)
                 const dates = fn.getDates(start, end, this.dealership)
 
                 // If select sale executive
-                if(this.selectedSaleExecutive.id){
+                if (this.selectedSaleExecutive.id) {
                     // get the user existing appointments
                     const existingAppointments = _.filter(this.existingAppointments, (existingAppointment) => {
                         return existingAppointment.user_id === this.selectedSaleExecutive.id
                     })
 
-                    if(this.selectedDate === ''){
+                    if (this.selectedDate === '') {
                         let appointmentSlots = []
                         // not selected date, iterate all open date
-                        _.forEach(dates, (date)=>{
+                        _.forEach(dates, (date) => {
                             const time = fn.getStartTimeEndTime(date, this.dealership)
 
                             const daysSlot = fn.getTimeSlotsForDay(time, this.event)
                             appointmentSlots.push([...daysSlot])
                         })
 
-                    }else{
+                    } else {
                         // selected date
                         const selectedDate = this.selectedDate
                         const selectedSaleExecutiveId = this.selectedSaleExecutive.id
@@ -157,28 +192,32 @@
                         let modifySlots = []
 
                         _.map(slots, (slot) => {
-                            let currentSlot = {...slot}
+                            let currentSlot = {
+                                ...slot,
+                                status: 'available'
+                            }
                             // iterate into appointment
-                            if(this.existingAppointments.length > 0){
+                            if (this.existingAppointments.length > 0) {
                                 _.map(this.existingAppointments, (appointment) => {
-                                    if(appointment.start === slot.start){
+                                    if (
+                                        appointment.start === slot.start &&
+                                        selectedSaleExecutiveId === appointment.user_id
+                                    ) {
                                         currentSlot = {
                                             ...currentSlot,
                                             status: 'unavailable'
                                         }
                                     }
                                 })
-                            }else{
+                            } else {
                                 currentSlot = {
                                     ...currentSlot,
                                     status: 'available'
                                 }
                             }
-
                             modifySlots.push(currentSlot)
                         })
 
-                        console.log('selected field:', modifySlots)
                         this.$store.commit('setAllAppointmentSlots', modifySlots)
                     }
 
@@ -190,8 +229,8 @@
                 let appointments = []
 
                 // Check if selected date is set
-                if(this.selectedDate === ''){
-                    _.forEach(dates, (date)=>{
+                if (this.selectedDate === '') {
+                    _.forEach(dates, (date) => {
                         const time = fn.getStartTimeEndTime(date, this.dealership)
 
                         const daysSlot = fn.getTimeSlotsForDay(time, this.event)
@@ -199,7 +238,7 @@
                     })
 
                     appointments = [..._.flatten(appointmentSlots)]
-                }else{
+                } else {
                     const time = fn.getStartTimeEndTime(this.selectedDate, this.dealership)
                     const daysSlot = fn.getTimeSlotsForDay(time, this.event)
                     appointments = [...daysSlot]
@@ -208,15 +247,15 @@
                 this.$store.commit('setAllAppointmentTime', appointments)
 
                 _.forEach(appointments, (appointment) => {
-                    if(allSlots.length > 0){
+                    if (allSlots.length > 0) {
                         const found = _.find(allSlots, {slotId: appointment.slotId})
-                        if(typeof found === 'undefined'){
+                        if (typeof found === 'undefined') {
                             allSlots.push({
                                 status: 'available',
                                 ...appointment
                             })
                         }
-                    }else{
+                    } else {
                         allSlots.push({
                             status: 'available',
                             ...appointment
@@ -224,31 +263,39 @@
                     }
                 })
 
-                console.log('all slot is: ',allSlots)
                 this.$store.commit('setAllAppointmentSlots', allSlots)
             },
 
-            onSelectSlot(selectedSlot){
+            onSelectSlot(selectedSlot) {
+                // Check availability
+                if (selectedSlot.status === 'unavailable') {
+                    return
+                }
+
                 let totalSlot = []
                 _.forEach(this.slots, (slot) => {
-                    if(slot.slotId === selectedSlot.slotId){
+                    if (slot.slotId === selectedSlot.slotId) {
                         totalSlot.push({
                             ...slot,
                             status: 'selected'
                         })
-                    }else{
-                        if(slot.status === 'selected'){
+                    } else {
+                        if (slot.status === 'selected') {
                             totalSlot.push({
                                 ...slot,
                                 status: 'available'
                             })
-                        }else{
+                        } else {
                             totalSlot.push({...slot})
                         }
                     }
                 })
                 this.$store.commit('setSelectedSlot', selectedSlot)
                 this.$store.commit('setAllAppointmentSlots', totalSlot)
+            },
+
+            onClick() {
+                console.log(this.bringGuest)
             }
         }
     }
