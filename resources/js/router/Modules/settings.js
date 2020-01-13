@@ -9,6 +9,12 @@ const SettingsRoutes = {
             path:'list',
             name: 'listSettings',
             component: Settings.List,
+        },
+
+        {
+            path:'translations',
+            name: 'translationSetting',
+            component: Settings.Translation,
         }
     ]
 }

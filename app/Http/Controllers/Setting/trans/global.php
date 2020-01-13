@@ -1014,6 +1014,18 @@ return [
         'label' => 'your reservation has been confirmed',
         'identifier' => 'yourReservationConfirmed',
         'translation' => 'your reservation has been confirmed'
+    ],
+
+    [
+        'label' => 'Translation',
+        'identifier' => 'translation',
+        'translation' => 'Translation'
+    ],
+
+    [
+        'label' => 'Identifier',
+        'identifier' => 'identifier',
+        'translation' => 'Identifier'
     ]
 
 ];

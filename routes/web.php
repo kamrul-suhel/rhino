@@ -330,6 +330,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
     Route::get('/booking', function () {
         return view('index');
     });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Settings
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::prefix('settings')->group(function(){
+        Route::get('translations', function () {
+            return view('index');
+        });
+    });
 });
 
 

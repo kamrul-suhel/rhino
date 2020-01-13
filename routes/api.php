@@ -31,11 +31,6 @@ Route::prefix('users')->group(function () {
     Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list');
 });
 
-Route::prefix('settings')->group(function () {
-    Route::post('add', 'Setting\SettingController@generateDefaultSetting');
-    Route::get('/', 'Setting\SettingController@index');
-});
-
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +40,10 @@ Route::prefix('settings')->group(function () {
 */
 
 Route::prefix('settings')->group(function () {
+    Route::get('', 'Setting\SettingController@index');
     Route::post('add', 'Setting\SettingController@generateDefaultSetting');
-    Route::get('/', 'Setting\SettingController@index');
+    Route::get('translations', 'Setting\TranslationController@list');
+    Route::put('translations/{id}/update', 'Setting\TranslationStoreController@update');
 });
 
 

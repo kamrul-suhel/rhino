@@ -200,6 +200,12 @@ const mutations = {
                         link: 'testDateTime',
                         access: ''
                     },
+                    {
+                        icon: 'keyboard_arrow_right',
+                        text: trans.translation,
+                        link: 'translationSetting',
+                        access: ''
+                    },
                 ],
             },
 
