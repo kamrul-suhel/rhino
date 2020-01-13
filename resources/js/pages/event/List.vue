@@ -27,8 +27,8 @@
                     :items="events"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                    :no-results-text="`${trans.no} ${trans.events} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.events} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalEvents"
