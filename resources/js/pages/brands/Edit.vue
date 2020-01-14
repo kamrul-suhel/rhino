@@ -93,7 +93,9 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch :label="trans.status"
                                               :color="themeOption.inputColor"
-                                              v-model="brand.status">
+                                              v-model="brand.status"
+                                              :true-value="1"
+                                              :false-value="0">
                                     </v-switch>
                                 </v-flex>
                             </v-layout>
@@ -132,7 +134,7 @@
                                                 <v-btn
                                                     :class="themeOption.buttonSuccess"
                                                     small
-                                                    @click="$router.push({name: 'addBrandVehicle'})"
+                                                    @click="addBrandVehicle()"
                                                 >
                                                     {{ `${trans.create} ${trans.vehicle}` }}
                                                 </v-btn>
@@ -310,6 +312,10 @@
                 this.$store.commit('setSelectedBrand', {})
                 this.$store.commit('setSubSelectedLanguage', {})
                 this.$store.commit('setRegionsByBrandId', [])
+            },
+
+            addBrandVehicle(){
+                this.$router.push({name: 'addBrandVehicle', params: {brandId: this.$route.params.id}})
             }
         },
 

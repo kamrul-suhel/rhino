@@ -323,10 +323,11 @@
 
                     axios.post(URL, typeForm).then((response) => {
                         this.initialize()
+                        const message = this.editType ? `${this.trans.successfully_updated}` : `${this.trans.successfully_created}`
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedType.name}  ${this.editType ? this.trans.successfully_updated : trans.successfully_created}`
+                            message: message
                         })
 
                         this.onResetType()

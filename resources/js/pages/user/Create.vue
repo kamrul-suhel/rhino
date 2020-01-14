@@ -186,7 +186,9 @@
                                     <v-switch
                                         :label="trans.status"
                                         :color="themeOption.inputColor"
-                                        v-model="user.status">
+                                        v-model="user.status"
+                                        :true-value="1"
+                                        :false-value="0">
                                     </v-switch>
                                 </v-flex>
                             </v-layout>
@@ -246,7 +248,9 @@ import { log } from 'util'
         data() {
             return {
                 valid: true,
-                user: {},
+                user: {
+                    status: 1
+                },
                 password: false,
                 confirmPassword: false,
                 accessLevels: [],

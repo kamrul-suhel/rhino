@@ -135,8 +135,6 @@
                 eventUserFrom.append('user_id', userId)
                 axios.post(URL, eventUserFrom).then((response) => {
                     if (response.data.success) {
-                        console.log('suerld')
-                        return;
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,

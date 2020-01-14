@@ -37,7 +37,7 @@
                     class="elevation-1"
                 >
                     <template v-slot:items="props">
-                        <td>{{ props.item.firstname }}</td>
+                        <td>{{ props.item.firstname }} {{ props.item.surname }}</td>
                         <td>{{ props.item.email }}</td>
                         <td class="text-xs-left" v-if="!subComponent">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-left" v-if="!subComponent">{{ props.item.level }}</td>

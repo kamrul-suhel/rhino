@@ -87,7 +87,9 @@
                                     <v-switch
                                         :label="trans.status"
                                         :color="themeOption.inputColor"
-                                        v-model="dealership.status">
+                                        v-model="dealership.status"
+                                        :true-value="1"
+                                        :false-value="0">
                                     </v-switch>
                                 </v-flex>
                             </v-layout>
@@ -243,7 +245,8 @@
             return {
                 valid: true,
                 dealership: {
-                    country_id: 48
+                    country_id: 48,
+                    status: 1
                 },
                 times: {},
                 active: null,

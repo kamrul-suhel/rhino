@@ -50,7 +50,7 @@
                 <v-btn small
                        @click="onCreateRelation"
                        :color="themeOption.buttonPrimaryColor"
-                >{{ this.selectedBrand.id ? `${trans.update}` : `${trans.brand}` }}</v-btn>
+                >{{ this.selectedBrand.id ? `${trans.update} ${trans.brand}` : `${trans.add} ${trans.brand}` }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-form>

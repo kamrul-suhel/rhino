@@ -26,7 +26,6 @@ class EventListController extends Controller
             'dealerships_translation.name as dealership',
             'countries.driver_seating_position as country_driver_seating_position',
             'countries.name as country',
-            'countries.capital',
 
             'types.id as type_id',
             'types_translation.name as type'

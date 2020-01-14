@@ -203,7 +203,9 @@
         data() {
             return {
                 valid: true,
-                guest: {}
+                guest: {
+                    status: 1
+                }
             }
         },
 

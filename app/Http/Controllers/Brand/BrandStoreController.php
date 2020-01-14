@@ -23,7 +23,7 @@ class BrandStoreController extends Controller
         $brand->logo = $request->logo;
         $brand->colour = $request->colour;
         $brand->company_id = $request->company_id;
-        $brand->status = $request->status;
+        $brand->status = 1;
         $brand->save();
 
         // Create brand Translation

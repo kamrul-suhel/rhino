@@ -38,7 +38,7 @@
                         <tr @click="onEditBrand(props.item)">
                             <td>{{ props.item.name }}</td>
                             <td>{{ props.item.company }}</td>
-                            <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
+                            <td class="text-xs-left">{{ props.item.status == 1 ? trans.active: trans.inactive }}</td>
                             <td class="text-xs-right">
                                 <v-icon
                                     small
@@ -136,14 +136,6 @@
                                 </FileUpload>
                             </v-flex>
 
-                            <v-flex xs12>
-                                <v-switch
-                                    :label="trans.status"
-                                    true-value="1"
-                                    false-value="0"
-                                    v-model="selectedBrand.status">
-                                </v-switch>
-                            </v-flex>
                         </v-card-text>
 
                         <v-card-actions class="pa-2">
@@ -270,6 +262,7 @@
 
         created() {
             this.fetchCompany()
+            this.selectedBrand.status = 1;
         },
 
         mounted() {

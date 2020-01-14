@@ -27,7 +27,8 @@ class BrandController extends Controller
             'brands.company_id',
             'brands_translation.name',
             'companies_translation.name as company',
-            'brands_translation.description'
+            'brands_translation.description',
+            'brands.status'
         )
             ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
             ->leftJoin('companies', function($company){
