@@ -160,7 +160,10 @@ Route::prefix('groups')->group(function () {
 */
 
 Route::prefix('languages')->group(function () {
-    Route::get('/', 'Language\LanguageController@index');
+    Route::get('', 'Language\LanguageController@index');
+    Route::post('', 'Language\LanguageStoreController@store');
+    Route::put('{id}', 'Language\LanguageStoreController@update');
+    Route::delete('{id}', 'Language\LanguageDeleteController@destroy');
 });
 
 

@@ -117,7 +117,7 @@ const mutations = {
                 navs: [
                     {
                         icon: 'list',
-                        text: trans.list_of_languages,
+                        text: `${trans.language} ${trans.list}`,
                         link: 'listLanguages',
                         access: ''
                     }
