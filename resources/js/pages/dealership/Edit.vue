@@ -186,7 +186,7 @@
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
                                                     :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
-                                                    :label="trans.address_line_1"
+                                                    :label="`${trans.address_line} 1`"
                                                     v-model="dealership.address_line_1">
                                                 </v-text-field>
                                             </v-flex>
@@ -194,7 +194,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_2"
+                                                    :label="`${trans.address_line} 2`"
                                                     v-model="dealership.address_line_2"
                                                 >
                                                 </v-text-field>
@@ -205,7 +205,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_3"
+                                                    :label="`${trans.address_line} 3`"
                                                     v-model="dealership.address_line_3"
                                                 >
                                                 </v-text-field>
@@ -214,7 +214,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_4"
+                                                    :label="`${trans.address_line} 4`"
                                                     v-model="dealership.address_line_4"
                                                 >
                                                 </v-text-field>
@@ -225,7 +225,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_5"
+                                                    :label="`${trans.address_line} 5`"
                                                     v-model="dealership.address_line_5"
                                                 >
                                                 </v-text-field>
@@ -234,7 +234,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_6"
+                                                    :label="`${trans.address_line} 6`"
                                                     v-model="dealership.address_line_6"
                                                 >
                                                 </v-text-field>
