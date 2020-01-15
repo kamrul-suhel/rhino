@@ -155,10 +155,6 @@
                 }
             },
 
-            update(){
-              this.initialize()
-            },
-
             searchUsers() {
                 this.initialize()
             }
@@ -210,8 +206,14 @@
                         case 'dealership':
                             const URL = `/api/events/${eventId}/users/${user.id}`
                             axios.delete(URL).then((response)=>{
+                                this.$store.commit('setSnackbarMessage', {
+                                    openMessage: true,
+                                    timeOut: this.themeOption.snackBarTimeout,
+                                    message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                                })
+
                                 if(response.data.success){
-                                    this.$store.commit('setInitialize')
+                                    this.$store.commit('removeUserFromUserList', user)
                                 }
                             })
                     }

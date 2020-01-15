@@ -26,6 +26,22 @@ const mutations = {
         state.users = [...users]
     },
 
+    addUserToUserList(state, user){
+        let users = [...state.users]
+        users.push({...user})
+
+        state.users = [...users]
+    },
+
+    removeUserFromUserList(state, user){
+        const currentUser = _.filter(state.users, function(curUser){
+            return curUser.id !== user.id
+        })
+
+        state.users = [...currentUser]
+        console.log('user si :', state.users)
+    },
+
     updateUserForBooking(state, selectedUser){
         const updatedUsers = _.map(state.users, (currentUser)=>{
 

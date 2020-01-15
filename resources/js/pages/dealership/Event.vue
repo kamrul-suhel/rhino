@@ -26,13 +26,6 @@
         }),
 
         watch: {
-            update() {
-                this.initialize()
-            },
-
-            selectedUsers() {
-                this.initialize()
-            }
         },
 
         created() {
