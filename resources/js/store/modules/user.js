@@ -114,8 +114,6 @@ const mutations = {
     },
 
     setUserListHeader(state, options) {
-        console.log(options);
-        
         const trans = {...options.trans}
         const subComponent = options.subComponent
         let userColumn = {}
@@ -161,8 +159,6 @@ const mutations = {
         ]
 
         state.listHeader = [...header]
-        console.log(header);
-        
     }
 }
 

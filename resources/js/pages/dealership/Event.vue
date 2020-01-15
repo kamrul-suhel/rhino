@@ -19,16 +19,30 @@
 
         computed: ({
             ...mapGetters({
-                trans: 'getFields'
+                trans: 'getFields',
+                update: 'getInitialize',
+                selectedUsers: 'getUsers'
             })
         }),
 
-        watch: {},
+        watch: {
+            update() {
+                this.initialize()
+            },
 
-        created() {
-
+            selectedUsers() {
+                this.initialize()
+            }
         },
 
-        methods: {}
+        created() {
+            this.initialize()
+        },
+
+        methods: {
+            initialize() {
+                this.$store.dispatch('fetchUsersByDealershipId', {dealershipId: this.$route.params.dealershipId})
+            }
+        }
     }
 </script>

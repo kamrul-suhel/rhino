@@ -52,9 +52,9 @@
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.surname} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.surname"
+                                        :label="trans.surName"
                                         v-model="guest.surname"
                                         required
                                     ></v-text-field>

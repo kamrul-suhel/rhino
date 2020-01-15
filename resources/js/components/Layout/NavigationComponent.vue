@@ -25,6 +25,7 @@
                     v-for="(navs, index) in items"
                     :key="index"
                     :prepend-icon="navs.icon"
+                    v-if="onChechAccessLavel(navs)"
             >
                 <v-list-tile slot="activator">
                     <v-list-tile-title v-text="navs.text"></v-list-tile-title>
@@ -60,7 +61,8 @@
             ...mapGetters({
                 trans: 'getFields',
                 openNavigation: 'getIsNavigationOpen',
-                items: 'getNavigationBar'
+                items: 'getNavigationBar',
+                authUser: 'getAuthUser'
             })
         },
 
@@ -94,6 +96,10 @@
                         window.location = '/admin'
                     }
                 })
+            },
+
+            onChechAccessLavel(nav){
+                return true
             }
         }
     }
