@@ -68,6 +68,11 @@ const mutations = {
             },
 
             {
+                text: 'Unique ID',
+                value: 'uniqueId'
+            },
+
+            {
                 text: trans.status,
                 value: 'status'
             },

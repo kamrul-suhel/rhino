@@ -144,8 +144,8 @@
                 if (this.$refs.login_form.validate()) {
 
                     // make spinner visible
-                    // this.loginProgress = true;
-                    // this.loading = true;
+                    this.loginProgress = true;
+                    this.loading = true;
 
                     // prepare submitting data
                     let loginForm = new FormData()
@@ -155,8 +155,8 @@
                     // submit data with ajax request
                     axios.post('/login', loginForm)
                         .then(response => {
-
                             if(response.data.success){
+                                this.$store.commit('setAuthUser', response.data.authUser)
                                 this.$store.commit('setUserRole', true)
                                 this.$router.push({name: 'dashboard'})
                             }

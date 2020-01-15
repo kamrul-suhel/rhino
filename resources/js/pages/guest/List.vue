@@ -39,6 +39,7 @@
                         <td>{{ props.item.email }}</td>
                         <td class="text-xs-left">{{ `${props.item.mobile}` }}</td>
                         <td class="text-xs-left">{{ `${props.item.address_line_1} ${props.item.address_line_2}` }}</td>
+                        <td class="text-xs-left">{{ `${props.item.unique}` }}</td>
                         <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-right">
                             <v-icon

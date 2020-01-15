@@ -25,14 +25,14 @@ const mutations = {
                         icon: 'list',
                         text: `${trans.dealership} ${trans.list}`,
                         link: 'listDealerships',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
                     {
                         icon: 'post_add',
                         text: `${trans.create} ${trans.dealership}`,
                         link: 'addDealerships',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
 
@@ -40,7 +40,14 @@ const mutations = {
                         icon: 'bookmarks',
                         text: `${trans.list_of} ${trans.groups}`,
                         link: 'listDealershipsGroups',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
+                    },
+
+                    {
+                        icon: 'bookmarks',
+                        text: `${trans.list_of} ${trans.groups}`,
+                        link: 'listDealershipsGroups',
+                        access: ['admin']
                     }
                 ],
             },
@@ -48,13 +55,13 @@ const mutations = {
             {
                 icon: 'donut_small',
                 text: trans.brands,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
                         text: `${trans.brand} ${trans.list}`,
                         link: 'listBrands',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     }
                 ],
             },
@@ -62,20 +69,20 @@ const mutations = {
             {
                 icon: 'directions_car',
                 text: trans.vehicles,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
                         text: `${trans.vehicle} ${trans.list}`,
                         link: 'listVehicles',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
                     {
                         icon: 'add',
                         text: `${trans.create} ${trans.vehicle}`,
                         link: 'addVehicles',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
                 ],
@@ -84,13 +91,13 @@ const mutations = {
             {
                 icon: 'business_center',
                 text: trans.companies,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
                         text: `${trans.company} ${trans.list}`,
                         link: 'listCompanies',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     }
                 ],
             },
@@ -98,20 +105,20 @@ const mutations = {
             {
                 icon: 'map',
                 text: trans.countries,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
                         text: `${trans.countries} ${trans.list}`,
                         link: 'listCountries',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
                     {
                         icon: 'add',
                         text: `${trans.create} ${trans.country}`,
                         link: 'createCountries',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     }
                 ],
             },
@@ -119,13 +126,13 @@ const mutations = {
             {
                 icon: 'language',
                 text: trans.languages,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
                         text: `${trans.language} ${trans.list}`,
                         link: 'listLanguages',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     }
                 ],
             },
@@ -133,27 +140,27 @@ const mutations = {
             {
                 icon: 'event_note',
                 text: trans.events,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
                         text: `${trans.list_of} ${trans.events}`,
                         link: 'listEvents',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
                     {
                         icon: 'add',
                         text: `${trans.create} ${trans.event}`,
                         link: 'createEvents',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
                     {
                         icon: 'emohi_events',
                         text: `${trans.types}`,
                         link: 'listEventTypes',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     }
                 ],
             },
@@ -161,7 +168,7 @@ const mutations = {
             {
                 icon: 'person',
                 text: trans.users,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
@@ -174,7 +181,7 @@ const mutations = {
                         icon: 'person_add',
                         text: `${trans.create} ${trans.user}`,
                         link: 'createUsers',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     }
                 ],
             },
@@ -182,33 +189,33 @@ const mutations = {
             {
                 icon: 'people',
                 text: trans.guests,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'list',
                         text: `${trans.list_of} ${trans.guests}`,
                         link: 'listGuest',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
 
                     {
                         icon: 'person_add',
                         text: `${trans.create} ${trans.guest}`,
                         link: 'createGuest',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     }
                 ],
             },
             {
                 icon: 'build',
                 text: `${trans.settings}`,
-                access: ['admin', 'dealership'],
+                access: ['admin'],
                 navs: [
                     {
                         icon: 'keyboard_arrow_right',
                         text: trans.translation,
                         link: 'translationSetting',
-                        access: ['admin', 'dealership']
+                        access: ['admin']
                     },
                 ],
             },

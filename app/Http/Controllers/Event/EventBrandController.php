@@ -15,7 +15,8 @@ class EventBrandController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addBrand(Request $request, $eventId){
+    public function addBrand(Request $request, $eventId)
+    {
         $eventId = $request->event_id;
         $brandId = $request->brand_id;
 
@@ -29,7 +30,7 @@ class EventBrandController extends Controller
         $vehicles = Vehicle::where('brand_id', $brandId)
             ->get();
 
-        $vehicles->map(function($vehicle) use($eventId){
+        $vehicles->map(function ($vehicle) use ($eventId) {
             // Generate Event vehicle table
             $eventVehicle = new EventVehicle();
             $eventVehicle->event_id = $eventId;
@@ -45,7 +46,8 @@ class EventBrandController extends Controller
         ]);
     }
 
-    public function destroyBrand($eventId, $brandId){
+    public function destroyBrand($eventId, $brandId)
+    {
         $brandEvent = BrandEvent::where([
             'event_id' => $eventId,
             'brand_id' => $brandId
@@ -57,14 +59,12 @@ class EventBrandController extends Controller
         $vehicles = Vehicle::where('brand_id', $brandId)
             ->get();
 
-        $vehicles->map(function($vehicle) use($eventId){
+        $vehicles->map(function ($vehicle) use ($eventId) {
             // Generate Event vehicle table
-            $eventVehicle = EventVehicle::where([
-                'event_id'=> $eventId,
+            EventVehicle::where([
+                'event_id' => $eventId,
                 'vehicle_id' => $vehicle->id
-            ])->first();
-
-            $eventVehicle->delete();
+            ])->delete();
         });
 
         return response()->json([

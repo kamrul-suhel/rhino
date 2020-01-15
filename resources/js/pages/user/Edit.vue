@@ -64,6 +64,8 @@
                                         :rules="[v => !!v || `${trans.select_a} ${trans.role}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.access_level"
+                                        item-text="text"
+                                        item-value="value"
                                         v-model="user.level"
                                         @change="onFetchData"
                                     >
@@ -337,6 +339,10 @@
                     _.forOwn(this.user, (value, key) => {
                         if(key === 'firstname'){
                             userForm.append('name', this.user.firstname)
+                            return
+                        }
+                        if(key === 'dealership_id'){
+                            userForm.append('dealershipId', value)
                             return
                         }
                         userForm.append(key, value)

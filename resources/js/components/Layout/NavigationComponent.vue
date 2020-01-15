@@ -25,7 +25,7 @@
                     v-for="(navs, index) in items"
                     :key="index"
                     :prepend-icon="navs.icon"
-                    v-if="onChechAccessLavel(navs)"
+                    v-if="onCheckAccessLevel(navs)"
             >
                 <v-list-tile slot="activator">
                     <v-list-tile-title v-text="navs.text"></v-list-tile-title>
@@ -34,6 +34,7 @@
                 <v-list-tile
                         v-for="(nav, i) in navs.navs"
                         :key="i"
+                        v-if="onCheckAccessLevel(nav)"
                         @click="onPageChange(nav)"
                 >
                     <v-list-tile-title v-text="nav.text"></v-list-tile-title>
@@ -98,8 +99,18 @@
                 })
             },
 
-            onChechAccessLavel(nav){
-                return true
+            onCheckAccessLevel(nav){
+                let accessLevel = [...nav.access]
+                const authUserRole = this.authUser.level
+                const canAccess = _.findIndex(accessLevel, function(level){
+                    return level === authUserRole
+                })
+
+                if(canAccess === -1){
+                    return false
+                }else{
+                    return true
+                }
             }
         }
     }

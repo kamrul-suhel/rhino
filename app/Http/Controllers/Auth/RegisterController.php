@@ -82,6 +82,7 @@ class RegisterController extends Controller
             // validation is failed
         }
 
+
         $user = $this->save($request);
         return response()->json([
             'success' => true
