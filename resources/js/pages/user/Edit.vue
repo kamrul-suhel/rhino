@@ -73,7 +73,7 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2
-                                        v-if="user.level==='dealership'">
+                                        v-if="user.level==='dealership' || user.level === 'sales_executive'">
                                     <v-select
                                         :items="dealerships"
                                         item-text="name"
@@ -378,8 +378,6 @@
                 if (this.user.profile_image && this.user.profile_image.length > 0) {
                     this.profileImage = this.user.profile_image
                 }
-
-                console.log(this.user)
                 this.onFetchData()
             }
         },
@@ -396,9 +394,11 @@
             },
 
             onFetchData() {
+                console.log(this.user.level)
                 const level = this.user.level
                 switch (level) {
                     case 'dealership':
+                    case 'sales_executive':
                         this.$store.dispatch('fetchDealershipsForDropdown')
                         break
 
