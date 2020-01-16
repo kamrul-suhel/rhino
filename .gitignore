@@ -4,6 +4,8 @@
 /public/js/app.map.js
 /public/js/app.js.map
 /public/css/app.css.map
+/public/css/app.css
+/public/*
 /public/storage
 /storage/*.key
 /vendor
