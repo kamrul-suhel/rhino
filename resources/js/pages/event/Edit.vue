@@ -203,8 +203,42 @@
 
                         <v-layout row wrap v-if="!subComponent">
                             <v-flex xs12>
-                                <Brand v-if="selectedEvent.id"
-                                    :eventId="selectedEvent.id"></Brand>
+                                <v-card flat>
+                                    <v-card-text>
+                                        <v-tabs
+                                            dark
+                                            :slider-color="themeOption.tabSliderColor"
+                                        >
+                                            <v-tab
+                                                key="eventGuest"
+                                                ripple
+                                            >
+                                                {{ `${trans.guests}` }}
+                                            </v-tab>
+
+                                            <v-tab
+                                                key="eventBrand"
+                                                ripple
+                                            >
+                                                {{ `${trans.brands}` }}
+                                            </v-tab>
+
+                                            <v-tab-item
+                                                key="eventBrand"
+                                            >
+                                                <EventGuest></EventGuest>
+                                            </v-tab-item>
+
+                                            <v-tab-item
+                                                key="eventGuest"
+                                            >
+                                                <Brand v-if="selectedEvent.id"
+                                                       :eventId="selectedEvent.id"
+                                                ></Brand>
+                                            </v-tab-item>
+                                        </v-tabs>
+                                    </v-card-text>
+                                </v-card>
                             </v-flex>
                         </v-layout>
 
@@ -298,9 +332,21 @@
     import Brand from '@/components/Event/Brand'
     import Vehicle from '@/components/Event/EventVehicle'
     import EventUsers from '@/components/Event/EventUsers'
-    import Appointment from "@/components/Appointment/Appointment";
+    import Appointment from "@/components/Appointment/Appointment"
+    import EventGuest from "@/components/Event/EventGuest";
 
     export default {
+        components: {
+            TimePicker,
+            ImageUpload,
+            LanguagePicker,
+            Brand,
+            Vehicle,
+            EventUsers,
+            Appointment,
+            EventGuest
+        },
+
         data() {
             return {
                 startEvent: false,
@@ -312,16 +358,6 @@
                 appointmentDuration:[],
                 breakTime:[]
             }
-        },
-
-        components: {
-            TimePicker,
-            ImageUpload,
-            LanguagePicker,
-            Brand,
-            Vehicle,
-            EventUsers,
-            Appointment
         },
 
         props: {

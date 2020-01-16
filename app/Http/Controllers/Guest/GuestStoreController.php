@@ -60,7 +60,7 @@ class GuestStoreController extends Controller
         $request->has('stage') ? $guest->stage = $request->stage : null;
         $request->has('status') ? $guest->status = $request->status : null;
 
-        // If creating new guest, then generate new unique password
+        // If creating new guest, then generate new unique id
         if(!$id){
             $guest->unique = generateUniqueIdForGuest();
         }

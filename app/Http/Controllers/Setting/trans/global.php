@@ -1026,6 +1026,24 @@ return [
         'label' => 'Identifier',
         'identifier' => 'identifier',
         'translation' => 'Identifier'
+    ],
+
+    [
+        'label' => 'CSV',
+        'identifier' => 'csv',
+        'translation' => 'CSV'
+    ],
+
+    [
+        'label' => 'Clear',
+        'identifier' => 'clear',
+        'translation' => 'Clear'
+    ],
+
+    [
+        'label' => 'Reset',
+        'identifier' => 'reset',
+        'translation' => 'Reset'
     ]
 
 ];

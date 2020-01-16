@@ -47,6 +47,11 @@ class GuestListController extends Controller
                 }
             }
 
+            // If request has eventId, then load specific guest.
+            if($request->has('eventId') & !empty($request->eventId)){
+                $guests = $guests->where('guests.event_id', $request->eventId);
+            }
+
             // If sortBy set, then sort by name
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;

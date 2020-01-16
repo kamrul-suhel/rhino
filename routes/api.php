@@ -267,6 +267,8 @@ Route::prefix('guests')->group(function () {
     Route::get('', 'Guest\GuestListController@list');
     Route::get('{id}', 'Guest\GuestShowController@show');
     Route::post('', 'Guest\GuestStoreController@store');
+    Route::post('upload', 'Guest\GuestUploadCSVController@generateGuests');
+    Route::post('upload/confirm', 'Guest\GuestUploadCSVController@store');
     Route::put('{id}', 'Guest\GuestStoreController@update');
     Route::delete('{id}', 'Guest\GuestDestroyController@destroy');
 });

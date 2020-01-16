@@ -88,6 +88,10 @@ export default {
             params += `&vehicleType=${payload.vehicleType}`
         }
 
+        if (payload.eventId && typeof (payload.eventId) !== 'undefined') {
+            params += `&eventId=${payload.eventId}`
+        }
+
         return params
     },
 
