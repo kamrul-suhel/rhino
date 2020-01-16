@@ -20,6 +20,7 @@ class GuestStoreController extends Controller
     {
         $this->save($request);
 
+
        return response()->json([
            'success' => true
        ]);

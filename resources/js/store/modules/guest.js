@@ -9,7 +9,9 @@ const defaultState = {
     guestListRowPerPage: [15, 25, 40],
 
     // For dropdown
-    guestsDropDown: []
+    guestsDropDown: [],
+
+    initialize: false
 }
 
 const state = {
@@ -19,6 +21,10 @@ const state = {
 const mutations = {
     setGuests(state, guests) {
         state.guests = [...guests]
+    },
+
+    setInitializeGuest(state){
+      state.initialize = !state.initialize
     },
 
     setGuestsForDropDown(state, guests) {
@@ -91,6 +97,10 @@ const mutations = {
 const getters = {
     getGuests(state) {
         return state.guests
+    },
+
+    getInitializeGuest(state){
+        return state.initialize
     },
 
     getGuestsForDropDown(state) {

@@ -90,6 +90,12 @@ return [
     ],
 
     [
+        'label' => 'Successfully upload',
+        'identifier' => 'successfully_upload',
+        'translation' => 'Successfully upload'
+    ],
+
+    [
         'label' => 'Successfully deleted',
         'identifier' => 'successfully_deleted',
         'translation' => 'Successfully deleted'

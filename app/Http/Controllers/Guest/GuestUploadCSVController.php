@@ -17,20 +17,21 @@ class GuestUploadCSVController extends Controller
      * @param GuestUploadCSVRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function generateGuests(GuestUploadCSVRequest $request){
+    public function generateGuests(GuestUploadCSVRequest $request)
+    {
         $file = $request->file;
         $validator = Validator::make(
             [
-                'file'      => $file,
+                'file' => $file,
                 'extension' => strtolower($file->getMimeType()),
             ],
             [
-                'file'      => 'required',
-                'extension'      => 'required|in:csv'
+                'file' => 'required',
+                'extension' => 'required|in:csv'
             ]
         );
 
-        if($validator->failed()){
+        if ($validator->failed()) {
             return response()->json([
                 'success' => false
             ]);
@@ -44,9 +45,9 @@ class GuestUploadCSVController extends Controller
 
         $header = array_shift($guests);
         $modifyGuests = [];
-        foreach($guests as $key => $value){
+        foreach ($guests as $key => $value) {
             $individualGuest = [];
-            foreach($value as $objectKey => $objectValue){
+            foreach ($value as $objectKey => $objectValue) {
                 $individualGuest[$header[$objectKey]] = $objectValue;
             }
 
@@ -61,19 +62,28 @@ class GuestUploadCSVController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param UploadMultipleGuestRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(UploadMultipleGuestRequest $request)
     {
         $eventId = $request->eventId;
         $guests = collect($request->guests);
 
-        $guests->map(function($guest) use($eventId){
+        $guests->map(function ($guest) use ($eventId) {
             $guestRequest = new GuestRequest();
-            $guestRequest->request->add(['eventId' => $eventId]);
-            dd($guestRequest->all());
+            $guestRequest->merge(['event_id' => $eventId]);
+            foreach ($guest as $key => $value) {
+                $guestRequest->merge([$key => $value]);
+            }
+
+            $guestController = new GuestStoreController($guestRequest);
+            $guestController->store($guestRequest);
         });
+
+        // Get all guest by event id
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

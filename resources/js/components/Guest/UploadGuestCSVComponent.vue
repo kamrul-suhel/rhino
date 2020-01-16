@@ -19,6 +19,7 @@
 
                     <v-toolbar-items>
                         <v-btn dark flat
+                               v-if="selected.length > 0"
                                @click="onConfirmUpload()">
                             {{ trans.save }}
                         </v-btn>
@@ -64,6 +65,7 @@
                         select-all
                         item-key="first_name"
                         class="elevation-1"
+                        v-if="guests.length > 0"
                     >
 
                         <template v-slot:headers="props">
@@ -143,18 +145,7 @@
 
                 selected: [],
                 guests: [],
-                dialog: true,
-                items: [
-                    {
-                        title: 'Click Me'
-                    },
-                    {
-                        title: 'Click Me'
-                    }
-                ],
-                notifications: false,
-                sound: true,
-                widgets: false
+                dialog: false
             }
         },
 
@@ -277,7 +268,7 @@
                 ]
             },
 
-            changeSort (column) {
+            changeSort(column) {
                 if (this.pagination.sortBy === column) {
                     this.pagination.descending = !this.pagination.descending
                 } else {
@@ -286,7 +277,7 @@
                 }
             },
 
-            onConfirmUpload(){
+            onConfirmUpload() {
                 let uploadGuestForm = new FormData()
                 uploadGuestForm.append('eventId', this.$route.params.id)
 
@@ -299,7 +290,15 @@
 
                 // Save into database
                 axios.post('/api/guests/upload/confirm', uploadGuestForm).then((response) => {
-                    console.log('response is: ', response)
+                    if (response.data.success) {
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.guests}  ${this.trans.successfully_upload}`
+                        })
+                        this.$store.commit('setInitializeGuest')
+                        this.dialog = false
+                    }
                 })
             }
         }
