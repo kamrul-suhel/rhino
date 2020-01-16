@@ -82,6 +82,7 @@ class RegisterController extends Controller
             // validation is failed
         }
 
+
         $user = $this->save($request);
         return response()->json([
             'success' => true
@@ -134,7 +135,7 @@ class RegisterController extends Controller
                 break;
 
             case User::USERDEALERSHIP:
-                $user->dealership_id = $request->dealership_id;
+                $user->dealership_id = $request->dealershipId;
                 $user->group_id = null;
                 $user->region_id = null;
                 $user->country_id = null;
@@ -143,7 +144,7 @@ class RegisterController extends Controller
                 break;
 
             case User::USERSALEEXECUTIVE:
-                $user->dealership_id = $request->dealership_id;
+                $user->dealership_id = $request->dealershipId;
                 $user->group_id = null;
                 $user->region_id = null;
                 $user->country_id = null;

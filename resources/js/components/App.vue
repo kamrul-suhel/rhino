@@ -1,47 +1,35 @@
 <template>
-    <div id="app">
+    <div id="app" v-if="initialize">
         <v-app
             id="inspire"
             dark
-            v-if="isLoading"
+            v-if="isAdmin"
         >
-            <template v-if="isAdmin">
-                <navigation-component></navigation-component>
-                <header-component></header-component>
-                <v-content>
-                    <v-container fill-height>
-                        <v-layout >
-                            <v-flex>
-                                <SnackBar></SnackBar>
-                                <router-view></router-view>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-content>
-            </template>
-
-            <template v-else>
-                <v-content>
-                    <v-container fill-height>
-                        <v-layout >
-                            <v-flex>
-                                <SnackBar></SnackBar>
-                                <router-view></router-view>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-content>
-            </template>
-
+            <navigation-component></navigation-component>
+            <header-component></header-component>
+            <v-content>
+                <v-container fill-height>
+                    <v-layout>
+                        <v-flex>
+                            <SnackBar></SnackBar>
+                            <router-view></router-view>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-content>
         </v-app>
+        <template v-else>
+            <SnackBar></SnackBar>
+            <router-view></router-view>
+        </template>
     </div>
 </template>
 
 <script>
-    import  HeaderComponent  from './Layout/HeaderComonent.vue';
-    import  NavigationComponent  from './Layout/NavigationComponent.vue';
-    import SnackBar from "./SnackBar";
-    import {mapGetters} from 'vuex';
+    import HeaderComponent from './Layout/HeaderComonent.vue'
+    import NavigationComponent from './Layout/NavigationComponent.vue'
+    import SnackBar from "./SnackBar"
+    import {mapGetters} from 'vuex'
 
     export default {
         name: 'App',
@@ -52,30 +40,38 @@
         },
 
         data: () => ({
-            login:false,
-            initialize: false
+
         }),
 
-        computed:{
+        computed: {
             ...mapGetters({
                 isLogin: 'getIsLogin',
                 isLoading: 'getIsLoading',
                 themeOption: 'getThemeOption',
-                isAdmin : 'getIsAdmin'
+                isAdmin: 'getIsAdmin',
+                initialize: 'getInitializeApp'
             })
         },
 
         watch: {
-          themeOption(value){
-              console.log('theme option is change', value);
-              this.$vuetify.theme = this.themeOption.theme
+            themeOption(value) {
+                this.$vuetify.theme = this.themeOption.theme
             }
         },
 
         async created() {
+            axios.get('/auth/me').then((response) => {
+                if(response.data.success){
+                    this.$store.commit('setAuthUser', response.data.authUser)
+                    this.$store.commit('setUserRole', true)
+                    this.$store.commit('setInitialize', true)
+                }else{
+                    this.$store.commit('setUserRole', false)
+                    this.$store.commit('setInitialize', true)
+                }
+            })
         },
 
-        methods: {
-        }
+        methods: {}
     }
 </script>

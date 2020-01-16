@@ -1,7 +1,7 @@
 import * as Language from "../../pages/language"
 
 const LanguageRoutes = {
-    path: '/languages',
+    path: '/admin/languages',
     name: 'languages',
     component: Language.Root,
     children:[

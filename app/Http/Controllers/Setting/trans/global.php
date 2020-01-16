@@ -96,10 +96,53 @@ return [
     ],
 
     [
-        'label' => 'Name',
-        'identifier' => 'name',
-        'translation' => 'Name'
+        'label' => 'Dealerships',
+        'identifier' => 'dealerships',
+        'translation' => 'Dealerships'
     ],
+
+    [
+        'label' => 'Dealership',
+        'identifier' => 'dealership',
+        'translation' => 'Dealership'
+    ],
+
+    [
+        'label' => 'Brands',
+        'identifier' => 'brands',
+        'translation' => 'Brands'
+    ],
+
+    [
+        'label' => 'Brand',
+        'identifier' => 'brand',
+        'translation' => 'Brand'
+    ],
+
+    [
+        'label' => 'Vehicles',
+        'identifier' => 'vehicles',
+        'translation' => 'Vehicles'
+    ],
+
+    [
+        'label' => 'Vehicle',
+        'identifier' => 'vehicle',
+        'translation' => 'Vehicle'
+    ],
+
+    [
+        'label' => 'Events',
+        'identifier' => 'events',
+        'translation' => 'Events'
+    ],
+
+    [
+        'label' => 'Event',
+        'identifier' => 'event',
+        'translation' => 'Event'
+    ],
+
 
     [
         'label' => 'Country',
@@ -108,9 +151,21 @@ return [
     ],
 
     [
+        'label' => 'Countries',
+        'identifier' => 'countries',
+        'translation' => 'Countries'
+    ],
+
+    [
         'label' => 'Region',
         'identifier' => 'region',
         'translation' => 'Region'
+    ],
+
+    [
+        'label' => 'Regions',
+        'identifier' => 'regions',
+        'translation' => 'Regions'
     ],
 
     [
@@ -135,6 +190,12 @@ return [
         'label' => 'Select',
         'identifier' => 'select',
         'translation' => 'Select'
+    ],
+
+    [
+        'label' => 'Select A',
+        'identifier' => 'select_a',
+        'translation' => 'Select A'
     ],
 
     [
@@ -174,6 +235,60 @@ return [
     ],
 
     [
+        'label' => 'Groups',
+        'identifier' => 'groups',
+        'translation' => 'Groups'
+    ],
+
+    [
+        'label' => 'Guests',
+        'identifier' => 'guests',
+        'translation' => 'Guests'
+    ],
+
+    [
+        'label' => 'Users',
+        'identifier' => 'users',
+        'translation' => 'Users'
+    ],
+
+    [
+        'label' => 'User',
+        'identifier' => 'user',
+        'translation' => 'User'
+    ],
+
+    [
+        'label' => 'Guest',
+        'identifier' => 'guest',
+        'translation' => 'Guest'
+    ],
+
+    [
+        'label' => 'Languages',
+        'identifier' => 'languages',
+        'translation' => 'Languages'
+    ],
+
+    [
+        'label' => 'Language',
+        'identifier' => 'language',
+        'translation' => 'Language'
+    ],
+
+    [
+        'label' => 'Types',
+        'identifier' => 'types',
+        'translation' => 'Types'
+    ],
+
+    [
+        'label' => 'Type',
+        'identifier' => 'type',
+        'translation' => 'Type'
+    ],
+
+    [
         'label' => 'Logo',
         'identifier' => 'logo',
         'translation' => 'Logo'
@@ -198,6 +313,60 @@ return [
     ],
 
     [
+        'label' => 'First name',
+        'identifier' => 'firstName',
+        'translation' => 'First name'
+    ],
+
+    [
+        'label' => 'Surname',
+        'identifier' => 'surName',
+        'translation' => 'Surname'
+    ],
+
+    [
+        'label' => 'Passwords',
+        'identifier' => 'passwords',
+        'translation' => 'Passwords'
+    ],
+
+    [
+        'label' => 'Password',
+        'identifier' => 'password',
+        'translation' => 'Password'
+    ],
+
+    [
+        'label' => 'Enter your password',
+        'identifier' => 'enterYourPassword',
+        'translation' => 'Enter your password'
+    ],
+
+    [
+        'label' => 'minimum 8 character',
+        'identifier' => 'minimum8Character',
+        'translation' => 'minimum 8 character'
+    ],
+
+    [
+        'label' => 'not matching',
+        'identifier' => 'notMatching',
+        'translation' => 'not matching'
+    ],
+
+    [
+        'label' => 'Rule',
+        'identifier' => 'rule',
+        'translation' => 'Rule'
+    ],
+
+    [
+        'label' => 'Profile',
+        'identifier' => 'profile',
+        'translation' => 'Profile'
+    ],
+
+    [
         'label' => 'Flag',
         'identifier' => 'flag',
         'translation' => 'Flag'
@@ -219,6 +388,12 @@ return [
         'label' => 'List Of',
         'identifier' => 'list_of',
         'translation' => 'List Of'
+    ],
+
+    [
+        'label' => 'List',
+        'identifier' => 'list',
+        'translation' => 'List'
     ],
 
     [
@@ -360,6 +535,12 @@ return [
     ],
 
     [
+        'label' => 'Sales executive',
+        'identifier' => 'sales_executive',
+        'translation' => 'Sales executive'
+    ],
+
+    [
         'label' => 'Sales executives',
         'identifier' => 'sales_executives',
         'translation' => 'Sales executives'
@@ -384,6 +565,24 @@ return [
     ],
 
     [
+        'label' => 'Or',
+        'identifier' => 'or',
+        'translation' => 'Or'
+    ],
+
+    [
+        'label' => 'No',
+        'identifier' => 'no',
+        'translation' => 'No'
+    ],
+
+    [
+        'label' => 'Found',
+        'identifier' => 'found',
+        'translation' => 'Found'
+    ],
+
+    [
         'label' => 'Break',
         'identifier' => 'break',
         'translation' => 'Break'
@@ -393,5 +592,458 @@ return [
         'label' => 'Code',
         'identifier' => 'code',
         'translation' => 'Code'
+    ],
+
+    [
+        'label' => 'Company',
+        'identifier' => 'company',
+        'translation' => 'Company'
+    ],
+
+    [
+        'label' => 'Companies',
+        'identifier' => 'companies',
+        'translation' => 'Companies'
+    ],
+
+    [
+        'label' => 'Seating Position',
+        'identifier' => 'seating_position',
+        'translation' => 'Seating Position'
+    ],
+
+    [
+        'label' => 'Left',
+        'identifier' => 'left',
+        'translation' => 'Left'
+    ],
+
+    [
+        'label' => 'Right',
+        'identifier' => 'right',
+        'translation' => 'Right'
+    ],
+
+    [
+        'label' => 'Banner',
+        'identifier' => 'banner',
+        'translation' => 'Banner'
+    ],
+
+    [
+        'label' => 'Latitude',
+        'identifier' => 'latitude',
+        'translation' => 'Latitude'
+    ],
+
+    [
+        'label' => 'Longitude',
+        'identifier' => 'longitude',
+        'translation' => 'Longitude'
+    ],
+
+    [
+        'label' => 'Monday',
+        'identifier' => 'monday',
+        'translation' => 'Monday'
+    ],
+
+    [
+        'label' => 'Tuesday',
+        'identifier' => 'tuesday',
+        'translation' => 'Tuesday'
+    ],
+
+    [
+        'label' => 'Wednesday',
+        'identifier' => 'wednesday',
+        'translation' => 'Wednesday'
+    ],
+
+
+    [
+        'label' => 'Thursday',
+        'identifier' => 'thursday',
+        'translation' => 'Thursday'
+    ],
+
+    [
+        'label' => 'Friday',
+        'identifier' => 'friday',
+        'translation' => 'Friday'
+    ],
+
+    [
+        'label' => 'Saturday',
+        'identifier' => 'saturday',
+        'translation' => 'Saturday'
+    ],
+
+    [
+        'label' => 'Sunday',
+        'identifier' => 'sunday',
+        'translation' => 'Sunday'
+    ],
+
+    [
+        'label' => 'Start',
+        'identifier' => 'start',
+        'translation' => 'Start'
+    ],
+
+    [
+        'label' => 'End',
+        'identifier' => 'end',
+        'translation' => 'End'
+    ],
+
+    [
+        'label' => 'Address Line',
+        'identifier' => 'address_line',
+        'translation' => 'Address Line'
+    ],
+
+    [
+        'label' => 'Appointment',
+        'identifier' => 'appointment',
+        'translation' => 'Appointment'
+    ],
+
+    [
+        'label' => 'Appointments',
+        'identifier' => 'appointments',
+        'translation' => 'Appointments'
+    ],
+
+    [
+        'label' => 'Time',
+        'identifier' => 'time',
+        'translation' => 'Time'
+    ],
+
+    [
+        'label' => 'Greeting',
+        'identifier' => 'greeting',
+        'translation' => 'Greeting'
+    ],
+
+    [
+        'label' => 'Notes',
+        'identifier' => 'notes',
+        'translation' => 'Notes'
+    ],
+
+    [
+        'label' => 'Text',
+        'identifier' => 'text',
+        'translation' => 'text'
+    ],
+
+    [
+        'label' => 'Date',
+        'identifier' => 'date',
+        'translation' => 'Date'
+    ],
+
+    [
+        'label' => 'Surname',
+        'identifier' => 'surname',
+        'translation' => 'Surname'
+    ],
+
+    [
+        'label' => 'Your Details',
+        'identifier' => 'your_details',
+        'translation' => 'Your Details'
+    ],
+
+    [
+        'label' => 'Part exchange',
+        'identifier' => 'partExchange',
+        'translation' => 'Part exchange'
+    ],
+
+    [
+        'label' => 'Select model',
+        'identifier' => 'selectModel',
+        'translation' => 'Select model'
+    ],
+
+    [
+        'label' => 'Book your slot',
+        'identifier' => 'bookYourSlot',
+        'translation' => 'Book your slot'
+    ],
+
+    [
+        'label' => 'Booking confirmation',
+        'identifier' => 'bookingConfirmation',
+        'translation' => 'Booking confirmation'
+    ],
+
+    [
+        'label' => 'Logout',
+        'identifier' => 'logOut',
+        'translation' => 'Logout'
+    ],
+
+    [
+        'label' => 'Login',
+        'identifier' => 'login',
+        'translation' => 'Login'
+    ],
+
+    [
+        'label' => 'Skip this step',
+        'identifier' => 'skipThisStep',
+        'translation' => 'Skip this step'
+    ],
+
+    [
+        'label' => 'Unsure',
+        'identifier' => 'unsure',
+        'translation' => 'Unsure'
+    ],
+
+    [
+        'label' => 'Now book your appointment',
+        'identifier' => 'nowBookYourAppointment',
+        'translation' => 'Now book your appointment'
+    ],
+
+    [
+        'label' => 'Choose',
+        'identifier' => 'choose',
+        'translation' => 'Choose'
+    ],
+
+    [
+        'label' => 'a',
+        'identifier' => 'a',
+        'translation' => 'a'
+    ],
+
+    [
+        'label' => 'time',
+        'identifier' => 'time',
+        'translation' => 'Time'
+    ],
+
+    [
+        'label' => 'Sales',
+        'identifier' => 'sales',
+        'translation' => 'Sales'
+    ],
+
+    [
+        'label' => 'Person',
+        'identifier' => 'person',
+        'translation' => 'Person'
+    ],
+
+    [
+        'label' => 'Would you like to bring guest?',
+        'identifier' => 'wouldYouLikeToBringGuest',
+        'translation' => 'Would you like to bring guest?'
+    ],
+
+    [
+        'label' => 'Might your guest also be interested in changing their car?',
+        'identifier' => 'mightYourGuestAlsoBeInterested',
+        'translation' => 'Might your guest also be interested in changing their car?'
+    ],
+
+    [
+        'label' => 'Yes',
+        'identifier' => 'yes',
+        'translation' => 'Yes'
+    ],
+
+    [
+        'label' => 'Available',
+        'identifier' => 'available',
+        'translation' => 'Available'
+    ],
+
+    [
+        'label' => 'Dates',
+        'identifier' => 'dates',
+        'translation' => 'dates'
+    ],
+
+    [
+        'label' => 'Times',
+        'identifier' => 'times',
+        'translation' => 'times'
+    ],
+
+    [
+        'label' => 'Continue',
+        'identifier' => 'continue',
+        'translation' => 'Continue'
+    ],
+    [
+        'label' => 'Sign in',
+        'identifier' => 'signin',
+        'translation' => 'Sign in'
+    ],
+    [
+        'label' => 'Welcome',
+        'identifier' => 'welcome',
+        'translation' => 'Welcome'
+    ],
+    [
+        'label' => 'Multi',
+        'identifier' => 'multi',
+        'translation' => 'Multi'
+    ],
+    [
+        'label' => 'Access Level',
+        'identifier' => 'access_level',
+        'translation' => 'Access Level'
+    ],
+
+    [
+        'label' => 'Staff',
+        'identifier' => 'staff',
+        'translation' => 'Staff'
+    ],
+
+    [
+        'label' => 'Member',
+        'identifier' => 'member',
+        'translation' => 'Member'
+    ],
+
+    [
+        'label' => 'Do you have a car to part exchange?',
+        'identifier' => 'DoYouHaveACarToPartExchange',
+        'translation' => 'Do you have a car to part exchange?'
+    ],
+
+    [
+        'label' => 'Enter your',
+        'identifier' => 'enterYour',
+        'translation' => 'Enter your'
+    ],
+
+    [
+        'label' => 'Details',
+        'identifier' => 'details',
+        'translation' => 'Details'
+    ],
+
+    [
+        'label' => 'Registration Number',
+        'identifier' => 'registrationNumber',
+        'translation' => 'Registration Number'
+    ],
+
+    [
+        'label' => 'Make and Model',
+        'identifier' => 'makeAndModel',
+        'translation' => 'Make and Model'
+    ],
+
+    [
+        'label' => 'Current Mileage',
+        'identifier' => 'currentMileage',
+        'translation' => 'Current Mileage'
+    ],
+
+    [
+        'label' => 'By checking this box, you agree to us obtaining a settlement figure for your part exchange vehicle',
+        'identifier' => 'byCheckingThisBox',
+        'translation' => 'By checking this box, you agree to us obtaining a settlement figure for your part exchange vehicle'
+    ],
+    [
+        'label' => 'Click here if you don\'t have a part exchange vehicle',
+        'identifier' => 'clickHereDoNotExchangeVehicle',
+        'translation' => 'Click here if you don\'t have a part exchange vehicle'
+    ],
+
+    [
+        'label' => 'Please confirm or amend your contact details',
+        'identifier' => 'pleaseConfirmAmendYourContactDetails',
+        'translation' => 'Please confirm or amend your contact details'
+    ],
+
+    [
+        'label' => 'Are these details still correct?',
+        'identifier' => 'areTheseDetailsStillCorrect',
+        'translation' => 'Are these details still correct?'
+    ],
+
+    [
+        'label' => 'Phone Number',
+        'identifier' => 'phoneNumber',
+        'translation' => 'Phone Number'
+    ],
+
+    [
+        'label' => 'Save',
+        'identifier' => 'save',
+        'translation' => 'Save'
+    ],
+
+    [
+        'label' => 'Please check the following details are correct',
+        'identifier' => 'followingDetailsAreCorrect',
+        'translation' => 'Please check the following details are correct'
+    ],
+
+    [
+        'label' => 'Are these details still correct?',
+        'identifier' => 'areTheseDetailsStillCorrect',
+        'translation' => 'Are these details still correct?'
+    ],
+
+    [
+        'label' => 'Your model(s) of interest:',
+        'identifier' => 'modelsOfInterest',
+        'translation' => 'Your model(s) of interest:'
+    ],
+
+    [
+        'label' => 'Amend',
+        'identifier' => 'amend',
+        'translation' => 'Amend'
+    ],
+
+    [
+        'label' => 'your reservation has been confirmed',
+        'identifier' => 'yourReservationConfirmed',
+        'translation' => 'your reservation has been confirmed'
+    ],
+
+    [
+        'label' => 'Translation',
+        'identifier' => 'translation',
+        'translation' => 'Translation'
+    ],
+
+    [
+        'label' => 'Identifier',
+        'identifier' => 'identifier',
+        'translation' => 'Identifier'
+    ],
+
+    [
+        'label' => 'CSV',
+        'identifier' => 'csv',
+        'translation' => 'CSV'
+    ],
+
+    [
+        'label' => 'Clear',
+        'identifier' => 'clear',
+        'translation' => 'Clear'
+    ],
+
+    [
+        'label' => 'Reset',
+        'identifier' => 'reset',
+        'translation' => 'Reset'
     ]
+
 ];

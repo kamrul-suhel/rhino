@@ -68,6 +68,11 @@ const mutations = {
             },
 
             {
+                text: 'Unique ID',
+                value: 'uniqueId'
+            },
+
+            {
                 text: trans.status,
                 value: 'status'
             },
@@ -168,9 +173,9 @@ const actions = {
                 commit('setGuestsForDropDown', response.data)
             }
         })
-            .catch((error) => {
+        .catch((error) => {
 
-            })
+        })
     }
 }
 

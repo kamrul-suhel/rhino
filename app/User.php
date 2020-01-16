@@ -20,7 +20,7 @@ class User extends Authenticatable
     const USERREGION = 'region';
     const USERRCOUNTRY = 'country';
     const USERBRAND = 'brand';
-    const USERSALEEXECUTIVE = 'sale_executive';
+    const USERSALEEXECUTIVE = 'sales_executive';
 
 
     /**

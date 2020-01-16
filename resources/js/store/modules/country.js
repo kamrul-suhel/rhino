@@ -45,23 +45,19 @@ const mutations = {
             {
                 text: trans.name,
                 align: 'left',
-                sortable: false,
                 value: 'name'
             },
 
             {
-                text: trans.capital,
-                value: 'capital'
-            },
-
-            {
                 text: trans.code ,
-                value: 'code'
+                value: 'code',
+                sortable: false,
             },
 
             {
                 text: trans.seating_position,
-                value: 'seating_position'
+                value: 'seating_position',
+                sortable: false,
             },
 
             {
@@ -71,7 +67,9 @@ const mutations = {
 
             {
                 text: trans.action,
-                value: 'action'
+                value: 'action',
+                align: 'right',
+                sortable: false,
             }
         ]
 

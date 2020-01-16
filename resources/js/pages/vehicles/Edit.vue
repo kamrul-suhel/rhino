@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_vehicle }}:</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.vehicle}` }}:</span>
                         <span v-if="!subComponent">{{ vehicle.brand }}</span> <span>{{ vehicle.model }}</span>
                     </v-toolbar-title>
 
@@ -32,7 +32,7 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || trans.vehicle_model_is_required]"
+                                        :rules="[v => !!v || `${trans.vehicle} ${trans.model} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.model"
                                         v-model="vehicle.model"
@@ -45,7 +45,7 @@
                                     <v-select
                                         :items="brands"
                                         item-text="name"
-                                        :rules="[v => !!v || trans.select_a_brand]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.brand}`]"
                                         item-value="id"
                                         :color="themeOption.inputColor"
                                         :label="trans.brand"
@@ -62,7 +62,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label class="mb-3">Left hand drive image</label>
+                                            <label class="mb-3">{{ `${trans.left_hand_drive_image}` }}</label>
                                             <v-divider class="my-2"></v-divider>
 
                                             <v-card class="pa-2 my-3">
@@ -85,7 +85,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                        <v-flex xs12>
-                                           <label for="">Right hand drive image</label>
+                                           <label for="">{{`${trans.right_hand_drive_image}`}} </label>
 
                                            <v-divider class="my-2"></v-divider>
 
@@ -242,13 +242,12 @@
 
             onBackToBrand(){
                 if(this.subComponent){
-                    console.log('is subComponent');
                     switch(this.model){
                         case 'brand':
                             this.$router.push({
-                                name: 'editBrand',
+                                name: 'editBrands',
                                 params: {
-                                    id: this.$route.params.BrandId
+                                    id: this.$route.params.brandId
                                 }
                             })
 
@@ -256,7 +255,6 @@
                             break
                     }
                 }else{
-                    console.log("isn't subComponent");
                     this.$router.push({name: 'listBrands'})
                     this.$store.commit('setButtonLoading', false)
                 }
@@ -276,7 +274,7 @@
                 this.hasRightImage = true
             },
 
-           uploadImage(file, identifier, image){
+            uploadImage(file, identifier, image){
                 let formData = new FormData()
                 formData.append('file', file)
                 formData.append('model', identifier)

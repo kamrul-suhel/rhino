@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_country_by_name"
+                :label="`${trans.searchBy} ${trans.country} ${trans.name}`"
                 v-model="searchCountry">
             </v-text-field>
         </v-toolbar>
@@ -23,8 +23,8 @@
             :headers="headers"
             :items="countries"
             :pagination.sync="pagination"
-            :no-results-text="trans.no_country_found"
-            :no-data-text="trans.no_country_found"
+            :no-results-text="`${trans.no} ${trans.country} ${trans.found}`"
+            :no-data-text="`${trans.no} ${trans.country} ${trans.found}`"
             :rows-per-page-text="trans.rows_per_page"
             :rows-per-page-items="rowsPerPage"
             :total-items="totalCountry"
@@ -33,8 +33,7 @@
         >
             <template v-slot:items="props">
                 <td>{{ props.item.name }}</td>
-                <td class="text-xs-left">{{ props.item.capital }}</td>
-                <td class="text-xs-left">{{ props.item.iso_3166_2 }}</td>
+                <td class="text-xs-left">{{ props.item.country_code }}</td>
                 <td class="text-xs-left">{{ props.item.driver_seating_position }}</td>
                 <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                 <td class="text-xs-right">
@@ -80,15 +79,8 @@
 
                     <v-flex xs12>
                         <v-text-field
-                            :label="trans.capital"
-                            v-model="selectedCountry.capital"
-                        ></v-text-field>
-                    </v-flex>
-
-                    <v-flex xs12>
-                        <v-text-field
                             :label="trans.code"
-                            v-model="selectedCountry.iso_3166_2"
+                            v-model="selectedCountry.country_code"
                         ></v-text-field>
                     </v-flex>
 

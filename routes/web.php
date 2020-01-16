@@ -1,7 +1,16 @@
 <?php
 
 
+use App\User;
+use Illuminate\Http\Request;
+
 Auth::routes();
+
+/**
+ * AUth route
+ */
+
+Route::get('auth/me', 'Auth\LoginController@getLoginUser');
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +23,22 @@ Auth::routes();
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('', function(){
+    return view('index');
+})->name('admin');
 
-Route::get('/frontend', function () {
-    return view('welcome');
-});
+Route::post('guests/login', 'Guest\GuestLoginController@login');
+Route::post('guests/logout', 'Guest\GuestLoginController@logOut');
+
+/*
+|--------------------------------------------------------------------------
+| Unprotected route
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/admin', function () {
+    return view('index');
+})->name('admin');
 
 /*
 |--------------------------------------------------------------------------
@@ -28,248 +46,328 @@ Route::get('/frontend', function () {
 |--------------------------------------------------------------------------
 |
 */
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
 
-Route::prefix('dealerships')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
+    Route::get('dashboard', function(){
+        return view('index');
+     })->name('dashboard');
+
+    Route::prefix('dealerships')->group(function () {
+        Route::get('/', function () {
+            return view('index');
+        });
+
+        Route::get('/list', function () {
+            return view('index');
+        });
+
+        Route::get('create', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/edit', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/user/create', function () {
+            return view('index');
+        });
+
+        /**
+         * Group routes
+         */
+        Route::prefix('groups')->group(function(){
+            Route::get('', function () {
+                return view('index');
+            });
+
+            Route::get('list', function () {
+                return view('index');
+            });
+        });
+
+        /**
+         * Dealership event routes
+         */
+        Route::get('{dealershipId}/events/{id}/edit', function () {
+            return view('index');
+        });
     });
 
-    Route::get('create', function () {
-        return view('welcome');
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for countries
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::prefix('countries')->group(function () {
+        Route::get('', function () {
+            return view('index');
+        });
+
+        Route::get('/create', function () {
+            return view('index');
+        });
+
+        Route::get('/list', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/edit', function () {
+            return view('index');
+        });
     });
 
-    Route::get('{id}/edit', function () {
-        return view('welcome');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Languages
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::prefix('languages')->group(function () {
+        Route::get('/', function () {
+            return view('index');
+        });
+
+        Route::get('list', function () {
+            return view('index');
+        });
     });
 
-    /**
-     * Group routes
-     */
-    Route::get('groups', function () {
-        return view('welcome');
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Brands
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::prefix('brands')->group(function () {
+        Route::get('/', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/edit', function () {
+            return view('index');
+        });
+
+        Route::get('create', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/vehicle/{vehicleId}', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/vehicle/create', function () {
+            return view('index');
+        });
+
+        Route::get('list', function () {
+            return view('index');
+        });
     });
 
-    /**
-     * Dealership event routes
-     */
-    Route::get('{dealershipId}/events/{id}/edit', function () {
-        return view('welcome');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Vehicles
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::prefix('vehicles')->group(function () {
+        Route::get('/', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/edit', function () {
+            return view('index');
+        });
+
+        Route::get('create', function () {
+            return view('index');
+        });
+
+        Route::get('list', function () {
+            return view('index');
+        });
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Companies
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::prefix('companies')->group(function () {
+        Route::get('/', function () {
+            return view('index');
+        });
+
+        Route::get('list', function () {
+            return view('index');
+        });
+
+        Route::get('create', function () {
+            return view('index');
+        });
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Users
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::prefix('users')->group(function () {
+        Route::get('', function () {
+            return view('index');
+        });
+
+
+        Route::get('list', function () {
+            return view('index');
+        });
+
+        Route::get('create', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/edit', function ($id) {
+            $user = User::find($id);
+            $title = "$user->firstname $user->surname";
+            return view('index')->with('title', "User - $title");
+        });
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Events
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::prefix('events')->group(function () {
+        Route::get('', function () {
+            return view('index');
+        });
+
+        Route::get('list', function () {
+            return view('index');
+        });
+
+        Route::get('create', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/edit', function () {
+            return view('index');
+        });
+
+
+        Route::get('types', function () {
+            return view('index');
+        });
+
+        Route::get('types/list', function () {
+            return view('index');
+        });
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Guests
+    |--------------------------------------------------------------------------
+    |
+    */
+    Route::prefix('guests')->group(function () {
+        Route::get('', function () {
+            return view('index');
+        });
+
+        Route::get('list', function () {
+            return view('index');
+        });
+
+        Route::get('create', function () {
+            return view('index');
+        });
+
+        Route::get('{id}/edit', function () {
+            return view('index');
+        });
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Testing
+    | Disable when it is on production
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::get('sendMail', 'Test\TestMailController@sendMail');
+
+
+    Route::prefix('test')->group(function(){
+        Route::get('datetime', function(){
+            return view('index');
+        });
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Frontend
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::get('/booking', function () {
+        return view('index');
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Settings
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::prefix('settings')->group(function(){
+        Route::get('translations', function () {
+            return view('index');
+        });
     });
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-/*
-|--------------------------------------------------------------------------
-| Routes for countries
-|--------------------------------------------------------------------------
-|
-*/
+/**
+ * Frontend route
+ */
 
-Route::prefix('countries')->group(function () {
-    Route::get('', function () {
-        return view('welcome');
+Route::middleware(['guestAuth'])->prefix('booking')->group(function () {
+    Route::get('', function(Request $request){
+        if($request->ajax()){
+            return response()->json([
+                'success' => true,
+                'uniqueId' => session()->get('uniqueId')
+            ]);
+        }
+
+        return view('index');
     });
 
-    Route::get('/create', function () {
-        return view('welcome');
+    Route::get('list', function(){
+        return view('index');
     });
-
-    Route::get('/list', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/edit', function () {
-        return view('welcome');
-    });
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Languages
-|--------------------------------------------------------------------------
-|
-*/
-Route::prefix('languages')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-});
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Brands
-|--------------------------------------------------------------------------
-|
-*/
-Route::prefix('brands')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/edit', function () {
-        return view('welcome');
-    });
-
-    Route::get('create', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/vehicle/{vehicleId}', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/vehicle/create', function () {
-        return view('welcome');
-    });
-
-    Route::get('list', function () {
-        return view('welcome');
-    });
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Vehicles
-|--------------------------------------------------------------------------
-|
-*/
-Route::prefix('vehicles')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/edit', function () {
-        return view('welcome');
-    });
-
-    Route::get('create', function () {
-        return view('welcome');
-    });
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Companies
-|--------------------------------------------------------------------------
-|
-*/
-Route::prefix('companies')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
-    Route::get('create', function () {
-        return view('welcome');
-    });
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Users
-|--------------------------------------------------------------------------
-|
-*/
-
-Route::prefix('users')->group(function () {
-    Route::get('', function () {
-        return view('welcome');
-    });
-
-
-    Route::get('list', function () {
-        return view('welcome');
-    });
-
-    Route::get('create', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/edit', function () {
-        return view('welcome');
-    });
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Events
-|--------------------------------------------------------------------------
-|
-*/
-Route::prefix('events')->group(function () {
-    Route::get('', function () {
-        return view('welcome');
-    });
-
-    Route::get('list', function () {
-        return view('welcome');
-    });
-
-    Route::get('create', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/edit', function () {
-        return view('welcome');
-    });
-
-
-    Route::get('types', function () {
-        return view('welcome');
-    });
-
-    Route::get('types/list', function () {
-        return view('welcome');
-    });
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Guests
-|--------------------------------------------------------------------------
-|
-*/
-Route::prefix('guests')->group(function () {
-    Route::get('', function () {
-        return view('welcome');
-    });
-
-    Route::get('list', function () {
-        return view('welcome');
-    });
-
-    Route::get('create', function () {
-        return view('welcome');
-    });
-
-    Route::get('{id}/edit', function () {
-        return view('welcome');
-    });
-
-});
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Routes for Testing
-| Disable when it is on production
-|--------------------------------------------------------------------------
-|
-*/
-
-Route::get('sendMail', 'Test\TestMailController@sendMail');
-
-
-Route::prefix('test')->group(function(){
-   Route::get('datetime', function(){
-       return view('welcome');
-   });
 });

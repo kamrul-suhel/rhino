@@ -1,7 +1,7 @@
 import * as Vehicles from "../../pages/vehicles";
 
 const vehiclesRoute ={
-    path: '/vehicles',
+    path: '/admin/vehicles',
     name: 'vehicles',
     component: Vehicles.Root,
     children:[

@@ -15,7 +15,6 @@
                             v-for="user in (subComponent ? selectedUsers : users)"
                             :key="user.id"
                             avatar
-                            @click=""
                         >
                             <v-list-tile-avatar>
                                 <v-avatar
@@ -43,13 +42,13 @@
                                 <template v-if="!subComponent">
                                     <v-btn icon ripple
                                            v-if="checkUserExists(user)"
-                                           @click="onRemoveRelation(user.id)">
+                                           @click="onRemoveRelation(user)">
                                         <v-icon color="red lighten-1">remove_circle_outline</v-icon>
                                     </v-btn>
 
                                     <v-btn icon ripple
                                            v-else
-                                           @click="onCreateRelation(user.id)">
+                                           @click="onCreateRelation(user)">
                                         <v-icon color="lighten-1">add_circle_outline</v-icon>
                                     </v-btn>
                                 </template>
@@ -94,29 +93,17 @@
                 themeOption: 'getThemeOption',
                 users: 'getUsersByDealership',
                 selectedUsers: 'getUsers',
-                update: 'getInitialize'
             })
         }),
 
         watch: {
-            update() {
-                this.initialize()
-            },
 
-            selectedUsers() {
-                this.initialize()
-            }
         },
 
         created() {
-            this.initialize()
         },
 
         methods: {
-            initialize() {
-                this.$store.dispatch('fetchUsersByDealershipId', {dealershipId: this.$route.params.dealershipId})
-            },
-
             checkUserExists(user) {
                 const found = _.find(this.selectedUsers, (selectedUser) => {
                     return user.id === selectedUser.id
@@ -128,12 +115,13 @@
                 return false
             },
 
-            onCreateRelation(userId) {
+            onCreateRelation(user) {
                 const URL = `/api/events/${this.$route.params.eventId}/users`
 
                 let eventUserFrom = new FormData()
                 eventUserFrom.append(`event_id`, this.$route.params.eventId)
-                eventUserFrom.append('user_id', userId)
+                eventUserFrom.append('user_id', user.id)
+
                 axios.post(URL, eventUserFrom).then((response) => {
                     if (response.data.success) {
                         this.$store.commit('setSnackbarMessage', {
@@ -141,17 +129,20 @@
                             timeOut: this.themeOption.snackBarTimeout,
                             message: `${this.trans.user}  ${this.trans.has_been_added.toLowerCase()} ${this.trans.to.toLowerCase()} ${this.trans.event}`
                         })
-                        this.$store.commit('setInitialize')
+
+                        this.$store.commit('addUserToUserList', user)
                     }
                 })
             },
 
-            onRemoveRelation(userId) {
-                const URL = `/api/events/${eventId}/users/${userId}`
+            onRemoveRelation(user) {
+
+                const eventId = this.$route.params.eventId
+                const URL = `/api/events/${eventId}/users/${user.id}`
                 let brandEventFrom = new FormData()
                 brandEventFrom.append(`event_id`, eventId)
                 brandEventFrom.append(`_method`, 'DELETE')
-                brandEventFrom.append('user_id', userId)
+                brandEventFrom.append('user_id', user.id)
                 axios.delete(URL, brandEventFrom).then((response) => {
                     if (response.data.success) {
                         this.$store.commit('setSnackbarMessage', {
@@ -159,7 +150,8 @@
                             timeOut: this.themeOption.snackBarTimeout,
                             message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
                         })
-                        this.$store.commit('setInitializeBrands')
+
+                        this.$store.commit('removeUserFromUserList', user)
                     }
                 })
             },

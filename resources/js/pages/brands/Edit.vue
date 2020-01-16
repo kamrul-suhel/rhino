@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_brand }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.brand}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -31,7 +31,7 @@
                             <v-layout justify-space-between row>
                                 <v-flex xs12 sm6 md6 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || trans.brand_name_is_required]"
+                                        :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.name"
                                         v-model="brand.name"
@@ -56,7 +56,6 @@
                                     <v-select
                                         :items="companies"
                                         item-text="name"
-                                        :rules="[v => !!v || trans.select_a_company]"
                                         item-value="id"
                                         :color="themeOption.inputColor"
                                         :label="trans.company"
@@ -84,7 +83,7 @@
                                     <v-text-field
                                         :label="trans.color"
                                         v-model="brand.colour"
-                                        :rules="[v => !!v || trans.choose_a_color]"
+                                        :rules="[v => !!v || `${trans.color} ${trans.is_required}`]"
                                         required
                                         @focus="isColorSwatchActive = true"
                                         :color="themeOption.inputColor">
@@ -94,7 +93,9 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch :label="trans.status"
                                               :color="themeOption.inputColor"
-                                              v-model="brand.status">
+                                              v-model="brand.status"
+                                              :true-value="1"
+                                              :false-value="0">
                                     </v-switch>
                                 </v-flex>
                             </v-layout>
@@ -133,9 +134,9 @@
                                                 <v-btn
                                                     :class="themeOption.buttonSuccess"
                                                     small
-                                                    @click="$router.push({name: 'addBrandVehicle'})"
+                                                    @click="addBrandVehicle()"
                                                 >
-                                                    {{ trans.create_vehicle }}
+                                                    {{ `${trans.create} ${trans.vehicle}` }}
                                                 </v-btn>
                                             </v-flex>
                                         </v-layout>
@@ -181,9 +182,9 @@
 <script>
     import {mapGetters} from 'vuex'
     import {Chrome} from 'vue-color'
-    import FileUpload from '../../components/ImageUpload'
-    import Regions from '../../components/Brand/Regions'
-    import LanguagePicker from '../../components/Language'
+    import FileUpload from '@/components/ImageUpload'
+    import Regions from '@/components/Brand/Regions'
+    import LanguagePicker from '@/components/Language'
     import Vehicles from '../vehicles/List'
 
     export default {
@@ -263,7 +264,7 @@
                 this.$store.dispatch('fetchBrand', {id: this.$route.params.id})
             },
             fetchCompany() {
-                this.$store.dispatch('fetchCompanies', {themeOption: this.themeOption, trans: this.trans});
+                this.$store.dispatch('fetchCompanyForDropdown', {themeOption: this.themeOption, trans: this.trans});
             },
 
             onUpdateBrand() {
@@ -311,6 +312,10 @@
                 this.$store.commit('setSelectedBrand', {})
                 this.$store.commit('setSubSelectedLanguage', {})
                 this.$store.commit('setRegionsByBrandId', [])
+            },
+
+            addBrandVehicle(){
+                this.$router.push({name: 'addBrandVehicle', params: {brandId: this.$route.params.id}})
             }
         },
 

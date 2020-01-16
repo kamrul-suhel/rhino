@@ -18,7 +18,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.monday_start"
-                        :label="trans.monday_start"
+                        :label="`${trans.monday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -54,7 +54,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.monday_end"
-                        :label="trans.monday_end"
+                        :label="`${trans.monday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -88,7 +88,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.tuesday_start"
-                        :label="trans.tuesday_start"
+                        :label="`${trans.tuesday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -124,7 +124,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.tuesday_end"
-                        :label="trans.tuesday_end"
+                        :label="`${trans.tuesday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -158,7 +158,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.wednesday_start"
-                        :label="trans.wednesday_start"
+                        :label="`${trans.wednesday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -194,7 +194,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.wednesday_end"
-                        :label="trans.wednesday_end"
+                        :label="`${trans.wednesday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -228,7 +228,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.thursday_start"
-                        :label="trans.thursday_start"
+                        :label="`${trans.thursday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -264,7 +264,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.thursday_end"
-                        :label="trans.thursday_end"
+                        :label="`${trans.thursday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -298,7 +298,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.friday_start"
-                        :label="trans.friday_start"
+                        :label="`${trans.friday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -334,7 +334,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.friday_end"
-                        :label="trans.friday_end"
+                        :label="`${trans.friday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -368,7 +368,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.saturday_start"
-                        :label="trans.saturday_start"
+                        :label="`${trans.saturday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -404,7 +404,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.saturday_end"
-                        :label="trans.saturday_end"
+                        :label="`${trans.saturday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -438,7 +438,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.sunday_start"
-                        :label="trans.sunday_start"
+                        :label="`${trans.sunday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -474,7 +474,7 @@
                     <v-text-field
                         :color="themeOption.inputColor"
                         v-model="dealership.sunday_end"
-                        :label="trans.sunday_end"
+                        :label="`${trans.sunday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
                         v-on="on"
@@ -544,77 +544,77 @@
             generateTimes() {
                 const times = [
                     {
-                        label: this.trans.monday_start,
+                        label: `${trans.monday} ${trans.start}`,
                         ref: 'mondayStart',
                         value: ''
                     },
                     {
-                        label: this.trans.monday_end,
+                        label: `${trans.monday} ${trans.end}`,
                         ref: 'mondayEnd',
                         value: ''
                     },
                     {
-                        label: this.trans.tuesday_start,
+                        label: `${trans.tuesday} ${trans.start}`,
                         ref: 'tuesdayStart',
                         value: ''
                     },
                     {
-                        label: this.trans.tuesday_end,
+                        label: `${trans.tueday} ${trans.end}`,
                         ref: 'tuesdayEnd',
                         value: ''
                     },
                     ,
                     {
-                        label: this.trans.wednesday_start,
+                        label: `${trans.wednesday} ${trans.start}`,
                         ref: 'wednesdayStart',
                         value: ''
                     },
                     {
-                        label: this.trans.wednesday_end,
+                        label: `${trans.wednesday} ${trans.end}`,
                         ref: 'wednesdayEnd',
                         value: ''
                     }
                     ,
                     {
-                        label: this.trans.thursday_start,
+                        label: `${trans.thursday} ${trans.start}`,
                         ref: 'thursdayStart',
                         value: ''
                     },
                     {
-                        label: this.trans.thursday_end,
+                        label: `${trans.thursday} ${trans.end}`,
                         ref: 'thursdayEnd',
                         value: ''
                     }
                     ,
                     {
-                        label: this.trans.friday_start,
+                        label: `${trans.friday} ${trans.start}`,
                         ref: 'fridayStart',
                         value: ''
                     },
                     {
-                        label: this.trans.friday_end,
+                        label: `${trans.friday} ${trans.end}`,
                         ref: 'fridayEnd',
                         value: ''
                     }
                     ,
                     {
-                        label: this.trans.saturday_start,
+                        label: `${trans.saturday} ${trans.start}`,
                         ref: 'saturdayStart',
                         value: ''
                     },
                     {
-                        label: this.trans.saturday_end,
+                        label: `${trans.saturday} ${trans.end}`,
                         ref: 'saturdayEnd',
                         value: ''
                     }
                     ,
                     {
-                        label: this.trans.sunday_start,
+                        label: `${trans.sunday} ${trans.start}`,
                         ref: 'sundayStart',
                         value: ''
                     },
                     {
-                        label: this.trans.sunday_end,
+                        label: `${trans.sunday} ${trans.end}`,
                         ref: 'sundayEnd',
                         value: ''
                     }

@@ -78,6 +78,7 @@
              */
             selectedLanguage(value) {
                 this.$store.commit('setSelectedLanguage', value)
+                this.$store.dispatch('fetchSettingFields', {languageId: value.id})
             },
 
             onNavigationToggle(){

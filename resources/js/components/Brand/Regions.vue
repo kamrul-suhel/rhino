@@ -9,8 +9,8 @@
                         :items="regions"
                         disable-initial-sort
                         :pagination.sync="pagination"
-                        :no-results-text="trans.no_region_added"
-                        :no-data-text="trans.no_region_added"
+                        :no-results-text="`${trans.no} ${trans.region} ${trans.has_been_added}`"
+                        :no-data-text="`${trans.no} ${trans.region} ${trans.has_been_added}`"
                         :rows-per-page-text="trans.rows_per_page"
                         :rows-per-page-items="rowsPerPage"
                         :total-items="totalRegions"
@@ -50,15 +50,15 @@
             >
                 <v-card>
                     <v-card-title>
-                        <h3>{{ editRegion ? trans.edit_region : trans.create_region }}</h3>
+                        <h3>{{ editRegion ? `${trans.edit} ${trans.region}` : `${trans.create} ${trans.region}` }}</h3>
                     </v-card-title>
                     <v-card-text>
 
                         <v-layout column warp>
                             <v-flex xs12>
                                 <v-text-field
-                                    :rules="[v => !!v || trans.region_name_required]"
-                                    :label="trans.region_name"
+                                    :rules="[v => !!v || `${trans.region} ${trans.name} ${trans.is_required}`]"
+                                    :label="`${trans.region} ${trans.name}`"
                                     v-model="selectedRegion.name"
                                     :color="themeOption.inputColor">
                                 </v-text-field>
@@ -66,7 +66,7 @@
 
                             <v-flex xs12>
                                 <v-autocomplete
-                                    :rules="[v => !!v || trans.select_a_country]"
+                                    :rules="[v => !!v || `${trans.select} ${trans.country}`]"
                                     :items="countries"
                                     item-text="name"
                                     item-value="id"
@@ -89,7 +89,7 @@
                         <v-btn small
                                @click="onCreateRegion()"
                                :color="themeOption.buttonPrimaryColor">
-                            {{ editRegion ? trans.update : trans.add_region }}
+                            {{ editRegion ? `${trans.update}` : `${trans.add} ${trans.region}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>

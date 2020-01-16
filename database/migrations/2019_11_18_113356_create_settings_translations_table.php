@@ -17,7 +17,7 @@ class CreateSettingsTranslationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('setting_id')->index();
             $table->unsignedBigInteger('language_id')->index();
-            $table->string('label');
+            $table->string('label')->index();
             $table->string('translation');
             $table->timestamps();
         });

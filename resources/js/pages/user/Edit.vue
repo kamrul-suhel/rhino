@@ -61,9 +61,11 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-select
                                         :items="levels"
-                                        :rules="[v => !!v || trans.select_a_country]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.role}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.rule"
+                                        :label="trans.access_level"
+                                        item-text="text"
+                                        item-value="value"
                                         v-model="user.level"
                                         @change="onFetchData"
                                     >
@@ -331,7 +333,7 @@
             },
 
             confirmRule() {
-                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatch}`
+                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatching}`
             }
         }),
 
@@ -407,6 +409,10 @@
                     _.forOwn(this.user, (value, key) => {
                         if(key === 'firstname'){
                             userForm.append('name', this.user.firstname)
+                            return
+                        }
+                        if(key === 'dealership_id'){
+                            userForm.append('dealershipId', value)
                             return
                         }
                         userForm.append(key, value)

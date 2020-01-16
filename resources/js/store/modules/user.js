@@ -11,9 +11,12 @@ const defaultState = {
     // For dropdown
     usersDropDown: [],
 
-    levels: []
-}
+    levels: [],
 
+    //Tab option
+    tabColor: 'dark',
+    tabSliderColor: 'white'
+}
 const state = {
     ...defaultState
 }
@@ -21,6 +24,43 @@ const state = {
 const mutations = {
     setUsers(state, users) {
         state.users = [...users]
+    },
+
+    addUserToUserList(state, user){
+        let users = [...state.users]
+        users.push({...user})
+
+        state.users = [...users]
+    },
+
+    removeUserFromUserList(state, user){
+        const currentUser = _.filter(state.users, function(curUser){
+            return curUser.id !== user.id
+        })
+
+        state.users = [...currentUser]
+        console.log('user si :', state.users)
+    },
+
+    updateUserForBooking(state, selectedUser){
+        const updatedUsers = _.map(state.users, (currentUser)=>{
+
+            let user = {
+                ...currentUser,
+                selected: ''
+            }
+
+            if(selectedUser.id === user.id){
+                user = {
+                    ...user,
+                    selected: 'selected'
+                }
+            }
+
+            return user
+        })
+
+        state.users = [...updatedUsers]
     },
 
     setLevel(state, trans) {
@@ -58,6 +98,11 @@ const mutations = {
             {
                 'text': trans.company,
                 'value': 'company'
+            },
+
+            {
+                'text': trans.sales_executive,
+                'value': 'sales_executive'
             }
         ]
 
@@ -80,12 +125,12 @@ const mutations = {
         state.totalUsers = totalUser
     },
 
-    resetUserstore(state) {
+    resetUserStore(state) {
         state = {...defaultState}
     },
 
     setUserListHeader(state, options) {
-        const trans = options.trans
+        const trans = {...options.trans}
         const subComponent = options.subComponent
         let userColumn = {}
         if (!subComponent) {
@@ -260,6 +305,10 @@ const actions = {
             .catch((error) => {
 
             })
+    },
+
+    fetchSaleExecutivesForBooking({commit}, payload){
+        commit('setUsers', payload.users)
     }
 }
 

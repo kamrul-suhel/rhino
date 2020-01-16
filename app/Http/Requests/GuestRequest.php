@@ -27,7 +27,7 @@ class GuestRequest extends FormRequest
             'event_id' => 'required|exists:events,id',
             'first_name' => 'required|string',
             'surname' => 'required|string',
-            'postcode' => 'required',
+            'postcode' => 'sometimes',
             'mobile' => 'required'
         ];
     }

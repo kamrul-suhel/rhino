@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_model"
+                :label="`${trans.searchBy} ${trans.model}`"
                 v-model="searchVehicle">
             </v-text-field>
         </v-toolbar>
@@ -26,8 +26,8 @@
                     :items="vehicles"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_vehicle_found"
-                    :no-data-text="trans.no_vehicle_found"
+                    :no-results-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalVehicles"
@@ -35,26 +35,26 @@
                     class="elevation-1"
                 >
                     <template v-slot:items="props">
-                        <td>{{ props.item.model }}</td>
-                        <td v-if="!subComponent">{{ props.item.brand }}</td>
-                        <td class="text-xs-right">
-                            <v-icon
-                            small
-                            class="mr-2"
-                            @click="onEditVehicle(props.item)"
-
-                            >
-                                edit
-                            </v-icon>
-
-                            <v-icon
-                                :color="themeOption.buttonDangerColor"
+                        <tr @click="onEditVehicle(props.item)">
+                            <td>{{ props.item.model }}</td>
+                            <td v-if="!subComponent">{{ props.item.brand }}</td>
+                            <td class="text-xs-right">
+                                <v-icon
                                 small
-                                @click="onDeleteVehicle(props.item)"
-                            >
-                                delete
-                            </v-icon>
-                        </td>
+                                class="mr-2"
+                                @click="onEditVehicle(props.item)">
+                                    edit
+                                </v-icon>
+
+                                <v-icon
+                                    :color="themeOption.buttonDangerColor"
+                                    small
+                                    @click.stop="onDeleteVehicle(props.item)"
+                                >
+                                    delete
+                                </v-icon>
+                            </td>
+                        </tr>
                     </template>
                 </v-data-table>
             </v-flex>
@@ -111,7 +111,6 @@
     import {mapGetters} from 'vuex'
     import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
-import { log } from 'util'
 
     export default {
         components: {
@@ -166,11 +165,7 @@ import { log } from 'util'
 
             searchVehicle() {
                 this.initialize()
-            },
-
-            // selectedColor(value) {
-            //     this.color = value.hex
-            // }
+            }
         },
 
         created() {
@@ -179,13 +174,8 @@ import { log } from 'util'
         mounted() {
         },
         methods: {
-            fetchVehicle() {
-                this.$store.dispatch('fetchVehicles', {themeOption: this.themeOption, trans: this.trans});
-            },
-
             // Initialize data when first render
             initialize() {
-                
                 let extraOption = {}
                 if(this.subComponent){
                     extraOption = {
@@ -200,7 +190,7 @@ import { log } from 'util'
                     themeOption: this.themeOption,
                     paginate: true,
                     search: this.searchVehicle,
-                    subComponent: true,
+                    subComponent: this.subComponent,
                     ...extraOption
                 }
 
@@ -210,7 +200,6 @@ import { log } from 'util'
             onEditVehicle(vehicle) {
                 // $router.push({name: 'editVehicles', params:{id: props.item.id}})
                 if (this.subComponent){
-
                     switch(this.model){
                         case 'brand':
                             this.$router.push({name: 'editBrandVehicle', params:{brandId: this.$route.params.id, vehicleId: vehicle.id}})
@@ -253,32 +242,6 @@ import { log } from 'util'
                         }
                     });
             },
-            // onCreateVehicle() {
-            //     if (this.$refs.createVehicle.validate()) {
-            //         // Check update or create
-            //         let URL = '/api/vehicles'
-            //         let vehicleForm = new FormData()
-            //         vehicleForm.append('model', this.selectedVehicle.model)
-            //         vehicleForm.append('driver_seating_position_right_image', this.seatingRightImage)
-            //         vehicleForm.append('driver_seating_position_left_image', this.seatingLeftImage)
-            //         vehicleForm.append('brand_id', this.selectedVehicle.brand_id)
-            //         vehicleForm.append('status', this.selectedVehicle.status)
-
-            //         axios.post(URL, vehicleForm).then((response) => {
-            //             if (response.data.success) {
-            //                 this.initialize()
-            //                 this.$store.commit('setSnackbarMessage', {
-            //                     openMessage: true,
-            //                     timeOut: this.themeOption.snackBarTimeout,
-            //                     message: `${this.selectedVehicle.model}  ${this.trans.successfully_created}`
-            //                 })
-
-            //                 this.onResetVehicle()
-            //             }
-            //         })
-            //     }
-
-            // },
 
             onLanguageChange(selectedLanguage) {
                 this.$store.dispatch('fetchVehicle', {
@@ -290,7 +253,6 @@ import { log } from 'util'
             onResetVehicle() {
                 this.editVehicle = false
                 this.$store.commit('setSelectedVehicle', {})
-                // this.$store.commit('resetImageUpload')
             },
         }
     }

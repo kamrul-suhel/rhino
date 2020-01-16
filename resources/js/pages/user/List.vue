@@ -16,7 +16,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchUsers">
             </v-text-field>
         </v-toolbar>
@@ -28,7 +28,7 @@
                     :items="users"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_brand_found"
+                    :no-results-text="`${trans.no} ${trans.users} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.users} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
@@ -37,7 +37,7 @@
                     class="elevation-1"
                 >
                     <template v-slot:items="props">
-                        <td>{{ props.item.firstname }}</td>
+                        <td>{{ props.item.firstname }} {{ props.item.surname }}</td>
                         <td>{{ props.item.email }}</td>
                         <td class="text-xs-left" v-if="!subComponent">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-left" v-if="!subComponent">{{ props.item.level }}</td>
@@ -155,10 +155,6 @@
                 }
             },
 
-            update(){
-              this.initialize()
-            },
-
             searchUsers() {
                 this.initialize()
             }
@@ -210,8 +206,14 @@
                         case 'dealership':
                             const URL = `/api/events/${eventId}/users/${user.id}`
                             axios.delete(URL).then((response)=>{
+                                this.$store.commit('setSnackbarMessage', {
+                                    openMessage: true,
+                                    timeOut: this.themeOption.snackBarTimeout,
+                                    message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                                })
+
                                 if(response.data.success){
-                                    this.$store.commit('setInitialize')
+                                    this.$store.commit('removeUserFromUserList', user)
                                 }
                             })
                     }

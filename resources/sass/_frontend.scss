@@ -1,0 +1,690 @@
+/**
+ Frontend Login
+ */
+
+.guest-login {
+    background-repeat:no-repeat !important;
+    background-size: cover !important;
+
+    .login-section {
+        border-radius: 6px !important;
+        box-shadow: 0px 3px 6px #00000029;
+
+        h2 {
+            font-size: 39px;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .theme--light.v-text-field>.v-input__control>.v-input__slot:before {
+            opacity: 0.18;
+        }
+
+        .login-button {
+            height: 50px;
+            padding: 13px 40px 13px 20px;
+            font-size: 18px;
+            background-color: #000000;
+            box-shadow: none;
+            border-radius: 25px;
+            opacity: 1;
+
+            .v-icon {
+                margin-right: 15px;
+            }
+        }
+
+        .multi-button {
+            height: 36px;
+            padding: 5px 20px;
+            font-size: 12px;
+            background-color: #F4F4F4 !important;
+            color: #000000;
+            box-shadow: 0 9px 44px #0000000F;
+            border: 1px solid #707070;
+            border-radius: 18px;
+
+            .v-icon {
+                margin-right: 15px;
+            }
+        }
+    }
+}
+
+/*
+    Model Section
+ */
+
+.model-section {
+
+    button.selected {
+        background-color: #333C42 !important;
+        color: white !important;
+    }
+}
+
+/**
+*   End model section
+*/
+
+
+/*
+    Choose time in frontend
+ */
+.appointmentSlot{
+    .slot{
+        .v-responsive__content>div {
+            min-height: calc(100% - 10px);
+            box-sizing: border-box;
+            padding: 5px !important;
+            margin: 5px !important;
+            position: relative;
+        }
+        .available{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .unavailable {
+            &::before, &::after {
+                content: '';
+                width: 141%;
+                height: 2px;
+                position: absolute;
+                left: -20.5%;
+                top: calc(50% - 1px);
+                transform: rotate(45deg);
+                background-color: #C3C3C3;
+            }
+
+            &::after {
+                transform: rotate(-45deg);
+            }
+
+            h6 {
+                color: #C3C3C3;
+            }
+        }
+
+        .selected{
+            &:hover{
+                cursor: default;
+            }
+
+            h6{
+                color:#fff;
+            }
+        }
+    }
+}
+
+/**
+*   End choose time section
+*/
+
+/*
+*****************************************
+    Calender Component
+*****************************************
+*/
+
+.calenderComponent{
+    .calender{
+        &.v-card{
+            box-shadow:none;
+            background:transparent;
+
+            .v-picker__body{
+                background:transparent;
+            }
+        }
+    }
+
+    .keys {
+        label {
+            flex-grow: 0;
+        }
+
+        div {
+            flex-grow: 0;
+        }
+    }
+}
+
+/*
+*****************************************
+    End Calender Component
+*****************************************
+*/
+
+
+/*
+*****************************************
+    SalesPerson Component
+*****************************************
+*/
+
+.sales-person {
+    .v-card {
+        width: 100%;
+        background: none;
+
+        .v-card__text {
+            padding: 0;
+
+            .salesperson-container {
+                padding: 5px 40px 5px 5px;
+                border-radius: 19px;
+                cursor: pointer;
+
+                &:hover{
+                    cursor:pointer;
+                }
+
+                &.active{
+                    color:#fff;
+                }
+
+                .avatar-flex {
+                    flex-grow: 0;
+                    margin-right: 10px;
+                }
+
+                .text-flex {
+                    margin: 3.5px 0;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}
+
+/*
+*****************************************
+    End SalesPerson Component
+*****************************************
+*/
+
+
+
+/*
+*****************************************
+    Time Booking Component
+*****************************************
+*/
+
+.book-step .checkboxes .flex {
+    flex-grow: 0;
+    position: relative;
+    justify-content: left;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-top: 5px;
+
+    .v-input {
+        width: 32px;
+        height: 32px;
+        margin: 0;
+        padding: 5px 0 0 0;
+    }
+}
+
+/*
+*****************************************
+    End Time Booking Component
+*****************************************
+*/
+
+
+
+.rhinoFrontend{
+    .content{
+        padding:0 0 0 280px;
+        margin:0;
+        width:100%;
+        max-width:100%;
+    }
+
+    @media only screen and (max-width:960px){
+        .content{
+            padding-left:0;
+        }
+    }
+
+}
+
+.frontend-container {
+    padding: 0;
+}
+
+.navigation-drawer {
+    padding:30px;
+
+    /* BRAND CAROUSEL */
+
+    .brand-carousel {
+        box-shadow: none;
+
+        .v-carousel__controls {
+            display: none;
+        }
+    }
+
+
+    .event-title {
+        font-size: 22px;
+        line-height: 28px;
+        margin-top: 25px;
+    }
+
+    h4 {
+        margin-top: 20px;
+    }
+
+
+    .rhinoNavigationStepper{
+        width:100%;
+
+        .v-tabs__container{
+            display:flex;
+            flex-direction:column;
+            align-items:start;
+            justify-content: flex-start;
+            margin-top: 50px;
+            height: auto;
+
+            .v-tabs__div {
+                margin-bottom: 50px;
+
+                .v-tabs__item {
+                    padding-left: 0;
+                    position: relative;
+                    text-transform: capitalize;
+                    font-weight: 600;
+
+                    .v-avatar {
+                        border-radius: 50%;
+                        border: 1px solid transparent;
+                        margin-right: 10px;
+                        height: 26px !important;
+                        width: 26px !important;
+                    }
+
+                    .link {
+                        height: 62px;
+                        content: '';
+                        width: 1px;
+                        position: absolute;
+                        top: 32px;
+                        left: 12.5px;
+                    }
+                }
+            }
+        }
+
+        .v-tabs__slider-wrapper{
+            display:none;
+        }
+    }
+
+    /**
+    Nav footer
+     */
+
+    .flex:last-of-type {
+
+        .flex:first-of-type {
+            height: 28px;
+            margin: auto 0;
+            padding-bottom: 8px;
+
+            h2 {
+                margin: 0 !important;
+                height: 20px;
+                font-size: 20px;
+
+                .v-icon {
+                    margin: 0px auto 2px 2px;
+                    font-size: 18px !important;
+                }
+            }
+        }
+    }
+
+}
+
+.light-grey {
+    background-color: rgb(230,230,230);
+}
+
+.border-medium {
+    border: 1px solid rgb(210,210,210);
+}
+
+.rounded-25 {
+    border-radius: 25px;
+}
+
+.height-50 {
+    height: 50px;
+}
+
+.grow-0 {
+    flex-grow: 0;
+}
+
+.padding-l-85 {
+    padding-left: 85px;
+}
+
+.padding-r-45 {
+    padding-right: 45px;
+}
+
+.padding-l-35 {
+    padding-left: 35px;
+}
+
+.theme-color {
+    border-color: #cc0000;
+}
+
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
+    background: none;
+}
+
+/* END OF REMOVE ONCE DYNAMIC */
+
+
+.theme--light.v-calendar-weekly, .theme--light.v-sheet {
+
+    .v-calendar-weekly__day-month {
+        display: none;
+    }
+
+    .v-calendar-weekly__day {
+        border-radius: 50%;
+        border: none;
+        padding-top: calc(14.3% - 10px);
+        width: calc(14.3% - 10px);
+        padding-bottom: 0;
+        height: 0;
+        margin: 5px;
+        text-align: center;
+        background: none;
+        display: flex;
+        flex-flow: column nowrap;
+
+        .v-calendar-weekly__day-label {
+            width: auto;
+            height: auto;
+            margin: auto;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .v-calendar-weekly__head .v-calendar-weekly__head-weekday {
+        border: none;
+        text-align: center;
+        margin: 5px;
+        height: auto;
+        width: calc(14.3% - 10px);
+    }
+}
+
+
+.body-3 {
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.padding-x-85 {
+    padding-right: 85px;
+    padding-left: 85px;
+}
+
+.rounded-20 {
+    border-radius: 20px;
+}
+
+.theme-fill {
+    background-color: #cc0000 !important;
+}
+
+.model-section{
+    .vehicle{
+        border:2px solid transparent;
+        border-radius:5px;
+    }
+}
+
+
+
+
+
+/*
+*****************************************
+    Frontend Language Select Component
+*****************************************
+*/
+
+
+.frontend-language.v-input {
+    width: 68px;
+    flex-grow: 0;
+    cursor: pointer;
+
+    .v-select__slot {
+        cursor: pointer;
+
+        .v-label {
+            display: none;
+        }
+
+        .v-icon {
+            font-size: 20px;
+        }
+    }
+
+    input {
+        cursor: pointer;
+    }
+
+    .v-input__slot::before, .v-input__slot::after {
+        display: none;
+    }
+
+    label {
+        font-size: 9pt;
+    }
+
+    .v-input__icon--append .v-icon {
+        font-size: 10px;
+    }
+}
+
+/*
+*****************************************
+    End Frontend Language Select Component
+*****************************************
+*/
+
+
+
+
+
+/*
+*****************************************
+    Part Exchange Page
+*****************************************
+*/
+
+.part-exchange {
+
+    .registration-input {
+        width: 330px;
+        height: 70px;
+        background-color: rgb(255, 180, 0);
+        border: 1px solid rgb(160, 120, 0);
+        border-radius: 7px;
+        text-transform: uppercase;
+        color: black;
+        font-size: 25px;
+        line-height: 25px;
+        padding: 22.5px;
+        max-width: 100%;
+    }
+
+    .exchange-details, .no-part-exchange {
+        box-sizing: border-box;
+        position: relative;
+        min-height: 400px;
+
+        > .layout {
+            border: 4px solid rgb(240, 240, 240);
+        }
+
+        .flex {
+            flex-grow: 0;
+        }
+
+    }
+
+    .no-part-exchange {
+        cursor: pointer;
+
+        h2 {
+            width: 300px;
+            max-width: 100%;
+            white-space: normal;
+            text-align: center;
+        }
+    }
+}
+
+/*
+*****************************************
+    End Part Exchange Page
+*****************************************
+*/
+
+
+
+
+
+/*
+*****************************************
+    Personal Details Page
+*****************************************
+*/
+
+.personal-details {
+
+    .details-container {
+        border: 1px solid rgb(240,240,240);
+    }
+
+    .v-text-field--outline input {
+        margin: 11px 0;
+    }
+
+    .v-input--is-disabled {
+        pointer-events: none;
+
+        .v-input__slot {
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .v-text-field__details {
+            display: none;
+        }
+    }
+
+    .v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+        box-shadow: none;
+    }
+}
+
+/*
+*****************************************
+    End Personal Details Page
+*****************************************
+*/
+
+
+
+/*
+*****************************************
+    Booking Confirmation Page
+*****************************************
+*/
+
+.booking-confirmation {
+
+    .v-card {
+        background-color: transparent;
+        border: 1px solid rgb(220,220,220);
+        box-shadow: none;
+
+        .v-card__text {
+            padding: 0;
+        }
+    }
+
+    .v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+        box-shadow: none;
+    }
+
+    .registration-confirmation {
+        width: 120px;
+        height: 30px;
+        background-color: rgb(255, 180, 0);
+        border: 1px solid rgb(160, 120, 0);
+        border-radius: 3px;
+        text-transform: uppercase;
+        text-align: center;
+        color: black;
+        font-size: 16px;
+        line-height: 16px;
+        padding: 7px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .v-carousel {
+        box-shadow: none;
+
+        .v-window__container {
+            height: 200px !important;
+
+            .v-window-item, .v-carousel__item {
+                height: 200px !important;
+            }
+        }
+
+        .v-window-item {
+            width: calc(100% - 120px);
+            margin: 0 60px;
+        }
+
+        .v-carousel__controls {
+            background: none;
+        }
+    }
+
+}
+
+/*
+*****************************************
+    End Booking Confirmation Page
+*****************************************
+*/

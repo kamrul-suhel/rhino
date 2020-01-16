@@ -49,35 +49,44 @@ const mutations = {
         state = {...defaultState}
     },
 
-    setVehicleListHeader(state, trans, subComponent){
+    setVehicleListHeader(state, payload){
 
-        let extraParams = {}
+        let header = []
 
-        if(subComponent){
-            extraParams = {
-                text: trans.brand,
-                align: 'left',
-                sortable: false,
-                value: 'brand'
-            }
+        if(!payload.subComponent){
+            header = [
+                {
+                    text: payload.trans.vehicle,
+                    align: 'left',
+                    value: 'vehicle'
+                },
+
+                {
+                    text: payload.trans.brand,
+                    align: 'left',
+                    value: 'brand'
+                },
+
+                {
+                    text: payload.trans.actions,
+                    value: 'actions',
+                    align:'right'
+                }
+            ]
+        }else{
+            header = [
+                {
+                    text: payload.trans.vehicle,
+                    align: 'left',
+                    value: 'vehicle'
+                },
+                {
+                    text: payload.trans.actions,
+                    value: 'actions',
+                    align:'right'
+                }
+            ]
         }
-        
-        const header = [
-            {
-                text: trans.vehicle,
-                align: 'left',
-                sortable: false,
-                value: 'vehicle'
-            },
-            
-            ...extraParams,
-
-            {
-                text: trans.actions,
-                value: 'actions',
-                align:'right'
-            }
-        ]
 
         state.listHeader = [...header]
     },
@@ -134,12 +143,14 @@ const actions = {
      * @param payload
      */
     fetchVehicles({commit}, payload = {}) {
-
         // Set loading is true
         commit('setVehicleLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        commit('setVehicleListHeader', payload.trans, payload.subComponent)
+        commit('setVehicleListHeader', {
+            trans: payload.trans,
+            subComponent:  payload.subComponent
+        })
 
         const params = fn.generateParams(payload)
         const URL = `/api/vehicles${params}`
@@ -161,49 +172,13 @@ const actions = {
         const URL = `/api/vehicles/${payload.id}/show${fn.generateParams(payload)}`
         axios.get(URL).then((response) => {
             if(response.data){
-                console.log(response.data);
                 commit('setSelectedVehicle', response.data.vehicle)
                 dispatch('fetchBrands', {id: response.data.brand.id})
             }
         }).catch((error)=>{
             // Generate error message
         })
-    },
-
-
-    /**
-     * Get Selected company
-     * @param id // required
-     */
-    // fetchBrand({commit, dispatch}, payload){
-    //     const URL = `/api/brands/${payload.id}/show`+ fn.generateParams(payload)
-    //     axios.get(URL).then((response) => {
-    //         if(response.data){
-    //             commit('setSelectedBrand', response.data.brand)
-    //         }
-    //     }).catch((error)=>{
-    //         // Generate error message
-    //     })
-    // },
-
-    // fetchRegionByBranId({commit}, payload={}){
-    //     console.log('paginate :', payload)
-
-    //     // Set loading is true
-    //     commit('setBrandLoading', payload.themeOption.loadingColor)
-
-    //     commit('setBrandRegionsListHeader', payload.trans)
-    //     const params = fn.generateParams(payload)
-
-    //     const URL = `/api/brands/${payload.id}/regions${params}`
-    //     axios.get(URL).then((response)=>{
-    //         if(response.data.regions){
-    //             commit('setRegionsByBrandId', response.data.regions)
-    //             commit('setTotalRegionByBrandId', response.data.total)
-    //             commit('setBrandLoading', false)
-    //         }
-    //     })
-    // }
+    }
 }
 
 export default {

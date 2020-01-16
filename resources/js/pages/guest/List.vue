@@ -1,12 +1,14 @@
 <template>
     <div >
-        <v-toolbar flat>
-            <v-toolbar-title>
+        <v-toolbar flat
+            :color="subComponent ? themeOption.toolbarColor : ''">
+            <v-toolbar-title v-if="!subComponent">
                 <span :class="themeOption.textHeadingColor+'--text'">{{ trans.guests }}</span>
             </v-toolbar-title>
             <v-divider
                 class="mx-2"
                 inset
+                v-if="!subComponent"
                 vertical
             ></v-divider>
 
@@ -14,9 +16,11 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchGuests">
             </v-text-field>
+
+            <UploadGuestCSVComponent></UploadGuestCSVComponent>
         </v-toolbar>
 
         <v-layout row wrap>
@@ -26,8 +30,8 @@
                     :items="guests"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_brand_found"
-                    :no-data-text="trans.no_brand_found"
+                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGuests"
@@ -39,6 +43,7 @@
                         <td>{{ props.item.email }}</td>
                         <td class="text-xs-left">{{ `${props.item.mobile}` }}</td>
                         <td class="text-xs-left">{{ `${props.item.address_line_1} ${props.item.address_line_2}` }}</td>
+                        <td class="text-xs-left">{{ `${props.item.unique}` }}</td>
                         <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-right">
                             <v-icon
@@ -50,6 +55,7 @@
                             </v-icon>
 
                             <v-icon
+                                v-if="!subComponent"
                                 :color="themeOption.buttonDangerColor"
                                 small
                                 @click="onDeleteGuest(props.item)"
@@ -111,7 +117,13 @@
 <script>
     import {mapGetters} from 'vuex'
 
+    import UploadGuestCSVComponent from "@/components/Guest/UploadGuestCSVComponent";
+
     export default {
+        components: {
+            UploadGuestCSVComponent
+        },
+
         data() {
             return {
                 pagination: {},
@@ -120,6 +132,17 @@
                 searchGuests: '',
                 selectedGuest:{}
             }
+        },
+
+        props:{
+          subComponent:{
+              type: Boolean,
+              default: false
+          },
+
+          model: {
+              type: String
+          }
         },
 
         computed: ({
@@ -155,12 +178,24 @@
         methods: {
             // Initialize data when first render
             initialize() {
+                let additionalOptions = {}
+                // specific event then add id
+                if(this.subComponent){
+                    switch(this.model){
+                        case 'event': // load event specific guest
+                            additionalOptions = {
+                                eventId : this.$route.params.id
+                            }
+                            break
+                    }
+                }
                 const paginateOption = {
                     ...this.pagination,
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    search: this.searchGuests
+                    search: this.searchGuests,
+                    ...additionalOptions
                 }
 
                 this.$store.dispatch('fetchGuests', paginateOption)

@@ -19,7 +19,6 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 |
 */
-
 Route::prefix('users')->group(function () {
     Route::post('', 'Auth\RegisterController@store');
     Route::put('{id}', 'Auth\RegisterController@update');
@@ -33,11 +32,6 @@ Route::prefix('users')->group(function () {
     Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list');
 });
 
-Route::prefix('settings')->group(function () {
-    Route::post('add', 'Setting\SettingController@generateDefaultSetting');
-    Route::get('/', 'Setting\SettingController@index');
-});
-
 
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +41,10 @@ Route::prefix('settings')->group(function () {
 */
 
 Route::prefix('settings')->group(function () {
+    Route::get('', 'Setting\SettingController@index');
     Route::post('add', 'Setting\SettingController@generateDefaultSetting');
-    Route::get('/', 'Setting\SettingController@index');
+    Route::get('translations', 'Setting\TranslationController@list');
+    Route::put('translations/{id}/update', 'Setting\TranslationStoreController@update');
 });
 
 
@@ -116,9 +112,9 @@ Route::prefix('companies')->group(function () {
 Route::prefix('brands')->group(function () {
     Route::get('', 'Brand\BrandController@index');
     Route::get('dropdown', 'Brand\BrandDropDownController@getBrandsForDropDown');
-    Route::post('', 'Brand\BrandController@store');
+    Route::post('', 'Brand\BrandStoreController@store');
     Route::get('{id}/show', 'Brand\BrandController@show');
-    Route::put('{id}/update', 'Brand\BrandController@update');
+    Route::put('{id}/update', 'Brand\BrandStoreController@update');
     Route::delete('{id}/delete', 'Brand\BrandController@destroy');
     Route::get('{id}/regions', 'Brand\BrandRegionController@getRegions');
 });
@@ -165,7 +161,10 @@ Route::prefix('groups')->group(function () {
 */
 
 Route::prefix('languages')->group(function () {
-    Route::get('/', 'Language\LanguageController@index');
+    Route::get('', 'Language\LanguageController@index');
+    Route::post('', 'Language\LanguageStoreController@store');
+    Route::put('{id}', 'Language\LanguageStoreController@update');
+    Route::delete('{id}', 'Language\LanguageDeleteController@destroy');
 });
 
 
@@ -265,9 +264,12 @@ Route::prefix('eventvehicle')->group(function () {
 |
 */
 Route::prefix('guests')->group(function () {
+
     Route::get('', 'Guest\GuestListController@list');
     Route::get('{id}', 'Guest\GuestShowController@show');
     Route::post('', 'Guest\GuestStoreController@store');
+    Route::post('upload', 'Guest\GuestUploadCSVController@generateGuests');
+    Route::post('upload/confirm', 'Guest\GuestUploadCSVController@store');
     Route::put('{id}', 'Guest\GuestStoreController@update');
     Route::delete('{id}', 'Guest\GuestDestroyController@destroy');
 });
@@ -292,4 +294,17 @@ Route::prefix('appointments')->group(function () {
 
 Route::prefix('uploadfiles')->group(function () {
     Route::post('', 'File\FileUploadController@uploadFiles');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Booking, guest journey
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('booking')->group(function(){
+    Route::post('', 'Booking\BookingStoreController@store');
+    Route::get('{uniqueId}', 'Booking\BookingController@getData');
 });

@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchGroup">
             </v-text-field>
         </v-toolbar>
@@ -26,8 +26,8 @@
                     :items="groups"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_group_found"
-                    :no-data-text="trans.no_group_found"
+                    :no-results-text="`${trans.no} ${trans.group} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.group} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGroup"
@@ -62,7 +62,7 @@
             <v-flex xs12 sm4 pt-3 pl-3>
                 <v-card>
                     <v-card-title>
-                        <h3>{{ editGroup ? trans.edit_group : trans.create_groups}}</h3>
+                        <h3>{{ editGroup ? `${trans.edit} ${trans.group}` : `${trans.create} ${trans.group}` }}</h3>
                     </v-card-title>
                     <v-divider></v-divider>
 
@@ -117,7 +117,7 @@
                             small
                             :color="themeOption.buttonSecondaryColor"
                             @click="onCreateGroup">
-                            {{ editGroup ? trans.update_group : trans.add_group}}
+                            {{ editGroup ? `${trans.update} ${trans.group}` : `${trans.add} ${trans.group}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>

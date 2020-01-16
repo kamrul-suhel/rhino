@@ -19,7 +19,6 @@ class CreateLanguagesTable extends Migration
             $table->string('code3',5)->index();
             $table->string('name');
             $table->tinyInteger('status')->index();
-            $table->text('flag')->nullable();
             $table->timestamps();
         });
     }

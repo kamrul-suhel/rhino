@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+//    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -35,5 +37,64 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            if($request->ajax()){
+                return response()->json([
+                    'success' => true,
+                    'authUser' => Auth::user()
+                ]);
+            }else{
+                return redirect()->intended('dashboard');
+            }
+        }
+
+        return response()->json([
+            'success' => false
+        ]);
+    }
+
+    /**
+     * Get Login user
+     * @return mixed
+     */
+    public function getLoginUser(){
+        $user = Auth::user();
+
+        if($user){
+            return response()->json([
+                'success' => true,
+                'authUser' => $user
+            ]);
+        }
+
+        return response()->json([
+            'success' => false
+        ]);
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        if($request->ajax()){
+            return response()->json([
+                'success' => true
+            ]);
+        }
+
+        return $this->loggedOut($request) ?: redirect('/admin');
     }
 }

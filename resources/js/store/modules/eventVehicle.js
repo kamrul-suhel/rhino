@@ -138,6 +138,14 @@ const actions = {
                 commit('setEventVehiclesLoading', false)
             }
         });
+    },
+
+    /**
+     * Vehicle for frontend
+     * Load vehicles from other actions
+     */
+    fetchVehicleForFrontend({commit}, payload){
+        commit('setEventVehicles', payload.vehicles)
     }
 }
 

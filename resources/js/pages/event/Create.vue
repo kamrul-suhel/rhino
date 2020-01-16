@@ -39,7 +39,7 @@
 
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="nameRules"
+                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="`${trans.greeting} ${trans.text}`"
                                         v-model="event.greeting"
@@ -68,7 +68,7 @@
                                         item-value="id"
                                         :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
+                                        :label="`${trans.select} ${trans.event} ${trans.type}`"
                                         v-model="event.type_id"
                                     >
                                     </v-select>
@@ -89,7 +89,9 @@
                                     <v-switch
                                         :label="trans.status"
                                         :color="themeOption.inputColor"
-                                        v-model="event.status">
+                                        v-model="event.status"
+                                        :true-value="1"
+                                        :false-value="0">
                                     </v-switch>
                                 </v-flex>
                             </v-layout>
@@ -231,12 +233,11 @@
                 startEvent: false,
                 endEvent: false,
                 valid: true,
-                event: {},
+                event: {
+                    status: 1
+                },
                 times: {},
                 active: null,
-                nameRules: [
-                    v => !!v || this.trans.name_is_required
-                ],
                 appointmentDuration:[]
             }
         },
@@ -261,7 +262,7 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
-                this.$store.dispatch('fetchGroups', {dropDown: true})
+                this.$store.dispatch('fetchTypes', {dropDown: true})
             },
 
             onCreateEvent() {
@@ -270,15 +271,9 @@
 
                     // Set form object for event
                     _.forOwn(this.event, (value, key) => {
-                        if (key === 'status') {
-                            if (value === 'true') {
-                                eventForm.append('status', 1)
-                            } else {
-                                eventForm.append('status', 0)
-                            }
-                        } else {
-                            eventForm.append(key, value)
-                        }
+
+                        eventForm.append(key, value)
+                        
                     })
 
                     // Set form object for times

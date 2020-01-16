@@ -25,6 +25,7 @@
                     v-for="(navs, index) in items"
                     :key="index"
                     :prepend-icon="navs.icon"
+                    v-if="onCheckAccessLevel(navs)"
             >
                 <v-list-tile slot="activator">
                     <v-list-tile-title v-text="navs.text"></v-list-tile-title>
@@ -33,6 +34,7 @@
                 <v-list-tile
                         v-for="(nav, i) in navs.navs"
                         :key="i"
+                        v-if="onCheckAccessLevel(nav)"
                         @click="onPageChange(nav)"
                 >
                     <v-list-tile-title v-text="nav.text"></v-list-tile-title>
@@ -41,6 +43,13 @@
                     </v-list-tile-action>
                 </v-list-tile>
             </v-list-group>
+
+            <v-list-tile @click="onLogout">
+                <v-list-tile-action>
+                    <v-icon>power_settings_new</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-title>{{ trans.logOut }}</v-list-tile-title>
+            </v-list-tile>
         </v-list>
     </v-navigation-drawer>
 </template>
@@ -53,7 +62,8 @@
             ...mapGetters({
                 trans: 'getFields',
                 openNavigation: 'getIsNavigationOpen',
-                items: 'getNavigationBar'
+                items: 'getNavigationBar',
+                authUser: 'getAuthUser'
             })
         },
 
@@ -78,8 +88,29 @@
                 }
             },
 
-            onCloseWindow() {
-                window.close();
+            onLogout() {
+                axios.post('/logout').then((response) => {
+
+                    if(response.data.success){
+                        // reset auth user
+                        this.$store.commit('setAuthUser', {})
+                        window.location = '/admin'
+                    }
+                })
+            },
+
+            onCheckAccessLevel(nav){
+                let accessLevel = [...nav.access]
+                const authUserRole = this.authUser.level
+                const canAccess = _.findIndex(accessLevel, function(level){
+                    return level === authUserRole
+                })
+
+                if(canAccess === -1){
+                    return false
+                }else{
+                    return true
+                }
             }
         }
     }

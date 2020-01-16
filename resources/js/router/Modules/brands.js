@@ -1,7 +1,7 @@
 import * as Brands from "../../pages/brands";
 
 const brandsRoute ={
-    path: '/brands',
+    path: '/admin/brands',
     name: 'brands',
     component: Brands.Root,
     children:[
@@ -19,10 +19,10 @@ const brandsRoute ={
 
         {
             path:':id/edit',
-            name: 'editBrands',
+            name: 'editBrand',
             component: Brands.Edit,
         },
-        
+
         {
             path: ':brandId/vehicle/create',
             name: 'addBrandVehicle',

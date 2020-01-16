@@ -1,7 +1,7 @@
 import * as Groups from "../../pages/dealership/group";
 
 const DealershipGroupsRoutes =  {
-    path: '/dealerships/groups',
+    path: '/admin/dealerships/groups',
     name: 'dealershipsGroups',
     component: Groups.Root,
     children: [

@@ -14,7 +14,7 @@
 
             <v-text-field
                 :color="themeOption.inputColor"
-                :label="trans.search_by_name"
+                :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchBrands">
             </v-text-field>
         </v-toolbar>
@@ -26,8 +26,8 @@
                     :items="brands"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_brand_found"
-                    :no-data-text="trans.no_brand_found"
+                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                    :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
                     :rows-per-page-text="trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalBrands"
@@ -35,26 +35,28 @@
                     class="elevation-1"
                 >
                     <template v-slot:items="props">
-                        <td>{{ props.item.name }}</td>
-                        <td>{{ props.item.company }}</td>
-                        <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
-                        <td class="text-xs-right">
-                            <v-icon
-                                small
-                                class="mr-2"
-                                @click="onEditBrand(props.item)"
-                            >
-                                edit
-                            </v-icon>
+                        <tr @click="onEditBrand(props.item)">
+                            <td>{{ props.item.name }}</td>
+                            <td>{{ props.item.company }}</td>
+                            <td class="text-xs-left">{{ props.item.status == 1 ? trans.active: trans.inactive }}</td>
+                            <td class="text-xs-right">
+                                <v-icon
+                                    small
+                                    class="mr-2"
+                                    @click="onEditBrand(props.item)"
+                                >
+                                    edit
+                                </v-icon>
 
-                            <v-icon
-                                :color="themeOption.buttonDangerColor"
-                                small
-                                @click="onDeleteBrand(props.item)"
-                            >
-                                delete
-                            </v-icon>
-                        </td>
+                                <v-icon
+                                    :color="themeOption.buttonDangerColor"
+                                    small
+                                    @click.stop="onDeleteBrand(props.item)"
+                                >
+                                    delete
+                                </v-icon>
+                            </td>
+                        </tr>
                     </template>
                 </v-data-table>
             </v-flex>
@@ -66,7 +68,7 @@
                     lazy-validation>
                     <v-card>
                         <v-card-title>
-                            <h3>{{ editBrand ? trans.edit_brand : trans.create_brand}}</h3>
+                            <h3>{{ editBrand ? `${trans.edit} ${trans.brand}` : `${trans.create} ${trans.brand}` }}</h3>
                         </v-card-title>
                         <v-divider></v-divider>
 
@@ -84,7 +86,7 @@
 
                             <v-text-field
                                 :label="trans.name"
-                                :rules="[v => !!v || trans.brand_name_is_required]"
+                                :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
                                 required
                                 v-model="selectedBrand.name"
                                 :color="themeOption.inputColor"
@@ -113,7 +115,7 @@
                             <v-text-field
                                 :label="trans.color"
                                 v-model="color"
-                                :rules="[v => !!v || trans.choose_a_color]"
+                                :rules="[v => !!v || `${trans.select_a} ${trans.color}`]"
                                 required
                                 @focus="isColorSwatchActive = true"
                                 :color="themeOption.inputColor">
@@ -134,14 +136,6 @@
                                 </FileUpload>
                             </v-flex>
 
-                            <v-flex xs12>
-                                <v-switch
-                                    :label="trans.status"
-                                    true-value="1"
-                                    false-value="0"
-                                    v-model="selectedBrand.status">
-                                </v-switch>
-                            </v-flex>
                         </v-card-text>
 
                         <v-card-actions class="pa-2">
@@ -268,6 +262,7 @@
 
         created() {
             this.fetchCompany()
+            this.selectedBrand.status = 1;
         },
 
         mounted() {
@@ -293,7 +288,7 @@
             },
 
             onEditBrand(brand) {
-                this.$router.push({name: 'editBrands', params: {id: brand.id}})
+                this.$router.push({name: 'editBrand', params: {id: brand.id}})
             },
 
             onDeleteBrand(company) {

@@ -28,7 +28,7 @@ class SettingsTableSeeder extends Seeder
           ]
         ];
 
-        $languageId = 40; // By default english is language table
+        $languageId = 1; // By default english is language table
 
         foreach($settingArray as $item){
             $setting = Setting::create([

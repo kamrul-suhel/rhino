@@ -15,34 +15,36 @@ class LanguageController extends Controller
      */
     public function index(Request $request)
     {
-        $languages = Language::where('status', 1);
-        // request has type then filter by type
-        if($request->has('type')){
-            switch($request->type){
-                case 'active':
-                    $languages = $languages->where('status', 1);
-                    break;
+        $languages = Language::select(
+            'languages.*'
+        );
+
+        // For crud request
+        if($request->has('paginate') && !empty($request->paginate)){
+            if($request->has('search') && !empty($request->search)){
+                $languages = $languages->where('languages.name', 'LIKE', '%'.$request->search .'%');
             }
+
+            $languages = $languages->paginate($this->perPage);
+        }else{
+            // request has type then filter by type
+            if($request->has('type')){
+                switch($request->type){
+                    case 'active':
+                        $languages = $languages->where('status', 1);
+                        break;
+                }
+            }
+
+            $languages = $languages->get();
+            return response()->json($languages);
         }
 
-        $languages = $languages->get();
-        return response()->json($languages);
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        /*
-         * Validate request
-         */
-
-        $language = New Language();
-
+        return response()->json([
+            'languages' => $languages->items(),
+            'total' => $languages->total()
+        ]);
     }
 
     /**
@@ -58,28 +60,5 @@ class LanguageController extends Controller
             'language' => $language,
             'success' => true
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

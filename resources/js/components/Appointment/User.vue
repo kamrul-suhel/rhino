@@ -42,6 +42,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import UserAppointment from './UserAppointment'
+    import fn from '@/utils/function'
 
     export default {
         data(){
@@ -88,24 +89,8 @@
             generateDate(){
                 const start = moment(this.selectedEvent.start)
                 const end = moment(this.selectedEvent.end)
-                const dates = this.getDates(start, end)
+                const dates = fn.getDates(start, end, this.dealership)
                 this.dates = [...dates]
-            },
-
-            /**
-             * Generate dates between start date & end dates
-             * @param startDate
-             * @param stopDate
-             * @returns {[]}
-             */
-            getDates(startDate, stopDate) {
-                let dateArray = [];
-                let currentDate = startDate;
-                while (currentDate <= stopDate) {
-                    dateArray.push(moment(currentDate).format('YYYY-MM-DD'))
-                    currentDate = moment(currentDate).add(1, 'days');
-                }
-                return dateArray;
             },
 
             /**

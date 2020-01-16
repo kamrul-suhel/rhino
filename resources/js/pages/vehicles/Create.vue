@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.create_vehicle }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.vehicle}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -29,8 +29,8 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="nameRules"
-                                        :label="trans.model_of_vehicle"
+                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
+                                        :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
                                         :color="themeOption.inputColor"
                                         v-model="vehicle.model"
                                     ></v-text-field>
@@ -43,9 +43,9 @@
                                         :items="brands"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.vehicle_brand_is_required]"
+                                        :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_a_brand"
+                                        :label="`${trans.select_a} ${trans.brand}`"
                                         v-model="vehicle.brand_id"
                                     >
                                     </v-select>
@@ -112,7 +112,7 @@
                             small
                             @click="onCreateVehicle()"
                         >
-                            {{ trans.create_vehicle }}
+                            {{ `${trans.create} ${trans.vehicle}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-flex>
@@ -136,10 +136,6 @@
             return {
                 valid: true,
                 vehicle: {},
-
-                nameRules: [
-                    v => !!v || this.trans.vehicle_model_is_required
-                ],
 
                 leftImage: '',
                 rightImage: '',
@@ -217,7 +213,7 @@
                             
                             // check if vehicle created from brand or vehicle
                             if ( this.subComponent ){
-                                this.$router.push({name: 'editBrands', params:{id: this.$route.params.brandId}});
+                                this.$router.push({name: 'editBrand', params:{id: this.$route.params.brandId}});
                             } else {
                                 this.$router.push({name: 'listVehicles'});
                             }

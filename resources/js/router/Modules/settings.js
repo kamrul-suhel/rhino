@@ -1,7 +1,7 @@
 import * as Settings from "../../pages/settings"
 
 const SettingsRoutes = {
-    path: '/settings',
+    path: '/admin/settings',
     name: 'settings',
     component: Settings.Root,
     children:[
@@ -9,6 +9,12 @@ const SettingsRoutes = {
             path:'list',
             name: 'listSettings',
             component: Settings.List,
+        },
+
+        {
+            path:'translations',
+            name: 'translationSetting',
+            component: Settings.Translation,
         }
     ]
 }

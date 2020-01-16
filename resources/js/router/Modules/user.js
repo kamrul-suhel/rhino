@@ -1,7 +1,7 @@
 import * as User from "../../pages/user";
 
 const brandsRoute ={
-    path: '/users',
+    path: '/admin/users',
     name: 'users',
     component: User.Root,
     children:[

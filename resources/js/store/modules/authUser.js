@@ -3,8 +3,8 @@ const defaultState = {
     userId : null,
     userName: null,
     userEmail: null,
-    admin: true,
-    isLogin: false,
+    admin: false,
+    isLogin: true,
     themeOption:{
         theme: 'dark',
         inputColor: 'white',
@@ -34,14 +34,26 @@ const defaultState = {
         tabSliderColor: 'black',
 
         // Default image
-        brandDefaultImage : '/images/brandPlaceholder.jpg'
-    }
+        brandDefaultImage : '/images/brandPlaceholder.jpg',
+
+        // Frontend
+        drawerWidthF: '280',
+        companyIconSizeF: '100',
+        titleWidthF: '400px',
+        brandColor: '#cc0000',
+        secondaryColor: '#444444'
+    },
+    initialize: false
 }
 const state = {
     ...defaultState
 }
 
 const mutations = {
+    setInitialize(state, status){
+        state.initialize = status
+    },
+
     setUser(state, user){
         state.userId = user.id
         state.userName = user.name
@@ -56,7 +68,6 @@ const mutations = {
 
     setAuthUser(state, user){
         state.authUser =  {...user}
-        state.isLogin = true
     },
 
     setIsLogin(state, status){
@@ -68,6 +79,10 @@ const mutations = {
             ...state.themeOption,
             ...themeOption
         }
+    },
+
+    setUserRole(state, role){
+        state.admin = role
     }
 }
 
@@ -102,6 +117,10 @@ const getters = {
 
     getIsAdmin(state){
         return state.admin
+    },
+
+    getInitializeApp(state){
+        return state.initialize
     }
 }
 

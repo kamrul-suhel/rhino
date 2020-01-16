@@ -18,6 +18,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import fn from '@/utils/function'
 
     export default {
         data() {
@@ -52,39 +53,8 @@
 
         methods: {
             initializeUserAppointment() {
-                const time = this.getStartTimeEndTime()
-                this.getTimeSlotsForDay(time)
-            },
-
-            getStartTimeEndTime() {
-                const startTime = `${moment(this.date).format('dddd').toLowerCase()}_start`
-                const endTime = `${moment(this.date).format('dddd').toLowerCase()}_end`
-
-                return {
-                    start: `${this.date} ${this.dealership[startTime]}`,
-                    end: `${this.date} ${this.dealership[endTime]}`
-                }
-            },
-
-            getTimeSlotsForDay(date) {
-                const appointmentDuration = this.selectedEvent.appointment_duration
-                const breakTime = this.selectedEvent.break_time
-
-                let timeSlots = []
-                let dayStart = moment(date.start)
-                let dayEnd = moment(date.end)
-                do {
-                    let newDate = moment(dayStart).add(appointmentDuration, 'minutes')
-                    const times = {
-                        start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
-                        end: newDate.format('YYYY-MM-DD HH:mm:ss')
-                    }
-
-                    dayStart.add(appointmentDuration, 'minutes')
-                    timeSlots.push(times)
-                } while (dayStart <= dayEnd);
-
-                this.appointmentSlots = [...timeSlots]
+                const time = fn.getStartTimeEndTime(this.date, this.dealership)
+                this.appointmentSlots = fn.getTimeSlotsForDay(time, this.selectedEvent)
             }
         }
     }

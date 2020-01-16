@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ trans.edit_dealerships }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.dealerships}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -32,9 +32,9 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="nameRules"
+                                        :rules=" [v => !!v || `${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.name_of_dealership"
+                                        :label="`${trans.name} ${trans.of} ${trans.dealership}`"
                                         v-model="dealership.name"
                                     ></v-text-field>
                                 </v-flex>
@@ -46,7 +46,7 @@
                                         :items="countries"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || trans.select_a_country]"
+                                        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.select_country"
                                         v-model="dealership.country_id"
@@ -60,7 +60,7 @@
                                         item-text="name"
                                         item-value="id"
                                         :color="themeOption.inputColor"
-                                        :label="trans.select_groups"
+                                        :label="`${trans.select_a} ${trans.group}`"
                                         v-model="dealership.group_id"
                                     >
                                     </v-select>
@@ -154,6 +154,19 @@
                                     >
                                         <v-layout row wrap pt-3>
                                             <dealership-users></dealership-users>
+
+                                            
+                                            <v-flex xs12 sm6 pa-2>
+                                                <v-btn
+                                                    :class="themeOption.buttonSuccess"
+                                                    small
+                                                    @click="$router.push({name: 'createDealershipUser', params: {dealershipId: dealership.id}})"
+                                                >
+                                                
+                                                    {{ trans.add }} {{ trans.user }}
+                                                </v-btn>
+                                            </v-flex>
+
                                         </v-layout>
                                     </v-tab-item>
 
@@ -172,8 +185,8 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :rules="[v => !!v || trans.address_is_required]"
-                                                    :label="trans.address_line_1"
+                                                    :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
+                                                    :label="`${trans.address_line} 1`"
                                                     v-model="dealership.address_line_1">
                                                 </v-text-field>
                                             </v-flex>
@@ -181,7 +194,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_2"
+                                                    :label="`${trans.address_line} 2`"
                                                     v-model="dealership.address_line_2"
                                                 >
                                                 </v-text-field>
@@ -192,7 +205,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_3"
+                                                    :label="`${trans.address_line} 3`"
                                                     v-model="dealership.address_line_3"
                                                 >
                                                 </v-text-field>
@@ -201,7 +214,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_4"
+                                                    :label="`${trans.address_line} 4`"
                                                     v-model="dealership.address_line_4"
                                                 >
                                                 </v-text-field>
@@ -212,7 +225,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_5"
+                                                    :label="`${trans.address_line} 5`"
                                                     v-model="dealership.address_line_5"
                                                 >
                                                 </v-text-field>
@@ -221,7 +234,7 @@
                                             <v-flex xs12 sm6 pa-2>
                                                 <v-text-field
                                                     :color="themeOption.inputColor"
-                                                    :label="trans.address_line_6"
+                                                    :label="`${trans.address_line} 6`"
                                                     v-model="dealership.address_line_6"
                                                 >
                                                 </v-text-field>
@@ -258,7 +271,7 @@
                                 small
                                 @click="onUpdateDealership()"
                             >
-                                {{ trans.update_dealerships }}
+                                {{  `${trans.update} ${trans.dealership}`  }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -292,10 +305,6 @@
                 valid: true,
                 active: null,
                 model: null,
-
-                nameRules: [
-                    v => !!v || this.trans.name_is_required
-                ]
             }
         },
 

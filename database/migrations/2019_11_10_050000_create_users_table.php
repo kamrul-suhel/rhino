@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->text('profile_image')->nullable();
             $table->boolean('send_mail');
             $table->tinyInteger('status')->index();
+            $table->bigInteger('language_id')->nullable();
             $table->timestamps();
         });
     }

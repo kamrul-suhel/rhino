@@ -19,7 +19,6 @@
                                 v-for="brand in brands"
                                 :key="brand.id"
                                 avatar
-                                @click=""
                             >
                                 <v-list-tile-avatar>
                                     <v-avatar

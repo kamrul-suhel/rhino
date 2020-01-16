@@ -38,7 +38,7 @@ class AddSetting
         SettingTranslation::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $languageId = 40; // By default english is language table
+        $languageId = 1; // By default english is language table
         foreach($filesPath as $path){
             $settingArray = include $path;
 

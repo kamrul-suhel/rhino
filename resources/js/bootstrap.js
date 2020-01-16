@@ -3,7 +3,10 @@ window._ = require('lodash');
 window.axios = require('axios');
 window.moment = require('moment');
 
+const token = document.head.querySelector('meta[name="csrf-token"]');
+
 window.axios.defaults.headers.common = {
+    'X-CSRF-Token': token.content,
     'X-Requested-With': 'XMLHttpRequest'
 };
 
@@ -27,7 +30,7 @@ import 'babel-polyfill'
 
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 
 
 /**
@@ -88,7 +91,7 @@ new Vue({
     methods: {
         initSetting() {
             // Setup translation fields
-            this.$store.dispatch('getAllSettingFields');
+            this.$store.dispatch('fetchSettingFields');
 
             // Initialize language
             this.$store.dispatch('fetchLanguages')
