@@ -27,6 +27,7 @@ Route::prefix('users')->group(function () {
     Route::get('{id}/show', 'Auth\UserShowController@show');
     Route::get('dropdown', 'Auth\UserDropdownController@list');
     Route::delete('{id}', 'Auth\UserDeleteController@destroy');
+    Route::post('{id}/updatepassword', 'Auth\UserShowController@changePassword');
 
     // Event User
     Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list');

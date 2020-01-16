@@ -126,6 +126,75 @@
                                     ></v-autocomplete>
                                 </v-flex>
 
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-btn
+                                        color="primary"
+                                        dark
+                                        small
+                                        @click.stop="dialog = true"
+                                        >
+                                        Change Password
+                                    </v-btn>
+
+
+                                    <v-dialog
+                                        v-model="dialog"
+                                        width="500"
+                                        >
+                                        <v-card p2>
+                                            <v-card-title class="headline">Change your password</v-card-title>
+                                            <v-spacer></v-spacer>
+                                            <v-card-text>
+                                                <v-text-field 
+                                                    :append-icon="password ? 'visibility' : 'visibility_off'"
+                                                    :rules="passwordRule"
+                                                    required
+                                                    :color="themeOption.inputColor"
+                                                    :label="trans.password"
+                                                    :type="password ? `text` : `password`"
+                                                    v-model="user.password"
+                                                    @click:append="password = !password"
+                                                    :hint="`${trans.password} ${trans.minimum8Character}`"
+                                                    counter
+                                                ></v-text-field>
+                                            
+                                                <v-text-field 
+                                                    :append-icon="confirmPassword ? 'visibility' : 'visibility_off'"
+                                                    :rules="[v => !!v || `${trans.confirm} ${trans.is_required}`, confirmRule]"
+                                                    required
+                                                    :color="themeOption.inputColor"
+                                                    :label="`${trans.confirm} ${trans.password}`"
+                                                    :type="confirmPassword ? `text` : `password`"
+                                                    @click:append="confirmPassword = !confirmPassword"
+                                                    v-model="user.password_confirmation"
+                                                    counter
+                                                ></v-text-field>
+                                            </v-card-text>
+
+                                            <v-card-actions>
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn
+                                                :class="themeOption.buttonSuccess"
+                                                small
+                                                @click="dialog = false; updatePassword()"
+                                            >
+                                                Update
+                                            </v-btn>
+
+                                            <v-btn
+                                                :color="themeOption.buttonSecondaryColor"
+                                                small
+                                                @click="dialog = false"
+                                            >
+                                                Cancel
+                                            </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                        </v-dialog>
+                                </v-flex>
+
+
                                 <v-flex xs12 sm6 pa-2
                                         v-if="user.level === 'region'">
                                     <v-select :items="regions"
@@ -235,7 +304,8 @@
                 accessLevels: [],
                 profileImage: '',
                 processing: false,
-                buttonDisabled: false
+                buttonDisabled: false,
+                dialog: false,
             }
         },
 
@@ -368,6 +438,12 @@
                 axios.post('/api/uploadfiles', formData).then((response) => {
                     this.profileImage = response.data
                 })
+            },
+
+            updatePassword(){
+                if ( passwordRule ){
+                    console.log('update password');
+                }
             }
         }
     }

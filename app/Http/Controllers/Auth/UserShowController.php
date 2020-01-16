@@ -46,4 +46,15 @@ class UserShowController extends Controller
             'user' => $user
         ]);
     }
+
+    public function changePassword(Request $request, $id)
+    {
+
+        // Get user by ID
+        
+
+        // Get password and hash
+
+        // Update password in user table
+    }
 }
