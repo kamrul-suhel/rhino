@@ -134,66 +134,9 @@
                                         dark
                                         small
                                         @click.stop="dialog = true"
-                                        >
+                                    >
                                         Change Password
                                     </v-btn>
-
-
-                                    <v-dialog
-                                        v-model="dialog"
-                                        width="500"
-                                        >
-                                        <v-card p2>
-                                            <v-card-title class="headline">Change your password</v-card-title>
-                                            <v-spacer></v-spacer>
-                                            <v-card-text>
-                                                <v-text-field 
-                                                    :append-icon="password ? 'visibility' : 'visibility_off'"
-                                                    :rules="passwordRule"
-                                                    required
-                                                    :color="themeOption.inputColor"
-                                                    :label="trans.password"
-                                                    :type="password ? `text` : `password`"
-                                                    v-model="user.password"
-                                                    @click:append="password = !password"
-                                                    :hint="`${trans.password} ${trans.minimum8Character}`"
-                                                    counter
-                                                ></v-text-field>
-                                            
-                                                <v-text-field 
-                                                    :append-icon="confirmPassword ? 'visibility' : 'visibility_off'"
-                                                    :rules="[v => !!v || `${trans.confirm} ${trans.is_required}`, confirmRule]"
-                                                    required
-                                                    :color="themeOption.inputColor"
-                                                    :label="`${trans.confirm} ${trans.password}`"
-                                                    :type="confirmPassword ? `text` : `password`"
-                                                    @click:append="confirmPassword = !confirmPassword"
-                                                    v-model="user.password_confirmation"
-                                                    counter
-                                                ></v-text-field>
-                                            </v-card-text>
-
-                                            <v-card-actions>
-                                            <v-spacer></v-spacer>
-
-                                            <v-btn
-                                                :class="themeOption.buttonSuccess"
-                                                small
-                                                @click="dialog = false; updatePassword()"
-                                            >
-                                                Update
-                                            </v-btn>
-
-                                            <v-btn
-                                                :color="themeOption.buttonSecondaryColor"
-                                                small
-                                                @click="dialog = false"
-                                            >
-                                                Cancel
-                                            </v-btn>
-                                            </v-card-actions>
-                                        </v-card>
-                                        </v-dialog>
                                 </v-flex>
 
 
@@ -249,19 +192,55 @@
 
                             <v-layout row wrap>
                                 <v-flex xs12 sm6 pa-2>
-                                    <div class="my-2">{{ `${trans.profile} ${trans.image}` }}</div>
-                                    <v-card class="pa-3">
-                                        <input type="file"
-                                               class="mb-3"
-                                               accept="image/*"
-                                               ref="profileImage"
-                                               @change="onProfileImageUpload"/>
 
-                                        <v-img
-                                            :src="profileImage"
-                                            aspect-ratio="2"
-                                        ></v-img>
-                                    </v-card>
+
+
+                                    <v-tabs
+                                        v-model="active"
+                                        :color="themeOption.tabColor"
+                                        :slider-color="themeOption.tabSliderColor"
+                                    >
+                                        <v-tab
+                                            key="profileImage"
+                                            ripple
+                                        >
+                                            {{ `${trans.profile} ${trans.image}`}}
+                                        </v-tab>
+
+                                        <v-tab
+                                            key="specialized"
+                                            ripple
+                                        >
+                                            {{ trans.specialized }}
+                                        </v-tab>
+
+                                        <v-tab-item
+                                            key="profileImage">
+                                            <v-layout row wrap mt-3>
+                                                <v-card class="pa-3">
+                                                    <input type="file"
+                                                           class="mb-3"
+                                                           accept="image/*"
+                                                           ref="profileImage"
+                                                           @change="onProfileImageUpload"/>
+
+                                                    <v-img
+                                                        :src="profileImage"
+                                                        aspect-ratio="2"
+                                                    ></v-img>
+                                                </v-card>
+                                            </v-layout>
+                                        </v-tab-item>
+
+                                        <v-tab-item
+                                            key="specialized"
+                                        >
+                                            <v-layout row wrap>
+                                                Specialize section
+                                            </v-layout>
+                                        </v-tab-item>
+                                    </v-tabs>
+
                                 </v-flex>
                             </v-layout>
                             <v-divider class="mt-2 mb-2"></v-divider>
@@ -291,6 +270,62 @@
                 </v-flex>
             </v-layout>
         </v-form>
+
+        <v-dialog
+            v-model="dialog"
+            width="500"
+        >
+            <v-card p2>
+                <v-card-title class="headline">Change your password</v-card-title>
+                <v-spacer></v-spacer>
+                <v-card-text>
+                    <v-text-field
+                        :append-icon="password ? 'visibility' : 'visibility_off'"
+                        :rules="passwordRule"
+                        required
+                        :color="themeOption.inputColor"
+                        :label="trans.password"
+                        :type="password ? `text` : `password`"
+                        v-model="user.password"
+                        @click:append="password = !password"
+                        :hint="`${trans.password} ${trans.minimum8Character}`"
+                        counter
+                    ></v-text-field>
+
+                    <v-text-field
+                        :append-icon="confirmPassword ? 'visibility' : 'visibility_off'"
+                        :rules="[v => !!v || `${trans.confirm} ${trans.is_required}`, confirmRule]"
+                        required
+                        :color="themeOption.inputColor"
+                        :label="`${trans.confirm} ${trans.password}`"
+                        :type="confirmPassword ? `text` : `password`"
+                        @click:append="confirmPassword = !confirmPassword"
+                        v-model="user.password_confirmation"
+                        counter
+                    ></v-text-field>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                        :class="themeOption.buttonSuccess"
+                        small
+                        @click="dialog = false; updatePassword()"
+                    >
+                        Update
+                    </v-btn>
+
+                    <v-btn
+                        :color="themeOption.buttonSecondaryColor"
+                        small
+                        @click="dialog = false"
+                    >
+                        Cancel
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -308,6 +343,7 @@
                 processing: false,
                 buttonDisabled: false,
                 dialog: false,
+                active: null
             }
         },
 
@@ -338,8 +374,8 @@
         }),
 
         watch: {
-            user(){
-                if(this.user.profile_image && this.user.profile_image.length > 0){
+            user() {
+                if (this.user.profile_image && this.user.profile_image.length > 0) {
                     this.profileImage = this.user.profile_image
                 }
 
@@ -399,6 +435,7 @@
             },
 
             onCreateUser() {
+
                 if (this.$refs.userForm.validate()) {
                     this.buttonDisabled = true
                     this.processing = this.themeOption.buttonLoadingStyle
@@ -407,11 +444,11 @@
                     let userForm = new FormData()
                     userForm.append('_method', 'put')
                     _.forOwn(this.user, (value, key) => {
-                        if(key === 'firstname'){
+                        if (key === 'firstname') {
                             userForm.append('name', this.user.firstname)
                             return
                         }
-                        if(key === 'dealership_id'){
+                        if (key === 'dealership_id') {
                             userForm.append('dealershipId', value)
                             return
                         }
@@ -446,8 +483,8 @@
                 })
             },
 
-            updatePassword(){
-                if ( passwordRule ){
+            updatePassword() {
+                if (passwordRule) {
                     console.log('update password');
                 }
             }

@@ -1050,6 +1050,12 @@ return [
         'label' => 'Reset',
         'identifier' => 'reset',
         'translation' => 'Reset'
+    ],
+
+    [
+        'label' => 'Specialized',
+        'identifier' => 'specialized',
+        'translation' => 'Specialized'
     ]
 
 ];
