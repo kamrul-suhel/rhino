@@ -52,6 +52,18 @@ return [
     ],
 
     [
+        'label' => 'Successfully added',
+        'identifier' => 'successfully_added',
+        'translation' => 'Successfully added'
+    ],
+
+    [
+        'label' => 'Successfully removed',
+        'identifier' => 'successfully_removed',
+        'translation' => 'Successfully removed'
+    ],
+
+    [
         'label' => 'Create',
         'identifier' => 'create',
         'translation' => 'Create'
