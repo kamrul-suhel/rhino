@@ -16,8 +16,23 @@ const mutations = {
         state.specializeBrands = [...specializeBrands]
     },
 
+    addSpecializeBrand(state, specializeBrand) {
+        state.specializeBrands.push(specializeBrand)
+    },
+
+    removeSpecializeBrand(state, specializeBrand){
+        const newUserBrand = _.filter(state.specializeBrands, (brand) => {
+            return brand.id != specializeBrand.id
+        })
+        state.specializeBrands = [...newUserBrand]
+    },
+
     setSpecializeBrandLoading(state, status) {
         state.loading = status
+    },
+
+    setSpecializeTotalBrand(state, totalBrands){
+        state.totalSpecializeBrand = totalBrands
     },
 
     setTotalSpecializeBrands(state, totalSpecializeBrands) {
@@ -25,20 +40,26 @@ const mutations = {
     },
 
     setSpecializeBrandListHeader(state, trans) {
-
         const header = [
             {
-                text: trans.name,
+                text: trans.brand,
                 align: 'left',
                 sortable: true,
-                value: 'name'
+                value: 'brand'
             },
 
             {
-                text: trans.email,
-                align: 'left',
-                sortable: true,
-                value: 'email'
+                text: trans.new,
+                align: 'center',
+                sortable: false,
+                value: 'new'
+            },
+
+            {
+                text: trans.used,
+                value: 'used',
+                sortable: false,
+                align: 'center'
             },
 
             {
@@ -86,75 +107,21 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchUsers({commit}, payload = {}) {
-
+    fetchSpecializeBrandByDealershipId({commit}, payload = {}) {
         // Set loading is true
-        commit('setUserLoading', payload.themeOption.loadingColor)
-
-        // Setup header for list view
-        commit('setUserListHeader', {trans: payload.trans})
+        commit('setSpecializeBrandLoading', payload.themeOption.loadingColor)
+        commit('setSpecializeBrandListHeader', payload.trans)
 
         const params = fn.generateParams(payload)
-        const URL = `/api/users${params}`
+        const URL = `/api/users/${payload.userId}/brands${params}`
 
         axios.get(URL).then((response) => {
-            if (response.data.users) {
-                commit('setUsers', response.data.users)
-                commit('setTotalUsers', response.data.total)
-                commit('setUserLoading', false)
+            if (response.data.brands) {
+                commit('setSpecializeBrands', response.data.brands)
+                commit('setSpecializeTotalBrand', response.data.total)
+                commit('setSpecializeBrandLoading', false)
             }
         });
-    },
-
-    fetchUsersForEvent({commit}, payload = {}) {
-        // Set loading is true
-        commit('setUserLoading', payload.themeOption.loadingColor)
-
-        // Setup header for list view
-        commit('setUserListHeader', {trans: payload.trans, subComponent: payload.subComponent})
-
-        const params = fn.generateParams(payload)
-        const URL = `/api/users/events/${payload.eventId}/dealerships/${payload.dealershipId}${params}`
-
-        axios.get(URL).then((response) => {
-            if (response.data.users) {
-                commit('setUsers', response.data.users)
-                commit('setTotalUsers', response.data.total)
-                commit('setUserLoading', false)
-            }
-        });
-    },
-
-    /**
-     * Get Selected company
-     * @param id // required
-     */
-    fetchUser({commit, dispatch}, payload) {
-        const URL = `/api/users/${payload.id}/show${fn.generateParams(payload)}`
-        axios.get(URL).then((response) => {
-            if (response.data) {
-                commit('setSelectedUser', response.data.user)
-            }
-        }).catch((error) => {
-            // Generate error message
-        })
-    },
-
-    fetchUserForDropDown({commit}, payload = {}) {
-        const URL = `/api/users/dropdown${fn.generateParams(payload)}`
-
-        axios.get(URL).then((response) => {
-            if (response.data) {
-                commit('setUsersForDropDown', response.data)
-            }
-        })
-            .catch((error) => {
-
-            })
-    },
-
-    fetchSaleExecutivesForBooking({commit}, payload){
-        commit('setUsers', payload.users)
     }
 }
 
