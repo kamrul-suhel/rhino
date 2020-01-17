@@ -6,6 +6,9 @@ const defaultState = {
     admin: false,
     isLogin: true,
     themeOption:{
+        primaryColor: '',
+        secondaryColor: '#444',
+        textColor:'',
         theme: 'dark',
         inputColor: 'white',
         buttonPrimaryColor: 'success',
@@ -40,8 +43,8 @@ const defaultState = {
         drawerWidthF: '280',
         companyIconSizeF: '100',
         titleWidthF: '400px',
-        brandColor: '#cc0000',
-        secondaryColor: '#444444'
+        brandColor: '#cc0000'
+
     },
     initialize: false
 }

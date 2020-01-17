@@ -2,18 +2,15 @@
     <div id="app" v-if="initialize">
         <v-app
             id="inspire"
-            dark
             v-if="isAdmin"
         >
             <navigation-component></navigation-component>
-            <header-component></header-component>
             <v-content>
+                <header-component></header-component>
                 <v-container fill-height>
                     <v-layout>
-                        <v-flex>
-                            <SnackBar></SnackBar>
-                            <router-view></router-view>
-                        </v-flex>
+                        <SnackBar></SnackBar>
+                        <router-view></router-view>
                     </v-layout>
                 </v-container>
             </v-content>

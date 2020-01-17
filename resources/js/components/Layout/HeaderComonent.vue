@@ -1,11 +1,6 @@
 <template>
     <div>
-        <v-toolbar
-            fixed
-            clipped-left
-            app
-            color="dark"
-        >
+        <v-toolbar>
             <v-toolbar-side-icon @click.stop="onNavigationToggle()"></v-toolbar-side-icon>
             <v-icon class="mx-3">fab fa-youtube</v-icon>
             <v-toolbar-title class="mr-5 align-center">
@@ -25,24 +20,6 @@
                 ></v-autocomplete>
             </v-layout>
         </v-toolbar>
-
-
-        <v-snackbar
-            v-model="snackbar"
-            right
-            :timeout="timeout"
-            top
-            color="green"
-        >
-            {{ text }}
-            <v-btn
-                color="white"
-                flat
-                @click="snackbar = false"
-            >
-                Close
-            </v-btn>
-        </v-snackbar>
     </div>
 </template>
 
@@ -52,9 +29,6 @@
     export default {
         data() {
             return {
-                snackbar: false,
-                text: '',
-                timeout: 2000,
             }
         },
 
@@ -81,7 +55,7 @@
                 this.$store.dispatch('fetchSettingFields', {languageId: value.id})
             },
 
-            onNavigationToggle(){
+            onNavigationToggle() {
                 this.$store.commit('setIsNavigationOpen')
             }
         }
