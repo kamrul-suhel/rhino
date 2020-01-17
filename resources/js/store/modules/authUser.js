@@ -10,7 +10,7 @@ const defaultState = {
         secondaryColor: '#444',
         textColor:'',
         theme: 'dark',
-        inputColor: 'white',
+        inputColor: 'dark',
         buttonPrimaryColor: 'success',
         buttonSecondaryColor: 'dark',
         buttonDangerColor: 'red',
@@ -19,7 +19,7 @@ const defaultState = {
         buttonLoadingStyle: 'loading',
 
         // Header setting
-        textHeadingColor: 'cyan',
+        textHeadingColor: '#e20000',
         loadingColor: 'white',
 
         // Snack bar option

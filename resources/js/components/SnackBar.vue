@@ -1,5 +1,5 @@
 <template>
-    <v-layout>
+    <v-layout row wrap>
         <v-snackbar
             v-model="show"
             :color="bgColor"

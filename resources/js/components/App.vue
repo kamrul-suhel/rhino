@@ -6,15 +6,14 @@
         >
             <navigation-component></navigation-component>
             <v-content>
+                <SnackBar></SnackBar>
                 <header-component></header-component>
-                <v-container fill-height>
-                    <v-layout>
-                        <SnackBar></SnackBar>
-                        <router-view></router-view>
-                    </v-layout>
+                <v-container>
+                    <router-view></router-view>
                 </v-container>
             </v-content>
         </v-app>
+
         <template v-else>
             <SnackBar></SnackBar>
             <router-view></router-view>
