@@ -4,50 +4,65 @@
             clipped
             v-model="drawer"
             app
-            width="250"
+            width="300"
     >
-        <v-list>
-            <v-list-tile class="header-section">
-                <v-list-tile-title>
-                    <div class="store-logo">
-                    </div>
-                </v-list-tile-title>
-            </v-list-tile>
 
-            <v-list-tile>
+        <v-layout row wrap>
+            <v-flex xs12>
+                <h2>Rhino<span>events</span>.com</h2>
+            </v-flex>
+
+            <v-flex xs12 sm8>
+                <h2 :style="{color: themeOption.adminNavIconColor}">{{ title }}</h2>
+            </v-flex>
+
+            <v-flex xs12 sm4>
+                <v-layout row>
+                    <v-autocomplete
+                        :placeholder="trans.select_a_language"
+                        prepend-icon="search"
+                        :items="languages"
+                        item-text="name"
+                        @change="selectedLanguage"
+                        item-value="id"
+                        return-object
+                    ></v-autocomplete>
+                </v-layout>
+            </v-flex>
+        </v-layout>
+
+        <v-divider></v-divider>
+
+        <v-list>
+            <v-list-tile @click="$router.push({name: 'dashboard'})">
                 <v-list-tile-action>
-                    <v-icon>home</v-icon>
+                    <v-icon :color="themeOption.adminNavIconColor">home</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-title>{{ trans.dashboard }}</v-list-tile-title>
             </v-list-tile>
 
-            <v-list-group
-                    v-for="(navs, index) in items"
-                    :key="index"
-                    :prepend-icon="navs.icon"
-                    v-if="onCheckAccessLevel(navs)"
-            >
-                <v-list-tile slot="activator">
-                    <v-list-tile-title v-text="navs.text"></v-list-tile-title>
+            <template v-for="(nav, i) in navs">
+                <v-list-tile
+                    :key="i"
+                    v-if="onCheckAccessLevel(nav)"
+                    @click="onPageChange(nav)"
+                >
+                    <v-list-tile-action>
+                        <v-icon v-text="nav.icon" :color="themeOption.adminNavIconColor"></v-icon>
+                    </v-list-tile-action>
+
+                    <v-list-tile-title v-text="nav.text"></v-list-tile-title>
                 </v-list-tile>
 
-                <v-list-tile
-                        v-for="(nav, i) in navs.navs"
-                        :key="i"
-                        v-if="onCheckAccessLevel(nav)"
-                        @click="onPageChange(nav)"
-                >
-                    <v-list-tile-title v-text="nav.text"></v-list-tile-title>
-                    <v-list-tile-action>
-                        <v-icon v-text="nav.icon"></v-icon>
-                    </v-list-tile-action>
-                </v-list-tile>
-            </v-list-group>
+                <v-divider v-if="nav.divider"></v-divider>
+            </template>
 
             <v-list-tile @click="onLogout">
                 <v-list-tile-action>
-                    <v-icon>power_settings_new</v-icon>
+                    <v-icon :color="themeOption.adminNavIconColor">power_settings_new
+                    </v-icon>
                 </v-list-tile-action>
+
                 <v-list-tile-title>{{ trans.logOut }}</v-list-tile-title>
             </v-list-tile>
         </v-list>
@@ -60,10 +75,13 @@
     export default {
         computed: {
             ...mapGetters({
+                themeOption: 'getThemeOption',
                 trans: 'getFields',
+                languages: 'getLanguages',
                 openNavigation: 'getIsNavigationOpen',
-                items: 'getNavigationBar',
-                authUser: 'getAuthUser'
+                navs: 'getNavigationBar',
+                authUser: 'getAuthUser',
+                title: 'getNavTitle'
             })
         },
 
@@ -86,6 +104,15 @@
                 }else{
                     this.$router.push({name: item.link});
                 }
+            },
+
+            /**
+             * Language change render all translation
+             * @param value
+             */
+            selectedLanguage(value) {
+                this.$store.commit('setSelectedLanguage', value)
+                this.$store.dispatch('fetchSettingFields', {languageId: value.id})
             },
 
             onLogout() {

@@ -43,7 +43,9 @@ const defaultState = {
         drawerWidthF: '280',
         companyIconSizeF: '100',
         titleWidthF: '400px',
-        brandColor: '#cc0000'
+        brandColor: '#cc0000',
+
+        adminNavIconColor: '#e20000'
 
     },
     initialize: false

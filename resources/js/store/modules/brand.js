@@ -196,12 +196,11 @@ const actions = {
     /**
      * Get Selected company
      * @param id // required
+     * @param payload
      */
     fetchBrand({commit, dispatch}, payload) {
         const URL = `/api/brands/${payload.id}/show` + fn.generateParams(payload)
         axios.get(URL).then((response) => {
-            console.log('fetch brand');
-            console.log(response.data);
             if (response.data) {
                 commit('setSelectedBrand', response.data.brand)
             }
