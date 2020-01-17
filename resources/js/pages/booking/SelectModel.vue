@@ -60,7 +60,7 @@
                             <v-img
                                 contain
                                 :aspect-ratio="16/12"
-                                :src="vehicle.driver_seating_position_left_image"
+                                :src="renderVehicleImage(vehicle)"
                             ></v-img>
                             <v-card-text class="text-xs-center">
                                 {{ vehicle.model }}
@@ -113,10 +113,10 @@
         },
 
         watch: {
-            selectedVehicles(){
-                if(this.vehicles.length > 0){
+            selectedVehicles() {
+                if (this.vehicles.length > 0) {
                     this.skipStep = true
-                }else{
+                } else {
                     this.skipStep = false
                 }
             }
@@ -138,13 +138,13 @@
 
         methods: {
             onSelectVehicle(vehicle) {
-               this.$store.commit('setOrRemoveVehicle', vehicle)
+                this.$store.commit('setOrRemoveVehicle', vehicle)
             },
 
             onVehicleSelected(vehicle) {
                 let selected = ''
                 _.map(this.selectedVehicles, (currentVehicle) => {
-                    if(vehicle.id === currentVehicle.id){
+                    if (vehicle.id === currentVehicle.id) {
                         selected = this.color
                     }
                 })
@@ -152,7 +152,7 @@
                 return selected
             },
 
-            onFilterVehicle(type){
+            onFilterVehicle(type) {
                 this.$store.commit('setBookingVehicleType', type)
                 this.$store.dispatch('fetchEventVehicles', {
                     id: this.selectedEvent.id,
@@ -162,8 +162,27 @@
                 })
             },
 
-            onContinue(){
+            onContinue() {
                 this.$store.commit('setBookingStep', 1)
+            },
+
+            renderVehicleImage(vehicle) {
+                if (vehicle.image !== null) {
+                    return vehicle.image
+                }
+
+                const dealershipSeatingPosition = this.dealership.driver_seating_position
+
+                switch (dealershipSeatingPosition) {
+                    case 'right':
+                        return vehicle.driver_seating_position_right_image
+
+                    case 'left':
+                        return vehicle.driver_seating_position_left_image
+
+                    default:
+                        return this.themeOption.brandDefaultImage
+                }
             }
         }
     }
