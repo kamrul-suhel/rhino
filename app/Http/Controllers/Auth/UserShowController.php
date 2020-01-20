@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserShowController extends Controller
 {
@@ -45,16 +46,5 @@ class UserShowController extends Controller
         return response()->json([
             'user' => $user
         ]);
-    }
-
-    public function changePassword(Request $request, $id)
-    {
-
-        // Get user by ID
-        
-
-        // Get password and hash
-
-        // Update password in user table
     }
 }

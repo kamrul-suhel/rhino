@@ -286,9 +286,9 @@
                         :color="themeOption.inputColor"
                         :label="trans.password"
                         :type="password ? `text` : `password`"
-                        v-model="user.password"
                         @click:append="password = !password"
                         :hint="`${trans.password} ${trans.minimum8Character}`"
+                        v-model="newPassword"
                         counter
                     ></v-text-field>
 
@@ -300,7 +300,7 @@
                         :label="`${trans.confirm} ${trans.password}`"
                         :type="confirmPassword ? `text` : `password`"
                         @click:append="confirmPassword = !confirmPassword"
-                        v-model="user.password_confirmation"
+                        v-model="password_confirmation"
                         counter
                     ></v-text-field>
                 </v-card-text>
@@ -343,7 +343,9 @@
                 processing: false,
                 buttonDisabled: false,
                 dialog: false,
-                active: null
+                active: null,
+                newPassword: '',
+                password_confirmation: ''
             }
         },
 
@@ -484,9 +486,21 @@
             },
 
             updatePassword() {
-                if (passwordRule) {
-                    console.log('update password');
-                }
+                    let data = new FormData()
+                    data.append('password', this.newPassword)
+                    data.append('confirm_password', this.newPassword)
+                    data.append('email', this.user.email)
+                    
+                    axios.post(`/api/users/${this.user.id}/updatepassword`, data).then((response) => {
+                        console.log('Password updated successfully');
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.password} ${this.trans.successfully_updated}`
+                        })
+
+                    })
+                
             }
         }
     }
