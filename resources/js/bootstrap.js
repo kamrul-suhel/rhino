@@ -51,11 +51,17 @@ import i18n from './plugins/i18n/index'
 /**
 * Import filter
 */
-
 import './filters/index'
 
 
 import router from './router'
+
+/**
+ * Import flag-icon
+ */
+import FlagIcon from 'vue-flag-icon'
+
+Vue.use(FlagIcon)
 
 Vue.use(Vuetify)
 Vue.use(Vuex)

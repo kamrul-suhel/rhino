@@ -191,54 +191,51 @@
                             <v-divider class="my-3"></v-divider>
 
                             <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-
-
-
+                                <v-flex xs12 pa-2>
                                     <v-tabs
                                         v-model="active"
                                         :color="themeOption.tabColor"
                                         :slider-color="themeOption.tabSliderColor"
                                     >
                                         <v-tab
-                                            key="profileImage"
-                                            ripple
-                                        >
-                                            {{ `${trans.profile} ${trans.image}`}}
-                                        </v-tab>
-
-                                        <v-tab
                                             key="specialized"
+                                            v-if="user.level === 'sales_executive'"
                                             ripple
                                         >
                                             {{ trans.specialized }}
                                         </v-tab>
 
-                                        <v-tab-item
-                                            key="profileImage">
-                                            <v-layout row wrap mt-3>
-                                                <v-card class="pa-3">
-                                                    <input type="file"
-                                                           class="mb-3"
-                                                           accept="image/*"
-                                                           ref="profileImage"
-                                                           @change="onProfileImageUpload"/>
-
-                                                    <v-img
-                                                        :src="profileImage"
-                                                        aspect-ratio="2"
-                                                    ></v-img>
-                                                </v-card>
-                                            </v-layout>
-                                        </v-tab-item>
+<!--                                        <v-tab-->
+<!--                                            key="profileImage"-->
+<!--                                            ripple-->
+<!--                                        >-->
+<!--                                            {{ `${trans.profile} ${trans.image}`}}-->
+<!--                                        </v-tab>-->
 
                                         <v-tab-item
+                                            v-if="user.level === 'sales_executive'"
                                             key="specialized"
                                         >
-                                            <v-layout row wrap>
-                                                Specialize section
-                                            </v-layout>
+                                            <SpecializeBrand></SpecializeBrand>
                                         </v-tab-item>
+
+<!--                                        <v-tab-item-->
+<!--                                            key="profileImage">-->
+<!--                                            <v-layout row wrap mt-3>-->
+<!--                                                <v-card class="pa-3">-->
+<!--                                                    <input type="file"-->
+<!--                                                           class="mb-3"-->
+<!--                                                           accept="image/*"-->
+<!--                                                           ref="profileImage"-->
+<!--                                                           @change="onProfileImageUpload"/>-->
+
+<!--                                                    <v-img-->
+<!--                                                        :src="profileImage"-->
+<!--                                                        aspect-ratio="2"-->
+<!--                                                    ></v-img>-->
+<!--                                                </v-card>-->
+<!--                                            </v-layout>-->
+<!--                                        </v-tab-item>-->
                                     </v-tabs>
 
                                 </v-flex>
@@ -332,7 +329,14 @@
 <script>
     import {mapGetters} from 'vuex'
 
+    import SpecializeBrand from '@/components/User/Specialize'
+
     export default {
+
+        components : {
+          SpecializeBrand
+        },
+
         data() {
             return {
                 valid: true,
@@ -343,9 +347,9 @@
                 processing: false,
                 buttonDisabled: false,
                 dialog: false,
-                active: null,
                 newPassword: '',
-                password_confirmation: ''
+                password_confirmation: '',
+                active: ''
             }
         },
 
@@ -396,7 +400,6 @@
             },
 
             onFetchData() {
-                console.log(this.user.level)
                 const level = this.user.level
                 switch (level) {
                     case 'dealership':

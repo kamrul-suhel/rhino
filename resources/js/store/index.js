@@ -24,6 +24,8 @@ import EventVehicle from './modules/eventVehicle'
 import Appointment from './modules/appointment'
 import Booking from './modules/booking'
 import Translations from './modules/translation'
+import SpecializeBrand from './modules/specializeBrand'
+import Header from './modules/header'
 
 
 Vue.use(Vuex)
@@ -64,6 +66,7 @@ const store = new Vuex.Store({
     },
 
     modules: {
+        Header,
         SnackBar,
         Button,
         settings,
@@ -85,7 +88,8 @@ const store = new Vuex.Store({
         EventVehicle,
         Appointment,
         Booking,
-        Translations
+        Translations,
+        SpecializeBrand
     }
 })
 

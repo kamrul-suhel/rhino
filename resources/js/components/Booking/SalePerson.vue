@@ -36,7 +36,9 @@
                                         size="28"
                                         color="grey lighten-4">
                                         <img :src="saleExecutive.profile_image"
+                                             v-if="saleExecutive.profile_image === ''"
                                              :alt="saleExecutive.firstname">
+                                        <v-icon :color="color">account_circle</v-icon>
                                     </v-avatar>
                                 </v-flex>
                                 <v-flex class="text-flex">

@@ -1,86 +1,101 @@
 <template>
-    <v-layout row wrap>
-        <v-flex xs12 pt-3>
-            <v-data-table
-                :headers="headers"
-                :items="vehicles"
-                disable-initial-sort
-                :pagination.sync="pagination"
-                :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                :rows-per-page-text="trans.rows_per_page"
-                :rows-per-page-items="rowsPerPage"
-                :total-items="totalEvents"
-                :loading="loading"
-                class="elevation-1"
-            >
-                <template v-slot:items="props">
-                    <td>{{ props.item.model }}</td>
-                    <td>
-                        <v-checkbox
-                            class="eventVehicleSwitch"
-                            :color="themeOption.inputColor"
-                            :false-value="0"
-                            :true-value="1"
-                            v-model="props.item.new"
-                            @change="onEventVehicleChange(props.item)"
-                        ></v-checkbox>
-                    </td>
-
-                    <td>
-                        <v-checkbox
-                            class="eventVehicleSwitch"
-                            :false-value="0"
-                            :true-value="1"
-                            :color="themeOption.inputColor"
-                            v-model="props.item.used"
-                            return-object
-                            @change="onEventVehicleChange(props.item)"
-                        ></v-checkbox>
-                    </td>
-
-                    <td>
-                        <v-avatar
-                            tile
-                            color="grey lighten-4"
-                            @click="onImageChange(props.item)"
-                        >
-                            <img :src="props.item.image|image(themeOption.brandDefaultImage)" alt="avatar">
-                        </v-avatar>
-                    </td>
-
-                    <td>
-                        <v-edit-dialog
-                            :return-value.sync="props.item"
-                            lazy
-                            @save="onEventVehicleChange(props.item)"
-                            @cancel="cancel(props.item)"
-                            @open="open(props.item)"
-                            @close="close(props.item)"
-                        > {{ props.item.order }}
-                            <template v-slot:input>
-                                <v-text-field
+    <v-layout row wrap mt-3>
+        <v-flex xs12 sm8>
+            <v-card flat>
+                <v-card-text class="pa-0">
+                    <v-data-table
+                        :headers="headers"
+                        :items="specializeBrands"
+                        disable-initial-sort
+                        :pagination.sync="pagination"
+                        :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                        :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                        :rows-per-page-text="trans.rows_per_page"
+                        :rows-per-page-items="rowsPerPage"
+                        :total-items="totalSpecializeBrands"
+                        :loading="loading"
+                        class="elevation-1"
+                    >
+                        <template v-slot:items="props">
+                            <td>{{ props.item.brand_name }}</td>
+                            <td class="text-xs-center">
+                                <v-checkbox
+                                    class="eventVehicleSwitch"
                                     :color="themeOption.inputColor"
-                                    type="number"
-                                    v-model="props.item.order"
-                                    :label="trans.edit"
-                                    single-line
-                                ></v-text-field>
-                            </template>
-                        </v-edit-dialog>
-                    </td>
+                                    :false-value="0"
+                                    :true-value="1"
+                                    v-model="props.item.new"
+                                    @change="onBrandUserChange(props.item)"
+                                ></v-checkbox>
+                            </td>
 
-                    <td class="text-xs-right">
-                        <v-icon
-                            :color="themeOption.buttonDangerColor"
-                            small
-                            @click="onDeleteEvent(props.item)"
+                            <td class="text-xs-center">
+                                <v-checkbox
+                                    class="eventVehicleSwitch"
+                                    :false-value="0"
+                                    :true-value="1"
+                                    :color="themeOption.inputColor"
+                                    v-model="props.item.used"
+                                    return-object
+                                    @change="onBrandUserChange(props.item)"
+                                ></v-checkbox>
+                            </td>
+
+                            <td class="text-xs-right">
+                                <v-icon
+                                    :color="themeOption.buttonDangerColor"
+                                    small
+                                    @click="onDeleteUserBrand(props.item)"
+                                >
+                                    delete
+                                </v-icon>
+                            </td>
+                        </template>
+                    </v-data-table>
+                </v-card-text>
+            </v-card>
+        </v-flex>
+
+        <v-flex xs12 sm4>
+            <v-form ref="brandUserForm"
+                    v-model="valid"
+                    lazy-validation
+            >
+                <v-card>
+                    <v-card-title>
+                        <h3>{{ `${trans.add} ${trans.brand}` }}</h3>
+                    </v-card-title>
+
+                    <v-divider></v-divider>
+
+                    <v-card-text>
+                        <v-layout row wrap>
+                            <v-flex xs12>
+                                <v-select :label="`${trans.select_a} ${trans.brand}`"
+                                          :color="themeOption.inputColor"
+                                          :items="availableBrands"
+                                          item-text="brand"
+                                          :rules="[v => !!v || `${trans.select_a} ${trans.brand}`]"
+                                          required
+                                          v-model="selectedBrand"
+                                          return-object
+                                >
+                                </v-select>
+                            </v-flex>
+                        </v-layout>
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn small
+                               @click="onCreateRelation"
+                               :color="themeOption.buttonPrimaryColor"
                         >
-                            delete
-                        </v-icon>
-                    </td>
-                </template>
-            </v-data-table>
+                            {{ `${trans.add} ${trans.brand}` }}
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-flex>
     </v-layout>
 </template>
@@ -91,9 +106,11 @@
     export default {
         data() {
             return {
+                valid: true,
                 dialog: false,
                 pagination: {},
-                selectedVehicle: {}
+                selectedBrand: null,
+                availableBrands: []
             }
         },
 
@@ -101,12 +118,13 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                vehicles: 'getEventVehicles',
-                headers: 'getEventVehiclesListHeader',
-                totalEvents: 'getTotalEventVehicle',
-                loading: 'getEventVehiclesLoading',
-                rowsPerPage: 'getEventVehiclesListRowsPerPage',
-                selectedEvent: 'getSelectedEventVehicle'
+                specializeBrands: 'getSpecializeBrands',
+                headers: 'getSpecializeBrandListHeader',
+                totalSpecializeBrands: 'getTotalSpecializeBrand',
+                loading: 'getSpecializeBrandLoading',
+                rowsPerPage: 'getSpecializeBrandListRowsPerPage',
+                brands: 'getBrandsByDealership',
+                user: 'getSelectedUser'
             })
         }),
 
@@ -115,99 +133,122 @@
                 handler() {
                     this.initialize()
                 }
+            },
+
+            specializeBrands() {
+                this.updateBrandDropdown()
             }
         },
 
         created() {
-
+            this.fetchBrandByDealership()
         },
 
         methods: {
             // Initialize data when first render
             initialize() {
-                let paramObject = {}
-
-                if (this.subComponent) {
-                }
                 const paginateOption = {
                     ...this.pagination,
-                    id: this.$route.params.eventId,
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
                     search: this.searchBrands,
-                    ...paramObject
+                    userId: this.user.id
                 }
 
-                this.$store.dispatch('fetchEventVehicles', paginateOption)
+                this.$store.dispatch('fetchSpecializeBrandByDealershipId', paginateOption)
             },
 
-            cancel(item) {
+            fetchBrandByDealership() {
+                const dealershipId = this.user.dealership_id
 
+                this.$store.dispatch('fetchBrandsByDealershipId', {
+                    dealershipId: dealershipId,
+                    trans: this.trans,
+                    themeOption: this.themeOption
+                })
             },
 
-            open() {
+            updateBrandDropdown() {
+                let newAvailableBrands = []
+                _.map(this.brands, (brand) => {
+                    const index = _.findIndex(this.specializeBrands, (specializeBrand) => {
+                        return brand.brand_id === parseInt(specializeBrand.brand_id)
+                    })
+
+                    if (index === -1) {
+                        newAvailableBrands.push(brand)
+                    }
+                })
+                this.availableBrands = [...newAvailableBrands]
             },
 
-            close(item) {
-            },
-
-            onEventVehicleChange(vehicle, fetchVehicle = false) {
-                let eventVehicleForm = new FormData()
-                eventVehicleForm.append('_method', 'PUT')
-                const URL = `/api/eventvehicle/${vehicle.id}`
-
-                // Set form object for event vehicle
-                _.forOwn(vehicle, (value, key) => {
-                    eventVehicleForm.append(key, value)
+            /**
+             * Updating bran user info
+             * @param brandUser
+             */
+            onBrandUserChange(brandUser) {
+                let brandUserForm = new FormData()
+                _.forOwn(brandUser, (value, key) => {
+                    brandUserForm.append(key, value)
                 })
 
-                axios.post(URL, eventVehicleForm).then((response) => {
-                    if(response.data.success){
-                        if(fetchVehicle){
-                            this.dialog = false
-                            this.selectedVehicle = {}
-                            this.initialize()
+                const URL = `/api/users/${this.user.id}/brand/${brandUser.id}`
+
+                axios.post(URL, brandUser).then((response) => {
+                    if (response.data.success) {
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.brand} ${this.trans.successfully_updated}`
+                        })
+                    }
+                })
+            },
+
+            onDeleteUserBrand(userBrand) {
+                const URL = `/api/users/${userBrand.user_id}/brand/${userBrand.id}`
+
+                axios.delete(URL).then((response) => {
+                    if (response.data.success) {
+                        this.updateRecord(userBrand, false)
+                    }
+                })
+            },
+
+            onCreateRelation() {
+                if (this.$refs.brandUserForm.validate()) {
+                    let brandUser = new FormData()
+                    brandUser.append('brand_id', this.selectedBrand.brand_id)
+                    brandUser.append('user_id', this.user.id)
+
+                    const URL = `/api/users/${this.user.id}/brand`
+                    axios.post(URL, brandUser).then((response) => {
+                        if (response.data.success) {
+                            const brand = {
+                                ...response.data.brand,
+                                brand_name: this.selectedBrand.brand,
+                                user_name: null
+                            }
+
+                            this.updateRecord(brand, true)
                         }
-                    }
+                    })
+                }
+            },
+
+            updateRecord(userBrand, add) {
+                // Update add brand reset
+                this.$refs.brandUserForm.reset()
+
+                const message = `${this.trans.brand} ${add ? this.trans.successfully_added : this.trans.successfully_removed}`
+                this.$store.commit('setSnackbarMessage', {
+                    openMessage: true,
+                    timeOut: this.themeOption.snackBarTimeout,
+                    message: message
                 })
-            },
 
-            onImageChange(vehicle) {
-                this.selectedVehicle = {...vehicle}
-                this.dialog = true
-            },
-
-            setImage() {
-                const image = this.$refs.image.files[0]
-                this.uploadImage(image, 'vehicles')
-            },
-
-            onUploadConfirm() {
-                this.onEventVehicleChange(this.selectedVehicle, true)
-            },
-
-            uploadImage(file, identifier) {
-                let formData = new FormData()
-                formData.append('file', file)
-                formData.append('model', identifier)
-
-                axios.post('/api/uploadfiles', formData).then((response) => {
-                    this.rightImage = response.data
-                    this.selectedVehicle = {
-                        ...this.selectedVehicle,
-                        image: response.data
-                    }
-                })
-            },
-
-            onDeleteEvent(vehicle){
-                const URL = `/api/eventvehicle/${vehicle.id}`
-                axios.delete(URL).then((response)=>{
-                    if(response.data.success){
-                        this.initialize()
-                    }
-                })
+                add ? this.$store.commit('addSpecializeBrand', userBrand) : this.$store.commit('removeSpecializeBrand', userBrand)
             }
         }
     }

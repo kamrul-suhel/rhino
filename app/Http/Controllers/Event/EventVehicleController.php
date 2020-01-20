@@ -18,6 +18,8 @@ class EventVehicleController extends Controller
         $eventVehicles = EventVehicle::select(
             'event_vehicle.*',
             'vehicles_translation.language_id',
+            'vehicles.driver_seating_position_left_image',
+            'vehicles.driver_seating_position_right_image',
             'vehicles_translation.model'
         )->leftJoin('vehicles', function($vehicle){
             $vehicle->on('vehicles.id', '=', 'event_vehicle.vehicle_id');

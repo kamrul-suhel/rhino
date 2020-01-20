@@ -50,7 +50,7 @@ class BrandStoreController extends Controller
         // Update brand
         $brand = Brand::findOrFail($id);
         $request->has('logo') ? $brand->logo = $request->logo : null;
-        $request->has('company_id') && !empty($request->company_id) ? $brand->company_id = $request->company_id : null;
+        $request->has('company_id') && !empty($request->company_id) && $request->company_id !== 'null' ? $brand->company_id = $request->company_id : null;
         $request->has('status') ? $brand->status = $request->status : null;
         $request->has('colour') ? $brand->colour = $request->colour : null;
         $brand->save();

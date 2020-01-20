@@ -30,6 +30,12 @@ Route::prefix('users')->group(function () {
 
     // Event User
     Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list');
+
+    // Brand User route
+    Route::get('{id}/brands', 'Auth\UserBrandListController@List');
+    Route::post('{id}/brand', 'Auth\UserBrandStoreController@store');
+    Route::post('{id}/brand/{brandUserId}', 'Auth\UserBrandStoreController@update');
+    Route::delete('{id}/brand/{brandUserId}', 'Auth\UserBrandDestroyController@destroy');
 });
 
 
