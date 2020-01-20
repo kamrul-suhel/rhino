@@ -53,6 +53,8 @@
                          :style="{borderColor: onVehicleSelected(vehicle)}">
                         <v-card
                             hover
+                            :disabled="vehicleType === ''"
+                            :class="{disabled: vehicleType === ''}"
                             raised
                             @click="onSelectVehicle(vehicle)"
                             flat
@@ -138,10 +140,19 @@
 
         methods: {
             onSelectVehicle(vehicle) {
+                // If vehicle type not select then do not add into vehicle list
+                if(this.vehicleType === ''){
+                    return
+                }
+
                 this.$store.commit('setOrRemoveVehicle', vehicle)
             },
 
             onVehicleSelected(vehicle) {
+                if(this.vehicleType === ''){
+                    return;
+                }
+
                 let selected = ''
                 _.map(this.selectedVehicles, (currentVehicle) => {
                     if (vehicle.id === currentVehicle.id) {

@@ -11,6 +11,27 @@
         :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
         @change="onSubLanguageChange"
         :label="trans.language">
+        <template v-slot:selection="data">
+            <v-chip
+                :selected="data.selected"
+                close
+            >
+                <v-avatar>
+                    <flag :iso="data.item.code2"></flag>
+                </v-avatar>
+                {{ data.item.name }}
+            </v-chip>
+        </template>
+
+        <template v-slot:item="data">
+
+            <v-list-tile-avatar>
+                <flag :iso="data.item.code2"></flag>
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+                <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+            </v-list-tile-content>
+        </template>
     </v-autocomplete>
 </template>
 

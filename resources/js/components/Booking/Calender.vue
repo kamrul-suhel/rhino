@@ -58,6 +58,7 @@
                         class="calender mt-3"
                         full-width
                         no-title
+                        reactive
                         :color="color"
                         v-model="selectedDate"
                         :allowed-dates="val => allowDates.indexOf(val) !== -1"

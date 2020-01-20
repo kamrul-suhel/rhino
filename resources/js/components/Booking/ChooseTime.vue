@@ -166,7 +166,7 @@
                 const end = moment(this.event.end)
                 const dates = fn.getDates(start, end, this.dealership)
 
-                // If select sale executive
+                // If selected sale executive
                 if (this.selectedSaleExecutive.id) {
                     // get the user existing appointments
                     const existingAppointments = _.filter(this.existingAppointments, (existingAppointment) => {
@@ -292,6 +292,8 @@
                 })
                 this.$store.commit('setSelectedSlot', selectedSlot)
                 this.$store.commit('setAllAppointmentSlots', totalSlot)
+
+                // Check sale person availability
             },
 
             onClick() {
