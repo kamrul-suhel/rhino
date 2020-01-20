@@ -294,6 +294,10 @@
                 this.$store.commit('setAllAppointmentSlots', totalSlot)
 
                 // Check sale person availability
+                if(this.selectedSaleExecutive.id){
+                    return
+                }
+
             },
 
             onClick() {

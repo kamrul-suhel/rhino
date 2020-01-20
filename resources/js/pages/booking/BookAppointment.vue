@@ -1,30 +1,30 @@
 <template>
     <div class="book-appointment px-5">
         <v-layout row wrap>
-            <v-flex>
+            <v-flex xs12>
                 <h4 class="display-1 mt-5 text-xs-center">
                     {{ trans.nowBookYourAppointment }}
                 </h4>
             </v-flex>
+        </v-layout>
 
-            <v-flex>
-                <v-layout row wrap mt-5>
-                    <v-flex xs12 md4>
-                        <Calender></Calender>
-                    </v-flex>
-
-                    <v-flex xs12 md4>
-                        <SalePerson></SalePerson>
-                    </v-flex>
-
-                    <v-flex xs12 md4>
-                        <ChooseTime></ChooseTime>
-                    </v-flex>
-
-                </v-layout>
+        <v-layout row wrap mt-5>
+            <v-flex xs12 md4>
+                <Calender></Calender>
             </v-flex>
 
-            <v-flex>
+            <v-flex xs12 md4>
+                <SalePerson></SalePerson>
+            </v-flex>
+
+            <v-flex xs12 md4>
+                <ChooseTime></ChooseTime>
+            </v-flex>
+
+        </v-layout>
+
+        <v-layout row wrap>
+            <v-flex xs12 md4>
                 <v-layout>
                     <v-flex align="center" justify="center">
                         <v-layout row sm4 my-5 justify-center>

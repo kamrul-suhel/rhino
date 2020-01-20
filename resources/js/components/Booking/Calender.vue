@@ -19,7 +19,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex>
+        <v-flex xs12>
             <v-layout row nowrap class="mt-4 keys">
                 <v-flex>
                     <label class="body-2">
@@ -94,6 +94,7 @@
             },
 
             selectedEvent(){
+                this.selectedDate = this.selectedEvent.start
                 this.allowedDates()
             }
         },

@@ -1,6 +1,5 @@
 <template>
     <v-app
-        dark
         id="inspire"
     >
         <v-container fill-height
