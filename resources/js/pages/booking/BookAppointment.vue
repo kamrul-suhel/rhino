@@ -23,24 +23,14 @@
 
         </v-layout>
 
-        <v-layout row wrap>
-            <v-flex xs12 md4>
-                <v-layout>
-                    <v-flex align="center" justify="center">
-                        <v-layout row sm4 my-5 justify-center>
-                            <v-flex class="grow-0">
-                                <div>
-                                    <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
-                                           outline
-                                           @click="onContinue()"
-                                           :color="color"
-                                           depressed>{{ trans.continue }}
-                                    </v-btn>
-                                </div>
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
-                </v-layout>
+        <v-layout row wrap align-content-center>
+            <v-flex xs12>
+                    <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
+                           outline
+                           @click="onContinue()"
+                           :color="color"
+                           depressed>{{ trans.continue }}
+                    </v-btn>
             </v-flex>
         </v-layout>
     </div>

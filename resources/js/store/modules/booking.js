@@ -1,4 +1,5 @@
 const defaultState = {
+    appointmentBooked: false,
     guest: {},
     selectedVehicles:[],
     allAppointments:[],
@@ -25,6 +26,10 @@ const state = {
 }
 
 const mutations = {
+    setAppointmentBooked(state, status){
+        state.appointmentBooked = status
+    },
+
     setBookingGuest(state, guest){
         state.guest = {...guest}
     },
@@ -119,6 +124,10 @@ const mutations = {
 }
 
 const getters = {
+    getAppointmentBooked(){
+
+    },
+    
     getBookingGuest(state){
         return state.guest
     },

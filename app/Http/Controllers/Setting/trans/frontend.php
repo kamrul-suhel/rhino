@@ -33,5 +33,11 @@ return [
         'label' => 'e.g nchfge23sxs',
         'identifier' => 'e.gnchfge23sxs',
         'translation' => 'e.g nchfge23sxs'
+    ],
+
+    [
+        'label' => 'Are you interested in a new or used model?',
+        'identifier' => 'areYouInterestedNewOrUsed',
+        'translation' => 'Are you interested in a new or used model?'
     ]
 ];

@@ -4,7 +4,12 @@
             id="inspire"
             v-if="isAdmin"
         >
-            <navigation-component></navigation-component>
+            <navigation-component v-if="authUser.level === 'admin'"
+            ></navigation-component>
+
+            <DealershipNavigation v-if="authUser.level === 'dealership'"
+            ></DealershipNavigation>
+
             <v-content>
                 <SnackBar></SnackBar>
                 <header-component></header-component>
@@ -22,8 +27,9 @@
 </template>
 
 <script>
-    import HeaderComponent from './Layout/HeaderComonent.vue'
-    import NavigationComponent from './Layout/NavigationComponent.vue'
+    import HeaderComponent from './Layout/HeaderComonent'
+    import NavigationComponent from './Layout/NavigationComponent'
+    import DealershipNavigation from "./Layout/DealershipNavigation"
     import SnackBar from "./SnackBar"
     import {mapGetters} from 'vuex'
 
@@ -31,6 +37,7 @@
         name: 'App',
         components: {
             NavigationComponent,
+            DealershipNavigation,
             HeaderComponent,
             SnackBar
         },
@@ -45,7 +52,8 @@
                 isLoading: 'getIsLoading',
                 themeOption: 'getThemeOption',
                 isAdmin: 'getIsAdmin',
-                initialize: 'getInitializeApp'
+                initialize: 'getInitializeApp',
+                authUser: 'getAuthUser'
             })
         },
 

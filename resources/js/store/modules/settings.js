@@ -52,7 +52,6 @@ const actions = {
         commit('setIsLoading', true)
         axios.get(URL).then((response) => {
             commit('setFieldsItem', response.data);
-            dispatch('dispatchNavigation', response.data) // Dispatch to navigation store
             commit('setIsLoading', false)
         });
     }

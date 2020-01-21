@@ -211,6 +211,12 @@ return [
     ],
 
     [
+        'label' => 'Selected',
+        'identifier' => 'selected',
+        'translation' => 'Selected'
+    ],
+
+    [
         'label' => 'Select A',
         'identifier' => 'select_a',
         'translation' => 'Select A'
@@ -559,6 +565,18 @@ return [
     ],
 
     [
+        'label' => 'Analytics',
+        'identifier' => 'analytics',
+        'translation' => 'Analytics'
+    ],
+
+    [
+        'label' => 'Organize',
+        'identifier' => 'organize',
+        'translation' => 'Organize'
+    ],
+
+    [
         'label' => 'Sales executives',
         'identifier' => 'sales_executives',
         'translation' => 'Sales executives'
@@ -788,6 +806,36 @@ return [
     ],
 
     [
+        'label' => 'Book',
+        'identifier' => 'book',
+        'translation' => 'Book'
+    ],
+
+    [
+        'label' => 'Booked',
+        'identifier' => 'booked',
+        'translation' => 'Booked'
+    ],
+
+    [
+        'label' => 'Services',
+        'identifier' => 'services',
+        'translation' => 'Services'
+    ],
+
+    [
+        'label' => 'Unbooked',
+        'identifier' => 'unbooked',
+        'translation' => 'Unbooked'
+    ],
+
+    [
+        'label' => 'Download',
+        'identifier' => 'download',
+        'translation' => 'Download'
+    ],
+
+    [
         'label' => 'Book your slot',
         'identifier' => 'bookYourSlot',
         'translation' => 'Book your slot'
@@ -875,6 +923,12 @@ return [
         'label' => 'Yes',
         'identifier' => 'yes',
         'translation' => 'Yes'
+    ],
+
+    [
+        'label' => 'Calendar',
+        'identifier' => 'calendar',
+        'translation' => 'Calendar'
     ],
 
     [

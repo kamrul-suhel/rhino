@@ -94,7 +94,11 @@
             },
 
             selectedEvent(){
-                this.selectedDate = this.selectedEvent.start
+                // this.selectedDate = this.selectedEvent.start
+                this.allowedDates()
+            },
+
+            selectedSaleExecutive(){
                 this.allowedDates()
             }
         },
@@ -105,8 +109,12 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 color: 'getFrontendColor',
+                event: 'getSelectedEvent',
                 selectedEvent: 'getSelectedEvent',
-                dealership: 'getSelectedDealership'
+                dealership: 'getSelectedDealership',
+                selectedSlot: 'getSelectedSlot',
+                existingAppointments: 'getAllBookingAppointments',
+                selectedSaleExecutive: 'getBookingSelectedSaleExecutive'
             })
         }),
 
@@ -114,8 +122,45 @@
             allowedDates() {
                 let start = moment(this.selectedEvent.start)
                 let end = moment(this.selectedEvent.end)
-
                 const dates = fn.getDates(start, end, this.dealership)
+                // Check is slot is selected or not
+                if(!this.selectedSlot.slotId){
+                    if(this.selectedSaleExecutive.id){
+                        let availableDates = []
+
+                         _.map(dates, (date) => {
+                            let isAvailable = false
+                            _.map(this.existingAppointments, (appointment) => {
+                                const appointmentDate = moment(appointment.start).format('L')
+                                const selectedDate = moment(date).format('L')
+                                if(
+                                    selectedDate === appointmentDate &&
+                                    this.selectedSaleExecutive.id === appointment.user_id &&
+                                    this.selectedSlot.slotId === appointment.slot_id
+                                ){
+                                    isAvailable = false
+                                    return false
+                                }else{
+                                    isAvailable = true
+                                    return false
+                                }
+                            })
+
+                            if(isAvailable){
+                                availableDates.push(date)
+                            }
+                        })
+
+                        this.allowDates = [...availableDates]
+                        // default select first date
+                        if(this.allowDates.length > 0){
+                            this.selectedDate = this.allowDates[0]
+                        }
+                        return
+                    }
+
+                }
+
                 this.allowDates = [...dates]
             }
         }

@@ -232,11 +232,12 @@
                     <v-btn class="border-medium height-50 rounded-25 padding-l-85 padding-r-45"
                            :style="{backgroundColor: color}"
                            @click="onConfirmBooking()"
-                           style="color:white"
+                           outline
+                           :color="color"
                            depressed>
                         {{ trans.confirm }}
                         <v-icon class="padding-l-35"
-                                color="white"
+                                :color="color"
                                 small light>arrow_forward
                         </v-icon>
                     </v-btn>

@@ -7,16 +7,9 @@
             width="300"
     >
 
-        <v-layout row wrap align-content-center>
+        <v-layout row wrap>
             <v-flex xs12>
-                <v-img 
-                    src="/images/rhino-events-logo.png" 
-                    aspect-ratio="1"
-                    max-width="70%"
-                    max-height="30px"
-                    contain
-                    class="py-5 mx-auto">
-                </v-img>
+                <h2>Rhino<span>events</span>.com</h2>
             </v-flex>
 
             <v-flex xs12 sm8>
@@ -38,7 +31,7 @@
             </v-flex>
         </v-layout>
 
-        <v-divider class="my-2"></v-divider>
+        <v-divider></v-divider>
 
         <v-list>
             <v-list-tile @click="$router.push({name: 'dashboard'})">
@@ -48,21 +41,25 @@
                 <v-list-tile-title>{{ trans.dashboard }}</v-list-tile-title>
             </v-list-tile>
 
-            <template v-for="(nav, i) in navs">
-                <v-list-tile
-                    :key="i"
-                    v-if="onCheckAccessLevel(nav)"
-                    @click="onPageChange(nav)"
-                >
-                    <v-list-tile-action>
-                        <v-icon v-text="nav.icon" :color="themeOption.adminNavIconColor"></v-icon>
-                    </v-list-tile-action>
+            <div v-for="(navGroup, i) in navs" :key="i">
+                <h2>{{ navGroup.text }}</h2>
 
-                    <v-list-tile-title v-text="nav.text"></v-list-tile-title>
+                <template v-for="(nav, i) in navGroup.subGroups">
+                    <v-list-tile
+                        :key="i"
+                        v-if="onCheckAccessLevel(nav)"
+                        @click="onPageChange(nav)"
+                    >
+                        <v-list-tile-action>
+                            <v-icon v-text="nav.icon" :color="themeOption.adminNavIconColor"></v-icon>
+                        </v-list-tile-action>
 
-                </v-list-tile>
-                <v-divider v-if="nav.divider" class="my-2"></v-divider>
-            </template>
+                        <v-list-tile-title v-text="nav.text"></v-list-tile-title>
+                    </v-list-tile>
+
+                    <v-divider v-if="nav.divider"></v-divider>
+                </template>
+            </div>
 
             <v-list-tile @click="onLogout">
                 <v-list-tile-action>
@@ -85,8 +82,8 @@
                 themeOption: 'getThemeOption',
                 trans: 'getFields',
                 languages: 'getLanguages',
-                openNavigation: 'getIsNavigationOpen',
-                navs: 'getNavigationBar',
+                openNavigation: 'getDealershipIsNavigationOpen',
+                navs: 'getDealershipNavigation',
                 authUser: 'getAuthUser',
                 title: 'getNavTitle'
             })
@@ -97,15 +94,14 @@
                 drawer: true
             }
         },
+        created() {
+            this.$store.commit('setDealershipNavigation', this.trans) // set dealership navigation
+        },
 
         watch:{
             openNavigation(){
                 this.drawer = this.openNavigation
             }
-        },
-
-        created() {
-            this.$store.dispatch('dispatchNavigation', this.trans) // Dispatch to navigation store
         },
 
         methods: {

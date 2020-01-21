@@ -39,7 +39,6 @@ const mutations = {
         })
 
         state.users = [...currentUser]
-        console.log('user si :', state.users)
     },
 
     updateUserForBooking(state, selectedUser){
@@ -308,7 +307,14 @@ const actions = {
     },
 
     fetchSaleExecutivesForBooking({commit}, payload){
-        commit('setUsers', payload.users)
+        const users = _.map(payload.users, (user) => {
+            return {
+                ...user,
+                availability: true
+            }
+        })
+
+        commit('setUsers', users)
     }
 }
 
