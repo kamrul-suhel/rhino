@@ -7,9 +7,16 @@
             width="300"
     >
 
-        <v-layout row wrap>
+        <v-layout row wrap align-content-center>
             <v-flex xs12>
-                <h2>Rhino<span>events</span>.com</h2>
+                <v-img 
+                    src="/images/rhino-events-logo.png" 
+                    aspect-ratio="1"
+                    max-width="70%"
+                    max-height="30px"
+                    contain
+                    class="py-5 mx-auto">
+                </v-img>
             </v-flex>
 
             <v-flex xs12 sm8>
@@ -31,7 +38,7 @@
             </v-flex>
         </v-layout>
 
-        <v-divider></v-divider>
+        <v-divider class="my-2"></v-divider>
 
         <v-list>
             <v-list-tile @click="$router.push({name: 'dashboard'})">
@@ -52,9 +59,9 @@
                     </v-list-tile-action>
 
                     <v-list-tile-title v-text="nav.text"></v-list-tile-title>
-                </v-list-tile>
 
-                <v-divider v-if="nav.divider"></v-divider>
+                </v-list-tile>
+                <v-divider v-if="nav.divider" class="my-2"></v-divider>
             </template>
 
             <v-list-tile @click="onLogout">

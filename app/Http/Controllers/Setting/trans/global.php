@@ -1068,6 +1068,12 @@ return [
         'label' => 'Specialized',
         'identifier' => 'specialized',
         'translation' => 'Specialized'
+    ],
+
+    [
+        'label' => 'Manage',
+        'identifier' => 'manage',
+        'translation' => 'Manage'
     ]
 
 ];

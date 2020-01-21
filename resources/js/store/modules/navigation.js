@@ -16,157 +16,90 @@ const mutations = {
     setNavigation(state, trans) {
         console.log('Available translation field: ', trans);
         const navItems = [
+
             {
-                icon: 'list',
-                text: `${trans.dealership} ${trans.list}`,
-                link: 'listDealerships',
-                access: ['admin'],
+                icon: 'person',
+                text: `${trans.manage} ${trans.users}`,
+                link: 'listUsers',
+                access: ['admin', 'dealership'],
                 divider: false
             },
 
+            
             {
-                icon: 'post_add',
-                text: `${trans.create} ${trans.dealership}`,
-                link: 'addDealerships',
-                access: ['admin'],
-                divider: false
-            },
-
-
-            {
-                icon: 'bookmarks',
-                text: `${trans.list_of} ${trans.groups}`,
-                link: 'listDealershipsGroups',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'bookmarks',
-                text: `${trans.list_of} ${trans.groups}`,
-                link: 'listDealershipsGroups',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'list',
-                text: `${trans.brand} ${trans.list}`,
-                link: 'listBrands',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'list',
-                text: `${trans.brand} ${trans.list}`,
-                link: 'listBrands',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'list',
-                text: `${trans.vehicle} ${trans.list}`,
+                icon: 'drive_eta',
+                text: `${trans.manage} ${trans.vehicles}`,
                 link: 'listVehicles',
                 access: ['admin'],
                 divider: false
             },
 
+            
             {
-                icon: 'add',
-                text: `${trans.create} ${trans.vehicle}`,
-                link: 'addVehicles',
-                access: ['admin'],
-                divider: false
-            },
-            {
-                icon: 'list',
-                text: `${trans.company} ${trans.list}`,
-                link: 'listCompanies',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'list',
-                text: `${trans.countries} ${trans.list}`,
-                link: 'listCountries',
-                access: ['admin'],
-                divider: true
-            },
-
-            {
-                icon: 'add',
-                text: `${trans.create} ${trans.country}`,
-                link: 'createCountries',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'list',
-                text: `${trans.language} ${trans.list}`,
-                link: 'listLanguages',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'list',
-                text: `${trans.list_of} ${trans.events}`,
+                icon: 'event',
+                text: `${trans.manage} ${trans.events}`,
                 link: 'listEvents',
                 access: ['admin'],
                 divider: false
             },
 
             {
-                icon: 'add',
-                text: `${trans.create} ${trans.event}`,
-                link: 'createEvents',
-                access: ['admin'],
-                divider: false
-            },
-
-            {
-                icon: 'emohi_events',
-                text: `${trans.types}`,
+                icon: 'events',
+                text: `${trans.manage}  ${trans.events} ${trans.types}`,
                 link: 'listEventTypes',
                 access: ['admin'],
                 divider: false
             },
 
             {
-                icon: 'list',
-                text: `${trans.list_of} ${trans.users}`,
-                link: 'listUsers',
-                access: ['admin', 'dealership'],
-                divider: false
-            },
-
-            {
-                icon: 'person_add',
-                text: `${trans.create} ${trans.user}`,
-                link: 'createUsers',
+                icon: 'flag',
+                text: `${trans.manage} ${trans.languages}`,
+                link: 'listLanguages',
                 access: ['admin'],
                 divider: true
             },
 
             {
-                icon: 'list',
-                text: `${trans.list_of} ${trans.guests}`,
-                link: 'listGuest',
+                icon: 'business',
+                text: `${trans.manage} ${trans.companies}`,
+                link: 'listCompanies',
                 access: ['admin'],
                 divider: false
             },
 
             {
-                icon: 'person_add',
-                text: `${trans.create} ${trans.guest}`,
-                link: 'createGuest',
+                icon: 'assignment_ind',
+                text: `${trans.manage} ${trans.brands}`,
+                link: 'listBrands',
                 access: ['admin'],
                 divider: false
             },
+
+            
+            {
+                icon: 'language',
+                text: `${trans.manage} ${trans.countries}`,
+                link: 'listCountries',
+                access: ['admin'],
+                divider: false
+            },
+
+            {
+                icon: 'blur_linear',
+                text: `${trans.manage} ${trans.groups}`,
+                link: 'listDealershipsGroups',
+                access: ['admin'],
+                divider: false
+            },
+
+            {
+                icon: 'tag_faces',
+                text: `${trans.manage} ${trans.dealerships}`,
+                link: 'listDealerships',
+                access: ['admin'],
+                divider: false
+            },
+
             {
                 icon: 'keyboard_arrow_right',
                 text: trans.translation,
