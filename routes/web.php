@@ -92,6 +92,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
         Route::get('{dealershipId}/events/{id}/edit', function () {
             return view('index');
         });
+
+        /**
+         * Dealership admin route
+         */
+        Route::prefix('book-guest')->group(function(){
+            Route::get('/', function(){
+               return view('index');
+            });
+        });
     });
 
     Route::get('/home', 'HomeController@index')->name('home');

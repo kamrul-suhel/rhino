@@ -9,6 +9,7 @@
         <v-flex>
             <v-layout row justify-end class="mt-4">
                 <button :style="{color:color}"
+                        @click="onSalePersonRemove()"
                         style="opacity:0.7">{{ trans.clear }}
                 </button>
             </v-layout>
@@ -29,6 +30,7 @@
                                 :style="{backgroundColor: saleExecutive.selected && saleExecutive.selected === 'selected' ? color : ''}"
                                 @click="onSelectSaleExecutive(saleExecutive)"
                                 v-for="saleExecutive in saleExecutives"
+                                v-if="saleExecutive.availability"
                                 :key="saleExecutive.id">
                             <v-layout row>
                                 <v-flex class="avatar-flex">
@@ -81,6 +83,11 @@
             onSelectSaleExecutive(saleExecutive){
                 this.$store.commit('setBookingSelectedSaleExecutive', saleExecutive)
                 this.$store.commit('updateUserForBooking', saleExecutive)
+            },
+
+            onSalePersonRemove(){
+                this.$store.commit('setBookingSelectedSaleExecutive', {})
+                this.$store.commit('updateUserForBooking', {})
             }
         }
     }

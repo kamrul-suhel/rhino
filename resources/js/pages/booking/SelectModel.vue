@@ -1,100 +1,93 @@
 <template>
     <div class="model-section" px-5>
-        <v-layout column>
-            <v-flex>
+        <v-layout row wrap>
+            <v-flex xs12>
                 <h5 class="headline mt-5 text-lg-center"
-                    :style="{color: color}">{{trans.greeting_f}}
+                    :style="{color: color}">{{trans.areYouInterestedNewOrUsed}}
                 </h5>
-
-                <v-flex justify="center">
-                    <v-layout row sm4 mt-4 justify-center>
-                        <v-flex class="grow-0">
-                            <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey"
-                                       @click="onFilterVehicle('new')"
-                                       :class="{selected: vehicleType === 'new'} "
-                                       depressed>
-                                    {{ trans.new }}
-                                </v-btn>
-                            </div>
-                        </v-flex>
-
-                        <v-flex class="grow-0">
-                            <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey"
-                                       :class="{selected: vehicleType === 'used'} "
-                                       @click="onFilterVehicle('used')"
-                                       depressed>
-                                    {{ trans.used }}
-                                </v-btn>
-                            </div>
-                        </v-flex>
-
-                        <v-flex class="grow-0">
-                            <div>
-                                <v-btn class="border-medium height-50 rounded-25 light-grey"
-                                       :class="{selected: vehicleType === 'unsure'} "
-                                       @click="onFilterVehicle('unsure')"
-                                       depressed>
-                                    {{ trans.unsure }}
-                                </v-btn>
-                            </div>
-                        </v-flex>
-                    </v-layout>
-                </v-flex>
             </v-flex>
 
-            <v-layout row wrap pa-5>
-                <v-flex xs12 sm6 md4 lg3 xl2 pa-3
-                        v-for="vehicle in vehicles"
-                        :key="vehicle.id">
+            <v-flex justify="center">
+                <v-layout row sm4 mt-4 justify-center>
+                    <v-flex class="grow-0">
+                        <div>
+                            <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                   @click="onFilterVehicle('new')"
+                                   :class="{selected: vehicleType === 'new'} "
+                                   depressed>
+                                {{ trans.new }}
+                            </v-btn>
+                        </div>
+                    </v-flex>
 
-                    <div class="vehicle"
-                         :style="{borderColor: onVehicleSelected(vehicle)}">
-                        <v-card
-                            hover
-                            :disabled="vehicleType === ''"
-                            :class="{disabled: vehicleType === ''}"
-                            raised
-                            @click="onSelectVehicle(vehicle)"
-                            flat
-                        >
-                            <v-img
-                                contain
-                                :aspect-ratio="16/12"
-                                :src="renderVehicleImage(vehicle)"
-                            ></v-img>
-                            <v-card-text class="text-xs-center">
-                                {{ vehicle.model }}
-                            </v-card-text>
-                        </v-card>
-                    </div>
+                    <v-flex class="grow-0">
+                        <div>
+                            <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                   :class="{selected: vehicleType === 'used'} "
+                                   @click="onFilterVehicle('used')"
+                                   depressed>
+                                {{ trans.used }}
+                            </v-btn>
+                        </div>
+                    </v-flex>
 
-                </v-flex>
+                    <v-flex class="grow-0">
+                        <div>
+                            <v-btn class="border-medium height-50 rounded-25 light-grey"
+                                   :class="{selected: vehicleType === 'unsure'} "
+                                   @click="onFilterVehicle('unsure')"
+                                   depressed>
+                                {{ trans.unsure }}
+                            </v-btn>
+                        </div>
+                    </v-flex>
+                </v-layout>
+            </v-flex>
+        </v-layout>
 
-            </v-layout>
 
-            <v-layout>
-                <v-flex align="center" justify="center">
-                    <v-layout row sm4 my-5 justify-center>
-                        <v-flex class="grow-0">
-                            <div>
-                                <v-btn class="border-medium height-50 rounded-25 theme-color padding-l-85 padding-r-45"
-                                       outline
-                                       @click="onContinue"
-                                       :color="color"
-                                       depressed>
-                                    {{ skipStep ? trans.continue : trans.skipThisStep }}
-                                    <v-icon class="padding-l-35"
-                                            :color="color"
-                                            small dark>arrow_forward
-                                    </v-icon>
-                                </v-btn>
-                            </div>
-                        </v-flex>
-                    </v-layout>
-                </v-flex>
-            </v-layout>
+        <v-layout row wrap pa-5>
+            <v-flex xs12 sm6 md4 lg3 xl2 pa-3
+                    v-for="vehicle in vehicles"
+                    :key="vehicle.id">
+
+                <div class="vehicle"
+                     :style="{borderColor: onVehicleSelected(vehicle)}">
+                    <v-card
+                        :hover="vehicleType != ''"
+                        :disabled="vehicleType === ''"
+                        :class="{disabled: vehicleType === ''}"
+                        raised
+                        @click="onSelectVehicle(vehicle)"
+                        flat
+                    >
+                        <v-img
+                            contain
+                            :aspect-ratio="16/12"
+                            :src="renderVehicleImage(vehicle)"
+                        ></v-img>
+                        <v-card-text class="text-xs-center">
+                            {{ vehicle.model }}
+                        </v-card-text>
+                    </v-card>
+                </div>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row my-5 justify-center>
+            <v-flex class="grow-0">
+                <v-btn class="border-medium height-50 rounded-25 theme-color padding-l-85 padding-r-45"
+                       outline
+                       @click="onContinue"
+                       :color="color"
+                       depressed>
+                    {{ skipStep ? trans.continue : trans.skipThisStep }}
+                    <v-icon class="padding-l-35"
+                            :color="color"
+                            small dark>arrow_forward
+                    </v-icon>
+                </v-btn>
+            </v-flex>
         </v-layout>
     </div>
 </template>
@@ -141,7 +134,7 @@
         methods: {
             onSelectVehicle(vehicle) {
                 // If vehicle type not select then do not add into vehicle list
-                if(this.vehicleType === ''){
+                if (this.vehicleType === '') {
                     return
                 }
 
@@ -149,7 +142,7 @@
             },
 
             onVehicleSelected(vehicle) {
-                if(this.vehicleType === ''){
+                if (this.vehicleType === '') {
                     return;
                 }
 

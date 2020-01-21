@@ -33,7 +33,8 @@
                                                 :color="color"
                                                 v-model="partExchange.termCondition"
                                     ></v-checkbox>
-                                    <label class="mt-2 caption" style="white-space:normal;width:80%">{{ trans.byCheckingThisBox }}</label>
+                                    <label class="mt-2 caption" style="white-space:normal;width:80%">{{
+                                        trans.byCheckingThisBox }}</label>
                                 </v-layout>
                             </v-flex>
                         </v-layout>
@@ -48,7 +49,8 @@
                             <v-flex>
                                 <v-icon :style="{color:color}"
                                         large
-                                        class="car-icon" style="padding: 15px; border-radius: 50%; background-color: rgb(240,240,240);"
+                                        class="car-icon"
+                                        style="padding: 15px; border-radius: 50%; background-color: rgb(240,240,240);"
                                 >directions_car
                                 </v-icon>
                             </v-flex>
@@ -63,21 +65,14 @@
             </v-flex>
 
             <v-flex>
-                <v-layout>
-                    <v-flex align="center" justify="center">
-                        <v-layout row sm4 my-5 justify-center>
-                            <v-flex class="grow-0">
-                                <div>
-                                    <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
-                                           :color="color"
-                                           @click="onContinue()"
-                                           depressed
-                                    >{{ trans.continue }}
-                                    </v-btn>
-                                </div>
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
+                <v-layout row justify-center>
+                    <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
+                           :color="color"
+                           outline
+                           @click="onContinue()"
+                           depressed
+                    >{{ trans.continue }}
+                    </v-btn>
                 </v-layout>
             </v-flex>
         </v-layout>
@@ -85,18 +80,17 @@
 </template>
 
 
-
 <script>
     import {mapGetters} from 'vuex'
 
     export default {
-        data(){
+        data() {
             return {
                 checkbox3: false,
             }
         },
 
-        created(){
+        created() {
 
         },
 
@@ -111,7 +105,7 @@
         }),
 
         methods: {
-            onPartExchangeVehicle(){
+            onPartExchangeVehicle() {
                 let partExchange = {
                     ...this.partExchange,
                     vehicleExchange: !this.partExchange.vehicleExchange
@@ -120,7 +114,7 @@
                 this.$store.commit('setPartExchange', partExchange)
             },
 
-            onContinue(){
+            onContinue() {
                 this.$store.commit('setBookingStep', 3)
             }
         }

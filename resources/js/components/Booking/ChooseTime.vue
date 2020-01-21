@@ -13,6 +13,7 @@
             <v-layout row justify-end style="width:70%" class="mt-4">
                 <v-flex>
                     <button :style="{color: color}"
+                            @click="onClearSlot()"
                             style="opacity:0.7">{{ trans.clear }}
                     </button>
                 </v-flex>
@@ -156,7 +157,8 @@
                 selectedDate: 'getBookingSelectedDate',
                 selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
                 existingAppointments: 'getAllBookingAppointments',
-                bringGuest: 'getBookingBringGuest'
+                bringGuest: 'getBookingBringGuest',
+                selectedSlot: 'getSelectedSlot'
             })
         }),
 
@@ -168,6 +170,16 @@
 
                 // If selected sale executive
                 if (this.selectedSaleExecutive.id) {
+                    // Check is slot is selected or no
+                    if(this.selectedSlot.start){
+                        // if date is not selected then generate dates
+                        if(this.selectedDate === ''){
+
+                        }
+                        return
+                    }
+
+
                     // get the user existing appointments
                     const existingAppointments = _.filter(this.existingAppointments, (existingAppointment) => {
                         return existingAppointment.user_id === this.selectedSaleExecutive.id
@@ -294,14 +306,86 @@
                 this.$store.commit('setAllAppointmentSlots', totalSlot)
 
                 // Check sale person availability
-                if(this.selectedSaleExecutive.id){
-                    return
+                if(!this.selectedSaleExecutive.id){
+                    let saleExecutives = []
+                    // Check date is selected or no
+                    if(this.selectedDate === ''){
+                        // not selected data, Iterate all date and check is user exists
+                        const start = moment(this.event.start)
+                        const end = moment(this.event.end)
+                        const dates = fn.getDates(start, end, this.dealership)
+                        _.map(this.saleExecutives, (saleExecutive) => {
+                            let currentSaleExecutive = {...saleExecutive}
+
+                            _.map(this.existingAppointments, (appointment) => {
+                                const appointmentDate = moment(appointment.start).format('L')
+
+                                _.map(dates, (date) => {
+                                    const selectedDate = moment(date).format('L')
+                                    if(
+                                        selectedDate === appointmentDate &&
+                                        saleExecutive.id === appointment.user_id &&
+                                        selectedSlot.slotId === appointment.slot_id
+                                    ){
+                                        currentSaleExecutive = {
+                                            ...currentSaleExecutive,
+                                            availability: false
+                                        }
+                                    }else{
+                                        currentSaleExecutive = {
+                                            ...currentSaleExecutive,
+                                            availability: true
+                                        }
+                                    }
+                                })
+
+                            })
+
+                            saleExecutives.push(currentSaleExecutive)
+                        })
+
+                    }else{
+                        // selected date
+                        _.map(this.saleExecutives, (saleExecutive) => {
+                            let currentSaleExecutive = {...saleExecutive}
+
+                            _.map(this.existingAppointments, (appointment) => {
+                                const selectedDate = moment(this.selectedDate).format('L')
+                                const appointmentDate = moment(appointment.start).format('L')
+                                if(
+                                    selectedDate === appointmentDate &&
+                                    saleExecutive.id === appointment.user_id &&
+                                    selectedSlot.slotId === appointment.slot_id
+                                ){
+                                    currentSaleExecutive = {
+                                        ...currentSaleExecutive,
+                                        availability: false
+                                    }
+                                }else{
+                                    currentSaleExecutive = {
+                                        ...currentSaleExecutive,
+                                        availability: true
+                                    }
+                                }
+                            })
+
+                            saleExecutives.push(currentSaleExecutive)
+                        })
+
+                        // Update sale executive into store
+                        this.$store.commit('setUsers', saleExecutives)
+                    }
                 }
 
             },
 
             onClick() {
                 console.log(this.bringGuest)
+            },
+
+            onClearSlot(){
+                this.$store.commit('setSelectedSlot', {})
+                this.generateSlots()
             }
         }
     }

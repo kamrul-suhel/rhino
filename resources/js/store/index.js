@@ -8,6 +8,7 @@ import settings from './modules/settings'
 import authUser from './modules/authUser'
 import user from './modules/user'
 import navigation from './modules/navigation'
+import DealershipNavigation from './modules/navigationForDealership'
 import language from './modules/language'
 import country from './modules/country'
 import SnackBar from './modules/snackbar'
@@ -73,6 +74,7 @@ const store = new Vuex.Store({
         authUser,
         user,
         navigation,
+        DealershipNavigation,
         language,
         country,
         Dealership,
