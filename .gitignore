@@ -5,8 +5,10 @@
 /public/js/app.js.map
 /public/css/app.css.map
 /public/css/app.css
-/public/*
+/public/js
 /public/storage
+/public/css
+/public/images/vendor
 /public/css/app.css
 /public/css/vuetify.min.css
 /public/mix-manifest.json
