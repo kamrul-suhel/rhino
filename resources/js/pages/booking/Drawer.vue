@@ -16,7 +16,7 @@
                         <brand-carousel-component></brand-carousel-component>
                     </v-flex>
 
-                    <v-flex xs6 class="language-select stroke-dropdown">
+                    <v-flex class="language-select stroke-dropdown">
                         <language-picker
                             :languageId="guest.language_id"
                             isFrontend

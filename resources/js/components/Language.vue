@@ -1,7 +1,7 @@
 <template>
     <v-autocomplete
         :items="languages"
-        item-text="name"
+        item-text="code2"
         item-value="id"
         :color="themeOption.inputColor"
         v-model="selectedLanguageId"
@@ -19,7 +19,7 @@
                 <v-avatar>
                     <flag :iso="data.item.code2"></flag>
                 </v-avatar>
-                {{ data.item.name }}
+                {{ data.item.code2 }}
             </v-chip>
         </template>
 
