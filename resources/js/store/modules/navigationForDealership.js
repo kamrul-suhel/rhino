@@ -22,21 +22,21 @@ const mutations = {
                 access: ['dealership'],
                 subGroups:[
                     {
-                        icon: 'list',
+                        icon: 'person',
                         text: `${trans.book} ${trans.a} ${trans.guest}`,
-                        link: 'listDealerships',
+                        link: 'dealershipAdminBookAGuest',
                         access: ['dealership'],
                     },
 
                     {
-                        icon: 'list',
+                        icon: 'cloud_download',
                         text: `${trans.download} ${trans.booked} ${trans.guests}`,
                         link: 'listDealerships',
                         access: ['dealership'],
                     },
 
                     {
-                        icon: 'list',
+                        icon: 'cloud_download',
                         text: `${trans.download} ${trans.unbooked} ${trans.guests}`,
                         link: 'listDealerships',
                         access: ['dealership'],
@@ -50,28 +50,28 @@ const mutations = {
                 access: ['dealership'],
                 subGroups:[
                     {
-                        icon: 'list',
+                        icon: 'date_range',
                         text: `${trans.calendar}`,
                         link: 'listDealerships',
                         access: ['dealership'],
                     },
 
                     {
-                        icon: 'list',
+                        icon: 'directions_car',
                         text: `${trans.edit} ${trans.event}`,
                         link: 'listDealerships',
                         access: ['dealership'],
                     },
 
                     {
-                        icon: 'list',
+                        icon: 'add',
                         text: `${trans.update} ${trans.sales}`,
                         link: 'listDealerships',
                         access: ['dealership'],
                     },
 
                     {
-                        icon: 'list',
+                        icon: 'date_range',
                         text: `${trans.analytics}`,
                         link: 'listDealerships',
                         access: ['dealership'],

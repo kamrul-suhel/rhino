@@ -161,6 +161,8 @@
         },
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.users}`)
+            this.$store.commit('setNavTitle', `${this.trans.users}`)
         },
 
         mounted() {

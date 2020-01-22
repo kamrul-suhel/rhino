@@ -1,0 +1,44 @@
+.dealership-dashboard{
+    .guest-card{
+        .guest-card-title{
+            justify-content:center;
+        }
+    }
+
+    .card-radius-20{
+        border-radius:10px;
+    }
+}
+
+.dealershipAdminToolbar{
+    font-size:16px !important;
+
+    .eventDropdown{
+        padding:0;
+        margin:0;
+        width: 80%;
+
+        .v-input__slot{
+            margin:0;
+
+            &::before{
+                border:none;
+            }
+
+            input{
+                padding:0;
+            }
+        }
+    }
+
+    .toolbar{
+        border-radius: 15px;
+        position: relative;
+        z-index: 1;
+        top: -5px;
+
+        .toolbar-content{
+            padding:8px 20px;
+        }
+    }
+}

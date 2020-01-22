@@ -1,4 +1,4 @@
-import * as Dashboard from "../../pages/dashboard";
+import * as Dashboard from "@/pages/dashboard";
 
 const dashboard ={
     path: '/admin/dashboard',

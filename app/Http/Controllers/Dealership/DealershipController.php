@@ -110,7 +110,7 @@ class DealershipController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show(Request $request,$id, $isEvent = false)
     {
         // Create translation if not exists
         if($request->has('edit') && !empty($request->edit)){
@@ -163,6 +163,14 @@ class DealershipController extends Controller
             $regions = Region::where('country_id', $dealership->country_id)
                 ->get();
         }
+
+        if($isEvent){
+            return [
+                'dealership' => $dealership,
+                'regions' => $regions
+            ];
+        }
+
         return response()->json([
             'dealership' => $dealership,
             'regions' => $regions

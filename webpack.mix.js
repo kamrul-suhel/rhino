@@ -13,7 +13,6 @@ const mix = require('laravel-mix');
 let productionSourceMaps = false;
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps(productionSourceMaps, 'source-map');
+   .sass('resources/sass/app.scss', 'public/css');
 
 mix.copy('node_modules/vuetify/dist/vuetify.min.css', 'public/css/vuetify.min.css');

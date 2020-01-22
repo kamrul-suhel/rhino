@@ -16,6 +16,7 @@ import Guest from "./Modules/guest"
 import Settings from "./Modules/settings"
 import Admin from "./Modules/admin"
 import Dashboard from "./Modules/dashboard"
+import DealershipAdmin from "./Modules/dealershipAdmin"
 
 // Remove in product please
 import Test from "./Modules/test"
@@ -75,7 +76,9 @@ const routes = [
     {...Admin},
 
     // Dashboard Routes
-    {...Dashboard}
+    {...Dashboard},
+
+    {...DealershipAdmin}
 ]
 
 export default new Router({

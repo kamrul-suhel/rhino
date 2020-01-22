@@ -46,7 +46,6 @@ Vue.component('r-language', Global.default.Langauge)
  * Import plugins
  */
 import ImageUploader from 'vue-image-upload-resize'
-import i18n from './plugins/i18n/index'
 
 /**
 * Import filter
@@ -84,7 +83,6 @@ new Vue({
     el: '#app',
     store,
     router,
-    i18n,
     components: {
         App
     },

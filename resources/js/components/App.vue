@@ -1,7 +1,7 @@
 <template>
     <div id="app" v-if="initialize">
         <v-app
-            id="inspire"
+            id="rhino"
             v-if="isAdmin"
         >
             <navigation-component v-if="authUser.level === 'admin'"
@@ -53,7 +53,8 @@
                 themeOption: 'getThemeOption',
                 isAdmin: 'getIsAdmin',
                 initialize: 'getInitializeApp',
-                authUser: 'getAuthUser'
+                authUser: 'getAuthUser',
+                trans: 'getFields'
             })
         },
 
@@ -66,7 +67,17 @@
         async created() {
             axios.get('/auth/me').then((response) => {
                 if(response.data.success){
-                    this.$store.commit('setAuthUser', response.data.authUser)
+                    const authUser = response.data.authUser
+
+                    // If auth user is dealership manager, then set dealership & regions for manager
+                    if(authUser.level === 'dealership'){
+                        const dealership = {...response.data.dealership}
+                        const regions = [...response.data.regions]
+                        this.$store.commit('setSelectedDealership', dealership)
+                        this.$store.commit('setRegions', regions)
+                    }
+
+                    this.$store.commit('setAuthUser', authUser)
                     this.$store.commit('setUserRole', true)
                     this.$store.commit('setInitialize', true)
                 }else{

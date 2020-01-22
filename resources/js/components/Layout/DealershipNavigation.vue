@@ -36,7 +36,7 @@
         <v-list>
             <v-list-tile @click="$router.push({name: 'dashboard'})">
                 <v-list-tile-action>
-                    <v-icon :color="themeOption.adminNavIconColor">home</v-icon>
+                    <v-icon :color="themeOption.dealershipAdminNavColor">home</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-title>{{ trans.dashboard }}</v-list-tile-title>
             </v-list-tile>
@@ -51,7 +51,7 @@
                         @click="onPageChange(nav)"
                     >
                         <v-list-tile-action>
-                            <v-icon v-text="nav.icon" :color="themeOption.adminNavIconColor"></v-icon>
+                            <v-icon v-text="nav.icon" :color="themeOption.dealershipAdminNavColor"></v-icon>
                         </v-list-tile-action>
 
                         <v-list-tile-title v-text="nav.text"></v-list-tile-title>
@@ -63,7 +63,7 @@
 
             <v-list-tile @click="onLogout">
                 <v-list-tile-action>
-                    <v-icon :color="themeOption.adminNavIconColor">power_settings_new
+                    <v-icon :color="themeOption.dealershipAdminNavColor">power_settings_new
                     </v-icon>
                 </v-list-tile-action>
 

@@ -155,7 +155,8 @@
                     axios.post('/login', loginForm)
                         .then(response => {
                             if(response.data.success){
-                                this.$store.commit('setAuthUser', response.data.authUser)
+                                const authUser = {...response.data.authUser}
+                                this.$store.commit('setAuthUser', authUser)
                                 this.$store.commit('setUserRole', true)
                                 this.$router.push({name: 'dashboard'})
                             }

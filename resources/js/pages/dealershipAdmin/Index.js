@@ -1,15 +1,9 @@
-import Create from './Create'
-import List from './List'
-import Root from "./Root"
-import Edit from "./Edit"
-import Event from "./Event"
-import AddUser from "./AddUser"
+import BookGuest from './BookGuest'
+import Root from './Root'
+import Calendar from './Calendar'
 
 export {
     Root,
-    Create,
-    List,
-    Edit,
-    Event,
-    AddUser
+    BookGuest,
+    Calendar
 }
