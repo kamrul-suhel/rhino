@@ -884,6 +884,12 @@ return [
     ],
 
     [
+        'label' => 'Team member',
+        'identifier' => 'teamMember',
+        'translation' => 'Team member'
+    ],
+
+    [
         'label' => 'Unsure',
         'identifier' => 'unsure',
         'translation' => 'Unsure'

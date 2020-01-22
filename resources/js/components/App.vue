@@ -1,5 +1,5 @@
 <template>
-    <div id="app" v-if="initialize">
+    <div id="app" v-if="initialize && isSettingFieldLoaded">
         <v-app
             id="rhino"
             v-if="isAdmin"
@@ -50,6 +50,7 @@
             ...mapGetters({
                 isLogin: 'getIsLogin',
                 isLoading: 'getIsLoading',
+                isSettingFieldLoaded: 'getIsSettingLoaded',
                 themeOption: 'getThemeOption',
                 isAdmin: 'getIsAdmin',
                 initialize: 'getInitializeApp',

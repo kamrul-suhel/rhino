@@ -131,9 +131,25 @@ const mutations = {
     setUserListHeader(state, options) {
         const trans = {...options.trans}
         const subComponent = options.subComponent
-        let userColumn = {}
+
+
+        let header = []
         if (!subComponent) {
-            userColumn = [
+            header = [
+                {
+                    text: trans.name,
+                    align: 'left',
+                    sortable: true,
+                    value: 'name'
+                },
+
+                {
+                    text: trans.email,
+                    align: 'left',
+                    sortable: true,
+                    value: 'email'
+                },
+
                 {
                     text: trans.status,
                     value: 'status'
@@ -144,34 +160,39 @@ const mutations = {
                     value: 'lavelAccess',
                     align: 'left',
                     sortable: false
+                },
+
+                {
+                    text: trans.actions,
+                    value: 'actions',
+                    sortable: false,
+                    align: 'right'
+                }
+            ]
+        }else{
+            header = [
+                {
+                    text: trans.name,
+                    align: 'left',
+                    sortable: true,
+                    value: 'name'
+                },
+
+                {
+                    text: trans.email,
+                    align: 'left',
+                    sortable: true,
+                    value: 'email'
+                },
+
+                {
+                    text: trans.actions,
+                    value: 'actions',
+                    sortable: false,
+                    align: 'right'
                 }
             ]
         }
-
-        const header = [
-            {
-                text: trans.name,
-                align: 'left',
-                sortable: true,
-                value: 'name'
-            },
-
-            {
-                text: trans.email,
-                align: 'left',
-                sortable: true,
-                value: 'email'
-            },
-
-            ...userColumn,
-
-            {
-                text: trans.actions,
-                value: 'actions',
-                sortable: false,
-                align: 'right'
-            }
-        ]
 
         state.listHeader = [...header]
     }

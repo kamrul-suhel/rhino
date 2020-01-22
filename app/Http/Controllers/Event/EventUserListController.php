@@ -23,7 +23,8 @@ class EventUserListController extends Controller
             'event_user.user_id',
             'event_user.event_id'
         )
-            ->leftJoin('event_user', 'event_user.user_id', '=', 'users.id');
+            ->leftJoin('event_user', 'event_user.user_id', '=', 'users.id')
+            ->where('event_user.event_id', $eventId);
 
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
@@ -59,12 +60,12 @@ class EventUserListController extends Controller
                 $users = $users->orderBy('users.id', 'DESC');
             }
 
-            $users = $users->where('event_user.event_id', $eventId);
-
             $data = $users->paginate($this->perPage);
             $totalUsers = $data->total();
             $data = $data->items();
         } else {
+            $users = $users->where('users.dealership_id', $dealershipId);
+
             $data = $users->get();
             $totalUsers = $users->count();
         }

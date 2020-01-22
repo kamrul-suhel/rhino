@@ -52,7 +52,7 @@ const mutations = {
                     {
                         icon: 'date_range',
                         text: `${trans.calendar}`,
-                        link: 'listDealerships',
+                        link: 'dealershipAdminCalendar',
                         access: ['dealership'],
                     },
 
@@ -71,7 +71,7 @@ const mutations = {
                     },
 
                     {
-                        icon: 'date_range',
+                        icon: 'insert_chart_outlined',
                         text: `${trans.analytics}`,
                         link: 'listDealerships',
                         access: ['dealership'],

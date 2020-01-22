@@ -178,6 +178,7 @@
                     search: this.searchUsers
                 }
 
+
                 // Check component load as a sub component
                 if(this.subComponent){
                     switch(this.model){

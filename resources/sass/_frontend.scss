@@ -564,11 +564,11 @@
         margin-left: 0;
         padding-left: 0;
     }
-}
 
-.v-select.v-text-field input {
-    width: 0;
-    flex-grow: 0;
+    &.v-select.v-text-field input {
+        width: 0;
+        flex-grow: 0;
+    }
 }
 
 /*

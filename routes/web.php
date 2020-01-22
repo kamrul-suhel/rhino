@@ -325,6 +325,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
        return view('index');
     });
 
+    Route::get('calendar', function(){
+        return view('index');
+    });
+
 
     /*
     |--------------------------------------------------------------------------
