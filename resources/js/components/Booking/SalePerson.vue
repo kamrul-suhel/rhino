@@ -1,12 +1,13 @@
 <template>
-    <v-layout column class="book-step sales-person" align-center style="border-right: 1px solid rgb(240,240,240)">
-        <v-flex>
-            <v-layout>
-                <h6 class="headline text-xs-center">{{ trans.choose + ' ' + trans.a}} <b>{{ trans.sales + ' ' + trans.person }}</b></h6>
-            </v-layout>
+    <v-layout class="book-step sales-person"
+              row wrap
+              align-center
+              style="border-right: 1px solid rgb(240,240,240)">
+        <v-flex xs12>
+            <h6 class="headline text-xs-center">{{ trans.choose + ' ' + trans.a}} <b>{{ trans.sales + ' ' + trans.person }}</b></h6>
         </v-flex>
 
-        <v-flex>
+        <v-flex xs12>
             <v-layout row justify-end class="mt-4">
                 <button :style="{color:color}"
                         @click="onSalePersonRemove()"
@@ -15,7 +16,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex>
+        <v-flex xs12>
             <v-layout row wrap
                       justify-center
                       class="mt-2"

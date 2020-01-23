@@ -1,6 +1,6 @@
 <template>
-    <v-layout column
-              class="book-step"
+    <v-layout class="book-step"
+              row wrap
               v-if="vehicleType !== 'unsure'"
               align-center>
         <v-flex xs12>
