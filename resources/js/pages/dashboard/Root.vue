@@ -1,17 +1,14 @@
 <template>
-    <div>
-
-        <h2>Admin Dashboard</h2>
-
-    </div>
+        <AdminDashboard v-if="authUser.level === 'admin'"></AdminDashboard>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
+    import AdminDashboard from './AdminDashboard'
 
     export default {
         components: {
-            
+            AdminDashboard
         },
 
         data() {
@@ -25,17 +22,8 @@
                 languages: 'getLanguages',
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
+                authUser: 'getAuthUser'
             })
         }),
-
-        watch: {
-
-        },
-
-        created() {
-        },
-
-        methods: {
-        }
     }
 </script>

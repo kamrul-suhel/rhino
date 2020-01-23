@@ -619,6 +619,18 @@ return [
     ],
 
     [
+        'label' => 'Remove',
+        'identifier' => 'remove',
+        'translation' => 'Remove'
+    ],
+
+    [
+        'label' => 'Reporting',
+        'identifier' => 'reporting',
+        'translation' => 'Reporting'
+    ],
+
+    [
         'label' => 'Break',
         'identifier' => 'break',
         'translation' => 'Break'
