@@ -24,7 +24,9 @@
             </v-flex>
         </v-layout>
 
-        <dealership-toolbar></dealership-toolbar>
+        <dealership-toolbar
+            v-if="authUser.level === 'dealership'">
+        </dealership-toolbar>
     </div>
 </template>
 
@@ -47,7 +49,8 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 isLogin: 'getIsLogin',
-                title: 'getHeaderTitle'
+                title: 'getHeaderTitle',
+                authUser: 'getAuthUser'
             })
         },
 

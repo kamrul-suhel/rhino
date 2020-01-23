@@ -42,9 +42,7 @@
             SnackBar
         },
 
-        data: () => ({
-
-        }),
+        data: () => ({}),
 
         computed: {
             ...mapGetters({
@@ -67,11 +65,11 @@
 
         async created() {
             axios.get('/auth/me').then((response) => {
-                if(response.data.success){
+                if (response.data.success) {
                     const authUser = response.data.authUser
 
                     // If auth user is dealership manager, then set dealership & regions for manager
-                    if(authUser.level === 'dealership'){
+                    if (authUser.level === 'dealership') {
                         const dealership = {...response.data.dealership}
                         const regions = [...response.data.regions]
                         this.$store.commit('setSelectedDealership', dealership)
@@ -81,7 +79,7 @@
                     this.$store.commit('setAuthUser', authUser)
                     this.$store.commit('setUserRole', true)
                     this.$store.commit('setInitialize', true)
-                }else{
+                } else {
                     this.$store.commit('setUserRole', false)
                     this.$store.commit('setInitialize', true)
                 }
@@ -89,8 +87,8 @@
         },
 
         methods: {
-            isInitialize(){
-                if(this.initialize && this.isSettingFieldLoaded){
+            isInitialize() {
+                if (this.initialize && this.isSettingFieldLoaded) {
                     return true
                 }
                 return false

@@ -16,6 +16,7 @@ const defaultState = {
     totalBrands: 0,
     eventBrandHeader:[],
     selectedEventBrand:{}
+
 }
 
 const state = {

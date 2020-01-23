@@ -92,7 +92,7 @@
                             :key="user.id"
                             v-if="saleExecutiveDropdown"
                             avatar
-                            @click="onSelectSeleExecutive(user)"
+                            @click="onSelectSaleExecutive(user)"
                         >
                             <v-list-tile-content>
                                 <v-list-tile-title>
@@ -183,7 +183,8 @@
                 })
             },
 
-            onSelectSeleExecutive(saleExecutive){
+            onSelectSaleExecutive(saleExecutive){
+                this.onSelectSaleExecutive = false
                 console.log('sale executive: ', saleExecutive)
             }
         }
