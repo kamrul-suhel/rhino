@@ -99,7 +99,6 @@ new Vue({
 
             // Initialize language
             this.$store.dispatch('fetchLanguages')
-
         }
     }
 })

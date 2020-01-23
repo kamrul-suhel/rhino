@@ -1,5 +1,5 @@
 <template>
-    <div id="app" v-if="initialize && isSettingFieldLoaded">
+    <div id="app" v-if="isInitialize()">
         <v-app
             id="rhino"
             v-if="isAdmin"
@@ -88,6 +88,13 @@
             })
         },
 
-        methods: {}
+        methods: {
+            isInitialize(){
+                if(this.initialize && this.isSettingFieldLoaded){
+                    return true
+                }
+                return false
+            }
+        }
     }
 </script>
