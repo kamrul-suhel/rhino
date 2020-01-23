@@ -15,7 +15,7 @@
         "babel-polyfill": "^6.26.0",
         "moment": "^2.24.0",
         "vue-color": "^2.7.0",
-        "vue-flag-icon": "^1.0.6",
+        "vue-flag-icon-2": "^1.0.8",
         "vue-image-upload-resize": "^2.1.1",
         "yarn-upgrade-all": "^0.3.0"
     },

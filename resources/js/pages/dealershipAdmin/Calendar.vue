@@ -104,22 +104,63 @@
                 </v-card>
             </v-flex>
         </v-layout>
+
+        <div class="r-tab" v-if="isUserSelected">
+            <div class="r-tab-title">
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">more_horiz
+                    </v-icon>
+                </div>
+
+                <div>
+                    {{ `${trans.with} ${trans.a} ${trans.uniqueCode}` }}
+                </div>
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">close
+                    </v-icon>
+                </div>
+            </div>
+
+            <div class="r-tab-content">
+                <v-container fluid pa-0 grid-list-xl>
+                    <v-layout row wrap>
+                        <v-flex xs12>
+                            <User :user="selectedUser"></User>
+                        </v-flex>
+
+                        <v-flex xs12 class="text-xs-center">
+                            <v-btn round
+                                   :color="themeOption.adminNavIconColor"
+                                   class="ma-0">
+                                <span style="color:#fff;">{{ `${trans.submit}` }}</span>
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </div>
+        </div>
     </v-container>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
+    import User from '@/components/Appointment/User'
 
     export default {
 
-        components: {},
+        components: {
+            User
+        },
 
         data() {
             return {
                 teamMemberShow: false,
                 selectedTeamMemberType: null,
                 saleExecutive: false,
-                saleExecutiveDropdown: false
+                saleExecutiveDropdown: false,
+                isUserSelected: false
             }
         },
         computed: ({
@@ -128,13 +169,16 @@
                 themeOption: 'getThemeOption',
                 dealership: 'getSelectedDealership',
                 selectedEvent: 'getSelectedEvent',
-                users: 'getUsers'
+                users: 'getUsers',
+                appointments: 'getAppointments',
+                selectedUser: 'getSelectedUser'
             })
         }),
 
         watch: {
             selectedEvent(){
                 this.fetchEventUser()
+                this.fetchAllAppointmentByEventId()
             }
         },
 
@@ -184,8 +228,14 @@
             },
 
             onSelectSaleExecutive(saleExecutive){
-                this.onSelectSaleExecutive = false
-                console.log('sale executive: ', saleExecutive)
+                this.isUserSelected = false
+                this.$store.commit('setSelectedUser', saleExecutive)
+                this.isUserSelected = true
+            },
+
+            fetchAllAppointmentByEventId(){
+                const eventId = this.selectedEvent.id
+                this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId})
             }
         }
     }

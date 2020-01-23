@@ -41,6 +41,7 @@ import * as Global from './components/index'
 
 Vue.component('r-button', Global.default.Button)
 Vue.component('r-language', Global.default.Langauge)
+Vue.component('Flag', Global.default.Flag)
 
 /**
  * Import plugins
@@ -58,9 +59,7 @@ import router from './router'
 /**
  * Import flag-icon
  */
-import FlagIcon from 'vue-flag-icon'
-
-Vue.use(FlagIcon)
+import 'flag-icon-css-2/css/flag-icon.css'
 
 Vue.use(Vuetify)
 Vue.use(Vuex)

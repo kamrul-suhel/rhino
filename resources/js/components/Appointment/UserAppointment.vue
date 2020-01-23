@@ -11,6 +11,10 @@
                     <div>{{ appointmentSlot.start|dateFormat('LT', 'en') }}</div>
                     <div>{{ appointmentSlot.end| dateFormat('LT', 'en') }}</div>
                 </v-card-text>
+
+                <v-card-actions>
+                    <div>{{ checkAvailability(appointmentSlot)}}</div>
+                </v-card-actions>
             </v-card>
         </v-flex>
     </v-layout>
@@ -41,9 +45,11 @@
                 themeOption: 'getThemeOption',
                 dealership: 'getSelectedDealership',
                 selectedUsers: 'getUsers',
+                selectedUser: 'getSelectedUser',
                 selectedEvent: 'getSelectedEvent',
                 update: 'getInitializeAppointment',
-                appointmentUsers: 'getAppointmentUsers'
+                appointmentUsers: 'getAppointmentUsers',
+                existingAppointments: 'getAppointments'
             })
         }),
 
@@ -55,6 +61,23 @@
             initializeUserAppointment() {
                 const time = fn.getStartTimeEndTime(this.date, this.dealership)
                 this.appointmentSlots = fn.getTimeSlotsForDay(time, this.selectedEvent)
+            },
+
+            checkAvailability(currentSlot){
+                const selectedUser = {...this.selectedUser}
+
+                if (this.existingAppointments.length > 0) {
+                    _.map(this.existingAppointments, (appointment) => {
+                        if (
+                            appointment.start === currentSlot.start &&
+                            selectedUser.id === appointment.user_id
+                        ) {
+                            return false
+                        }
+                    })
+                }else{
+                    return true
+                }
             }
         }
     }

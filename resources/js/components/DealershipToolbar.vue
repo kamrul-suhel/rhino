@@ -19,8 +19,8 @@
                                         :color="themeOption.inputColor"
                                         append-icon="keyboard_arrow_down"
                                         item-text="event"
-                                        item-value="id"
-                                        v-model="selectedEvent.id"
+                                        v-model="selectedEvent"
+                                        return-object
                                     ></v-autocomplete>
                                 </v-flex>
 
@@ -58,9 +58,17 @@
                 themeOption: 'getThemeOption',
                 isLogin: 'getIsLogin',
                 dealership: 'getSelectedDealership',
-                events: 'getEventsForDropDown',
-                selectedEvent: 'getSelectedEvent'
-            })
+                events: 'getEventsForDropDown'
+            }),
+
+            selectedEvent:{
+                get: function() {
+                    return this.$store.getters.getSelectedEvent
+                },
+                set:function(value) {
+                    this.$store.commit('setSelectedEvent', value)
+                }
+            }
         },
 
         created() {

@@ -1,18 +1,19 @@
 <template>
     <div>
-        <v-layout align-center
-                  justify-space-between
-                  row
-                  wrap
-                  fill-height
-                  class="header"
-                  pa-5
-                  :style="{height : `${themeOption.adminHeaderHeight}px`}">
+        <v-layout
+            align-center
+            justify-space-between
+            row
+            wrap
+            fill-height
+            class="header"
+            pa-5
+            :style="{height : `${themeOption.adminHeaderHeight}px`}">
             <v-flex xs12 sm4>
                 <h2>Logo</h2>
             </v-flex>
 
-            <v-flex xs12 sm4 >
+            <v-flex xs12 sm4>
                 <div class="text-xs-center">
                     {{ title }}
                 </div>
@@ -35,8 +36,8 @@
     import DealershipToolbar from '@/components/DealershipToolbar'
 
     export default {
-        components:{
-          DealershipToolbar
+        components: {
+            DealershipToolbar
         },
         data() {
             return {}
