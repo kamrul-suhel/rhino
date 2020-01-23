@@ -5,12 +5,17 @@ const state = {
     fields: {},
     navigations: [],
     home:'',
-    isLoading: false
+    isLoading: false,
+    isLoaded: false
 };
 
 const mutations = {
     setTheme(state, theme){
         state.theme = theme;
+    },
+
+    setIsSettingLoaded(state, status){
+        state.isLoaded = status
     },
 
     setFieldsItem(state, fields){
@@ -28,6 +33,10 @@ const mutations = {
 }
 
 const getters = {
+    getIsSettingLoaded(state){
+        return state.isLoaded
+    },
+
     getTheme(state){
        return state.theme
     },
@@ -53,6 +62,7 @@ const actions = {
         axios.get(URL).then((response) => {
             commit('setFieldsItem', response.data);
             commit('setIsLoading', false)
+            commit('setIsSettingLoaded', true)
         });
     }
 }

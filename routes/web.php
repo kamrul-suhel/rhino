@@ -314,6 +314,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
 
     });
 
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Dealership Admin
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::get('bookguest', function(){
+       return view('index');
+    });
+
+    Route::get('calendar', function(){
+        return view('index');
+    });
+
 
     /*
     |--------------------------------------------------------------------------

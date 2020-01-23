@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Dealership;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dealership\DealershipController;
+use App\Http\Controllers\Event\EventBrandController;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,15 +64,31 @@ class LoginController extends Controller
 
     /**
      * Get Login user
-     * @return mixed
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function getLoginUser(){
+    public function getLoginUser(Request $request){
         $user = Auth::user();
 
         if($user){
+            // If login user is dealership manager, then add dealership
+            $dealership = null;
+            $dealershipRegions = null;
+            $brands = null;
+            if(
+                $user->level === User::USERDEALERSHIP &&
+                !empty($user->dealership_id)
+            )
+            {
+                $dealershipController = new DealershipController($request);
+                $dealership = $dealershipController->show($request, $user->dealership_id, true);
+            }
+
             return response()->json([
                 'success' => true,
-                'authUser' => $user
+                'authUser' => $user,
+                'dealership' => $dealership['dealership'],
+                'regions' => $dealership['regions']
             ]);
         }
 

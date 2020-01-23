@@ -15,9 +15,11 @@ class EventUserStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $eventUser = new EventUser();
-        $eventUser->event_id = $request->event_id;
-        $eventUser->user_id = $request->user_id;
+        $eventUser = EventUser::firstOrnew([
+            'event_id' => $request->event_id,
+            'user_id' => $request->user_id
+        ]);
+
         $eventUser->save();
 
         return response()->json([

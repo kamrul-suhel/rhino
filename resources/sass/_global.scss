@@ -1,3 +1,16 @@
+/**
+*********************************
+    Top theme background color
+*********************************
+ */
+.theme--light.application{
+    background:#fff;
+}
+
 .v-text-field__prefix{
   padding-right:25px !important;
+}
+
+.r-border-round{
+    border-radius: 10px;
 }

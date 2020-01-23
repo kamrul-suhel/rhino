@@ -211,6 +211,12 @@ return [
     ],
 
     [
+        'label' => 'Source',
+        'identifier' => 'source',
+        'translation' => 'Source'
+    ],
+
+    [
         'label' => 'Selected',
         'identifier' => 'selected',
         'translation' => 'Selected'
@@ -448,6 +454,12 @@ return [
         'label' => 'Search by',
         'identifier' => 'searchBy',
         'translation' => 'Search by'
+    ],
+
+    [
+        'label' => 'Search',
+        'identifier' => 'search',
+        'translation' => 'Search'
     ],
 
     [
@@ -824,6 +836,12 @@ return [
     ],
 
     [
+        'label' => 'Book an appointment',
+        'identifier' => 'bookAnAppointment',
+        'translation' => 'Book an appointment'
+    ],
+
+    [
         'label' => 'Booked',
         'identifier' => 'booked',
         'translation' => 'Booked'
@@ -875,6 +893,12 @@ return [
         'label' => 'Skip this step',
         'identifier' => 'skipThisStep',
         'translation' => 'Skip this step'
+    ],
+
+    [
+        'label' => 'Team member',
+        'identifier' => 'teamMember',
+        'translation' => 'Team member'
     ],
 
     [
@@ -1009,6 +1033,30 @@ return [
         'label' => 'Enter your',
         'identifier' => 'enterYour',
         'translation' => 'Enter your'
+    ],
+
+    [
+        'label' => 'With',
+        'identifier' => 'with',
+        'translation' => 'With'
+    ],
+
+    [
+        'label' => 'Submit',
+        'identifier' => 'submit',
+        'translation' => 'Submit'
+    ],
+
+    [
+        'label' => 'Without',
+        'identifier' => 'without',
+        'translation' => 'Without'
+    ],
+
+    [
+        'label' => 'Unique code',
+        'identifier' => 'uniqueCode',
+        'translation' => 'Unique code'
     ],
 
     [

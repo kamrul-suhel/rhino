@@ -161,6 +161,8 @@
         },
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.users}`)
+            this.$store.commit('setNavTitle', `${this.trans.users}`)
         },
 
         mounted() {
@@ -175,6 +177,7 @@
                     paginate: true,
                     search: this.searchUsers
                 }
+
 
                 // Check component load as a sub component
                 if(this.subComponent){

@@ -258,6 +258,15 @@ const actions = {
         axios.get(URL).then((response)=>{
             if(response.data){
                 commit('setEventsForDropDown', response.data.events)
+
+                // Initialize state select first event
+                if(
+                    payload.selectFirst &&
+                    payload.selectFirst !== 'undefined' &&
+                    response.data.events.length > 0 // And event is exists
+                ){
+                    commit('setSelectedEvent', response.data.events[0])
+                }
             }
         })
             .catch((error)=>{

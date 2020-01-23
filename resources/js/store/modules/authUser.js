@@ -18,6 +18,9 @@ const defaultState = {
         buttonLoading: false,
         buttonLoadingStyle: 'loading',
 
+        adminHeader: '#31393C',
+        adminHeaderHeight: 150,
+
         // Header setting
         textHeadingColor: '#e20000',
         loadingColor: 'white',
@@ -45,7 +48,10 @@ const defaultState = {
         titleWidthF: '400px',
         brandColor: '#cc0000',
 
-        adminNavIconColor: '#e20000'
+        adminNavIconColor: '#e20000',
+
+        // Dealership admin
+        dealershipAdminNavColor: '#000'
 
     },
     initialize: false
