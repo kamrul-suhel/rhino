@@ -9,14 +9,16 @@
 
         <v-layout row wrap
                   fill-height
+                  align-content-start
+                  class="navigation-content"
         >
             <v-flex xs12>
                 <v-layout>
-                    <v-flex xs6>
+                    <v-flex xs8>
                         <brand-carousel-component></brand-carousel-component>
                     </v-flex>
 
-                    <v-flex class="language-select stroke-dropdown">
+                    <v-flex xs4 class="language-select stroke-dropdown">
                         <language-picker
                             :languageId="guest.language_id"
                             isFrontend
@@ -55,7 +57,7 @@
                         value="bookYourSlot"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
-                        {{ `${trans.bookYourSlot}` }}
+                        {{ `${trans.bookYourAppointment}` }}
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -64,7 +66,7 @@
                         value="partExchange"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
-                        {{ `${trans.partExchange}` }}
+                        {{ `${trans.partExchange} ${trans.details}` }}
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -87,7 +89,8 @@
                 </v-tabs>
             </v-flex>
 
-            <v-flex my-5 xs12>
+            <v-flex mt-5 xs12
+                    class="navigation-footer">
                 <v-layout row wrap align-bottom>
                     <v-flex xs6>
                         <h2 class="my-1 mr-4 name-button" :style="{color: color}">

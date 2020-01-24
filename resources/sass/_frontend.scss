@@ -141,6 +141,10 @@
             .v-picker__body{
                 background:transparent;
             }
+
+            .v-date-picker-header__value{
+                //display:none; // hide header
+            }
         }
     }
 
@@ -264,6 +268,16 @@
 
 .navigation-drawer {
     padding:30px;
+
+    .navigation-content{
+        position:relative;
+
+        .navigation-footer{
+            position:absolute;
+            bottom:0;
+            left:0;
+        }
+    }
 
     /* BRAND CAROUSEL */
 
@@ -467,6 +481,12 @@
     .vehicle{
         border:2px solid transparent;
         border-radius:5px;
+
+        .v-card{
+            &.disabled{
+                opacity:.5;
+            }
+        }
     }
 }
 

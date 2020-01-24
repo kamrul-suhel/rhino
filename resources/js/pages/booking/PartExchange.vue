@@ -65,7 +65,10 @@
             </v-flex>
 
             <v-flex>
-                <v-layout row justify-center>
+                <v-layout row
+                          justify-center
+                          class="my-5"
+                >
                     <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
                            :color="color"
                            outline
