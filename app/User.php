@@ -49,4 +49,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Get user brand
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function brands(){
+        return $this->belongsToMany(Brand::class,'brand_user', 'user_id', 'brand_id')
+            ->withPivot(['new', 'used']);
+    }
+
+    /**
+     * Get brand user pivot table info
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function specializeBrands(){
+        return $this->hasMany(BrandUser::class);
+    }
 }

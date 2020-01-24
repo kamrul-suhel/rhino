@@ -8,23 +8,30 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap mt-5>
-            <v-flex xs12 md4>
+        <v-layout row wrap
+                  mt-5
+                  justify-center>
+            <v-flex xs12
+                    :md4="vehicleType !== 'unsure'"
+                    :md6="vehicleType === 'unsure' || vehicleType === ''">
                 <Calender></Calender>
             </v-flex>
 
-            <v-flex xs12 md4>
+            <v-flex xs12 md4
+                    v-if="vehicleType !== 'unsure' && vehicleType !== ''">
                 <SalePerson></SalePerson>
             </v-flex>
 
-            <v-flex xs12 md4>
+            <v-flex xs12
+                    :md4="vehicleType !== 'unsure'"
+                    :md6="vehicleType === 'unsure' || vehicleType === ''">
                 <ChooseTime></ChooseTime>
             </v-flex>
 
         </v-layout>
 
-        <v-layout row wrap align-content-center>
-            <v-flex xs12>
+        <v-layout row wrap class="my-5">
+            <v-flex xs12 class="text-xs-center">
                     <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
                            outline
                            @click="onContinue()"
@@ -56,10 +63,6 @@
             }
         },
 
-        created(){
-
-        },
-
         computed: ({
             ...mapGetters({
                 trans: 'getFields',
@@ -68,9 +71,14 @@
                 dealership: 'getSelectedDealership',
                 selectedVehicles: 'getBookingSelectedVehicles',
                 color: 'getFrontendColor',
-                selectedEvent: 'getSelectedEvent'
+                selectedEvent: 'getSelectedEvent',
+                vehicleType: 'getBookingVehicleType'
             })
         }),
+
+        created(){
+            console.log('type si: ', this.vehicleType)
+        },
 
         methods:{
             onContinue(){

@@ -866,9 +866,9 @@ return [
     ],
 
     [
-        'label' => 'Book your slot',
-        'identifier' => 'bookYourSlot',
-        'translation' => 'Book your slot'
+        'label' => 'Book your appointment',
+        'identifier' => 'bookYourAppointment',
+        'translation' => 'Book your appointment'
     ],
 
     [

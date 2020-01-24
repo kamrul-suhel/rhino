@@ -14,21 +14,22 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function getData($uniqueId){
+    public function getData($uniqueId)
+    {
 
         $guest = Guest::where('unique', $uniqueId)->first();
         $event = '';
         $dealership = '';
-        $vehicles= [];
+        $vehicles = [];
         $brands = [];
 
-        if($guest){
+        if ($guest) {
             $event = Event::select(
                 'events.*',
                 'events_translation.name',
                 'events_translation.notes'
             )
-                ->leftJoin('events_translation', function($eventT){
+                ->leftJoin('events_translation', function ($eventT) {
                     $eventT->on('events_translation.event_id', '=', 'events.id')
                         ->where('events_translation.language_id', $this->languageId);
                 })
@@ -39,17 +40,18 @@ class BookingController extends Controller
                 'dealerships.*',
                 'countries.driver_seating_position'
             )
-                ->leftJoin('countries','countries.id', '=', 'dealerships.country_id' )
+                ->leftJoin('countries', 'countries.id', '=', 'dealerships.country_id')
                 ->where('dealerships.id', $event->dealership_id)
                 ->first();
 
             $vehicles = EventVehicle::select(
                 'event_vehicle.*',
+                'vehicles.brand_id',
                 'vehicles_translation.model',
                 'vehicles.driver_seating_position_left_image',
                 'vehicles.driver_seating_position_right_image'
             )
-                ->leftJoin('vehicles', function($vehicle){
+                ->leftJoin('vehicles', function ($vehicle) {
                     $vehicle->on('vehicles.id', '=', 'event_vehicle.vehicle_id')
                         ->leftJoin('vehicles_translation', 'vehicles_translation.vehicle_id', 'vehicles.id')
                         ->where('vehicles_translation.language_id', $this->languageId);
@@ -67,6 +69,7 @@ class BookingController extends Controller
             $saleExecutives = User::select(
                 'users.*'
             )
+                ->with('specializeBrands')
                 ->where('dealership_id', $dealership->id)
                 ->get();
 

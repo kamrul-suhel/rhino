@@ -25,7 +25,6 @@
                             v-model="step"
                             color="black"
                             light
-                            slider-color="yellow"
                         >
                             <v-tab-item
                                 key="selectModel"

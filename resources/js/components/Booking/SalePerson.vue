@@ -33,6 +33,7 @@
                                 v-for="saleExecutive in saleExecutives"
                                 v-if="saleExecutive.availability"
                                 :key="saleExecutive.id">
+
                             <v-layout row>
                                 <v-flex class="avatar-flex">
                                     <v-avatar
@@ -44,11 +45,11 @@
                                         <v-icon :color="color">account_circle</v-icon>
                                     </v-avatar>
                                 </v-flex>
+
                                 <v-flex class="text-flex">
                                     <label>{{ saleExecutive.firstname}}</label>
                                 </v-flex>
                             </v-layout>
-
                         </v-flex>
                     </v-card-text>
                 </v-card>
@@ -76,7 +77,8 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 color: 'getFrontendColor',
-                saleExecutives: 'getUsers'
+                saleExecutives: 'getUsers',
+                vehicleType: 'getBookingVehicleType'
             })
         }),
 

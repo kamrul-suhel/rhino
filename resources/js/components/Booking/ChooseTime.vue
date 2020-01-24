@@ -1,7 +1,6 @@
 <template>
     <v-layout class="book-step"
               row wrap
-              v-if="vehicleType !== 'unsure'"
               align-center>
         <v-flex xs12>
             <h6 class="headline text-xs-center">
@@ -10,8 +9,9 @@
         </v-flex>
 
         <v-flex xs12>
-            <v-layout row justify-end style="width:70%" class="mt-4">
-                <v-flex>
+            <v-layout row wrap
+                      class="mt-4">
+                <v-flex xs12 class="text-xs-right">
                     <button :style="{color: color}"
                             @click="onClearSlot()"
                             style="opacity:0.7">{{ trans.clear }}
@@ -149,12 +149,12 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 color: 'getFrontendColor',
-                saleExecutives: 'getUsers',
                 event: 'getSelectedEvent',
                 dealership: 'getSelectedDealership',
                 slots: 'getAllAppointmentSlot',
                 vehicleType: 'getBookingVehicleType',
                 selectedDate: 'getBookingSelectedDate',
+                saleExecutives: 'getUsers',
                 selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
                 existingAppointments: 'getAllBookingAppointments',
                 bringGuest: 'getBookingBringGuest',
@@ -349,7 +349,7 @@
                         _.map(this.saleExecutives, (saleExecutive) => {
                             let currentSaleExecutive = {...saleExecutive}
 
-                            _.map(this.existingAppointments, (appointment) => {
+                            const foundAppointment = _.findIndex(this.existingAppointments, (appointment) => {
                                 const selectedDate = moment(this.selectedDate).format('L')
                                 const appointmentDate = moment(appointment.start).format('L')
                                 if(
@@ -357,17 +357,20 @@
                                     saleExecutive.id === appointment.user_id &&
                                     selectedSlot.slotId === appointment.slot_id
                                 ){
-                                    currentSaleExecutive = {
-                                        ...currentSaleExecutive,
-                                        availability: false
-                                    }
-                                }else{
-                                    currentSaleExecutive = {
-                                        ...currentSaleExecutive,
-                                        availability: true
-                                    }
+                                    return appointment
                                 }
                             })
+                            if(foundAppointment === -1){
+                                currentSaleExecutive = {
+                                    ...currentSaleExecutive,
+                                    availability: true
+                                }
+                            }else{
+                                currentSaleExecutive = {
+                                    ...currentSaleExecutive,
+                                    availability: false
+                                }
+                            }
 
                             saleExecutives.push(currentSaleExecutive)
                         })
@@ -384,6 +387,7 @@
             },
 
             onClearSlot(){
+                this.onSelectSlot({})
                 this.$store.commit('setSelectedSlot', {})
                 this.generateSlots()
             }
