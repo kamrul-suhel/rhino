@@ -1,23 +1,117 @@
 <template>
     <div>
-        <v-toolbar flat v-if="!subComponent">
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.vehicles }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
+        <v-layout row wrap>
+            <div class="r-tab" >
+                <div class="r-tab-title r-border-round">
+                    <div>
+                        <v-icon
+                            :color="themeOption.adminNavIconColor">drive_eta
+                        </v-icon>
+                    </div>
 
-            <v-spacer></v-spacer>
+                    <div>
+                        {{ `${trans.add} ${trans.a} ${trans.vehicle}` }}
+                    </div>
+                </div>
 
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.model}`"
-                v-model="searchVehicle">
-            </v-text-field>
-        </v-toolbar>
+                <div class="r-tab-content" >
+                    <v-container fluid pa-0 grid-list-xl>
+                        <v-form
+                        row wrap
+                        ref="vehicleForm"
+                        v-model="valid"
+                        lazy-validation>
+                        <v-layout row wrap>
+                            <v-flex xs12 pa-2>
+                                <v-text-field box
+                                    :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
+                                    :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                    :color="themeOption.inputColor"
+                                    v-model="vehicle.model"
+                                ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+
+                        <v-layout row wrap>
+                            <v-flex xs12 sm6 pa-2>
+                                <v-select box
+                                    :items="brands"
+                                    item-text="name"
+                                    item-value="id"
+                                    :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                    :color="themeOption.inputColor"
+                                    :label="`${trans.select_a} ${trans.brand}`"
+                                    v-model="vehicle.brand_id"
+                                >
+                                </v-select>
+                            </v-flex>
+                        </v-layout>
+
+                        <v-layout>
+                            <v-flex xs12 sm6 pa-2>
+                                <v-layout row wrap pt-3>
+                                    <v-flex xs12>
+                                        <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
+                                        <v-divider class="my-2"></v-divider>
+
+                                        <v-card class="pa-2 my-3">
+                                            <v-img
+                                                :src="leftImage"
+                                                aspect-ratio="2.75"
+                                            ></v-img>
+                                        </v-card>
+
+                                        <input
+                                            ref="leftImage"
+                                            type="file"
+                                            @change="setLeftImage"
+                                        />
+                                    </v-flex>
+                                </v-layout>
+                            </v-flex>
+
+                            <v-flex xs12 sm6 pa-2>
+                                <v-layout row wrap pt-3>
+                                    <v-flex xs12>
+                                        <label for="">{{ trans.right_hand_drive_image }}</label>
+
+                                        <v-divider class="my-2"></v-divider>
+
+                                        <v-card class="pa-2 my-3">
+                                            <v-img
+                                                :src="rightImage"
+                                                aspect-ratio="2.75"
+                                            ></v-img>
+                                        </v-card>
+
+                                        <input
+                                            ref="rightImage"
+                                            type="file"
+                                            @change="setRightImage"
+                                        />
+                                    </v-flex>
+                                </v-layout>
+                            </v-flex>
+
+                            <v-flex xs12 text-center>
+                                <v-card-actions class="pa-3">
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    :class="themeOption.buttonSuccess"
+                                    small
+                                    @click="onCreateVehicle()"
+                                >
+                                    {{ `${trans.create} ${trans.vehicle}` }}
+                                </v-btn>
+                                </v-card-actions>
+                            </v-flex>
+
+                        </v-layout>
+                        </v-form>
+                    </v-container>
+                </div>
+            </div>
+        </v-layout>
 
         <v-layout row wrap>
             <v-flex xs12 pt-3>
@@ -32,7 +126,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalVehicles"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <tr @click="onEditVehicle(props.item)">
@@ -111,6 +205,7 @@
     import {mapGetters} from 'vuex'
     import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
+    import vehicle from "../../store/modules/vehicle";
 
     export default {
         components: {
@@ -126,6 +221,12 @@
                 searchVehicle: '',
                 editVehicle: false,
                 valid: true,
+                isVehicleSelected: false,                
+                vehicle: {},
+                leftImage: '',
+                rightImage: '',
+                hasLeftImage: false,
+                hasRightImage: false
             }
         },
 
@@ -144,7 +245,7 @@
             ...mapGetters({
                 languages: 'getLanguages',
                 trans: 'getFields',
-                brands: 'getBrands',
+                brands: 'getBrandsForDropDown',
                 themeOption: 'getThemeOption',
                 vehicles: 'getVehicles',
                 headers: 'getVehicleListHeader',
@@ -176,6 +277,7 @@
         methods: {
             // Initialize data when first render
             initialize() {
+
                 let extraOption = {}
                 if(this.subComponent){
                     extraOption = {
@@ -194,7 +296,84 @@
                     ...extraOption
                 }
 
+                this.$store.dispatch('fetchBrandForDropDown');
                 this.$store.dispatch('fetchVehicles', paginateOption)
+            },
+
+            onCreateVehicle() {
+
+                console.log('create vehicle');
+
+                if (this.$refs.vehicleForm.validate()) {
+
+                    console.log('Passed validate');
+
+                    let vehicleForm = new FormData()
+
+                    this.vehicle.leftImage = this.leftImage;
+                    this.vehicle.rightImage = this.rightImage;
+
+                    // Set form object for vehicle
+                    _.forOwn(this.vehicle, (value, key) => {
+                            vehicleForm.append(key, value)
+                    });          
+                    
+                    if(this.subComponent){
+                        vehicleForm.append('brand_id', this.$route.params.brandId)
+                    }
+
+                    // send form data to save
+                    axios.post('/api/vehicles', vehicleForm).then((response) => {
+                        if (response.data.success) {
+                            console.log('success');
+                            console.log(response.data);
+
+                            this.$store.commit('setSnackbarMessage', {
+                                openMessage: true,
+                                timeOut: this.themeOption.snackBarTimeout,
+                                message: `${this.vehicle.model}  ${this.trans.successfully_created}`
+                            })
+                            
+                            // check if vehicle created from brand or vehicle
+                            if ( this.subComponent ){
+                                this.$router.push({name: 'editBrand', params:{id: this.$route.params.brandId}});
+                            } else {
+                                this.$router.push({name: 'listVehicles'});
+                            }
+                        }
+                    })
+                } else {
+                    console.log('failed validate');
+                }
+            },
+
+
+            setLeftImage() {
+                const image = this.$refs.leftImage.files[0]
+                this.uploadImage(image, 'vehicles', 'leftImage')
+                this.hasLeftImage = true
+            },
+
+            setRightImage(){
+                const image = this.$refs.rightImage.files[0]
+                this.uploadImage(image, 'vehicles', 'rightImage')
+                this.hasRightImage = true
+            },
+
+           uploadImage(file, identifier, image){
+                let formData = new FormData()
+                formData.append('file', file)
+                formData.append('model', identifier)
+
+                axios.post('/api/uploadfiles', formData).then((response) => {
+                    if(image === 'leftImage'){
+                        this.leftImage = response.data
+                    }
+
+                    if(image === 'rightImage'){
+                        this.rightImage = response.data
+                    }
+                })
             },
 
             onEditVehicle(vehicle) {

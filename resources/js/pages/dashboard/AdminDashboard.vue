@@ -20,7 +20,7 @@
             </v-flex>
         </v-layout>
 
-        <v-container>
+        <v-container pt-0>
             <v-layout row wrap justify-space-around>
                 <v-flex xs5>
                     <v-layout column mb-3>
@@ -148,8 +148,8 @@
                         </v-flex>
                     </v-layout>
                 </v-flex>
-
             </v-layout>
+                
         </v-container>
 
     </v-container>

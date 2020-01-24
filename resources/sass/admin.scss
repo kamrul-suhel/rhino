@@ -4,3 +4,26 @@
         color:#fff;
     }
 }
+
+.r-table th {
+    background: #4D4D4D;
+    color: #fff!important;
+}
+
+.r-table tr {
+    border-bottom: 0!important;
+    &:nth-child(odd) {
+        background: #F7F7F7;
+        &:hover {
+            background: #F7F7F7!important;
+        
+        }
+    }
+    &:nth-child(even) {
+        background: #EDEDED;
+        &:hover {
+            background: #EDEDED!important;
+        
+        }
+    }
+}

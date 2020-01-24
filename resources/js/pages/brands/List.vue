@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-toolbar flat>
+        <!-- <v-toolbar flat>
             <v-toolbar-title>
                 <span :class="themeOption.textHeadingColor+'--text'">{{ trans.brands }}</span>
             </v-toolbar-title>
@@ -17,10 +17,103 @@
                 :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchBrands">
             </v-text-field>
-        </v-toolbar>
+        </v-toolbar> -->
 
         <v-layout row wrap>
-            <v-flex xs12 sm8 pt-3>
+            <v-flex xs12>
+                <v-form
+                    ref="createBrand"
+                    v-model="valid"
+                    lazy-validation>
+                    
+                    <v-layout row wrap>
+
+                        <v-flex xs12>
+                            <h3>{{ `${trans.add} ${trans.new} ${trans.brand}` }}</h3>
+                        </v-flex>
+
+                        <v-flex xs4>
+                            <v-autocomplete
+                                v-if="this.editBrand"
+                                :label="trans.languages"
+                                v-model="selectedBrand.language_id"
+                                item-text="name"
+                                item-value="id"
+                                @change="onLanguageChange"
+                                :color="themeOption.inputColor"
+                                :items="languages">
+                            </v-autocomplete>
+
+                            <v-text-field
+                                :label="trans.name"
+                                box
+                                :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
+                                required
+                                v-model="selectedBrand.name"
+                                class="mr-4"
+                                :color="themeOption.inputColor"
+                            ></v-text-field>
+                        </v-flex>
+
+                            <!-- 
+                            <v-autocomplete :label="trans.company"
+                                            :color="themeOption.inputColor"
+                                            :items="companies"
+                                            item-text="name"
+                                            item-value="id"
+                                            v-model="selectedBrand.company_id">
+                            </v-autocomplete>
+                            -->
+
+                        <v-flex xs2>
+                            <div class="r-color-picker" v-if="isColorSwatchActive">
+                                <div class="r-color-picker-content">
+                                    <chrome v-model="selectedColor" box></chrome>
+                                    <v-btn small
+                                            class="r-color-choose"
+                                            @click="isColorSwatchActive = false"
+                                            :color="themeOption.buttonPrimaryColor">
+                                        {{ trans.select }}
+                                    </v-btn>
+                                </div>
+                            </div>
+
+                            <v-text-field
+                                box
+                                :label="trans.color"
+                                v-model="color"
+                                :rules="[v => !!v || `${trans.select_a} ${trans.color}`]"
+                                required
+                                @focus="isColorSwatchActive = true"
+                                :color="themeOption.inputColor">
+                            </v-text-field> 
+                        </v-flex>
+
+                        <v-flex xs4 class="ml-5">
+                            <span>{{trans.logo}}</span>
+
+                            <FileUpload :preview="false"
+                                        identifier="brand"
+                                        model="brands"
+                                        
+                                        >
+                            </FileUpload>
+                        </v-flex>
+
+                        <v-flex xs12>
+                            <v-btn small
+                                    :color="themeOption.buttonPrimaryColor"
+                                    @click="onCreateBrand">
+                                {{ editBrand ? trans.edit : trans.create }}
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-form>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row wrap>
+            <v-flex xs12 pt-3>
                 <v-data-table
                     :headers="headers"
                     :items="brands"
@@ -32,7 +125,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalBrands"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <tr @click="onEditBrand(props.item)">
@@ -59,101 +152,6 @@
                         </tr>
                     </template>
                 </v-data-table>
-            </v-flex>
-
-            <v-flex xs12 sm4 pt-3 pl-3>
-                <v-form
-                    ref="createBrand"
-                    v-model="valid"
-                    lazy-validation>
-                    <v-card>
-                        <v-card-title>
-                            <h3>{{ editBrand ? `${trans.edit} ${trans.brand}` : `${trans.create} ${trans.brand}` }}</h3>
-                        </v-card-title>
-                        <v-divider></v-divider>
-
-                        <v-card-text>
-                            <v-autocomplete
-                                v-if="this.editBrand"
-                                :label="trans.languages"
-                                v-model="selectedBrand.language_id"
-                                item-text="name"
-                                item-value="id"
-                                @change="onLanguageChange"
-                                :color="themeOption.inputColor"
-                                :items="languages">
-                            </v-autocomplete>
-
-                            <v-text-field
-                                :label="trans.name"
-                                :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
-                                required
-                                v-model="selectedBrand.name"
-                                :color="themeOption.inputColor"
-                            ></v-text-field>
-
-                            <v-autocomplete :label="trans.company"
-                                            :color="themeOption.inputColor"
-                                            :items="companies"
-                                            item-text="name"
-                                            item-value="id"
-                                            v-model="selectedBrand.company_id">
-                            </v-autocomplete>
-
-                            <div class="r-color-picker" v-if="isColorSwatchActive">
-                                <div class="r-color-picker-content">
-                                    <chrome v-model="selectedColor"></chrome>
-                                    <v-btn small
-                                           class="r-color-choose"
-                                           @click="isColorSwatchActive = false"
-                                           :color="themeOption.buttonPrimaryColor">
-                                        {{ trans.select }}
-                                    </v-btn>
-                                </div>
-                            </div>
-
-                            <v-text-field
-                                :label="trans.color"
-                                v-model="color"
-                                :rules="[v => !!v || `${trans.select_a} ${trans.color}`]"
-                                required
-                                @focus="isColorSwatchActive = true"
-                                :color="themeOption.inputColor">
-                            </v-text-field>
-
-                            <v-flex xs12>
-                                <span>{{trans.logo}}</span>
-
-                                <v-img
-                                    contain
-                                    :src="brandImage"
-                                    aspect-ratio="2"
-                                ></v-img>
-
-                                <FileUpload :preview="false"
-                                            identifier="brand"
-                                            model="brands">
-                                </FileUpload>
-                            </v-flex>
-
-                        </v-card-text>
-
-                        <v-card-actions class="pa-2">
-                            <v-spacer></v-spacer>
-                            <v-btn small
-                                   :color="themeOption.buttonSecondaryColor"
-                                   @click="onResetBrand">
-                                {{trans.cancel}}
-                            </v-btn>
-
-                            <v-btn small
-                                   :color="themeOption.buttonPrimaryColor"
-                                   @click="onCreateBrand">
-                                {{ editBrand ? trans.edit : trans.create }}
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-form>
             </v-flex>
         </v-layout>
 
@@ -317,7 +315,6 @@
 
                             this.initialize()
                             // reset selectedDealerships in store
-                            this.onResetBrand()
                             this.deleteDialog = false
                         }
                     });
@@ -358,12 +355,6 @@
                     id: this.selectedBrand.id,
                     languageId: selectedLanguage
                 })
-            },
-
-            onResetBrand() {
-                this.editBrand = false
-                this.$store.commit('setSelectedBrand', {})
-                this.$store.commit('resetImageUpload')
             },
         }
     }

@@ -2,15 +2,18 @@
     width:100%;
     background:#fff;
     position:relative;
+    margin-bottom: 30px;
 
-    &::before{
-        content: "";
-        position: absolute;
-        top: 60px;
-        height: 40px;
-        width: 100%;
-        background: #fff;
-        z-index: 100;
+    &.open {
+        &::before{
+            content: "";
+            position: absolute;
+            top: 60px;
+            height: 40px;
+            width: 100%;
+            background: #fff;
+            z-index: 100;
+        }
     }
 
     .r-tab-title{
