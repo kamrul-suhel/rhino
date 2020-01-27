@@ -260,7 +260,7 @@
         watch: {
             pagination: {
                 handler() {
-                    this.initialize()
+                    this.initialize();
                 }
             },
 
@@ -286,18 +286,8 @@
                     }
                 }
 
-                const paginateOption = {
-                    ...this.pagination,
-                    trans: this.trans,
-                    themeOption: this.themeOption,
-                    paginate: true,
-                    search: this.searchVehicle,
-                    subComponent: this.subComponent,
-                    ...extraOption
-                }
-
                 this.$store.dispatch('fetchBrandForDropDown');
-                this.$store.dispatch('fetchVehicles', paginateOption)
+                this.$store.dispatch('fetchVehicles', this.getPagination())
             },
 
             onCreateVehicle() {
@@ -333,13 +323,10 @@
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.vehicle.model}  ${this.trans.successfully_created}`
                             })
+
+
+                            this.$store.dispatch('fetchVehicles', this.getPagination() );
                             
-                            // check if vehicle created from brand or vehicle
-                            if ( this.subComponent ){
-                                this.$router.push({name: 'editBrand', params:{id: this.$route.params.brandId}});
-                            } else {
-                                this.$router.push({name: 'listVehicles'});
-                            }
                         }
                     })
                 } else {
@@ -347,6 +334,19 @@
                 }
             },
 
+
+
+            getPagination(){
+                const pagination = {
+                    ...this.pagination,
+                    trans: this.trans,
+                    themeOption: this.themeOption,
+                    paginate: true,
+                    search: this.searchVehicle,
+                    subComponent: this.subComponent,
+                }
+
+            },
 
             setLeftImage() {
                 const image = this.$refs.leftImage.files[0]
