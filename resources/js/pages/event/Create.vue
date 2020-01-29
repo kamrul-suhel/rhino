@@ -30,7 +30,6 @@
                                         v-model="event.name"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     ></v-text-field>
                                 </v-flex>
 
@@ -45,7 +44,6 @@
                                         v-model="event.dealership_id"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -77,7 +75,6 @@
                                                 v-on="on"
                                                 solo
                                                 flat
-                                                background-color="#eaeaea"
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
@@ -110,7 +107,6 @@
                                         min-width="290px"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
@@ -124,7 +120,6 @@
                                                 v-on="on"
                                                 solo
                                                 flat
-                                                background-color="#eaeaea"
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
@@ -155,7 +150,6 @@
                                         v-model="event.appointment_duration"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -171,7 +165,6 @@
                                         v-model="event.type_id"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -195,7 +188,6 @@
                                         v-model="event.greeting"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>

@@ -34,7 +34,6 @@
                                         style="width: 70%"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     >
                                     </v-select>
                                 </v-flex>
@@ -47,7 +46,6 @@
                                         style="width: 70%"
                                         solo
                                         flat
-                                        background-color="#eaeaea"
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -57,8 +55,6 @@
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
                                             <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
-                                            <v-divider class="my-2"></v-divider>
-
                                             <v-card class="pa-2 my-3">
                                                 <v-img
                                                     :src="leftImage"
@@ -79,9 +75,6 @@
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
                                             <label for="">{{ trans.right_hand_drive_image }}</label>
-
-                                            <v-divider class="my-2"></v-divider>
-
                                             <v-card class="pa-2 my-3">
                                                 <v-img
                                                     :src="rightImage"

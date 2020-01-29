@@ -41,7 +41,9 @@
                                 item-value="id"
                                 @change="onLanguageChange"
                                 :color="themeOption.inputColor"
-                                :items="languages">
+                                :items="languages"
+                                
+                                flat>
                             </v-autocomplete>
 
                             <v-text-field
@@ -52,6 +54,8 @@
                                 v-model="selectedBrand.name"
                                 class="mr-4"
                                 :color="themeOption.inputColor"
+                                solo
+                                flat
                             ></v-text-field>
                         </v-flex>
 
@@ -68,7 +72,10 @@
                         <v-flex xs2>
                             <div class="r-color-picker" v-if="isColorSwatchActive">
                                 <div class="r-color-picker-content">
-                                    <chrome v-model="selectedColor" box></chrome>
+                                    <chrome v-model="selectedColor" 
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"></chrome>
                                     <v-btn small
                                             class="r-color-choose"
                                             @click="isColorSwatchActive = false"
@@ -85,7 +92,9 @@
                                 :rules="[v => !!v || `${trans.select_a} ${trans.color}`]"
                                 required
                                 @focus="isColorSwatchActive = true"
-                                :color="themeOption.inputColor">
+                                :color="themeOption.inputColor"
+                                solo
+                                flat>
                             </v-text-field> 
                         </v-flex>
 
