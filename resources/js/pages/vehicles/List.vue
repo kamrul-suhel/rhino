@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-layout row wrap>
-            <div class="r-tab" >
+            <div class="r-tab open">
                 <div class="r-tab-title r-border-round">
                     <div>
                         <v-icon
@@ -21,92 +21,98 @@
                         ref="vehicleForm"
                         v-model="valid"
                         lazy-validation>
-                        <v-layout row wrap>
-                            <v-flex xs12 pa-2>
-                                <v-text-field box
-                                    :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
-                                    :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
-                                    :color="themeOption.inputColor"
-                                    v-model="vehicle.model"
-                                ></v-text-field>
-                            </v-flex>
-                        </v-layout>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm5 pa-2>
+                                    <v-select box
+                                        :items="brands"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.select_a} ${trans.brand}`"
+                                        v-model="vehicle.brand_id"
+                                        style="width: 70%"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
+                                    >
+                                    </v-select>
+                                </v-flex>
+                                <v-flex xs12 sm5 pa-2>
+                                    <v-text-field box
+                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
+                                        :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                        :color="themeOption.inputColor"
+                                        v-model="vehicle.model"
+                                        style="width: 70%"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
 
-                        <v-layout row wrap>
-                            <v-flex xs12 sm6 pa-2>
-                                <v-select box
-                                    :items="brands"
-                                    item-text="name"
-                                    item-value="id"
-                                    :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
-                                    :color="themeOption.inputColor"
-                                    :label="`${trans.select_a} ${trans.brand}`"
-                                    v-model="vehicle.brand_id"
-                                >
-                                </v-select>
-                            </v-flex>
-                        </v-layout>
+                            <v-layout>
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-layout row wrap pt-3>
+                                        <v-flex xs12>
+                                            <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
+                                            <v-divider class="my-2"></v-divider>
 
-                        <v-layout>
-                            <v-flex xs12 sm6 pa-2>
-                                <v-layout row wrap pt-3>
-                                    <v-flex xs12>
-                                        <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
-                                        <v-divider class="my-2"></v-divider>
+                                            <v-card class="pa-2 my-3">
+                                                <v-img
+                                                    :src="leftImage"
+                                                    aspect-ratio="2.75"
+                                                ></v-img>
+                                            </v-card>
 
-                                        <v-card class="pa-2 my-3">
-                                            <v-img
-                                                :src="leftImage"
-                                                aspect-ratio="2.75"
-                                            ></v-img>
-                                        </v-card>
+                                            <input
+                                                ref="leftImage"
+                                                type="file"
+                                                @change="setLeftImage"
+                                            />
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
 
-                                        <input
-                                            ref="leftImage"
-                                            type="file"
-                                            @change="setLeftImage"
-                                        />
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
+                                <v-flex xs12 sm6 pa-2>
+                                    <v-layout row wrap pt-3>
+                                        <v-flex xs12>
+                                            <label for="">{{ trans.right_hand_drive_image }}</label>
 
-                            <v-flex xs12 sm6 pa-2>
-                                <v-layout row wrap pt-3>
-                                    <v-flex xs12>
-                                        <label for="">{{ trans.right_hand_drive_image }}</label>
+                                            <v-divider class="my-2"></v-divider>
 
-                                        <v-divider class="my-2"></v-divider>
+                                            <v-card class="pa-2 my-3">
+                                                <v-img
+                                                    :src="rightImage"
+                                                    aspect-ratio="2.75"
+                                                ></v-img>
+                                            </v-card>
 
-                                        <v-card class="pa-2 my-3">
-                                            <v-img
-                                                :src="rightImage"
-                                                aspect-ratio="2.75"
-                                            ></v-img>
-                                        </v-card>
+                                            <input
+                                                ref="rightImage"
+                                                type="file"
+                                                @change="setRightImage"
+                                            />
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
+                            </v-layout>
 
-                                        <input
-                                            ref="rightImage"
-                                            type="file"
-                                            @change="setRightImage"
-                                        />
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-
-                            <v-flex xs12 text-center>
-                                <v-card-actions class="pa-3">
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    :class="themeOption.buttonSuccess"
-                                    small
-                                    @click="onCreateVehicle()"
-                                >
-                                    {{ `${trans.create} ${trans.vehicle}` }}
-                                </v-btn>
-                                </v-card-actions>
-                            </v-flex>
-
-                        </v-layout>
+                            <v-layout>
+                                <v-flex xs12 text-center>
+                                    <v-card-actions class="pa-3">
+                                    <v-btn
+                                        
+                                        small
+                                        @click="onCreateVehicle()"
+                                        color="error"
+                                    >
+                                        {{ `${trans.create} ${trans.vehicle}` }}
+                                    </v-btn>
+                                    </v-card-actions>
+                                </v-flex>
+                            </v-layout>
                         </v-form>
                     </v-container>
                 </div>
@@ -324,6 +330,8 @@
                                 message: `${this.vehicle.model}  ${this.trans.successfully_created}`
                             })
 
+                            console.log(this.getPagination());
+                            
 
                             this.$store.dispatch('fetchVehicles', this.getPagination() );
                             
@@ -345,6 +353,8 @@
                     search: this.searchVehicle,
                     subComponent: this.subComponent,
                 }
+
+                return pagination
 
             },
 

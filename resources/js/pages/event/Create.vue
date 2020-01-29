@@ -1,54 +1,40 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span
-                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.event}` }}</span>
-                    </v-toolbar-title>
+        <div class="r-tab open">
+            <div class="r-tab-title r-border-round">
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">drive_eta
+                    </v-icon>
+                </div>
 
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
-
-        <v-form
-            row wrap
-            ref="eventForm"
-            v-model="valid"
-            lazy-validation>
-            <v-layout>
-                <v-flex xs12>
-                    <v-card>
-                        <v-card-text>
+                <div>
+                    {{ `${trans.create} ${trans.event}` }}
+                </div>
+            </div>
+            <div class="r-tab-content" >
+                <v-form
+                    row wrap
+                    ref="eventForm"
+                    v-model="valid"
+                    lazy-validation>
+                    <v-layout>
+                        <v-flex xs12>
+                                
                             <v-layout row wrap>
-                                <v-flex xs12 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.name} ${trans.of} ${trans.event}`"
+                                        :label="`${trans.event} ${trans.name}`"
                                         v-model="event.name"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.greeting} ${trans.text}`"
-                                        v-model="event.greeting"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs4 pa-2>
                                     <v-select
                                         :items="dealerships"
                                         item-text="name"
@@ -57,47 +43,16 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
                                         v-model="event.dealership_id"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
                                     >
                                     </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="types"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.select} ${trans.event} ${trans.type}`"
-                                        v-model="event.type_id"
-                                    >
-                                    </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="appointmentDuration"
-                                        item-value="value"
-                                        item-text="text"
-                                        :label="trans.appointment_duration"
-                                        :color="themeOption.inputColor"
-                                        v-model="event.appointment_duration">
-                                    </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :color="themeOption.inputColor"
-                                        v-model="event.status"
-                                        :true-value="1"
-                                        :false-value="0">
-                                    </v-switch>
                                 </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-menu
                                         ref="startEvent"
                                         v-model="startEvent"
@@ -120,6 +75,9 @@
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                solo
+                                                flat
+                                                background-color="#eaeaea"
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
@@ -128,17 +86,17 @@
                                             <v-spacer></v-spacer>
 
                                             <v-btn flat :color="themeOption.buttonSecondaryColor"
-                                                   @click="startEvent = false">{{ trans.cancel }}
+                                                @click="startEvent = false">{{ trans.cancel }}
                                             </v-btn>
 
                                             <v-btn flat :color="themeOption.buttonPrimaryColor"
-                                                   @click="$refs.startEvent.save(event.start)">{{ trans.ok }}
+                                                @click="$refs.startEvent.save(event.start)">{{ trans.ok }}
                                             </v-btn>
                                         </v-date-picker>
                                     </v-menu>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-menu
                                         ref="endEvent"
                                         v-model="endEvent"
@@ -150,6 +108,9 @@
                                         offset-y
                                         full-width
                                         min-width="290px"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
@@ -161,6 +122,9 @@
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                solo
+                                                flat
+                                                background-color="#eaeaea"
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
@@ -169,51 +133,88 @@
                                             <v-spacer></v-spacer>
 
                                             <v-btn flat :color="themeOption.buttonSecondaryColor"
-                                                   @click="endEvent = false">{{ trans.cancel }}
+                                                @click="endEvent = false">{{ trans.cancel }}
                                             </v-btn>
 
                                             <v-btn flat :color="themeOption.buttonPrimaryColor"
-                                                   @click="$refs.endEvent.save(event.end)">{{ trans.ok }}
+                                                @click="$refs.endEvent.save(event.end)">{{ trans.ok }}
                                             </v-btn>
                                         </v-date-picker>
                                     </v-menu>
                                 </v-flex>
+                            </v-layout>
 
-                                <v-flex xs12 pa-2>
-                                    <v-textarea
+                            <v-layout row wrap>
+                                <v-flex xs12 sm4 pa-2>
+                                    <v-select
+                                        :items="appointmentDuration"
+                                        item-value="value"
+                                        item-text="text"
+                                        :label="trans.appointment_duration"
                                         :color="themeOption.inputColor"
-                                        :label="trans.notes"
-                                        v-model="event.notes"
-                                        :hint="trans.notes"
-                                    ></v-textarea>
+                                        v-model="event.appointment_duration"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
+                                    >
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm4 pa-2>
+                                    <v-select
+                                        :items="types"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.select} ${trans.event} ${trans.type}`"
+                                        v-model="event.type_id"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
+                                    >
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm4 pa-2>
+                                    <v-switch
+                                        :label="trans.status"
+                                        :color="themeOption.inputColor"
+                                        v-model="event.status"
+                                        :true-value="1"
+                                        :false-value="0">
+                                    </v-switch>
                                 </v-flex>
                             </v-layout>
-                        </v-card-text>
-
-                        <v-divider></v-divider>
-
-                        <v-card-actions class="pa-3">
-                            <v-spacer></v-spacer>
-
-                            <r-button :text="`${trans.back}`"
-                                      identifier="'eventList'"
-                                      small
-                                      :loadingBar="false"
-                                      @click="onBackToEventList"
-                                      :color="themeOption.buttonSecondaryColor"/>
-
-                            <r-button :text="`${trans.create} ${trans.event}`"
-                                      small
-                                      identifier="'eventCreate'"
-                                      :loadingBar="true"
-                                      @click="onCreateEvent"
-                                      :color="themeOption.buttonPrimaryColor"/>
-
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-        </v-form>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm8 pa-2>
+                                    <v-text-field
+                                        :rules="[v => !!v || `${trans.greeting} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.greeting} ${trans.text}`"
+                                        v-model="event.greeting"
+                                        solo
+                                        flat
+                                        background-color="#eaeaea"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row wrap>
+                                <v-flex xs12 pa-2>
+                                    <r-button :text="`${trans.create} ${trans.event}`"
+                                        small
+                                        identifier="'eventCreate'"
+                                        :loadingBar="true"
+                                        @click="onCreateEvent"
+                                        :color="themeOption.buttonPrimaryColor"/>
+                                </v-flex>
+                            </v-layout>                            
+                            
+                        </v-flex>
+                    </v-layout>
+                </v-form>
+            </div>
+        </div>
     </v-container>
 </template>
 
