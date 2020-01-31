@@ -10,7 +10,7 @@ const defaultState = {
         secondaryColor: '#444',
         textColor:'',
         theme: 'dark',
-        inputColor: 'dark',
+        inputColor: 'light',
         buttonPrimaryColor: 'success',
         buttonSecondaryColor: 'dark',
         buttonDangerColor: '#E20000',

@@ -1,26 +1,77 @@
 <template>
     <div>
-        <v-toolbar flat>
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.types }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
+        <div class="r-tab" :class="[showForm ? 'open' : '']" >
+            <div class="r-tab-title r-border-round" @click="toggleForm">
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">events
+                    </v-icon>
+                </div>
 
-            <v-spacer></v-spacer>
+                <div>
+                    {{ `${trans.add} ${trans.event} ${trans.type}` }}
+                </div>
+            </div>
 
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
-                v-model="searchType">
-            </v-text-field>
-        </v-toolbar>
+            <div class="r-tab-content" :class="[showForm ? 'open' : '']" >
+                <v-form ref="eventTypeForm"
+                        v-model="valid"
+                        lazy-validation>
+                    <v-layout row wrap>
+                        <v-flex xs12 v-if="editType">
+                            <Language 
+                                    :languageId="selectedType.language_id">
+                            </Language>
+                        </v-flex>
 
-        <v-layout row wrap>
-            <v-flex xs12 sm8 pt-3>
+                        <v-flex xs12 sm4 mr-3>
+                            <v-text-field
+                                :label="trans.name"
+                                :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                required
+                                v-model="selectedType.name"
+                                :color="themeOption.inputColor"
+                                box solo flat>
+                            </v-text-field>
+                        </v-flex>
+
+                        <v-flex xs12 sm4 ml-3>
+                            <span>{{trans.logo}}</span>
+
+                            <v-img
+                                :src="typeImage"
+                                aspect-ratio="2.75"
+                            ></v-img>
+
+                            <FileUpload :preview="false"
+                                        :multiple="false"
+                                        model="types">
+                            </FileUpload>
+                        </v-flex>
+
+                        <v-flex xs12>
+                            <v-switch
+                                :label="trans.status"
+                                :color="themeOption.inputColor"
+                                v-model="selectedType.status">
+                            </v-switch>
+                        </v-flex>
+                        <v-flex>
+                            <v-btn
+                                small
+                                dark
+                                :color="themeOption.buttonDangerColor"
+                                @click="onCreateType">
+                                {{ editType ? `${trans.update} ${trans.type}` : `${trans.add} ${trans.type}`}}
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-form>
+            </div>
+        </div>
+
+        <v-layout row>
+            <v-flex xs12 pt-3>
                 <v-data-table
                     :headers="headers"
                     :items="types"
@@ -32,7 +83,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalType"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.name }}</td>
@@ -56,76 +107,6 @@
                         </td>
                     </template>
                 </v-data-table>
-            </v-flex>
-
-            <v-flex xs12 sm4 pt-3 pl-3>
-                <v-form ref="eventTypeForm"
-                        v-model="valid"
-                        lazy-validation>
-                    <v-card>
-                        <v-card-title>
-                            <h3>{{ editType ? `${trans.edit} ${trans.type} ` : `${trans.create} ${trans.type}`}}</h3>
-                        </v-card-title>
-                        <v-divider></v-divider>
-
-                        <v-card-text>
-                            <v-flex xs12>
-                                <Language v-if="editType"
-                                          :languageId="selectedType.language_id">
-                                </Language>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <v-text-field
-                                    :label="trans.name"
-                                    :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
-                                    required
-                                    v-model="selectedType.name"
-                                    :color="themeOption.inputColor">
-                                </v-text-field>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <span>{{trans.logo}}</span>
-
-                                <v-img
-                                    :src="typeImage"
-                                    aspect-ratio="2.75"
-                                ></v-img>
-
-                                <FileUpload :preview="false"
-                                            :multiple="false"
-                                            model="types">
-                                </FileUpload>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <v-switch
-                                    :label="trans.status"
-                                    :color="themeOption.inputColor"
-                                    v-model="selectedType.status">
-                                </v-switch>
-                            </v-flex>
-                        </v-card-text>
-
-                        <v-card-actions class="pa-2">
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                small
-                                :color="themeOption.buttonPrimaryColor"
-                                @click="onResetType">
-                                {{trans.cancel}}
-                            </v-btn>
-
-                            <v-btn
-                                small
-                                :color="themeOption.buttonSecondaryColor"
-                                @click="onCreateType">
-                                {{ editType ? `${trans.update} ${trans.type}` : `${trans.add} ${trans.type}`}}
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-form>
             </v-flex>
         </v-layout>
 
@@ -195,7 +176,8 @@
                 dialog: false,
                 deleteDialog: false,
                 editType: false,
-                valid: true
+                valid: true,
+                showForm: false
             }
         },
 
@@ -240,6 +222,7 @@
         },
 
         created() {
+            this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
         },
 
         mounted() {
@@ -353,6 +336,10 @@
 
             onCancelType() {
 
+            }, 
+                        
+            toggleForm() {
+                this.showForm = !this.showForm
             }
         }
     }

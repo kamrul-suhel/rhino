@@ -1,25 +1,7 @@
 <template>
     <div >
-        <v-toolbar flat
-            :color="themeOption.toolbarColor">
-            <v-toolbar-title v-if="!subComponent">
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.users }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-                v-if="!subComponent"
-            ></v-divider>
 
-            <v-spacer></v-spacer>
-
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
-                v-model="searchUsers">
-            </v-text-field>
-        </v-toolbar>
+        <addUserForm></addUserForm>
 
         <v-layout row wrap>
             <v-flex xs12 pt-3>
@@ -34,7 +16,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalUsers"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.firstname }} {{ props.item.surname }}</td>
@@ -112,7 +94,13 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import addUserForm from './Create'
+
     export default {
+        components: {
+            addUserForm
+        },
+
         props:{
             subComponent:{
                 type: Boolean,

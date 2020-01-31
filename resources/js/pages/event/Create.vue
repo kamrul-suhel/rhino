@@ -1,7 +1,7 @@
 <template>
     <v-container pa-0>
-        <div class="r-tab open">
-            <div class="r-tab-title r-border-round">
+        <div class="r-tab" :class="[showForm ? 'open' : '']">
+            <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>
                     <v-icon
                         :color="themeOption.adminNavIconColor">drive_eta
@@ -12,7 +12,7 @@
                     {{ `${trans.create} ${trans.event}` }}
                 </div>
             </div>
-            <div class="r-tab-content" >
+            <div class="r-tab-content" :class="[showForm ? 'open' : '']">
                 <v-form
                     row wrap
                     ref="eventForm"
@@ -28,6 +28,7 @@
                                         :color="themeOption.inputColor"
                                         :label="`${trans.event} ${trans.name}`"
                                         v-model="event.name"
+                                        box
                                         solo
                                         flat
                                     ></v-text-field>
@@ -42,6 +43,7 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
                                         v-model="event.dealership_id"
+                                        box
                                         solo
                                         flat
                                     >
@@ -73,6 +75,7 @@
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                box
                                                 solo
                                                 flat
                                             ></v-text-field>
@@ -105,6 +108,7 @@
                                         offset-y
                                         full-width
                                         min-width="290px"
+                                        box
                                         solo
                                         flat
                                     >
@@ -118,6 +122,7 @@
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                box
                                                 solo
                                                 flat
                                             ></v-text-field>
@@ -148,6 +153,7 @@
                                         :label="trans.appointment_duration"
                                         :color="themeOption.inputColor"
                                         v-model="event.appointment_duration"
+                                        box
                                         solo
                                         flat
                                     >
@@ -163,6 +169,7 @@
                                         :color="themeOption.inputColor"
                                         :label="`${trans.select} ${trans.event} ${trans.type}`"
                                         v-model="event.type_id"
+                                        box
                                         solo
                                         flat
                                     >
@@ -172,7 +179,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-switch
                                         :label="trans.status"
-                                        :color="themeOption.inputColor"
+                                        :color="themeOption.buttonDangerColor"
                                         v-model="event.status"
                                         :true-value="1"
                                         :false-value="0">
@@ -186,6 +193,7 @@
                                         :color="themeOption.inputColor"
                                         :label="`${trans.greeting} ${trans.text}`"
                                         v-model="event.greeting"
+                                        box
                                         solo
                                         flat
                                     ></v-text-field>
@@ -194,11 +202,13 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <r-button :text="`${trans.create} ${trans.event}`"
+                                        class="rounded-btn text-white"
+                                        dark
                                         small
                                         identifier="'eventCreate'"
                                         :loadingBar="true"
                                         @click="onCreateEvent"
-                                        :color="themeOption.buttonPrimaryColor"/>
+                                        :color="themeOption.buttonDangerColor"/>
                                 </v-flex>
                             </v-layout>                            
                         </v-flex>
@@ -230,7 +240,8 @@
                 },
                 times: {},
                 active: null,
-                appointmentDuration:[]
+                appointmentDuration:[],
+                showForm: false
             }
         },
 
@@ -311,6 +322,10 @@
                         value: 120
                     }
                 ]
+            },
+            
+            toggleForm() {
+                this.showForm = !this.showForm
             }
         }
     }

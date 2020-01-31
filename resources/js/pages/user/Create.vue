@@ -1,242 +1,200 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4 >
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span
-                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.user}` }}</span>
-                    </v-toolbar-title>
+        <div class="r-tab" :class="[showForm ? 'open' : '']">
+            <div class="r-tab-title r-border-round" @click="toggleForm">
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">person
+                    </v-icon>
+                </div>
 
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
+                <div>
+                    {{ `${trans.create} ${trans.user}` }}
+                </div>
+            </div>
+            <div class="r-tab-content" :class="[showForm ? 'open' : '']">
 
-        <v-form
-            row wrap
-            ref="userForm"
-            v-model="valid"
-            lazy-validation>
-            <v-layout>
-                <v-flex xs12>
-                    <v-card>
-                        <v-card-text>
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.firstName"
-                                        v-model="user.name"
-                                    ></v-text-field>
-                                </v-flex>
+            <v-form
+                row wrap
+                ref="userForm"
+                v-model="valid"
+                lazy-validation>
+                <v-layout row wrap>
+                    <v-flex xs12 sm3 pa-2>
+                        <v-text-field
+                            :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.firstName"
+                            v-model="user.name"
+                            box solo flat
+                        ></v-text-field>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.surName"
-                                        v-model="user.surname"
-                                    ></v-text-field>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2>
+                        <v-text-field
+                            :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.surName"
+                            v-model="user.surname"
+                            box solo flat
+                        ></v-text-field>
+                    </v-flex>
 
-                                <v-flex xs12 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.email"
-                                        v-model="user.email"
-                                        required
-                                    ></v-text-field>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2>
+                        <v-text-field
+                            :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.email"
+                            v-model="user.email"
+                            box solo flat
+                            required
+                        ></v-text-field>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        :append-icon="password ? 'visibility' : 'visibility_off'"
-                                        :rules="passwordRule"
-                                        required
-                                        :color="themeOption.inputColor"
-                                        :label="trans.password"
-                                        :type="password ? `text` : `password`"
-                                        v-model="user.password"
-                                        @click:append="password = !password"
-                                        :hint="`${trans.password} ${trans.minimum8Character}`"
-                                        counter
-                                    ></v-text-field>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2>
+                        <v-text-field
+                            :append-icon="password ? 'visibility' : 'visibility_off'"
+                            :rules="passwordRule"
+                            required
+                            :color="themeOption.inputColor"
+                            :label="trans.password"
+                            :type="password ? `text` : `password`"
+                            v-model="user.password"
+                            @click:append="password = !password"
+                            :hint="`${trans.password} ${trans.minimum8Character}`"
+                            box solo flat
+                        ></v-text-field>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        :append-icon="confirmPassword ? 'visibility' : 'visibility_off'"
-                                        :rules="[v => !!v || `${trans.confirm} ${trans.is_required}`, confirmRule]"
-                                        required
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.confirm} ${trans.password}`"
-                                        :type="confirmPassword ? `text` : `password`"
-                                        @click:append="confirmPassword = !confirmPassword"
-                                        v-model="user.password_confirmation"
-                                        counter
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
+                    <v-flex xs12 sm3 pa-2>
+                        <v-text-field
+                            :append-icon="confirmPassword ? 'visibility' : 'visibility_off'"
+                            :rules="[v => !!v || `${trans.confirm} ${trans.is_required}`, confirmRule]"
+                            required
+                            :color="themeOption.inputColor"
+                            :label="`${trans.confirm} ${trans.password}`"
+                            :type="confirmPassword ? `text` : `password`"
+                            @click:append="confirmPassword = !confirmPassword"
+                            v-model="user.password_confirmation"
+                            box solo flat
+                        ></v-text-field>
+                    </v-flex>
+                
+                    <v-flex xs12 sm3 pa-2>
+                        <v-select
+                            :items="levels"
+                            :rules="[v => !!v || `${trans.select_a} ${trans.rule}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.rule"
+                            v-model="user.level"
+                            @change="onFetchData"
+                            box solo flat
+                        >
+                        </v-select>
+                    </v-flex>
 
-                            <v-layout row wrap v-if="!subComponent">
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="levels"
-                                        :rules="[v => !!v || `${trans.select_a} ${trans.rule}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.rule"
-                                        v-model="user.level"
-                                        @change="onFetchData"
-                                    >
-                                    </v-select>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2
+                            v-if="user.level==='dealership'">
+                        <v-select
+                            :items="dealerships"
+                            item-text="name"
+                            item-value="id"
+                            :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.dealership"
+                            v-model="user.dealershipId"
+                            box solo flat
+                        >
+                        </v-select>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level==='dealership'">
-                                    <v-select
-                                        :items="dealerships"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.dealership"
-                                        v-model="user.dealershipId"
-                                    >
-                                    </v-select>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2
+                            v-if="user.level === 'group'">
+                        <v-select
+                            :items="groups"
+                            item-text="name"
+                            item-value="id"
+                            :rules="[ v => !!v || `${trans.group} ${trans.is_required}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.group"
+                            v-model="user.group_id"
+                            box solo flat
+                        ></v-select>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'group'">
-                                    <v-select
-                                        :items="groups"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[ v => !!v || `${trans.group} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.group"
-                                        v-model="user.group_id"
-                                    ></v-select>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2
+                            v-if="user.level ==='country' || user.level === 'region'"
+                    >
+                        <v-autocomplete
+                            :items="countries"
+                            item-text="name"
+                            item-value="id"
+                            :rules="[ v => !!v || `${trans.country} ${trans.is_required}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.country"
+                            v-model="user.country_id"
+                            @change="getRegion"
+                            box solo flat
+                        ></v-autocomplete>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level ==='country' || user.level === 'region'"
-                                >
-                                    <v-autocomplete
-                                        :items="countries"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[ v => !!v || `${trans.country} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.country"
-                                        v-model="user.country_id"
-                                        @change="getRegion"
-                                    ></v-autocomplete>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2
+                            v-if="user.level === 'brand' || user.level === 'region'">
+                        <v-autocomplete
+                            :items="brands"
+                            item-text="name"
+                            item-value="id"
+                            :rules="[ v => !!v || `${trans.brand} ${trans.is_required}`]"
+                            :color="themeOption.inputColor"
+                            :label="trans.brand"
+                            v-model="user.brand_id"
+                            @change="getRegion"
+                            box solo flat
+                        ></v-autocomplete>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'brand' || user.level === 'region'">
-                                    <v-autocomplete
-                                        :items="brands"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[ v => !!v || `${trans.brand} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.brand"
-                                        v-model="user.brand_id"
-                                        @change="getRegion"
-                                    ></v-autocomplete>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2
+                            v-if="user.level === 'region'">
+                        <v-select :items="regions"
+                                item-text="name"
+                                item-value="id"
+                                :color="themeOption.inputColor"
+                                :rules="[v => !!v || `${trans.region} ${trans.is_required}`]"
+                                :label="trans.region"
+                                v-model="user.region_id"
+                                box solo flat
+                        ></v-select>
+                    </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'region'">
-                                    <v-select :items="regions"
-                                              item-text="name"
-                                              item-value="id"
-                                              :color="themeOption.inputColor"
-                                              :rules="[v => !!v || `${trans.region} ${trans.is_required}`]"
-                                              :label="trans.region"
-                                              v-model="user.region_id"
-                                    ></v-select>
-                                </v-flex>
+                    <v-flex xs12 sm3 pa-2
+                            v-if="user.level === 'company'">
+                        <v-select
+                            :items="companies"
+                            item-text="name"
+                            item-value="id"
+                            :color="themeOption.inputColor"
+                            :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
+                            :label="trans.company"
+                            v-model="user.company_id"
+                            box solo flat
+                        ></v-select>
+                    </v-flex>
+                </v-layout>
 
-                                <v-flex xs12 sm6 pa-2
-                                        v-if="user.level === 'company'">
-                                    <v-select
-                                        :items="companies"
-                                        item-text="name"
-                                        item-value="id"
-                                        :color="themeOption.inputColor"
-                                        :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
-                                        :label="trans.company"
-                                        v-model="user.company_id"
-                                    ></v-select>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :color="themeOption.inputColor"
-                                        v-model="user.status"
-                                        :true-value="1"
-                                        :false-value="0">
-                                    </v-switch>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-divider class="my-3"></v-divider>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <div class="my-2">{{ `${trans.profile} ${trans.image}` }}</div>
-                                    <v-card class="pa-3">
-                                        <input type="file"
-                                               class="mb-3"
-                                               accept="image/*"
-                                               ref="profileImage"
-                                               @change="onProfileImageUpload"/>
-
-                                        <v-img
-                                            :src="profileImage"
-                                            aspect-ratio="2"
-                                        ></v-img>
-                                    </v-card>
-                                </v-flex>
-                            </v-layout>
-                            <v-divider class="mt-2 mb-2"></v-divider>
-                        </v-card-text>
-
-                        <v-card-actions class="pa-3">
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                :class="themeOption.buttonSecondaryColor"
-                                small
-                                @click="$router.push({name: 'listUsers'})"
-                            >
-                                {{ `${trans.back}`}}
-                            </v-btn>
-
-                            <v-btn
-                                :class="themeOption.buttonSuccess"
-                                small
-                                @click="onCreateUser()"
-                            >
-                                {{ `${trans.create} ${trans.user}` }}
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-        </v-form>
+                <v-layout class="justify-center">
+                    <v-btn
+                        dark
+                        class="rounded-btn"
+                        :color="themeOption.buttonDangerColor"
+                        small
+                        @click="onCreateUser()"
+                    >
+                        {{ `${trans.submit}` }}
+                    </v-btn>
+                </v-layout>
+            </v-form>
+            </div>
+        </div>
     </v-container>
 </template>
 
@@ -254,7 +212,8 @@ import { log } from 'util'
                 password: false,
                 confirmPassword: false,
                 accessLevels: [],
-                profileImage: ''
+                profileImage: '',
+                showForm: false
             }
         },
 
@@ -379,12 +338,9 @@ import { log } from 'util'
                             message: `${this.trans.user}  ${this.trans.successfully_created}`
                         })
 
-                        if ( this.subComponent ) {
-                            this.$router.push({name: 'editDealerships', params: {id: this.$route.params.dealershipId} });
-                        } else {
-                            this.$router.push({name: 'listUsers'});
-                        }
                         
+                        this.showForm = false
+                        this.$refs.form.reset() 
 
                     })
                 }
@@ -400,6 +356,10 @@ import { log } from 'util'
                 axios.post('/api/uploadfiles', formData).then((response) => {
                     this.profileImage = response.data
                 })
+            },
+
+            toggleForm() {
+                this.showForm = !this.showForm
             }
         }
     }
