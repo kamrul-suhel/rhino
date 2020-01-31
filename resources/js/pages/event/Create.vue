@@ -199,16 +199,17 @@
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
-                            <v-layout row wrap>
+                            <v-layout row wrap class="justify-center">
                                 <v-flex xs12 pa-2>
-                                    <r-button :text="`${trans.create} ${trans.event}`"
+                                    <r-button 
+                                        :text="`${trans.submit}`"
                                         class="rounded-btn text-white"
                                         dark
                                         small
                                         identifier="'eventCreate'"
                                         :loadingBar="true"
                                         @click="onCreateEvent"
-                                        :color="themeOption.buttonDangerColor"/>
+                                        :color="themeOption.buttonDangerColor" />
                                 </v-flex>
                             </v-layout>                            
                         </v-flex>
@@ -326,6 +327,12 @@
             
             toggleForm() {
                 this.showForm = !this.showForm
+
+                if (this.showForm) {
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
+                } else {
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
+                }
             }
         }
     }

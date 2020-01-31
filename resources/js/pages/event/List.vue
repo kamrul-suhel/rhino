@@ -168,6 +168,7 @@
 
         created() {
             this.fetchCompany()
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
         },
 
         mounted() {

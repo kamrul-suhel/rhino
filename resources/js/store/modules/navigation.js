@@ -45,7 +45,7 @@ const mutations = {
 
             {
                 icon: 'events',
-                text: `${trans.manage}  ${trans.events} ${trans.types}`,
+                text: `${trans.manage}  ${trans.event} ${trans.types}`,
                 link: 'listEventTypes',
                 access: ['admin'],
                 divider: false

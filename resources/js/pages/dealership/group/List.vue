@@ -1,8 +1,8 @@
 <template>
     <div>
 
-        <div class="r-tab open">
-            <div class="r-tab-title r-border-round">
+        <div class="r-tab" :class="[showForm ? 'open' : '']">
+            <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>
                     <v-icon
                         :color="themeOption.adminNavIconColor">drive_eta
@@ -13,7 +13,7 @@
                     {{ `${trans.create} ${trans.new}  ${trans.group}` }}
                 </div>
             </div>
-            <div class="r-tab-content" >
+            <div class="r-tab-content"  :class="[showForm ? 'open' : '']">
                 <v-layout row wrap justify-space-between pt-3 pl-3>
                     <v-flex xs12>
                         <Language v-if="editGroup"
@@ -51,7 +51,6 @@
                             :color="themeOption.buttonDangerColor"
                             @click="onCreateGroup">
                             {{ `${trans.submit}` }}
-                            
                         </v-btn>
                     </v-flex>
                 </v-layout>
@@ -165,6 +164,7 @@
                 dialog: false,
                 deleteDialog: false,
                 editGroup: false,
+                showForm: false
             }
         },
 
@@ -214,6 +214,7 @@
         },
 
         created() {
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.groups}` )
         },
 
         mounted() {
@@ -315,6 +316,16 @@
 
             onCancelGroup() {
 
+            },
+
+            toggleForm() {
+                this.showForm = !this.showForm
+
+                if (this.showForm) {
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.group}` )
+                } else {
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.groups}` )
+                }
             }
         }
     }
