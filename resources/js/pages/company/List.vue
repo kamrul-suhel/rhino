@@ -1,26 +1,70 @@
 <template>
     <div>
-        <v-toolbar flat>
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.companies }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
 
-            <v-spacer></v-spacer>
+        <div class="r-tab" :class="[showForm ? 'open' : '']" >
+            <div class="r-tab-title r-border-round" @click="toggleForm">
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">business
+                    </v-icon>
+                </div>
 
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
-                v-model="searchCompany">
-            </v-text-field>
-        </v-toolbar>
+                <div>
+                    {{ `${trans.add} ${trans.new} ${trans.company}` }}
+                </div>
+            </div>
+
+            <div class="r-tab-content" :class="[showForm ? 'open' : '']" >
+                <v-layout row>
+                    <v-flex xs12 sm4 mr-3>
+                        <v-autocomplete
+                            v-if="this.editCompany"
+                            :label="trans.languages"
+                            v-model="selectedCompany.language_id"
+                            item-text="name"
+                            item-value="id"
+                            @change="onLanguageChange"
+                            :color="themeOption.inputColor"
+                            :items="languages">
+                        </v-autocomplete>
+
+                        <v-text-field
+                            :label="trans.name"
+                            v-model="selectedCompany.name"
+                            :color="themeOption.inputColor"
+                            box solo flat
+                        ></v-text-field>
+                    </v-flex>
+
+                    <v-flex xs12 sm-4 ml-3>
+                        <span>{{trans.logo}}</span>
+
+                        <v-img
+                            :src="companyImage"
+                        ></v-img>
+
+                        <FileUpload :preview="false"
+                                    :multiple="false"
+                                    model="'groups'">
+                        </FileUpload>
+                    </v-flex>
+                </v-layout>
+                <v-layout row>
+                    <v-flex xs12 class="pa-2">                        
+                        <v-btn class="rounded-btn"
+                            small
+                            dark
+                            :color="themeOption.buttonDangerColor"
+                            @click="onCreateCompany">
+                            {{ editCompany ? `${trans.update} ${trans.company}` : `${trans.create} ${trans.company}` }}
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
+            </div>
+        </div>
 
         <v-layout row wrap>
-            <v-flex xs12 sm8 pt-3>
+            <v-flex xs12 pt-3>
                 <v-data-table
                     :headers="headers"
                     :items="companies"
@@ -32,7 +76,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalCompanies"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.name }}</td>
@@ -56,65 +100,6 @@
                         </td>
                     </template>
                 </v-data-table>
-            </v-flex>
-
-            <v-flex xs12 sm4 pt-3 pl-3>
-                <v-card>
-                    <v-card-title>
-                        <h3>{{ editCompany ? `${trans.edit} ${trans.company}` : `${trans.create} ${trans.company}`}}</h3>
-                    </v-card-title>
-                    <v-divider></v-divider>
-
-                    <v-card-text>
-                        <v-autocomplete
-                            v-if="this.editCompany"
-                            :label="trans.languages"
-                            v-model="selectedCompany.language_id"
-                            item-text="name"
-                            item-value="id"
-                            @change="onLanguageChange"
-                            :color="themeOption.inputColor"
-                            :items="languages">
-                        </v-autocomplete>
-
-                        <v-text-field
-                            :label="trans.name"
-                            v-model="selectedCompany.name"
-                            :color="themeOption.inputColor"
-                        ></v-text-field>
-
-                        <v-flex xs12>
-                            <span>{{trans.logo}}</span>
-
-                            <v-img
-                                :src="companyImage"
-                                aspect-ratio="2.75"
-                            ></v-img>
-
-                            <FileUpload :preview="false"
-                                        :multiple="false"
-                                        model="'groups'">
-                            </FileUpload>
-                        </v-flex>
-                    </v-card-text>
-
-                    <v-card-actions class="pa-2">
-                        <v-spacer></v-spacer>
-                        <v-btn
-                            small
-                            :color="themeOption.buttonPrimaryColor"
-                            @click="onResetCompany">
-                            {{trans.cancel}}
-                        </v-btn>
-
-                        <v-btn
-                            small
-                            :color="themeOption.buttonSecondaryColor"
-                            @click="onCreateCompany">
-                            {{ editCompany ? `${trans.update} ${trans.company}` : `${trans.create} ${trans.company}` }}
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
             </v-flex>
         </v-layout>
 
@@ -182,7 +167,8 @@
                 dialog: false,
                 deleteDialog: false,
                 searchCompany:'',
-                editCompany: false
+                editCompany: false,
+                showForm: false
             }
         },
 
@@ -318,6 +304,10 @@
                 this.$store.commit('setSelectedCompany', {})
                 this.$store.commit('resetImageUpload')
             },
+
+            toggleForm() {
+                this.showForm = !this.showForm
+            }
         }
     }
 </script>

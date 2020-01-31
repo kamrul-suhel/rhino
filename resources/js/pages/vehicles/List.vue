@@ -1,8 +1,8 @@
 <template>
     <div>
         <v-layout row wrap>
-            <div class="r-tab open">
-                <div class="r-tab-title r-border-round">
+            <div class="r-tab" :class="[showForm ? 'open' : '']">
+                <div class="r-tab-title r-border-round" @click="toggleForm">
                     <div>
                         <v-icon
                             :color="themeOption.adminNavIconColor">drive_eta
@@ -14,7 +14,7 @@
                     </div>
                 </div>
 
-                <div class="r-tab-content" >
+                <div class="r-tab-content" :class="[showForm ? 'open' : '']">
                     <v-container fluid pa-0 grid-list-xl>
                         <v-form
                         row wrap
@@ -51,7 +51,7 @@
                             </v-layout>
 
                             <v-layout>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
                                             <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
@@ -71,7 +71,7 @@
                                     </v-layout>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
                                             <label for="">{{ trans.right_hand_drive_image }}</label>
@@ -96,12 +96,13 @@
                                 <v-flex xs12 text-center>
                                     <v-card-actions class="pa-3">
                                     <v-btn
-                                        
+                                        dark
                                         small
                                         @click="onCreateVehicle()"
-                                        color="error"
+                                        :color="themeOption.buttonDangerColor"
+                                        class="rounded-btn"
                                     >
-                                        {{ `${trans.create} ${trans.vehicle}` }}
+                                        {{ `${trans.submit}` }}
                                     </v-btn>
                                     </v-card-actions>
                                 </v-flex>
@@ -129,7 +130,25 @@
                 >
                     <template v-slot:items="props">
                         <tr @click="onEditVehicle(props.item)">
-                            <td>{{ props.item.model }}</td>
+                            <td width="10%">
+                                <v-img
+                                    contain
+                                    :src="props.item.driver_seating_position_left_image"
+                                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                                    aspect-ratio="1"
+                                    >
+                                </v-img>
+                            </td>
+                            <td width="10%">
+                                <v-img
+                                    contain
+                                    :src="props.item.driver_seating_position_right_image"
+                                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                                    aspect-ratio="1"
+                                    >
+                                </v-img>
+                            </td>
+                            <td width="20%">{{ props.item.model }}</td>
                             <td v-if="!subComponent">{{ props.item.brand }}</td>
                             <td class="text-xs-right">
                                 <v-icon
@@ -225,7 +244,8 @@
                 leftImage: '',
                 rightImage: '',
                 hasLeftImage: false,
-                hasRightImage: false
+                hasRightImage: false,
+                showForm: false
             }
         },
 
@@ -436,6 +456,10 @@
                 this.editVehicle = false
                 this.$store.commit('setSelectedVehicle', {})
             },
+
+            toggleForm() {
+                this.showForm = !this.showForm
+            }
         }
     }
 </script>

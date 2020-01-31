@@ -2,7 +2,7 @@
     width:100%;
     background:#fff;
     position:relative;
-    margin-bottom: 30px;
+    margin: 20px 0 30px;
 
     &.open {
         &::before{
@@ -13,6 +13,16 @@
             width: 100%;
             background: #fff;
             z-index: 3;
+        }
+
+        .r-tab-title::before {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            width: 100%;
+            height: 20px;
+            left: 0;
+            background: #fff;
         }
     }
 
@@ -27,16 +37,8 @@
         display:flex;
         align-items: center;
         justify-content: space-between;
-
-        &::before{
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            width: 100%;
-            height: 20px;
-            left: 0;
-            background: #fff;
-        }
+        cursor: pointer;
+        
     }
 
     .r-tab-content{
@@ -47,4 +49,12 @@
         z-index:1;
         background: #fff;
     }
+}
+
+
+.r-tab-content {
+    display: none;
+}
+.r-tab-content.open {
+    display: block;
 }

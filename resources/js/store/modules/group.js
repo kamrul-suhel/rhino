@@ -28,11 +28,6 @@ const mutations = {
             },
 
             {
-                text: trans.logo,
-                value: 'logo'
-            },
-
-            {
                 text: trans.status,
                 value: 'status'
             },

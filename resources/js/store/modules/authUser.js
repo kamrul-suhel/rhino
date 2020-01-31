@@ -13,7 +13,7 @@ const defaultState = {
         inputColor: 'dark',
         buttonPrimaryColor: 'success',
         buttonSecondaryColor: 'dark',
-        buttonDangerColor: 'red',
+        buttonDangerColor: '#E20000',
         buttonSuccess: 'success',
         buttonLoading: false,
         buttonLoadingStyle: 'loading',

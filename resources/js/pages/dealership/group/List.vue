@@ -1,26 +1,65 @@
 <template>
     <div>
-        <v-toolbar flat>
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.groups }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
 
-            <v-spacer></v-spacer>
+        <div class="r-tab open">
+            <div class="r-tab-title r-border-round">
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">drive_eta
+                    </v-icon>
+                </div>
 
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
-                v-model="searchGroup">
-            </v-text-field>
-        </v-toolbar>
+                <div>
+                    {{ `${trans.create} ${trans.new}  ${trans.group}` }}
+                </div>
+            </div>
+            <div class="r-tab-content" >
+                <v-layout row wrap justify-space-between pt-3 pl-3>
+                    <v-flex xs12>
+                        <Language v-if="editGroup"
+                            :languageId="selectedGroup.language_id">
+                        </Language>
+                    </v-flex>
+
+                    <v-flex xs12 sm4>
+                        <v-text-field
+                            :label="trans.name"
+                            v-model="selectedGroup.name"
+                            :color="themeOption.inputColor"
+                            solo 
+                            box
+                            flat>
+                        </v-text-field>
+                    </v-flex>
+
+                    <v-flex xs12 sm4>
+                        <v-switch
+                            :label="trans.status"
+                            :color="themeOption.inputColor"
+                            v-model="selectedGroup.status"
+                            :true-value="1"
+                            :false-value="0">
+                        </v-switch>
+                    </v-flex>
+                </v-layout>
+                <v-layout row class="justify-center">
+                    <v-flex xs12>
+                        <v-btn
+                            small
+                            dark
+                            class="rounded-btn"
+                            :color="themeOption.buttonDangerColor"
+                            @click="onCreateGroup">
+                            {{ `${trans.submit}` }}
+                            
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
+            </div>
+        </div>
 
         <v-layout row wrap>
-            <v-flex xs12 sm8 pt-3>
+            <v-flex xs12 pt-3>
                 <v-data-table
                     :headers="headers"
                     :items="groups"
@@ -32,7 +71,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGroup"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.name }}</td>
@@ -57,70 +96,6 @@
                         </td>
                     </template>
                 </v-data-table>
-            </v-flex>
-
-            <v-flex xs12 sm4 pt-3 pl-3>
-                <v-card>
-                    <v-card-title>
-                        <h3>{{ editGroup ? `${trans.edit} ${trans.group}` : `${trans.create} ${trans.group}` }}</h3>
-                    </v-card-title>
-                    <v-divider></v-divider>
-
-                    <v-card-text>
-                        <v-flex xs12>
-                            <Language v-if="editGroup"
-                                      :languageId="selectedGroup.language_id">
-                            </Language>
-                        </v-flex>
-
-                        <v-flex xs12>
-                            <v-text-field
-                                :label="trans.name"
-                                v-model="selectedGroup.name"
-                                :color="themeOption.inputColor">
-                            </v-text-field>
-                        </v-flex>
-
-                        <v-flex xs12>
-                            <span>{{trans.logo}}</span>
-
-                            <v-img
-                                :src="groupImage"
-                                aspect-ratio="2.75"
-                            ></v-img>
-
-                            <FileUpload :preview="false"
-                                        :multiple="false"
-                                        model="'groups'">
-                            </FileUpload>
-                        </v-flex>
-
-                        <v-flex xs12>
-                            <v-switch
-                                :label="trans.status"
-                                :color="themeOption.inputColor"
-                                v-model="selectedGroup.status">
-                            </v-switch>
-                        </v-flex>
-                    </v-card-text>
-
-                    <v-card-actions class="pa-2">
-                        <v-spacer></v-spacer>
-                        <v-btn
-                            small
-                            :color="themeOption.buttonPrimaryColor"
-                            @click="onResetGroup">
-                            {{trans.cancel}}
-                        </v-btn>
-
-                        <v-btn
-                            small
-                            :color="themeOption.buttonSecondaryColor"
-                            @click="onCreateGroup">
-                            {{ editGroup ? `${trans.update} ${trans.group}` : `${trans.add} ${trans.group}` }}
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
             </v-flex>
         </v-layout>
 
@@ -189,7 +164,7 @@
                 searchGroup: '',
                 dialog: false,
                 deleteDialog: false,
-                editGroup: false
+                editGroup: false,
             }
         },
 
@@ -321,10 +296,11 @@
 
                 axios.post(URL, groupForm).then((response)=>{
                     this.initialize()
+
                     this.$store.commit('setSnackbarMessage', {
                         openMessage: true,
                         timeOut: this.themeOption.snackBarTimeout,
-                        message: `${this.selectedGroup.name}  ${this.editGroup ? this.trans.successfully_updated : trans.successfully_created}`
+                        message: `${this.selectedGroup.name} ${this.editGroup ? this.trans.successfully_updated: this.trans.successfully_created}`
                     })
 
                     this.onResetGroup()

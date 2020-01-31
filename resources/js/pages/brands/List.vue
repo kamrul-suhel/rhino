@@ -1,24 +1,5 @@
 <template>
     <div>
-        <!-- <v-toolbar flat>
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.brands }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
-
-            <v-spacer></v-spacer>
-
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
-                v-model="searchBrands">
-            </v-text-field>
-        </v-toolbar> -->
-
         <v-layout row wrap>
             <v-flex xs12>
                 <v-form
@@ -42,18 +23,19 @@
                                 @change="onLanguageChange"
                                 :color="themeOption.inputColor"
                                 :items="languages"
-                                
+                                box
+                                solo
                                 flat>
                             </v-autocomplete>
 
                             <v-text-field
                                 :label="trans.name"
-                                box
                                 :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
                                 required
                                 v-model="selectedBrand.name"
                                 class="mr-4"
                                 :color="themeOption.inputColor"
+                                box
                                 solo
                                 flat
                             ></v-text-field>
@@ -104,15 +86,16 @@
                             <FileUpload :preview="false"
                                         identifier="brand"
                                         model="brands"
-                                        
                                         >
                             </FileUpload>
                         </v-flex>
 
                         <v-flex xs12>
                             <v-btn small
-                                    :color="themeOption.buttonPrimaryColor"
-                                    @click="onCreateBrand">
+                                    dark
+                                    :color="themeOption.buttonDangerColor"
+                                    @click="onCreateBrand"
+                                    class="rounded-btn">
                                 {{ editBrand ? trans.edit : trans.create }}
                             </v-btn>
                         </v-flex>
