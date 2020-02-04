@@ -134,7 +134,6 @@
                                 <v-img
                                     contain
                                     :src="props.item.driver_seating_position_left_image"
-                                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
                                     aspect-ratio="1"
                                     >
                                 </v-img>
@@ -143,7 +142,6 @@
                                 <v-img
                                     contain
                                     :src="props.item.driver_seating_position_right_image"
-                                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
                                     aspect-ratio="1"
                                     >
                                 </v-img>
@@ -289,6 +287,7 @@
         },
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.vehicles}`)
         },
 
         mounted() {
@@ -305,7 +304,7 @@
                     }
                 }
 
-                this.$store.dispatch('fetchBrandForDropDown');
+                // this.$store.dispatch('fetchBrandForDropDown');
                 this.$store.dispatch('fetchVehicles', this.getPagination())
             },
 
@@ -344,9 +343,7 @@
                             })
 
                             console.log(this.getPagination());
-                            
 
-                            this.$store.dispatch('fetchVehicles', this.getPagination() );
                             
                         }
                     })

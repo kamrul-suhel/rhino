@@ -15,13 +15,15 @@
 
             <v-flex xs12 sm4>
                 <div class="text-xs-center">
-                    {{ title }}
+                    <h2>{{ title }}</h2>
                 </div>
             </v-flex>
 
             <v-flex xs12 sm4>
                 <v-spacer></v-spacer>
-                <span>languaage</span>
+                <div class="text-xs-right">
+                    <span>language</span>
+                </div>
             </v-flex>
         </v-layout>
 

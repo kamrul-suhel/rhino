@@ -390,6 +390,7 @@
 
         created() {
             this.initialize()
+            this.$store.commit( 'setHeaderTitle', `${this.trans.edit} ${this.trans.user}` )
         },
 
         methods: {

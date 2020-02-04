@@ -360,6 +360,13 @@ import { log } from 'util'
 
             toggleForm() {
                 this.showForm = !this.showForm
+
+                
+                if (this.showForm) {
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.user}` )
+                } else {
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.users}` )
+                }
             }
         }
     }

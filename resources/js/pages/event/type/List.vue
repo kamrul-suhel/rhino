@@ -4,7 +4,7 @@
             <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>
                     <v-icon
-                        :color="themeOption.adminNavIconColor">events
+                        :color="themeOption.adminNavIconColor">grade
                     </v-icon>
                 </div>
 

@@ -253,6 +253,7 @@
         created() {
             this.fetchCompany()
             this.selectedBrand.status = 1;
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.brands}`)
         },
 
         mounted() {

@@ -81,7 +81,7 @@
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
-                                            :color="themeOption.inputColor"
+                                            :color="themeOption.buttonDangerColor"
                                             v-model="event.start" no-title scrollable>
                                             <v-spacer></v-spacer>
 
@@ -128,7 +128,7 @@
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
-                                            :color="themeOption.inputColor"
+                                            :color="themeOption.buttonDangerColor"
                                             v-model="event.end" no-title scrollable>
                                             <v-spacer></v-spacer>
 
@@ -175,16 +175,6 @@
                                     >
                                     </v-select>
                                 </v-flex>
-
-                                <v-flex xs12 sm4 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :color="themeOption.buttonDangerColor"
-                                        v-model="event.status"
-                                        :true-value="1"
-                                        :false-value="0">
-                                    </v-switch>
-                                </v-flex>
                             </v-layout>
                             <v-layout row wrap>
                                 <v-flex xs12 sm8 pa-2>
@@ -197,6 +187,17 @@
                                         solo
                                         flat
                                     ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm4 pa-2>
+                                    <v-switch
+                                        :label="trans.status"
+                                        :color="themeOption.switchOnColor"
+                                        v-model="event.status"
+                                        :true-value="1"
+                                        :false-value="0">
+                                    </v-switch>
                                 </v-flex>
                             </v-layout>
                             <v-layout row wrap class="justify-center">
@@ -294,7 +295,6 @@
                                 message: `${this.event.name}  ${this.trans.successfully_created}`
                             })
                             this.$store.commit('setButtonLoading', false)
-                            this.$router.push({name: 'listEvents'})
                         }
                     })
                 }else{
