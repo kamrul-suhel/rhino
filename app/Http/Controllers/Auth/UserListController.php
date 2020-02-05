@@ -17,6 +17,7 @@ class UserListController extends Controller
     {
         $data = [];
         $totalUsers = 0;
+
         $users = User::select(
             'users.*',
             'dealerships.id as dealership_id',
@@ -93,7 +94,7 @@ class UserListController extends Controller
             $data = $data->items();
         } else {
             $data = $users->get();
-            $totalUsers = $users->count();
+            $totalUsers = $data->count();
         }
 
         return response()->json([

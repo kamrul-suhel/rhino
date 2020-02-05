@@ -27,4 +27,8 @@ class Dealership extends Model
     public function group(){
         return $this->belongsTo(Group::class, 'dealership_id', 'id');
     }
+
+    public function dealershipTranslation(){
+        return $this->hasOne(DealershipTranslation::class,'dealership_id', 'id');
+    }
 }

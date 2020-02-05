@@ -67,4 +67,45 @@ class User extends Authenticatable
     public function specializeBrands(){
         return $this->hasMany(BrandUser::class);
     }
+
+    /**
+     * Belong to one dealership
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function dealership(){
+        return $this->belongsTo(Dealership::class);
+    }
+
+    /**
+     * Belong to one group
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
+
+    /**
+     * Belong to one region
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function region(){
+        return $this->belongsTo(Region::class);
+    }
+
+
+    /**
+     * Belong to one country
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country(){
+       return $this->belongsTo(Country::class);
+    }
+
+    /**
+     * Belong to one company
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
 }

@@ -25,4 +25,8 @@ class Group extends Model
     {
         return $this->hasMany(Dealership::class, 'dealership_id', 'id');
     }
+
+    public function groupTranslation(){
+        return $this->hasOne(GroupTranslation::class, 'group_id', 'id');
+    }
 }
