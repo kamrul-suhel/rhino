@@ -56,6 +56,18 @@ const mutations = {
         if(!payload.subComponent){
             header = [
                 {
+                    text: payload.trans.left,
+                    align: 'left',
+                    value: 'left'
+                },
+
+                {
+                    text: payload.trans.right,
+                    align: 'left',
+                    value: 'right'
+                },
+
+                {
                     text: payload.trans.vehicle,
                     align: 'left',
                     value: 'vehicle'

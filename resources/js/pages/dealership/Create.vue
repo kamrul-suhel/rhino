@@ -1,231 +1,236 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.dealership}` }}</span>
-                    </v-toolbar-title>
+        <div class="r-tab" :class="[showForm ? 'open' : '']">
+            <div class="r-tab-title r-border-round" @click="toggleForm">
+                <div>
+                    <v-icon
+                        :color="themeOption.adminNavIconColor">tag_faces
+                    </v-icon>
+                </div>
 
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
+                <div>
+                    {{ `${trans.create} ${trans.dealership}` }}
+                </div>
+            </div>
+            <div class="r-tab-content" :class="[showForm ? 'open' : '']">
+                <v-form
+                    row wrap
+                    ref="dealershipForm"
+                    v-model="valid"
+                    lazy-validation>
+                    <v-layout>
+                        <v-flex xs12>
+                                <v-layout row wrap>
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.name}`"
+                                            v-model="dealership.name" 
+                                            box solo flat
+                                        ></v-text-field>
+                                    </v-flex>
 
-        <v-form
-            row wrap
-            ref="dealershipForm"
-            v-model="valid"
-            lazy-validation>
-            <v-layout>
-                <v-flex xs12>
-                    <v-card>
-                        <v-card-text>
-                            <v-layout row wrap>
-                                <v-flex xs12 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.name} ${trans.of} ${trans.dealership}`"
-                                        v-model="dealership.name"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            type="number"
+                                            :color="themeOption.inputColor"
+                                            :label="trans.latitude"
+                                            v-model="dealership.latitude"
+                                            box solo flat>
+                                        </v-text-field>
+                                    </v-flex>
 
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="countries"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.select_country"
-                                        v-model="dealership.country_id"
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            type="number"
+                                            :color="themeOption.inputColor"
+                                            v-model="dealership.longitude"
+                                            :label="trans.longitude"
+                                            box solo flat>
+                                        </v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :color="themeOption.inputColor"
+                                            :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
+                                            :label="`${trans.address_line} 1`"
+                                            v-model="dealership.address_line_1"
+                                            box solo flat>
+                                        </v-text-field>
+                                    </v-flex>
+                                </v-layout>
+
+                                <v-layout row wrap>
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.address_line} 2`"
+                                            v-model="dealership.address_line_2"
+                                            box solo flat
+                                        >
+                                        </v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.address_line} 3`"
+                                            v-model="dealership.address_line_3"
+                                            box solo flat
+                                        >
+                                        </v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.address_line} 4`"
+                                            v-model="dealership.address_line_4"
+                                            box solo flat
+                                        >
+                                        </v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.address_line} 5`"
+                                            v-model="dealership.address_line_5"
+                                            box solo flat
+                                        >
+                                        </v-text-field>
+                                    </v-flex>
+                                </v-layout>
+
+
+                                <v-layout row wrap>
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.address_line} 6`"
+                                            v-model="dealership.address_line_6"
+                                            box solo flat
+                                        >
+                                        </v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-select
+                                            :items="countries"
+                                            item-text="name"
+                                            item-value="id"
+                                            :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
+                                            :color="themeOption.inputColor"
+                                            :label="trans.select_country"
+                                            v-model="dealership.country_id"
+                                            box solo flat
+                                        >
+                                        </v-select>
+                                    </v-flex>
+
+                                </v-layout>
+
+                                <v-layout row wrap>
+
+                                    <v-flex xs12 sm6 pa-2>
+                                        <v-switch
+                                            :label="trans.status"
+                                            :color="themeOption.inputColor"
+                                            v-model="dealership.status"
+                                            :true-value="1"
+                                            :false-value="0">
+                                        </v-switch>
+                                    </v-flex>
+                                </v-layout>
+
+                                <v-divider class="mt-2 mb-2"></v-divider>
+
+                                <v-layout column wrap>
+                                    <v-tabs
+                                        v-model="active"
+                                        :color="themeOption.tabColor"
+                                        :slider-color="themeOption.tabSliderColor"
                                     >
-                                    </v-select>
-                                </v-flex>
+                                        <v-tab
+                                            key="address"
+                                            ripple
+                                        >
+                                            {{ trans.address}}
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="groups"
-                                        item-text="name"
-                                        item-value="id"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.select_a} ${trans.group}`"
-                                        v-model="dealership.group_id"
+                                        </v-tab>
+
+                                        <v-tab
+                                            key="dealershipImage"
+                                            ripple
+                                        >
+                                            {{ `${trans.dealership} ${trans.banner}`}}
+
+                                        </v-tab>
+
+                                        <v-tab
+                                            key="times"
+                                            ripple
+                                        >
+                                            {{ trans.opening_times}}
+
+                                        </v-tab>
+
+                                        <v-tab-item
+                                            key="address"
+                                        >
+                                            <v-layout row wrap pt-3>
+                                                
+
+                                                
+                                            </v-layout>
+
+                                            <v-layout row wrap pt-3>
+                                                
+                                            </v-layout>
+
+                                            <v-layout row wrap>
+                                                
+
+                                                
+                                            </v-layout>
+                                        </v-tab-item>
+
+                                        <v-tab-item
+                                            key="dealershipImage"
+                                        >
+                                            <v-layout row wrap pt-3>
+                                                <ImageUpload :preview="true"
+                                                            model="dealership"
+                                                ></ImageUpload>
+                                            </v-layout>
+                                        </v-tab-item>
+
+                                        <v-tab-item
+                                            key="times">
+                                            <TimePicker :dealership="times"
+                                                        v-on:sendTimes="updateTimes">
+                                            </TimePicker>
+                                        </v-tab-item>
+                                    </v-tabs>
+                                </v-layout>
+                                <v-layout class="pa-3">
+                                    <v-btn
+                                        :color="themeOption.buttonDangerColor"
+                                        class="rounded-btn"
+                                        dark
+                                        small
+                                        @click="onCreateDealership()"
                                     >
-                                    </v-select>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        type="number"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.latitude"
-                                        v-model="dealership.latitude">
-                                    </v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
-                                        type="number"
-                                        :color="themeOption.inputColor"
-                                        v-model="dealership.longitude"
-                                        :label="trans.longitude">
-                                    </v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :color="themeOption.inputColor"
-                                        v-model="dealership.status"
-                                        :true-value="1"
-                                        :false-value="0">
-                                    </v-switch>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-divider class="mt-2 mb-2"></v-divider>
-
-                            <v-layout column wrap>
-                                <v-tabs
-                                    v-model="active"
-                                    :color="themeOption.tabColor"
-                                    :slider-color="themeOption.tabSliderColor"
-                                >
-                                    <v-tab
-                                        key="address"
-                                        ripple
-                                    >
-                                        {{ trans.address}}
-
-                                    </v-tab>
-
-                                    <v-tab
-                                        key="dealershipImage"
-                                        ripple
-                                    >
-                                        {{ `${trans.dealership} ${trans.banner}`}}
-
-                                    </v-tab>
-
-                                    <v-tab
-                                        key="times"
-                                        ripple
-                                    >
-                                        {{ trans.opening_times}}
-
-                                    </v-tab>
-
-                                    <v-tab-item
-                                        key="address"
-                                    >
-                                        <v-layout row wrap pt-3>
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
-                                                    :label="`${trans.address_line} 1`"
-                                                    v-model="dealership.address_line_1">
-                                                </v-text-field>
-                                            </v-flex>
-
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="`${trans.address_line} 2`"
-                                                    v-model="dealership.address_line_2"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-                                        </v-layout>
-
-                                        <v-layout row wrap pt-3>
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="`${trans.address_line} 3`"
-                                                    v-model="dealership.address_line_3"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="`${trans.address_line} 4`"
-                                                    v-model="dealership.address_line_4"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-                                        </v-layout>
-
-                                        <v-layout row wrap>
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="`${trans.address_line} 5`"
-                                                    v-model="dealership.address_line_5"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-
-                                            <v-flex xs12 sm6 pa-2>
-                                                <v-text-field
-                                                    :color="themeOption.inputColor"
-                                                    :label="`${trans.address_line} 6`"
-                                                    v-model="dealership.address_line_6"
-                                                >
-                                                </v-text-field>
-                                            </v-flex>
-                                        </v-layout>
-                                    </v-tab-item>
-
-                                    <v-tab-item
-                                        key="dealershipImage"
-                                    >
-                                        <v-layout row wrap pt-3>
-                                            <ImageUpload :preview="true"
-                                                         model="dealership"
-                                            ></ImageUpload>
-                                        </v-layout>
-                                    </v-tab-item>
-
-                                    <v-tab-item
-                                        key="times">
-                                        <TimePicker :dealership="times"
-                                                    v-on:sendTimes="updateTimes">
-                                        </TimePicker>
-                                    </v-tab-item>
-                                </v-tabs>
-                            </v-layout>
-                        </v-card-text>
-
-                        <v-divider></v-divider>
-
-                        <v-card-actions class="pa-3">
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                :class="themeOption.buttonSuccess"
-                                small
-                                @click="onCreateDealership()"
-                            >
-                                {{ `${trans.create} ${trans.dealership}` }}
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-        </v-form>
+                                        {{ `${trans.submit}` }}
+                                    </v-btn>
+                                </v-layout>
+                        </v-flex>
+                    </v-layout>
+                </v-form>
+            </div>
+        </div>
     </v-container>
 </template>
 
@@ -251,6 +256,7 @@
                 times: {},
                 active: null,
                 model: null,
+                showForm: false
             }
         },
 
@@ -261,7 +267,6 @@
                 selectedCountry: 'getSelectedCountry',
                 themeOption: 'getThemeOption',
                 regions: 'getRegions',
-                groups: 'getGroups'
             })
         }),
 
@@ -275,7 +280,6 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
-                this.$store.dispatch('fetchGroups', {dropDown: true})
             },
 
             updateTimes(times) {
@@ -312,10 +316,14 @@
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.dealership.name}  ${this.trans.successfully_created}`
                             })
-                            this.$router.push({name: 'listDealerships'})
                         }
                     })
                 }
+            },
+
+            toggleForm() {
+                this.showForm = !this.showForm
+
             }
         }
     }

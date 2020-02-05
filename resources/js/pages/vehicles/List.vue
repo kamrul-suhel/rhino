@@ -1,8 +1,8 @@
 <template>
     <div>
         <v-layout row wrap>
-            <div class="r-tab" >
-                <div class="r-tab-title r-border-round">
+            <div class="r-tab" :class="[showForm ? 'open' : '']">
+                <div class="r-tab-title r-border-round" @click="toggleForm">
                     <div>
                         <v-icon
                             :color="themeOption.adminNavIconColor">drive_eta
@@ -14,99 +14,99 @@
                     </div>
                 </div>
 
-                <div class="r-tab-content" >
+                <div class="r-tab-content" :class="[showForm ? 'open' : '']">
                     <v-container fluid pa-0 grid-list-xl>
                         <v-form
                         row wrap
                         ref="vehicleForm"
                         v-model="valid"
                         lazy-validation>
-                        <v-layout row wrap>
-                            <v-flex xs12 pa-2>
-                                <v-text-field box
-                                    :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
-                                    :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
-                                    :color="themeOption.inputColor"
-                                    v-model="vehicle.model"
-                                ></v-text-field>
-                            </v-flex>
-                        </v-layout>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm5 pa-2>
+                                    <v-select box
+                                        :items="brands"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.select_a} ${trans.brand}`"
+                                        v-model="vehicle.brand_id"
+                                        style="width: 70%"
+                                        solo
+                                        flat
+                                    >
+                                    </v-select>
+                                </v-flex>
+                                <v-flex xs12 sm5 pa-2>
+                                    <v-text-field box
+                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
+                                        :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                        :color="themeOption.inputColor"
+                                        v-model="vehicle.model"
+                                        style="width: 70%"
+                                        solo
+                                        flat
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
 
-                        <v-layout row wrap>
-                            <v-flex xs12 sm6 pa-2>
-                                <v-select box
-                                    :items="brands"
-                                    item-text="name"
-                                    item-value="id"
-                                    :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
-                                    :color="themeOption.inputColor"
-                                    :label="`${trans.select_a} ${trans.brand}`"
-                                    v-model="vehicle.brand_id"
-                                >
-                                </v-select>
-                            </v-flex>
-                        </v-layout>
+                            <v-layout>
+                                <v-flex xs12 sm5 pa-2>
+                                    <v-layout row wrap pt-3>
+                                        <v-flex xs12>
+                                            <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
+                                            <v-card class="pa-2 my-3">
+                                                <v-img
+                                                    :src="leftImage"
+                                                    aspect-ratio="2.75"
+                                                ></v-img>
+                                            </v-card>
 
-                        <v-layout>
-                            <v-flex xs12 sm6 pa-2>
-                                <v-layout row wrap pt-3>
-                                    <v-flex xs12>
-                                        <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
-                                        <v-divider class="my-2"></v-divider>
+                                            <input
+                                                ref="leftImage"
+                                                type="file"
+                                                @change="setLeftImage"
+                                            />
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
 
-                                        <v-card class="pa-2 my-3">
-                                            <v-img
-                                                :src="leftImage"
-                                                aspect-ratio="2.75"
-                                            ></v-img>
-                                        </v-card>
+                                <v-flex xs12 sm5 pa-2>
+                                    <v-layout row wrap pt-3>
+                                        <v-flex xs12>
+                                            <label for="">{{ trans.right_hand_drive_image }}</label>
+                                            <v-card class="pa-2 my-3">
+                                                <v-img
+                                                    :src="rightImage"
+                                                    aspect-ratio="2.75"
+                                                ></v-img>
+                                            </v-card>
 
-                                        <input
-                                            ref="leftImage"
-                                            type="file"
-                                            @change="setLeftImage"
-                                        />
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
+                                            <input
+                                                ref="rightImage"
+                                                type="file"
+                                                @change="setRightImage"
+                                            />
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
+                            </v-layout>
 
-                            <v-flex xs12 sm6 pa-2>
-                                <v-layout row wrap pt-3>
-                                    <v-flex xs12>
-                                        <label for="">{{ trans.right_hand_drive_image }}</label>
-
-                                        <v-divider class="my-2"></v-divider>
-
-                                        <v-card class="pa-2 my-3">
-                                            <v-img
-                                                :src="rightImage"
-                                                aspect-ratio="2.75"
-                                            ></v-img>
-                                        </v-card>
-
-                                        <input
-                                            ref="rightImage"
-                                            type="file"
-                                            @change="setRightImage"
-                                        />
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-
-                            <v-flex xs12 text-center>
-                                <v-card-actions class="pa-3">
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    :class="themeOption.buttonSuccess"
-                                    small
-                                    @click="onCreateVehicle()"
-                                >
-                                    {{ `${trans.create} ${trans.vehicle}` }}
-                                </v-btn>
-                                </v-card-actions>
-                            </v-flex>
-
-                        </v-layout>
+                            <v-layout>
+                                <v-flex xs12 text-center>
+                                    <v-card-actions class="pa-3">
+                                    <v-btn
+                                        dark
+                                        small
+                                        @click="onCreateVehicle()"
+                                        :color="themeOption.buttonDangerColor"
+                                        class="rounded-btn"
+                                    >
+                                        {{ `${trans.submit}` }}
+                                    </v-btn>
+                                    </v-card-actions>
+                                </v-flex>
+                            </v-layout>
                         </v-form>
                     </v-container>
                 </div>
@@ -130,7 +130,23 @@
                 >
                     <template v-slot:items="props">
                         <tr @click="onEditVehicle(props.item)">
-                            <td>{{ props.item.model }}</td>
+                            <td width="10%">
+                                <v-img
+                                    contain
+                                    :src="props.item.driver_seating_position_left_image"
+                                    aspect-ratio="1"
+                                    >
+                                </v-img>
+                            </td>
+                            <td width="10%">
+                                <v-img
+                                    contain
+                                    :src="props.item.driver_seating_position_right_image"
+                                    aspect-ratio="1"
+                                    >
+                                </v-img>
+                            </td>
+                            <td width="20%">{{ props.item.model }}</td>
                             <td v-if="!subComponent">{{ props.item.brand }}</td>
                             <td class="text-xs-right">
                                 <v-icon
@@ -226,7 +242,8 @@
                 leftImage: '',
                 rightImage: '',
                 hasLeftImage: false,
-                hasRightImage: false
+                hasRightImage: false,
+                showForm: false
             }
         },
 
@@ -270,6 +287,7 @@
         },
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.vehicles}`)
         },
 
         mounted() {
@@ -286,7 +304,7 @@
                     }
                 }
 
-                this.$store.dispatch('fetchBrandForDropDown');
+                // this.$store.dispatch('fetchBrandForDropDown');
                 this.$store.dispatch('fetchVehicles', this.getPagination())
             },
 
@@ -324,8 +342,8 @@
                                 message: `${this.vehicle.model}  ${this.trans.successfully_created}`
                             })
 
+                            console.log(this.getPagination());
 
-                            this.$store.dispatch('fetchVehicles', this.getPagination() );
                             
                         }
                     })
@@ -345,6 +363,8 @@
                     search: this.searchVehicle,
                     subComponent: this.subComponent,
                 }
+
+                return pagination
 
             },
 
@@ -433,6 +453,10 @@
                 this.editVehicle = false
                 this.$store.commit('setSelectedVehicle', {})
             },
+
+            toggleForm() {
+                this.showForm = !this.showForm
+            }
         }
     }
 </script>

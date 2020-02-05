@@ -1,24 +1,8 @@
 <template>
     <div>
-        <v-toolbar flat :class="{'mt-4' : subComponent}">
-            <v-toolbar-title v-if="!subComponent">
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.events }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-                v-if="!subComponent"
-            ></v-divider>
 
-            <v-spacer></v-spacer>
 
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.event.toLowerCase()} ${trans.name.toLowerCase()}`"
-                v-model="searchBrands">
-            </v-text-field>
-        </v-toolbar>
+        <EventForm></EventForm>
 
         <v-layout row wrap>
             <v-flex xs12 pt-3>
@@ -33,7 +17,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalEvents"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.event }}</td>
@@ -115,11 +99,13 @@
     import {mapGetters} from 'vuex'
     import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
+    import EventForm from './Create'
 
     export default {
         components: {
             FileUpload,
-            Chrome
+            Chrome,
+            EventForm
         },
 
         props: {
@@ -182,6 +168,7 @@
 
         created() {
             this.fetchCompany()
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
         },
 
         mounted() {

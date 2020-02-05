@@ -1,24 +1,5 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.brand}` }}</span>
-                    </v-toolbar-title>
-
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-
-                    <language-picker :languageId="brand.language_id"></language-picker>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
-
         <v-form
             row wrap
             ref="brandForm"
@@ -110,37 +91,12 @@
                                 >
 
                                     <v-tab
-                                        key="vehicles"
-                                        ripple
-                                    >
-                                        {{ trans.vehicles }}
-                                    </v-tab>
-
-                                    <v-tab
                                         key="regions"
                                         ripple
                                     >
                                         {{ trans.regions}}
                                     </v-tab>
 
-                                    <v-tab-item
-                                        key="Vehicles"
-                                    >
-                                        <v-layout>
-                                            <v-flex xs12 md8 lg10>
-                                                <vehicles model="brand" subComponent></vehicles>
-                                            </v-flex>
-                                            <v-flex xs12 md4 lg2 pt-3 class="text-xs-right">
-                                                <v-btn
-                                                    :class="themeOption.buttonSuccess"
-                                                    small
-                                                    @click="addBrandVehicle()"
-                                                >
-                                                    {{ `${trans.create} ${trans.vehicle}` }}
-                                                </v-btn>
-                                            </v-flex>
-                                        </v-layout>
-                                    </v-tab-item>
                                     <v-tab-item
                                         key="regions"
                                     >
@@ -256,6 +212,7 @@
         created() {
             this.initialize()
             this.fetchCompany()
+            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.brand}`)
         },
 
         methods: {

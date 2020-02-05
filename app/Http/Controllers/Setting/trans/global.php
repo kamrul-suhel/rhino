@@ -631,6 +631,12 @@ return [
     ],
 
     [
+        'label' => 'Submit',
+        'identifier' => 'submit',
+        'translation' => 'Submit'
+    ],
+
+    [
         'label' => 'Remove',
         'identifier' => 'remove',
         'translation' => 'Remove'
