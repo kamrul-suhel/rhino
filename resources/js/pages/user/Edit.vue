@@ -182,7 +182,7 @@
                                         :false-value="0"
                                         :true-value="1"
                                         :label="trans.status"
-                                        :color="themeOption.inputColor"
+                                        :color="themeOption.switchOnColor"
                                         v-model="user.status">
                                     </v-switch>
                                 </v-flex>

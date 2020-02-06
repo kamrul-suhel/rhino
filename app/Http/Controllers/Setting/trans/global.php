@@ -649,6 +649,12 @@ return [
     ],
 
     [
+        'label' => 'Translations',
+        'identifier' => 'translations',
+        'translation' => 'Translations'
+    ],
+
+    [
         'label' => 'Break',
         'identifier' => 'break',
         'translation' => 'Break'

@@ -1,27 +1,18 @@
 <template>
     <div>
-        <v-toolbar flat>
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">
-                    {{ trans.translation }}
-                </span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
-
-            <v-spacer></v-spacer>
-
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
-                v-model="searchField">
-            </v-text-field>
-
-            <LanguagePicker :languageId="selectedLanguage.id"></LanguagePicker>
-        </v-toolbar>
+        <v-layout flat>
+            <v-flex xs12 sm4 class="mr-5">
+                <v-text-field
+                    :color="themeOption.inputColor"
+                    :label="`${trans.searchBy} ${trans.name}`"
+                    v-model="searchField"
+                    box solo flat>
+                </v-text-field>
+            </v-flex>
+            <v-flex xs12 sm4>
+                <LanguagePicker :languageId="selectedLanguage.id"></LanguagePicker>
+            </v-flex>
+        </v-layout>
 
         <v-data-table
             :headers="headers"
@@ -33,7 +24,7 @@
             :rows-per-page-items="rowsPerPage"
             :total-items="totalTranslation"
             :loading="loading"
-            class="elevation-1"
+            class="elevation-1 r-table"
         >
             <template v-slot:items="props">
                 <td class="text-xs-left">{{ props.item.label }}</td>
@@ -147,6 +138,8 @@
         },
 
         created() {
+            
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.translations}`)
         },
 
         mounted() {

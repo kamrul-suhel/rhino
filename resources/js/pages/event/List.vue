@@ -21,12 +21,11 @@
                 >
                     <template v-slot:items="props">
                         <td>{{ props.item.event }}</td>
-                        <td>{{ props.item.start }}</td>
-                        <td>{{ props.item.end }}</td>
-                        <td>{{ props.item.type }}</td>
-                        <td>{{ props.item.dealership }}</td>
                         <td>{{ props.item.country }}</td>
-                        <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
+                        <td>{{ props.item.dealership }}</td>
+                        <td>{{ props.item.start }} to {{ props.item.end }}</td>
+                        <td>{{ props.item.appointment_duration }}</td>
+                        <td>{{ props.item.type }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small

@@ -52,7 +52,7 @@
                         <v-flex xs12>
                             <v-switch
                                 :label="trans.status"
-                                :color="themeOption.inputColor"
+                                :color="themeOption.switchOnColor"
                                 v-model="selectedType.status">
                             </v-switch>
                         </v-flex>
