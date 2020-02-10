@@ -27,6 +27,7 @@ import Booking from './modules/booking'
 import Translations from './modules/translation'
 import SpecializeBrand from './modules/specializeBrand'
 import Header from './modules/header'
+import Global from './modules/global'
 
 
 Vue.use(Vuex)
@@ -67,6 +68,7 @@ const store = new Vuex.Store({
     },
 
     modules: {
+        Global,
         Header,
         SnackBar,
         Button,

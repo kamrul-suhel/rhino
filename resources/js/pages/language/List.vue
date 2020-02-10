@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-layout row wrap>
-            <v-flex xs12 pt-3 pl-3>
+            <v-flex xs12 pt-3>
                 <div class="r-tab" :class="[showForm ? 'open' : '']">
                     <div class="r-tab-title r-border-round" @click="toggleForm">
                         <div>
@@ -23,19 +23,19 @@
                                 <v-layout justify-space-between>
                                     <v-flex xs3>
                                         <v-text-field :label="trans.name"
-                                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
-                                                        :color="themeOption.inputColor"
-                                                        v-model="selectedLanguage.name"
-                                                        box flat solo
+                                            :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                            :color="themeOption.inputColor"
+                                            v-model="selectedLanguage.name"
+                                            box flat solo
                                         ></v-text-field>
                                     </v-flex>
 
                                     <v-flex xs3>
                                         <v-text-field :label="`${trans.code} 2`"
-                                                        :color="themeOption.inputColor"
-                                                        :rules="[v => !!v || `${trans.code} 2 ${trans.is_required}`]"
-                                                        v-model="selectedLanguage.code2"
-                                                        box flat solo
+                                            :color="themeOption.inputColor"
+                                            :rules="[v => !!v || `${trans.code} 2 ${trans.is_required}`]"
+                                            v-model="selectedLanguage.code2"
+                                            box flat solo
                                         ></v-text-field>
                                     </v-flex>
 
@@ -220,6 +220,7 @@
 
         created() {
             this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.languages}`)
+            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.languages}`)
         },
 
         mounted() {
@@ -243,6 +244,7 @@
             onEditLanguage(language) {
                 this.editLanguage = true
                 this.selectedLanguage = {...language}
+                this.showForm = true
             },
 
             onDeleteLanguage(language) {
@@ -300,6 +302,8 @@
                             this.initialize()
 
                             this.onResetLanguage()
+
+                            this.showForm = false
                         }
                     })
                 }

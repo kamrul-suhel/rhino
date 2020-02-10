@@ -1,23 +1,5 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span
-                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.user}` }}</span>
-                    </v-toolbar-title>
-
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
-
         <v-form
             row wrap
             ref="userForm"
@@ -28,37 +10,38 @@
                     <v-card>
                         <v-card-text>
                             <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm3 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.firstName"
                                         v-model="user.firstname"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm3 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.surName"
                                         v-model="user.surname"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 pa-2>
+                                <v-flex xs12 sm3 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.email"
                                         v-model="user.email"
+                                        box solo flat
                                         required
                                     ></v-text-field>
                                 </v-flex>
-                            </v-layout>
 
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm3 pa-2>
                                     <v-select
                                         :items="levels"
                                         :rules="[v => !!v || `${trans.select_a} ${trans.role}`]"
@@ -68,11 +51,12 @@
                                         item-value="value"
                                         v-model="user.level"
                                         @change="onFetchData"
+                                        box solo flat
                                     >
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
+                                <v-flex xs12 sm3 pa-2
                                         v-if="user.level==='dealership' || user.level === 'sales_executive'">
                                     <v-select
                                         :items="dealerships"
@@ -82,11 +66,12 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
                                         v-model="user.dealership_id"
+                                        box solo flat
                                     >
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
+                                <v-flex xs12 sm3 pa-2
                                         v-if="user.level === 'group'">
                                     <v-select
                                         :items="groups"
@@ -96,10 +81,11 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.group"
                                         v-model="user.group_id"
+                                        box solo flat
                                     ></v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
+                                <v-flex xs12 sm3 pa-2
                                         v-if="user.level ==='country' || user.level === 'region'"
                                 >
                                     <v-autocomplete
@@ -111,10 +97,11 @@
                                         :label="trans.country"
                                         v-model="user.country_id"
                                         @change="getRegion"
+                                        box solo flat
                                     ></v-autocomplete>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
+                                <v-flex xs12 sm3 pa-2
                                         v-if="user.level === 'brand' || user.level === 'region'">
                                     <v-autocomplete
                                         :items="brands"
@@ -125,22 +112,11 @@
                                         :label="trans.brand"
                                         v-model="user.brand_id"
                                         @change="getRegion"
+                                        box solo flat
                                     ></v-autocomplete>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-btn
-                                        color="primary"
-                                        dark
-                                        small
-                                        @click.stop="dialog = true"
-                                    >
-                                        Change Password
-                                    </v-btn>
-                                </v-flex>
-
-
-                                <v-flex xs12 sm6 pa-2
+                                <v-flex xs12 sm3 pa-2
                                         v-if="user.level === 'region'">
                                     <v-select :items="regions"
                                               item-text="name"
@@ -149,10 +125,11 @@
                                               :rules="[v => !!v || `${trans.region} ${trans.is_required}`]"
                                               :label="trans.region"
                                               v-model="user.region_id"
+                                              box solo flat
                                     ></v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2
+                                <v-flex xs12 sm3 pa-2
                                         v-if="user.level === 'company'">
                                     <v-select
                                         :items="companies"
@@ -162,21 +139,33 @@
                                         :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
                                         :label="trans.company"
                                         v-model="user.company_id"
+                                        box solo flat
                                     ></v-select>
                                 </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
-                                <v-flex xs12>
+                                <v-flex xs12 pa-2>
                                     <v-textarea
                                         :label="`${trans.notes}`"
                                         :color="themeOption.inputColor"
                                         v-model="user.notes"
+                                        box solo flat
                                     ></v-textarea>
                                 </v-flex>
                             </v-layout>
 
                             <v-layout row wrap>
+                                <v-flex xs12 sm3 pa-2>
+                                    <v-btn
+                                        color="primary"
+                                        dark
+                                        small
+                                        @click.stop="dialog = true"
+                                    >
+                                        Change Password
+                                    </v-btn>
+                                </v-flex>
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch
                                         :false-value="0"
@@ -187,9 +176,6 @@
                                     </v-switch>
                                 </v-flex>
                             </v-layout>
-
-                            <v-divider class="my-3"></v-divider>
-
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-tabs
@@ -240,13 +226,13 @@
 
                                 </v-flex>
                             </v-layout>
-                            <v-divider class="mt-2 mb-2"></v-divider>
                         </v-card-text>
 
-                        <v-card-actions class="pa-3">
-                            <v-spacer></v-spacer>
+                        <v-card-actions class="justify-center pa-3">
                             <v-btn
+                                dark
                                 :color="themeOption.buttonSecondaryColor"
+                                class="rounded-btn"
                                 small
                                 @click="$router.push({name: 'listUsers'})"
                             >
@@ -254,9 +240,11 @@
                             </v-btn>
 
                             <v-btn
+                                dark
                                 :loading="processing"
                                 :disabled="buttonDisabled"
-                                :color="themeOption.buttonSuccess"
+                                :color="themeOption.buttonDangerColor"
+                                class="rounded-btn"
                                 small
                                 @click="onCreateUser()"
                             >
@@ -391,6 +379,7 @@
         created() {
             this.initialize()
             this.$store.commit( 'setHeaderTitle', `${this.trans.edit} ${this.trans.user}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.edit} ${this.trans.user}` )
         },
 
         methods: {

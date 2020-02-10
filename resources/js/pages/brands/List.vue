@@ -121,9 +121,18 @@
                 >
                     <template v-slot:items="props">
                         <tr @click="onEditBrand(props.item)">
+                            <td width="25%">
+                                <v-img
+                                    v-if="props.item.logo"
+                                    contain
+                                    :src="props.item.logo"
+                                    aspect-ratio="1"
+                                    max-width="100"
+                                    >
+                                </v-img>
+                            </td>
                             <td>{{ props.item.name }}</td>
                             <td>{{ props.item.company }}</td>
-                            <td class="text-xs-left">{{ props.item.status == 1 ? trans.active: trans.inactive }}</td>
                             <td class="text-xs-right">
                                 <v-icon
                                     small
@@ -173,6 +182,7 @@
                 <v-card-actions class="pa-3">
                     <v-spacer></v-spacer>
                     <v-btn
+                        dark
                         :color="themeOption.buttonSecondaryColor"
                         small
                         @click="onDeleteCancel"
@@ -181,7 +191,7 @@
                     </v-btn>
 
                     <v-btn
-                        color="red"
+                        :color="themeOption.buttonDangerColor"
                         small
                         @click="onConfirmDeleteBrand"
                     >
@@ -254,6 +264,7 @@
             this.fetchCompany()
             this.selectedBrand.status = 1;
             this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.brands}`)
+            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.brands}`)
         },
 
         mounted() {

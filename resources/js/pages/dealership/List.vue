@@ -148,6 +148,7 @@
 
         created() {
             this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.dealerships}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.dealerships}` )
         },
 
         mounted() {

@@ -152,7 +152,7 @@
                                 <v-icon
                                 small
                                 class="mr-2"
-                                @click="onEditVehicle(props.item)">
+                                @click.stop="onEditVehicle(props.item)">
                                     edit
                                 </v-icon>
 
@@ -197,6 +197,7 @@
                 <v-card-actions class="pa-3">
                     <v-spacer></v-spacer>
                     <v-btn
+                        dark
                         :color="themeOption.buttonSecondaryColor"
                         small
                         @click="onDeleteCancel"
@@ -205,7 +206,8 @@
                     </v-btn>
 
                     <v-btn
-                        color="red"
+                        dark
+                        :color="themeOption.buttonDangerColor"
                         small
                         @click="onConfirmDeleteVehicle"
                     >
@@ -271,6 +273,7 @@
                 rowsPerPage: 'getVehicleListRowsPerPage',
                 selectedVehicle: 'getSelectedVehicle',
                 //brandImage: 'getUploadedImage'
+                updateComponent: 'getUpdateComponent'
             })
         }),
 
@@ -283,11 +286,16 @@
 
             searchVehicle() {
                 this.initialize()
+            },
+
+            updateComponent() {
+                this.initialize()
             }
         },
 
         created() {
             this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.vehicles}`)
+            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.vehicles}`)
         },
 
         mounted() {
@@ -304,7 +312,7 @@
                     }
                 }
 
-                // this.$store.dispatch('fetchBrandForDropDown');
+                this.$store.dispatch('fetchBrandForDropDown');
                 this.$store.dispatch('fetchVehicles', this.getPagination())
             },
 
@@ -344,6 +352,8 @@
 
                             console.log(this.getPagination());
 
+                            
+                            this.$store.commit('setUpdateComponent')
                             
                         }
                     })

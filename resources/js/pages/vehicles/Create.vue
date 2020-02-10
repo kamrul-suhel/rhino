@@ -178,7 +178,6 @@
 
             
             onCreateVehicle() {
-
                 console.log('create vehicle');
 
                 if (this.$refs.vehicleForm.validate()) {
@@ -210,7 +209,10 @@
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.vehicle.model}  ${this.trans.successfully_created}`
                             })
-                            
+                        
+
+                            this.$store.commit('setUpdateComponent')
+
                             // check if vehicle created from brand or vehicle
                             if ( this.subComponent ){
                                 this.$router.push({name: 'editBrand', params:{id: this.$route.params.brandId}});

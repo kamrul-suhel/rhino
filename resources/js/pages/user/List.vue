@@ -72,6 +72,7 @@
                 <v-card-actions class="pa-3">
                     <v-spacer></v-spacer>
                     <v-btn
+                        dark
                         :color="themeOption.buttonSecondaryColor"
                         small
                         @click="deleteDialog = false"
@@ -80,7 +81,8 @@
                     </v-btn>
 
                     <v-btn
-                        color="red"
+                        dark
+                        :color="themeOption.buttonDangerColor"
                         small
                         @click="onDeleteConfirm"
                     >

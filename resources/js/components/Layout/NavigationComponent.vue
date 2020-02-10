@@ -19,7 +19,7 @@
                 </v-img>
             </v-flex>
 
-            <v-flex xs12 sm8>
+            <v-flex xs12 sm8 class="px-4">
                 <h2 :style="{color: themeOption.adminNavIconColor}">{{ title }}</h2>
             </v-flex>
 

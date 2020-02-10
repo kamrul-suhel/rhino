@@ -145,7 +145,8 @@
                 loading: 'getEventLoading',
                 rowsPerPage: 'getBrandListRowsPerPage',
                 selectedEvent: 'getSelectedEvent',
-                brandImage: 'getUploadedImage'
+                brandImage: 'getUploadedImage',
+                updateComponent: 'getUpdateComponent'
             })
         }),
 
@@ -162,12 +163,18 @@
 
             selectedColor(value) {
                 this.color = value.hex
+            },
+
+            
+            updateComponent() {
+                this.initialize()
             }
         },
 
         created() {
             this.fetchCompany()
             this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.events}` )
         },
 
         mounted() {
