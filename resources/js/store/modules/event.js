@@ -70,24 +70,10 @@ const mutations = {
             },
 
             {
-                text: trans.startDate,
+                text: trans.country,
                 align: 'left',
                 sortable: false,
-                value: 'startDate'
-            },
-
-            {
-                text: trans.endDate,
-                align: 'left',
-                sortable: false,
-                value: 'endDate'
-            },
-
-            {
-                text: `${trans.event} ${trans.type}`,
-                align: 'left',
-                sortable: false,
-                value: 'type'
+                value: 'country'
             },
 
             {
@@ -98,15 +84,23 @@ const mutations = {
             },
 
             {
-                text: trans.country,
+                text: trans.date,
                 align: 'left',
                 sortable: false,
-                value: 'country'
+                value: 'date'
+            },
+
+            
+            {
+                text: trans.appointment_duration,
+                value: 'appointment_duration'
             },
 
             {
-                text: trans.status,
-                value: 'status'
+                text: `${trans.event} ${trans.type}`,
+                align: 'left',
+                sortable: false,
+                value: 'type'
             },
 
             {

@@ -101,7 +101,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch
                                         :label="trans.status"
-                                        :color="themeOption.inputColor"
+                                        :color="themeOption.switchOnColor"
                                         v-model="selectedEvent.status">
                                     </v-switch>
                                 </v-flex>

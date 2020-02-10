@@ -73,7 +73,7 @@
 
                                 <v-flex xs12 sm6 pa-2>
                                     <v-switch :label="trans.status"
-                                              :color="themeOption.inputColor"
+                                              :color="themeOption.switchOnColor"
                                               v-model="brand.status"
                                               :true-value="1"
                                               :false-value="0">

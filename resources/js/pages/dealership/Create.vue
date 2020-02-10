@@ -129,7 +129,17 @@
                                         >
                                         </v-select>
                                     </v-flex>
-
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-select
+                                            :items="groups"
+                                            item-text="name"
+                                            item-value="id"
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.select_a} ${trans.group}`"
+                                            v-model="dealership.group_id"
+                                            box solo flat>
+                                        </v-select>
+                                    </v-flex>
                                 </v-layout>
 
                                 <v-layout row wrap>
@@ -137,10 +147,11 @@
                                     <v-flex xs12 sm6 pa-2>
                                         <v-switch
                                             :label="trans.status"
-                                            :color="themeOption.inputColor"
+                                            :color="themeOption.switchOnColor"
                                             v-model="dealership.status"
                                             :true-value="1"
-                                            :false-value="0">
+                                            :false-value="0"
+                                            >
                                         </v-switch>
                                     </v-flex>
                                 </v-layout>
@@ -267,6 +278,7 @@
                 selectedCountry: 'getSelectedCountry',
                 themeOption: 'getThemeOption',
                 regions: 'getRegions',
+                groups: 'getGroups'
             })
         }),
 
@@ -280,6 +292,7 @@
         methods: {
             initialize() {
                 this.$store.dispatch('fetchCountriesForDropdown')
+                this.$store.dispatch('fetchGroups', {dropDown: true})
             },
 
             updateTimes(times) {

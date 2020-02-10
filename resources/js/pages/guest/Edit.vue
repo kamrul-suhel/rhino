@@ -165,7 +165,7 @@
                                         :label="trans.status"
                                         :true-value="1"
                                         :false-value="0"
-                                        :color="themeOption.inputColor"
+                                        :color="themeOption.switchOnColor"
                                         v-model="guest.status">
                                     </v-switch>
                                 </v-flex>

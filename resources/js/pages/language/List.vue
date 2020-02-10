@@ -1,26 +1,84 @@
 <template>
     <div>
-        <v-toolbar flat>
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.languages }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
-
-            <v-spacer></v-spacer>
-
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
-                v-model="searchLanguages">
-            </v-text-field>
-        </v-toolbar>
-
         <v-layout row wrap>
-            <v-flex xs12 sm8 pt-3>
+            <v-flex xs12 pt-3 pl-3>
+                <div class="r-tab" :class="[showForm ? 'open' : '']">
+                    <div class="r-tab-title r-border-round" @click="toggleForm">
+                        <div>
+                            <v-icon
+                                :color="themeOption.adminNavIconColor">flag
+                            </v-icon>
+                        </div>
+
+                        <div>
+                            {{ `${trans.add}  ${trans.language}` }}
+                        </div>
+                    </div>
+                    <div class="r-tab-content"  :class="[showForm ? 'open' : '']">
+                        <v-layout row wrap justify-space-between pt-3 pl-3>
+                            <v-form
+                                ref="createLanguage"
+                                v-model="valid"
+                                lazy-validation>
+                                <v-layout justify-space-between>
+                                    <v-flex xs3>
+                                        <v-text-field :label="trans.name"
+                                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                                        :color="themeOption.inputColor"
+                                                        v-model="selectedLanguage.name"
+                                                        box flat solo
+                                        ></v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs3>
+                                        <v-text-field :label="`${trans.code} 2`"
+                                                        :color="themeOption.inputColor"
+                                                        :rules="[v => !!v || `${trans.code} 2 ${trans.is_required}`]"
+                                                        v-model="selectedLanguage.code2"
+                                                        box flat solo
+                                        ></v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs3>
+                                        <v-text-field :label="`${trans.code} 3`"
+                                                        :rules="[v => !!v || `${trans.code} 3 ${trans.is_required}`]"
+                                                        :color="themeOption.inputColor"
+                                                        v-model="selectedLanguage.code3"
+                                                        box flat solo
+                                        ></v-text-field>
+                                    </v-flex>
+
+                                    <v-flex xs1>
+                                        <v-switch
+                                            :label="trans.status"
+                                            :color="themeOption.switchOnColor"
+                                            :true-value="1"
+                                            :false-value="0"
+                                            v-model="selectedLanguage.status"
+                                            box flat solo>
+                                        </v-switch>
+                                    </v-flex>
+                                </v-layout>
+
+                                <v-layout class="pa-2">
+                                    <v-flex xs5>
+                                        <v-btn small
+                                                dark
+                                                class="rounded-btn"
+                                                :color="themeOption.buttonDangerColor"
+                                                @click="onCreateLanguage">
+                                            {{ editLanguage ? trans.update : trans.create }}
+                                        </v-btn>
+                                    </v-flex>
+                                </v-layout>
+                            </v-form>
+                        </v-layout>
+                    </div>
+                </div>
+            </v-flex>
+        </v-layout>
+        <v-layout row wrap>
+            <v-flex xs12 pt-3>
                 <v-data-table
                     :headers="headers"
                     :items="languages"
@@ -32,7 +90,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalLanguages"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <tr>
@@ -62,71 +120,6 @@
                     </template>
                 </v-data-table>
             </v-flex>
-
-            <v-flex xs12 sm4 pt-3 pl-3>
-                <v-form
-                    ref="createLanguage"
-                    v-model="valid"
-                    lazy-validation>
-                    <v-card>
-                        <v-card-title>
-                            <h3>{{ editLanguage ? `${trans.edit} ${trans.language}` : `${trans.create} ${trans.language}` }}</h3>
-                        </v-card-title>
-                        <v-divider></v-divider>
-
-                        <v-card-text>
-                            <v-flex xs12>
-                                <v-text-field :label="trans.name"
-                                              :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
-                                              :color="themeOption.inputColor"
-                                              v-model="selectedLanguage.name"
-                                ></v-text-field>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <v-text-field :label="`${trans.code} 2`"
-                                              :color="themeOption.inputColor"
-                                              :rules="[v => !!v || `${trans.code} 2 ${trans.is_required}`]"
-                                              v-model="selectedLanguage.code2"
-                                ></v-text-field>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <v-text-field :label="`${trans.code} 3`"
-                                              :rules="[v => !!v || `${trans.code} 3 ${trans.is_required}`]"
-                                              :color="themeOption.inputColor"
-                                              v-model="selectedLanguage.code3"
-                                ></v-text-field>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <v-switch
-                                    :label="trans.status"
-                                    :color="themeOption.inputColor"
-                                    :true-value="1"
-                                    :false-value="0"
-                                    v-model="selectedLanguage.status">
-                                </v-switch>
-                            </v-flex>
-                        </v-card-text>
-
-                        <v-card-actions class="pa-2">
-                            <v-spacer></v-spacer>
-                            <v-btn small
-                                   :color="themeOption.buttonSecondaryColor"
-                                   @click="onResetLanguage">
-                                {{trans.cancel}}
-                            </v-btn>
-
-                            <v-btn small
-                                   :color="themeOption.buttonPrimaryColor"
-                                   @click="onCreateLanguage">
-                                {{ editLanguage ? trans.update : trans.create }}
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-form>
-            </v-flex>
         </v-layout>
 
         <v-dialog
@@ -153,17 +146,8 @@
                 <v-divider></v-divider>
 
                 <v-card-actions class="pa-3">
-                    <v-spacer></v-spacer>
                     <v-btn
-                        :color="themeOption.buttonSecondaryColor"
-                        small
-                        @click="onDeleteCancel"
-                    >
-                        {{ trans.cancel }}
-                    </v-btn>
-
-                    <v-btn
-                        color="red"
+                        :color="themeOption.buttonDangerColor"
                         small
                         @click="onConfirmDeleteLanguage"
                     >
@@ -200,7 +184,8 @@
                 valid: true,
                 selectedLanguage:{
                     status: 1
-                }
+                },
+                showForm: false
             }
         },
 
@@ -213,7 +198,7 @@
                 headers: 'getLanguagesListHeader',
                 totalLanguages: 'getTotalLanguage',
                 loading: 'getLanguageLoading',
-                rowsPerPage: 'getLanguageListRowsPerPage'
+                rowsPerPage: 'getLanguageListRowsPerPage',
             })
         }),
 
@@ -234,6 +219,7 @@
         },
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.languages}`)
         },
 
         mounted() {
@@ -325,6 +311,10 @@
                 const language = {}
                 this.selectedLanguage = {...language}
             },
+
+            toggleForm() {
+                this.showForm = !this.showForm
+            }
         }
     }
 </script>

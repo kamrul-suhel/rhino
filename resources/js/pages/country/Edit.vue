@@ -48,7 +48,7 @@
 
                             <v-flex xs12 sm6>
                                 <v-switch
-                                    :color="themeOption.inputColor"
+                                    :color="themeOption.switchOnColor"
                                     v-model="selectedCountry.status"
                                     :label="trans.status"
                                 ></v-switch>

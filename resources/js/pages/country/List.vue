@@ -1,23 +1,7 @@
 <template>
     <div>
-        <v-toolbar flat>
-            <v-toolbar-title>
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.countries }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                vertical
-            ></v-divider>
 
-            <v-spacer></v-spacer>
-
-            <v-text-field
-                :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.country} ${trans.name}`"
-                v-model="searchCountry">
-            </v-text-field>
-        </v-toolbar>
+        <CountryForm></CountryForm>
 
         <v-data-table
             :headers="headers"
@@ -29,7 +13,7 @@
             :rows-per-page-items="rowsPerPage"
             :total-items="totalCountry"
             :loading="loading"
-            class="elevation-1"
+            class="elevation-1 r-table"
         >
             <template v-slot:items="props">
                 <td>{{ props.item.name }}</td>
@@ -161,8 +145,14 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import CountryForm from './Create'
 
     export default {
+
+        components: {
+            CountryForm
+        },
+
         data() {
             return {
                 totalDesserts: 0,
@@ -213,6 +203,7 @@
         },
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.countries}`)
         },
 
         mounted() {
@@ -252,7 +243,8 @@
                         this.deleteDialog = false
                     }
                 });
-            }
+            },
+
         }
     }
 </script>

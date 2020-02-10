@@ -35,7 +35,7 @@
                     <v-flex xs12 sm4>
                         <v-switch
                             :label="trans.status"
-                            :color="themeOption.inputColor"
+                            :color="themeOption.switchOnColor"
                             v-model="selectedGroup.status"
                             :true-value="1"
                             :false-value="0">
@@ -46,7 +46,7 @@
                     <v-flex xs12>
                         <v-btn
                             small
-                            dark
+                            dark 
                             class="rounded-btn"
                             :color="themeOption.buttonDangerColor"
                             @click="onCreateGroup">
@@ -164,7 +164,10 @@
                 dialog: false,
                 deleteDialog: false,
                 editGroup: false,
-                showForm: false
+                showForm: false,
+                group: {
+                    status: 1
+                }
             }
         },
 
