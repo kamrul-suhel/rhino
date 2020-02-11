@@ -173,7 +173,8 @@
                 loading: 'getCountryLoading',
                 rowsPerPage: 'getCountryListRowsPerPage',
                 selectedCountry: 'getSelectedCountry',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                updateComponent: 'getUpdateComponent'
             })
         }),
 
@@ -199,11 +200,16 @@
                 }
 
                 this.initialize(paginateOption)
+            },
+
+            updateComponent() {
+                this.initialize()
             }
         },
 
         created() {
             this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.countries}`)
+            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.countries}`)
         },
 
         mounted() {

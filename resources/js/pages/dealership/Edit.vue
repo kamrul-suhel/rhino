@@ -253,6 +253,7 @@
         created() {
             this.initialize()
              this.$store.commit( 'setHeaderTitle', `${this.trans.edit} ${this.trans.dealership}` )
+             this.$store.commit( 'setNavTitle', `${this.trans.edit} ${this.trans.dealership}` )
         },
 
         methods: {

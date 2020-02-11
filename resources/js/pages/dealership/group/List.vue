@@ -217,7 +217,8 @@
         },
 
         created() {
-            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.groups}` )
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.groups}`)
+            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.groups}`)
         },
 
         mounted() {
@@ -326,8 +327,10 @@
 
                 if (this.showForm) {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.group}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.group}` )
                 } else {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.groups}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.groups}` )
                 }
             }
         }

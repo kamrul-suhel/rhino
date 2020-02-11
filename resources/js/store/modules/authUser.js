@@ -12,7 +12,7 @@ const defaultState = {
         theme: 'dark',
         inputColor: 'dark',
         buttonPrimaryColor: 'success',
-        buttonSecondaryColor: 'dark',
+        buttonSecondaryColor: '#333',
         buttonDangerColor: '#E20000',
         buttonSuccess: 'success',
         buttonLoading: false,
@@ -28,8 +28,8 @@ const defaultState = {
 
         // Snack bar option
         snackBarBgSuccess: 'success',
-        snackBarBgDanger: 'red',
-        snackBarBgError: 'red',
+        snackBarBgDanger: '#E20000',
+        snackBarBgError: '#E20000',
         snackBarTimeout : 6000,
 
         // Toolbar backgroun color
@@ -37,8 +37,8 @@ const defaultState = {
 
 
         //Tab option
-        tabColor: 'gray',
-        tabSliderColor: 'black',
+        tabColor: '#cecece',
+        tabSliderColor: '#fff',
 
         // Default image
         brandDefaultImage : '/images/brandPlaceholder.jpg',

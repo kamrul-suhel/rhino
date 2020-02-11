@@ -4,12 +4,12 @@
             <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>
                     <v-icon
-                        :color="themeOption.adminNavIconColor">person
+                        :color="themeOption.adminNavIconColor">language
                     </v-icon>
                 </div>
 
                 <div>
-                    {{ `${trans.create} ${trans.user}` }}
+                    {{ `${trans.add} ${trans.new} ${trans.country}` }}
                 </div>
             </div>
             <div class="r-tab-content" :class="[showForm ? 'open' : '']">
@@ -97,6 +97,9 @@
         },
 
         watch:{
+            updateComponent() {
+                this.initialize()
+            }
         },
 
         computed: ({
@@ -153,7 +156,9 @@
                             // reset selectedCountry in store
                             // this.$store.commit('setSelectedCountry', {})
 
-                            // this.$router.push({name: 'listCountries'});
+
+                            // push country to store to update list
+                            this.$store.commit('setUpdateComponent')
                         }
                     });
                 } else {

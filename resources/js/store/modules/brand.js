@@ -62,6 +62,11 @@ const mutations = {
     setBrandListHeader(state, trans) {
         const header = [
             {
+                text: trans.logo,
+                value: 'logo'
+            },
+
+            {
                 text: trans.name,
                 align: 'left',
                 sortable: false,
@@ -73,11 +78,6 @@ const mutations = {
                 align: 'left',
                 sortable: false,
                 value: 'company'
-            },
-
-            {
-                text: trans.status,
-                value: 'status'
             },
 
             {

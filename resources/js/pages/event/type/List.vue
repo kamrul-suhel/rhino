@@ -40,7 +40,7 @@
 
                             <v-img
                                 :src="typeImage"
-                                aspect-ratio="2.75"
+                                aspect-ratio="1"
                             ></v-img>
 
                             <FileUpload :preview="false"
@@ -53,7 +53,9 @@
                             <v-switch
                                 :label="trans.status"
                                 :color="themeOption.switchOnColor"
-                                v-model="selectedType.status">
+                                v-model="type.status"
+                                :true-value="1"
+                                :false-value="0">
                             </v-switch>
                         </v-flex>
                         <v-flex>
@@ -177,7 +179,10 @@
                 deleteDialog: false,
                 editType: false,
                 valid: true,
-                showForm: false
+                showForm: false,
+                type: {
+                    status: 1
+                },
             }
         },
 
@@ -223,6 +228,7 @@
 
         created() {
             this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
         },
 
         mounted() {

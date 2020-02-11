@@ -213,6 +213,7 @@
             this.initialize()
             this.fetchCompany()
             this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.brand}`)
+            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.brand}`)
         },
 
         methods: {

@@ -4,7 +4,7 @@
             <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>
                     <v-icon
-                        :color="themeOption.adminNavIconColor">drive_eta
+                        :color="themeOption.adminNavIconColor">event
                     </v-icon>
                 </div>
 
@@ -296,6 +296,9 @@
                             })
                             this.$store.commit('setButtonLoading', false)
                         }
+
+                        this.showForm = false
+                        this.$store.commit('setUpdateComponent')
                     })
                 }else{
                     this.$store.commit('setButtonLoading', false)
@@ -330,8 +333,10 @@
 
                 if (this.showForm) {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
                 } else {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.events}` )
                 }
             }
         }

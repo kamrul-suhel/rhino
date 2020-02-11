@@ -1,25 +1,5 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span
-                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.event}` }}</span>
-                    </v-toolbar-title>
-
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-
-                    <language-picker :languageId="selectedEvent.language_id"></language-picker>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
-
         <v-form
             row wrap
             ref="eventForm"
@@ -30,27 +10,17 @@
                     <v-card>
                         <v-card-text>
                             <v-layout row wrap>
-                                <v-flex xs12 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="`${trans.name} ${trans.of} ${trans.event}`"
                                         v-model="selectedEvent.name"
+                                        solo box flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.greeting} ${trans.text}`"
-                                        v-model="selectedEvent.greeting"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-select
                                         :items="dealerships"
                                         item-text="name"
@@ -59,56 +29,13 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
                                         v-model="selectedEvent.dealership_id"
+                                        solo box flat
                                     >
                                     </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="types"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.type}`"
-                                        v-model="selectedEvent.type_id"
-                                    >
-                                    </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="appointmentDuration"
-                                        item-value="value"
-                                        item-text="text"
-                                        :label="trans.appointment_duration"
-                                        :color="themeOption.inputColor"
-                                        v-model="selectedEvent.appointment_duration">
-                                    </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-select
-                                        :items="breakTime"
-                                        item-value="value"
-                                        item-text="text"
-                                        :label="`${trans.break} ${trans.time}`"
-                                        :color="themeOption.inputColor"
-                                        v-model="selectedEvent.break_time">
-                                    </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :color="themeOption.switchOnColor"
-                                        v-model="selectedEvent.status">
-                                    </v-switch>
                                 </v-flex>
                             </v-layout>
-
                             <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-menu
                                         ref="startEvent"
                                         v-model="startEvent"
@@ -131,6 +58,7 @@
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                solo box flat
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
@@ -149,7 +77,7 @@
                                     </v-menu>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-menu
                                         ref="endEvent"
                                         v-model="endEvent"
@@ -172,6 +100,7 @@
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                solo box flat
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
@@ -189,13 +118,54 @@
                                         </v-date-picker>
                                     </v-menu>
                                 </v-flex>
+                            </v-layout>
+                            <v-layout row wrap>
 
-                                <v-flex xs12 pa-2>
+                                <v-flex xs12 sm4 pa-2>
+                                    <v-select
+                                        :items="appointmentDuration"
+                                        item-value="value"
+                                        item-text="text"
+                                        :label="trans.appointment_duration"
+                                        :color="themeOption.inputColor"
+                                        v-model="selectedEvent.appointment_duration"
+                                        solo box flat>
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm4 pa-2>
+                                    <v-select
+                                        :items="types"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.type}`"
+                                        v-model="selectedEvent.type_id"
+                                        solo box flat
+                                    >
+                                    </v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm8 pa-2>
+                                    <v-text-field
+                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="`${trans.greeting} ${trans.text}`"
+                                        v-model="selectedEvent.greeting"
+                                        solo box flat
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+
+                            <v-layout row wrap>
+                                <v-flex xs12 sm8 pa-2>
                                     <v-textarea
                                         :color="themeOption.inputColor"
                                         :label="trans.notes"
                                         v-model="selectedEvent.notes"
                                         :hint="trans.notes"
+                                        solo flat box
                                     ></v-textarea>
                                 </v-flex>
                             </v-layout>
@@ -297,24 +267,24 @@
                             </v-flex>
                         </v-layout>
 
-                        <v-divider></v-divider>
 
-                        <v-card-actions class="pa-3">
-                            <v-spacer></v-spacer>
-
+                        <v-card-actions class="pa-3 justify-center">
                             <r-button :text="`${trans.back}`"
-                                      identifier="'eventBack'"
-                                      small
-                                      :loadingBar="true"
-                                      @click="onBackToEventList"
-                                      :color="themeOption.buttonSecondaryColor"/>
+                                dark
+                                identifier="'eventBack'"
+                                small
+                                class="rounded-btn text-white"
+                                :loadingBar="true"
+                                @click="onBackToEventList"
+                                :color="themeOption.buttonSecondaryColor"/>
 
                             <r-button :text="`${trans.update} ${trans.event}`"
-                                      identifier="'eventEdit'"
-                                      small
-                                      :loadingBar="true"
-                                      @click="onUpdateEvent"
-                                      :color="themeOption.buttonPrimaryColor"/>
+                                identifier="'eventEdit'"
+                                small
+                                class="rounded-btn text-white"
+                                :loadingBar="true"
+                                @click="onUpdateEvent"
+                                :color="themeOption.buttonDangerColor"/>
 
                         </v-card-actions>
                     </v-card>
@@ -408,6 +378,9 @@
         created() {
             this.initialize()
             this.setAppointmentDuration()
+            
+            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.event}` )
+            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.event}`) 
 
             // Load dealership & type when it is subcomponent
             if(this.subComponent){

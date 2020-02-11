@@ -364,8 +364,10 @@ import { log } from 'util'
                 
                 if (this.showForm) {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.user}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.user}` )
                 } else {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.users}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.users}` )
                 }
             }
         }

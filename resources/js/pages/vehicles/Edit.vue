@@ -1,25 +1,5 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.edit} ${trans.vehicle}` }}:</span>
-                        <span v-if="!subComponent">{{ vehicle.brand }}</span> <span>{{ vehicle.model }}</span>
-                    </v-toolbar-title>
-
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-
-                    <language-picker :languageId="vehicle.language_id"></language-picker>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
-
         <v-form
             row wrap
             ref="vehicleForm"
@@ -29,19 +9,8 @@
                 <v-flex xs12>
                     <v-card>
                         <v-card-text>
-                            <v-layout row wrap>
-                                <v-flex xs12 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.vehicle} ${trans.model} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="trans.model"
-                                        v-model="vehicle.model"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-
                             <v-layout row wrap v-if="!subComponent">
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm5 pa-2>
                                     <v-select
                                         :items="brands"
                                         item-text="name"
@@ -50,21 +19,29 @@
                                         :color="themeOption.inputColor"
                                         :label="trans.brand"
                                         v-model="vehicle.brand_id"
+                                        style="width: 70%"
+                                        box solo flat
                                     >
                                     </v-select>
                                 </v-flex>
+
+                                <v-flex xs12 sm5 pa-2>
+                                    <v-text-field
+                                        :rules="[v => !!v || `${trans.vehicle} ${trans.model} ${trans.is_required}`]"
+                                        :color="themeOption.inputColor"
+                                        :label="trans.model"
+                                        v-model="vehicle.model"
+                                        style="width: 70%"
+                                        box solo flat
+                                    ></v-text-field>
+                                </v-flex>
                             </v-layout>
 
-                            <v-divider class="mt-2 mb-2"></v-divider>
-
-
                             <v-layout>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
                                             <label class="mb-3">{{ `${trans.left_hand_drive_image}` }}</label>
-                                            <v-divider class="my-2"></v-divider>
-
                                             <v-card class="pa-2 my-3">
                                                 <v-img
                                                     :src="leftImage"
@@ -82,13 +59,10 @@
                                 </v-flex>
 
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                        <v-flex xs12>
                                            <label for="">{{`${trans.right_hand_drive_image}`}} </label>
-
-                                           <v-divider class="my-2"></v-divider>
-
                                            <v-card class="pa-2 my-3">
                                                <v-img
                                                    :src="rightImage"
@@ -107,13 +81,12 @@
                             </v-layout>
                         </v-card-text>
 
-                        <v-divider></v-divider>
-
-                        <v-card-actions class="pa-3">
-                            <v-spacer></v-spacer>
+                        <v-card-actions class="justify-center pa-3">
                             <v-btn
+                                dark
                                 identifier="'vehicleBack'"
                                 :class="themeOption.buttonSecondaryColor"
+                                class="rounded-btn"
                                 small
                                 @click="onBackToBrand"
                             >
@@ -121,9 +94,11 @@
                             </v-btn>
 
                             <v-btn
+                                dark
                                 :loading="themeOption.buttonLoading"
                                 :disabled="themeOption.buttonLoading"
-                                :class="themeOption.buttonSuccess"
+                                :color="themeOption.buttonDangerColor"
+                                class="rounded-btn"
                                 small
                                 @click="onUpdateVehicle()"
                             >
@@ -199,6 +174,7 @@
         created() {
             this.initialize()
             this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.vehicle}`)
+            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.vehicle}`)
         },
 
         methods: {

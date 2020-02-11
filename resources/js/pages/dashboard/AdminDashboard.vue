@@ -184,6 +184,8 @@
         },
 
         created() {
+            this.$store.commit( 'setHeaderTitle', `${this.trans.dashboard}`)
+            this.$store.commit( 'setNavTitle', `${this.trans.dashboard}`)
         },
 
         methods: {
