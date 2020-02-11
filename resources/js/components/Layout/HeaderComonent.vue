@@ -9,8 +9,8 @@
             class="header"
             pa-5
             :style="{height : `${themeOption.adminHeaderHeight}px`}">
-            <v-flex xs12 sm4>
-                <h2>Logo</h2>
+            <v-flex xs12 sm4 v-if="checkLevel()">
+
             </v-flex>
 
             <v-flex xs12 sm4>
@@ -63,6 +63,13 @@
         methods: {
             onNavigationToggle() {
                 this.$store.commit('setIsNavigationOpen')
+            },
+
+            checkLevel(){
+                if(this.authUser.level !== 'admin'){
+                    return true
+                }
+                return false
             }
         }
     }

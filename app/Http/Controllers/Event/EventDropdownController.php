@@ -18,6 +18,7 @@ class EventDropdownController extends Controller
         $events = Event::select(
             'events.*',
             'events_translation.name as event',
+            'events_translation.name',
             'events_translation.language_id'
         )
             ->leftJoin('events_translation', function ($eventT) {

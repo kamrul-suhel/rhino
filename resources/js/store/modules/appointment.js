@@ -60,7 +60,7 @@ const getters = {
 const actions = {
     fetchAppointmentByEventId({commit}, payload){
         const params = fn.generateParams(payload)
-        const URL = `/api/appointments/${payload.eventId}`
+        const URL = `/api/appointments/${payload.eventId}${params}`
 
         axios.get(URL).then((response) => {
             if (response.data.appointments) {

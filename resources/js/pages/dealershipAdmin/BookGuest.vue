@@ -127,6 +127,27 @@
                 </div>
             </div>
         </v-layout>
+
+        <v-dialog
+            v-model="dialog"
+            hide-overlay
+            persistent
+            width="300"
+        >
+            <v-card
+                :color="themeOption.dialogBoxColor"
+                dark
+            >
+                <v-card-text>
+                    Please stand by
+                    <v-progress-linear
+                        indeterminate
+                        color="white"
+                        class="mb-0"
+                    ></v-progress-linear>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -139,6 +160,7 @@
 
         data() {
             return {
+                dialog: false,
                 loading: false,
                 selectedGuest: null,
                 guests: [],
@@ -215,6 +237,8 @@
                     return
                 }
 
+                this.dialog = true
+
                 let guestFormData = new FormData()
                 guestFormData.append('event_id', this.selectedEvent.id)
                 _.forOwn(this.selectedGuest, (value, key) => {
@@ -238,6 +262,7 @@
                                 'X-CSRF-TOKEN': csrfToken
                             }).then((loginResponse) => {
                                 if(loginResponse.data.success){
+                                    this.dialog = false
                                     this.$router.push({name: 'booking'})
                                 }
                             })

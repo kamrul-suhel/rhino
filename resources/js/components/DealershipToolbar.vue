@@ -18,7 +18,7 @@
                                         class="eventDropdown"
                                         :color="themeOption.inputColor"
                                         append-icon="keyboard_arrow_down"
-                                        item-text="event"
+                                        :item-text="selectedEvent.event ? 'event': 'name'"
                                         v-model="selectedEvent"
                                         return-object
                                     ></v-autocomplete>

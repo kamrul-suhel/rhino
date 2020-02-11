@@ -314,3 +314,15 @@ Route::prefix('booking')->group(function(){
     Route::post('', 'Booking\BookingStoreController@store');
     Route::get('{uniqueId}', 'Booking\BookingController@getData');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| API Route for Download csv
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::prefix('csv')->group(function(){
+   Route::get('guests/download', 'Guest\GuestDownloadCSVController@download');
+});
