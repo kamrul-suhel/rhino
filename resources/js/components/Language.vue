@@ -10,7 +10,9 @@
         :append-icon="isFrontend ? 'expand_more' : 'arrow_drop_down'"
         :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
         @change="onSubLanguageChange"
-        :label="trans.language" box solo flat>
+        :label="trans.language"
+        solo
+        flat>
         <template v-slot:selection="data">
             <v-chip
                 :selected="data.selected"

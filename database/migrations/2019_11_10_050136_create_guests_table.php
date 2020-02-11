@@ -28,11 +28,11 @@ class CreateGuestsTable extends Migration
             $table->string('address_line_5')->nullable();
             $table->string('address_line_6')->nullable();
             $table->string('postcode');
-            $table->string('landline')->nullable();
-            $table->string('mobile');
-            $table->string('method')->nullable();
+            $table->string('landline', 20)->nullable()->index();
+            $table->string('mobile', 20)->index();
+            $table->string('method', 20)->nullable()->index();
             $table->dateTime('last_logged_in')->nullable();
-            $table->smallInteger('stage')->default(1);
+            $table->smallInteger('stage')->default(1)->index();
             $table->boolean('confirmation_letter_sent')->default(0);
             $table->boolean('postal_contact')->default(0);
             $table->boolean('email_contact')->default(0);

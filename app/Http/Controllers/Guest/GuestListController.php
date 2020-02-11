@@ -68,6 +68,17 @@ class GuestListController extends Controller
             $data = $guests->paginate($this->perPage);
             $totalGuest = $data->total();
             $data = $data->items();
+        } elseif(
+            $request->has('search') &&
+            !empty($request->search) &&
+            $request->has('uniqueId') &&
+            !empty($request->uniqueId) &&
+            $request->has('eventId') &&
+            !empty($request->eventId)
+        ){
+            // Search by uniqueId & event
+            $data = $guests->where('guests.event_id', $request->eventId)
+                ->get();
         } else {
             $data = $guests->get();
             $totalBrand = $guests->count();

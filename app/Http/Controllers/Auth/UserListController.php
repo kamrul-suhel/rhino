@@ -26,20 +26,17 @@ class UserListController extends Controller
             'groups.id as group_id',
             'regions.name as region'
         )
-            ->leftJoin('dealerships', function($dealership){
+            ->leftJoin('dealerships', function ($dealership) {
                 $dealership->on('dealerships.id', '=', 'users.dealership_id');
                 $dealership->leftJoin('dealerships_translation', 'dealerships_translation.dealership_id', '=', 'dealerships.id');
                 $dealership->where('dealerships_translation.language_id', $this->languageId);
             })
-
-            ->leftJoin('groups', function($group){
+            ->leftJoin('groups', function ($group) {
                 $group->on('groups.id', '=', 'users.group_id');
                 $group->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id');
-                $group->where('groups_translation.language_id','=', $this->languageId);
+                $group->where('groups_translation.language_id', '=', $this->languageId);
             })
-
             ->leftJoin('regions', 'regions.id', '=', 'users.region_id')
-
             ->leftJoin('countries', 'countries.id', '=', 'users.country_id');
 
         // To get the list view populate
@@ -63,8 +60,8 @@ class UserListController extends Controller
             }
 
             // Filter by dealership, group, country & region based on
-            if($request->has('filterBy') && !empty($request->filterBy)){
-                switch($request->filterBy){
+            if ($request->has('filterBy') && !empty($request->filterBy)) {
+                switch ($request->filterBy) {
                     case 'dealership':
                         $users = $users->where([
                             'users.dealership_id' => $request->dealershipId,

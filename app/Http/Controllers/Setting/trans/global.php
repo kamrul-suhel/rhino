@@ -469,9 +469,21 @@ return [
     ],
 
     [
+        'label' => 'Phone',
+        'identifier' => 'phone',
+        'translation' => 'Phone'
+    ],
+
+    [
         'label' => 'Role',
         'identifier' => 'role',
         'translation' => 'Role'
+    ],
+
+    [
+        'label' => 'Walk in',
+        'identifier' => 'walkIn',
+        'translation' => 'Walk in'
     ],
 
     [
