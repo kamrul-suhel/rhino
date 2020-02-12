@@ -24,6 +24,7 @@ import Guest from './modules/guest'
 import EventVehicle from './modules/eventVehicle'
 import Appointment from './modules/appointment'
 import Booking from './modules/booking'
+import Analytics from './modules/analytics'
 import Translations from './modules/translation'
 import SpecializeBrand from './modules/specializeBrand'
 import Header from './modules/header'
@@ -93,6 +94,7 @@ const store = new Vuex.Store({
         Appointment,
         Booking,
         Translations,
+        Analytics,
         SpecializeBrand
     }
 })

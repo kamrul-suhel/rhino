@@ -15,6 +15,13 @@ const DealershipAdminRoutes = {
             path: 'calendar',
             name: 'dealershipAdminCalendar',
             component: DealershipAdmin.Calendar
+        },
+
+        
+        {
+            path: 'analytics',
+            name: 'dealershipAnalytics',
+            component: DealershipAdmin.Analytics
         }
     ]
 }

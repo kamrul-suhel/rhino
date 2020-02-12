@@ -221,6 +221,7 @@ Route::prefix('events')->group(function () {
     Route::put('{id}', 'Event\EventController@update');
     Route::post('{id}/brands', 'Event\EventBrandController@addBrand');
     Route::delete('{id}/brands/{brandId}', 'Event\EventBrandController@destroyBrand');
+    Route::get('{id}/analytics', 'Analytics\AnalyticsController@index');
 
     // Get brands for specific event
     Route::get('{id}/brands', 'Event\EventBrandListController@getBrandsByEventId');

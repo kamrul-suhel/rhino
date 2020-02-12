@@ -329,6 +329,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
         return view('index');
     });
 
+    Route::get('analytics', function(){
+        return view('index');
+    });
+
+
 
     /*
     |--------------------------------------------------------------------------
