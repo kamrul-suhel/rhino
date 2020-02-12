@@ -75,7 +75,7 @@ const mutations = {
                     {
                         icon: 'insert_chart_outlined',
                         text: `${trans.analytics}`,
-                        link: 'listDealerships',
+                        link: 'dealershipAnalytics',
                         access: ['dealership'],
                     }
                 ]

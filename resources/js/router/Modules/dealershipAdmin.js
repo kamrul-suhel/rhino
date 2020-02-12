@@ -17,9 +17,8 @@ const DealershipAdminRoutes = {
             component: DealershipAdmin.Calendar
         },
 
-        
         {
-            path: 'analytics',
+            path: 'events/:eventId/analytics',
             name: 'dealershipAnalytics',
             component: DealershipAdmin.Analytics
         }

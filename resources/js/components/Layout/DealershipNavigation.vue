@@ -152,6 +152,18 @@
 
         methods: {
             async onPageChange(item) {
+                // Analytics route
+                if (item.link === 'dealershipAnalytics') {
+                    this.$router.push({
+                        name: 'dealershipAnalytics',
+                        params: {
+                            eventId: this.selectedEvent.id
+                        }
+                    })
+                    return
+                }
+
+
                 // Check is dialog box
                 if (item.isDialog) {
                     this.downloadGuest = true

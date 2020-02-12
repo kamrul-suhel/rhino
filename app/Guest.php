@@ -6,9 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guest extends Model
 {
-    const STATUS_COMPLETED_NO_SALE = 0;
-    const STATUS_COMPLETED_SALE_MADE = 1;
-    const STATUS_COMPLETED_NO_SHOW = 2;
+    /**
+     * Const form status field
+     */
+    const STATUS_PENDING = 0;
+    const STATUS_CONFIRMED = 1;
+    const STATUS_COMPLETED_ARRIVE = 2;
+    const STATUS_COMPLETED_NO_SALE = 3;
+    const STATUS_COMPLETED_SALE_MADE = 4;
+    const STATUS_COMPLETED_NO_SHOW = 5;
+
+
+    /**
+     * Const for method field
+     * @var string
+     */
+    const METHOD_ONLINE = 'online';
+    const METHOD_TELEPHONE = 'telephone';
+    const METHOD_EMAIL = 'email';
+    const METHOD_SOCIAL = 'social';
+    const METHOD_WALKIN = 'walkin';
+    const METHOD_SMS = 'sms';
+    const METHOD_PROSPECTING = 'prospecting';
+
 
     protected $table = 'guests';
 

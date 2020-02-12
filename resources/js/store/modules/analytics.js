@@ -1,8 +1,5 @@
-import fn from '../../utils/function'
-
 const defaultState = {
-    analyticsData : [],
-    selectedEvent: {},
+    analyticsData : []
 }
 
 const state = {
@@ -25,7 +22,7 @@ const getters = {
 const actions = {
     fetchAnalytics({commit}, payload = {}) {
 
-        const URL = `/api/events/${payload.id}/analytics`
+        const URL = `/api/events/${payload.eventId}/analytics`
 
         axios.get(URL).then((response) => {
             if (response.data) {

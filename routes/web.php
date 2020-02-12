@@ -39,7 +39,7 @@ Route::post('guests/logout', 'Guest\GuestLoginController@logOut');
 */
 Route::get('/admin', function () {
     return view('index');
-})->name('admin');
+})->middleware('guest')->name('admin');
 
 /*
 |--------------------------------------------------------------------------
@@ -285,6 +285,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
         });
 
         Route::get('types/list', function () {
+            return view('index');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Routes for event analytics
+        |--------------------------------------------------------------------------
+        |
+        */
+
+        Route::get('{id}/analytics', function () {
             return view('index');
         });
     });

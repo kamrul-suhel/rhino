@@ -7,10 +7,8 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import {Chrome} from 'vue-color'
-    
     export default {
-    
+
         data() {
             return {
                 analyticsData: {},
@@ -35,15 +33,11 @@
 
         methods: {
             fetchAnalytics() {
-                this.$store.dispatch('fetchAnalytics', { id: this.selectedEvent.id } );
-            },
-
-            // Initialize data when first render
-            initialize() {
-
-                this.$store.dispatch('fetchAnalytics', { id: this.selectedEvent.id })
-            },
+                this.$store.dispatch('fetchAnalytics', {
+                    eventId: this.$route.params.eventId
+                });
+            }
         }
-    
+
     }
 </script>
