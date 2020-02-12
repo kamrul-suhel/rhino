@@ -25,11 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        DB::listen(function ($collection) {
-            Log::info($collection->sql, ['Binging: ' => $collection->bindings, 'Execution Time: ' => $collection->time]);
-            Log::info('Execution Time: ', [$collection->time.' MS']);
-            Log::info('Bindings: ', [$collection->bindings]);
-            Log::info('-------------------------------------------------------------------------------------------');
-        });
+        /**
+         * Debug SQL query
+         */
+//        DB::listen(function ($collection) {
+//            Log::info($collection->sql, ['Binging: ' => $collection->bindings, 'Execution Time: ' => $collection->time]);
+//            Log::info('Execution Time: ', [$collection->time.' MS']);
+//            Log::info('Bindings: ', [$collection->bindings]);
+//            Log::info('-------------------------------------------------------------------------------------------');
+//        });
     }
 }

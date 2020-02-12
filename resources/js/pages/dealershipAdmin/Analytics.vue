@@ -11,24 +11,24 @@
 
         data() {
             return {
-                analyticsData: {},
             }
         },
 
         computed: ({
             ...mapGetters({
-                languages: 'getLanguages',
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 selectedEvent: 'getSelectedEvent',
+                analyticsData: 'getAnalyticsData',
+                analyticsTotalGuest: 'getAnalyticsTotalGuest',
+                analyticGuestInfo: 'getAnalyticsTotalInfo'
             })
         }),
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.analytics}`)
+            this.$store.commit('setNavTitle', `${this.trans.analytics}`)
             this.fetchAnalytics()
-        },
-
-        mounted() {
         },
 
         methods: {

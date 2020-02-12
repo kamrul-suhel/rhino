@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
 
         // Seed the countries
-        $this->call(CountriesTableSeeder::class);
+//        $this->call(CountriesTableSeeder::class);
 
         // Seed the Time Zones
         //$this->call(TimeZonesTableSeeder::class);
 
         // Seed the Languages
-        $this->call(LanguagesTableSeeder::class);
+//        $this->call(LanguagesTableSeeder::class);
 
         // Seed the setting table
         //$this->call(SettingsTableSeeder::class);
@@ -54,9 +54,9 @@ class DatabaseSeeder extends Seeder
 
 
         // Seed User  table
-        $this->call(UserSeeder::class);
+//        $this->call(UserSeeder::class);
 
         // Seed Guest  table
-        // $this->call(GuestSeeder::class);
+         $this->call(GuestSeeder::class);
     }
 }

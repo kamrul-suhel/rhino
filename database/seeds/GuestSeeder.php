@@ -19,6 +19,6 @@ class GuestSeeder extends Seeder
         Guest::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        factory(Guest::class, 300)->create();
+        factory(Guest::class, 2000)->create();
     }
 }

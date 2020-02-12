@@ -23,17 +23,18 @@ $factory->define(Guest::class, function (Faker $faker) {
         'unique' => generateUniqueIdForGuest(),
         'first_name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
-        'language_id' => 40,
+        'language_id' => 1,
         'surname' => $faker->lastName,
         'address_line_1' => $faker->streetAddress,
         'address_line_2' => $faker->streetName,
         'address_line_3' => $faker->citySuffix,
         'address_line_4' => $faker->state,
         'address_line_5' => $faker->buildingNumber,
+        'method' => $faker->randomElement(['emial', 'phone', 'online', 'walkin', 'sms']),
         'address_line_6' => $faker->country,
         'postcode' => $faker->postcode,
         'landline' => $faker->phoneNumber,
         'mobile' => $faker->phoneNumber,
-        'status' => $faker->randomElement([0,1])
+        'status' => $faker->randomElement([0,1,2,3,4,5])
     ];
 });

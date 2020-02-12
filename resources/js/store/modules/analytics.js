@@ -1,5 +1,8 @@
 const defaultState = {
-    analyticsData : []
+    analytics : {},
+    totalGuest: 0,
+    guestInfo: {}
+
 }
 
 const state = {
@@ -7,15 +10,31 @@ const state = {
 }
 
 const mutations = {
-    setAnalyticsData(state, analyticsData){
-        state.analyticstData = {...analyticsData}
+    setAnalyticsData(state, analytics){
+        state.analytics = {...analytics}
     },
+
+    setAnalyticsTotalGuest(state, totalGuest){
+        state.totalGuest = totalGuest
+    },
+
+    setAnalyticsGuestInfo(state, guestInfo){
+        state.guestInfo = {...guestInfo}
+    }
 }
 
 const getters = {
     getAnalyticsData(state){
-        return state.analyticstData
+        return state.analytics
     },
+
+    getAnalyticsTotalGuest(state){
+        return state.totalGuest
+    },
+
+    getAnalyticsTotalInfo(state){
+        return state.guestInfo
+    }
 
 }
 
@@ -25,9 +44,11 @@ const actions = {
         const URL = `/api/events/${payload.eventId}/analytics`
 
         axios.get(URL).then((response) => {
-            if (response.data) {
-                commit('setAnalyticsData', response.data)
-                console.log(response.data);
+            if (response.data.success) {
+                commit('setAnalyticsData', response.data.analytics)
+                commit('setAnalyticsTotalGuest', response.data.total_guest)
+                commit('setAnalyticsGuestInfo', response.data.guest_info)
+
             }
         });
     },
