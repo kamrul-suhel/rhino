@@ -55,13 +55,10 @@
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
                                             <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
-                                            <v-card class="pa-2 my-3">
-                                                <v-img
-                                                    :src="leftImage"
-                                                    aspect-ratio="2.75"
-                                                ></v-img>
-                                            </v-card>
-
+                                            <v-img
+                                                :src="leftImage"
+                                                width="150"
+                                            ></v-img>
                                             <input
                                                 ref="leftImage"
                                                 type="file"
@@ -75,13 +72,10 @@
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
                                             <label for="">{{ trans.right_hand_drive_image }}</label>
-                                            <v-card class="pa-2 my-3">
-                                                <v-img
-                                                    :src="rightImage"
-                                                    aspect-ratio="2.75"
-                                                ></v-img>
-                                            </v-card>
-
+                                            <v-img
+                                                :src="rightImage"
+                                                width="150"
+                                            ></v-img>
                                             <input
                                                 ref="rightImage"
                                                 type="file"

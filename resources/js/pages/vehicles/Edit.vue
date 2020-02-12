@@ -93,7 +93,7 @@
                                 :class="themeOption.buttonSecondaryColor"
                                 class="rounded-btn"
                                 small
-                                @click="onBackToBrand"
+                                @click="onBackToVehicles"
                             >
                                 {{ trans.back }}
                             </v-btn>
@@ -222,25 +222,9 @@
                 }
             },
 
-            onBackToBrand(){
-                if(this.subComponent){
-                    switch(this.model){
-                        case 'brand':
-                            this.$router.push({
-                                name: 'editBrands',
-                                params: {
-                                    id: this.$route.params.brandId
-                                }
-                            })
-
-                            this.$store.commit('setButtonLoading', false)
-                            break
-                    }
-                }else{
-                    this.$router.push({name: 'listBrands'})
-                    this.$store.commit('setButtonLoading', false)
-                }
-                
+            onBackToVehicles(){
+                this.$router.push({name: 'listVehicles'})
+                this.$store.commit('setButtonLoading', false)
             },
 
 

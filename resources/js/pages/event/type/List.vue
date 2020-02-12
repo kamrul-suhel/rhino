@@ -41,7 +41,6 @@
 
                             <v-img
                                 :src="typeImage"
-                                aspect-ratio="1"
                                 width="150"
                             ></v-img>
 
@@ -232,8 +231,8 @@
         },
 
         created() {
-            this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
-            this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.event} ${this.trans.types}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.events}` )
         },
 
         mounted() {
