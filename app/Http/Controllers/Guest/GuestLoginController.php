@@ -24,10 +24,20 @@ class GuestLoginController extends Controller
             // Found user, set session variable
             $request->session()->put('uniqueId', $request->uniqueId);
 
-            return response()->json([
-                'success' => true,
-                'guest' => $guest
-            ]);
+            if(
+                $request->has('loginToGuestJourney') &&
+                !empty($request->loginToGuestJourney)
+            ){
+                return [
+                    'success' => true,
+                    'guest' => $guest
+                ];
+            }else{
+                return response()->json([
+                    'success' => true,
+                    'guest' => $guest
+                ]);
+            }
         } else {
             return response()->json([
                 'success' => false

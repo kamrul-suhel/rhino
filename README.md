@@ -7,6 +7,7 @@ We use Vuejs to build this app.
 - **[Vue image upload](https://www.npmjs.com/package/vue-image-upload-resize)**
 - **[Vue color](https://www.npmjs.com/package/vue-color)**
 - **[Vue Flag-Icon](https://www.npmjs.com/package/vue-flag-icon)**
+- **[Json2csv](https://github.com/zemirco/json2csv#readme)**
 
 ## License
 

@@ -52,7 +52,9 @@ const defaultState = {
         adminNavIconColor: '#e20000',
 
         // Dealership admin
-        dealershipAdminNavColor: '#000'
+        dealershipAdminNavColor: '#000',
+
+        dialogBoxColor: '#e20000'
 
     },
     initialize: false

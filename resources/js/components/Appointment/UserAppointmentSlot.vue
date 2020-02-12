@@ -1,33 +1,36 @@
 <template>
-    <v-layout row wrap>
-        <v-flex xs3
-                v-for="(appointmentSlot, index) in appointmentSlots"
-                :key="index">
-            <UserAppointmentSlot :appointmentSlot="appointmentSlot"></UserAppointmentSlot>
-        </v-flex>
-    </v-layout>
+    <v-card flat
+        tile>
+        <v-card-text class="appointmentSlot">
+            <div>{{ appointmentSlot.start|dateFormat('LT', 'en') }}</div>
+            <div>{{ appointmentSlot.end| dateFormat('LT', 'en') }}</div>
+        </v-card-text>
+
+        <v-card-actions>
+            <div v-if="checkAvailability(appointmentSlot)">
+                <h2>Available</h2>
+            </div> <!-- Available slot -->
+
+            <div v-else>
+                <h4>{{ `${appointment.guest_first_name} ${appointment.guest_surname}`}}</h4>
+            </div> <!-- unavailable -->
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
-    import fn from '@/utils/function'
-    import UserAppointmentSlot from '@/components/Appointment/UserAppointmentSlot'
 
     export default {
-        components: {
-            UserAppointmentSlot
-        },
-
         data() {
             return {
-                isClose: false,
-                appointmentSlots: []
+                appointment:{}
             }
         },
 
         props: {
-            date: {
-                type: String,
+            appointmentSlot: {
+                type: Object,
                 required: true
             }
         },
@@ -36,26 +39,15 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                dealership: 'getSelectedDealership',
-                selectedUsers: 'getUsers',
                 selectedUser: 'getSelectedUser',
-                selectedEvent: 'getSelectedEvent',
-                update: 'getInitializeAppointment',
-                appointmentUsers: 'getAppointmentUsers',
                 existingAppointments: 'getAppointments'
             })
         }),
 
         created() {
-            this.initializeUserAppointment()
         },
 
         methods: {
-            initializeUserAppointment() {
-                const time = fn.getStartTimeEndTime(this.date, this.dealership)
-                this.appointmentSlots = fn.getTimeSlotsForDay(time, this.selectedEvent)
-            },
-
             checkAvailability(currentSlot){
                 const selectedUser = {...this.selectedUser}
                 let isSlotAvailable = true
@@ -66,6 +58,7 @@
                             appointment.start === currentSlot.start &&
                             selectedUser.id === appointment.user_id
                         ) {
+                            this.appointment = {...appointment}
                             isSlotAvailable = false
                         }
                     })

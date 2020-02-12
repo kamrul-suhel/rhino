@@ -1,16 +1,16 @@
 <template>
     <v-navigation-drawer
-            fixed
-            clipped
-            v-model="drawer"
-            app
-            width="300"
+        fixed
+        clipped
+        v-model="drawer"
+        app
+        width="300"
     >
 
         <v-layout row wrap align-content-center>
             <v-flex xs12>
-                <v-img 
-                    src="/images/rhino-events-logo.png" 
+                <v-img
+                    src="/images/rhino-events-logo.png"
                     aspect-ratio="1"
                     max-width="70%"
                     max-height="30px"
@@ -77,11 +77,46 @@
                 <v-list-tile-title>{{ trans.logOut }}</v-list-tile-title>
             </v-list-tile>
         </v-list>
+
+        <v-dialog
+            v-model="downloadGuest"
+            max-width="250"
+        >
+            <v-card>
+                <v-card-title class="headline">
+                    <h4>{{ trans.download }}</h4>
+                    <h5>{{ `${trans.booked} ${trans.guest}` }}</h5>
+                </v-card-title>
+
+                <v-card-text>
+                    It is a long established fact that a reader will be distracted by the readable content of a page
+                    when looking at its layout.
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-btn outline round
+                           @click="onDownloadGuest()"
+                           :color="themeOption.adminNavIconColor"
+                           class="ma-0">
+                        {{ `${trans.download}` }}
+                    </v-btn>
+
+                    <v-btn outline round
+                           @click="downloadGuest = false"
+                           :color="themeOption.adminNavIconColor"
+                           class="ma-0 ml-2">
+                        {{ `${trans.cancel}` }}
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
     </v-navigation-drawer>
 </template>
 
 <script>
     import {mapGetters} from 'vuex';
+    import fn from '@/utils/function'
 
     export default {
         computed: {
@@ -92,30 +127,57 @@
                 openNavigation: 'getDealershipIsNavigationOpen',
                 navs: 'getDealershipNavigation',
                 authUser: 'getAuthUser',
-                title: 'getNavTitle'
+                title: 'getNavTitle',
+                selectedEvent: 'getSelectedEvent',
+                eventsForDropDown: 'getEventsForDropDown'
             })
         },
 
         data() {
             return {
-                drawer: true
+                drawer: true,
+                downloadGuest: false,
+                downloadType: null
             }
         },
         created() {
             this.$store.commit('setDealershipNavigation', this.trans) // set dealership navigation
         },
 
-        watch:{
-            openNavigation(){
+        watch: {
+            openNavigation() {
                 this.drawer = this.openNavigation
             }
         },
 
         methods: {
             async onPageChange(item) {
-                if(item.link === this.$route.name){
+                // Check is dialog box
+                if (item.isDialog) {
+                    this.downloadGuest = true
+                    // check type
+                    this.downloadType = item.link
                     return
-                }else{
+                }
+
+                // Check is edit event
+                if(item.link === 'editEvent'){
+                    const eventId = +this.selectedEvent.id
+                    const index = _.findIndex(this.eventsForDropDown, (event) => {
+                        return event.id === eventId
+                    })
+
+                    if(index < 0){
+                        return // do not have permission to edit this event
+                    }
+
+                    this.$router.push({name: 'editEvents', params:{id: eventId}})
+                    return
+                }
+
+                if (item.link === this.$route.name) {
+                    return
+                } else {
                     this.$router.push({name: item.link});
                 }
             },
@@ -132,7 +194,7 @@
             onLogout() {
                 axios.post('/logout').then((response) => {
 
-                    if(response.data.success){
+                    if (response.data.success) {
                         // reset auth user
                         this.$store.commit('setAuthUser', {})
                         window.location = '/admin'
@@ -140,18 +202,33 @@
                 })
             },
 
-            onCheckAccessLevel(nav){
+            onCheckAccessLevel(nav) {
                 let accessLevel = [...nav.access]
                 const authUserRole = this.authUser.level
-                const canAccess = _.findIndex(accessLevel, function(level){
+                const canAccess = _.findIndex(accessLevel, function (level) {
                     return level === authUserRole
                 })
 
-                if(canAccess === -1){
+                if (canAccess === -1) {
                     return false
-                }else{
+                } else {
                     return true
                 }
+            },
+
+            onDownloadGuest() {
+                const URL = `/api/csv/guests/download?downloadType=${this.downloadType}&eventId=${this.selectedEvent.id}`
+                const fileName = `${this.trans.booked}${this.trans.guest}`
+
+                axios.get(URL).then((response) => {
+                    // Check response success & have some data
+                    if (
+                        response.data.success &&
+                        response.data.guests.length > 0
+                    ) {
+                        return fn.downloadCSV(response.data.guests, fileName)
+                    }
+                })
             }
         }
     }

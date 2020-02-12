@@ -92,6 +92,10 @@ export default {
             params += `&eventId=${payload.eventId}`
         }
 
+        if (payload.saleExecutiveId && typeof (payload.saleExecutiveId) !== 'undefined') {
+            params += `&saleExecutiveId=${payload.saleExecutiveId}`
+        }
+
         return params
     },
 
@@ -165,4 +169,27 @@ export default {
         }
         return dateArray
     },
+
+    downloadCSV(data, fileName){
+        const {Parser} = require('json2csv')
+        const json2csvParser = new Parser()
+        const csv = json2csvParser.parse(data)
+        let blob = new Blob([csv], {type: "text/csv;charset=utf-8;"});
+
+        if (window.navigator.msSaveBlob) { // IE 10+
+            window.navigator.msSaveBlob(blob, `${fileName}.csv`)
+        } else {
+            let link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                let url = window.URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", `${fileName}.csv`);
+                link.style = "visibility:hidden";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
 }

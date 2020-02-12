@@ -31,15 +31,17 @@ const mutations = {
                     {
                         icon: 'cloud_download',
                         text: `${trans.download} ${trans.booked} ${trans.guests}`,
-                        link: 'listDealerships',
+                        link: 'bookedGuest',
                         access: ['dealership'],
+                        isDialog: true
                     },
 
                     {
                         icon: 'cloud_download',
                         text: `${trans.download} ${trans.unbooked} ${trans.guests}`,
-                        link: 'listDealerships',
+                        link: 'unbookedGuest',
                         access: ['dealership'],
+                        isDialog: true
                     }
                 ]
             },
@@ -59,7 +61,7 @@ const mutations = {
                     {
                         icon: 'directions_car',
                         text: `${trans.edit} ${trans.event}`,
-                        link: 'listDealerships',
+                        link: 'editEvent',
                         access: ['dealership'],
                     },
 

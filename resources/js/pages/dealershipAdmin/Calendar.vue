@@ -8,6 +8,7 @@
             <v-flex xs6 align-self-end>
                 <v-layout row wrap justify-end>
                     <v-btn outline round
+                           @click="onGoBack()"
                            :color="themeOption.adminNavIconColor"
                            class="ma-0">
                         <v-icon left dark>reply</v-icon>
@@ -17,7 +18,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4>
+        <v-layout mt-4 v-if="isFiltering">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -27,7 +28,7 @@
                         >
                             <v-list-tile-avatar>
                                 <v-icon
-                                        :color="themeOption.adminNavIconColor">event_note
+                                    :color="themeOption.adminNavIconColor">event_note
                                 </v-icon>
                             </v-list-tile-avatar>
 
@@ -66,7 +67,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4 v-if="saleExecutive">
+        <v-layout mt-4 v-if="saleExecutive && isFiltering">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -105,7 +106,7 @@
             </v-flex>
         </v-layout>
 
-        <div class="r-tab" v-if="isUserSelected">
+        <div class="r-tab open" v-if="isUserSelected">
             <div class="r-tab-title">
                 <div>
                     <v-icon
@@ -123,19 +124,22 @@
                 </div>
             </div>
 
-            <div class="r-tab-content">
+            <div class="r-tab-content open">
                 <v-container fluid pa-0 grid-list-xl>
                     <v-layout row wrap>
-                        <v-flex xs12>
-                            <User :user="selectedUser"></User>
+                        <v-flex xs6>
+                            <h2>{{ selectedUser.firstname }}</h2>
                         </v-flex>
-
-                        <v-flex xs12 class="text-xs-center">
+                        <v-flex xs6 class="text-xs-right">
                             <v-btn round
                                    :color="themeOption.adminNavIconColor"
                                    class="ma-0">
-                                <span style="color:#fff;">{{ `${trans.submit}` }}</span>
+                                <span style="color:#fff;">{{ `${trans.download}` }}</span>
                             </v-btn>
+                        </v-flex>
+
+                        <v-flex xs12>
+                            <User :user="selectedUser"></User>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -160,7 +164,8 @@
                 selectedTeamMemberType: null,
                 saleExecutive: false,
                 saleExecutiveDropdown: false,
-                isUserSelected: false
+                isUserSelected: false,
+                isFiltering: true
             }
         },
         computed: ({
@@ -176,9 +181,8 @@
         }),
 
         watch: {
-            selectedEvent(){
+            selectedEvent() {
                 this.fetchEventUser()
-                this.fetchAllAppointmentByEventId()
             }
         },
 
@@ -186,17 +190,17 @@
         },
 
         methods: {
-            onTeamMemberSelect(){
+            onTeamMemberSelect() {
                 this.teamMemberShow = !this.teamMemberShow
             },
 
-            onSelectTeamMember(type){
+            onSelectTeamMember(type) {
                 this.selectedTeamMemberType = type
                 this.teamMemberShow = !this.teamMemberShow
             },
 
-            getTeamMemberTitle(){
-                switch(this.selectedTeamMemberType){
+            getTeamMemberTitle() {
+                switch (this.selectedTeamMemberType) {
                     case 'team':
                         this.saleExecutive = true
                         return `${this.trans.sales} ${this.trans.teamMember}`
@@ -212,11 +216,11 @@
 
             },
 
-            onSaleExecutiveClick(){
+            onSaleExecutiveClick() {
                 this.saleExecutiveDropdown = !this.saleExecutiveDropdown
             },
 
-            fetchEventUser(){
+            fetchEventUser() {
                 const dealershipId = this.dealership.id
                 const eventId = this.selectedEvent.id
                 this.$store.dispatch('fetchUsersForEvent', {
@@ -227,15 +231,28 @@
                 })
             },
 
-            onSelectSaleExecutive(saleExecutive){
+            onSelectSaleExecutive(saleExecutive) {
                 this.isUserSelected = false
                 this.$store.commit('setSelectedUser', saleExecutive)
                 this.isUserSelected = true
+                this.fetchAllAppointmentByEventId(saleExecutive)
+
+                // reset all list
+                this.isFiltering = false
             },
 
-            fetchAllAppointmentByEventId(){
+            fetchAllAppointmentByEventId(saleExecutive) {
                 const eventId = this.selectedEvent.id
-                this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId})
+                this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId, saleExecutiveId: saleExecutive.id })
+            },
+
+            onGoBack() {
+                this.teamMemberShow = false
+                this.selectedTeamMemberType = null
+                this.saleExecutive = false
+                this.saleExecutiveDropdown = false
+                this.isUserSelected = false
+                this.isFiltering = true
             }
         }
     }
