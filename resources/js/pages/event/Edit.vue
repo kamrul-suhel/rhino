@@ -223,12 +223,12 @@
                                             dark
                                             :slider-color="themeOption.tabSliderColor"
                                         >
-                                            <v-tab
-                                                key="appointments"
-                                                ripple
-                                            >
-                                                {{ trans.appointments }}
-                                            </v-tab>
+<!--                                            <v-tab-->
+<!--                                                key="appointments"-->
+<!--                                                ripple-->
+<!--                                            >-->
+<!--                                                {{ trans.appointments }}-->
+<!--                                            </v-tab>-->
 
                                             <v-tab
                                                 key="saleExecutives"
@@ -244,11 +244,11 @@
                                                 {{ trans.vehicles }}
                                             </v-tab>
 
-                                            <v-tab-item
-                                                key="appointments"
-                                            >
-                                                <Appointment></Appointment>
-                                            </v-tab-item>
+<!--                                            <v-tab-item-->
+<!--                                                key="appointments"-->
+<!--                                            >-->
+<!--                                                <Appointment></Appointment>-->
+<!--                                            </v-tab-item>-->
 
                                             <v-tab-item
                                                 key="saleExecutives"
@@ -268,7 +268,7 @@
                         </v-layout>
 
 
-                        <v-card-actions class="pa-3 justify-center">
+                        <v-card-actions v-if="!subComponent"  class="pa-3 justify-center">
                             <r-button :text="`${trans.back}`"
                                 dark
                                 identifier="'eventBack'"
@@ -378,9 +378,9 @@
         created() {
             this.initialize()
             this.setAppointmentDuration()
-            
+
             this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.event}` )
-            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.event}`) 
+            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.event}`)
 
             // Load dealership & type when it is subcomponent
             if(this.subComponent){

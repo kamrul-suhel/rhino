@@ -50,7 +50,8 @@
             return {}
         },
 
-        watch: {},
+        watch: {
+        },
 
         computed: {
             ...mapGetters({

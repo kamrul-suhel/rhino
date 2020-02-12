@@ -161,17 +161,24 @@
                 }
 
                 // Check is edit event
-                if(item.link === 'editEvent'){
+                if (item.link === 'editEvent') {
+                    const dealershipId = this.authUser.dealership_id
                     const eventId = +this.selectedEvent.id
                     const index = _.findIndex(this.eventsForDropDown, (event) => {
                         return event.id === eventId
                     })
 
-                    if(index < 0){
+                    if (index < 0) {
                         return // do not have permission to edit this event
                     }
 
-                    this.$router.push({name: 'editEvents', params:{id: eventId}})
+                    this.$router.push({
+                        name: 'editDealershipsEvent',
+                        params: {
+                            dealershipId: dealershipId,
+                            eventId: eventId
+                        }
+                    })
                     return
                 }
 

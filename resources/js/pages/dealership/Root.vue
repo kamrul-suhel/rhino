@@ -3,6 +3,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
         data: () => {
             return {
@@ -10,8 +11,18 @@
             }
         },
 
-        created(){
+        computed: {
+            ...mapGetters({
+                selectedEvent: 'getSelectedEvent',
+                authUser: 'getAuthUser',
+                eventsForDropDown: 'getEventsForDropDown'
+            })
+        },
 
+        watch:{
+        },
+
+        created(){
         },
 
         methods: {
