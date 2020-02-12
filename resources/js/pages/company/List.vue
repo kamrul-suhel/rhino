@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div class="r-tab" :class="[showForm ? 'open' : '']" >
             <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>

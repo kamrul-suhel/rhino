@@ -17,13 +17,14 @@
                 <v-form ref="eventTypeForm"
                         v-model="valid"
                         lazy-validation>
-                    <v-layout row wrap>
-                        <v-flex xs12 v-if="editType">
+                    <v-layout row wrap justify-end>
+                        <v-flex xs12 sm3 v-if="editType">
                             <Language 
                                     :languageId="selectedType.language_id">
                             </Language>
                         </v-flex>
-
+                    </v-layout>
+                    <v-layout row wrap>
                         <v-flex xs12 sm4 mr-3>
                             <v-text-field
                                 :label="trans.name"
@@ -36,11 +37,12 @@
                         </v-flex>
 
                         <v-flex xs12 sm4 ml-3>
-                            <span>{{trans.logo}}</span>
+                            <span>{{trans.icon}}</span>
 
                             <v-img
                                 :src="typeImage"
                                 aspect-ratio="1"
+                                width="150"
                             ></v-img>
 
                             <FileUpload :preview="false"
@@ -58,10 +60,13 @@
                                 :false-value="0">
                             </v-switch>
                         </v-flex>
-                        <v-flex>
+                    </v-layout>
+                    <v-layout row justify-center class="py-4 text-center">
+                        <v-flex xs12 sm-4 class="text-center">
                             <v-btn
                                 small
                                 dark
+                                class="rounded-btn"
                                 :color="themeOption.buttonDangerColor"
                                 @click="onCreateType">
                                 {{ editType ? `${trans.update} ${trans.type}` : `${trans.add} ${trans.type}`}}
@@ -254,6 +259,7 @@
                 // Check if type has logo, then set image
                 this.$store.commit('setSelectedType', type)
                 this.editType = true
+                this.showForm = true
             },
 
             onDeleteType(Type) {

@@ -81,6 +81,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn small
+                               dark
                                @click="onResetRegion()"
                                :color="themeOption.buttonSecondaryColor">
                             {{ trans.cancel}}

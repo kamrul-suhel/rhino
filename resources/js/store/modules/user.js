@@ -137,10 +137,17 @@ const mutations = {
         if (!subComponent) {
             header = [
                 {
-                    text: trans.name,
+                    text: trans.firstName,
                     align: 'left',
                     sortable: true,
-                    value: 'name'
+                    value: 'first name'
+                },
+
+                {
+                    text: trans.surName,
+                    align: 'left',
+                    sortable: true,
+                    value: 'surname'
                 },
 
                 {
@@ -148,11 +155,6 @@ const mutations = {
                     align: 'left',
                     sortable: true,
                     value: 'email'
-                },
-
-                {
-                    text: trans.status,
-                    value: 'status'
                 },
 
                 {
@@ -172,11 +174,19 @@ const mutations = {
         }else{
             header = [
                 {
-                    text: trans.name,
+                    text: trans.firstName,
                     align: 'left',
                     sortable: true,
-                    value: 'name'
+                    value: 'first name'
                 },
+
+                {
+                    text: trans.surName,
+                    align: 'left',
+                    sortable: true,
+                    value: 'surname'
+                },
+
 
                 {
                     text: trans.email,
