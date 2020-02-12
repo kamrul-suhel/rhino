@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guest extends Model
 {
+    const STATUS_COMPLETED_NO_SALE = 0;
+    const STATUS_COMPLETED_SALE_MADE = 1;
+    const STATUS_COMPLETED_NO_SHOW = 2;
+
     protected $table = 'guests';
 
     protected $fillable = [

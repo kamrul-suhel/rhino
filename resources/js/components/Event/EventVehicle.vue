@@ -156,6 +156,10 @@
                 handler() {
                     this.initialize()
                 }
+            },
+
+            '$route.params.eventId': function(id){
+                this.initialize()
             }
         },
 

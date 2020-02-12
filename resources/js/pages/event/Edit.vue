@@ -1,6 +1,6 @@
 <template>
     <v-container pa-0>
-        <v-layout row wrap justify-end>
+        <v-layout row wrap justify-end v-if="!subComponent">
             <v-flex xs12 sm3>
                 <language-picker :languageId="event.language_id"></language-picker>
              </v-flex>
@@ -14,7 +14,7 @@
                 <v-flex xs12>
                     <v-card>
                         <v-card-text>
-                            <v-layout row wrap>
+                            <v-layout row wrap v-if="!subComponent">
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
@@ -39,7 +39,8 @@
                                     </v-select>
                                 </v-flex>
                             </v-layout>
-                            <v-layout row wrap>
+
+                            <v-layout row wrap v-if="!subComponent">
                                 <v-flex xs12 sm4 pa-2>
                                     <v-menu
                                         ref="startEvent"
@@ -124,7 +125,7 @@
                                     </v-menu>
                                 </v-flex>
                             </v-layout>
-                            <v-layout row wrap>
+                            <v-layout row wrap v-if="!subComponent">
 
                                 <v-flex xs12 sm4 pa-2>
                                     <v-select
@@ -163,7 +164,7 @@
                                 </v-flex>
                             </v-layout>
 
-                            <v-layout row wrap>
+                            <v-layout row wrap v-if="!subComponent">
                                 <v-flex xs12 sm8 pa-2>
                                     <v-textarea
                                         :color="themeOption.inputColor"
@@ -220,7 +221,7 @@
                         <!-- Dealership Admin can see -->
                         <v-layout row wrap v-if="subComponent && model==='dealership'">
                             <v-flex xs12>
-                                <v-divider></v-divider>
+                                <v-divider v-if="!subComponent"></v-divider>
 
                                 <v-card flat>
                                     <v-card-text>
@@ -355,10 +356,15 @@
                 dealerships: 'getDealerships',
                 selectedEvent: 'getSelectedEvent',
                 selectedLanguage: 'getSubSelectedLanguage',
+                updateComponent: 'getUpdateComponent'
             })
         }),
 
         watch: {
+            '$route.params.eventId': function (id) {
+                this.renderEventData()
+            },
+
             selectedLanguage(){
                 let id = null
                 if(this.subComponent){
@@ -389,10 +395,7 @@
 
             // Load dealership & type when it is subcomponent
             if(this.subComponent){
-                this.$store.dispatch('fetchDealershipsForDropdown')
-                this.$store.dispatch('fetchTypesForDropdown')
-                this.$store.dispatch('fetchDealership', {id: this.$route.params.dealershipId})
-                this.$store.dispatch('fetchAppointmentByEventId', {eventId: this.$route.params.eventId})
+                this.renderEventData()
             }
         },
 
@@ -505,6 +508,13 @@
                         value: 60
                     }
                 ]
+            },
+
+            renderEventData(){
+                this.$store.dispatch('fetchDealershipsForDropdown')
+                this.$store.dispatch('fetchTypesForDropdown')
+                this.$store.dispatch('fetchDealership', {id: this.$route.params.dealershipId})
+                this.$store.dispatch('fetchAppointmentByEventId', {eventId: this.$route.params.eventId})
             }
         }
     }

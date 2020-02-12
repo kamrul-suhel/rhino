@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
+
+    /**
+     * Status identifier
+     * @var string
+     */
+    const STATUS_PENDING = 1;
+    const STATUS_CONFIRMED = 2;
+
     protected $table = 'appointments';
 
     protected $fillable = [

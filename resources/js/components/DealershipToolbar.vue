@@ -20,6 +20,7 @@
                                         append-icon="keyboard_arrow_down"
                                         :item-text="selectedEvent.event ? 'event': 'name'"
                                         v-model="selectedEvent"
+                                        @change="onEventChange()"
                                         return-object
                                     ></v-autocomplete>
                                 </v-flex>
@@ -83,6 +84,10 @@
 
             onNavigationToggle() {
                 this.$store.commit('setIsNavigationOpen')
+            },
+
+            onEventChange(){
+                this.$store.commit('setUpdateComponent')
             }
         }
     }
