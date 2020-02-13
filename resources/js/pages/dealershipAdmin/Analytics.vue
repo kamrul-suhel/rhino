@@ -1,18 +1,144 @@
 <template>
     <v-container fluid px-5>
-        <h1>Analytics</h1>
+        <v-layout row py-5>
+            <v-flex xs12 sm6 px-3>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments by online registration</span> <span class="text-xs-right">{{ analyticsData.online ? analyticsData.online : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments by telephone</span> <span class="text-xs-right">{{ analyticsData.phone ? analyticsData.phone : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments by email</span> <span class="text-xs-right">{{ analyticsData.email ? analyticsData.email : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments by social media</span> <span class="text-xs-right">{{ analyticsData.social ? analyticsData.social : 0}}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments by walk-in</span> <span class="text-xs-right">{{ analyticsData.walkin ? analyticsData.walkin : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments by SMS</span> <span class="text-xs-right">{{ analyticsData.sms ? analyticsData.sms : 0 }}</span>
+                </div>
+            </v-flex>
+            <v-flex xs12 sm6 px-3>
+
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments by Prospecting</span> <span class="text-xs-right">{{ analyticsData.prospecting ? analyticsData.prospecting : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>New Customers</span> <span class="text-xs-right">{{ analyticsData.prosecting ? analyticsData.prospecting : 0 + analyticsData.walkin ? analyticsData.walkin : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointments confirmed</span> <span class="text-xs-right">{{ analyticGuestInfo.confirmed ? analyticGuestInfo.confirmed : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointment Show</span> <span class="text-xs-right">{{ analyticGuestInfo.show ? analyticGuestInfo.show : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Appointment no show</span> <span class="text-xs-right">{{ analyticGuestInfo.pending ? analyticGuestInfo.pending : 0 }}</span>
+                </div>
+                <v-divider class="pa-1"></v-divider>
+                <div class="d-flex my-2 justify-between">
+                    <span>Sales made</span> <span class="text-xs-right">{{ analyticGuestInfo.sale_made ?  analyticGuestInfo.sale_made : 0 }}</span>
+                </div>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row >
+            <v-flex xs12 sm4 class="text-xs-center">
+                Confirmed Appointments
+                <graph :chartData="confirmed" :options="options" :styles="myStyles"></graph>
+            </v-flex>
+            <v-flex xs12 sm4 class="text-xs-center">
+                Appointments Made
+                <graph :chartData="made" :options="options" :styles="myStyles"></graph>
+            </v-flex>
+            <v-flex xs12 sm4 class="text-xs-center">
+                Sales
+                <graph :chartData="sales" :options="options" :styles="myStyles"></graph>
+            </v-flex>
+        </v-layout>
 
     </v-container>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
+    import Graph from '@/components/Analytics/Graph'
+
     export default {
 
         data() {
             return {
+                confirmed: {
+                    labels: ['Confirmed', 'Unconfirmed'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [50, 50],
+                        backgroundColor: [
+                            '#CDDEEA',
+                            '#244252',
+                        ],
+                        borderColor: [
+                            '#CDDEEA',
+                            '#244252',
+                        ],
+                        
+                    }]
+                },
+                made: {
+                    labels: ['Showed Up', 'Yet to appear'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [50, 50],
+                        backgroundColor: [
+                            '#CDDEEA',
+                            '#244252',
+                        ],
+                        borderColor: [
+                            '#CDDEEA',
+                            '#244252',
+                        ],
+                        
+                    }]
+
+                },
+                sales: {
+                    labels: ['Sale', 'No Sale'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [50, 50],
+                        backgroundColor: [
+                            '#CDDEEA',
+                            '#244252',
+                        ],
+                        borderColor: [
+                            '#CDDEEA',
+                            '#244252',
+                        ],
+                        
+                    }]
+
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutoutPercentage: 85
+                }
             }
         },
+
+        components: {Graph},
 
         computed: ({
             ...mapGetters({
@@ -22,13 +148,25 @@
                 analyticsData: 'getAnalyticsData',
                 analyticsTotalGuest: 'getAnalyticsTotalGuest',
                 analyticGuestInfo: 'getAnalyticsTotalInfo'
-            })
+            }),
+
+            myStyles () {
+                return {
+                    height: `200px`,
+                    position: 'relative'
+                }
+            }
         }),
 
         created() {
             this.$store.commit('setHeaderTitle', `${this.trans.analytics}`)
             this.$store.commit('setNavTitle', `${this.trans.analytics}`)
             this.fetchAnalytics()
+            this.createConfirmedData()
+        },
+
+        mounted() {
+            
         },
 
         methods: {
@@ -36,7 +174,19 @@
                 this.$store.dispatch('fetchAnalytics', {
                     eventId: this.$route.params.eventId
                 });
-            }
+            },
+
+            createConfirmedData() {
+                console.log('total guests: ' + this.analyticsTotalGuest)
+            },
+
+            createMadeData() {
+
+            },
+
+            createSalesData() {
+
+            },
         }
 
     }
