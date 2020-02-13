@@ -127,7 +127,7 @@
                 selectedVehicles: 'getBookingSelectedVehicles',
                 color: 'getFrontendColor',
                 selectedEvent: 'getSelectedEvent',
-                vehicleType: 'getBookingVehicleType'
+                vehicleType: 'getBookingVehicleType',
             })
         }),
 

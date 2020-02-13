@@ -77,7 +77,6 @@
         }),
 
         created(){
-            console.log('type si: ', this.vehicleType)
         },
 
         methods:{

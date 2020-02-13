@@ -24,4 +24,9 @@ class Appointment extends Model
         'part_ex_settlement',
         'is_canceled'
     ];
+
+
+    public function vehicles(){
+        return $this->hasMany(AppointmentVehicle::class);
+    }
 }

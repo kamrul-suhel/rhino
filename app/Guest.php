@@ -57,4 +57,11 @@ class Guest extends Model
         'last_logged_in',
         'stage'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function appointment(){
+        return $this->hasMany(Appointment::class,'guest_id', 'id');
+    }
 }

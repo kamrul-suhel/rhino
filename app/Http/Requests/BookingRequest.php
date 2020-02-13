@@ -29,8 +29,8 @@ class BookingRequest extends FormRequest
             'user_id' => 'exists:users,id',
             'guest_id' => 'exists:guests,id',
             'slot_id' => 'required|integer',
-            'start' => 'required|date',
-            'end' => 'required|date',
+            'start' => 'date',
+            'end' => 'date',
             'vehicles' => 'array'
         ];
     }

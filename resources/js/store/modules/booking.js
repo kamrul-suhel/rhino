@@ -1,24 +1,22 @@
 const defaultState = {
     appointmentBooked: false,
     guest: {},
-    selectedVehicles:[],
-    allAppointments:[],
+    selectedVehicles: [],
+    allAppointments: [],
     color: '#000',
     vehicleType: '',
-    allAppointmentTime:[],
-    allSlot:[],
-    selectedSlot:{},
-    selectedDate:'',
+    allAppointmentTime: [],
+    allSlot: [],
+    selectedSlot: {},
+    selectedDate: '',
     selectedSaleExecutive: {},
-    bringGuest: {
-
-    },
-    step:'selectModel',
-    partExchange:{
+    bringGuest: {},
+    step: 'selectModel',
+    partExchange: {
         vehicleExchange: false
     },
 
-    confirmDetail:{}
+    confirmDetail: {}
 }
 
 const state = {
@@ -26,26 +24,80 @@ const state = {
 }
 
 const mutations = {
-    setAppointmentBooked(state, status){
+    setAppointmentBooked(state, status) {
         state.appointmentBooked = status
     },
 
-    setBookingGuest(state, guest){
+    setBookingGuest(state, guest) {
+        if(guest.appointment.length > 0){
+            const appointment = {...guest.appointment[0]}
+            const partExchange = {
+                registrationNumber:appointment.part_ex_vrm,
+                makeAndModel:appointment.part_ex_vehicle,
+                currentMilege:appointment.part_ex_distance,
+                termCondition: true,
+                vehicleExchange:false
+            }
+
+            state.partExchange = partExchange
+
+            if(
+                (appointment.slot_id || appointment.slot_id === 0) &&
+                !_.isEmpty(appointment.start) &&
+                !_.isEmpty(appointment.end) &&
+                appointment.user_id &&
+                appointment.user_id !== 'null'
+            ){
+                state.selectedSlot = {
+                    slotId: appointment.slot_id,
+                    start: appointment.start,
+                    end: appointment.end
+                }
+
+                state.selectedDate = moment(appointment.start).format( "YYYY-MM-DD")
+            }
+
+            // Bringing guest info
+            if(!_.isEmpty(appointment.bring_guest)){
+                state.bringGuest = {
+                    name: appointment.bring_guest,
+                    changingCar: appointment.guest_changing_car
+                }
+            }
+        }
         state.guest = {...guest}
     },
 
-    setOrRemoveVehicle(state, vehicle){
+    setOrRemoveVehicle(state, vehicle) {
+        let type = 1
+        switch (state.vehicleType) {
+            case 'new':
+                type = 1
+                break
+
+            case 'used':
+                type = 2
+                break
+
+            case 'unsure':
+                type = 3
+                break
+
+        }
         const selectedVehicles = [...state.selectedVehicles]
 
         const isExists = _.findIndex(selectedVehicles, (currVehicle) => {
             return currVehicle.id === vehicle.id
         })
 
-        if(isExists === -1){
-            selectedVehicles.push({...vehicle})
-        }else{
-            _.remove(selectedVehicles, function(currentVehicle) {
-                if(vehicle.id === currentVehicle.id){
+        if (isExists === -1) {
+            selectedVehicles.push({
+                ...vehicle,
+                condition: type
+            })
+        } else {
+            _.remove(selectedVehicles, function (currentVehicle) {
+                if (vehicle.id === currentVehicle.id) {
                     return currentVehicle
                 }
             })
@@ -53,54 +105,54 @@ const mutations = {
         state.selectedVehicles = [...selectedVehicles]
     },
 
-    setFrontendColor(state, brands){
-        if(brands.length === 0){
+    setFrontendColor(state, brands) {
+        if (brands.length === 0) {
             return
         }
 
-        if(brands.length === 1){
+        if (brands.length === 1) {
             state.color = brands[0].colour
         }
     },
 
-    setBookingVehicleType(state, type){
+    setBookingVehicleType(state, type) {
         state.vehicleType = type
     },
 
-    setAllAppointmentTime(state, appointments){
+    setAllAppointmentTime(state, appointments) {
         state.allAppointmentTime = [...appointments]
     },
 
-    setAllAppointmentSlots(state, slots){
+    setAllAppointmentSlots(state, slots) {
         state.allSlot = [...slots]
     },
 
-    setSelectedSlot(state, slot){
+    setSelectedSlot(state, slot) {
         state.selectedSlot = {...slot}
     },
 
-    setBookingSelectedDate(state, date){
+    setBookingSelectedDate(state, date) {
         state.selectedDate = date
     },
 
-    setBookingAppointments(state, appointments){
+    setBookingAppointments(state, appointments) {
         state.allAppointments = [...appointments]
     },
 
-    setBookingSelectedSaleExecutive(state, saleExecutive){
+    setBookingSelectedSaleExecutive(state, saleExecutive) {
         state.selectedSaleExecutive = {...saleExecutive}
     },
 
-    setBookingBringGuest(state, guest){
+    setBookingBringGuest(state, guest) {
         state.bringGuest = {...guest}
     },
 
-    setPartExchange(state, partExchange){
+    setPartExchange(state, partExchange) {
         state.partExchange = {...partExchange}
     },
 
-    setBookingStep(state, step){
-        switch(step){
+    setBookingStep(state, step) {
+        switch (step) {
             case 0:
                 state.step = 'selectModel'
                 break
@@ -119,77 +171,138 @@ const mutations = {
                 state.step = 'bookingConfirmation'
                 break
         }
+    },
+
+    updateSelectedVehicles(state, data){
+        const vehicles = [...data.vehicles]
+        let selectedVehicles =[]
+        const guest = {...data.guest}
+        if(guest.appointment.length > 0){
+            const appointment = {...guest.appointment[0]}
+            if(appointment.vehicles.length > 0){
+                let type = ''
+                switch (appointment.vehicles[0].vehicle_condition) {
+                    case 0:
+                    case 1:
+                        type = 'new'
+                        break
+
+                    case 2:
+                        type = 'used'
+                        break
+
+                    case 3:
+                        type = 'unsure'
+                        break
+                }
+
+                state.vehicleType = type
+
+                _.map(vehicles, (vehicle) => {
+                    _.map(appointment.vehicles, (currentVehicle) => {
+                        if(currentVehicle.vehicle_id === vehicle.vehicle_id){
+                            selectedVehicles.push({
+                                ...vehicle,
+                                condition: currentVehicle.vehicle_condition
+                            })
+                        }
+                    })
+                })
+            }
+        }
+
+        state.selectedVehicles = [...selectedVehicles]
+    },
+
+    updatedSelectedSaleExecutive(state, data){
+        const guest = {...data.guest}
+        if(guest.appointment.length > 0){
+            const appointment = {...guest.appointment[0]}
+            if(
+                appointment.user_id &&
+                appointment.user_id !== '' &&
+                appointment.user_id !== 'null'
+            ){
+                _.map(data.saleExecutives, (currentSaleExecutive) => {
+                    if(currentSaleExecutive.id === appointment.user_id){
+                        state.selectedSaleExecutive = {...currentSaleExecutive}
+                    }
+                })
+            }
+        }
     }
 
 }
 
 const getters = {
-    getAppointmentBooked(){
+    getAppointmentBooked() {
 
     },
-    
-    getBookingGuest(state){
+
+    getBookingGuest(state) {
         return state.guest
     },
 
-    getBookingSelectedVehicles(state){
+    getBookingSelectedVehicles(state) {
         return state.selectedVehicles
     },
 
-    getFrontendColor(state){
+    getFrontendColor(state) {
         return state.color
     },
 
-    getBookingVehicleType(state){
+    getBookingVehicleType(state) {
         return state.vehicleType
     },
 
-    getAllAppointmentSlot(state){
+    getAllAppointmentSlot(state) {
         return state.allSlot
     },
 
-    getAllAppointmentTime(state){
+    getAllAppointmentTime(state) {
         return state.allAppointmentTime
     },
 
-    getSelectedSlot(state){
+    getSelectedSlot(state) {
         return state.selectedSlot
     },
 
-    getBookingSelectedDate(state){
+    getBookingSelectedDate(state) {
         return state.selectedDate
     },
 
-    getAllBookingAppointments(state){
+    getAllBookingAppointments(state) {
         return state.allAppointments
     },
 
-    getBookingSelectedSaleExecutive(sate){
+    getBookingSelectedSaleExecutive(sate) {
         return sate.selectedSaleExecutive
     },
 
-    getBookingBringGuest(state){
+    getBookingBringGuest(state) {
         return state.bringGuest
     },
 
-    getBookingPartExchange(state){
+    getBookingPartExchange(state) {
         return state.partExchange
     },
 
-    getBookingStep(state){
+    getBookingStep(state) {
         return state.step
     }
 }
 
 const actions = {
-    fetchGuestBookingData({commit, dispatch}, payload){
+    fetchGuestBookingData({commit, dispatch}, payload) {
         const URL = `/booking`
-        axios.get(URL).then((response)=>{
-            if(response.data.success){
+        axios.get(URL).then((response) => {
+            if (response.data.success) {
                 const dataUrl = `/api/booking/${response.data.uniqueId}`
                 axios.get(dataUrl).then((response) => {
                     commit('setBookingGuest', response.data.guest)
                     commit('setBookingAppointments', response.data.appointments)
+                    commit('updateSelectedVehicles', response.data)
+                    commit('updatedSelectedSaleExecutive', response.data)
                     dispatch('setSelectedEventForFrontend', {event: response.data.event})
                     dispatch('setSelectedDealershipForFrontend', {dealership: response.data.dealership})
                     dispatch('fetchVehicleForFrontend', {vehicles: response.data.vehicles})

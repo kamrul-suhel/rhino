@@ -17,7 +17,14 @@ class BookingController extends Controller
     public function getData($uniqueId)
     {
 
-        $guest = Guest::where('unique', $uniqueId)->first();
+        $guest = Guest::with(['appointment' => function($appointment){
+            $appointment->with('vehicles');
+            $appointment->orderBy('id', 'DESC')
+                ->first();
+        }])
+            ->where('unique', $uniqueId)
+            ->first();
+
         $event = '';
         $dealership = '';
         $vehicles = [];
@@ -73,8 +80,7 @@ class BookingController extends Controller
                 ->where('dealership_id', $dealership->id)
                 ->get();
 
-            $appointments = Appointment::select()
-                ->where('appointments.event_id', $event->id)
+            $appointments = Appointment::where('appointments.event_id', $event->id)
                 ->get();
         }
 

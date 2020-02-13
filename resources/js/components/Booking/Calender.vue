@@ -87,7 +87,6 @@
             },
 
             selectedEvent(){
-                // this.selectedDate = this.selectedEvent.start
                 this.allowedDates()
             },
 
