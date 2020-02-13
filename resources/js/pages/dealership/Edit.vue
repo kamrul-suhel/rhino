@@ -1,5 +1,10 @@
 <template>
     <v-container pa-0>
+        <v-layout row wrap justify-end>
+            <v-flex xs12 sm3>
+                <language-picker :languageId="dealership.language_id"></language-picker>
+             </v-flex>
+        </v-layout>
         <v-form
             row wrap
             ref="dealershipForm"

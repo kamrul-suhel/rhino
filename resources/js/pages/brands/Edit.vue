@@ -17,30 +17,17 @@
                     <v-card>
                         <v-card-text>
                             <v-layout justify-space-between row>
-                                <v-flex xs12 sm6 md6 pa-2>
+                                <v-flex xs12 sm3 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.name"
                                         v-model="brand.name"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
-
-                                <v-flex xs12 sm6 md4 wrap pt-3 row justify-center >
-                                    <v-card width="250px">
-                                        <v-img
-                                            contain
-                                            :src="logo|image(themeOption.brandDefaultImage)"
-                                            aspect-ratio="2"
-                                        ></v-img>
-                                    </v-card>
-                                    <FileUpload :label="trans.logo" :preview="false"
-                                        model="brand"></FileUpload>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                            
+                                <v-flex xs12 sm3 pa-2>
                                     <v-select
                                         :items="companies"
                                         item-text="name"
@@ -49,11 +36,12 @@
                                         :label="trans.company"
                                         v-model="brand.company_id"
                                         @change="onCountryChange"
+                                        solo flat box
                                     >
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 md6 pa-2 row justify-center>
+                                <v-flex xs12 sm3 pa-2 row justify-center>
                                     <v-flex xs12 sm12 md8 align-self-center >
                                         <div class="r-color-picker mx-auto" v-if="isColorSwatchActive">
                                             <div class="r-color-picker-content mx-auto">
@@ -74,11 +62,24 @@
                                         :rules="[v => !!v || `${trans.color} ${trans.is_required}`]"
                                         required
                                         @focus="isColorSwatchActive = true"
-                                        :color="themeOption.inputColor">
+                                        :color="themeOption.inputColor"
+                                        solo flat box>
                                     </v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm3 wrap pt-3 row justify-center >
+                                    <v-img
+                                        contain
+                                        :src="logo|image(themeOption.brandDefaultImage)"
+                                        width="100"
+                                    ></v-img>
+                                    <FileUpload :label="trans.logo" :preview="false"
+                                        model="brand"></FileUpload>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row wrap>
+
+                                <v-flex xs12 sm3 pa-2>
                                     <v-switch :label="trans.status"
                                               :color="themeOption.switchOnColor"
                                               v-model="brand.status"
@@ -88,28 +89,11 @@
                                 </v-flex>
                             </v-layout>
 
-                            <v-divider class="mt-2 mb-2"></v-divider>
 
                             <v-layout column wrap>
-                                <v-tabs
-                                    v-model="active"
-                                    :color="themeOption.tabColor"
-                                    :slider-color="themeOption.tabSliderColor"
-                                >
-
-                                    <v-tab
-                                        key="regions"
-                                        ripple
-                                    >
-                                        {{ trans.regions}}
-                                    </v-tab>
-
-                                    <v-tab-item
-                                        key="regions"
-                                    >
-                                        <Regions model="brand"></Regions>
-                                    </v-tab-item>
-                                </v-tabs>
+                                
+                                <Regions model="brand"></Regions>
+                                
                             </v-layout>
                         </v-card-text>
 
