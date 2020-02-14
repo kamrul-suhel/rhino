@@ -51,7 +51,7 @@
                                         <v-flex xs12>
                                             <v-layout justify-center my-3>
                                                 <v-btn class="border-medium height-40 mx-1 rounded-25 light-grey"
-                                                    @click="onAmend(0)">
+                                                       @click="onAmend(0)">
                                                     {{ trans.amend }}
                                                 </v-btn>
                                             </v-layout>
@@ -84,7 +84,8 @@
 
                                                         <v-flex xs12>
                                                             <h6 class="xs12 body-1 text-xs-center">
-                                                                {{ slot.start|dateFormat('LT') }} to {{ slot.end|dateFormat('LT')}}
+                                                                {{ slot.start|dateFormat('LT') }} to {{
+                                                                slot.end|dateFormat('LT')}}
                                                             </h6>
                                                         </v-flex>
                                                     </v-layout>
@@ -174,7 +175,7 @@
                                                         <v-flex xs12>
                                                             <v-layout justify-center row nowrap mt-3>
                                                                 <v-btn @click="onAmend(2)"
-                                                                    class="border-medium height-40 rounded-25 light-grey">
+                                                                       class="border-medium height-40 rounded-25 light-grey">
                                                                     {{ trans.amend }}
                                                                 </v-btn>
                                                             </v-layout>
@@ -210,7 +211,7 @@
                                                         <v-flex xs12>
                                                             <v-layout justify-center row nowrap mt-3>
                                                                 <v-btn @click="onAmend(1)"
-                                                                    class="border-medium height-40 rounded-25 light-grey">
+                                                                       class="border-medium height-40 rounded-25 light-grey">
                                                                     {{ trans.amend }}
                                                                 </v-btn>
                                                             </v-layout>
@@ -278,6 +279,12 @@
         methods: {
             onConfirmBooking() {
                 let bookingForm = new FormData()
+
+                // Check is existing appointment
+                if (this.guest.appointment[0].id) {
+                    bookingForm.append('appointment_id', this.guest.appointment[0].id)
+                }
+
                 bookingForm.append('date', this.date)
                 bookingForm.append('event_id', this.event.id)
                 bookingForm.append('user_id', this.saleExecutive.id)
@@ -285,9 +292,9 @@
                 bookingForm.append('slot_id', this.slot.slotId)
                 bookingForm.append('bring_guest', this.bringGuest.name)
 
-                if(this.bringGuest.changingCar){
+                if (this.bringGuest.changingCar) {
                     bookingForm.append('guest_changing_car', 1)
-                }else{
+                } else {
                     bookingForm.append('guest_changing_car', 0)
                 }
 
@@ -298,25 +305,32 @@
                 bookingForm.append('part_ex_distance', this.partExchange.currentMilege)
                 bookingForm.append('_method', 'post')
 
-                _.map(this.vehicles, function(vehicle, index){
-                    bookingForm.append(`vehicles[${index}][id]`,vehicle.vehicle_id)
+                _.map(this.vehicles, function (vehicle, index) {
+                    if(vehicle.appointment_vehicle_id){
+                        bookingForm.append(`vehicles[${index}][appointment_vehicle_id]`, vehicle.id)
+                    }
+
+                    bookingForm.append(`vehicles[${index}][vehicle_id]`, vehicle.vehicle_id)
                     bookingForm.append(`vehicles[${index}][condition]`, vehicle.condition)
                 })
 
                 const URL = `/api/booking`
                 axios.post(URL, bookingForm).then((response) => {
-                    if(response.data.success){
+                    if (response.data.success) {
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             bgColor: this.themeOption.snackBarBgSuccess,
                             timeOut: this.themeOption.snackBarTimeout,
                             message: `${this.trans.yourReservationConfirmed}`
                         })
+
+                        // Disable editing for guest
+                        this.$store.commit('setDisableEditing', true)
                     }
                 })
             },
 
-            onAmend(step){
+            onAmend(step) {
                 this.$store.commit('setBookingStep', step)
             }
         }

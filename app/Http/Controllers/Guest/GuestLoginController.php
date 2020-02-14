@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GuestLoginRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -21,8 +22,13 @@ class GuestLoginController extends Controller
             ->first();
 
         if ($guest) {
-            // Found user, set session variable
+            // Found user, set session for login user
             $request->session()->put('uniqueId', $request->uniqueId);
+
+            // Update method & last login time
+            $request->has('method') ? $guest->method = $request->{'method'} : null;
+            $guest->last_logged_in = Carbon::now();
+            $guest->save();
 
             if(
                 $request->has('loginToGuestJourney') &&

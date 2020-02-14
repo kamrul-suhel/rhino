@@ -1212,6 +1212,12 @@ return [
         'label' => 'Manage',
         'identifier' => 'manage',
         'translation' => 'Manage'
+    ],
+
+    [
+        'label' => 'You already booked, you can not change',
+        'identifier' => 'alreadyConfirm',
+        'translation' => 'You already booked, you can not change'
     ]
 
 ];

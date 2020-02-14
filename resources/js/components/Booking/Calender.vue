@@ -77,24 +77,6 @@
             }
         },
 
-        created() {
-        },
-
-        watch: {
-
-            selectedDate() {
-                this.$store.commit('setBookingSelectedDate', this.selectedDate)
-            },
-
-            selectedEvent(){
-                this.allowedDates()
-            },
-
-            selectedSaleExecutive(){
-                this.allowedDates()
-            }
-        },
-
         computed: ({
             ...mapGetters({
                 trans: 'getFields',
@@ -106,12 +88,39 @@
                 dealership: 'getSelectedDealership',
                 selectedSlot: 'getSelectedSlot',
                 existingAppointments: 'getAllBookingAppointments',
-                selectedSaleExecutive: 'getBookingSelectedSaleExecutive'
+                selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
+                isDisable: 'getDisableEditing',
+                storeSelectedDate: 'getBookingSelectedDate'
             })
         }),
 
+        created() {
+        },
+
+        watch: {
+            selectedDate() {
+                this.$store.commit('setBookingSelectedDate', this.selectedDate)
+            },
+
+            selectedEvent(){
+                this.allowedDates()
+            },
+
+            selectedSaleExecutive(){
+                this.allowedDates()
+            },
+
+            storeSelectedDate(){
+                this.initialize()
+            }
+        },
+
         methods: {
             allowedDates() {
+                if(this.isDisable){
+                    return
+                }
+
                 let start = moment(this.selectedEvent.start)
                 let end = moment(this.selectedEvent.end)
                 const dates = fn.getDates(start, end, this.dealership)
@@ -154,6 +163,13 @@
 
             onDateCancel(){
                 this.selectedDate = ''
+            },
+
+            initialize(){
+                if(this.isDisable){
+                    // Check guest
+                    this.selectedDate = this.storeSelectedDate
+                }
             }
         }
     }

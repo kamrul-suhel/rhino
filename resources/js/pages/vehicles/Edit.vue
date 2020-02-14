@@ -25,8 +25,7 @@
                                         :label="trans.brand"
                                         v-model="vehicle.brand_id"
                                         style="width: 70%"
-                                        box solo flat
-                                    >
+                                        box solo flat>
                                     </v-select>
                                 </v-flex>
 
@@ -119,9 +118,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import {Chrome} from 'vue-color'
     import FileUpload from '../../components/ImageUpload'
-    import vehicle from "../../store/modules/vehicle";
     import LanguagePicker from '../../components/Language'
 
     export default {

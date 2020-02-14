@@ -10,8 +10,9 @@
                 <v-layout row wrap>
                     <v-flex xs12>
                         <v-parallax
-                            :src="`https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG`"
-                            alt="" height="240">
+                            :src="getEventBanner()"
+                            alt=""
+                            height="240">
                             <v-layout align-center justify-end class="text-center" cols="12">
                                 <v-flex align-self-center>
                                     <h1 class="display-1 font-weight-thin text-lg-right">{{trans.hello}}</h1>
@@ -20,7 +21,11 @@
                         </v-parallax>
                     </v-flex>
 
-                    <v-flex xs12>
+                    <v-flex xs12 class="rhino-booking">
+                        <div class="disabled-state" v-if="isDisable">
+                            <div class="disabled-state-content">{{trans.alreadyConfirm}}</div>
+                        </div>
+
                         <v-tabs-items
                             v-model="step"
                             color="black"
@@ -58,6 +63,7 @@
                                 key="bookingConfirmation"
                                 value="bookingConfirmation"
                             >
+
                                 <FBookingConfirmation></FBookingConfirmation>
                             </v-tab-item>
                         </v-tabs-items>
@@ -99,7 +105,9 @@
                 themeOption: 'getThemeOption',
                 isAdmin: 'getIsAdmin',
                 trans: 'getFields',
-                step: 'getBookingStep'
+                step: 'getBookingStep',
+                isDisable: 'getDisableEditing',
+                selectedEvent: 'getSelectedEvent'
             })
         },
 
@@ -115,6 +123,23 @@
         },
 
         methods: {
+
+            /**
+             * Get event banner image
+             * @returns {string|*}
+             */
+            getEventBanner(){
+                const defaultBanner = 'https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG'
+                if(
+                    this.selectedEvent.banner &&
+                    this.selectedEvent.banner !== 'null' &&
+                    this.selectedEvent.banner !== 'undefined'
+                ){
+                    return this.selectedEvent.banner
+                }
+
+                return defaultBanner
+            }
         }
     }
 

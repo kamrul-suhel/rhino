@@ -34,7 +34,7 @@
                         </v-flex>
 
                         <v-flex xs12 sm4>
-                            search found
+                            search guest
                         </v-flex>
                     </v-layout>
                 </v-card-text>

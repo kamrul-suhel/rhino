@@ -135,6 +135,7 @@
                     const token = document.head.querySelector('meta[name="csrf-token"]');
 
                     guestLogin.append('uniqueId', this.user.unique)
+                    guestLogin.append('method', 'online')
 
                     // submit data with ajax request
                     await axios.post('/guests/login', guestLogin)

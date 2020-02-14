@@ -1,4 +1,7 @@
+import fn from '@/utils/function'
+
 const defaultState = {
+    disableEditing: false,
     appointmentBooked: false,
     guest: {},
     selectedVehicles: [],
@@ -28,7 +31,16 @@ const mutations = {
         state.appointmentBooked = status
     },
 
+    setDisableEditing(state, status){
+        state.disableEditing = status
+    },
+
     setBookingGuest(state, guest) {
+        // Update disable editing state if, guest status not 0
+        if(guest.status > 0){
+            state.disableEditing = true
+        }
+
         if(guest.appointment.length > 0){
             const appointment = {...guest.appointment[0]}
             const partExchange = {
@@ -65,6 +77,7 @@ const mutations = {
                 }
             }
         }
+
         state.guest = {...guest}
     },
 
@@ -203,6 +216,7 @@ const mutations = {
                         if(currentVehicle.vehicle_id === vehicle.vehicle_id){
                             selectedVehicles.push({
                                 ...vehicle,
+                                appointment_vehicle_id : currentVehicle.id,
                                 condition: currentVehicle.vehicle_condition
                             })
                         }
@@ -225,9 +239,35 @@ const mutations = {
             ){
                 _.map(data.saleExecutives, (currentSaleExecutive) => {
                     if(currentSaleExecutive.id === appointment.user_id){
-                        state.selectedSaleExecutive = {...currentSaleExecutive}
+                        state.selectedSaleExecutive = {
+                            ...currentSaleExecutive,
+                            selected: 'selected'
+                        }
                     }
                 })
+
+                // Now generate slot
+                let allSlots = []
+
+                const time = fn.getStartTimeEndTime(
+                    moment(appointment.start).format('YYYY-MM-DD'),
+                    data.dealership
+                )
+                const slots = fn.getTimeSlotsForDay(time, data.event)
+                let modifySlots = []
+                _.map(slots, (slot) => {
+                    if(slot.slotId === appointment.slot_id){
+                        modifySlots.push({
+                            ...slot,
+                            status: 'selected'
+                        })
+                    }else{
+                        modifySlots.push({
+                            ...slot
+                        })
+                    }
+                })
+                state.allSlot = [...modifySlots]
             }
         }
     }
@@ -237,6 +277,10 @@ const mutations = {
 const getters = {
     getAppointmentBooked() {
 
+    },
+
+    getDisableEditing(state){
+        return state.disableEditing
     },
 
     getBookingGuest(state) {
@@ -307,7 +351,7 @@ const actions = {
                     dispatch('setSelectedDealershipForFrontend', {dealership: response.data.dealership})
                     dispatch('fetchVehicleForFrontend', {vehicles: response.data.vehicles})
                     dispatch('fetchBrandForFrontend', {brands: response.data.brands})
-                    dispatch('fetchSaleExecutivesForBooking', {users: response.data.saleExecutives})
+                    dispatch('fetchSaleExecutivesForBooking', {users: response.data.saleExecutives, data: response.data})
 
                     // set frontend color
                     commit('setFrontendColor', response.data.brands)

@@ -29,7 +29,6 @@ class Guest extends Model
     const METHOD_SMS = 'sms';
     const METHOD_PROSPECTING = 'prospecting';
 
-
     protected $table = 'guests';
 
     protected $fillable = [

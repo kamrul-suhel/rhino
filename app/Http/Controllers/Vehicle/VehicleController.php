@@ -113,6 +113,7 @@ class VehicleController extends Controller
 
         $vehicle = Vehicle::select(
             'vehicles.*',
+            'vehicles_translation.language_id',
             'vehicles_translation.model',
             'brands_translation.name as brand',
             'brands.logo as brand_logo'
@@ -152,17 +153,6 @@ class VehicleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -190,6 +180,12 @@ class VehicleController extends Controller
     }
 
 
+    /**
+     * Save or update vehicle
+     * @param VehicleRequest $request
+     * @param null $vehicleId
+     * @return bool
+     */
     private function saveVehicle(VehicleRequest $request, $vehicleId = null)
     {
 
@@ -215,7 +211,5 @@ class VehicleController extends Controller
         $vehicleTranslation->save();
 
         return true;
-
     }
-
 }

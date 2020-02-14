@@ -82,55 +82,48 @@
             <v-container grid-list-lg pt-0>
                 <v-layout row wrap>
                     <v-flex xs6>
-                        <v-responsive aspect-ratio="1">
-                            <v-card class="card-radius-20">
-                                <v-card-title>
-
-                                </v-card-title>
-                                <v-card-text>
-                                    text
-                                </v-card-text>
-                            </v-card>
-                        </v-responsive>
+                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCompanies'}">
+                            <v-icon color="#000">business</v-icon>
+                            <v-card-text class="px-2">
+                                {{ `${trans.calendar}` }}
+                            </v-card-text>
+                        </v-card>
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-responsive aspect-ratio="1">
-                            <v-card class="card-radius-20">
-                                <v-card-title>
-
-                                </v-card-title>
-                                <v-card-text>
-                                    text
-                                </v-card-text>
-                            </v-card>
-                        </v-responsive>
+                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listBrands'}">
+                            <v-icon color="#000">access_time</v-icon>
+                            <v-card-text class="px-2">
+                                {{ `${trans.edit} ${trans.event}` }}
+                            </v-card-text>
+                        </v-card>
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-responsive aspect-ratio="1">
-                            <v-card class="card-radius-20">
-                                <v-card-title>
-
-                                </v-card-title>
-                                <v-card-text>
-                                    text
-                                </v-card-text>
-                            </v-card>
-                        </v-responsive>
+                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCountries'}">
+                            <v-icon color="#000">languages</v-icon>
+                            <v-card-text class="px-2">
+                                {{ `${trans.update} ${trans.sales}` }}
+                            </v-card-text>
+                        </v-card>
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-responsive aspect-ratio="1">
-                            <v-card class="card-radius-20">
-                                <v-card-title>
+                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCompanies'}">
+                            <v-icon color="#000">bar_chart</v-icon>
+                            <v-card-text class="px-2">
+                                {{ `${trans.analytics}` }}
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
 
-                                </v-card-title>
-                                <v-card-text>
-                                    text
-                                </v-card-text>
-                            </v-card>
-                        </v-responsive>
+                    <v-flex xs6>
+                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listDealershipsGroups'}">
+                            <v-icon color="#000">contacts</v-icon>
+                            <v-card-text class="px-2">
+                                {{ `${trans.users}` }}
+                            </v-card-text>
+                        </v-card>
                     </v-flex>
                 </v-layout>
             </v-container>

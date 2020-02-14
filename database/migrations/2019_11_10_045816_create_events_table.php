@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->date('end');
             $table->smallInteger('appointment_duration')->nullable();
             $table->smallInteger('break_time')->nullable();
+            $table->text('banner')->nullable();
             $table->tinyInteger('status')->index()->default(1);
             $table->timestamps();
         });

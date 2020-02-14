@@ -338,11 +338,46 @@ const actions = {
     },
 
     fetchSaleExecutivesForBooking({commit}, payload){
-        const users = _.map(payload.users, (user) => {
-            return {
-                ...user,
-                availability: true
+        const guest = {...payload.data.guest}
+        let saleExecutive = null
+        if(guest.appointment.length > 0){
+            const appointment = {...guest.appointment[0]}
+            if(
+                appointment.user_id &&
+                appointment.user_id !== '' &&
+                appointment.user_id !== 'null'
+            ){
+                _.map(payload.users, (currentSaleExecutive) => {
+                    if(currentSaleExecutive.id === appointment.user_id){
+                        saleExecutive = appointment.user_id
+                    }
+                })
             }
+        }
+
+        const users = _.map(payload.users, (user) => {
+            if(saleExecutive !== null){
+                 if(saleExecutive === user.id){
+                     return {
+                         ...user,
+                         availability: true,
+                         selected: 'selected'
+                     }
+                 }else{
+                     return {
+                         ...user,
+                         availability: true,
+                         selected: ''
+                     }
+                 }
+            }else{
+                return {
+                    ...user,
+                    availability: true,
+                    selected: ''
+                }
+            }
+
         })
 
         commit('setUsers', users)

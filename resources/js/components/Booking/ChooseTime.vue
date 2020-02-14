@@ -23,17 +23,17 @@
                       class="appointmentSlot"
                       style="width:100%; flex-grow:0"
                       mx-1>
-                    <v-flex xs6 sm3 md4 xl3
-                            class="slot"
-                            v-for="slot in slots"
-                            :key="slot.slotId">
-                            <v-responsive aspect-ratio="1">
-                                <v-layout align-center row wrap
-                                          justify-center
-                                          class="pa-2 ma-2"
-                                          :class="slot.status"
-                                          @click="onSelectSlot(slot)"
-                                          :style="{
+                <v-flex xs6 sm3 md4 xl3
+                        class="slot"
+                        v-for="slot in slots"
+                        :key="slot.slotId">
+                    <v-responsive aspect-ratio="1">
+                        <v-layout align-center row wrap
+                                  justify-center
+                                  class="pa-2 ma-2"
+                                  :class="slot.status"
+                                  @click="onSelectSlot(slot)"
+                                  :style="{
                                         border: '1px solid rgb(220,220,220)',
                                          backgroundColor: slot.status === 'selected' ? color: ''
                                       }">
@@ -101,6 +101,25 @@
             }
         },
 
+        computed: ({
+            ...mapGetters({
+                trans: 'getFields',
+                themeOption: 'getThemeOption',
+                languages: 'getLanguages',
+                color: 'getFrontendColor',
+                event: 'getSelectedEvent',
+                dealership: 'getSelectedDealership',
+                slots: 'getAllAppointmentSlot',
+                vehicleType: 'getBookingVehicleType',
+                selectedDate: 'getBookingSelectedDate',
+                saleExecutives: 'getUsers',
+                selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
+                existingAppointments: 'getAllBookingAppointments',
+                bringGuest: 'getBookingBringGuest',
+                selectedSlot: 'getSelectedSlot'
+            })
+        }),
+
         created() {
         },
 
@@ -135,32 +154,15 @@
             selectedDate() {
                 // generate slot
                 this.generateSlots()
+                this.checkCascadeTime()
             },
 
             selectedSaleExecutive() {
                 // generate slot
                 this.generateSlots()
+                this.checkCascadeTime()
             }
         },
-
-        computed: ({
-            ...mapGetters({
-                trans: 'getFields',
-                themeOption: 'getThemeOption',
-                languages: 'getLanguages',
-                color: 'getFrontendColor',
-                event: 'getSelectedEvent',
-                dealership: 'getSelectedDealership',
-                slots: 'getAllAppointmentSlot',
-                vehicleType: 'getBookingVehicleType',
-                selectedDate: 'getBookingSelectedDate',
-                saleExecutives: 'getUsers',
-                selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
-                existingAppointments: 'getAllBookingAppointments',
-                bringGuest: 'getBookingBringGuest',
-                selectedSlot: 'getSelectedSlot'
-            })
-        }),
 
         methods: {
             generateSlots() {
@@ -171,9 +173,9 @@
                 // If selected sale executive
                 if (this.selectedSaleExecutive.id) {
                     // Check is slot is selected or no
-                    if(this.selectedSlot.start){
+                    if (this.selectedSlot.start) {
                         // if date is not selected then generate dates
-                        if(this.selectedDate === ''){
+                        if (this.selectedDate === '') {
 
                         }
                         return
@@ -306,10 +308,10 @@
                 this.$store.commit('setAllAppointmentSlots', totalSlot)
 
                 // Check sale person availability
-                if(!this.selectedSaleExecutive.id){
+                if (!this.selectedSaleExecutive.id) {
                     let saleExecutives = []
                     // Check date is selected or no
-                    if(this.selectedDate === ''){
+                    if (this.selectedDate === '') {
                         // not selected data, Iterate all date and check is user exists
                         const start = moment(this.event.start)
                         const end = moment(this.event.end)
@@ -322,16 +324,16 @@
 
                                 _.map(dates, (date) => {
                                     const selectedDate = moment(date).format('L')
-                                    if(
+                                    if (
                                         selectedDate === appointmentDate &&
                                         saleExecutive.id === appointment.user_id &&
                                         selectedSlot.slotId === appointment.slot_id
-                                    ){
+                                    ) {
                                         currentSaleExecutive = {
                                             ...currentSaleExecutive,
                                             availability: false
                                         }
-                                    }else{
+                                    } else {
                                         currentSaleExecutive = {
                                             ...currentSaleExecutive,
                                             availability: true
@@ -344,7 +346,7 @@
                             saleExecutives.push(currentSaleExecutive)
                         })
 
-                    }else{
+                    } else {
                         // selected date
                         _.map(this.saleExecutives, (saleExecutive) => {
                             let currentSaleExecutive = {...saleExecutive}
@@ -352,20 +354,20 @@
                             const foundAppointment = _.findIndex(this.existingAppointments, (appointment) => {
                                 const selectedDate = moment(this.selectedDate).format('L')
                                 const appointmentDate = moment(appointment.start).format('L')
-                                if(
+                                if (
                                     selectedDate === appointmentDate &&
                                     saleExecutive.id === appointment.user_id &&
                                     selectedSlot.slotId === appointment.slot_id
-                                ){
+                                ) {
                                     return appointment
                                 }
                             })
-                            if(foundAppointment === -1){
+                            if (foundAppointment === -1) {
                                 currentSaleExecutive = {
                                     ...currentSaleExecutive,
                                     availability: true
                                 }
-                            }else{
+                            } else {
                                 currentSaleExecutive = {
                                     ...currentSaleExecutive,
                                     availability: false
@@ -386,10 +388,46 @@
                 console.log(this.bringGuest)
             },
 
-            onClearSlot(){
+            onClearSlot() {
                 this.onSelectSlot({})
                 this.$store.commit('setSelectedSlot', {})
                 this.generateSlots()
+            },
+
+            checkCascadeTime() {
+                const selectedDate = this.selectedDate
+                const selectedSaleExecutive = this.selectedSaleExecutive
+                const selectedSlot = this.selectedSlot
+
+                if(selectedSlot.start){
+                    return // do not run if time is taken
+                }
+
+                if(
+                    !_.isEmpty(selectedDate) &&
+                    selectedSaleExecutive.id
+                ){
+                    const time = fn.getStartTimeEndTime(
+                        moment(selectedDate).format('YYYY-MM-DD'),
+                        this.dealership
+                    )
+                    const slots = fn.getTimeSlotsForDay(time, this.event)
+                    let checkTimeForm = new FormData()
+                    _.map(slots, (slot,key) => {
+                        checkTimeForm.append(`slots[${key}][slotId]`, slot.slotId)
+                        checkTimeForm.append(`slots[${key}][start]`, slot.start)
+                        checkTimeForm.append(`slots[${key}][end]`, slot.end)
+                    })
+                    checkTimeForm.append('saleExecutiveId', selectedSaleExecutive.id)
+                    checkTimeForm.append('selectedDate', selectedDate)
+
+                    const URL = `/api/booking/${selectedSaleExecutive.id}/availability`
+                    axios.post(URL, checkTimeForm).then((response) => {
+                        if(response.data.success){
+                            this.$store.commit('setAllAppointmentSlots', response.data.slots)
+                        }
+                    })
+                }
             }
         }
     }

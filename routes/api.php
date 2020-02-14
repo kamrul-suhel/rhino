@@ -314,6 +314,7 @@ Route::prefix('uploadfiles')->group(function () {
 Route::prefix('booking')->group(function(){
     Route::post('', 'Booking\BookingStoreController@store');
     Route::get('{uniqueId}', 'Booking\BookingController@getData');
+    Route::post('{saleExecutive}/availability', 'Booking\CheckSaleExecutiveAvailability@check');
 });
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Booking;
 
 use App\Appointment;
 use App\AppointmentVehicle;
+use App\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookingRequest;
 use Illuminate\Http\Request;
@@ -19,8 +20,18 @@ class BookingStoreController extends Controller
      */
     public function store(BookingRequest $request)
     {
-        $appointment = $this->save($request);
-        if($appointment){
+        if ($request->has('appointment_id') && !empty($request->appointment_id)) {
+            $appointment = $this->save($request, $request->appointment_id);
+        } else {
+            $appointment = $this->save($request);
+        }
+
+        if ($appointment) {
+            // Update guest state to confirm
+            $guest = Guest::findOrFail($request->guest_id);
+            $guest->status = Guest::STATUS_CONFIRMED;
+            $guest->save();
+
             return response()->json([
                 'success' => true,
                 'request' => $appointment
@@ -51,18 +62,27 @@ class BookingStoreController extends Controller
         $appointment->save();
 
         // if vehicles exists then update vehicle
-        if ($request->has('vehicles')
+        if (
+            $request->has('vehicles')
             && count($request->vehicles) > 0
         ) {
+            $appointment->vehicles()->delete();
             foreach ($request->vehicles as $vehicle) {
-                $appointmentVehicle = new AppointmentVehicle();
-                $appointmentVehicle->appointment_id = $appointment->id;
-                $appointmentVehicle->vehicle_id = $vehicle['id'];
-                $appointmentVehicle->vehicle_condition = $vehicle['condition'];
-                $appointmentVehicle->save();
+                $this->saveAppointmentVehicle($vehicle, $appointment->id);
             }
+        }else{
+            $appointment->vehicles()->delete();
         }
 
         return $appointment;
+    }
+
+    private function saveAppointmentVehicle($vehicle, $appointmentId, $appointmentVehicleId = null) {
+        $appointmentVehicle = $appointmentVehicleId ? AppointmentVehicle::findOrFail($appointmentVehicleId) : new AppointmentVehicle();
+        $appointmentVehicle->appointment_id = $appointmentId;
+        $appointmentVehicle->vehicle_id = $vehicle['vehicle_id'];
+        $appointmentVehicle->vehicle_condition = $vehicle['condition'];
+        $appointmentVehicle->save();
+        return true;
     }
 }
