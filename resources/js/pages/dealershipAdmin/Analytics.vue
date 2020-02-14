@@ -97,7 +97,7 @@
                             '#CDDEEA',
                             '#244252',
                         ],
-                        
+
                     }]
                 },
                 madePercent: 0,
@@ -114,7 +114,7 @@
                             '#CDDEEA',
                             '#244252',
                         ],
-                        
+
                     }]
 
                 },
@@ -132,7 +132,7 @@
                             '#CDDEEA',
                             '#244252',
                         ],
-                        
+
                     }]
 
                 },
@@ -181,7 +181,7 @@
         },
 
         mounted() {
-            
+
         },
 
         methods: {
@@ -195,27 +195,35 @@
                 });
             },
 
+            /**
+             * Confirm guest calculate
+             */
             createConfirmedAppointmentsData() {
-                this.confirmedPercent = this.totalGuests - this.analyticGuestInfo.pending / this.totalGuests * 100
+                this.confirmedPercent = ((this.totalGuests - this.analyticGuestInfo.pending) / this.totalGuests) * 100
                 this.confirmedPercent = this.confirmedPercent.toFixed(1)
                 const arrayData = [this.confirmedPercent, 100-this.confirmedPercent]
-                let ownObject = {}
-                _.forOwn(this.confirmed, (key, value) => {
+                let modifyConfirmData = {}
+
+                _.forOwn(this.confirmed, (value, key) => {
                     if(key === 'datasets'){
-                        ownObject[key] = [
-                            
-                        ]
+                        let datasets = []
+                        _.map(value, (data) => {
+                            datasets.push({
+                                ...data,
+                                data: [...arrayData]
+                            })
+                        })
+                        modifyConfirmData.datasets = [...datasets]
+                    }else{
+                        modifyConfirmData[key] = value
                     }
-                    ownObject[key] = value
                 })
 
-                this.confirmed = {...realComfirmData}
-                console.log(this.confirmed)
-                
+                this.confirmed = {...modifyConfirmData}
             },
 
             createAppointmentsMadeData() {
-                
+
             },
 
             createSalesData() {
