@@ -30,7 +30,7 @@ $factory->define(Guest::class, function (Faker $faker) {
         'address_line_3' => $faker->citySuffix,
         'address_line_4' => $faker->state,
         'address_line_5' => $faker->buildingNumber,
-        'method' => $faker->randomElement(['emial', 'phone', 'online', 'walkin', 'sms']),
+        'method' => $faker->randomElement(['email', 'phone', 'online', 'walkin', 'sms']),
         'address_line_6' => $faker->country,
         'postcode' => $faker->postcode,
         'landline' => $faker->phoneNumber,
