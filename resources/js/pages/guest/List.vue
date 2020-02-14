@@ -1,20 +1,8 @@
 <template>
     <div >
         <v-toolbar flat
-            :color="subComponent ? themeOption.toolbarColor : ''">
-            <v-toolbar-title v-if="!subComponent">
-                <span :class="themeOption.textHeadingColor+'--text'">{{ trans.guests }}</span>
-            </v-toolbar-title>
-            <v-divider
-                class="mx-2"
-                inset
-                v-if="!subComponent"
-                vertical
-            ></v-divider>
-
-            <v-spacer></v-spacer>
-
-            <v-text-field
+            :color="subComponent ? themeOption.toolbarColor : 'adminHeader'">
+            <v-text-field xs12 sm4
                 :color="themeOption.inputColor"
                 :label="`${trans.searchBy} ${trans.name}`"
                 v-model="searchGuests">
@@ -36,7 +24,7 @@
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGuests"
                     :loading="loading"
-                    class="elevation-1"
+                    class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
                         <td>{{ `${props.item.first_name} ${props.item.surname}` }}</td>
@@ -44,7 +32,6 @@
                         <td class="text-xs-left">{{ `${props.item.mobile}` }}</td>
                         <td class="text-xs-left">{{ `${props.item.address_line_1} ${props.item.address_line_2}` }}</td>
                         <td class="text-xs-left">{{ `${props.item.unique}` }}</td>
-                        <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small
@@ -176,6 +163,9 @@
         },
 
         created() {
+            
+            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.guests}` )
+            this.$store.commit('setNavTitle', `${this.trans.guests}`)
         },
 
         mounted() {

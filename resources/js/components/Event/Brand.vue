@@ -15,7 +15,7 @@
                             :rows-per-page-items="rowsPerPage"
                             :total-items="totalBrands"
                             :loading="loading"
-                            class="elevation-0"
+                            class="elevation-0 r-table"
                         >
                             <template v-slot:items="props">
                                 <td>{{ props.item.name }}</td>

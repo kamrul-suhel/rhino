@@ -28,13 +28,9 @@ const mutations = {
             },
 
             {
-                text: trans.status,
-                value: 'status'
-            },
-
-            {
                 text: trans.action,
-                value: 'action'
+                value: 'action',
+                align: 'right'
             }
         ]
 
@@ -96,10 +92,12 @@ const actions = {
      * @param payload
      */
     fetchGroups({commit}, payload = {}) {
-
+        
         // Set loading is true, if not dropdown
-        if (!payload.dropDown && typeof (payload.dropDown) != 'undefined') {
+        if (!payload.dropDown && typeof(payload.dropDown) === 'undefined') {
             commit('setGroupLoading', payload.themeOption.loadingColor)
+
+            console.log('fecthgroups ', payload)
             // Setup header for list view
             commit('setGroupListHeader', payload.trans)
         }

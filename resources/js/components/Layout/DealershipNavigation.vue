@@ -18,24 +18,6 @@
                     class="py-5 mx-auto">
                 </v-img>
             </v-flex>
-
-            <v-flex xs12 sm8>
-                <h2 :style="{color: themeOption.adminNavIconColor}">{{ title }}</h2>
-            </v-flex>
-
-            <v-flex xs12 sm4>
-                <v-layout row>
-                    <v-autocomplete
-                        :placeholder="trans.select_a_language"
-                        prepend-icon="search"
-                        :items="languages"
-                        item-text="name"
-                        @change="selectedLanguage"
-                        item-value="id"
-                        return-object
-                    ></v-autocomplete>
-                </v-layout>
-            </v-flex>
         </v-layout>
 
         <v-divider class="my-2"></v-divider>
@@ -49,7 +31,7 @@
             </v-list-tile>
 
             <div v-for="(navGroup, i) in navs" :key="i">
-                <h2>{{ navGroup.text }}</h2>
+                <h2 class="px-3 mt-3">{{ navGroup.text }}</h2>
 
                 <template v-for="(nav, i) in navGroup.subGroups">
                     <v-list-tile

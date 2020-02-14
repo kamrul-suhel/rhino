@@ -79,11 +79,6 @@ const mutations = {
             },
 
             {
-                text: trans.status,
-                value: 'status'
-            },
-
-            {
                 text: trans.actions,
                 value: 'actions',
                 align: 'right'
