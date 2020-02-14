@@ -1,32 +1,34 @@
-import * as DealershipAdmin from "@/pages/dealershipAdmin";
+function lazyLoad(view){
+    return () => import(`../../pages/dealershipAdmin/${view}`)
+}
 
 const DealershipAdminRoutes = {
     path: '/admin',
     name:'dealershipAdmin',
-    component: DealershipAdmin.Root,
+    component: lazyLoad('Root'),
     children: [
         {
             path: 'bookguest',
             name: 'dealershipAdminBookAGuest',
-            component: DealershipAdmin.BookGuest
+            component: lazyLoad('BookGuest')
         },
 
         {
             path: 'calendar',
             name: 'dealershipAdminCalendar',
-            component: DealershipAdmin.Calendar
+            component: lazyLoad('Calendar')
         },
 
         {
             path: 'events/:eventId/analytics',
             name: 'dealershipAnalytics',
-            component: DealershipAdmin.Analytics
+            component: lazyLoad('Analytics')
         },
 
         {
             path: 'events/:eventId/sales',
             name: 'eventSales',
-            component: DealershipAdmin.SaleUpdate
+            component:lazyLoad('SaleUpdate')
         }
     ]
 }

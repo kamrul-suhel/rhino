@@ -18,7 +18,7 @@
                                 :rules=" [v => !!v || `${trans.name} ${trans.is_required}`]"
                                 :color="themeOption.inputColor"
                                 :label="`${trans.name}`"
-                                v-model="dealership.name" 
+                                v-model="dealership.name"
                                 box solo flat
                             ></v-text-field>
                         </v-flex>
@@ -97,7 +97,7 @@
                                 box solo flat>
                             </v-text-field>
                         </v-flex>
-                        
+
                         <v-flex xs12 sm3 pa-2>
                             <v-select
                                 :items="countries"
@@ -147,14 +147,14 @@
                                 <v-layout row wrap pt-3>
                                     <dealership-users></dealership-users>
 
-                                    
+
                                     <v-flex xs12 sm6 pa-2>
                                         <v-btn
                                             :color="themeOption.buttonSuccess"
                                             small
                                             @click="$router.push({name: 'createDealershipUser', params: {dealershipId: dealership.id}})"
                                         >
-                                        
+
                                             {{ trans.add }} {{ trans.user }}
                                         </v-btn>
                                     </v-flex>
@@ -204,11 +204,11 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import TimePicker from "../../components/TimePicker"
-    import ImageUpload from "../../components/ImageUpload"
-    import Brands from '../../components/Dealership/Brands'
-    import LanguagePicker from '../../components/Language'
-    import DealershipUsers from '../../components/Dealership/Users'
+    import TimePicker from "@/components/TimePicker"
+    import ImageUpload from "@/components/ImageUpload"
+    import Brands from '@/components/Dealership/Brands'
+    import LanguagePicker from '@/components/Language'
+    import DealershipUsers from '@/components/Dealership/Users'
     import EventList from '../event/List'
 
     export default {
@@ -279,7 +279,7 @@
                     _.forOwn(this.dealership, (value, key)=>{
                         if(key === 'group_id'){
                             if(value == 'null'){
-                                
+
                             }else{
                                 dealershipForm.append(key, value)
                             }

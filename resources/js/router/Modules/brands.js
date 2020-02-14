@@ -1,38 +1,40 @@
-import * as Brands from "../../pages/brands";
+function lazyLoad(view){
+    return () => import(`../../pages/brands/${view}.vue`)
+}
 
 const brandsRoute ={
     path: '/admin/brands',
     name: 'brands',
-    component: Brands.Root,
+    component: lazyLoad('Root'),
     children:[
         {
             path:'list',
             name: 'listBrands',
-            component: Brands.List,
+            component: lazyLoad('List'),
         },
 
         {
             path:'create',
             name: 'createBrands',
-            component: Brands.Create,
+            component: lazyLoad('Create'),
         },
 
         {
             path:':id/edit',
             name: 'editBrand',
-            component: Brands.Edit,
+            component: lazyLoad('Edit'),
         },
 
         {
             path: ':brandId/vehicle/create',
             name: 'addBrandVehicle',
-            component: Brands.CreateVehicle,
+            component: lazyLoad('CreateVehicle'),
         },
 
         {
             path: ':brandId/vehicle/:vehicleId',
             name: 'editBrandVehicle',
-            component: Brands.EditVehicle,
+            component: lazyLoad('EditVehicle'),
         }
 
     ]
