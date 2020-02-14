@@ -199,9 +199,15 @@
              * Confirm guest calculate
              */
             createConfirmedAppointmentsData() {
-                this.confirmedPercent = ((this.totalGuests - this.analyticGuestInfo.pending) / this.totalGuests) * 100
-                this.confirmedPercent = this.confirmedPercent.toFixed(1)
-                const arrayData = [this.confirmedPercent, 100-this.confirmedPercent]
+                let confirmedPercent = ((this.totalGuests - this.analyticGuestInfo.pending) / this.totalGuests) * 100
+                confirmedPercent = confirmedPercent.toFixed(1)
+                this.confirmedPercent = confirmedPercent
+                let unConfirmed = 100 - confirmedPercent
+                unConfirmed = unConfirmed.toFixed(1)
+                const arrayData = [
+                    confirmedPercent,
+                    unConfirmed
+                ]
                 let modifyConfirmData = {}
 
                 _.forOwn(this.confirmed, (value, key) => {
