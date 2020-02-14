@@ -1,85 +1,39 @@
 <template>
     <v-container fluid px-5>
-        <v-layout row py-5>
-            <v-flex xs12 sm6 px-3>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments by online registration</span> <span class="text-xs-right">{{ analyticsData.online ? analyticsData.online : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments by telephone</span> <span class="text-xs-right">{{ analyticsData.phone ? analyticsData.phone : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments by email</span> <span class="text-xs-right">{{ analyticsData.email ? analyticsData.email : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments by social media</span> <span class="text-xs-right">{{ analyticsData.social ? analyticsData.social : 0}}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments by walk-in</span> <span class="text-xs-right">{{ analyticsData.walkin ? analyticsData.walkin : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments by SMS</span> <span class="text-xs-right">{{ analyticsData.sms ? analyticsData.sms : 0 }}</span>
-                </div>
-            </v-flex>
-            <v-flex xs12 sm6 px-3>
+        <Overview></Overview>
 
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments by Prospecting</span> <span class="text-xs-right">{{ analyticsData.prospecting ? analyticsData.prospecting : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>New Customers</span> <span class="text-xs-right">{{ analyticsData.prosecting ? analyticsData.prospecting : 0 + analyticsData.walkin ? analyticsData.walkin : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointments confirmed</span> <span class="text-xs-right">{{ analyticGuestInfo.confirmed ? analyticGuestInfo.confirmed : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointment Show</span> <span class="text-xs-right">{{ analyticGuestInfo.show ? analyticGuestInfo.show : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Appointment no show</span> <span class="text-xs-right">{{ analyticGuestInfo.pending ? analyticGuestInfo.pending : 0 }}</span>
-                </div>
-                <v-divider class="pa-1"></v-divider>
-                <div class="d-flex my-2 justify-between">
-                    <span>Sales made</span> <span class="text-xs-right">{{ analyticGuestInfo.sale_made ?  analyticGuestInfo.sale_made : 0 }}</span>
-                </div>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row >
+        <v-layout row>
             <v-flex xs12 sm4 class="text-xs-center">
                 Confirmed Appointments
                 <span class="graphNumber">{{confirmedPercent}}%</span>
                 <graph :chartData="confirmed" :options="options" :styles="myStyles"></graph>
             </v-flex>
+
             <v-flex xs12 sm4 class="text-xs-center">
                 Appointments Made
                 <span class="graphNumber">{{madePercent}}%</span>
                 <graph :chartData="made" :options="options" :styles="myStyles"></graph>
             </v-flex>
+
             <v-flex xs12 sm4 class="text-xs-center">
                 Sales
                 <span class="graphNumber">{{salesPercent}}%</span>
                 <graph :chartData="sales" :options="options" :styles="myStyles"></graph>
             </v-flex>
         </v-layout>
-
     </v-container>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
     import Graph from '@/components/Analytics/Graph'
+    import Overview from "@/components/Analytics/Overview";
 
     export default {
+        components: {
+            Graph,
+            Overview
+        },
 
         data() {
             return {
@@ -100,6 +54,7 @@
 
                     }]
                 },
+
                 madePercent: 0,
                 made: {
                     labels: ['Showed Up', 'Yet to appear'],
@@ -118,6 +73,7 @@
                     }]
 
                 },
+
                 salesPercent: 0,
                 sales: {
                     labels: ['Sale', 'No Sale'],
@@ -144,8 +100,6 @@
             }
         },
 
-        components: {Graph},
-
         computed: ({
             ...mapGetters({
                 trans: 'getFields',
@@ -156,7 +110,7 @@
                 analyticGuestInfo: 'getAnalyticsTotalInfo'
             }),
 
-            myStyles () {
+            myStyles() {
                 return {
                     height: `200px`,
                     position: 'relative'
@@ -166,11 +120,11 @@
 
         watch: {
             analyticsTotalGuest() {
-                this.totalGuests()
+                this.createConfirmedAppointmentsData()
             },
+
             analyticGuestInfo() {
                 this.createConfirmedAppointmentsData()
-                this.createAppointmentsMadeData()
             }
         },
 
@@ -185,9 +139,6 @@
         },
 
         methods: {
-            totalGuests(){
-                this.totalGuests = this.analyticsTotalGuest
-            },
 
             fetchAnalytics() {
                 this.$store.dispatch('fetchAnalytics', {
@@ -199,42 +150,82 @@
              * Confirm guest calculate
              */
             createConfirmedAppointmentsData() {
-                let confirmedPercent = ((this.totalGuests - this.analyticGuestInfo.pending) / this.totalGuests) * 100
-                confirmedPercent = confirmedPercent.toFixed(1)
-                this.confirmedPercent = confirmedPercent
-                let unConfirmed = 100 - confirmedPercent
-                unConfirmed = unConfirmed.toFixed(1)
-                const arrayData = [
-                    confirmedPercent,
+                this.confirmedPercent = _.round(((this.analyticsTotalGuest - this.analyticGuestInfo.pending) / this.analyticsTotalGuest) * 100, 1)
+                let unConfirmed = _.round((100 - this.confirmedPercent), 1)
+
+                const confirmedData = [
+                    this.confirmedPercent,
                     unConfirmed
                 ]
+                // Confirmed data set
                 let modifyConfirmData = {}
-
                 _.forOwn(this.confirmed, (value, key) => {
-                    if(key === 'datasets'){
+                    if (key === 'datasets') {
                         let datasets = []
                         _.map(value, (data) => {
                             datasets.push({
                                 ...data,
-                                data: [...arrayData]
+                                data: [...confirmedData]
                             })
                         })
                         modifyConfirmData.datasets = [...datasets]
-                    }else{
+                    } else {
                         modifyConfirmData[key] = value
                     }
                 })
-
                 this.confirmed = {...modifyConfirmData}
-            },
 
-            createAppointmentsMadeData() {
+                // Arrived data set
+                this.madePercent = _.round(((this.analyticGuestInfo.arrived / this.analyticsTotalGuest) * 100), 1)
+                const unMadePercent = _.round((100 - this.madePercent), 1)
+                const madeData = [
+                    this.madePercent,
+                    unMadePercent
+                ]
 
-            },
+                let modifyMadeData = {}
+                _.forOwn(this.made, (value, key) => {
+                    if (key === 'datasets') {
+                        let datasets = []
+                        _.map(value, (data) => {
+                            datasets.push({
+                                ...data,
+                                data: [...madeData]
+                            })
+                        })
+                        modifyMadeData.datasets = [...datasets]
+                    } else {
+                        modifyMadeData[key] = value
+                    }
+                })
+                this.made = {...modifyMadeData}
 
-            createSalesData() {
 
-            },
+                // Sale made analytics
+                this.salesPercent = _.round(((this.analyticGuestInfo.sale_made / this.analyticsTotalGuest) * 100), 1)
+                const unSalePercent = _.round((100 - this.salesPercent), 1)
+                const saleData = [
+                    this.salesPercent,
+                    unSalePercent
+                ]
+
+                let modifySaleData = {}
+                _.forOwn(this.sales, (value, key) => {
+                    if (key === 'datasets') {
+                        let datasets = []
+                        _.map(value, (data) => {
+                            datasets.push({
+                                ...data,
+                                data: [...saleData]
+                            })
+                        })
+                        modifySaleData.datasets = [...datasets]
+                    } else {
+                        modifySaleData[key] = value
+                    }
+                })
+                this.sales = {...modifySaleData}
+            }
         }
 
     }
