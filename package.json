@@ -16,6 +16,7 @@
         "chart.js": "^2.9.3",
         "json2csv": "^4.5.4",
         "moment": "^2.24.0",
+        "vue-chartjs": "^3.5.0",
         "vue-color": "^2.7.0",
         "vue-flag-icon-2": "^1.0.8",
         "vue-image-upload-resize": "^2.1.1",
