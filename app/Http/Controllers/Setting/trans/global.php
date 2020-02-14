@@ -205,6 +205,55 @@ return [
     ],
 
     [
+        'label' => 'Pending',
+        'identifier' => 'pending',
+        'translation' => 'Pending'
+    ],
+
+    [
+        'label' => 'Confirmed',
+        'identifier' => 'confirmed',
+        'translation' => 'Confirmed'
+    ],
+
+    [
+        'label' => 'Arrived',
+        'identifier' => 'arrived',
+        'translation' => 'Arrived'
+    ],
+
+    [
+        'label' => 'No Sale',
+        'identifier' => 'noSale',
+        'translation' => 'No Sale'
+    ],
+
+    [
+        'label' => 'Sale Made',
+        'identifier' => 'saleMade',
+        'translation' => 'Sale Made'
+    ],
+
+    [
+        'label' => 'Completed No Show',
+        'identifier' => 'completedNoShow',
+        'translation' => 'Completed No Show'
+    ],
+
+    [
+        'label' => 'No Show',
+        'identifier' => 'noShow',
+        'translation' => 'No Show'
+    ],
+
+
+    [
+        'label' => 'Unknown',
+        'identifier' => 'unknown',
+        'translation' => 'Unknown'
+    ],
+
+    [
         'label' => 'Select',
         'identifier' => 'select',
         'translation' => 'Select'
@@ -810,6 +859,12 @@ return [
         'identifier' => 'greeting',
         'translation' => 'Greeting'
     ],
+    [
+        'label' => 'Complete',
+        'identifier' => 'complete',
+        'translation' => 'Complete'
+    ],
+
 
     [
         'label' => 'Notes',

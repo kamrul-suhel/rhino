@@ -47,43 +47,76 @@ const mutations = {
         state = {...defaultState}
     },
 
-    setGuestListHeader(state, trans) {
-        const header = [
-            {
-                text: trans.name,
-                align: 'left',
-                sortable: false,
-                value: 'name'
-            },
+    setGuestListHeader(state, payload) {
+        const trans = {...payload.trans}
+        let header = []
+        if(payload.eventSale && payload.eventSale !== 'undefined'){
+            header = [
+                {
+                    text: trans.name,
+                    align: 'left',
+                    sortable: false,
+                    value: 'name'
+                },
 
-            {
-                text: trans.email,
-                align: 'left',
-                sortable: false,
-                value: 'email'
-            },
+                {
+                    text: trans.appointment,
+                    align: 'left',
+                    sortable: false,
+                    value: 'appointment'
+                },
 
-            {
-                text: trans.mobile,
-                value: 'mobile'
-            },
+                {
+                    text: trans.complete,
+                    align: 'left',
+                    sortable: false,
+                    value: 'complete'
+                },
+                {
+                    text: '',
+                    align: 'right',
+                    sortable: false,
+                    value: 'action'
+                }
+            ]
+        }else{
+            header = [
+                {
+                    text: trans.name,
+                    align: 'left',
+                    sortable: false,
+                    value: 'name'
+                },
 
-            {
-                text: trans.address,
-                value: 'address'
-            },
+                {
+                    text: trans.email,
+                    align: 'left',
+                    sortable: false,
+                    value: 'email'
+                },
 
-            {
-                text: 'Unique ID',
-                value: 'uniqueId'
-            },
+                {
+                    text: trans.mobile,
+                    value: 'mobile'
+                },
 
-            {
-                text: trans.actions,
-                value: 'actions',
-                align: 'right'
-            }
-        ]
+                {
+                    text: trans.address,
+                    value: 'address'
+                },
+
+                {
+                    text: 'Unique ID',
+                    value: 'uniqueId'
+                },
+
+                {
+                    text: trans.actions,
+                    value: 'actions',
+                    align: 'right'
+                }
+            ]
+        }
 
         state.listHeader = [...header]
     }
@@ -141,7 +174,12 @@ const actions = {
         commit('setGuestLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        commit('setGuestListHeader', payload.trans)
+        // Setup header for list view
+        if(payload.eventSale && payload.eventSale !== 'undefined'){
+            commit('setGuestListHeader', {trans: payload.trans, eventSale: true})
+        }else{
+            commit('setGuestListHeader', {trans: payload.trans})
+        }
 
         const params = fn.generateParams(payload)
         const URL = `/api/guests${params}`

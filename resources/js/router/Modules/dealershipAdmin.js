@@ -21,6 +21,12 @@ const DealershipAdminRoutes = {
             path: 'events/:eventId/analytics',
             name: 'dealershipAnalytics',
             component: DealershipAdmin.Analytics
+        },
+
+        {
+            path: 'events/:eventId/sales',
+            name: 'eventSales',
+            component: DealershipAdmin.SaleUpdate
         }
     ]
 }

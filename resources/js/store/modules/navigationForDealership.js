@@ -68,7 +68,7 @@ const mutations = {
                     {
                         icon: 'add',
                         text: `${trans.update} ${trans.sales}`,
-                        link: 'listDealerships',
+                        link: 'saleUpdate',
                         access: ['dealership'],
                     },
 

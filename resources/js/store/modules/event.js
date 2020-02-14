@@ -1,21 +1,21 @@
 import fn from '../../utils/function'
 
 const defaultState = {
-    events : [],
+    events: [],
     selectedEvent: {},
-    listHeader:[],
+    listHeader: [],
     loading: 'white',
     totalEvents: 0,
-    eventListRowPerPage: [15,25,40],
+    eventListRowPerPage: [15, 25, 40],
 
     // For dropdown
     eventsDropDown: [],
 
     // Regions variable
-    brands:[],
+    brands: [],
     totalBrands: 0,
-    eventBrandHeader:[],
-    selectedEventBrand:{}
+    eventBrandHeader: [],
+    selectedEventBrand: {}
 
 }
 
@@ -24,43 +24,45 @@ const state = {
 }
 
 const mutations = {
-    setEvents(state, events){
+    setEvents(state, events) {
         state.events = [...events]
     },
 
-    setEventsForDropDown(state, events){
+    setEventsForDropDown(state, events) {
         state.eventsDropDown = [...events]
     },
 
-    setSelectedEventRegion(state, selectedRegion){
+    setSelectedEventRegion(state, selectedRegion) {
         state.selectedEventRegion = selectedRegion
     },
 
-    setRegionsByEventId(state, regions){
+    setRegionsByEventId(state, regions) {
         state.regions = [...regions]
     },
 
-    setTotalRegionByEventId(state, totalRegion){
+    setTotalRegionByEventId(state, totalRegion) {
         state.totalRegions = totalRegion
     },
 
-    setEventLoading(state, status){
+    setEventLoading(state, status) {
         state.loading = status
     },
 
-    setSelectedEvent(state, event){
+    setSelectedEvent(state, event) {
         state.selectedEvent = {...event}
     },
 
-    setTotalEvents(state, totalEvent){
+    setTotalEvents(state, totalEvent) {
         state.totalEvents = totalEvent
     },
 
-    resetEventstore(state){
+    resetEventstore(state) {
         state = {...defaultState}
     },
 
-    setEventListHeader(state, trans){
+    setEventListHeader(state, payload) {
+        const trans = {...payload.trans}
+
         const header = [
             {
                 text: trans.name,
@@ -90,7 +92,7 @@ const mutations = {
                 value: 'date'
             },
 
-            
+
             {
                 text: trans.appointment_duration,
                 value: 'appointment_duration'
@@ -106,14 +108,14 @@ const mutations = {
             {
                 text: trans.actions,
                 value: 'actions',
-                align:'right'
+                align: 'right'
             }
         ]
 
         state.listHeader = [...header]
     },
 
-    setEventBrandListHeader(state, trans){
+    setEventBrandListHeader(state, trans) {
         const header = [
             {
                 text: trans.brand,
@@ -145,57 +147,57 @@ const mutations = {
         state.eventBrandHeader = [...header]
     },
 
-    setEventBrands(state, brands){
+    setEventBrands(state, brands) {
         state.brands = [...brands]
     }
 }
 
 const getters = {
-    getEvents(state){
+    getEvents(state) {
         return state.events
     },
 
-    getEventsForDropDown(state){
+    getEventsForDropDown(state) {
         return state.eventsDropDown
     },
 
-    getEventListHeader(state){
+    getEventListHeader(state) {
         return state.listHeader
     },
 
-    getSelectedEventRegion(state){
+    getSelectedEventRegion(state) {
         return state.selectedEventRegion
     },
 
-    getEventBrandListHeader(state){
-      return state.eventBrandHeader
+    getEventBrandListHeader(state) {
+        return state.eventBrandHeader
     },
 
-    getEventLoading(state){
+    getEventLoading(state) {
         return state.loading
     },
 
-    getEventListRowsPerPage(state){
+    getEventListRowsPerPage(state) {
         return state.eventListRowPerPage
     },
 
-    getSelectedEvent(state){
+    getSelectedEvent(state) {
         return state.selectedEvent
     },
 
-    getTotalEvents(state){
+    getTotalEvents(state) {
         return state.totalEvents
     },
 
-    getRegionByEventId(state){
+    getRegionByEventId(state) {
         return state.regions
     },
 
-    getTotalRegionByEventId(state){
+    getTotalRegionByEventId(state) {
         return state.totalRegions
     },
 
-    getEventBrands(state){
+    getEventBrands(state) {
         return state.brands
     }
 
@@ -218,7 +220,8 @@ const actions = {
         commit('setEventLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        commit('setEventListHeader', payload.trans)
+        commit('setEventListHeader', {trans: payload.trans})
+
 
         const params = fn.generateParams(payload)
         const URL = `/api/events${params}`
@@ -236,35 +239,35 @@ const actions = {
      * Get Selected company
      * @param id // required
      */
-    fetchEvent({commit, dispatch}, payload={}){
-        const URL = `/api/events/${payload.id}`+ fn.generateParams(payload)
+    fetchEvent({commit, dispatch}, payload = {}) {
+        const URL = `/api/events/${payload.id}` + fn.generateParams(payload)
         axios.get(URL).then((response) => {
-            if(response.data){
+            if (response.data) {
                 commit('setSelectedEvent', response.data.event)
             }
-        }).catch((error)=>{
+        }).catch((error) => {
             // Generate error message
         })
     },
 
-    fetchEventForDropDown({commit}, payload = {}){
+    fetchEventForDropDown({commit}, payload = {}) {
         const URL = `/api/events/dropdown${fn.generateParams(payload)}`
 
-        axios.get(URL).then((response)=>{
-            if(response.data){
+        axios.get(URL).then((response) => {
+            if (response.data) {
                 commit('setEventsForDropDown', response.data.events)
 
                 // Initialize state select first event
-                if(
+                if (
                     payload.selectFirst &&
                     payload.selectFirst !== 'undefined' &&
                     response.data.events.length > 0 // And event is exists
-                ){
+                ) {
                     commit('setSelectedEvent', response.data.events[0])
                 }
             }
         })
-            .catch((error)=>{
+            .catch((error) => {
 
             })
     },
@@ -274,7 +277,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchBrandsByEventId({commit} ,payload = {}){
+    fetchBrandsByEventId({commit}, payload = {}) {
         // Set loading is true
         commit('setEventLoading', payload.themeOption.loadingColor)
         // Setup header for list view
@@ -298,7 +301,7 @@ const actions = {
      * Booking for frontend set selected event
      */
 
-    setSelectedEventForFrontend({commit}, payload){
+    setSelectedEventForFrontend({commit}, payload) {
         commit('setSelectedEvent', payload.event)
     }
 }

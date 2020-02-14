@@ -288,6 +288,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
             return view('index');
         });
 
+        /**
+         * Event Sales route
+         */
+        Route::get('{eventId}/sales', function(){
+            return view('index');
+        });
+
         /*
         |--------------------------------------------------------------------------
         | Routes for event analytics

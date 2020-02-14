@@ -176,6 +176,17 @@
                     return
                 }
 
+                // Sale update route
+                if(item.link === 'saleUpdate'){
+                    this.$router.push({
+                        name: 'eventSales',
+                        params: {
+                            eventId: this.selectedEvent.id
+                        }
+                    })
+                    return
+                }
+
                 if (item.link === this.$route.name) {
                     return
                 } else {

@@ -29,6 +29,7 @@ import Translations from './modules/translation'
 import SpecializeBrand from './modules/specializeBrand'
 import Header from './modules/header'
 import Global from './modules/global'
+import SaleUpdate from "./modules/saleUpdate";
 
 
 Vue.use(Vuex)
@@ -95,7 +96,8 @@ const store = new Vuex.Store({
         Booking,
         Translations,
         Analytics,
-        SpecializeBrand
+        SpecializeBrand,
+        SaleUpdate
     }
 })
 
