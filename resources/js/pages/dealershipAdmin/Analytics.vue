@@ -57,14 +57,17 @@
         <v-layout row >
             <v-flex xs12 sm4 class="text-xs-center">
                 Confirmed Appointments
+                <span class="graphNumber">{{confirmedPercent}}%</span>
                 <graph :chartData="confirmed" :options="options" :styles="myStyles"></graph>
             </v-flex>
             <v-flex xs12 sm4 class="text-xs-center">
                 Appointments Made
+                <span class="graphNumber">{{madePercent}}%</span>
                 <graph :chartData="made" :options="options" :styles="myStyles"></graph>
             </v-flex>
             <v-flex xs12 sm4 class="text-xs-center">
                 Sales
+                <span class="graphNumber">{{salesPercent}}%</span>
                 <graph :chartData="sales" :options="options" :styles="myStyles"></graph>
             </v-flex>
         </v-layout>
@@ -80,6 +83,7 @@
 
         data() {
             return {
+                confirmedPercent: 0,
                 confirmed: {
                     labels: ['Confirmed', 'Unconfirmed'],
                     datasets: [{
@@ -96,11 +100,12 @@
                         
                     }]
                 },
+                madePercent: 0,
                 made: {
                     labels: ['Showed Up', 'Yet to appear'],
                     datasets: [{
                         label: '# of Votes',
-                        data: [50, 50],
+                        data: [30, 70],
                         backgroundColor: [
                             '#CDDEEA',
                             '#244252',
@@ -113,6 +118,7 @@
                     }]
 
                 },
+                salesPercent: 0,
                 sales: {
                     labels: ['Sale', 'No Sale'],
                     datasets: [{
@@ -134,7 +140,7 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     cutoutPercentage: 85
-                }
+                },
             }
         },
 
@@ -155,14 +161,23 @@
                     height: `200px`,
                     position: 'relative'
                 }
-            }
+            },
         }),
+
+        watch: {
+            analyticsTotalGuest() {
+                this.totalGuests()
+            },
+            analyticGuestInfo() {
+                this.createConfirmedAppointmentsData()
+                this.createAppointmentsMadeData()
+            }
+        },
 
         created() {
             this.$store.commit('setHeaderTitle', `${this.trans.analytics}`)
             this.$store.commit('setNavTitle', `${this.trans.analytics}`)
             this.fetchAnalytics()
-            this.createConfirmedData()
         },
 
         mounted() {
@@ -170,18 +185,37 @@
         },
 
         methods: {
+            totalGuests(){
+                this.totalGuests = this.analyticsTotalGuest
+            },
+
             fetchAnalytics() {
                 this.$store.dispatch('fetchAnalytics', {
                     eventId: this.$route.params.eventId
                 });
             },
 
-            createConfirmedData() {
-                console.log('total guests: ' + this.analyticsTotalGuest)
+            createConfirmedAppointmentsData() {
+                this.confirmedPercent = this.totalGuests - this.analyticGuestInfo.pending / this.totalGuests * 100
+                this.confirmedPercent = this.confirmedPercent.toFixed(1)
+                const arrayData = [this.confirmedPercent, 100-this.confirmedPercent]
+                let ownObject = {}
+                _.forOwn(this.confirmed, (key, value) => {
+                    if(key === 'datasets'){
+                        ownObject[key] = [
+                            
+                        ]
+                    }
+                    ownObject[key] = value
+                })
+
+                this.confirmed = {...realComfirmData}
+                console.log(this.confirmed)
+                
             },
 
-            createMadeData() {
-
+            createAppointmentsMadeData() {
+                
             },
 
             createSalesData() {

@@ -116,7 +116,7 @@
                     <v-layout column wrap>
                         <v-tabs
                             v-model="active"
-                            :color="themeOption.tabColor"
+                            dark
                             :slider-color="themeOption.tabSliderColor"
                         >
 

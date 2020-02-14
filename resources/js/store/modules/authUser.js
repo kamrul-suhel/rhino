@@ -38,7 +38,7 @@ const defaultState = {
 
         //Tab option
         tabColor: '#cecece',
-        tabSliderColor: '#fff',
+        tabSliderColor: '#E20000',
 
         // Default image
         brandDefaultImage : '/images/brandPlaceholder.jpg',

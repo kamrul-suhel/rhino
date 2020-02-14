@@ -101,8 +101,16 @@ const mutations = {
             },
 
             {
+                icon: 'people',
+                text: `${trans.manage} ${trans.guests}`,
+                link: 'listGuest',
+                access: ['admin'],
+                divider: false
+            },
+
+            {
                 icon: 'keyboard_arrow_right',
-                text: trans.translation,
+                text: trans.translations,
                 link: 'translationSetting',
                 access: ['admin'],
                 divider: false
