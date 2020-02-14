@@ -13,13 +13,13 @@
 
             </v-flex>
 
-            <v-flex xs12 sm4>
+            <v-flex xs12 :sm4="authUser.level === 'dealership'">
                 <div class="text-xs-center">
                     <h2>{{ title }}</h2>
                 </div>
             </v-flex>
 
-            <v-flex xs12 sm4>
+            <v-flex xs12 sm4 v-if="authUser.level === 'dealership'">
                 <v-spacer></v-spacer>
                 <div class="text-xs-right">
                     <span>language</span>
