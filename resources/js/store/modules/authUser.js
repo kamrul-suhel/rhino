@@ -6,7 +6,7 @@ const defaultState = {
     admin: false,
     isLogin: true,
     themeOption:{
-        primaryColor: '',
+        primaryColor: '#E20000',
         secondaryColor: '#444',
         textColor:'',
         theme: 'dark',

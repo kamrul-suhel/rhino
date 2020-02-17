@@ -53,42 +53,67 @@
                 isAdmin: 'getIsAdmin',
                 initialize: 'getInitializeApp',
                 authUser: 'getAuthUser',
-                trans: 'getFields'
+                trans: 'getFields',
+                languages: 'getLanguages',
+                isSettingLanguageLoaded: 'getSettingLanguage'
             })
         },
 
         watch: {
             themeOption(value) {
                 this.$vuetify.theme = this.themeOption.theme
+            },
+
+            isSettingLanguageLoaded(){
+                this.initializeData()
+            },
+
+            initialize(){
+                this.isInitialize()
             }
         },
 
-        async created() {
-            axios.get('/auth/me').then((response) => {
-                if (response.data.success) {
-                    const authUser = response.data.authUser
-
-                    // If auth user is dealership manager, then set dealership & regions for manager
-                    if (authUser.level === 'dealership') {
-                        const dealership = {...response.data.dealership}
-                        const regions = [...response.data.regions]
-                        this.$store.commit('setSelectedDealership', dealership)
-                        this.$store.commit('setRegions', regions)
-                    }
-
-                    this.$store.commit('setAuthUser', authUser)
-                    this.$store.commit('setUserRole', true)
-                    this.$store.commit('setInitialize', true)
-                } else {
-                    this.$store.commit('setUserRole', false)
-                    this.$store.commit('setInitialize', true)
-                }
-            })
+        created() {
+            this.initializeData();
         },
 
         methods: {
+            initializeData(){
+                if(this.languages.length > 0){
+                    axios.get('/auth/me').then((response) => {
+                        if (response.data.success) {
+                            const authUser = response.data.authUser
+
+                            // If auth user is dealership manager, then set dealership & regions for manager
+                            if (authUser.level === 'dealership') {
+                                const dealership = {...response.data.dealership}
+                                const regions = [...response.data.regions]
+                                this.$store.commit('setSelectedDealership', dealership)
+                                this.$store.commit('setRegions', regions)
+                            }
+
+                            this.$store.commit('setAuthUser', authUser)
+                            this.$store.commit('setUserRole', true)
+                            this.$store.commit('setInitialize', true)
+
+                            // Get selected langauage from auth user
+                            _.map(this.languages, (language) => {
+                                if(language.id === this.authUser.language_id){
+                                    this.$store.commit('setSelectedLanguage', {...language})
+                                    this.$store.dispatch('fetchSettingFields', {languageId: language.id});
+                                }
+                            })
+
+                        } else {
+                            this.$store.commit('setUserRole', false)
+                            this.$store.commit('setInitialize', true)
+                        }
+                    })
+                }
+            },
+
             isInitialize() {
-                if (this.initialize && this.isSettingFieldLoaded) {
+                if (this.initialize) {
                     return true
                 }
                 return false

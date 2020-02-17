@@ -23,8 +23,9 @@
                 <v-spacer></v-spacer>
                 <v-layout row>
                     <v-autocomplete
+                        dark
+                        :color="themeOption.primaryColor"
                         :placeholder="trans.select_a_language"
-                        color="dark"
                         :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
                         :items="languages"
                         item-text="name"
@@ -63,7 +64,7 @@
                 themeOption: 'getThemeOption',
                 isLogin: 'getIsLogin',
                 title: 'getHeaderTitle',
-                authUser: 'getAuthUser'
+                authUser: 'getAuthUser',
             })
         },
 
@@ -89,7 +90,7 @@
             selectedLanguage(value) {
                 this.$store.commit('setSelectedLanguage', value)
                 this.$store.dispatch('fetchSettingFields', {languageId: value.id})
-            },
+            }
         }
     }
 </script>

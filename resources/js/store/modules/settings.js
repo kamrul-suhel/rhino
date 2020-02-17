@@ -6,7 +6,8 @@ const state = {
     navigations: [],
     home:'',
     isLoading: false,
-    isLoaded: false
+    isLoaded: false,
+    loadSettingLanguage: false
 };
 
 const mutations = {
@@ -28,6 +29,10 @@ const mutations = {
 
     setIsLoading(state, loading){
         state.isLoading = loading
+    },
+
+    setLoadSettingLanguage(state, status){
+        state.loadSettingLanguage = status
     }
 
 }
@@ -52,18 +57,24 @@ const getters = {
 
     getIsLoading(state){
         return state.isLoading
+    },
+
+    getSettingLanguage(state){
+        return state.loadSettingLanguage
     }
 }
 
 const actions = {
     fetchSettingFields({commit,dispatch}, payload = null){
-        const URL = `/api/settings${fn.generateParams(payload)}`
-        commit('setIsLoading', true)
-        axios.get(URL).then((response) => {
-            commit('setFieldsItem', response.data);
-            commit('setIsLoading', false)
-            commit('setIsSettingLoaded', true)
-        });
+        return new Promise((resolve, reject) => {
+            const URL = `/api/settings${fn.generateParams(payload)}`
+            commit('setIsLoading', true)
+            axios.get(URL).then((response) => {
+                commit('setFieldsItem', response.data);
+                commit('setIsLoading', false)
+                resolve()
+            });
+        })
     }
 }
 

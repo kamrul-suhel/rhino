@@ -95,10 +95,11 @@ new Vue({
     methods: {
         initSetting() {
             // Setup translation fields
-            this.$store.dispatch('fetchSettingFields');
-
-            // Initialize language
-            this.$store.dispatch('fetchLanguages')
+            this.$store.dispatch('fetchSettingFields').then(() => {
+                this.$store.dispatch('fetchLanguages').then(() => {
+                    this.$store.commit('setLoadSettingLanguage', true)
+                })
+            })
         }
     }
 })

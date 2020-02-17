@@ -92,7 +92,7 @@ const getters = {
         return state.languagesCRUD
     },
 
-    getSelectedLanguages(state) {
+    getSelectedLanguage(state) {
         return state.selectedLanguage
     },
 
@@ -146,12 +146,15 @@ const actions = {
      * @param payload
      */
     fetchLanguages({commit}, payload = {}) {
-        const params = typeof (payload.type) != 'undefined' ? '?type=' + payload.type : '';
-        const URL = '/api/languages' + params
+        return new Promise((resolve, reject) => {
+            const params = typeof (payload.type) != 'undefined' ? '?type=' + payload.type : '';
+            const URL = '/api/languages' + params
 
-        axios.get(URL).then((response) => {
-            commit('setLanguages', response.data)
-        });
+            axios.get(URL).then((response) => {
+                commit('setLanguages', response.data)
+                resolve()
+            })
+        })
     },
 
     fetchSubLanguage({commit}, payload = {}) {

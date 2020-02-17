@@ -10,7 +10,7 @@
             :pagination.sync="pagination"
             :no-results-text="trans.no_dealership_found"
             :no-data-text="trans.no_dealership_found"
-            :rows-per-page-text="trans.rows_per_page"
+            :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
             :rows-per-page-items="rowsPerPage"
             :total-items="totalDealership"
             :loading="loading"
@@ -117,32 +117,24 @@
                 loading: 'getDealershipLoading',
                 rowsPerPage: 'getDealershipListRowsPerPage',
                 selectedDealership: 'getSelectedDealership',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                selectedLanguage: 'getSelectedLanguage'
             })
         }),
 
         watch: {
             pagination: {
                 handler() {
-                    const paginateOption = {
-                        ...this.pagination,
-                        trans: this.trans,
-                        paginate: true
-                    }
-                    this.initialize(paginateOption)
+                    this.initialize()
                 }
             },
 
-            searchDealerships(value) {
-                const paginateOption = {
-                    ...this.pagination,
-                    page: 1, // Setup first page,
-                    trans: this.trans,
-                    paginate: true,
-                    search: value
-                }
+            searchDealerships() {
+                this.initialize()
+            },
 
-                this.initialize(paginateOption)
+            trans(){
+                this.initialize()
             }
         },
 
@@ -151,8 +143,6 @@
             this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.dealerships}` )
         },
 
-        mounted() {
-        },
         methods: {
             // Initialize data when first render
             initialize() {
@@ -161,7 +151,8 @@
                     trans: this.trans,
                     themeOption: this.themeOption,
                     paginate: true,
-                    search: this.searchDealerships
+                    search: this.searchDealerships,
+                    languageId: this.selectedLanguage.id
                 }
 
                 this.$store.dispatch('fetchDealerships', paginateOption)

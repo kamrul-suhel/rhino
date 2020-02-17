@@ -27,11 +27,13 @@
                 <v-layout row>
                     <v-autocomplete
                         :placeholder="trans.select_a_language"
+                        :color="themeOption.primaryColor"
                         prepend-icon="search"
                         :items="languages"
                         item-text="name"
-                        @change="selectedLanguage"
+                        @change="onSelectLanguage"
                         item-value="id"
+                        v-model="languageId"
                         return-object
                     ></v-autocomplete>
                 </v-layout>
@@ -45,7 +47,7 @@
                 <v-list-tile-action>
                     <v-icon :color="themeOption.adminNavIconColor">home</v-icon>
                 </v-list-tile-action>
-                <v-list-tile-title>{{ trans.dashboard }}</v-list-tile-title>
+                <v-list-tile-title>{{ trans.dashboard |trans }}</v-list-tile-title>
             </v-list-tile>
 
             <template v-for="(nav, i) in navs">
@@ -58,7 +60,7 @@
                         <v-icon v-text="nav.icon" :color="themeOption.adminNavIconColor"></v-icon>
                     </v-list-tile-action>
 
-                    <v-list-tile-title v-text="nav.text"></v-list-tile-title>
+                    <v-list-tile-title >{{nav.text|trans}}</v-list-tile-title>
 
                 </v-list-tile>
                 <v-divider v-if="nav.divider" class="my-2"></v-divider>
@@ -70,7 +72,7 @@
                     </v-icon>
                 </v-list-tile-action>
 
-                <v-list-tile-title>{{ trans.logOut }}</v-list-tile-title>
+                <v-list-tile-title>{{ trans.logOut | trans }}</v-list-tile-title>
             </v-list-tile>
         </v-list>
     </v-navigation-drawer>
@@ -88,13 +90,15 @@
                 openNavigation: 'getIsNavigationOpen',
                 navs: 'getNavigationBar',
                 authUser: 'getAuthUser',
-                title: 'getNavTitle'
+                title: 'getNavTitle',
+                selectedLanguage: 'getSelectedLanguage'
             })
         },
 
         data() {
             return {
-                drawer: true
+                drawer: true,
+                languageId: null
             }
         },
 
@@ -105,11 +109,16 @@
 
             trans(){
                 this.$store.commit('setNavigation', this.trans)
+            },
+
+            selectedLanguage(){
+                this.languageId = this.selectedLanguage.id
             }
         },
 
         created() {
             this.$store.dispatch('dispatchNavigation', this.trans) // Dispatch to navigation store
+            this.languageId = this.selectedLanguage.id
         },
 
         methods: {
@@ -125,7 +134,7 @@
              * Language change render all translation
              * @param value
              */
-            selectedLanguage(value) {
+            onSelectLanguage(value) {
                 this.$store.commit('setSelectedLanguage', value)
                 this.$store.dispatch('fetchSettingFields', {languageId: value.id})
             },
