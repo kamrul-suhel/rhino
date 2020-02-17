@@ -9,8 +9,8 @@
 
         <v-layout row wrap align-content-center>
             <v-flex xs12>
-                <v-img 
-                    src="/images/rhino-events-logo.png" 
+                <v-img
+                    src="/images/rhino-events-logo.png"
                     aspect-ratio="1"
                     max-width="70%"
                     max-height="30px"
@@ -101,6 +101,10 @@
         watch:{
             openNavigation(){
                 this.drawer = this.openNavigation
+            },
+
+            trans(){
+                this.$store.commit('setNavigation', this.trans)
             }
         },
 

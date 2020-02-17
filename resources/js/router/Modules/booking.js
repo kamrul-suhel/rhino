@@ -1,9 +1,10 @@
-import * as Frontend from "@/pages/booking"
-
+function lazyLoad(view){
+    return () => import(`../../pages/dealershipAdmin/${view}`)
+}
 const booking ={
     path: '/booking',
     name: 'booking',
-    component: Frontend.Frontend
+    component: lazyLoad('Frontend')
 }
 
 export default booking

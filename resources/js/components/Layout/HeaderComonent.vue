@@ -21,9 +21,18 @@
 
             <v-flex xs12 sm4 v-if="authUser.level === 'dealership'">
                 <v-spacer></v-spacer>
-                <div class="text-xs-right">
-                    <span>language</span>
-                </div>
+                <v-layout row>
+                    <v-autocomplete
+                        :placeholder="trans.select_a_language"
+                        color="dark"
+                        :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
+                        :items="languages"
+                        item-text="name"
+                        item-value="id"
+                        @change="selectedLanguage"
+                        return-object
+                    ></v-autocomplete>
+                </v-layout>
             </v-flex>
         </v-layout>
 
@@ -49,6 +58,7 @@
 
         computed: {
             ...mapGetters({
+                languages: 'getLanguages',
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 isLogin: 'getIsLogin',
@@ -70,7 +80,16 @@
                     return true
                 }
                 return false
-            }
+            },
+
+            /**
+             * Language change render all translation
+             * @param value
+             */
+            selectedLanguage(value) {
+                this.$store.commit('setSelectedLanguage', value)
+                this.$store.dispatch('fetchSettingFields', {languageId: value.id})
+            },
         }
     }
 </script>

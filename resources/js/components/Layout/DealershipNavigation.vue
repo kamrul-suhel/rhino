@@ -129,11 +129,19 @@
         watch: {
             openNavigation() {
                 this.drawer = this.openNavigation
+            },
+
+            trans(){
+                this.$store.commit('setDealershipNavigation', this.trans)
             }
         },
 
         methods: {
             async onPageChange(item) {
+                if(this.$route.name === item.link){
+                    return
+                }
+
                 // Analytics route
                 if (item.link === 'dealershipAnalytics') {
                     this.$router.push({
@@ -144,7 +152,6 @@
                     })
                     return
                 }
-
 
                 // Check is dialog box
                 if (item.isDialog) {

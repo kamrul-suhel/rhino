@@ -25,6 +25,7 @@ const defaultState = {
         // Header setting
         textHeadingColor: '#e20000',
         loadingColor: 'white',
+        dealerShipLanguagePickerColor: '#fff',
 
         // Snack bar option
         snackBarBgSuccess: 'success',

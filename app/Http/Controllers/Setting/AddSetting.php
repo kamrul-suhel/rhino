@@ -53,6 +53,7 @@ class AddSetting
 
                 $setting = new Setting();
                 $setting->identifier = $item['identifier'];
+                $setting->label = $item['label'];
                 $setting->save();
 
                 $settingTranslation = new SettingTranslation();
