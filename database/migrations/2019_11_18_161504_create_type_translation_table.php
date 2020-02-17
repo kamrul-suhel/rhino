@@ -18,6 +18,8 @@ class CreateTypeTranslationTable extends Migration
             $table->unsignedBigInteger('type_id')->index();
             $table->unsignedBigInteger('language_id')->index();
             $table->string('name');
+            $table->string('display')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
