@@ -1,7 +1,8 @@
 <template>
     <div >
 
-        <addUserForm></addUserForm>
+        <addUserForm :sub-component="authUser.level === 'dealership'"
+                     :model="authUser.level === 'dealership'? 'dealership' : ''"></addUserForm>
 
         <v-layout row wrap>
             <v-flex xs12 pt-3>
@@ -128,6 +129,7 @@
             ...mapGetters({
                 languages: 'getLanguages',
                 trans: 'getFields',
+                authUser: 'getAuthUser',
                 themeOption: 'getThemeOption',
                 users: 'getUsers',
                 headers: 'getUserListHeader',

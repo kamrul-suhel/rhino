@@ -8,7 +8,7 @@
                 v-model="searchGuests">
             </v-text-field>
 
-            <UploadGuestCSVComponent></UploadGuestCSVComponent>
+            <UploadGuestCSVComponent v-if="subComponent"></UploadGuestCSVComponent>
         </v-toolbar>
 
         <v-layout row wrap>
@@ -163,7 +163,7 @@
         },
 
         created() {
-            
+
             this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.guests}` )
             this.$store.commit('setNavTitle', `${this.trans.guests}`)
         },

@@ -69,6 +69,76 @@
                             </v-layout>
                         </v-flex>
 
+                        <v-flex md8 sm12 v-if="editGuest">
+                            <v-layout row wrap justify-start>
+                                <v-flex md8 sm12>
+                                    <h6 class="body-1">{{ `${trans.mailing} ${trans.address}`}}</h6>
+                                    <v-text-field :color="color"
+                                                  v-model="guest.address_line_1"
+                                                  outline
+                                                  :disabled="!isEditable"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                        </v-flex>
+
+                        <v-flex md8 sm12 v-if="editGuest">
+                            <v-layout row wrap justify-start>
+                                <v-flex md8 sm12>
+                                    <h6 class="body-1">{{ `${trans.postcode}`}}</h6>
+                                    <v-text-field :color="color"
+                                                  v-model="guest.postcode"
+                                                  outline
+                                                  :disabled="!isEditable"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                        </v-flex>
+
+                        <v-flex md8 sm12 v-if="editGuest">
+                            <v-layout row wrap justify-center align-content-center>
+                                <v-flex xs12>
+                                    <h6 class="body-1">{{ `${trans.marketingPreferences}`}}</h6>
+                                </v-flex>
+
+                                <v-flex>
+                                    <span>Mailing</span>
+                                    <v-checkbox :color="color"
+                                                :true-value="1"
+                                                :false-value="0"
+                                                v-model="guest.postal_contact">
+                                    </v-checkbox>
+                                </v-flex>
+
+                                <v-flex>
+                                    <span>Email</span>
+                                    <v-checkbox :color="color"
+                                                :true-value="1"
+                                                :false-value="0"
+                                                v-model="guest.email_contact">
+                                    </v-checkbox>
+                                </v-flex>
+
+                                <v-flex>
+                                    <span>SMS</span>
+                                    <v-checkbox :color="color"
+                                                :true-value="1"
+                                                :false-value="0"
+                                                v-model="guest.sms_contact">
+                                    </v-checkbox>
+                                </v-flex>
+
+                                <v-flex>
+                                    <span>Phone</span>
+                                    <v-checkbox :color="color"
+                                                :true-value="1"
+                                                :false-value="0"
+                                                v-model="guest.phone_contact">
+                                    </v-checkbox>
+                                </v-flex>
+                            </v-layout>
+                        </v-flex>
+
                         <v-flex xs12 my-2>
                             <v-layout row justify-center>
                                 <v-btn v-if="isEditable"
@@ -124,9 +194,18 @@
                 languages: 'getLanguages',
                 guest: 'getBookingGuest',
                 color: 'getFrontendColor',
-                event: 'getSelectedEvent'
+                event: 'getSelectedEvent',
+                editGuest: 'getEditGuest'
             })
         }),
+
+        watch:{
+            editGuest(){
+                if(this.editGuest){
+                    this.isEditable = true
+                }
+            }
+        },
 
         methods:{
             onClickEdit(type){
@@ -138,11 +217,10 @@
                 if(type === 'save'){
                     // save guest date into database
                     let guestForm = new FormData()
-                    guestForm.append('first_name', this.guest.first_name)
-                    guestForm.append('surname', this.guest.surname)
-                    guestForm.append('email', this.guest.email)
-                    guestForm.append('mobile', this.guest.mobile)
-                    guestForm.append('event_id', this.event.id)
+                    _.forOwn(this.guest, (value, key)=> {
+                        guestForm.append(key, value)
+                    })
+
                     guestForm.append('_method', 'PUT')
 
                     const URL = `/api/guests/${this.guest.id}`
@@ -154,9 +232,14 @@
                                 message: `${this.guest.first_name}  ${this.trans.successfully_updated}`
                             })
                             this.isEditable = false
+
+                            // Check is edit guest enable then redirect to first page
+                            if(this.editGuest){
+                                this.$store.commit('setEditGuest', false)
+                                this.$store.commit('setBookingStep', 0)
+                            }
                         }
                     })
-
                 }
             },
 

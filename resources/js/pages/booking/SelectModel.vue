@@ -62,7 +62,7 @@
                         flat
                     >
                         <v-img
-                            contain
+                            cover
                             :aspect-ratio="16/12"
                             :src="renderVehicleImage(vehicle)"
                         ></v-img>

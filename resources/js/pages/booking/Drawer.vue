@@ -48,7 +48,7 @@
                         value="selectModel"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">1</v-avatar>
-                        {{ `${trans.selectModel}` }}
+                        <span :style="{color: color}">{{ `${trans.selectModel}` }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -57,7 +57,7 @@
                         value="bookYourSlot"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
-                        {{ `${trans.bookYourAppointment}` }}
+                        <span :style="{color: color}">{{ `${trans.bookYourAppointment}` }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -66,7 +66,7 @@
                         value="partExchange"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
-                        {{ `${trans.partExchange} ${trans.details}` }}
+                        <span :style="{color: color}">{{ `${trans.partExchange} ${trans.details}` }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -75,7 +75,7 @@
                         value="confirmYourDetail"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">4</v-avatar>
-                        {{ `${trans.confirm} ${trans.your_details}` }}
+                        <span :style="{color: color}">{{ `${trans.confirm} ${trans.your_details}` }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -84,16 +84,18 @@
                         value="bookingConfirmation"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">5</v-avatar>
-                        {{ `${trans.bookingConfirmation}` }}
+                        <span :style="{color: color}">{{ `${trans.bookingConfirmation}` }}</span>
                     </v-tab>
                 </v-tabs>
             </v-flex>
 
-            <v-flex mt-5 xs12
+            <v-flex xs12
                     class="navigation-footer">
                 <v-layout row wrap align-bottom>
                     <v-flex xs6>
-                        <h2 class="my-1 mr-4 name-button" :style="{color: color}">
+                        <h2 class="name-button"
+                            @click="onEditGuestDetail()"
+                            :style="{color: color}">
                             {{ guest.first_name }}
                             <v-icon small :color="color">settings</v-icon>
                         </h2>
@@ -190,6 +192,11 @@
                         this.$router.push({name: 'login'})
                     }
                 });
+            },
+
+            onEditGuestDetail(){
+                this.$store.commit('setEditGuest', true)
+                this.$store.commit('setBookingStep', 3)
             }
         }
     }

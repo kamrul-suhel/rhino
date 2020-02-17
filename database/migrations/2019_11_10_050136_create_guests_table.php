@@ -37,8 +37,9 @@ class CreateGuestsTable extends Migration
             $table->boolean('postal_contact')->default(0);
             $table->boolean('email_contact')->default(0);
             $table->boolean('sms_contact')->default(0);
+            $table->boolean('phone_contact')->default(0);
             $table->string('salutation')->nullable();
-            $table->tinyInteger('status')->index()->default(1);
+            $table->tinyInteger('status')->index()->default(0);
             $table->timestamps();
         });
     }

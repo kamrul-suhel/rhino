@@ -22,9 +22,9 @@
                     </v-flex>
 
                     <v-flex xs12 class="rhino-booking">
-                        <div class="disabled-state" v-if="isDisable">
-                            <div class="disabled-state-content">{{trans.alreadyConfirm}}</div>
-                        </div>
+<!--                        <div class="disabled-state" v-if="isDisable">-->
+<!--                            <div class="disabled-state-content" :style="{color: color}">{{trans.alreadyConfirm}}</div>-->
+<!--                        </div>-->
 
                         <v-tabs-items
                             v-model="step"
@@ -107,7 +107,8 @@
                 trans: 'getFields',
                 step: 'getBookingStep',
                 isDisable: 'getDisableEditing',
-                selectedEvent: 'getSelectedEvent'
+                selectedEvent: 'getSelectedEvent',
+                color: 'getFrontendColor',
             })
         },
 

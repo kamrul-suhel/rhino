@@ -24,10 +24,11 @@
                                         </v-flex>
 
                                         <v-flex xs12 mt-1 pa-0>
-                                            <h6 class="xs10 mx-1 title text-xs-center">New CORSA</h6>
+<!--                                            <h6 class="xs10 mx-1 title text-xs-center">New CORSA</h6>-->
                                         </v-flex>
 
-                                        <v-carousel light height="250"
+                                        <v-carousel light
+                                                    height="250"
                                                     v-if="vehicles.length > 0"
                                                     class="mt-2">
                                             <v-carousel-item

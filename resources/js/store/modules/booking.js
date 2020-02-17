@@ -2,6 +2,7 @@ import fn from '@/utils/function'
 
 const defaultState = {
     disableEditing: false,
+    editGuest: false,
     appointmentBooked: false,
     guest: {},
     selectedVehicles: [],
@@ -270,6 +271,10 @@ const mutations = {
                 state.allSlot = [...modifySlots]
             }
         }
+    },
+
+    setEditGuest(state, status){
+        state.editGuest = status
     }
 
 }
@@ -333,6 +338,10 @@ const getters = {
 
     getBookingStep(state) {
         return state.step
+    },
+
+    getEditGuest(state){
+        return state.editGuest
     }
 }
 

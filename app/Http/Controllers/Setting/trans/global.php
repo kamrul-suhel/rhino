@@ -518,6 +518,20 @@ return [
     ],
 
     [
+        'label' => 'Mailing',
+        'identifier' => 'mailing',
+        'translation' => 'Mailing'
+    ],
+
+    [
+        'label' => 'Marketing Preferences',
+        'identifier' => 'marketingPreferences',
+        'translation' => 'Marketing Preferences'
+    ],
+
+
+
+    [
         'label' => 'Phone',
         'identifier' => 'phone',
         'translation' => 'Phone'
