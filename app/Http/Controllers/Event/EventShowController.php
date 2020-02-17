@@ -22,8 +22,7 @@ class EventShowController extends Controller
             ],
                 [
                     'notes' => '',
-                    'name' => '',
-                    'greeting' => ''
+                    'name' => ''
                 ]);
         }
 
@@ -32,7 +31,6 @@ class EventShowController extends Controller
             'events.*',
             'events_translation.name',
             'events_translation.notes',
-            'events_translation.greeting',
             'events_translation.language_id',
             'dealerships.id as dealership_id',
             'dealerships.country_id',

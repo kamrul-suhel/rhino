@@ -19,7 +19,6 @@ class CreateEventTranslation extends Migration
             $table->unsignedBigInteger('language_id')->index();
             $table->string('name')->nullable()->index();
             $table->longText('notes')->nullable();
-            $table->string('greeting')->nullable();
             $table->timestamps();
         });
     }

@@ -79,6 +79,7 @@ class EventController extends Controller
         $request->has('end') ? $event->end = $request->end : null;
         $request->has('appointment_duration') ? $event->appointment_duration = $request->appointment_duration : null;
         $request->has('break_time') ? $event->break_time = $request->break_time : null;
+        $request->has('greeting') ? $event->greeting = $request->greeting : null;
         $request->has('status') ? $event->status = $request->status : null;
 
         $event->save();
@@ -98,7 +99,6 @@ class EventController extends Controller
 
         $request->has('name') ? $eventTranslation->name = $request->name : null;
         $request->has('notes') ? $eventTranslation->notes = $request->notes : null;
-        $request->has('greeting') ? $eventTranslation->greeting = $request->greeting : null;
 
         $eventTranslation->save();
 

@@ -18,7 +18,7 @@ class TranslationController extends Controller
         $translations = Setting::select(
             'settings.*',
             'settings_translation.id as setting_translation_id',
-            'settings_translation.label',
+            'settings.label',
             'settings_translation.translation'
         )->leftJoin('settings_translation', function ($settingTranslation) {
             $settingTranslation->on('settings_translation.setting_id', '=', 'settings.id')
@@ -28,7 +28,7 @@ class TranslationController extends Controller
         if($request->has('paginate') && !empty($request->paginate)){
             // Search by name
             if($request->has('search') && !empty($request->search)){
-                $translations = $translations->where('settings_translation.label', 'LIKE','%'.$request->search.'%');
+                $translations = $translations->where('settings.label', 'LIKE','%'.$request->search.'%');
             }
         }
 

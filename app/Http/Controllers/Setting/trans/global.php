@@ -1273,6 +1273,17 @@ return [
         'label' => 'You already booked, you can not change',
         'identifier' => 'alreadyConfirm',
         'translation' => 'You already booked, you can not change'
+    ],
+
+    [
+        'label' => 'Hello',
+        'identifier' => 'hello',
+        'translation' => 'Hello'
+    ],
+    [
+        'label' => 'Hi',
+        'identifier' => 'hi',
+        'translation' => 'Hi'
     ]
 
 ];

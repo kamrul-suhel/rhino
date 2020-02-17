@@ -281,7 +281,7 @@
                 let bookingForm = new FormData()
 
                 // Check is existing appointment
-                if (this.guest.appointment[0].id) {
+                if (this.guest.appointment.length > 0 && this.guest.appointment[0].id) {
                     bookingForm.append('appointment_id', this.guest.appointment[0].id)
                 }
 

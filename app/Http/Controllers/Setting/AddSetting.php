@@ -58,7 +58,6 @@ class AddSetting
                 $settingTranslation = new SettingTranslation();
                 $settingTranslation->setting_id = $setting->id;
                 $settingTranslation->language_id = $languageId;
-                $settingTranslation->label = $item['label'];
                 $settingTranslation->translation = $item['translation'];
 
                 $settingTranslation->save();

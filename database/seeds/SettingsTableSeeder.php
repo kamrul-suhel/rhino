@@ -32,13 +32,13 @@ class SettingsTableSeeder extends Seeder
 
         foreach($settingArray as $item){
             $setting = Setting::create([
-                'identifier' => $item['identifier']
+                'identifier' => $item['identifier'],
+                'label' => $item['label']
             ]);
 
             $settingTranslation = SettingTranslation::create([
                 'setting_id' => $setting->id,
                 'language_id' => $languageId,
-                'label' => $item['label'],
                 'translation' => $item['translation']
             ]);
         }
