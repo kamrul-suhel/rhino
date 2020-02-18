@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Dealership;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dealership\DealershipController;
+use App\Http\Controllers\Dealership\DealershipShowController;
 use App\Http\Controllers\Event\EventBrandController;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -80,7 +81,7 @@ class LoginController extends Controller
                 !empty($user->dealership_id)
             )
             {
-                $dealershipController = new DealershipController($request);
+                $dealershipController = new DealershipShowController($request);
                 $dealership = $dealershipController->show($request, $user->dealership_id, true);
             }
 

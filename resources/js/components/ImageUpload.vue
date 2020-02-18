@@ -73,7 +73,7 @@
         },
 
         created() {
-            console.log("identifier is:", this.identifier)
+
         },
 
         methods: {

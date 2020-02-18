@@ -135,7 +135,7 @@
             },
 
             updateComponent() {
-                this.initialize(paginateOption)
+                this.initialize()
             },
 
             trans(){

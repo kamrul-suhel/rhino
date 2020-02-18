@@ -201,19 +201,12 @@
                                             key="address"
                                         >
                                             <v-layout row wrap pt-3>
-
-
-
                                             </v-layout>
 
                                             <v-layout row wrap pt-3>
-
                                             </v-layout>
 
                                             <v-layout row wrap>
-
-
-
                                             </v-layout>
                                         </v-tab-item>
 
@@ -305,7 +298,6 @@
             },
 
             updateTimes(times) {
-                console.log('time is: ', times);
             },
 
             onCreateDealership(){

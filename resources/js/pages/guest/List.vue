@@ -172,8 +172,10 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.guests}` )
-            this.$store.commit('setNavTitle', `${this.trans.guests}`)
+            if(!this.subComponent){
+                this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.guests}` )
+                this.$store.commit('setNavTitle', `${this.trans.guests}`)
+            }
         },
 
         mounted() {

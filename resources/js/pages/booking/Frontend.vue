@@ -22,9 +22,9 @@
                     </v-flex>
 
                     <v-flex xs12 class="rhino-booking">
-<!--                        <div class="disabled-state" v-if="isDisable">-->
-<!--                            <div class="disabled-state-content" :style="{color: color}">{{trans.alreadyConfirm}}</div>-->
-<!--                        </div>-->
+                        <!--                        <div class="disabled-state" v-if="isDisable">-->
+                        <!--                            <div class="disabled-state-content" :style="{color: color}">{{trans.alreadyConfirm}}</div>-->
+                        <!--                        </div>-->
 
                         <v-tabs-items
                             v-model="step"
@@ -129,14 +129,14 @@
              * Get event banner image
              * @returns {string|*}
              */
-            getEventBanner(){
-                const defaultBanner = 'https://cdn2.buyacar.co.uk/sites/buyacar/files/styles/w860/public/alfa-romeo-giulia67-1_0.jpg?itok=cM6fGydG'
-                if(
-                    this.selectedEvent.banner &&
-                    this.selectedEvent.banner !== 'null' &&
-                    this.selectedEvent.banner !== 'undefined'
-                ){
-                    return this.selectedEvent.banner
+            getEventBanner() {
+                const defaultBanner = this.themeOption.eventDefaultImage
+                if (
+                    this.selectedEvent.banner_image &&
+                    this.selectedEvent.banner_image !== 'null' &&
+                    this.selectedEvent.banner_image !== 'undefined'
+                ) {
+                    return this.selectedEvent.banner_image
                 }
 
                 return defaultBanner

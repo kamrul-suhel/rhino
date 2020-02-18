@@ -5,7 +5,8 @@
                 <language-picker
                     :solo="false"
                     :flat="false"
-                    :languageId="event.language_id">
+                    :chip="false"
+                    :languageId="selectedEvent.language_id">
                 </language-picker>
             </v-flex>
         </v-layout>
@@ -197,6 +198,14 @@
                                             :slider-color="themeOption.tabSliderColor"
                                         >
                                             <v-tab
+                                                key="eventImage"
+                                                ripple
+                                            >
+                                                {{ `${trans.event} ${trans.banner}`}}
+
+                                            </v-tab>
+
+                                            <v-tab
                                                 key="eventGuest"
                                                 ripple
                                             >
@@ -209,6 +218,27 @@
                                             >
                                                 {{ `${trans.brands}` }}
                                             </v-tab>
+
+                                            <v-tab-item
+                                                key="eventImage"
+                                            >
+                                                <v-layout row wrap pt-3>
+                                                    <v-flex xs12 sm4>
+                                                        <v-card class="pa-2 my-3">
+                                                            <v-img
+                                                                cover
+                                                                :src="bannerImage|image(themeOption.brandDefaultImage)"
+                                                                aspect-ratio="2.75"
+                                                            ></v-img>
+                                                        </v-card>
+
+                                                        <ImageUpload :preview="false"
+                                                                     model="event"
+                                                        ></ImageUpload>
+                                                    </v-flex>
+
+                                                </v-layout>
+                                            </v-tab-item>
 
                                             <v-tab-item
                                                 key="eventBrand"
@@ -240,13 +270,6 @@
                                             dark
                                             :slider-color="themeOption.tabSliderColor"
                                         >
-                                            <!--                                            <v-tab-->
-                                            <!--                                                key="appointments"-->
-                                            <!--                                                ripple-->
-                                            <!--                                            >-->
-                                            <!--                                                {{ trans.appointments }}-->
-                                            <!--                                            </v-tab>-->
-
                                             <v-tab
                                                 key="saleExecutives"
                                                 ripple
@@ -260,12 +283,6 @@
                                             >
                                                 {{ trans.vehicles }}
                                             </v-tab>
-
-                                            <!--                                            <v-tab-item-->
-                                            <!--                                                key="appointments"-->
-                                            <!--                                            >-->
-                                            <!--                                                <Appointment></Appointment>-->
-                                            <!--                                            </v-tab-item>-->
 
                                             <v-tab-item
                                                 key="saleExecutives"
@@ -342,7 +359,8 @@
                 times: {},
                 active: null,
                 appointmentDuration: [],
-                breakTime: []
+                breakTime: [],
+                bannerImage: null
             }
         },
 
@@ -366,7 +384,8 @@
                 dealerships: 'getDealerships',
                 selectedEvent: 'getSelectedEvent',
                 selectedLanguage: 'getSubSelectedLanguage',
-                updateComponent: 'getUpdateComponent'
+                updateComponent: 'getUpdateComponent',
+                uploadedEventImage: 'getUploadedImage'
             })
         }),
 
@@ -393,6 +412,14 @@
                     languageId: this.selectedLanguage.id,
                     edit: true
                 })
+            },
+
+            selectedEvent(){
+                this.bannerImage = this.selectedEvent.banner_image
+            },
+
+            uploadedEventImage(){
+                this.bannerImage = this.uploadedEventImage
             }
         },
 
@@ -442,7 +469,11 @@
                                 eventForm.append('status', 0)
                             }
                         } else {
-                            eventForm.append(key, value)
+                            if(key === 'banner_image'){
+                                eventForm.append('banner_image', this.bannerImage)
+                            }else{
+                                eventForm.append(key, value)
+                            }
                         }
                     })
 

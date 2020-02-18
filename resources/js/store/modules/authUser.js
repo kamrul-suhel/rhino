@@ -43,6 +43,7 @@ const defaultState = {
 
         // Default image
         brandDefaultImage : '/images/brandPlaceholder.jpg',
+        eventDefaultImage : '/images/event_default_image.jpg',
 
         // Frontend
         drawerWidthF: '280',
@@ -59,7 +60,6 @@ const defaultState = {
 
         // Time picker option
         timePickerHeaderColor:'#e20000'
-
     },
     initialize: false
 }
