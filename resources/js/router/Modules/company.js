@@ -1,14 +1,15 @@
-import * as Company from "../../pages/company";
-
+function lazyLoad(view){
+    return () => import(`../../pages/company/${view}.vue`)
+}
 const CompanyRoutes = {
     path: '/admin/companies',
     name: 'companies',
-    component: Company.Root,
+    component: lazyLoad('Root'),
     children: [
         {
             path: 'list',
             name: 'listCompanies',
-            component: Company.List,
+            component: lazyLoad('List')
         }
     ]
 }

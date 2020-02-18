@@ -1,14 +1,16 @@
-import * as Language from "../../pages/test";
+function lazyLoad(view){
+    return () => import(`../../pages/test/${view}.vue`)
+}
 
 const testRoute ={
     path: '/test',
     name: 'test',
-    component: Language.Root,
+    component: lazyLoad('Root'),
     children:[
         {
             path:'datetime',
             name: 'testDateTime',
-            component: Language.Language,
+            component: lazyLoad('Language'),
         }
     ]
 }

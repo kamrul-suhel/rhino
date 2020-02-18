@@ -1,26 +1,28 @@
-import * as Guest from "../../pages/guest";
+function lazyLoad(view){
+    return () => import(`../../pages/guest/${view}.vue`)
+}
 
 const guestsRoute ={
     path: '/admin/guests',
     name: 'guests',
-    component: Guest.Root,
+    component: lazyLoad('Root'),
     children:[
         {
             path:'list',
             name: 'listGuests',
-            component: Guest.List,
+            component: lazyLoad('List'),
         },
 
         {
             path:'create',
             name: 'createGuest',
-            component: Guest.Create,
+            component: lazyLoad('Create'),
         },
 
         {
             path:':id/edit',
             name: 'editGuest',
-            component: Guest.Edit,
+            component: lazyLoad('Edit'),
         }
     ]
 }

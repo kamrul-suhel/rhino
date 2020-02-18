@@ -6,23 +6,25 @@
         :color="themeOption.inputColor"
         v-model="selectedLanguageId"
         return-object
-        :class="isFrontend ? 'frontend-language' : ''"
+        :class="[isFrontend ? 'frontend-language' : '', model]"
         :append-icon="isFrontend ? 'expand_more' : 'arrow_drop_down'"
         :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
         @change="onSubLanguageChange"
         :label="trans.language"
-        solo
-        flat>
+        :solo="solo"
+        :flat="flat">
         <template v-slot:selection="data">
             <v-chip
                 :selected="data.selected"
                 close
+                v-if="chip"
             >
                 <v-avatar>
                     <flag :iso="data.item.code2"></flag>
                 </v-avatar>
                 {{ data.item.code2 }}
             </v-chip>
+            <span v-else>{{ `${data.item.name} (${data.item.code2})` }}</span>
         </template>
 
         <template v-slot:item="data">
@@ -55,6 +57,28 @@
                 required: false,
                 type: Boolean,
                 default: false
+            },
+
+            model:{
+                type: String,
+                required: false
+            },
+
+            solo: {
+                type: Boolean,
+                required:false,
+                default: true
+            },
+
+            flat: {
+                type: Boolean,
+                required: false,
+                default: true
+            },
+            chip:{
+                type:Boolean,
+                required: false,
+                default: true
             }
         },
 

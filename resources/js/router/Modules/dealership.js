@@ -1,26 +1,28 @@
-import * as Dealership from "../../pages/dealership";
+function lazyLoad(view){
+    return () => import(`../../pages/dealership/${view}.vue`)
+}
 
 const DealershipRoutes =  {
     path: '/admin/dealerships',
     name: 'dealerships',
-    component: Dealership.Root,
+    component: lazyLoad('Root'),
     children: [
         {
             path: 'list',
             name: 'listDealerships',
-            component: Dealership.List
+            component: lazyLoad('List')
         },
 
         {
             path: 'create',
             name: 'addDealerships',
-            component: Dealership.Create
+            component: lazyLoad('Create')
         },
 
         {
             path: ':id/edit',
             name: 'editDealerships',
-            component: Dealership.Edit
+            component: lazyLoad('Edit')
         },
 
         // Edit event for dealership
@@ -28,14 +30,14 @@ const DealershipRoutes =  {
             path: ':dealershipId/events/:eventId/edit',
             name: 'editDealershipsEvent',
             props: true,
-            component: Dealership.Event
+            component: lazyLoad('Event')
         },
 
         // Add staff member to dealership
         {
             path: ':dealershipId/user/create',
             name: 'createDealershipUser',
-            component: Dealership.AddUser
+            component: lazyLoad('AddUser')
         }
 
     ]

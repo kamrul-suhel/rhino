@@ -1,26 +1,27 @@
-import * as Vehicles from "../../pages/vehicles";
-
+function lazyLoad(view){
+    return () => import(`../../pages/vehicles/${view}.vue`)
+}
 const vehiclesRoute ={
     path: '/admin/vehicles',
     name: 'vehicles',
-    component: Vehicles.Root,
+    component: lazyLoad('Root'),
     children:[
         {
             path:'list',
             name: 'listVehicles',
-            component: Vehicles.List,
+            component: lazyLoad('List')
         },
 
         {
             path:'create',
             name: 'addVehicles',
-            component: Vehicles.Create,
+            component: lazyLoad('Create')
         },
 
         {
             path:':id/edit',
             name: 'editVehicles',
-            component: Vehicles.Edit,
+            component: lazyLoad('Edit')
         },
     ]
 }

@@ -1,26 +1,28 @@
-import * as Event from "../../pages/event";
+function lazyLoad(view){
+    return () => import(`../../pages/event/${view}.vue`)
+}
 
 const eventsRoute ={
     path: '/admin/events',
     name: 'events',
-    component: Event.Root,
+    component: lazyLoad('Root'),
     children:[
         {
             path:'list',
             name: 'listEvents',
-            component: Event.List,
+            component: lazyLoad('List'),
         },
 
         {
             path:'create',
             name: 'createEvents',
-            component: Event.Create,
+            component: lazyLoad('Create'),
         },
 
         {
             path:':id/edit',
             name: 'editEvents',
-            component: Event.Edit
+            component: lazyLoad('Edit')
         }
     ]
 }

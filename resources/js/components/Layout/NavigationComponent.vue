@@ -28,14 +28,28 @@
                     <v-autocomplete
                         :placeholder="trans.select_a_language"
                         :color="themeOption.primaryColor"
-                        prepend-icon="search"
+                        prepend-icon="language"
                         :items="languages"
-                        item-text="name"
+                        item-text="code2"
                         @change="onSelectLanguage"
                         item-value="id"
                         v-model="languageId"
                         return-object
-                    ></v-autocomplete>
+                    >
+                        <template v-slot:selection="data">
+                            {{ `${data.item.code2}` }}
+                        </template>
+
+                        <template v-slot:item="data">
+                            <v-list-tile-avatar>
+                                <flag :iso="data.item.code2"></flag>
+                            </v-list-tile-avatar>
+
+                            <v-list-tile-content>
+                                <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                            </v-list-tile-content>
+                        </template>
+                    </v-autocomplete>
                 </v-layout>
             </v-flex>
         </v-layout>

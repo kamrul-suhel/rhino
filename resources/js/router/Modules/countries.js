@@ -1,26 +1,27 @@
-import * as Countries from "../../pages/country";
-
+function lazyLoad(view){
+    return () => import(`../../pages/country/${view}.vue`)
+}
 const CountriesRoutes = {
     path: '/admin/countries',
     name: 'countries',
-    component: Countries.Root,
+    component: lazyLoad('Root'),
     children: [
         {
             path: 'list',
             name: 'listCountries',
-            component: Countries.List,
+            component: lazyLoad('List')
         },
 
         {
             path: 'create',
             name: 'createCountries',
-            component: Countries.Create,
+            component: lazyLoad('Create')
         },
 
         {
             path: ':id/edit',
             name: 'editCountries',
-            component: Countries.Edit,
+            component: lazyLoad('Edit')
         }
     ]
 }

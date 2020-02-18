@@ -1,9 +1,10 @@
-import * as Dashboard from "@/pages/dashboard";
-
+function lazyLoad(view){
+    return () => import(`../../pages/dashboard/${view}.vue`)
+}
 const dashboard ={
     path: '/admin/dashboard',
     name: 'dashboard',
-    component: Dashboard.Root
+    component: lazyLoad('Root')
 }
 
 export default dashboard
