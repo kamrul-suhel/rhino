@@ -117,7 +117,8 @@
                 loading: 'getDealershipLoading',
                 rowsPerPage: 'getDealershipListRowsPerPage',
                 selectedDealership: 'getSelectedDealership',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                updateComponent: 'getUpdateComponent'
             })
         }),
 
@@ -143,6 +144,10 @@
                 }
 
                 this.initialize(paginateOption)
+            },
+
+            updateComponent() {
+                this.initialize()
             }
         },
 

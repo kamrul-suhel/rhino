@@ -14,14 +14,14 @@
                 </div>
             </div>
             <div class="r-tab-content"  :class="[showForm ? 'open' : '']">
-                <v-layout row wrap justify-space-between pt-3 pl-3>
+                <v-layout row wrap pt-3 pl-3>
                     <v-flex xs12>
                         <Language v-if="editGroup"
                             :languageId="selectedGroup.language_id">
                         </Language>
                     </v-flex>
 
-                    <v-flex xs12 sm4>
+                     <v-flex xs12 sm4 mr-3>
                         <v-text-field
                             :label="trans.name"
                             v-model="selectedGroup.name"
@@ -33,13 +33,17 @@
                     </v-flex>
 
                     <v-flex xs12 sm4>
-                        <v-switch
-                            :label="trans.status"
-                            :color="themeOption.switchOnColor"
-                            v-model="selectedGroup.status"
-                            :true-value="1"
-                            :false-value="0">
-                        </v-switch>
+                        <span>{{trans.logo}}</span>
+
+                        <v-img
+                            :src="groupImage"
+                            width="200"
+                        ></v-img>
+
+                        <FileUpload :preview="false"
+                                    :multiple="false"
+                                    model="'groups'">
+                        </FileUpload>
                     </v-flex>
                 </v-layout>
                 <v-layout row class="justify-center">
@@ -73,6 +77,13 @@
                     class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
+                        <td width="10%"> 
+                            <v-img
+                                contain
+                                aspect-ratio="1"
+                                :src="props.item.logo">
+                            </v-img> 
+                        </td>
                         <td>{{ props.item.name }}</td>
                         <td class="text-xs-right">
                             <v-icon
@@ -241,7 +252,7 @@
                 }
                 // Check if group has logo, then set image
                 this.$store.commit('setSelectedGroup', group)
-                this.editGroup = true
+                this.showForm = true
             },
 
             onDeleteGroup(Group) {
@@ -268,7 +279,7 @@
                             })
 
                             this.initialize()
-                            // reset selectedDealerships in store
+                            
                             this.onResetGroup()
 
                             this.deleteDialog = false
@@ -317,8 +328,10 @@
             },
 
             onCancelGroup() {
-
+                this.editGroup = false
+                this.$store.commit('setSelectedGroup', {})
             },
+
 
             toggleForm() {
                 this.showForm = !this.showForm
@@ -326,6 +339,7 @@
                 if (this.showForm) {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.group}` )
                     this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.group}` )
+                    this.onResetGroup()
                 } else {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.groups}` )
                     this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.groups}` )

@@ -21,6 +21,13 @@ const mutations = {
     setGroupListHeader(state, trans){
         const header = [
             {
+                text: trans.logo,
+                align: 'left',
+                sortable: false,
+                value: 'logo'
+            },
+            
+            {
                 text: trans.name,
                 align: 'left',
                 sortable: false,

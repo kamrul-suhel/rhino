@@ -14,7 +14,7 @@
             </div>
 
             <div class="r-tab-content" :class="[showForm ? 'open' : '']" >
-                <v-layout row>
+                <v-layout>
                     <v-flex xs12 sm4 mr-3>
                         <v-autocomplete
                             v-if="this.editCompany"
@@ -26,7 +26,10 @@
                             :color="themeOption.inputColor"
                             :items="languages">
                         </v-autocomplete>
-
+                    </v-flex>
+                </v-layout>
+                <v-layout row>
+                    <v-flex xs12 sm4 mr-3>
                         <v-text-field
                             :label="trans.name"
                             v-model="selectedCompany.name"
@@ -40,6 +43,7 @@
 
                         <v-img
                             :src="companyImage"
+                            width="200"
                         ></v-img>
 
                         <FileUpload :preview="false"
@@ -78,8 +82,14 @@
                     class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
+                        <td width="10%"> 
+                            <v-img
+                                contain
+                                aspect-ratio="1"
+                                :src="props.item.logo">
+                            </v-img> 
+                        </td>
                         <td>{{ props.item.name }}</td>
-                        <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small
@@ -167,7 +177,7 @@
                 deleteDialog: false,
                 searchCompany:'',
                 editCompany: false,
-                showForm: false
+                showForm: false,
             }
         },
 
@@ -199,6 +209,9 @@
         },
 
         created() {
+            
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.companies}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.companies}` )
         },
 
         mounted() {
@@ -225,6 +238,7 @@
                     this.$store.commit('setImage', company.logo)
                 }
                 this.$store.commit('setSelectedCompany', company)
+                this.showForm = true
             },
 
             onDeleteCompany(company){
@@ -247,7 +261,6 @@
                             })
 
                             this.initialize()
-                            // reset selectedDealerships in store
                             this.onResetCompany()
                             this.deleteDialog = false
                         }
@@ -260,6 +273,7 @@
                 let companyForm = new FormData()
                 companyForm.append('name', this.selectedCompany.name)
                 companyForm.append('logo', this.companyImage)
+                companyForm.append('status', 1)
 
                 if(this.editCompany){
                     const ID = this.selectedCompany.id

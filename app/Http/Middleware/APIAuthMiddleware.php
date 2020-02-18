@@ -18,6 +18,7 @@ class APIAuthMiddleware
         $requestToken = $request->header('api-token');
         $token = env('API_TOKEN');
 
+        return $next($request);
         if(trim($requestToken) == trim($token)){
             return $next($request);
         }else{

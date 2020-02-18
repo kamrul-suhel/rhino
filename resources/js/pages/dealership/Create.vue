@@ -300,20 +300,13 @@
             },
 
             onCreateDealership(){
+
                 if(this.$refs.dealershipForm.validate()){
                     let dealershipForm = new FormData()
 
                     // Set form object for dealership
                     _.forOwn(this.dealership, (value, key)=>{
-                        if(key === 'status'){
-                            if(value === 'true'){
-                                dealershipForm.append('status', 1)
-                            }else{
-                                dealershipForm.append('status', 0)
-                            }
-                        }else{
-                            dealershipForm.append(key, value)
-                        }
+                        dealershipForm.append(key, value)
                     })
 
                     // Set form object for times
@@ -330,6 +323,8 @@
                                 message: `${this.dealership.name}  ${this.trans.successfully_created}`
                             })
                         }
+
+                        this.$store.commit('setUpdateComponent')
                     })
                 }
             },
