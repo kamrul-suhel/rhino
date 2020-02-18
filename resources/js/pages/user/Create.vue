@@ -240,7 +240,7 @@ import { log } from 'util'
                 brands: 'getBrandsForDropDown',
                 countries: 'getCountries',
                 regions: 'getRegions',
-                companies: 'getCompanies'
+                companies: 'getCompanies',
             }),
 
             passwordRule() {
@@ -255,7 +255,11 @@ import { log } from 'util'
             }
         }),
 
-        watch: {},
+        watch: {
+            updateComponent() {
+                this.initialize()
+            }
+        },
 
         created() {
             this.initialize()
@@ -339,10 +343,9 @@ import { log } from 'util'
                             message: `${this.trans.user}  ${this.trans.successfully_created}`
                         })
 
-
                         this.showForm = false
-                        this.$refs.form.reset()
-
+                        this.$refs.userForm.reset()
+                        this.$store.commit('setUpdateComponent')
                     })
                 }
             },

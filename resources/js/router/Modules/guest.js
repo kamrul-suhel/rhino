@@ -7,7 +7,7 @@ const guestsRoute ={
     children:[
         {
             path:'list',
-            name: 'listGuest',
+            name: 'listGuests',
             component: Guest.List,
         },
 

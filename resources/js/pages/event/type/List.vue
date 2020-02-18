@@ -57,7 +57,7 @@
                         <v-flex xs12 sm3 mr-3>
                             <v-text-field
                                 :label="trans.displayName"
-                                v-model="selectedType.displayName"
+                                v-model="selectedType.display_name"
                                 :color="themeOption.inputColor"
                                 box solo flat>
                             </v-text-field>
@@ -112,7 +112,7 @@
                                 :src="props.item.image">
                             </v-img> 
                         </td>
-                        <td>{{ props.item.displayName }}</td>
+                        <td>{{ props.item.display_name }}</td>
                         <td>{{ props.item.name }}</td>
                         <td>{{ props.item.description }}</td>
                         <td class="text-xs-right">
@@ -319,6 +319,8 @@
                 if (this.$refs.eventTypeForm.validate()) {
                     let typeForm = new FormData()
                     typeForm.append('name', this.selectedType.name)
+                    typeForm.append('display_name', this.selectedType.display_name)
+                    typeForm.append('description', this.selectedType.description)
                     typeForm.append('logo', this.typeImage)
 
                     let URL = `/api/events/types`
