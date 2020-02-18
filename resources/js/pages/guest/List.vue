@@ -10,6 +10,7 @@
 
             <v-btn
                 :color="themeOption.buttonSuccess"
+                v-if="!subComponent"
                 small
                 @click="$router.push({name: 'createGuest'})"
             >

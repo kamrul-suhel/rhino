@@ -128,7 +128,7 @@
         <v-btn :color="themeOption.buttonPrimaryColor"
                small
                @click="onAddGuests()"
-        >{{ `${trans.add} ${trans.guests}` }}
+        >{{ `${trans.upload} ${trans.guests}` }}
         </v-btn>
     </div>
 </template>
