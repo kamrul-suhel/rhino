@@ -22,6 +22,8 @@ class TypeController extends Controller
         $types = EventType::select(
             'types.*',
             'types_translation.name',
+            'types_translation.display_name',
+            'types_translation.description',
             'types_translation.language_id'
         )
             ->leftJoin('types_translation', 'types_translation.type_id', '=', 'types.id')
@@ -71,6 +73,8 @@ class TypeController extends Controller
         // Make translation
         $typeTranslation = new EventTypeTranslation();
         $request->has('name') ? $typeTranslation->name = $request->name : null;
+        $request->has('display_name') ? $typeTranslation->display_name = $request->display_name : null;
+        $request->has('description') ? $typeTranslation->description = $request->description : null;
         $typeTranslation->language_id = $this->languageId;
         $typeTranslation->type_id = $type->id;
 
@@ -98,6 +102,8 @@ class TypeController extends Controller
         ])->first();
 
         $request->has('name') ? $typeTranslation->name = $request->name : null;
+        $request->has('display_name') ? $typeTranslation->display_name = $request->display_name : null;
+        $request->has('description') ? $typeTranslation->description = $request->description : null;
         $typeTranslation->save();
 
         return response()->json([
@@ -131,6 +137,8 @@ class TypeController extends Controller
         $type = EventType::select(
             'types.*',
             'types_translation.name',
+            'types_translation.display_name',
+            'types_translation.description',
             'types_translation.language_id'
         )
             ->leftJoin('types_translation', 'types_translation.type_id', '=', 'types.id')

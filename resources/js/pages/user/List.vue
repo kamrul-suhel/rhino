@@ -136,7 +136,8 @@
                 totalUsers: 'getTotalUsers',
                 loading: 'getUserLoading',
                 rowsPerPage: 'getUserListRowsPerPage',
-                update: 'getInitialize'
+                update: 'getInitialize',
+                updateComponent: 'getUpdateComponent'
             })
         }),
 
@@ -156,6 +157,10 @@
             },
 
             '$route.params.eventId': function(id){
+                this.initialize()
+            },
+
+            updateComponent() {
                 this.initialize()
             }
         },

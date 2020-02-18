@@ -8,6 +8,14 @@
                 v-model="searchGuests">
             </v-text-field>
 
+            <v-btn
+                :color="themeOption.buttonSuccess"
+                small
+                @click="$router.push({name: 'createGuest'})"
+            >
+                {{ `${trans.add} ${trans.guest}` }}
+            </v-btn>
+
             <UploadGuestCSVComponent v-if="subComponent"></UploadGuestCSVComponent>
         </v-toolbar>
 

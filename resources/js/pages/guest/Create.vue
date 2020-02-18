@@ -28,7 +28,7 @@
                     <v-card>
                         <v-card-text>
                             <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm3 pa-2>
                                     <v-select
                                         :color="themeOption.inputColor"
                                         :items="events"
@@ -38,121 +38,138 @@
                                         :label="`${trans.event}`"
                                         v-model="guest.event_id"
                                         required
+                                        box solo flat
                                     ></v-select>
                                 </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
+                            </v-layout>
+                            <v-layout row wrap py-4>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.firstName"
                                         v-model="guest.first_name"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.surName"
                                         v-model="guest.surname"
+                                        box solo flat
                                         required
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.email"
                                         v-model="guest.email"
+                                        box solo flat
                                         required
                                     ></v-text-field>
                                 </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
+                            </v-layout>
+                            <v-layout row wrap py-4>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="`${trans.address_line} 1`"
                                         v-model="guest.address_line_1"
+                                        box solo flat
                                         required
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
                                         :label="`${trans.address_line} 2`"
                                         v-model="guest.address_line_2"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
                                         :label="`${trans.address_line} 3`"
                                         v-model="guest.address_line_3"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
                                         :label="`${trans.address_line} 4`"
                                         v-model="guest.address_line_4"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
                                         :label="`${trans.address_line} 5`"
                                         v-model="guest.address_line_5"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
                                         :label="`${trans.address_line} 6`"
                                         v-model="guest.address_line_6"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.postcode} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.postcode"
                                         v-model="guest.postcode"
+                                        box solo flat
                                         required
                                     ></v-text-field>
                                 </v-flex>
-
-                                <v-flex xs12 sm6 pa-2>
+                            </v-layout>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
                                         :label="trans.landline"
                                         v-model="guest.landline"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.mobile} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.mobile"
                                         v-model="guest.mobile"
+                                        box solo flat
                                         required
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm6 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
                                         :label="trans.method"
                                         v-model="guest.method"
+                                        box solo flat
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -167,28 +184,33 @@
                                         v-model="guest.status">
                                     </v-switch>
                                 </v-flex>
-                                <v-divider class="mt-2 mb-2"></v-divider>
                             </v-layout>
                         </v-card-text>
 
-                        <v-card-actions class="pa-3">
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                :class="themeOption.buttonSecondaryColor"
-                                small
-                                @click="$router.push({name: 'listGuests'})"
-                            >
-                                {{ `${trans.back}`}}
-                            </v-btn>
+                        <v-layout class="pa-3 text-xs-left">
+                            <v-flex>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    class="rounded-btn"
+                                    dark
+                                    :color="themeOption.buttonSecondaryColor"
+                                    small
+                                    @click="$router.push({name: 'listGuests'})"
+                                >
+                                    {{ `${trans.back}`}}
+                                </v-btn>
 
-                            <v-btn
-                                :class="themeOption.buttonSuccess"
-                                small
-                                @click="onCreateGuest()"
-                            >
-                                {{ `${trans.create} ${trans.guest}` }}
-                            </v-btn>
-                        </v-card-actions>
+                                <v-btn
+                                    class="rounded-btn"
+                                    dark
+                                    :color="themeOption.buttonDangerColor"
+                                    small
+                                    @click="onCreateGuest()"
+                                >
+                                    {{ `${trans.create} ${trans.guest}` }}
+                                </v-btn>
+                            </v-flex>
+                        </v-layout>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -246,7 +268,7 @@
                                 message: `${this.guest.first_name}  ${this.trans.successfully_created}`
                             })
 
-                            this.$router.push({name: 'listGuest'})
+                            this.$router.push({name: 'listGuests'})
                         }
                     })
                 }
