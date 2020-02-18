@@ -322,16 +322,7 @@
                     }
 
                     _.forOwn(this.user, (value, key) => {
-
-                        if (key === 'status') {
-                            if (value === 'true') {
-                                userForm.append('status', 1)
-                            } else {
-                                userForm.append('status', 0)
-                            }
-                        } else {
-                            userForm.append(key, value)
-                        }
+                        userForm.append(key, value)
                     })
 
                     // add user profile image
