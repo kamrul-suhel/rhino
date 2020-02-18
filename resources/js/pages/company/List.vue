@@ -49,7 +49,7 @@
                     </v-flex>
                 </v-layout>
                 <v-layout row>
-                    <v-flex xs12 class="pa-2">                        
+                    <v-flex xs12 class="pa-2">
                         <v-btn class="rounded-btn"
                             small
                             dark
@@ -71,7 +71,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.group} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.group} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalCompanies"
                     :loading="loading"

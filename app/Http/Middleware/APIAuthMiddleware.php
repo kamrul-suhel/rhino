@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Response;
 
 class APIAuthMiddleware
 {
@@ -15,13 +16,17 @@ class APIAuthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $requestToken = $request->header('api-token');
-        $token = env('API_TOKEN');
+        $requestToken = $request->header('API-TOKEN');
 
-        if(trim($requestToken) == trim($token)){
+        $verify = password_verify(env('SECURITY_CODE'), $requestToken);
+
+        if($verify){
             return $next($request);
         }else{
-            return response(['Token mismatch', 403]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Token mismatch'
+            ], Response::HTTP_FORBIDDEN);
         }
 
     }

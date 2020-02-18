@@ -12,6 +12,7 @@ Auth::routes();
 
 Route::get('auth/me', 'Auth\LoginController@getLoginUser');
 Route::get('refresh_csrf_token', 'Auth\RefreshCSRFToken@refreshCSRFToken');
+Route::get('generate_security_token', 'Auth\GenerateSecurityTokenController@generateToken');
 
 /*
 |--------------------------------------------------------------------------

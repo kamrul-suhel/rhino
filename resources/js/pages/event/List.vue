@@ -1,9 +1,6 @@
 <template>
     <div>
-
-
         <EventForm></EventForm>
-
         <v-layout row wrap>
             <v-flex xs12 pt-3>
                 <v-data-table
@@ -13,7 +10,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.events} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.events} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalEvents"
                     :loading="loading"
@@ -165,7 +162,7 @@
                 this.color = value.hex
             },
 
-            
+
             updateComponent() {
                 this.initialize()
             }
