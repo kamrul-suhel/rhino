@@ -65,7 +65,7 @@ Route::prefix('dealerships')->group(function () {
     Route::get('', 'Dealership\DealershipListController@list');
     Route::get('dropdown', 'Dealership\DealershipDropDownController@index');
     Route::post('', 'Dealership\DealershipController@store');
-    Route::get('{id}/show', 'Dealership\DealershipController@show');
+    Route::get('{id}/show', 'Dealership\DealershipShowController@show');
     Route::put('{id}/update', 'Dealership\DealershipController@update');
     Route::delete('{id}/delete', 'Dealership\DealershipController@destroy');
 

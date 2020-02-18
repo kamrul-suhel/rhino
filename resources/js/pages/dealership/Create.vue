@@ -26,7 +26,7 @@
                                             :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
                                             :color="themeOption.inputColor"
                                             :label="`${trans.name}`"
-                                            v-model="dealership.name" 
+                                            v-model="dealership.name"
                                             box solo flat
                                         ></v-text-field>
                                     </v-flex>
@@ -129,6 +129,7 @@
                                         >
                                         </v-select>
                                     </v-flex>
+
                                     <v-flex xs12 sm3 pa-2>
                                         <v-select
                                             :items="groups"
@@ -140,10 +141,18 @@
                                             box solo flat>
                                         </v-select>
                                     </v-flex>
+
+                                    <v-flex xs12 sm3 pa-2>
+                                        <v-text-field
+                                            :color="themeOption.inputColor"
+                                            :label="`${trans.suffix}`"
+                                            v-model="dealership.suffix"
+                                            box solo flat>
+                                        </v-text-field>
+                                    </v-flex>
                                 </v-layout>
 
                                 <v-layout row wrap>
-
                                     <v-flex xs12 sm6 pa-2>
                                         <v-switch
                                             :label="trans.status"
@@ -192,19 +201,19 @@
                                             key="address"
                                         >
                                             <v-layout row wrap pt-3>
-                                                
 
-                                                
+
+
                                             </v-layout>
 
                                             <v-layout row wrap pt-3>
-                                                
+
                                             </v-layout>
 
                                             <v-layout row wrap>
-                                                
 
-                                                
+
+
                                             </v-layout>
                                         </v-tab-item>
 

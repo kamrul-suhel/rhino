@@ -10,15 +10,14 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "dependencies": {
-        "amcharts3": "^3.21.13",
         "babel-plugin-root-import": "^6.4.1",
         "babel-polyfill": "^6.26.0",
         "chart.js": "^2.9.3",
+        "flag-icon-css": "^3.4.6",
         "json2csv": "^4.5.4",
         "moment": "^2.24.0",
         "vue-chartjs": "^3.5.0",
         "vue-color": "^2.7.0",
-        "vue-flag-icon-2": "^1.0.8",
         "vue-image-upload-resize": "^2.1.1",
         "yarn-upgrade-all": "^0.3.0"
     },

@@ -55,7 +55,10 @@ const defaultState = {
         // Dealership admin
         dealershipAdminNavColor: '#000',
 
-        dialogBoxColor: '#e20000'
+        dialogBoxColor: '#e20000',
+
+        // Time picker option
+        timePickerHeaderColor:'#e20000'
 
     },
     initialize: false

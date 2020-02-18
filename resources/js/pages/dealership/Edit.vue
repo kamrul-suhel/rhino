@@ -2,7 +2,13 @@
     <v-container pa-0>
         <v-layout row wrap justify-end>
             <v-flex xs12 sm3>
-                <language-picker :languageId="dealership.language_id"></language-picker>
+                <language-picker
+                    :languageId="dealership.language_id"
+                    :solo="false"
+                    :chip="false"
+                    :flat="false"
+                >
+                </language-picker>
              </v-flex>
         </v-layout>
         <v-form
@@ -109,6 +115,15 @@
                                 v-model="dealership.country_id"
                                 box solo flat>
                             </v-select>
+                        </v-flex>
+
+                        <v-flex xs12 sm3 pa-2>
+                            <v-text-field
+                                :color="themeOption.inputColor"
+                                :label="`${trans.suffix}`"
+                                v-model="dealership.suffix"
+                                box solo flat>
+                            </v-text-field>
                         </v-flex>
                     </v-layout>
 

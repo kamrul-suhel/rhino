@@ -27,6 +27,7 @@
 
                 <v-time-picker
                     v-if="mondayStart"
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-model="dealership.monday_start"
                     format="24hr"
                     full-width
@@ -61,6 +62,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="mondayEnd"
                     format="24hr"
                     v-model="dealership.monday_end"
@@ -95,6 +97,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="tuesdayStart"
                     format="24hr"
                     v-model="dealership.tuesday_start"
@@ -131,6 +134,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="tuesdayEnd"
                     format="24hr"
                     v-model="dealership.tuesday_end"
@@ -165,6 +169,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="wednesdayStart"
                     format="24hr"
                     v-model="dealership.wednesday_start"
@@ -201,6 +206,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="wednesdayEnd"
                     format="24hr"
                     v-model="dealership.wednesday_end"
@@ -235,6 +241,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="thursdayStart"
                     format="24hr"
                     v-model="dealership.thursday_start"
@@ -271,6 +278,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="thursdayEnd"
                     format="24hr"
                     v-model="dealership.thursday_end"
@@ -305,6 +313,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="fridayStart"
                     format="24hr"
                     v-model="dealership.friday_start"
@@ -341,6 +350,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="fridayEnd"
                     format="24hr"
                     v-model="dealership.friday_end"
@@ -375,6 +385,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="saturdayStart"
                     format="24hr"
                     v-model="dealership.saturday_start"
@@ -411,6 +422,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="saturdayEnd"
                     format="24hr"
                     v-model="dealership.saturday_end"
@@ -445,6 +457,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="sundayStart"
                     format="24hr"
                     v-model="dealership.sunday_start"
@@ -481,6 +494,7 @@
                     ></v-text-field>
                 </template>
                 <v-time-picker
+                    :header-color="themeOption.timePickerHeaderColor"
                     v-if="sundayEnd"
                     format="24hr"
                     v-model="dealership.sunday_end"
@@ -514,7 +528,6 @@
                 sundayEnd: false,
                 mondayStart: false,
                 mondayEnd: false,
-
             }
         },
 
@@ -621,7 +634,6 @@
                 ]
 
                 this.times = [...times]
-                console.log('time is : ', this.times);
             },
         }
     }

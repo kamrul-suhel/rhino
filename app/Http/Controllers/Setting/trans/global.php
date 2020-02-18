@@ -102,6 +102,12 @@ return [
     ],
 
     [
+        'label' => 'Suffix',
+        'identifier' => 'suffix',
+        'translation' => 'Suffix'
+    ],
+
+    [
         'label' => 'Successfully upload',
         'identifier' => 'successfully_upload',
         'translation' => 'Successfully upload'

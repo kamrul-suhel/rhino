@@ -60,7 +60,7 @@ import router from './router'
 /**
  * Import flag-icon
  */
-import 'flag-icon-css-2/css/flag-icon.css'
+import 'flag-icon-css/css/flag-icon.css'
 
 Vue.use(Vuetify)
 Vue.use(Vuex)
@@ -75,7 +75,7 @@ Vue.config.productionTip = true
 
 
 import App from './components/App'
-import store from './store';
+import store from './store'
 
 
 /* eslint-disable no-new */
