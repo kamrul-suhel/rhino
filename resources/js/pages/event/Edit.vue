@@ -2,7 +2,10 @@
     <v-container pa-0>
         <v-layout row wrap justify-end>
             <v-flex xs12 sm3>
-                <language-picker :languageId="event.language_id"></language-picker>
+                <language-picker :solo="false"
+                                 :flat="false"
+                                 :languageId="event.language_id">
+                </language-picker>
             </v-flex>
         </v-layout>
         <v-form
