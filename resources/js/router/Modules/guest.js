@@ -9,7 +9,7 @@ const guestsRoute ={
     children:[
         {
             path:'list',
-            name: 'listGuests',
+            name: 'listGuest',
             component: lazyLoad('List'),
         },
 
