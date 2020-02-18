@@ -21,11 +21,15 @@ class EventBrandListController extends Controller
             'brands_translation.description'
         )
             ->leftJoin('brand_event', 'brand_event.brand_id', '=', 'brands.id')
-            ->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id')
+            ->leftJoin('brands_translation', function($brandT){
+                $brandT->on('brands_translation.brand_id', '=', 'brands.id')
+                ->where('brands_translation.language_id', $this->languageId);
+            })
             ->leftJoin('companies', 'companies.id', '=', 'brands.company_id')
-            ->leftJoin('companies_translation', 'companies.id', '=', 'companies_translation.company_id')
-            ->where('brands_translation.language_id', $this->languageId)
-            ->where('companies_translation.language_id', $this->languageId)
+            ->leftJoin('companies_translation', function($companyT){
+                $companyT->on('companies.id', '=', 'companies_translation.company_id')
+                ->where('companies_translation.language_id', $this->languageId);
+            })
             ->where('brand_event.event_id', $eventId);
 
         // To get the list view populate
