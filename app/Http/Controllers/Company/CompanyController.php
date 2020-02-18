@@ -21,6 +21,7 @@ class CompanyController extends Controller
             'companies_translation.language_id',
             'companies.id',
             'companies.logo',
+            'companies.status',
             'companies.created_at'
         )->leftJoin('companies_translation', 'companies_translation.company_id', 'companies.id')
             ->where('companies_translation.language_id', $this->languageId);
@@ -77,6 +78,7 @@ class CompanyController extends Controller
     {
         $company = new Company();
         $company->logo = $request->has('logo') ? $request->logo : '';
+        $company->status = $request->has('status') ? $request->status : 0;
         $company->save();
 
         $companyTranslation = new CompanyTranslation();
@@ -111,6 +113,7 @@ class CompanyController extends Controller
             'companies_translation.language_id',
             'companies.id',
             'companies.logo',
+            'companies.status',
             'companies.created_at'
         )->leftJoin('companies_translation', 'companies_translation.company_id', 'companies.id')
             ->where('companies_translation.language_id', $this->languageId)

@@ -37,6 +37,11 @@ const mutations = {
     setCompanyListHeader(state, trans){
         const header = [
             {
+                text: trans.logo,
+                value: 'logo'
+            },
+            
+            {
                 text: trans.name,
                 align: 'left',
                 sortable: false,
@@ -44,13 +49,9 @@ const mutations = {
             },
 
             {
-                text: trans.status,
-                value: 'status'
-            },
-
-            {
                 text: trans.actions,
-                value: 'actions'
+                value: 'actions',
+                align: 'right'
             }
         ]
 

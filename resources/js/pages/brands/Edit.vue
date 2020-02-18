@@ -102,7 +102,8 @@
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
                             <v-btn
-                                :class="themeOption.buttonSecondaryColor"
+                                dark
+                                :color="themeOption.buttonSecondaryColor"
                                 small
                                 @click="$router.push({name: 'listBrands'})"
                             >

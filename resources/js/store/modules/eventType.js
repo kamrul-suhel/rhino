@@ -21,6 +21,20 @@ const mutations = {
     setTypeListHeader(state, trans){
         const header = [
             {
+                text: trans.icon,
+                align: 'left',
+                sortable: false,
+                value: 'icon'
+            },
+
+            {
+                text: trans.displayName,
+                align: 'left',
+                sortable: false,
+                value: 'Display Name'
+            },
+
+            {
                 text: trans.name,
                 align: 'left',
                 sortable: false,
@@ -28,8 +42,10 @@ const mutations = {
             },
 
             {
-                text: trans.status,
-                value: 'status'
+                text: trans.description,
+                align: 'left',
+                sortable: false,
+                value: 'description'
             },
 
             {

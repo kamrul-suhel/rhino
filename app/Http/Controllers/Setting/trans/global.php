@@ -1294,10 +1294,23 @@ return [
         'identifier' => 'hello',
         'translation' => 'Hello'
     ],
+
     [
         'label' => 'Hi',
         'identifier' => 'hi',
         'translation' => 'Hi'
+    ],
+
+    [
+        'label' => 'Display Name',
+        'identifier' => 'displayName',
+        'translation' => 'Display Name'
+    ],
+
+    [
+        'label' => 'Description',
+        'identifier' => 'description',
+        'translation' => 'Description'
     ]
 
 ];

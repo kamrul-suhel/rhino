@@ -17,6 +17,8 @@
                 <v-form ref="eventTypeForm"
                         v-model="valid"
                         lazy-validation>
+
+                    <!-- Language Selector for translations -->
                     <v-layout row wrap justify-end>
                         <v-flex xs12 sm3 v-if="editType">
                             <Language 
@@ -24,8 +26,24 @@
                             </Language>
                         </v-flex>
                     </v-layout>
+
+
                     <v-layout row wrap>
-                        <v-flex xs12 sm4 mr-3>
+                        <v-flex xs12 sm1 ml-3 >
+                            <span>{{trans.icon}}</span>
+
+                            <v-img
+                                :src="typeImage"
+                                width="50px"
+                            ></v-img>
+
+                            <FileUpload :preview="false"
+                                        :multiple="false"
+                                        model="types">
+                            </FileUpload>
+                        </v-flex>
+
+                        <v-flex xs12 sm3 mr-3>
                             <v-text-field
                                 :label="trans.name"
                                 :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
@@ -35,31 +53,26 @@
                                 box solo flat>
                             </v-text-field>
                         </v-flex>
-
-                        <v-flex xs12 sm4 ml-3>
-                            <span>{{trans.icon}}</span>
-
-                            <v-img
-                                :src="typeImage"
-                                width="150"
-                            ></v-img>
-
-                            <FileUpload :preview="false"
-                                        :multiple="false"
-                                        model="types">
-                            </FileUpload>
+                                                
+                        <v-flex xs12 sm3 mr-3>
+                            <v-text-field
+                                :label="trans.displayName"
+                                v-model="selectedType.displayName"
+                                :color="themeOption.inputColor"
+                                box solo flat>
+                            </v-text-field>
                         </v-flex>
 
-                        <v-flex xs12>
-                            <v-switch
-                                :label="trans.status"
-                                :color="themeOption.switchOnColor"
-                                v-model="type.status"
-                                :true-value="1"
-                                :false-value="0">
-                            </v-switch>
+                        <v-flex xs12 sm4 mr-3>
+                            <v-textarea
+                                :label="trans.description"
+                                v-model="selectedType.description"
+                                :color="themeOption.inputColor"
+                                box solo flat>
+                            </v-textarea>
                         </v-flex>
                     </v-layout>
+
                     <v-layout row justify-center class="py-4 text-center">
                         <v-flex xs12 sm-4 class="text-center">
                             <v-btn
@@ -92,8 +105,16 @@
                     class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
+                        <td width="7%">
+                            <v-img
+                                contain
+                                width="50px"
+                                :src="props.item.image">
+                            </v-img> 
+                        </td>
+                        <td>{{ props.item.displayName }}</td>
                         <td>{{ props.item.name }}</td>
-                        <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
+                        <td>{{ props.item.description }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small
@@ -142,7 +163,8 @@
                 <v-card-actions class="pa-3">
                     <v-spacer></v-spacer>
                     <v-btn
-                        color="info"
+                        dark
+                        :color="themeOption.buttonSecondaryColor"
                         small
                         @click="onCancelDeleteDialog()"
                     >
@@ -298,13 +320,6 @@
                     let typeForm = new FormData()
                     typeForm.append('name', this.selectedType.name)
                     typeForm.append('logo', this.typeImage)
-
-                    // Set status value
-                    if (this.selectedType.status === true) {
-                        typeForm.append('status', 1)
-                    } else {
-                        typeForm.append('status', 0)
-                    }
 
                     let URL = `/api/events/types`
 

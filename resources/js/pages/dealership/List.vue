@@ -118,6 +118,7 @@
                 rowsPerPage: 'getDealershipListRowsPerPage',
                 selectedDealership: 'getSelectedDealership',
                 themeOption: 'getThemeOption',
+                updateComponent: 'getUpdateComponent',
                 selectedLanguage: 'getSelectedLanguage'
             })
         }),
@@ -131,6 +132,10 @@
 
             searchDealerships() {
                 this.initialize()
+            },
+
+            updateComponent() {
+                this.initialize(paginateOption)
             },
 
             trans(){
