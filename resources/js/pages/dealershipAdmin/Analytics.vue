@@ -2,7 +2,7 @@
     <v-container fluid px-5>
         <Overview></Overview>
 
-        <v-layout row>
+        <v-layout row v-if="analyticsTotalGuest > 0">
             <v-flex xs12 sm4 class="text-xs-center">
                 Confirmed Appointments
                 <span class="graphNumber">{{confirmedPercent}}%</span>
@@ -42,7 +42,7 @@
                     labels: ['Confirmed', 'Unconfirmed'],
                     datasets: [{
                         label: '# of Votes',
-                        data: [50, 50],
+                        data: [0, 0],
                         backgroundColor: [
                             '#CDDEEA',
                             '#244252',
@@ -60,7 +60,7 @@
                     labels: ['Showed Up', 'Yet to appear'],
                     datasets: [{
                         label: '# of Votes',
-                        data: [30, 70],
+                        data: [0, 0],
                         backgroundColor: [
                             '#CDDEEA',
                             '#244252',
@@ -79,7 +79,7 @@
                     labels: ['Sale', 'No Sale'],
                     datasets: [{
                         label: '# of Votes',
-                        data: [50, 50],
+                        data: [0, 0],
                         backgroundColor: [
                             '#CDDEEA',
                             '#244252',
@@ -150,8 +150,14 @@
              * Confirm guest calculate
              */
             createConfirmedAppointmentsData() {
-                this.confirmedPercent = _.round(((this.analyticsTotalGuest - this.analyticGuestInfo.pending) / this.analyticsTotalGuest) * 100, 1)
+                if(this.analyticsTotalGuest <= 0){
+                    return
+                }
+                const guestPending = this.analyticGuestInfo.pending ? this.analyticGuestInfo.pending : 0
+                const totalGuest = this.analyticsTotalGuest ? this.analyticsTotalGuest : 0
+                this.confirmedPercent = _.round(((totalGuest - guestPending) / totalGuest) * 100, 1)
                 let unConfirmed = _.round((100 - this.confirmedPercent), 1)
+
 
                 const confirmedData = [
                     this.confirmedPercent,
@@ -176,12 +182,14 @@
                 this.confirmed = {...modifyConfirmData}
 
                 // Arrived data set
-                this.madePercent = _.round(((this.analyticGuestInfo.arrived / this.analyticsTotalGuest) * 100), 1)
+                const guestArrived = this.analyticGuestInfo.arrived ? this.analyticGuestInfo.arrived : 0
+                this.madePercent = _.round(((guestArrived / totalGuest) * 100), 1)
                 const unMadePercent = _.round((100 - this.madePercent), 1)
                 const madeData = [
                     this.madePercent,
                     unMadePercent
                 ]
+                console.log('made data: ', madeData)
 
                 let modifyMadeData = {}
                 _.forOwn(this.made, (value, key) => {
@@ -202,7 +210,8 @@
 
 
                 // Sale made analytics
-                this.salesPercent = _.round(((this.analyticGuestInfo.sale_made / this.analyticsTotalGuest) * 100), 1)
+                const saleMade = this.analyticGuestInfo.sale_made ? this.analyticGuestInfo.sale_made : 0
+                this.salesPercent = _.round(((saleMade / totalGuest) * 100), 1)
                 const unSalePercent = _.round((100 - this.salesPercent), 1)
                 const saleData = [
                     this.salesPercent,

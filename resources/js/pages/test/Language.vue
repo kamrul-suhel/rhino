@@ -47,7 +47,7 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                selectedLanguage: 'getSelectedLanguages'
+                selectedLanguage: 'getSelectedLanguage'
             })
         }),
 

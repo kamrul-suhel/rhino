@@ -116,7 +116,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalVehicles"
                     :loading="loading"
@@ -233,7 +233,7 @@
                 searchVehicle: '',
                 editVehicle: false,
                 valid: true,
-                isVehicleSelected: false,                
+                isVehicleSelected: false,
                 vehicle: {},
                 leftImage: '',
                 rightImage: '',
@@ -326,8 +326,8 @@
                     // Set form object for vehicle
                     _.forOwn(this.vehicle, (value, key) => {
                             vehicleForm.append(key, value)
-                    });          
-                    
+                    });
+
                     if(this.subComponent){
                         vehicleForm.append('brand_id', this.$route.params.brandId)
                     }
@@ -346,9 +346,9 @@
 
                             console.log(this.getPagination());
 
-                            
+
                             this.$store.commit('setUpdateComponent')
-                            
+
                         }
                     })
                 } else {

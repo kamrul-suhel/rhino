@@ -8,7 +8,7 @@
                 v-model="searchGuests">
             </v-text-field>
 
-            <UploadGuestCSVComponent></UploadGuestCSVComponent>
+            <UploadGuestCSVComponent v-if="subComponent"></UploadGuestCSVComponent>
         </v-toolbar>
 
         <v-layout row wrap>
@@ -20,7 +20,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.guest} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGuests"
                     :loading="loading"
@@ -163,7 +163,6 @@
         },
 
         created() {
-            
             this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.guests}` )
             this.$store.commit('setNavTitle', `${this.trans.guests}`)
         },

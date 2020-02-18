@@ -62,7 +62,7 @@ Route::prefix('settings')->group(function () {
 */
 
 Route::prefix('dealerships')->group(function () {
-    Route::get('', 'Dealership\DealershipController@index');
+    Route::get('', 'Dealership\DealershipListController@list');
     Route::get('dropdown', 'Dealership\DealershipDropDownController@index');
     Route::post('', 'Dealership\DealershipController@store');
     Route::get('{id}/show', 'Dealership\DealershipController@show');

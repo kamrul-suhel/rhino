@@ -6,7 +6,7 @@
                     ref="createBrand"
                     v-model="valid"
                     lazy-validation>
-                    
+
                     <v-layout row wrap>
 
                         <v-flex xs12>
@@ -41,7 +41,7 @@
                             ></v-text-field>
                         </v-flex>
 
-                            <!-- 
+                            <!--
                             <v-autocomplete :label="trans.company"
                                             :color="themeOption.inputColor"
                                             :items="companies"
@@ -54,7 +54,7 @@
                         <v-flex xs2>
                             <div class="r-color-picker" v-if="isColorSwatchActive">
                                 <div class="r-color-picker-content">
-                                    <chrome v-model="selectedColor" 
+                                    <chrome v-model="selectedColor"
                                         solo
                                         flat
                                         background-color="#eaeaea"></chrome>
@@ -77,7 +77,7 @@
                                 :color="themeOption.inputColor"
                                 solo
                                 flat>
-                            </v-text-field> 
+                            </v-text-field>
                         </v-flex>
 
                         <v-flex xs4 class="ml-5">
@@ -113,7 +113,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalBrands"
                     :loading="loading"

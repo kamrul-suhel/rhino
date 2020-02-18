@@ -6,7 +6,7 @@ const defaultState = {
     admin: false,
     isLogin: true,
     themeOption:{
-        primaryColor: '',
+        primaryColor: '#E20000',
         secondaryColor: '#444',
         textColor:'',
         theme: 'dark',
@@ -34,7 +34,7 @@ const defaultState = {
         snackBarTimeout : 6000,
 
         // Toolbar backgroun color
-        toolbarColor: '#424242',
+        toolbarColor: '#fff',
 
 
         //Tab option

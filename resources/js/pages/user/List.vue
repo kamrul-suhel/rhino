@@ -1,7 +1,8 @@
 <template>
     <div >
 
-        <addUserForm></addUserForm>
+        <addUserForm :sub-component="authUser.level === 'dealership'"
+                     :model="authUser.level === 'dealership'? 'dealership' : ''"></addUserForm>
 
         <v-layout row wrap>
             <v-flex xs12 pt-3>
@@ -12,7 +13,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.users} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.users} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalUsers"
                     :loading="loading"
@@ -128,6 +129,7 @@
             ...mapGetters({
                 languages: 'getLanguages',
                 trans: 'getFields',
+                authUser: 'getAuthUser',
                 themeOption: 'getThemeOption',
                 users: 'getUsers',
                 headers: 'getUserListHeader',
@@ -146,6 +148,10 @@
             },
 
             searchUsers() {
+                this.initialize()
+            },
+
+            trans(){
                 this.initialize()
             },
 

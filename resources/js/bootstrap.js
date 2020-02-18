@@ -8,7 +8,7 @@ const token = document.head.querySelector('meta[name="csrf-token"]');
 window.axios.defaults.headers.common = {
     'X-CSRF-Token': token.content,
     'X-Requested-With': 'XMLHttpRequest',
-    'API-Token' : 'WohJBxvGmv5Edhn4GQvO'
+    'API-Token' : '$2y$10$/oey3p/7FyViooGDXcUvdOKXIWyIxRvyGSmCy03r1T4nVkVU8xzy.'
 };
 
 import 'babel-polyfill'
@@ -95,10 +95,11 @@ new Vue({
     methods: {
         initSetting() {
             // Setup translation fields
-            this.$store.dispatch('fetchSettingFields');
-
-            // Initialize language
-            this.$store.dispatch('fetchLanguages')
+            this.$store.dispatch('fetchSettingFields').then(() => {
+                this.$store.dispatch('fetchLanguages').then(() => {
+                    this.$store.commit('setLoadSettingLanguage', true)
+                })
+            })
         }
     }
 })

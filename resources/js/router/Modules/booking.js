@@ -1,5 +1,6 @@
+
 function lazyLoad(view){
-    return () => import(`../../pages/dealershipAdmin/${view}`)
+    return () => import(`../../pages/booking/${view}`)
 }
 const booking ={
     path: '/booking',

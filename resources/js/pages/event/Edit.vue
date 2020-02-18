@@ -1,9 +1,9 @@
 <template>
     <v-container pa-0>
-        <v-layout row wrap justify-end v-if="!subComponent">
+        <v-layout row wrap justify-end>
             <v-flex xs12 sm3>
                 <language-picker :languageId="event.language_id"></language-picker>
-             </v-flex>
+            </v-flex>
         </v-layout>
         <v-form
             row wrap
@@ -14,7 +14,7 @@
                 <v-flex xs12>
                     <v-card>
                         <v-card-text>
-                            <v-layout row wrap v-if="!subComponent">
+                            <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
@@ -40,7 +40,7 @@
                                 </v-flex>
                             </v-layout>
 
-                            <v-layout row wrap v-if="!subComponent">
+                            <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-menu
                                         ref="startEvent"
@@ -125,8 +125,8 @@
                                     </v-menu>
                                 </v-flex>
                             </v-layout>
-                            <v-layout row wrap v-if="!subComponent">
 
+                            <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-select
                                         :items="appointmentDuration"
@@ -154,17 +154,24 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm8 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.greeting} ${trans.text}`"
+                                    <p>{{ trans.greeting }}</p>
+                                    <v-radio-group
                                         v-model="selectedEvent.greeting"
-                                        solo box flat
-                                    ></v-text-field>
+                                        :mandatory="false">
+                                        <v-radio :color="themeOption.inputColor"
+                                                 :label="trans.hello"
+                                                 :value="0">
+                                        </v-radio>
+
+                                        <v-radio :color="themeOption.inputColor"
+                                                 :label="trans.hi"
+                                                 :value="1">
+                                        </v-radio>
+                                    </v-radio-group>
                                 </v-flex>
                             </v-layout>
 
-                            <v-layout row wrap v-if="!subComponent">
+                            <v-layout row wrap>
                                 <v-flex xs12 sm8 pa-2>
                                     <v-textarea
                                         :color="themeOption.inputColor"
@@ -229,12 +236,12 @@
                                             dark
                                             :slider-color="themeOption.tabSliderColor"
                                         >
-<!--                                            <v-tab-->
-<!--                                                key="appointments"-->
-<!--                                                ripple-->
-<!--                                            >-->
-<!--                                                {{ trans.appointments }}-->
-<!--                                            </v-tab>-->
+                                            <!--                                            <v-tab-->
+                                            <!--                                                key="appointments"-->
+                                            <!--                                                ripple-->
+                                            <!--                                            >-->
+                                            <!--                                                {{ trans.appointments }}-->
+                                            <!--                                            </v-tab>-->
 
                                             <v-tab
                                                 key="saleExecutives"
@@ -250,11 +257,11 @@
                                                 {{ trans.vehicles }}
                                             </v-tab>
 
-<!--                                            <v-tab-item-->
-<!--                                                key="appointments"-->
-<!--                                            >-->
-<!--                                                <Appointment></Appointment>-->
-<!--                                            </v-tab-item>-->
+                                            <!--                                            <v-tab-item-->
+                                            <!--                                                key="appointments"-->
+                                            <!--                                            >-->
+                                            <!--                                                <Appointment></Appointment>-->
+                                            <!--                                            </v-tab-item>-->
 
                                             <v-tab-item
                                                 key="saleExecutives"
@@ -274,23 +281,23 @@
                         </v-layout>
 
 
-                        <v-card-actions v-if="!subComponent"  class="pa-3 justify-center">
+                        <v-card-actions class="pa-3 justify-center">
                             <r-button :text="`${trans.back}`"
-                                dark
-                                identifier="'eventBack'"
-                                small
-                                class="rounded-btn text-white"
-                                :loadingBar="true"
-                                @click="onBackToEventList"
-                                :color="themeOption.buttonSecondaryColor"/>
+                                      dark
+                                      identifier="'eventBack'"
+                                      small
+                                      class="rounded-btn text-white"
+                                      :loadingBar="true"
+                                      @click="onBackToEventList"
+                                      :color="themeOption.buttonSecondaryColor"/>
 
                             <r-button :text="`${trans.update} ${trans.event}`"
-                                identifier="'eventEdit'"
-                                small
-                                class="rounded-btn text-white"
-                                :loadingBar="true"
-                                @click="onUpdateEvent"
-                                :color="themeOption.buttonDangerColor"/>
+                                      identifier="'eventEdit'"
+                                      small
+                                      class="rounded-btn text-white"
+                                      :loadingBar="true"
+                                      @click="onUpdateEvent"
+                                      :color="themeOption.buttonDangerColor"/>
 
                         </v-card-actions>
                     </v-card>
@@ -331,8 +338,8 @@
                 event: {},
                 times: {},
                 active: null,
-                appointmentDuration:[],
-                breakTime:[]
+                appointmentDuration: [],
+                breakTime: []
             }
         },
 
@@ -365,10 +372,10 @@
                 this.renderEventData()
             },
 
-            selectedLanguage(){
+            selectedLanguage() {
                 let id = null
-                if(this.subComponent){
-                    switch(this.model){
+                if (this.subComponent) {
+                    switch (this.model) {
                         case 'dealership':
                             id = this.$route.params.eventId
                             break
@@ -390,11 +397,11 @@
             this.initialize()
             this.setAppointmentDuration()
 
-            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.event}` )
+            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.event}`)
             this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.event}`)
 
             // Load dealership & type when it is subcomponent
-            if(this.subComponent){
+            if (this.subComponent) {
                 this.renderEventData()
             }
         },
@@ -402,8 +409,8 @@
         methods: {
             initialize() {
                 let id = null
-                if(this.subComponent){
-                    switch(this.model){
+                if (this.subComponent) {
+                    switch (this.model) {
                         case 'dealership':
                             id = this.$route.params.eventId
                             break
@@ -411,7 +418,7 @@
                         default:
                             id = this.$route.params.id
                     }
-                }else{
+                } else {
                     id = this.$route.params.id
                 }
                 this.$store.dispatch('fetchEvent', {id: id})
@@ -454,14 +461,14 @@
                             // this.$router.push({name: 'listEvents'})
                         }
                     })
-                }else{
+                } else {
                     this.$store.commit('setButtonLoading', false)
                 }
             },
 
-            onBackToEventList(){
-                if(this.subComponent){
-                    switch(this.model){
+            onBackToEventList() {
+                if (this.subComponent) {
+                    switch (this.model) {
                         case 'dealership':
                             this.$router.push({
                                 name: 'editDealerships',
@@ -473,13 +480,13 @@
                             this.$store.commit('setButtonLoading', false)
                             break
                     }
-                }else{
+                } else {
                     this.$router.push({name: 'listEvents'})
                     this.$store.commit('setButtonLoading', false)
                 }
             },
 
-            setAppointmentDuration(){
+            setAppointmentDuration() {
                 this.appointmentDuration = [
                     {
                         text: `60 ${this.trans.minutes}`,
@@ -510,7 +517,7 @@
                 ]
             },
 
-            renderEventData(){
+            renderEventData() {
                 this.$store.dispatch('fetchDealershipsForDropdown')
                 this.$store.dispatch('fetchTypesForDropdown')
                 this.$store.dispatch('fetchDealership', {id: this.$route.params.dealershipId})

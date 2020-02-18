@@ -79,8 +79,8 @@
                             box solo flat
                         ></v-text-field>
                     </v-flex>
-                
-                    <v-flex xs12 sm3 pa-2>
+
+                    <v-flex xs12 sm3 pa-2 v-if="authUser.level !== 'dealership'">
                         <v-select
                             :items="levels"
                             :rules="[v => !!v || `${trans.select_a} ${trans.rule}`]"
@@ -233,6 +233,7 @@ import { log } from 'util'
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
+                authUser: 'getAuthUser',
                 levels: 'getUserLevels',
                 dealerships: 'getDealerships',
                 groups: 'getGroups',
@@ -306,7 +307,7 @@ import { log } from 'util'
 
             onCreateUser() {
                 if (this.$refs.userForm.validate()) {
-                    
+
                     // Set form object for dealership
                     let userForm = new FormData()
 
@@ -338,9 +339,9 @@ import { log } from 'util'
                             message: `${this.trans.user}  ${this.trans.successfully_created}`
                         })
 
-                        
+
                         this.showForm = false
-                        this.$refs.form.reset() 
+                        this.$refs.form.reset()
 
                     })
                 }
@@ -361,7 +362,7 @@ import { log } from 'util'
             toggleForm() {
                 this.showForm = !this.showForm
 
-                
+
                 if (this.showForm) {
                     this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.user}` )
                     this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.user}` )

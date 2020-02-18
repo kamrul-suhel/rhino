@@ -61,6 +61,12 @@ class GuestStoreController extends Controller
         $request->has('stage') ? $guest->stage = $request->stage : null;
         $request->has('status') ? $guest->status = $request->status : null;
 
+        $request->has('postal_contact') ? $guest->postal_contact = $request->postal_contact : null;
+        $request->has('email_contact') ? $guest->email_contact = $request->email_contact : null;
+        $request->has('sms_contact') ? $guest->sms_contact = $request->sms_contact : null;
+        $request->has('phone_contact') ? $guest->phone_contact = $request->phone_contact : null;
+        $request->has('salutation') ? $guest->salutation = $request->salutation : null;
+
         // If creating new guest, then generate new unique id
         if(!$id){
             $guest->unique = generateUniqueIdForGuest();
