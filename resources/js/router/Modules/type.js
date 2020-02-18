@@ -1,14 +1,16 @@
-import * as Type from "../../pages/event/type/index";
+function lazyLoad(view){
+    return () => import(`../../pages/event/type/${view}.vue`)
+}
 
 const EventTypesRoutes =  {
     path: '/admin/events/types',
     name: 'eventTypes',
-    component: Type.Root,
+    component: lazyLoad('Root'),
     children: [
         {
             path: 'list',
             name: 'listEventTypes',
-            component: Type.List
+            component: lazyLoad('List')
         }
     ]
 }

@@ -1,20 +1,22 @@
-import * as Settings from "../../pages/settings"
+function lazyLoad(view){
+    return () => import(`../../pages/settings/${view}.vue`)
+}
 
 const SettingsRoutes = {
     path: '/admin/settings',
     name: 'settings',
-    component: Settings.Root,
+    component: lazyLoad('Root'),
     children:[
         {
             path:'list',
             name: 'listSettings',
-            component: Settings.List,
+            component: lazyLoad('List'),
         },
 
         {
             path:'translations',
             name: 'translationSetting',
-            component: Settings.Translation,
+            component: lazyLoad('Translation'),
         }
     ]
 }

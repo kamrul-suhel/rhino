@@ -2,8 +2,13 @@
     <v-container pa-0>
         <v-layout row wrap justify-end>
             <v-flex xs12 sm3>
-                <language-picker :languageId="vehicle.language_id"></language-picker>
-             </v-flex>
+                <language-picker
+                    :languageId="vehicle.language_id"
+                    :solo="false"
+                    :flat="false"
+                    :chip="false"
+                ></language-picker>
+            </v-flex>
         </v-layout>
         <v-form
             row wrap
@@ -65,21 +70,21 @@
 
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
-                                       <v-flex xs12>
-                                           <label for="">{{`${trans.right_hand_drive_image}`}} </label>
-                                           <v-card class="pa-2 my-3">
-                                               <v-img
-                                                   :src="rightImage"
-                                                   aspect-ratio="2.75"
-                                               ></v-img>
-                                           </v-card>
+                                        <v-flex xs12>
+                                            <label for="">{{`${trans.right_hand_drive_image}`}} </label>
+                                            <v-card class="pa-2 my-3">
+                                                <v-img
+                                                    :src="rightImage"
+                                                    aspect-ratio="2.75"
+                                                ></v-img>
+                                            </v-card>
 
-                                           <input
-                                               ref="rightImage"
-                                               type="file"
-                                               @change="setRightImage"
-                                           />
-                                       </v-flex>
+                                            <input
+                                                ref="rightImage"
+                                                type="file"
+                                                @change="setRightImage"
+                                            />
+                                        </v-flex>
                                     </v-layout>
                                 </v-flex>
                             </v-layout>
@@ -164,7 +169,7 @@
                 this.rightImage = this.vehicle.driver_seating_position_right_image;
             },
 
-            selectedLanguage(){
+            selectedLanguage() {
                 this.$store.dispatch('fetchVehicle', {
                     id: this.$route.params.id,
                     languageId: this.selectedLanguage.id,
@@ -183,14 +188,14 @@
             initialize() {
                 this.$store.dispatch('fetchBrandForDropDown');
 
-                if ( this.subComponent) {
+                if (this.subComponent) {
                     this.$store.dispatch('fetchVehicle', {id: this.$route.params.vehicleId})
                 } else {
                     this.$store.dispatch('fetchVehicle', {id: this.$route.params.id})
                 }
             },
 
-            onUpdateVehicle(){
+            onUpdateVehicle() {
                 if (this.$refs.vehicleForm.validate()) {
                     let vehicleForm = new FormData()
 
@@ -206,20 +211,20 @@
 
                     // send form data to save
                     const URL = `/api/vehicles/${this.vehicle.id}/update`
-                    axios.post(URL, vehicleForm).then((response)=>{
-                        if(response.data.success){
+                    axios.post(URL, vehicleForm).then((response) => {
+                        if (response.data.success) {
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.vehicle.model}  ${this.trans.successfully_updated}`
                             })
                         }
-                    }).catch((error)=>{
+                    }).catch((error) => {
                     })
                 }
             },
 
-            onBackToVehicles(){
+            onBackToVehicles() {
                 this.$router.push({name: 'listVehicles'})
                 this.$store.commit('setButtonLoading', false)
             },
@@ -231,23 +236,23 @@
                 this.hasLeftImage = true
             },
 
-            setRightImage(){
+            setRightImage() {
                 const image = this.$refs.rightImage.files[0]
                 this.uploadImage(image, 'vehicles', 'rightImage')
                 this.hasRightImage = true
             },
 
-            uploadImage(file, identifier, image){
+            uploadImage(file, identifier, image) {
                 let formData = new FormData()
                 formData.append('file', file)
                 formData.append('model', identifier)
 
                 axios.post('/api/uploadfiles', formData).then((response) => {
-                    if(image === 'leftImage'){
+                    if (image === 'leftImage') {
                         this.leftImage = response.data
                     }
 
-                    if(image === 'rightImage'){
+                    if (image === 'rightImage') {
                         this.rightImage = response.data
                     }
                 })

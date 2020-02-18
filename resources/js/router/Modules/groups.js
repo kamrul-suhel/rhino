@@ -1,26 +1,28 @@
-import * as Groups from "../../pages/dealership/group";
+function lazyLoad(view){
+    return () => import(`../../pages/dealership/group/${view}.vue`)
+}
 
 const DealershipGroupsRoutes =  {
     path: '/admin/dealerships/groups',
     name: 'dealershipsGroups',
-    component: Groups.Root,
+    component: lazyLoad('Root'),
     children: [
         {
             path: 'list',
             name: 'listDealershipsGroups',
-            component: Groups.List
+            component: lazyLoad('List')
         },
 
         {
             path: 'create',
             name: 'addDealershipsGroups',
-            component: Groups.Create
+            component: lazyLoad('Create')
         },
 
         {
             path: ':id/edit',
             name: 'editDealershipsGroups',
-            component: Groups.Edit
+            component: lazyLoad('Edit')
         }
     ]
 }

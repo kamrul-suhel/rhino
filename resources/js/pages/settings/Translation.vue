@@ -1,7 +1,7 @@
 <template>
     <div>
-        <v-layout flat>
-            <v-flex xs12 sm4 class="mr-5">
+        <v-layout row wrap >
+            <v-flex xs12 sm6>
                 <v-text-field
                     :color="themeOption.inputColor"
                     :label="`${trans.searchBy} ${trans.name}`"
@@ -9,8 +9,19 @@
                     box solo flat>
                 </v-text-field>
             </v-flex>
-            <v-flex xs12 sm4>
-                <LanguagePicker :languageId="selectedLanguage.id"></LanguagePicker>
+
+            <v-flex xs12 sm6>
+                <v-layout row wrap justify-end align-content-end>
+                    <v-flex xs12 sm8>
+                        <LanguagePicker :languageId="selectedLanguage.id"
+                                        :solo="false"
+                                        :flat="false"
+                                        :chip="false"
+                                        model="translation">
+                        </LanguagePicker>
+                    </v-flex>
+                </v-layout>
+
             </v-flex>
         </v-layout>
 
@@ -153,7 +164,6 @@
 
             save (settingTranslation) {
                 const translationId = settingTranslation.setting_translation_id
-                debugger
                 let translationForm = new FormData()
                 translationForm.append('setting_translation_id', translationId)
                 translationForm.append('translation', settingTranslation.translation)

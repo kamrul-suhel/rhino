@@ -1,26 +1,28 @@
-import * as User from "../../pages/user";
+function lazyLoad(view){
+    return () => import(`../../pages/user/${view}.vue`)
+}
 
 const brandsRoute ={
     path: '/admin/users',
     name: 'users',
-    component: User.Root,
+    component: lazyLoad('Root'),
     children:[
         {
             path:'list',
             name: 'listUsers',
-            component: User.List,
+            component: lazyLoad('List'),
         },
 
         {
             path:'create',
             name: 'createUsers',
-            component: User.Create,
+            component: lazyLoad('Create'),
         },
 
         {
             path:':id/edit',
             name: 'editUsers',
-            component: User.Edit,
+            component: lazyLoad('Edit'),
         }
     ]
 }
