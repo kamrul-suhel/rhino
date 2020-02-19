@@ -108,7 +108,38 @@
                                             flat
                                             box
                                             return-object
-                                        ></v-autocomplete>
+                                        >
+                                            <template v-slot:no-data>
+                                                <v-list-tile>
+                                                    <v-list-tile-title>
+                                                        {{`${trans.no} ${trans.user} ${trans.found}`}}
+                                                    </v-list-tile-title>
+                                                </v-list-tile>
+                                            </template>
+
+                                            <template v-slot:selection="{ item, selected }">
+                                                    <span v-text="`${item.email} (${item.first_name})`"></span>
+                                            </template>
+
+                                            <template v-slot:item="{ item }">
+                                                <v-list-tile
+                                                    three-line
+                                                    :key="item.id"
+                                                    avatar
+                                                >
+                                                    <v-list-tile-avatar
+                                                        :color="themeOption.primaryColor"
+                                                        class="headline font-weight-light white--text"
+                                                    >
+                                                        {{ item.first_name.charAt(0) }}
+                                                    </v-list-tile-avatar>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title v-text="`${item.surname} ${item.first_name}`"></v-list-tile-title>
+                                                        <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                </v-list-tile>
+                                            </template>
+                                        </v-autocomplete>
                                     </v-flex>
 
                                 </v-layout>

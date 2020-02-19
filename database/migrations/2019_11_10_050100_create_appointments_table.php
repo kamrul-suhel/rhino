@@ -17,7 +17,7 @@ class CreateAppointmentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('event_id')->index();
             $table->unsignedBigInteger('user_id')->index()->nullable();
-            $table->unsignedBigInteger('guest_id')->index();
+            $table->unsignedBigInteger('guest_id')->index()->nullable();
             $table->mediumInteger('slot_id')->index()->nullable();
             $table->string('bring_guest', 120)->nullable();
             $table->tinyInteger('guest_changing_car')->default(0);
@@ -27,7 +27,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('part_ex_vehicle')->nullable();
             $table->string('part_ex_distance')->nullable();
             $table->boolean('part_ex_settlement')->nullable();
-            $table->boolean('is_canceled')->default(0);
+            $table->tinyInteger('status')->index()->default(0);
             $table->timestamps();
         });
     }

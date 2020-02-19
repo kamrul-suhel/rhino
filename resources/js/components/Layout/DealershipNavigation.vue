@@ -23,7 +23,7 @@
         <v-divider class="my-2"></v-divider>
 
         <v-list>
-            <v-list-tile @click="$router.push({name: 'dashboard'})">
+            <v-list-tile @click="onPageChange({link: 'dashboard'})">
                 <v-list-tile-action>
                     <v-icon :color="themeOption.dealershipAdminNavColor">home</v-icon>
                 </v-list-tile-action>
@@ -43,7 +43,7 @@
                             <v-icon v-text="nav.icon" :color="themeOption.dealershipAdminNavColor"></v-icon>
                         </v-list-tile-action>
 
-                        <v-list-tile-title v-text="nav.text"></v-list-tile-title>
+                        <v-list-tile-title>{{ nav.text| trans}}</v-list-tile-title>
                     </v-list-tile>
 
                     <v-divider v-if="nav.divider"></v-divider>
@@ -162,7 +162,7 @@
                 }
 
                 // Check is edit event
-                if (item.link === 'editEvent') {
+                if (item.link === 'editDealershipsEvent') {
                     const dealershipId = this.authUser.dealership_id
                     const eventId = +this.selectedEvent.id
                     const index = _.findIndex(this.eventsForDropDown, (event) => {
@@ -194,11 +194,7 @@
                     return
                 }
 
-                if (item.link === this.$route.name) {
-                    return
-                } else {
-                    this.$router.push({name: item.link});
-                }
+                this.$router.push({name: item.link});
             },
 
             /**

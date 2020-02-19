@@ -2,18 +2,29 @@
     <v-card flat
         tile>
         <v-card-text class="appointmentSlot">
-            <div>{{ appointmentSlot.start|dateFormat('LT', 'en') }}</div>
-            <div>{{ appointmentSlot.end| dateFormat('LT', 'en') }}</div>
+            <div>{{ appointmentSlot.start|dateFormat('LT', 'en') }} -  {{ appointmentSlot.end| dateFormat('LT', 'en') }}</div>
         </v-card-text>
 
         <v-card-actions>
-            <div v-if="checkAvailability(appointmentSlot)">
-                <h2>Available</h2>
-            </div> <!-- Available slot -->
+            <v-layout v-if="checkAvailability(appointmentSlot)"
+                      row
+                      wrap
+                      justify-center
+                      align-center>
+                <v-flex xs12>
+                    <div class="appointment-button available">Available</div>
+                </v-flex>
+            </v-layout>
+             <!-- Available slot -->
 
-            <div v-else>
-                <h4>{{ `${appointment.guest_first_name} ${appointment.guest_surname}`}}</h4>
-            </div> <!-- unavailable -->
+            <v-layout v-else row wrap justify-center align-center>
+                <v-flex xs12>
+                    <div class="appointment-button disable">
+                        {{ `${appointment.guest_first_name} ${appointment.guest_surname}`}}
+                    </div>
+                </v-flex>
+            </v-layout>
+            <!-- unavailable -->
         </v-card-actions>
     </v-card>
 </template>

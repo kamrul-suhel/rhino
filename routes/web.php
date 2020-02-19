@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
             return view('index');
         });
 
-        Route::get('{id}/user/create', function () {
+        Route::get('{id}/users/create', function () {
             return view('index');
         });
 

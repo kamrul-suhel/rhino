@@ -61,7 +61,7 @@ const mutations = {
                     {
                         icon: 'directions_car',
                         text: `${trans.edit} ${trans.event}`,
-                        link: 'editEvent',
+                        link: 'editDealershipsEvent',
                         access: ['dealership'],
                     },
 
@@ -76,6 +76,27 @@ const mutations = {
                         icon: 'insert_chart_outlined',
                         text: `${trans.analytics}`,
                         link: 'dealershipAnalytics',
+                        access: ['dealership'],
+                    },
+
+                    {
+                        icon: 'insert_chart_outlined',
+                        text: `${trans.guests}`,
+                        link: 'eventGuestList',
+                        access: ['dealership'],
+                    },
+
+                    {
+                        icon: 'insert_chart_outlined',
+                        text: `${trans.edit} ${trans.dealership}`,
+                        link: 'editDealership',
+                        access: ['dealership'],
+                    },
+
+                    {
+                        icon: 'insert_chart_outlined',
+                        text: `${trans.users}`,
+                        link: 'dealershipUserList',
                         access: ['dealership'],
                     }
                 ]

@@ -42,7 +42,9 @@
             SnackBar
         },
 
-        data: () => ({}),
+        data: () => ({
+            redirectTo: null
+        }),
 
         computed: {
             ...mapGetters({
@@ -55,7 +57,8 @@
                 authUser: 'getAuthUser',
                 trans: 'getFields',
                 languages: 'getLanguages',
-                isSettingLanguageLoaded: 'getSettingLanguage'
+                isSettingLanguageLoaded: 'getSettingLanguage',
+                updateComponent: 'getUpdateComponent'
             })
         },
 
@@ -64,11 +67,11 @@
                 this.$vuetify.theme = this.themeOption.theme
             },
 
-            isSettingLanguageLoaded(){
+            isSettingLanguageLoaded() {
                 this.initializeData()
             },
 
-            initialize(){
+            initialize() {
                 this.isInitialize()
             }
         },
@@ -78,8 +81,8 @@
         },
 
         methods: {
-            initializeData(){
-                if(this.languages.length > 0){
+            initializeData() {
+                if (this.languages.length > 0) {
                     axios.get('/auth/me').then((response) => {
                         if (response.data.success) {
                             const authUser = response.data.authUser
@@ -98,7 +101,7 @@
 
                             // Get selected langauage from auth user
                             _.map(this.languages, (language) => {
-                                if(language.id === this.authUser.language_id){
+                                if (language.id === this.authUser.language_id) {
                                     this.$store.commit('setSelectedLanguage', {...language})
                                     this.$store.dispatch('fetchSettingFields', {languageId: language.id});
                                 }

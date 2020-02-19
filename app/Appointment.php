@@ -8,6 +8,14 @@ class Appointment extends Model
 {
 
     /**
+     * Status filed option
+     */
+    const STATUS_PENDING = 0;
+    const STATUS_CONFIRMED = 1;
+    const STATUS_CANCELED = 2;
+    const STATUS_NOT_AVAILABLE = 3;
+
+    /**
      * Status identifier
      * @var string
      */

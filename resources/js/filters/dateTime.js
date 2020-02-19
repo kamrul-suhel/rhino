@@ -67,6 +67,10 @@ Vue.filter('dateFormat', (date, format, locale='en') => {
             filterDate = newMoment.format('MMMM') // Jan..December
             break
 
+        case 'dddd':
+            filterDate = newMoment.format('dddd') // Jan..December
+            break
+
         case 'Do':
             filterDate = newMoment.format('Do') // 1st..31st
             break

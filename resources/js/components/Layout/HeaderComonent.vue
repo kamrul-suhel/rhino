@@ -30,7 +30,8 @@
                         :items="languages"
                         item-text="name"
                         item-value="id"
-                        @change="selectedLanguage"
+                        v-model="selectedLanguageId"
+                        @change="onSelectLanguage"
                         return-object
                     ></v-autocomplete>
                 </v-layout>
@@ -52,10 +53,16 @@
             DealershipToolbar
         },
         data() {
-            return {}
+            return {
+                selectedLanguageId: null
+            }
         },
 
-        watch: {},
+        watch: {
+            selectedLanguage(){
+                this.selectedLanguageId = this.selectedLanguage.id
+            }
+        },
 
         computed: {
             ...mapGetters({
@@ -65,10 +72,12 @@
                 isLogin: 'getIsLogin',
                 title: 'getHeaderTitle',
                 authUser: 'getAuthUser',
+                selectedLanguage: 'getSelectedLanguage'
             })
         },
 
         created() {
+            this.selectedLanguageId = this.selectedLanguage.id
         },
 
         methods: {
@@ -87,7 +96,7 @@
              * Language change render all translation
              * @param value
              */
-            selectedLanguage(value) {
+            onSelectLanguage(value) {
                 this.$store.commit('setSelectedLanguage', value)
                 this.$store.dispatch('fetchSettingFields', {languageId: value.id})
             }

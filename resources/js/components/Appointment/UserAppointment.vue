@@ -3,7 +3,8 @@
         <v-flex xs3
                 v-for="(appointmentSlot, index) in appointmentSlots"
                 :key="index">
-            <UserAppointmentSlot :appointmentSlot="appointmentSlot"></UserAppointmentSlot>
+            <UserAppointmentSlot :appointmentSlot="appointmentSlot">
+            </UserAppointmentSlot>
         </v-flex>
     </v-layout>
 </template>

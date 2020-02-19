@@ -1,0 +1,16 @@
+.appointment-button{
+    text-align: center;
+    line-height: 40px;
+    border-radius: 20px;
+    color: #444;
+
+    &.disable{
+        border: 1px solid #ddd;
+        background: #ddd;
+    }
+
+    &.available{
+        border: 1px solid #a5e0a5;
+        background: #a5e0a5;
+    }
+}

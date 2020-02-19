@@ -35,6 +35,7 @@ const defaultState = {
 
         // Toolbar backgroun color
         toolbarColor: '#fff',
+        calenderToolbarColor: '#444',
 
 
         //Tab option

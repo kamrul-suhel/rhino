@@ -35,9 +35,15 @@ const DealershipRoutes =  {
 
         // Add staff member to dealership
         {
-            path: ':dealershipId/user/create',
+            path: ':dealershipId/users/create',
             name: 'createDealershipUser',
             component: lazyLoad('AddUser')
+        },
+
+        {
+            path: ':dealershipId/users/:userId/edit',
+            name: 'editDealershipUser',
+            component: lazyLoad('EditUser')
         }
 
     ]

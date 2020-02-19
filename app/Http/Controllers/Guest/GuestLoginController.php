@@ -30,15 +30,15 @@ class GuestLoginController extends Controller
             $guest->last_logged_in = Carbon::now();
             $guest->save();
 
-            if(
+            if (
                 $request->has('loginToGuestJourney') &&
                 !empty($request->loginToGuestJourney)
-            ){
+            ) {
                 return [
                     'success' => true,
                     'guest' => $guest
                 ];
-            }else{
+            } else {
                 return response()->json([
                     'success' => true,
                     'guest' => $guest

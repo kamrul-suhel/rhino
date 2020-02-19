@@ -243,7 +243,7 @@
 
             fetchAllAppointmentByEventId(saleExecutive) {
                 const eventId = this.selectedEvent.id
-                this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId, saleExecutiveId: saleExecutive.id })
+                this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId, saleExecutiveId: saleExecutive.id})
             },
 
             onGoBack() {

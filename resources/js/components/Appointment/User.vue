@@ -9,17 +9,7 @@
             >
                 <v-layout row wrap>
                     <v-flex xs12>
-                        <v-toolbar :color="themeOption.toolbarColor"
-                                   dense
-                                   tabs
-                                   dark>
-                            <v-toolbar-title>{{ date|dateFormat('LL') }}</v-toolbar-title>
-                            <v-spacer></v-spacer>
-
-                            <v-btn icon>
-                                <v-icon>calendar_today</v-icon>
-                            </v-btn>
-                        </v-toolbar>
+                        <h3>{{ date|dateFormat('dddd') }}, {{ date|dateFormat('LL') }} </h3>
                     </v-flex>
 
                     <v-flex xs12 v-if="isClosed(date)">

@@ -141,7 +141,6 @@
 
             onSubmit() {
                 if (this.$refs.login_form.validate()) {
-
                     // make spinner visible
                     this.loginProgress = true;
                     this.loading = true;
@@ -154,14 +153,9 @@
                     // submit data with ajax request
                     axios.post('/login', loginForm)
                         .then(response => {
-                            if(response.data.success){
-                                const authUser = {...response.data.authUser}
-                                this.$store.commit('setAuthUser', authUser)
-                                this.$store.commit('setUserRole', true)
-                                this.$router.push({name: 'dashboard'})
+                            if (response.data.success) {
+                                window.location.href = '/admin/dashboard' // redirect to login
                             }
-                            this.loginProgress = false
-                            this.loading = false
                         })
                         .catch(error => {
                             this.loading = false
