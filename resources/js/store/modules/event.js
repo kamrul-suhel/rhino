@@ -250,7 +250,7 @@ const actions = {
         })
     },
 
-    fetchEventForDropDown({commit}, payload = {}) {
+    fetchEventForDropDown({commit, dispatch}, payload = {}) {
         const URL = `/api/events/dropdown${fn.generateParams(payload)}`
 
         axios.get(URL).then((response) => {
@@ -263,7 +263,9 @@ const actions = {
                     payload.selectFirst !== 'undefined' &&
                     response.data.events.length > 0 // And event is exists
                 ) {
-                    commit('setSelectedEvent', response.data.events[0])
+                    const event = response.data.events[0]
+                    commit('setSelectedEvent', event)
+                    dispatch('fetchGuestForDropDown', {eventId: event.id})
                 }
             }
         })

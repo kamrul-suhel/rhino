@@ -268,7 +268,7 @@
                                 message: `${this.guest.first_name}  ${this.trans.successfully_created}`
                             })
 
-                            this.$router.push({name: 'listGuests'})
+                            this.$router.push({name: 'listGuest'})
                         }
                     })
                 }

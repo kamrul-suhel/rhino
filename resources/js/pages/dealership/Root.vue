@@ -15,25 +15,12 @@
             ...mapGetters({
                 selectedEvent: 'getSelectedEvent',
                 authUser: 'getAuthUser',
-                eventsForDropDown: 'getEventsForDropDown',
-                updateComponent: 'getUpdateComponent'
+                eventsForDropDown: 'getEventsForDropDown'
             })
         },
 
         watch:{
-            updateComponent(){
-                if(this.$route.params.eventId === this.selectedEvent.id){
-                    return
-                }
 
-                this.$router.push({
-                    name: 'editDealershipsEvent',
-                    params:{
-                        eventId: this.selectedEvent.id,
-                        dealershipId: this.authUser.dealership_id
-                    }
-                })
-            }
         },
 
         created(){

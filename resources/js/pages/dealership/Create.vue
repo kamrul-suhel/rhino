@@ -301,7 +301,6 @@
             },
 
             onCreateDealership(){
-
                 if(this.$refs.dealershipForm.validate()){
                     let dealershipForm = new FormData()
 
