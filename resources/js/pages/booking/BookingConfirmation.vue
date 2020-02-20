@@ -304,6 +304,8 @@
                 bookingForm.append('part_ex_vrm', this.partExchange.registrationNumber)
                 bookingForm.append('part_ex_vehicle', this.partExchange.makeAndModel)
                 bookingForm.append('part_ex_distance', this.partExchange.currentMilege)
+
+                bookingForm.append('status', 1) // Make booking confirm
                 bookingForm.append('_method', 'post')
 
                 _.map(this.vehicles, function (vehicle, index) {

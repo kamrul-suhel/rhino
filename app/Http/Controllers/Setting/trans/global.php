@@ -416,6 +416,12 @@ return [
     ],
 
     [
+        'label' => 'Assign',
+        'identifier' => 'assign',
+        'translation' => 'Assign'
+    ],
+
+    [
         'label' => 'Password',
         'identifier' => 'password',
         'translation' => 'Password'
@@ -1049,6 +1055,12 @@ return [
     ],
 
     [
+        'label' => 'Bring guest?',
+        'identifier' => 'bringGuest',
+        'translation' => 'bring guest?'
+    ],
+
+    [
         'label' => 'Might your guest also be interested in changing their car?',
         'identifier' => 'mightYourGuestAlsoBeInterested',
         'translation' => 'Might your guest also be interested in changing their car?'
@@ -1067,9 +1079,27 @@ return [
     ],
 
     [
+        'label' => 'Not',
+        'identifier' => 'not',
+        'translation' => 'Not'
+    ],
+
+    [
         'label' => 'Available',
         'identifier' => 'available',
         'translation' => 'Available'
+    ],
+
+    [
+        'label' => 'Unavailable',
+        'identifier' => 'unavailable',
+        'translation' => 'Unavailable'
+    ],
+
+    [
+        'label' => 'Break time',
+        'identifier' => 'breakTime',
+        'translation' => 'Break time'
     ],
 
     [

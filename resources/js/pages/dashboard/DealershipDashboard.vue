@@ -93,13 +93,7 @@
 
                     <v-flex xs6>
                         <v-card class="elevation-12 py-4 text-xs-center"
-                                :to="{
-                            name: 'editDealershipsEvent',
-                            params:{
-                                dealershipId: selectedDealership.id,
-                                eventId: selectedEvent.id
-                            }
-                        }">
+                                @click="onNavigateTo('editDealershipEvent')">
                             <v-icon color="#000">access_time</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.edit} ${trans.event}` }}
@@ -108,7 +102,7 @@
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'eventSales', params:{eventId: selectedEvent.id}}">
+                        <v-card class="elevation-12 py-4 text-xs-center" @click="onNavigateTo('eventSales')">
                             <v-icon color="#000">languages</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.update} ${trans.sales}` }}
@@ -118,10 +112,7 @@
 
                     <v-flex xs6>
                         <v-card class="elevation-12 py-4 text-xs-center"
-                                :to="{name: 'dealershipAnalytics',
-                                params:{
-                                    eventId: selectedEvent.id
-                                }}">
+                                @click="onNavigateTo('dealershipAnalytics')">
                             <v-icon color="#000">bar_chart</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.analytics}` }}
@@ -168,6 +159,26 @@
         created() {
         },
 
-        methods: {}
+        methods: {
+            onNavigateTo(type){
+                switch(type) {
+                    case 'dealershipAnalytics':
+                        this.$router.push({name: 'dealershipAnalytics', params:{eventId: this.selectedEvent.id}})
+                        break
+                    case 'eventSales':
+                        this.$router.push({name: 'eventSales', params:{eventId: this.selectedEvent.id}})
+                        break
+
+                    case 'editDealershipEvent':
+                        this.$router.push({
+                            name: 'editDealershipsEvent',
+                            params: {
+                                dealershipId: this.selectedDealership.id,
+                                eventId: this.selectedEvent.id
+                            }
+                        })
+                }
+            }
+        }
     }
 </script>

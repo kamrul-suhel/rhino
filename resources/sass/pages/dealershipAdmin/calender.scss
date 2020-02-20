@@ -3,6 +3,7 @@
     line-height: 40px;
     border-radius: 20px;
     color: #444;
+    cursor:pointer;
 
     &.disable{
         border: 1px solid #ddd;
@@ -12,5 +13,21 @@
     &.available{
         border: 1px solid #a5e0a5;
         background: #a5e0a5;
+    }
+}
+
+.assign-to-sale-executive{
+    .selected{
+        .v-card{
+            background:#000;
+            color:#fff;
+        }
+    }
+
+    .unavailable{
+        .v-card{
+            background:#ddd;
+            color:#444;
+        }
     }
 }

@@ -15,6 +15,7 @@ class Guest extends Model
     const STATUS_COMPLETED_NO_SALE = 3;
     const STATUS_COMPLETED_SALE_MADE = 4;
     const STATUS_COMPLETED_NO_SHOW = 5;
+    const STATUS_CANCELED = 6;
 
 
     /**

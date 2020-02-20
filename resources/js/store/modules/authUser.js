@@ -7,6 +7,7 @@ const defaultState = {
     isLogin: true,
     themeOption:{
         primaryColor: '#E20000',
+        primaryTextColor: '#fff',
         secondaryColor: '#444',
         textColor:'',
         theme: 'dark',
@@ -45,6 +46,7 @@ const defaultState = {
         // Default image
         brandDefaultImage : '/images/brandPlaceholder.jpg',
         eventDefaultImage : '/images/event_default_image.jpg',
+        userDefaultImage : '/images/user_default_image.png',
 
         // Frontend
         drawerWidthF: '280',

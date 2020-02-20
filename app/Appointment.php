@@ -10,10 +10,11 @@ class Appointment extends Model
     /**
      * Status filed option
      */
-    const STATUS_PENDING = 0;
-    const STATUS_CONFIRMED = 1;
-    const STATUS_CANCELED = 2;
-    const STATUS_NOT_AVAILABLE = 3;
+    const APPOINTMENT_PENDING = 0;
+    const APPOINTMENT_CONFIRMED = 1;
+    const APPOINTMENT_CANCELED = 6; // Consistance with guest table
+    const APPOINTMENT_NOT_AVAILABLE = 3;
+    const APPOINTMENT_BREAK_TIME = 4;
 
     /**
      * Status identifier
@@ -32,7 +33,6 @@ class Appointment extends Model
         'part_ex_settlement',
         'is_canceled'
     ];
-
 
     public function vehicles(){
         return $this->hasMany(AppointmentVehicle::class);

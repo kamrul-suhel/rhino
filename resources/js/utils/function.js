@@ -191,5 +191,13 @@ export default {
                 document.body.removeChild(link);
             }
         }
+    },
+
+    allowedDates(event, dealership) {
+        let start = moment(event.start)
+        let end = moment(event.end)
+        const dates = this.getDates(start, end, dealership)
+
+        return dates
     }
 }

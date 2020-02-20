@@ -26,7 +26,7 @@ class AddForeignKeyToAppointmentsTable extends Migration
             $table->foreign('guest_id')
                 ->on('guests')
                 ->references('id')
-                ->onDelete('cascade');
+                ->onDelete('set null');
         });
     }
 

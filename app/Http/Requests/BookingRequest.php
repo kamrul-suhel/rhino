@@ -24,7 +24,7 @@ class BookingRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'required|date',
+            'date' => 'date',
             'event_id' => 'required|exists:events,id',
             'user_id' => 'exists:users,id',
             'guest_id' => 'exists:guests,id',

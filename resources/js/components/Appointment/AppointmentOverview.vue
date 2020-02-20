@@ -1,0 +1,60 @@
+<template>
+    <v-layout row wrap justify-center align-center>
+        <v-flex xs12>
+            <div class="appointment-button disable"
+                 @click="onAppointmentDetail()">
+                <span v-if="appointment.status === 3">{{ `${trans.not} ${trans.available}`}}</span>
+                <span v-if="appointment.status === 4">{{ `${trans.breakTime}`}}</span>
+                <span v-if="appointment.status === 1">
+                    {{ `${trans.confirmed}`}}
+                    <span v-if="appointment.guest_id">{{ appointment.guest_first_name }}</span>
+                </span>
+            </div>
+        </v-flex>
+    </v-layout>
+    <!-- unavailable -->
+</template>
+
+<script>
+    import {mapGetters} from 'vuex'
+
+    export default {
+        components: {
+
+        },
+
+        data() {
+            return {
+
+            }
+        },
+
+        props: {
+            appointment: {
+                type: Object,
+                required: true
+            }
+        },
+
+        computed: ({
+            ...mapGetters({
+                trans: 'getFields',
+                themeOption: 'getThemeOption',
+                selectedUser: 'getSelectedUser',
+                existingAppointments: 'getAppointments'
+            })
+        }),
+
+        created() {
+        },
+
+        methods: {
+            onAppointmentDetail(){
+                this.$store.commit('setAppointmentAvailable', false)
+                this.$store.commit('setAppointmentUnavailable', true)
+                this.$store.commit('setAppointmentDialog', true)
+                this.$store.commit('setAppointmentDialogSlot', this.appointment)
+            }
+        }
+    }
+</script>

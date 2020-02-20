@@ -22,7 +22,7 @@ class CheckSaleExecutiveAvailability extends Controller
         $saleExecutiveId = $request->saleExecutiveId;
 
         foreach ($request->slots as $slot) {
-            $startTime = Carbon::parse($slot['start']);
+            $startTime = Carbon::parse($slot['start'])->add('1 seconds');
             $endTime = Carbon::parse($slot['end']);
             // check appointment table is this time is exists with sale executive
             $appointment = Appointment::where(function ($query) use ($startTime, $endTime, $saleExecutiveId) {

@@ -29,7 +29,8 @@ import Translations from './modules/translation'
 import SpecializeBrand from './modules/specializeBrand'
 import Header from './modules/header'
 import Global from './modules/global'
-import SaleUpdate from "./modules/saleUpdate";
+import SaleUpdate from "./modules/saleUpdate"
+import AssignToSaleExecutiveDialog from "./modules/assignToSaleExecutive";
 
 
 Vue.use(Vuex)
@@ -97,7 +98,8 @@ const store = new Vuex.Store({
         Translations,
         Analytics,
         SpecializeBrand,
-        SaleUpdate
+        SaleUpdate,
+        AssignToSaleExecutiveDialog
     }
 })
 

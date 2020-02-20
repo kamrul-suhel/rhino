@@ -118,26 +118,22 @@
                                             </template>
 
                                             <template v-slot:selection="{ item, selected }">
-                                                    <span v-text="`${item.email} (${item.first_name})`"></span>
+                                                <span v-text="`${item.first_name}`"></span>
                                             </template>
 
                                             <template v-slot:item="{ item }">
-                                                <v-list-tile
-                                                    three-line
-                                                    :key="item.id"
-                                                    avatar
+                                                <v-list-tile-avatar
+                                                    :color="themeOption.primaryColor"
+                                                    class="headline font-weight-light white--text"
                                                 >
-                                                    <v-list-tile-avatar
-                                                        :color="themeOption.primaryColor"
-                                                        class="headline font-weight-light white--text"
-                                                    >
-                                                        {{ item.first_name.charAt(0) }}
-                                                    </v-list-tile-avatar>
-                                                    <v-list-tile-content>
-                                                        <v-list-tile-title v-text="`${item.surname} ${item.first_name}`"></v-list-tile-title>
-                                                        <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
-                                                    </v-list-tile-content>
-                                                </v-list-tile>
+                                                    {{ item.first_name.charAt(0) }}
+                                                </v-list-tile-avatar>
+
+                                                <v-list-tile-content>
+                                                    <v-list-tile-title
+                                                        v-text="`${item.surname} ${item.first_name}`"></v-list-tile-title>
+                                                    <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
+                                                </v-list-tile-content>
                                             </template>
                                         </v-autocomplete>
                                     </v-flex>
@@ -198,7 +194,7 @@
                 selectedSource: null,
                 sources: [],
                 select: null,
-                withUnique:false
+                withUnique: false
             }
         },
         computed: ({
@@ -251,20 +247,20 @@
                 }
             },
 
-            onGoBack(){
-              this.withUnique = false
+            onGoBack() {
+                this.withUnique = false
             },
 
-            onUniqueCode(){
-              this.withUnique = true
+            onUniqueCode() {
+                this.withUnique = true
             },
 
             onGuestBookingSubmit() {
                 // validate form
-                if(this.selectedSource === '' || this.selectedSource === null){
+                if (this.selectedSource === '' || this.selectedSource === null) {
                     return
                 }
-                if(!this.selectedGuest.id){
+                if (!this.selectedGuest.id) {
                     return
                 }
 
@@ -282,7 +278,7 @@
 
                 // submit for appointment
                 axios.post(`/api/guests/${this.selectedGuest.id}`, guestFormData).then((response) => {
-                    if(response.data.success){
+                    if (response.data.success) {
                         axios.get('/refresh_csrf_token').then((csrfResponse) => {
                             let csrfToken = csrfResponse.data.csrfToken
 
@@ -292,7 +288,7 @@
                             axios.post('/guests/login', guestLogin, {
                                 'X-CSRF-TOKEN': csrfToken
                             }).then((loginResponse) => {
-                                if(loginResponse.data.success){
+                                if (loginResponse.data.success) {
                                     this.dialog = false
                                     this.$router.push({name: 'booking'})
                                 }

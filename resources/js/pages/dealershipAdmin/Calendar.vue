@@ -145,17 +145,23 @@
                 </v-container>
             </div>
         </div>
+        <AppointmentDialog></AppointmentDialog>
+        <AssignToSaleExecutiveDialog></AssignToSaleExecutiveDialog>
     </v-container>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
     import User from '@/components/Appointment/User'
+    import AppointmentDialog from "@/components/Appointment/AppointmentDialog"
+    import AssignToSaleExecutiveDialog from "@/components/Appointment/AssignToSaleExecutiveDialog";
 
     export default {
 
         components: {
-            User
+            User,
+            AppointmentDialog,
+            AssignToSaleExecutiveDialog
         },
 
         data() {
@@ -176,13 +182,18 @@
                 selectedEvent: 'getSelectedEvent',
                 users: 'getUsers',
                 appointments: 'getAppointments',
-                selectedUser: 'getSelectedUser'
+                selectedUser: 'getSelectedUser',
+                updateComponent: 'getUpdateComponent'
             })
         }),
 
         watch: {
             selectedEvent() {
                 this.fetchEventUser()
+            },
+
+            updateComponent(){
+                this.fetchAllAppointmentByEventId(this.selectedUser)
             }
         },
 

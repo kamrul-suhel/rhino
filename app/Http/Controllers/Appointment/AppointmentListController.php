@@ -29,6 +29,8 @@ class AppointmentListController extends Controller
             $appointments = $appointments->where('appointments.user_id', $request->saleExecutiveId);
         }
 
+        $appointments = $appointments->whereIn('appointments.status', [Appointment::APPOINTMENT_CONFIRMED, Appointment::APPOINTMENT_NOT_AVAILABLE, Appointment::APPOINTMENT_BREAK_TIME]);
+
         $appointments = $appointments->where('appointments.event_id', $eventId)->get();
 
         return response()->json([

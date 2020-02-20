@@ -27,10 +27,18 @@ class BookingStoreController extends Controller
         }
 
         if ($appointment) {
-            // Update guest state to confirm
-            $guest = Guest::findOrFail($request->guest_id);
-            $guest->status = Guest::STATUS_CONFIRMED;
-            $guest->save();
+            if($appointment->guest_id){
+                // Update guest status to
+                $guest = Guest::findOrFail($request->guest_id);
+
+                if($request->has('canceled') && !empty($request->canceled)){
+                    // Canceled status
+                    $guest->status = Guest::STATUS_CANCELED;
+                }else{
+                    $guest->status = Guest::STATUS_CONFIRMED;
+                }
+                $guest->save();
+            }
 
             return response()->json([
                 'success' => true,
@@ -45,11 +53,12 @@ class BookingStoreController extends Controller
 
     public function save(BookingRequest $request, $id = null)
     {
+
         $appointment = $id ? Appointment::findOrFail($id) : new Appointment();
 
         $request->has('event_id') ? $appointment->event_id = $request->event_id : null;
         $request->has('user_id') ? $appointment->user_id = $request->user_id : null;
-        $request->has('guest_id') ? $appointment->guest_id = $request->guest_id : null;
+        $appointment->guest_id = $request->has('guest_id') ?  $request->guest_id : null;
         $request->has('slot_id') ? $appointment->slot_id = $request->slot_id : null;
         $request->has('bring_guest') && $request->bring_guest !== 'null' ? $appointment->bring_guest = $request->bring_guest : null;
         $request->has('guest_changing_car') && $request->guest_changing_car !== 'null' ? $appointment->guest_changing_car = $request->guest_changing_car : null;
@@ -58,8 +67,20 @@ class BookingStoreController extends Controller
         $request->has('part_ex_vrm') && $request->part_ex_vrm !== 'null' ? $appointment->part_ex_vrm = $request->part_ex_vrm : null;
         $request->has('part_ex_vehicle') && $request->part_ex_vehicle !== 'null' ? $appointment->part_ex_vehicle = $request->part_ex_vehicle : null;
         $request->has('part_ex_distance') && $request->part_ex_distance !== 'null' ? $appointment->part_ex_distance = $request->part_ex_distance : null;
+        $request->has('status') && $request->status !== 'null' ? $appointment->status = $request->status : null;
 
         $appointment->save();
+
+
+        // if request has canceled, do not update appointment vehicle
+        if($request->has('canceled') && !empty($request->canceled)){
+            return $appointment;
+        }
+
+        // Do not want to delete vehicle
+        if($request->has('delete_vehicle') && !empty($request->delete_vehicle)){
+            return $appointment;
+        }
 
         // if vehicles exists then update vehicle
         if (
@@ -71,7 +92,9 @@ class BookingStoreController extends Controller
                 $this->saveAppointmentVehicle($vehicle, $appointment->id);
             }
         }else{
-            $appointment->vehicles()->delete();
+            if($id){
+                $appointment->vehicles()->delete();
+            }
         }
 
         return $appointment;

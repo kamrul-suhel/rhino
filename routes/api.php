@@ -289,6 +289,8 @@ Route::prefix('guests')->group(function () {
 */
 Route::prefix('appointments')->group(function () {
     Route::get('{eventId}', 'Appointment\AppointmentListController@list');
+    Route::put('{appointmentId}', 'Booking\BookingStoreController@store');
+    Route::delete('{appointmentId}', 'Appointment\AppointmentDestroyController@destroy');
 });
 
 
