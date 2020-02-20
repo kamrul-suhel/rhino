@@ -80,22 +80,22 @@ const mutations = {
                     },
 
                     {
-                        icon: 'insert_chart_outlined',
+                        icon: 'people',
                         text: `${trans.guests}`,
                         link: 'eventGuestList',
                         access: ['dealership'],
                     },
 
                     {
-                        icon: 'insert_chart_outlined',
+                        icon: 'business',
                         text: `${trans.edit} ${trans.dealership}`,
                         link: 'editDealership',
                         access: ['dealership'],
                     },
 
                     {
-                        icon: 'insert_chart_outlined',
-                        text: `${trans.users}`,
+                        icon: 'people',
+                        text: `${trans.staff}`,
                         link: 'dealershipUserList',
                         access: ['dealership'],
                     }

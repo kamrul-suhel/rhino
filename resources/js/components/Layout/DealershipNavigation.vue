@@ -111,6 +111,7 @@
                 authUser: 'getAuthUser',
                 title: 'getNavTitle',
                 selectedEvent: 'getSelectedEvent',
+                selectedDealership: 'getSelectedDealership',
                 eventsForDropDown: 'getEventsForDropDown'
             })
         },
@@ -139,6 +140,16 @@
         methods: {
             async onPageChange(item) {
                 if(this.$route.name === item.link){
+                    return
+                }
+
+                if (item.link === 'editDealership') {
+                    this.$router.push({
+                        name: 'editDealerships',
+                        params: {
+                            id: this.selectedDealership.id
+                        }
+                    })
                     return
                 }
 

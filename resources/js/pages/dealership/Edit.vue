@@ -144,6 +144,7 @@
 
                             <v-tab
                                 key="brands"
+                                v-if="authUser.level === 'Admin'"
                                 ripple
                             >
                                 {{ trans.brands }}
@@ -179,6 +180,7 @@
 
                             <v-tab-item
                                 key="brands"
+                                v-if="authUser.level === 'Admin'"
                             >
                                 <Brands v-if="dealership.id"
                                         :dealershipId="dealership.id">
@@ -253,6 +255,7 @@
                 regions: 'getRegions',
                 dealership: 'getSelectedDealership',
                 selectedLanguage: 'getSubSelectedLanguage',
+                authUser: 'getAuthUser',
             })
         }),
 
