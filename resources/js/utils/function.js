@@ -214,7 +214,7 @@ export default {
             case 4:
                 return `${trans.breakTime}`
             case 6:
-                return `${trans.canceled}`
+                return `${trans.cancel}`
         }
     }
 }

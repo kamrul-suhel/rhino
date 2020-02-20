@@ -96,6 +96,25 @@ return [
         'identifier' => 'delete_confirmation',
         'translation' => 'Are you sure you want to delete ?'
     ],
+
+    [
+        'label' => 'Are you sure you want to cancel this appointment ?',
+        'identifier' => 'confirmationForCancel',
+        'translation' => 'Are you sure you want to cancel this appointment ?'
+    ],
+
+    [
+        'label' => 'Are you sure you want to reebok this appointment ?',
+        'identifier' => 'confirmationForReebok',
+        'translation' => 'Are you sure you want to reebok this appointment ?'
+    ],
+
+    [
+        'label' => 'Are you sure you want to book this appointment ?',
+        'identifier' => 'confirmationForBook',
+        'translation' => 'Are you sure you want to book this appointment ?'
+    ],
+
     [
         'label' => 'Cancel',
         'identifier' => 'cancel',
@@ -1024,6 +1043,7 @@ return [
         'translation' => 'Now book your appointment'
     ],
 
+
     [
         'label' => 'Choose',
         'identifier' => 'choose',
@@ -1269,6 +1289,12 @@ return [
         'label' => 'Your model(s) of interest:',
         'identifier' => 'modelsOfInterest',
         'translation' => 'Your model(s) of interest:'
+    ],
+
+    [
+        'label' => 'Finish guest booking journey',
+        'identifier' => 'finishGuestBookingJourney',
+        'translation' => 'Finish guest booking journey'
     ],
 
     [
