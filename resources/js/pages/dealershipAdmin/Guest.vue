@@ -11,7 +11,7 @@
                     <template v-slot:items="props">
                         <tr>
                             <td><strong>{{ trans.surName }}:</strong> {{ guest.surname }}</td>
-                            <td class="text-xs-left"> <strong>{{ trans.firstName }}:</strong> {{ guest.first_name }}</td>
+                            <td class="text-xs-left"><strong>{{ trans.firstName }}:</strong> {{ guest.first_name }}</td>
                         </tr>
 
                         <tr>
@@ -26,7 +26,9 @@
 
                         <tr>
                             <td><strong>{{ `${trans.address_line} 1` }}:</strong> {{ guest.address_line_1 }}</td>
-                            <td class="text-xs-left"><strong>{{ `${trans.landline} 2` }}:</strong> {{ guest.address_line_2 }}</td>
+                            <td class="text-xs-left"><strong>{{ `${trans.landline} 2` }}:</strong> {{
+                                guest.address_line_2 }}
+                            </td>
                         </tr>
                     </template>
                 </v-data-table>
@@ -39,7 +41,7 @@
                     <v-flex xs12
                             v-for="appointment in guest.appointment"
                             :key="appointment.id">
-                        <v-card>
+                        <v-card class="mb-3">
                             <v-card-title>
                                 <strong>{{ trans.name }}:</strong> {{ appointment.event.event_name}}
                                 <v-spacer></v-spacer>
@@ -61,11 +63,12 @@
 
                                 <v-layout row wrap>
                                     <v-flex xs6>
-                                        <strong>{{ trans.sales_executive }}:</strong> {{ `${appointment.user.firstname} ${appointment.user.surname}`}}
+                                        <strong>{{ trans.sales_executive }}:</strong> {{ appointment.user ?
+                                        `${appointment.user.firstname} ${appointment.user.surname}` : ''}}
                                     </v-flex>
 
                                     <v-flex xs5>
-                                        <strong>{{ trans.email }}</strong>{{ appointment.user.email }}
+                                        <strong>{{ trans.email }}</strong>{{ appointment.user ? appointment.user.email : '' }}
                                     </v-flex>
                                 </v-layout>
                             </v-card-text>
@@ -88,13 +91,21 @@
                                         {{ `${trans.reebok} ${trans.appointment}` }}
                                     </span>
                                 </v-btn>
+
+                                <v-btn :color="themeOption.primaryColor"
+                                       flat
+                                       v-if="appointment.status === 0"
+                                       @click="onBookGuest(appointment)">
+                                    <span :style="{color: themeOption.primaryColor}">
+                                        {{ `${trans.finishGuestBookingJourney}` }}
+                                    </span>
+                                </v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-flex>
                 </v-layout>
             </v-flex>
         </v-layout>
-
 
         <v-dialog
             v-model="dialog"
@@ -114,7 +125,7 @@
                 <v-card-text>
                     <v-container grid-list-md>
                         <v-layout row wrap>
-                            <v-flex xs12 sm6 class="text-xs-center">
+                            <v-flex xs12 class="text-xs-center">
                                 {{ dialogDescription }}
                             </v-flex>
                         </v-layout>
@@ -126,11 +137,30 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
+                        v-if="dialogButtonCancel"
                         @color="themeOption.primaryColor"
                         flat
                         @click="onConfirmAction('confirmedCancel')"
                     >
                         {{ `${trans.confirmed} ${trans.cancel}` }}
+                    </v-btn>
+
+                    <v-btn
+                        v-if="selectedAppointment.status === 6"
+                        @color="themeOption.primaryColor"
+                        flat
+                        @click="onConfirmAction('reebokAppointment')"
+                    >
+                        {{ `${trans.reebok} ${trans.appointment}` }}
+                    </v-btn>
+
+                    <v-btn
+                        v-if="selectedAppointment.status === 0"
+                        @color="themeOption.primaryColor"
+                        flat
+                        @click="onConfirmAction('finishExistingBooking')"
+                    >
+                        {{ `${trans.finishGuestBookingJourney}` }}
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -154,6 +184,7 @@
                 dialog: false,
                 dialogTitle: null,
                 dialogDescription: null,
+                dialogButtonCancel: true,
                 selectedAppointment: {}
             }
         },
@@ -166,9 +197,7 @@
             })
         }),
 
-        watch: {
-
-        },
+        watch: {},
 
         created() {
             this.initialize()
@@ -179,27 +208,116 @@
         },
 
         methods: {
-            initialize(){
+            initialize() {
                 this.$store.dispatch('fetchGuestDetailInfo', {guestId: this.$route.params.guestId})
             },
 
-            getAppointmentStatus(appointment){
+            getAppointmentStatus(appointment) {
                 return fn.appointmentStatusString(appointment, this.trans)
             },
 
-            onCancel(appointment){
+            onCancel(appointment) {
                 this.dialogTitle = `${this.trans.cancel} ${this.trans.appointment}`
-                // this.dialogDescription = `${this.trans.}`
+                this.dialogDescription = `${this.trans.confirmationForCancel}`
                 this.selectedAppointment = {...appointment}
+                this.dialogButtonCancel = true
                 this.dialog = true
             },
 
-            onReebok(appointment){
+            onReebok(appointment) {
                 this.selectedAppointment = {...appointment}
+                this.dialogTitle = `${this.trans.reebok} ${this.trans.appointment}`
+                this.dialogDescription = `${this.trans.confirmationForReebok}`
+                this.dialogButtonCancel = false
                 this.dialog = true
             },
 
-            onConfirmAction(type){
+            onBookGuest(appointment) {
+                this.selectedAppointment = {...appointment}
+                this.dialogTitle = `${this.trans.book} ${this.trans.guest}`
+                this.dialogDescription = `${this.trans.confirmationForBook}`
+                this.dialogButtonCancel = false
+                this.dialog = true
+            },
+
+            onConfirmAction(type) {
+                let appointmentForm = new FormData()
+                let URL = null
+
+                switch (type) {
+                    case 'confirmedCancel':
+                        appointmentForm.append('canceled', true) // canceled the appointment
+                        _.forOwn(this.selectedAppointment, (value, key) => {
+                            switch (key) {
+                                case 'id':
+                                    appointmentForm.append('appointment_id', value)
+                                    break
+
+                                case 'status':
+                                    appointmentForm.append('status', 6) // Consistance with guest table
+                                    break
+
+                                case 'vehicles':
+                                    break
+
+                                default:
+                                    appointmentForm.append(key, value)
+                            }
+                        })
+
+                        appointmentForm.append('_method', 'PUT')
+
+                        const appointmentId = this.selectedAppointment.id
+                        URL = `/api/appointments/${appointmentId}`
+                        axios.post(URL, appointmentForm).then((response) => {
+                            if (response.data.success) {
+                                this.initialize()
+                                this.dialog = false
+                            }
+                        })
+                        return
+
+                    case 'reebokAppointment':
+                        appointmentForm.append('guest_id', this.$route.params.guestId)
+                        appointmentForm.append('appointment_id', this.selectedAppointment.id)
+                        appointmentForm.append('_method', 'PUT')
+                        URL = `/api/appointments/${this.selectedAppointment.id}/reebok`
+                        axios.post(URL, appointmentForm).then((response) => {
+                            if (response.data.success) {
+                                axios.get('/refresh_csrf_token').then((csrfResponse) => {
+                                    let csrfToken = csrfResponse.data.csrfToken
+
+                                    let guestLogin = new FormData()
+                                    guestLogin.append('uniqueId', this.guest.unique)
+                                    // login guest into frontend
+                                    axios.post('/guests/login', guestLogin, {
+                                        'X-CSRF-TOKEN': csrfToken
+                                    }).then((loginResponse) => {
+                                        if (loginResponse.data.success) {
+                                            window.location.href = '/booking'
+                                        }
+                                    })
+                                })
+                            }
+                        })
+                        return
+
+                    case 'finishExistingBooking':
+                        axios.get('/refresh_csrf_token').then((csrfResponse) => {
+                            let csrfToken = csrfResponse.data.csrfToken
+
+                            let guestLogin = new FormData()
+                            guestLogin.append('uniqueId', this.guest.unique)
+                            // login guest into frontend
+                            axios.post('/guests/login', guestLogin, {
+                                'X-CSRF-TOKEN': csrfToken
+                            }).then((loginResponse) => {
+                                if (loginResponse.data.success) {
+                                    window.location.href = '/booking'
+                                }
+                            })
+                        })
+                }
 
             }
         }
