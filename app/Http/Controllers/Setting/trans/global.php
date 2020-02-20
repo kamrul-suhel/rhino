@@ -1277,6 +1277,7 @@ return [
         'translation' => 'Amend'
     ],
 
+
     [
         'label' => 'your reservation has been confirmed',
         'identifier' => 'yourReservationConfirmed',
