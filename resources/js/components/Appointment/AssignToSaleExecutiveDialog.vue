@@ -200,7 +200,6 @@
 
             generateAppointmentSlot() {
                 if (this.selectedDate && this.selectedSaleExecutive.id) {
-                    console.log(fn.getStartTimeEndTime(this.selectedDate, this.dealership))
                     const time = fn.getStartTimeEndTime(this.selectedDate, this.dealership)
                     const slots = fn.getTimeSlotsForDay(time, this.selectedEvent)
 

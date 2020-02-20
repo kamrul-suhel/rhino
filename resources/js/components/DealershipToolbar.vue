@@ -34,7 +34,16 @@
                         </v-flex>
 
                         <v-flex xs12 sm4>
-                            search guest
+                            <v-select
+                                :items="dropdownGuests"
+                                :color="themeOption.inputColor"
+                                :label="`${trans.searchBy} ${trans.guest}`"
+                                item-text="name"
+                                item-value="id"
+                                return-object
+                                v-model="selectedGuest"
+                                @change="onSelectGuest()"
+                            ></v-select>
                         </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -60,7 +69,9 @@
                 themeOption: 'getThemeOption',
                 isLogin: 'getIsLogin',
                 dealership: 'getSelectedDealership',
-                events: 'getEventsForDropDown'
+                events: 'getEventsForDropDown',
+                dropdownGuests: 'getGuestsForDropDown',
+                totalGuest: 'getTotalGuests'
             }),
 
             selectedEvent:{
@@ -69,6 +80,16 @@
                 },
                 set:function(value) {
                     this.$store.commit('setSelectedEvent', value)
+                }
+            },
+
+            selectedGuest:{
+                get: function(){
+                    return this.$store.getters.getSelectedGuest
+                },
+
+                set: function(selectedGuest){
+                    this.$store.commit('setSelectedGuest', selectedGuest)
                 }
             }
         },
@@ -88,6 +109,21 @@
 
             onEventChange(){
                 this.$store.commit('setUpdateComponent')
+                this.$store.dispatch('fetchGuestForDropDown', {eventId: this.selectedEvent.id})
+            },
+
+            onSelectGuest(){
+                if(this.$route.params.guestId === this.selectedGuest.id){
+                    return
+                }
+
+                this.$router.push({
+                    name: 'dealershipGuestShow',
+                    params:{
+                        dealershipId: this.dealership.id,
+                        guestId: this.selectedGuest.id
+                    }
+                })
             }
         }
     }

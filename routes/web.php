@@ -103,6 +103,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
                return view('index');
             });
         });
+
+        Route::prefix('{dealershipId}/guests')->group(function(){
+            Route::get('{id}/show', function(){
+                return view('index');
+            });
+        });
     });
 
     Route::get('/home', 'HomeController@index')->name('home');

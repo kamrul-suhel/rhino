@@ -13,11 +13,12 @@ class GuestShowController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+
         $guest = Guest::select(
             'guests.*',
             'events_translation.name as event'
@@ -27,10 +28,28 @@ class GuestShowController extends Controller
                 $eventT->leftJoin('events_translation', 'events_translation.event_id', 'events.id');
                 $eventT->where('events_translation.language_id', $this->languageId);
             })
+            ->with([
+                'appointment.user',
+                'appointment.vehicles',
+                'appointment.event' => function ($event) {
+                    $languageId = $this->languageId;
+                    $event->select(
+                        'events.*',
+                        'events_translation.name as event_name',
+                        'events_translation.notes as event_note'
+                    )
+                        ->leftJoin('events_translation', function ($eventT) use ($languageId) {
+                            $eventT->on('events_translation.event_id', '=', 'events.id')
+                                ->where('events_translation.language_id', $this->languageId);
+                        });
+
+                }
+            ])
             ->where('guests.id', $id)
             ->first();
 
         return response()->json([
+            'success' => true,
             'guest' => $guest
         ]);
     }

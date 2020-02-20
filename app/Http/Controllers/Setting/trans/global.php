@@ -52,6 +52,12 @@ return [
     ],
 
     [
+        'label' => 'Reebok',
+        'identifier' => 'reebok',
+        'translation' => 'Reebok'
+    ],
+
+    [
         'label' => 'Successfully added',
         'identifier' => 'successfully_added',
         'translation' => 'Successfully added'

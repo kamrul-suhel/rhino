@@ -29,6 +29,12 @@ const DealershipAdminRoutes = {
             path: 'events/:eventId/sales',
             name: 'eventSales',
             component:lazyLoad('SaleUpdate')
+        },
+
+        {
+            path: 'dealerships/:dealershipId/guests/:guestId/show',
+            name: 'dealershipGuestShow',
+            component:lazyLoad('Guest')
         }
     ]
 }

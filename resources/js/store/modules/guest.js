@@ -3,6 +3,7 @@ import fn from '../../utils/function'
 const defaultState = {
     guests: [],
     selectedGuest: {},
+    guestDetail:{},
     listHeader: [],
     loading: 'white',
     totalGuests: 0,
@@ -25,6 +26,10 @@ const mutations = {
 
     setInitializeGuest(state){
       state.initialize = !state.initialize
+    },
+
+    setGuestDetail(state, detail){
+        state.guestDetail = {...detail}
     },
 
     setGuestsForDropDown(state, guests) {
@@ -139,6 +144,9 @@ const getters = {
         return state.listHeader
     },
 
+    getGuestDetail(state){
+        return state.guestDetail
+    },
 
     getGuestLoading(state) {
         return state.loading
@@ -213,12 +221,26 @@ const actions = {
 
         axios.get(URL).then((response) => {
             if (response.data) {
-                commit('setGuestsForDropDown', response.data)
+                commit('setGuestsForDropDown', response.data.guests)
+                commit('setTotalGuests', response.data.total)
             }
         })
         .catch((error) => {
 
         })
+    },
+
+    fetchGuestDetailInfo({commit}, payload = {}) {
+        const URL = `/api/guests/${payload.guestId}${fn.generateParams(payload)}`
+
+        axios.get(URL).then((response) => {
+            if (response.data.success) {
+                commit('setGuestDetail', response.data.guest)
+            }
+        })
+            .catch((error) => {
+
+            })
     }
 }
 

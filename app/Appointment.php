@@ -37,4 +37,16 @@ class Appointment extends Model
     public function vehicles(){
         return $this->hasMany(AppointmentVehicle::class);
     }
+
+    /**
+     * Appointment belong to event
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function event(){
+        return $this->belongsTo(Event::class, 'event_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

@@ -199,5 +199,22 @@ export default {
         const dates = this.getDates(start, end, dealership)
 
         return dates
+    },
+
+    appointmentStatusString(appointment, trans){
+        switch(appointment.status){
+            case 0:
+                return trans.pending
+
+            case 1:
+                return trans.confirmed
+
+            case 3:
+                return `${trans.not} ${trns.available}`
+            case 4:
+                return `${trans.breakTime}`
+            case 6:
+                return `${trans.canceled}`
+        }
     }
 }

@@ -27,6 +27,11 @@ class GuestListController extends Controller
                 $eventT->where('events_translation.language_id', $this->languageId);
             });
 
+        // If request has eventId, then load specific event guest.
+        if($request->has('eventId') & !empty($request->eventId)){
+            $guests = $guests->where('guests.event_id', $request->eventId);
+        }
+
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search dealership name
@@ -47,11 +52,6 @@ class GuestListController extends Controller
                 }
             }
 
-            // If request has eventId, then load specific guest.
-            if($request->has('eventId') & !empty($request->eventId)){
-                $guests = $guests->where('guests.event_id', $request->eventId);
-            }
-
             // If sortBy set, then sort by name
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;
@@ -68,20 +68,9 @@ class GuestListController extends Controller
             $data = $guests->paginate($this->perPage);
             $totalGuest = $data->total();
             $data = $data->items();
-        } elseif(
-            $request->has('search') &&
-            !empty($request->search) &&
-            $request->has('uniqueId') &&
-            !empty($request->uniqueId) &&
-            $request->has('eventId') &&
-            !empty($request->eventId)
-        ){
-            // Search by uniqueId & event
-            $data = $guests->where('guests.event_id', $request->eventId)
-                ->get();
         } else {
             $data = $guests->get();
-            $totalBrand = $guests->count();
+            $totalGuest = $guests->count();
         }
 
         return response()->json([

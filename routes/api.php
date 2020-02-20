@@ -273,6 +273,7 @@ Route::prefix('eventvehicle')->group(function () {
 Route::prefix('guests')->group(function () {
 
     Route::get('', 'Guest\GuestListController@list');
+    Route::get('dropdown', 'Guest\GuestDropdownController@list');
     Route::get('{id}', 'Guest\GuestShowController@show');
     Route::post('', 'Guest\GuestStoreController@store');
     Route::post('upload', 'Guest\GuestUploadCSVController@generateGuests');
