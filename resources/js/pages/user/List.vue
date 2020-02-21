@@ -183,9 +183,17 @@
                     search: this.searchUsers
                 }
 
+                if(this.authUser.level === 'dealership'){
+            
+                    const pagination = {
+                        ...paginateOption,
+                        dealershipId: this.$route.params.dealershipId
+                    }
+                    this.$store.dispatch('fetchUsersForEvent', pagination)
 
-                // Check component load as a sub component
-                if(this.subComponent){
+                }else{
+                    // Check component load as a sub component
+                    if(this.subComponent){
                     switch(this.model){
                         case 'dealership':
                             const pagination = {
@@ -201,6 +209,10 @@
                 }else{
                     this.$store.dispatch('fetchUsers', paginateOption)
                 }
+                }
+
+                
+                
             },
 
             onEditUser(user){
