@@ -4,8 +4,19 @@ function lazyLoad(view){
 }
 const booking ={
     path: '/booking',
-    name: 'booking',
-    component: lazyLoad('Frontend')
+    component: lazyLoad('Root'),
+    children:[
+        {
+            path: '/',
+            name: 'booking',
+            component: lazyLoad('Frontend')
+        },
+        {
+            path: 'confirmed',
+            name: 'bookingConfirmed',
+            component: lazyLoad('Confirmed')
+        }
+    ]
 }
 
 export default booking

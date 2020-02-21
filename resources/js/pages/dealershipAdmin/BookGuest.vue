@@ -18,7 +18,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4 v-if="!withUnique">
+        <v-layout mt-4 v-if="showNav">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -41,7 +41,7 @@
 
                         <v-list-tile
                             avatar
-                            @click=""
+                            @click="onWithoutUniqueCode()"
                         >
                             <v-list-tile-avatar>
                                 <v-icon
@@ -155,6 +155,11 @@
             </div>
         </v-layout>
 
+
+        <v-layout row wrap mt-5 v-if="withoutUnique">
+            <CreateGuest @dialogStatus="onDialogStatusChange" @guest="onCreateGuest"></CreateGuest>
+        </v-layout>
+
         <v-dialog
             v-model="dialog"
             hide-overlay
@@ -180,10 +185,13 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import CreateGuest from '@/pages/guest/Create'
 
     export default {
 
-        components: {},
+        components: {
+            CreateGuest
+        },
 
         data() {
             return {
@@ -194,7 +202,9 @@
                 selectedSource: null,
                 sources: [],
                 select: null,
-                withUnique: false
+                withUnique: false,
+                withoutUnique: false,
+                showNav: true
             }
         },
         computed: ({
@@ -249,10 +259,20 @@
 
             onGoBack() {
                 this.withUnique = false
+                this.withoutUnique = false
+                this.showNav = true
             },
 
             onUniqueCode() {
                 this.withUnique = true
+                this.showNav = false
+                this.withoutUnique = false
+            },
+
+            onWithoutUniqueCode(){
+                this.withUnique = false
+                this.showNav = false
+                this.withoutUnique = true
             },
 
             onGuestBookingSubmit() {
@@ -275,28 +295,38 @@
                 guestFormData.append('method', this.selectedSource)
                 guestFormData.append('_method', 'PUT')
 
-
                 // submit for appointment
                 axios.post(`/api/guests/${this.selectedGuest.id}`, guestFormData).then((response) => {
                     if (response.data.success) {
-                        axios.get('/refresh_csrf_token').then((csrfResponse) => {
-                            let csrfToken = csrfResponse.data.csrfToken
-
-                            let guestLogin = new FormData()
-                            guestLogin.append('uniqueId', this.selectedGuest.unique)
-                            // login guest into frontend
-                            axios.post('/guests/login', guestLogin, {
-                                'X-CSRF-TOKEN': csrfToken
-                            }).then((loginResponse) => {
-                                if (loginResponse.data.success) {
-                                    this.dialog = false
-                                    this.$router.push({name: 'booking'})
-                                }
-                            })
-                        })
+                        this.onRedirectToBooking(this.selectedGuest)
                     }
                 })
+            },
 
+            onDialogStatusChange(status){
+                this.dialog = status
+            },
+
+            onCreateGuest(guest){
+                this.onRedirectToBooking(guest)
+            },
+
+            onRedirectToBooking(guest){
+                axios.get('/refresh_csrf_token').then((csrfResponse) => {
+                    let csrfToken = csrfResponse.data.csrfToken
+
+                    let guestLogin = new FormData()
+                    guestLogin.append('uniqueId', guest.unique)
+                    // login guest into frontend
+                    axios.post('/guests/login', guestLogin, {
+                        'X-CSRF-TOKEN': csrfToken
+                    }).then((loginResponse) => {
+                        if (loginResponse.data.success) {
+                            this.dialog = false
+                            this.$router.push({name: 'booking'})
+                        }
+                    })
+                })
             }
         }
     }

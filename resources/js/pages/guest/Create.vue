@@ -1,6 +1,6 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
+        <v-layout row warp pb-4 v-if="authUser.level === 'admin'">
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
@@ -27,7 +27,7 @@
                 <v-flex xs12>
                     <v-card>
                         <v-card-text>
-                            <v-layout row wrap>
+                            <v-layout row wrap v-if="authUser.level === 'admin'">
                                 <v-flex xs12 sm3 pa-2>
                                     <v-select
                                         :color="themeOption.inputColor"
@@ -42,6 +42,7 @@
                                     ></v-select>
                                 </v-flex>
                             </v-layout>
+
                             <v-layout row wrap py-4>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
@@ -208,13 +209,14 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import authUser from "../../store/modules/authUser";
 
     export default {
         data() {
             return {
                 valid: true,
                 guest: {
-                    status: 1
+                    status: 0
                 }
             }
         },
@@ -223,7 +225,9 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                events: 'getEventsForDropDown'
+                events: 'getEventsForDropDown',
+                authUser: 'getAuthUser',
+                selectedEvent: 'getSelectedEvent'
             })
         }),
 
@@ -241,11 +245,19 @@
 
             onCreateGuest() {
                 if (this.$refs.guestForm.validate()) {
+                    if(this.$route.name === 'dealershipAdminBookAGuest'){
+                        this.$emit('dialogStatus', true)
+                    }
                     // Set form object for dealership
                     let guestForm = new FormData()
                     _.forOwn(this.guest, (value, key) => {
                         guestForm.append(key, value)
                     })
+
+                    // Check if auth user is dealership then get eventId from selected event
+                    if(this.$route.name === 'dealershipAdminBookAGuest'){
+                        guestForm.append('event_id', this.selectedEvent.id)
+                    }
 
                     const URL = `/api/guests`
                     axios.post(URL, guestForm).then((response) => {
@@ -256,7 +268,14 @@
                                 message: `${this.guest.first_name}  ${this.trans.successfully_created}`
                             })
 
+                            // If request coming from book guest page then return to book guest journey
+                            if(this.$route.name === 'dealershipAdminBookAGuest'){
+                               this.$emit('guest', response.data.guest)
+                                return
+                            }
+
                             this.$router.push({name: 'listGuest'})
+
                         }
                     })
                 }

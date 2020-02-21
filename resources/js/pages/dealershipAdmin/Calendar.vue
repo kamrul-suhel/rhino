@@ -194,6 +194,7 @@
 
             updateComponent(){
                 this.fetchAllAppointmentByEventId(this.selectedUser)
+                this.onGoBack()
             }
         },
 
