@@ -173,18 +173,6 @@
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :true-value="1"
-                                        :false-value="0"
-                                        :color="themeOption.switchOnColor"
-                                        v-model="guest.status">
-                                    </v-switch>
-                                </v-flex>
-                            </v-layout>
                         </v-card-text>
 
                         <v-layout class="pa-3 text-xs-left">
