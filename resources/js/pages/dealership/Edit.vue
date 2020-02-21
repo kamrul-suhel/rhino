@@ -144,7 +144,7 @@
 
                             <v-tab
                                 key="brands"
-                                v-if="authUser.level === 'Admin'"
+                                v-if="authUser.level === 'admin'"
                                 ripple
                             >
                                 {{ trans.brands }}
@@ -180,7 +180,7 @@
 
                             <v-tab-item
                                 key="brands"
-                                v-if="authUser.level === 'Admin'"
+                                v-if="authUser.level === 'admin'"
                             >
                                 <Brands v-if="dealership.id"
                                         :dealershipId="dealership.id">

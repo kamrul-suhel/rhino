@@ -69,7 +69,7 @@ class UserListController extends Controller
                     case 'dealership':
                         $users = $users->where([
                             'users.dealership_id' => $request->dealershipId,
-//                            'users.level' => User::USERSALEEXECUTIVE
+                            // 'users.level' => User::USERSALEEXECUTIVE
                         ]);
                 }
             }
