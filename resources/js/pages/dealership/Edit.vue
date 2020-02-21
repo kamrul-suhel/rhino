@@ -163,7 +163,6 @@
                                 <v-layout row wrap pt-3>
                                     <dealership-users></dealership-users>
 
-
                                     <v-flex xs12 sm6 pa-2>
                                         <v-btn
                                             :color="themeOption.buttonSuccess"

@@ -28,10 +28,15 @@ class GuestDownloadCSVController extends Controller
 
         switch ($request->downloadType) {
             case 'bookedGuest':
-                $guests = $guests->where('appointments.event_id', $request->eventId);
+                $guests = $guests->where([
+                    'appointments.event_id' => $request->eventId,
+                    'appointments.status' => 1
+                ]);
                 break;
+
             case 'unbookedGuest':
-                $guests = $guests->whereNull('appointments.event_id');
+                $guests = $guests->whereNull(['appointments.event_id'])
+                    ->orWhere('appointments.status', [6, 0]);
                 break;
         }
 

@@ -74,10 +74,14 @@ class BookingController extends Controller
                 ->get();
 
             $saleExecutives = User::select(
-                'users.*'
+                'users.*',
+                'event_user.user_id',
+                'event_user.event_id'
             )
+                ->leftJoin('event_user', 'event_user.user_id', '=', 'users.id')
+                ->where('event_user.event_id', $event->id)
                 ->with('specializeBrands')
-                ->where('dealership_id', $dealership->id)
+                ->where('users.dealership_id', $dealership->id)
                 ->get();
 
             $appointments = Appointment::where('appointments.event_id', $event->id)
