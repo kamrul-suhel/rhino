@@ -50,6 +50,8 @@ class UserBrandListController extends Controller
                 $brandUsers = $brandUsers->orderBy('brand_user.id', 'DESC');
             }
 
+            $brandUsers = $brandUsers->where('brand_user.user_id', $request->id);
+
             $data = $brandUsers->paginate($this->perPage);
             $totalBrand = $data->total();
             $data = $data->items();

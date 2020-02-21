@@ -41,16 +41,9 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn small
-                       @click="onFetchBrands"
-                       :color="themeOption.buttonSecondaryColor"
-                >
-                    {{ trans.cancel }}
-                </v-btn>
-
-                <v-btn small
                        @click="onCreateRelation"
                        :color="themeOption.buttonPrimaryColor"
-                >{{ this.selectedBrand.id ? `${trans.update} ${trans.brand}` : `${trans.add} ${trans.brand}` }}</v-btn>
+                >{{`${trans.add} ${trans.brand}` }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-form>

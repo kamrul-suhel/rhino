@@ -135,6 +135,7 @@
                             <td>{{ props.item.company }}</td>
                             <td class="text-xs-right">
                                 <v-icon
+                                    v-if="!subComponent"
                                     small
                                     class="mr-2"
                                     @click="onEditBrand(props.item)"
@@ -243,6 +244,14 @@
                 brandImage: 'getUploadedImage'
             })
         }),
+
+        props:{
+          subComponent:{
+              type: Boolean,
+              required: false,
+              default: false
+          }
+        },
 
         watch: {
             pagination: {

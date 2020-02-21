@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <addUserForm :sub-component="authUser.level === 'dealership'"
                      :model="authUser.level === 'dealership'? 'dealership' : ''"></addUserForm>
 
@@ -103,13 +103,13 @@
             addUserForm
         },
 
-        props:{
-            subComponent:{
+        props: {
+            subComponent: {
                 type: Boolean,
                 default: false
             },
 
-            model:{
+            model: {
                 type: String
             }
         },
@@ -120,7 +120,7 @@
                 dialog: false,
                 deleteDialog: false,
                 searchUsers: '',
-                selectedUser:{}
+                selectedUser: {}
             }
         },
 
@@ -151,11 +151,11 @@
                 this.initialize()
             },
 
-            trans(){
+            trans() {
                 this.initialize()
             },
 
-            '$route.params.eventId': function(id){
+            '$route.params.eventId': function (id) {
                 this.initialize()
             },
 
@@ -182,18 +182,10 @@
                     search: this.searchUsers
                 }
 
-                if(this.authUser.level === 'dealership'){
-            
-                    const pagination = {
-                        ...paginateOption,
-                        dealershipId: this.$route.params.dealershipId
-                    }
-                    this.$store.dispatch('fetchUsersForEvent', pagination)
 
-                }else{
-                    // Check component load as a sub component
-                    if(this.subComponent){
-                    switch(this.model){
+                // Check component load as a sub component
+                if (this.subComponent) {
+                    switch (this.model) {
                         case 'dealership':
                             const pagination = {
                                 ...paginateOption,
@@ -205,51 +197,48 @@
                             this.$store.dispatch('fetchUsersForEvent', pagination)
                             break;
                     }
-                }else{
+                } else {
                     this.$store.dispatch('fetchUsers', paginateOption)
                 }
-                }
-
-                
-                
-            },
-
-            onEditUser(user){
 
             },
 
-            onDeleteUser(user){
-                if(this.subComponent){
+            onEditUser(user) {
+
+            },
+
+            onDeleteUser(user) {
+                if (this.subComponent) {
                     const eventId = this.$route.params.eventId
-                    switch(this.model){
+                    switch (this.model) {
                         case 'dealership':
                             const URL = `/api/events/${eventId}/users/${user.id}`
-                            axios.delete(URL).then((response)=>{
+                            axios.delete(URL).then((response) => {
                                 this.$store.commit('setSnackbarMessage', {
                                     openMessage: true,
                                     timeOut: this.themeOption.snackBarTimeout,
                                     message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
                                 })
 
-                                if(response.data.success){
+                                if (response.data.success) {
                                     this.$store.commit('removeUserFromUserList', user)
                                 }
                             })
                     }
-                }else{
+                } else {
                     this.selectedUser = {...user}
                     this.deleteDialog = true
                 }
             },
 
-            onDeleteConfirm(){
-                if(this.subComponent){
+            onDeleteConfirm() {
+                if (this.subComponent) {
                     const eventId = this.$route.params.eventId
-                    switch(this.model){
+                    switch (this.model) {
                         case 'dealership':
                             const URL = `/api/events/${eventId}/users/${user.id}`
-                            axios.delete(URL).then((response)=>{
-                                if(response.data.success){
+                            axios.delete(URL).then((response) => {
+                                if (response.data.success) {
                                     this.$store.commit('setSnackbarMessage', {
                                         openMessage: true,
                                         timeOut: this.themeOption.snackBarTimeout,
@@ -259,10 +248,10 @@
                                 }
                             })
                     }
-                }else{
+                } else {
                     // Delete user
                     const URL = `/api/users/${this.selectedUser.id}`
-                    axios.delete(URL).then((response)=>{
+                    axios.delete(URL).then((response) => {
                         this.deleteDialog = false
                         this.initialize()
 

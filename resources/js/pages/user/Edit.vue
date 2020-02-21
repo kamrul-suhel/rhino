@@ -185,7 +185,6 @@
                                     >
                                         <v-tab
                                             key="specialized"
-                                            v-if="user.level === 'sales_executive'"
                                             ripple
                                         >
                                             {{ trans.specialized }}
@@ -199,7 +198,6 @@
                                         </v-tab>
 
                                         <v-tab-item
-                                            v-if="user.level === 'sales_executive'"
                                             key="specialized"
                                         >
                                             <SpecializeBrand></SpecializeBrand>

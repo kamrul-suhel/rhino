@@ -91,13 +91,6 @@ const mutations = {
                         text: `${trans.edit} ${trans.dealership}`,
                         link: 'editDealership',
                         access: ['dealership'],
-                    },
-
-                    {
-                        icon: 'people',
-                        text: `${trans.staff}`,
-                        link: 'dealershipUserList',
-                        access: ['dealership'],
                     }
                 ]
             }

@@ -23,14 +23,6 @@
                                 <td class="text-xs-left">{{ props.item.region }}</td>
                                 <td class="text-xs-right">
                                     <v-icon
-                                        small
-                                        class="mr-2"
-                                        @click="onEditBrand(props.item)"
-                                    >
-                                        edit
-                                    </v-icon>
-
-                                    <v-icon
                                         :color="themeOption.buttonDangerColor"
                                         small
                                         @click="onDeleteBrand(props.item)"
