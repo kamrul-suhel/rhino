@@ -158,6 +158,12 @@
             },
 
             selectedSaleExecutive() {
+                if (
+                    this.vehicleType === 'unsure' &&
+                    this.selectedDate != ''
+                ) {
+                    return
+                }
                 // generate slot
                 this.generateSlots()
                 this.checkCascadeTime()
@@ -165,7 +171,61 @@
         },
 
         methods: {
+            generateSaleExecutive(selectedSlot) {
+
+                const time = fn.getStartTimeEndTime(this.selectedDate, this.dealership)
+                const daysSlot = fn.getTimeSlotsForDay(time, this.event)
+                let foundSaleExecutive = {}
+
+                let modifySlots = []
+
+                _.map(daysSlot, (slot) => {
+                    let takenSlot = []
+
+                    _.map(this.saleExecutives, (saleExecutive) => {
+                        let isSaleExecutiveExists = true
+                        _.map(this.existingAppointments, (existingAppointment) => {
+                            if (
+                                slot.start === existingAppointment.start &&
+                                saleExecutive.id === existingAppointment.user_id
+                            ) {
+                                isSaleExecutiveExists = false
+                            }
+                        })
+
+                        if (isSaleExecutiveExists) {
+                            takenSlot.push(true)
+                        } else {
+                            takenSlot.push(false)
+                        }
+                    })
+
+                    if (_.includes(takenSlot, true)) {
+                        modifySlots.push({
+                            ...slot,
+                            status: 'available'
+                        })
+                    } else {
+                        modifySlots.push({
+                            ...slot,
+                            status: 'unavailable'
+                        })
+                    }
+                })
+
+                this.$store.commit('setAllAppointmentSlots', modifySlots)
+            },
+
             generateSlots() {
+                if (
+                    this.vehicleType === 'unsure' &&
+                    this.selectedDate != ''
+                ) {
+                    this.generateSaleExecutive()
+                    return
+                }
+
+
                 const start = moment(this.event.start)
                 const end = moment(this.event.end)
                 const dates = fn.getDates(start, end, this.dealership)
@@ -285,6 +345,26 @@
                     return
                 }
 
+                if (
+                    this.vehicleType === 'unsure' &&
+                    this.selectedDate != ''
+                ) {
+                    let selectedSaleExecutive = {}
+                    _.map(this.saleExecutives, (saleExecutive) => {
+                        _.map(this.existingAppointments, (appointment) => {
+                            if(
+                                saleExecutive.id !== appointment.user_id
+                            ){
+                                selectedSaleExecutive = {...saleExecutive}
+                            }
+                        })
+                    })
+
+
+                    this.$store.commit('setBookingSelectedSaleExecutive', selectedSaleExecutive)
+                    this.$store.commit('setSelectedSlot', selectedSlot)
+                }
+
                 let totalSlot = []
                 _.forEach(this.slots, (slot) => {
                     if (slot.slotId === selectedSlot.slotId) {
@@ -398,21 +478,21 @@
                 const selectedSaleExecutive = this.selectedSaleExecutive
                 const selectedSlot = this.selectedSlot
 
-                if(selectedSlot.start){
+                if (selectedSlot.start) {
                     return // do not run if time is taken
                 }
 
-                if(
+                if (
                     !_.isEmpty(selectedDate) &&
                     selectedSaleExecutive.id
-                ){
+                ) {
                     const time = fn.getStartTimeEndTime(
                         moment(selectedDate).format('YYYY-MM-DD'),
                         this.dealership
                     )
                     const slots = fn.getTimeSlotsForDay(time, this.event)
                     let checkTimeForm = new FormData()
-                    _.map(slots, (slot,key) => {
+                    _.map(slots, (slot, key) => {
                         checkTimeForm.append(`slots[${key}][slotId]`, slot.slotId)
                         checkTimeForm.append(`slots[${key}][start]`, slot.start)
                         checkTimeForm.append(`slots[${key}][end]`, slot.end)
@@ -422,7 +502,7 @@
 
                     const URL = `/api/booking/${selectedSaleExecutive.id}/availability`
                     axios.post(URL, checkTimeForm).then((response) => {
-                        if(response.data.success){
+                        if (response.data.success) {
                             this.$store.commit('setAllAppointmentSlots', response.data.slots)
                         }
                     })

@@ -90,7 +90,8 @@
                 existingAppointments: 'getAllBookingAppointments',
                 selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
                 isDisable: 'getDisableEditing',
-                storeSelectedDate: 'getBookingSelectedDate'
+                storeSelectedDate: 'getBookingSelectedDate',
+                vehicleType: 'getBookingVehicleType',
             })
         }),
 
@@ -107,6 +108,13 @@
             },
 
             selectedSaleExecutive(){
+                if (
+                    this.vehicleType === 'unsure' &&
+                    this.selectedDate != ''
+                ) {
+                    return
+                }
+
                 this.allowedDates()
             },
 
