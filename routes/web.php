@@ -66,7 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
         Route::get('create', function () {
             return view('index');
         });
-        
+
         Route::get('{id}/users', function () {
             return view('index');
         });
@@ -379,18 +379,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
 
     /*
     |--------------------------------------------------------------------------
-    | Routes for Frontend
-    |--------------------------------------------------------------------------
-    |
-    */
-
-    Route::get('/booking', function () {
-        return view('index');
-    });
-
-
-    /*
-    |--------------------------------------------------------------------------
     | Routes for Settings
     |--------------------------------------------------------------------------
     |
@@ -417,6 +405,17 @@ Route::middleware(['guestAuth'])->prefix('booking')->group(function () {
             ]);
         }
 
+        return view('index');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes for Frontend
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    Route::get('confirmed', function(){
         return view('index');
     });
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Appointment;
 
 use App\Appointment;
+use App\EventUser;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class AppointmentListController extends Controller
@@ -15,6 +17,13 @@ class AppointmentListController extends Controller
      */
     public function list(Request $request, $eventId)
     {
+        $users = EventUser::select('user_id')
+            ->where('event_id', $eventId)
+            ->pluck('user_id');
+
+//        dd($users);
+
+
         $appointments = Appointment::select(
             'appointments.*',
             'guests.first_name as guest_first_name',
@@ -29,7 +38,11 @@ class AppointmentListController extends Controller
             $appointments = $appointments->where('appointments.user_id', $request->saleExecutiveId);
         }
 
-        $appointments = $appointments->whereIn('appointments.status', [Appointment::APPOINTMENT_CONFIRMED, Appointment::APPOINTMENT_NOT_AVAILABLE, Appointment::APPOINTMENT_BREAK_TIME]);
+        $appointments = $appointments->whereIn('appointments.status', [
+            Appointment::APPOINTMENT_CONFIRMED,
+            Appointment::APPOINTMENT_NOT_AVAILABLE,
+            Appointment::APPOINTMENT_BREAK_TIME
+        ]);
 
         $appointments = $appointments->where('appointments.event_id', $eventId)->get();
 

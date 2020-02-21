@@ -40,7 +40,7 @@ class UserListController extends Controller
             ->leftJoin('countries', 'countries.id', '=', 'users.country_id');
 
             if($request->has('dealershipId') && !empty($request->dealershipId)){
-                $users = $user->where('users.dealership_id', $request->dealershipId);
+                $users = $users->where('users.dealership_id', $request->dealershipId);
             }
 
         // To get the list view populate

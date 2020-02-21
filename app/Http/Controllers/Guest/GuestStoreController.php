@@ -18,11 +18,11 @@ class GuestStoreController extends Controller
      */
     public function store(GuestRequest $request)
     {
-        $this->save($request);
-
+        $guest = $this->save($request);
 
        return response()->json([
-           'success' => true
+           'success' => true,
+           'guest' => $guest
        ]);
     }
 
