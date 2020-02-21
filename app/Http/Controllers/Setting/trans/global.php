@@ -1317,6 +1317,12 @@ return [
     ],
 
     [
+        'label' => 'Unique code mismatch',
+        'identifier' => 'uniqueCodeNotFound',
+        'translation' => 'Unique code mismatch'
+    ],
+
+    [
         'label' => 'Identifier',
         'identifier' => 'identifier',
         'translation' => 'Identifier'

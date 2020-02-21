@@ -40,7 +40,7 @@
                         </v-flex>
 
                         <v-flex xs12 v-if="errorLogin">
-                            <p class="mb-0 red--text">Access denied user email & password is not match.</p>
+                            <p class="mb-0 red--text">{{ trans.uniqueCodeNotFound }}</p>
                         </v-flex>
 
                         <v-flex xs12 mt-2>
