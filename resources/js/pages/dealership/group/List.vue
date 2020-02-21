@@ -77,18 +77,19 @@
                     class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
-                        <td width="10%"> 
+                        <td width="10%" class="text-xs-left"> 
                             <v-img
                                 contain
-                                aspect-ratio="1"
-                                :src="props.item.logo">
+                                :src="props.item.logo"
+                                py-2>
                             </v-img> 
                         </td>
                         <td>{{ props.item.name }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small
-                                class="mr-2"
+                                dark
+                                :color="themeOption.buttonSecondaryColor"
                                 @click="onEditGroup(props.item)"
                             >
                                 edit
@@ -96,6 +97,7 @@
 
                             <v-icon
                                 small
+                                dark
                                 :color="themeOption.buttonDangerColor"
                                 @click="onDeleteGroup(props.item)"
                             >

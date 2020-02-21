@@ -28,7 +28,6 @@
                     <v-autocomplete
                         :placeholder="trans.select_a_language"
                         :color="themeOption.primaryColor"
-                        prepend-icon="language"
                         :items="languages"
                         item-text="code2"
                         @change="onSelectLanguage"

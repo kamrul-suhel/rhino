@@ -84,8 +84,8 @@
                             <span>{{trans.logo}}</span>
 
                             <FileUpload :preview="false"
-                                        identifier="brand"
-                                        model="brands"
+                                    :multiple="false"
+                                    model="brands"
                                         >
                             </FileUpload>
                         </v-flex>

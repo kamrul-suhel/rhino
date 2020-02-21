@@ -85,7 +85,7 @@
                         <td width="10%"> 
                             <v-img
                                 contain
-                                aspect-ratio="1"
+                                width="50px"
                                 :src="props.item.logo">
                             </v-img> 
                         </td>
@@ -139,6 +139,7 @@
                     <v-spacer></v-spacer>
                     <v-btn
                         :color="themeOption.buttonSecondaryColor"
+                        dark
                         small
                         @click="deleteDialog = false"
                     >
@@ -146,7 +147,8 @@
                     </v-btn>
 
                     <v-btn
-                        color="red"
+                        :color="themeOption.buttonDangerColor"
+                        dark
                         small
                         @click="onConfirmDeleteCompany"
                     >
