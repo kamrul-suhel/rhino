@@ -347,8 +347,10 @@
                                 message: `${this.selectedBrand.name}  ${this.trans.successfully_created}`
                             })
 
-                            this.onResetBrand()
                         }
+
+                        this.$store.commit('setSelectedBrand', {})
+                        this.color = ''
                     })
                 }
 

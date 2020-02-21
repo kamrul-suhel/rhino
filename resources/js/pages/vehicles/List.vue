@@ -346,8 +346,14 @@
 
                             console.log(this.getPagination());
 
-
                             this.$store.commit('setUpdateComponent')
+                            
+                            this.vehicle = {}
+                            this.leftImage = ''
+                            this.rightImage = ''
+                            this.hasLeftImage = false
+                            this.hasRightImage = false
+                            this.showForm = false
 
                         }
                     })
@@ -384,7 +390,7 @@
                 this.hasRightImage = true
             },
 
-           uploadImage(file, identifier, image){
+            uploadImage(file, identifier, image){
                 let formData = new FormData()
                 formData.append('file', file)
                 formData.append('model', identifier)

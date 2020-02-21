@@ -219,6 +219,10 @@
                             } else {
                                 this.$router.push({name: 'listVehicles'});
                             }
+
+                            
+                            this.vehicle = {}
+                        
                         }
                     })
                 } else {
