@@ -186,6 +186,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import CreateGuest from '@/pages/guest/Create'
+    import fn from '@/utils/function'
 
     export default {
 
@@ -229,22 +230,7 @@
 
         methods: {
             async generateSource() {
-                let sources = [
-                    {
-                        'text': this.trans.email,
-                        'value': 'email'
-                    },
-
-                    {
-                        'text': this.trans.phone,
-                        'value': 'phone'
-                    },
-
-                    {
-                        'text': this.trans.walkIn,
-                        'value': 'walkIn'
-                    }
-                ]
+                let sources = fn.getBookGuestOptions(this.trans)
 
                 this.sources = [...sources]
 

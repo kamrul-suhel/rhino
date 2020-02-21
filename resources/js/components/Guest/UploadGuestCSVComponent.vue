@@ -285,7 +285,7 @@
                     _.forOwn(guest, (value, field) => {
                         uploadGuestForm.append(`guests[${key}][${field}]`, value)
                     })
-                    uploadGuestForm.append(`guests[${key}][status]`, 1) // Default status is active
+                    uploadGuestForm.append(`guests[${key}][status]`, 0) // Default status is active
                 })
 
                 // Save into database

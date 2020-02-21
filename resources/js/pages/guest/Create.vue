@@ -166,12 +166,16 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm4 pa-2>
-                                    <v-text-field
+                                    <v-select
                                         :color="themeOption.inputColor"
+                                        :items="methods"
+                                        :rules="[v => !!v || `${trans.method} ${trans.is_required}`]"
+                                        item-text="text"
+                                        item-value="value"
                                         :label="trans.method"
                                         v-model="guest.method"
-                                        box solo flat
-                                    ></v-text-field>
+                                        box solo flat>
+                                    </v-select>
                                 </v-flex>
                             </v-layout>
                         </v-card-text>
@@ -209,7 +213,8 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import authUser from "../../store/modules/authUser";
+    import authUser from "../../store/modules/authUser"
+    import fn from '@/utils/function'
 
     export default {
         data() {
@@ -217,7 +222,8 @@
                 valid: true,
                 guest: {
                     status: 0
-                }
+                },
+                methods:[]
             }
         },
 
@@ -239,6 +245,7 @@
 
         methods: {
             initialize() {
+                this.methods = [...fn.getBookGuestOptions(this.trans)]
                 this.$store.dispatch('fetchEventForDropDown')
             },
 

@@ -1335,6 +1335,12 @@ return [
     ],
 
     [
+        'label' => 'Online',
+        'identifier' => 'online',
+        'translation' => 'Online'
+    ],
+
+    [
         'label' => 'Reset',
         'identifier' => 'reset',
         'translation' => 'Reset'

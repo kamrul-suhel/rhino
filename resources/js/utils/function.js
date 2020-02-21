@@ -216,5 +216,29 @@ export default {
             case 6:
                 return `${trans.cancel}`
         }
+    },
+
+    getBookGuestOptions(trans){
+        return  [
+            {
+                'text': trans.email,
+                'value': 'email'
+            },
+
+            {
+                'text': trans.phone,
+                'value': 'phone'
+            },
+
+            {
+                'text': trans.walkIn,
+                'value': 'walkIn'
+            },
+
+            {
+                'text': trans.online,
+                'value': 'online'
+            }
+        ]
     }
 }
