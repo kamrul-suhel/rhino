@@ -189,7 +189,6 @@
                     this.madePercent,
                     unMadePercent
                 ]
-                console.log('made data: ', madeData)
 
                 let modifyMadeData = {}
                 _.forOwn(this.made, (value, key) => {

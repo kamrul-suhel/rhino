@@ -197,7 +197,11 @@
             })
         }),
 
-        watch: {},
+        watch: {
+            '$route.params.guestId': function (id) {
+                this.initialize()
+            }
+        },
 
         created() {
             this.initialize()

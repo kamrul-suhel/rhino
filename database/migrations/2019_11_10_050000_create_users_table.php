@@ -31,8 +31,8 @@ class CreateUsersTable extends Migration
             $table->longText('notes');
             $table->text('profile_image')->nullable();
             $table->boolean('send_mail');
-            $table->tinyInteger('status')->index();
-            $table->bigInteger('language_id')->nullable();
+            $table->tinyInteger('status')->index()->default(1);
+            $table->bigInteger('language_id')->nullable()->default(1);
             $table->timestamps();
         });
     }

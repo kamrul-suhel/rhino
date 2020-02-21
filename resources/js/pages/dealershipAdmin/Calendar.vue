@@ -115,7 +115,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.with} ${trans.a} ${trans.uniqueCode}` }}
+                    {{ `${trans.appointment}` }}
                 </div>
                 <div>
                     <v-icon

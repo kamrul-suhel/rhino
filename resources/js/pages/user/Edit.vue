@@ -10,7 +10,7 @@
                     <v-card>
                         <v-card-text>
                             <v-layout row wrap>
-                                <v-flex xs12 sm3 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
@@ -20,7 +20,7 @@
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
@@ -30,7 +30,7 @@
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2>
+                                <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
@@ -41,7 +41,7 @@
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2>
+                                <v-flex xs12 sm3 pa-2 v-if="authUser.level === 'admin'">
                                     <v-select
                                         :items="levels"
                                         :rules="[v => !!v || `${trans.select_a} ${trans.role}`]"
@@ -57,7 +57,7 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm3 pa-2
-                                        v-if="user.level==='dealership' || user.level === 'sales_executive'">
+                                        v-if="authUser.level === 'admin'">
                                     <v-select
                                         :items="dealerships"
                                         item-text="name"
@@ -191,12 +191,12 @@
                                             {{ trans.specialized }}
                                         </v-tab>
 
-<!--                                        <v-tab-->
-<!--                                            key="profileImage"-->
-<!--                                            ripple-->
-<!--                                        >-->
-<!--                                            {{ `${trans.profile} ${trans.image}`}}-->
-<!--                                        </v-tab>-->
+                                        <v-tab
+                                            key="profileImage"
+                                            ripple
+                                        >
+                                            {{ `${trans.profile} ${trans.image}`}}
+                                        </v-tab>
 
                                         <v-tab-item
                                             v-if="user.level === 'sales_executive'"
@@ -205,23 +205,23 @@
                                             <SpecializeBrand></SpecializeBrand>
                                         </v-tab-item>
 
-<!--                                        <v-tab-item-->
-<!--                                            key="profileImage">-->
-<!--                                            <v-layout row wrap mt-3>-->
-<!--                                                <v-card class="pa-3">-->
-<!--                                                    <input type="file"-->
-<!--                                                           class="mb-3"-->
-<!--                                                           accept="image/*"-->
-<!--                                                           ref="profileImage"-->
-<!--                                                           @change="onProfileImageUpload"/>-->
+                                        <v-tab-item
+                                            key="profileImage">
+                                            <v-layout row wrap mt-3>
+                                                <v-card class="pa-3">
+                                                    <input type="file"
+                                                           class="mb-3"
+                                                           accept="image/*"
+                                                           ref="profileImage"
+                                                           @change="onProfileImageUpload"/>
 
-<!--                                                    <v-img-->
-<!--                                                        :src="profileImage"-->
-<!--                                                        aspect-ratio="2"-->
-<!--                                                    ></v-img>-->
-<!--                                                </v-card>-->
-<!--                                            </v-layout>-->
-<!--                                        </v-tab-item>-->
+                                                    <v-img
+                                                        :src="profileImage"
+                                                        aspect-ratio="2"
+                                                    ></v-img>
+                                                </v-card>
+                                            </v-layout>
+                                        </v-tab-item>
                                     </v-tabs>
 
                                 </v-flex>
@@ -234,7 +234,7 @@
                                 :color="themeOption.buttonSecondaryColor"
                                 class="rounded-btn"
                                 small
-                                @click="$router.push({name: 'listUsers'})"
+                                @click="onGoBack()"
                             >
                                 {{ `${trans.back}`}}
                             </v-btn>
@@ -321,8 +321,8 @@
 
     export default {
 
-        components : {
-          SpecializeBrand
+        components: {
+            SpecializeBrand
         },
 
         data() {
@@ -352,7 +352,8 @@
                 countries: 'getCountries',
                 regions: 'getRegions',
                 companies: 'getCompanies',
-                user: 'getSelectedUser'
+                user: 'getSelectedUser',
+                authUser: 'getAuthUser'
             }),
 
             passwordRule() {
@@ -378,8 +379,8 @@
 
         created() {
             this.initialize()
-            this.$store.commit( 'setHeaderTitle', `${this.trans.edit} ${this.trans.user}` )
-            this.$store.commit( 'setNavTitle', `${this.trans.edit} ${this.trans.user}` )
+            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.user}`)
+            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.user}`)
         },
 
         methods: {
@@ -479,21 +480,27 @@
             },
 
             updatePassword() {
-                    let data = new FormData()
-                    data.append('password', this.newPassword)
-                    data.append('confirm_password', this.newPassword)
-                    data.append('email', this.user.email)
-                    
-                    axios.post(`/api/users/${this.user.id}/updatepassword`, data).then((response) => {
-                        console.log('Password updated successfully');
-                        this.$store.commit('setSnackbarMessage', {
-                            openMessage: true,
-                            timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.password} ${this.trans.successfully_updated}`
-                        })
+                let data = new FormData()
+                data.append('password', this.newPassword)
+                data.append('confirm_password', this.newPassword)
+                data.append('email', this.user.email)
 
+                axios.post(`/api/users/${this.user.id}/updatepassword`, data).then((response) => {
+                    this.$store.commit('setSnackbarMessage', {
+                        openMessage: true,
+                        timeOut: this.themeOption.snackBarTimeout,
+                        message: `${this.trans.password} ${this.trans.successfully_updated}`
                     })
-                
+                })
+            },
+
+            onGoBack() {
+                if (this.authUser.level === 'dealership') {
+                    this.$router.push({name: 'editDealerships', params: {id: this.authUser.dealership_id}})
+                    return
+                }
+
+                this.$router.push({name: 'listUsers'})
             }
         }
     }

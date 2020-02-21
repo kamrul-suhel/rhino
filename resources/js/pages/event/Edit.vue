@@ -385,7 +385,8 @@
                 selectedEvent: 'getSelectedEvent',
                 selectedLanguage: 'getSubSelectedLanguage',
                 updateComponent: 'getUpdateComponent',
-                uploadedEventImage: 'getUploadedImage'
+                uploadedEventImage: 'getUploadedImage',
+                dealership: 'getSelectedDealership',
             })
         }),
 
@@ -414,11 +415,21 @@
                 })
             },
 
-            selectedEvent(){
+            updateComponent() {
+                this.$router.push({
+                    name: 'editDealershipsEvent',
+                    params: {
+                        dealershipId: this.dealership.id,
+                        eventId: this.selectedEvent.id
+                    }
+                })
+            },
+
+            selectedEvent() {
                 this.bannerImage = this.selectedEvent.banner_image
             },
 
-            uploadedEventImage(){
+            uploadedEventImage() {
                 this.bannerImage = this.uploadedEventImage
             }
         },
@@ -469,9 +480,9 @@
                                 eventForm.append('status', 0)
                             }
                         } else {
-                            if(key === 'banner_image'){
+                            if (key === 'banner_image') {
                                 eventForm.append('banner_image', this.bannerImage)
-                            }else{
+                            } else {
                                 eventForm.append(key, value)
                             }
                         }

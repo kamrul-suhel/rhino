@@ -157,8 +157,6 @@
                 axios.post('/logout').then((response) => {
 
                     if(response.data.success){
-                        // reset auth user
-                        this.$store.commit('setAuthUser', {})
                         window.location = '/admin'
                     }
                 })
