@@ -2,6 +2,10 @@ function lazyLoad(view){
     return () => import(`../../pages/dealership/${view}.vue`)
 }
 
+function userLazyLoad(view){
+    return () => import(`../../pages/user/${view}.vue`)
+}
+
 const DealershipRoutes =  {
     path: '/admin/dealerships',
     name: 'dealerships',
@@ -31,6 +35,12 @@ const DealershipRoutes =  {
             name: 'editDealershipsEvent',
             props: true,
             component: lazyLoad('Event')
+        },
+
+        {
+            path: ':dealershipId/users',
+            name: 'dealershipUserList',
+            component: userLazyLoad('List')
         },
 
         // Add staff member to dealership

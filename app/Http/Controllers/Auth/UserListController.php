@@ -39,6 +39,10 @@ class UserListController extends Controller
             ->leftJoin('regions', 'regions.id', '=', 'users.region_id')
             ->leftJoin('countries', 'countries.id', '=', 'users.country_id');
 
+            if($request->has('dealershipId') && !empty($request->dealershipId)){
+                $users = $user->where('users.dealership_id', $request->dealershipId);
+            }
+
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search dealership name

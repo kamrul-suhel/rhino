@@ -143,6 +143,16 @@
                     return
                 }
 
+                if (item.link === 'dealershipUserList') {
+                    this.$router.push({
+                        name: 'dealershipUserList',
+                        params: {
+                            dealershipId: this.selectedDealership.id
+                        }
+                    })
+                    return
+                }
+
                 if (item.link === 'editDealership') {
                     this.$router.push({
                         name: 'editDealerships',
