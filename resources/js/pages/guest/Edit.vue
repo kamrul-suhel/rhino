@@ -74,7 +74,7 @@
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.address_line_1"
+                                        :label="`${trans.address_line} 1`"
                                         v-model="guest.address_line_1"
                                         required
                                     ></v-text-field>
@@ -83,7 +83,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.address_line_2"
+                                        :label="`${trans.address_line} 2`"
                                         v-model="guest.address_line_2"
                                     ></v-text-field>
                                 </v-flex>
@@ -91,7 +91,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.address_line_3"
+                                        :label="`${trans.address_line} 3`"
                                         v-model="guest.address_line_3"
                                     ></v-text-field>
                                 </v-flex>
@@ -99,7 +99,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.address_line_4"
+                                        :label="`${trans.address_line} 4`"
                                         v-model="guest.address_line_4"
                                     ></v-text-field>
                                 </v-flex>
@@ -107,7 +107,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.address_line_5"
+                                        :label="`${trans.address_line} 5`"
                                         v-model="guest.address_line_5"
                                     ></v-text-field>
                                 </v-flex>
@@ -115,7 +115,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="trans.address_line_6"
+                                        :label="`${trans.address_line} 6`"
                                         v-model="guest.address_line_6"
                                     ></v-text-field>
                                 </v-flex>
@@ -151,27 +151,19 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm6 pa-2>
-                                    <v-text-field
+                                    <v-select
                                         :color="themeOption.inputColor"
+                                        :items="methods"
+                                        :rules="[v => !!v || `${trans.method} ${trans.is_required}`]"
+                                        item-text="text"
+                                        item-value="value"
                                         :label="trans.method"
-                                        v-model="guest.method"
-                                    ></v-text-field>
+                                        v-model="guest.method">
+                                    </v-select>
                                 </v-flex>
                             </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :label="trans.status"
-                                        :true-value="1"
-                                        :false-value="0"
-                                        :color="themeOption.switchOnColor"
-                                        v-model="guest.status">
-                                    </v-switch>
-                                </v-flex>
-                            </v-layout>
-                            <v-divider class="mt-2 mb-2"></v-divider>
                         </v-card-text>
+                        <v-divider class="mt-2 mb-2"></v-divider>
 
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
@@ -201,12 +193,14 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import fn from '@/utils/function'
 
     export default {
         data() {
             return {
                 valid: true,
-                loading: false
+                loading: false,
+                methods:[]
             }
         },
 
@@ -227,6 +221,8 @@
 
         methods: {
             initialize() {
+                this.methods = [...fn.getBookGuestOptions(this.trans)]
+
                 this.$store.dispatch('fetchEventForDropDown')
                 this.$store.dispatch('fetchGuest', {id: this.$route.params.id})
             },

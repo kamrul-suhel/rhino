@@ -1317,6 +1317,12 @@ return [
     ],
 
     [
+        'label' => 'Unique code mismatch',
+        'identifier' => 'uniqueCodeNotFound',
+        'translation' => 'Unique code mismatch'
+    ],
+
+    [
         'label' => 'Identifier',
         'identifier' => 'identifier',
         'translation' => 'Identifier'
@@ -1332,6 +1338,12 @@ return [
         'label' => 'Clear',
         'identifier' => 'clear',
         'translation' => 'Clear'
+    ],
+
+    [
+        'label' => 'Online',
+        'identifier' => 'online',
+        'translation' => 'Online'
     ],
 
     [

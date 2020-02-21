@@ -48,9 +48,15 @@ class AnalyticsController extends Controller
                 case 4:
                     $generateLabel['sale_made'] = $value;
                     break;
+
                 case 5:
-                    $generateLabel['show'] = $value;
+                    $generateLabel['no_show'] = $value;
                     break;
+
+                case 6:
+                    $generateLabel['cancel'] = $value;
+                    break;
+
                 default:
                     $generateLabel['other'] = $value;
             }

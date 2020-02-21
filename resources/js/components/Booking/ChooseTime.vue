@@ -181,7 +181,6 @@
                         return
                     }
 
-
                     // get the user existing appointments
                     const existingAppointments = _.filter(this.existingAppointments, (existingAppointment) => {
                         return existingAppointment.user_id === this.selectedSaleExecutive.id

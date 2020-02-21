@@ -40,11 +40,11 @@
             </div>
             <v-divider class="pa-1"></v-divider>
             <div class="d-flex my-2 justify-between">
-                <span>Appointment Show</span> <span class="text-xs-right">{{ analyticGuestInfo.show ? analyticGuestInfo.show : 0 }}</span>
+                <span>Appointment Show</span> <span class="text-xs-right">{{ analyticGuestInfo.arrived ? analyticGuestInfo.arrived : 0 }}</span>
             </div>
             <v-divider class="pa-1"></v-divider>
             <div class="d-flex my-2 justify-between">
-                <span>Appointment no show</span> <span class="text-xs-right">{{ analyticGuestInfo.pending ? analyticGuestInfo.pending : 0 }}</span>
+                <span>Appointment no show</span> <span class="text-xs-right">{{ analyticGuestInfo.no_show ? analyticGuestInfo.no_show : 0 }}</span>
             </div>
             <v-divider class="pa-1"></v-divider>
             <div class="d-flex my-2 justify-between">
