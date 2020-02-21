@@ -136,10 +136,10 @@
                         >
 
                             <v-tab
-                                key="users"
+                                key="staff"
                                 ripple
                             >
-                                {{ trans.users }}
+                                {{ trans.staff }}
                             </v-tab>
 
                             <v-tab
@@ -158,7 +158,7 @@
                             </v-tab>
 
                             <v-tab-item
-                                key="users"
+                                key="staff"
                             >
                                 <v-layout row wrap pt-3>
                                     <dealership-users></dealership-users>
