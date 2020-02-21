@@ -56,21 +56,6 @@
                                 {{ trans.signin }}
                             </v-btn>
                         </v-flex>
-
-                        <v-flex xs12>
-                            <v-layout row justify-end xs12 mb-4>
-                                <input type="hidden" name="_token"/>
-                                <v-btn
-                                    class="ma-0 multi-button"
-                                    raised
-                                    dark
-                                    :loading="loading"
-                                    :disabled="loading"
-                                    @click="onSubmit()">
-                                    {{ trans.multi }} {{ trans.brand }}
-                                </v-btn>
-                            </v-layout>
-                        </v-flex>
                     </v-layout>
                 </v-form>
             </v-card>

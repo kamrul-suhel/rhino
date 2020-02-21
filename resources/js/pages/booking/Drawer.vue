@@ -187,7 +187,7 @@
 
         methods: {
             onGuestLogout() {
-                axios.post('guests/logout').then((response) => {
+                axios.post('/guests/logout').then((response) => {
                     if (response.data.success) {
                         this.$router.push({name: 'login'})
                     }
