@@ -21,7 +21,8 @@ class AppointmentListController extends Controller
             ->where('event_id', $eventId)
             ->pluck('user_id');
 
-        
+//        dd($users);
+
 
         $appointments = Appointment::select(
             'appointments.*',
