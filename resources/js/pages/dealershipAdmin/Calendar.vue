@@ -5,7 +5,7 @@
                 <h2>{{ trans.bookAnAppointment }}</h2>
             </v-flex>
 
-            <v-flex xs6 align-self-end>
+            <v-flex xs6 align-self-end v-if="authUser.level === 'dealership'">
                 <v-layout row wrap justify-end>
                     <v-btn outline round
                            @click="onGoBack()"
@@ -18,7 +18,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4 v-if="isFiltering">
+        <v-layout mt-4 v-if="isFiltering && authUser.level === 'dealership'">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -145,6 +145,7 @@
                 </v-container>
             </div>
         </div>
+
         <AppointmentDialog></AppointmentDialog>
         <AssignToSaleExecutiveDialog></AssignToSaleExecutiveDialog>
     </v-container>
@@ -154,7 +155,8 @@
     import {mapGetters} from 'vuex'
     import User from '@/components/Appointment/User'
     import AppointmentDialog from "@/components/Appointment/AppointmentDialog"
-    import AssignToSaleExecutiveDialog from "@/components/Appointment/AssignToSaleExecutiveDialog";
+    import AssignToSaleExecutiveDialog from "@/components/Appointment/AssignToSaleExecutiveDialog"
+    import CONST from '@/utils/const'
 
     export default {
 
@@ -171,7 +173,9 @@
                 saleExecutive: false,
                 saleExecutiveDropdown: false,
                 isUserSelected: false,
-                isFiltering: true
+                isFiltering: true,
+
+                isSaleExecutive: false
             }
         },
         computed: ({
@@ -183,7 +187,8 @@
                 users: 'getUsers',
                 appointments: 'getAppointments',
                 selectedUser: 'getSelectedUser',
-                updateComponent: 'getUpdateComponent'
+                updateComponent: 'getUpdateComponent',
+                authUser: 'getAuthUser',
             })
         }),
 
@@ -192,16 +197,46 @@
                 this.fetchEventUser()
             },
 
-            updateComponent(){
+            updateComponent() {
                 this.fetchAllAppointmentByEventId(this.selectedUser)
+                if(this.authUser.level === CONST.SALE_EXECUTIVE){
+                    return
+                }
                 this.onGoBack()
+            },
+
+            selectedUser(){
+              this.initializeCalender()
+            },
+
+            authUser() {
+                this.initializeCalender()
+            },
+
+            users(){
+                this.initializeCalender()
             }
         },
 
         created() {
+            this.$store.commit('setHeaderTitle', this.trans.calendar)
+            this.initializeCalender()
         },
 
         methods: {
+            initializeCalender() {
+                if (
+                    this.authUser &&
+                    this.authUser.level === CONST.SALE_EXECUTIVE &&
+                    this.selectedUser.id &&
+                    this.selectedEvent.id
+                ) {
+                    this.isSaleExecutive = true
+                    this.isUserSelected = true
+                    this.fetchAllAppointmentByEventId(this.authUser)
+                }
+            },
+
             onTeamMemberSelect() {
                 this.teamMemberShow = !this.teamMemberShow
             },
@@ -225,7 +260,6 @@
                         this.saleExecutive = false
                         return `${this.trans.teamMember} / ${this.trans.date}`
                 }
-
             },
 
             onSaleExecutiveClick() {

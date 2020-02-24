@@ -32,7 +32,7 @@ const mutations = {
                         icon: 'cloud_download',
                         text: `${trans.download} ${trans.booked} ${trans.guests}`,
                         link: 'bookedGuest',
-                        access: ['dealership'],
+                        access: ['dealership', 'sales_executive'],
                         isDialog: true
                     },
 
@@ -40,7 +40,7 @@ const mutations = {
                         icon: 'cloud_download',
                         text: `${trans.download} ${trans.unbooked} ${trans.guests}`,
                         link: 'unbookedGuest',
-                        access: ['dealership'],
+                        access: ['dealership', 'sales_executive'],
                         isDialog: true
                     }
                 ]
@@ -55,7 +55,7 @@ const mutations = {
                         icon: 'date_range',
                         text: `${trans.calendar}`,
                         link: 'dealershipAdminCalendar',
-                        access: ['dealership'],
+                        access: ['dealership', 'sales_executive'],
                     },
 
                     {
@@ -69,7 +69,7 @@ const mutations = {
                         icon: 'add',
                         text: `${trans.update} ${trans.sales}`,
                         link: 'saleUpdate',
-                        access: ['dealership'],
+                        access: ['dealership', 'sales_executive'],
                     },
 
                     {

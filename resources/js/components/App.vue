@@ -7,7 +7,7 @@
             <navigation-component v-if="authUser.level === 'admin'"
             ></navigation-component>
 
-            <DealershipNavigation v-if="authUser.level === 'dealership'"
+            <DealershipNavigation v-if="checkUserAccess()"
             ></DealershipNavigation>
 
             <v-content>
@@ -30,6 +30,7 @@
     import HeaderComponent from './Layout/HeaderComonent'
     import NavigationComponent from './Layout/NavigationComponent'
     import DealershipNavigation from "./Layout/DealershipNavigation"
+    import CONST from '@/utils/const'
     import SnackBar from "./SnackBar"
     import {mapGetters} from 'vuex'
 
@@ -88,11 +89,18 @@
                             const authUser = response.data.authUser
 
                             // If auth user is dealership manager, then set dealership & regions for manager
-                            if (authUser.level === 'dealership') {
+                            if (
+                                authUser.level === CONST.MANAGER ||
+                                authUser.level === CONST.SALE_EXECUTIVE
+                            ) {
                                 const dealership = {...response.data.dealership}
                                 const regions = [...response.data.regions]
                                 this.$store.commit('setSelectedDealership', dealership)
                                 this.$store.commit('setRegions', regions)
+
+                                if(authUser.level === CONST.SALE_EXECUTIVE){
+                                    this.$store.commit('setSelectedUser', authUser)
+                                }
                             }
 
                             this.$store.commit('setAuthUser', authUser)
@@ -119,6 +127,17 @@
                 if (this.initialize) {
                     return true
                 }
+                return false
+            },
+
+            checkUserAccess(){
+                if(
+                    this.authUser.level === 'dealership' ||
+                    this.authUser.level === 'sales_executive'
+                ){
+                    return true
+                }
+
                 return false
             }
         }

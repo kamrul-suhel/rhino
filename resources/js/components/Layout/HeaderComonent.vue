@@ -39,7 +39,7 @@
         </v-layout>
 
         <dealership-toolbar
-            v-if="authUser.level === 'dealership'">
+            v-if="checkUserAccess()">
         </dealership-toolbar>
     </div>
 </template>
@@ -47,6 +47,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import DealershipToolbar from '@/components/DealershipToolbar'
+    import CONST from '@/utils/const'
 
     export default {
         components: {
@@ -86,7 +87,7 @@
             },
 
             checkLevel(){
-                if(this.authUser.level !== 'admin'){
+                if(this.authUser.level === CONST.MANAGER){
                     return true
                 }
                 return false
@@ -99,6 +100,16 @@
             onSelectLanguage(value) {
                 this.$store.commit('setSelectedLanguage', value)
                 this.$store.dispatch('fetchSettingFields', {languageId: value.id})
+            },
+
+            checkUserAccess(){
+                if(
+                    this.authUser.level === 'dealership' ||
+                    this.authUser.level === 'sales_executive'
+                ){
+                    return true
+                }
+                return false
             }
         }
     }

@@ -100,7 +100,10 @@
 
         methods: {
             initialize() {
-                this.$store.dispatch('fetchEventForDropDown', {dealershipId: this.dealership.id, selectFirst: true})
+                this.$store.dispatch('fetchEventForDropDown', {
+                    dealershipId: this.dealership.id,
+                    selectFirst: true
+                })
             },
 
             onNavigationToggle() {
