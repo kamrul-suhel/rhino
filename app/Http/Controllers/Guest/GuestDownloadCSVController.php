@@ -21,7 +21,9 @@ class GuestDownloadCSVController extends Controller
     {
         $guests = Guest::select(
             'guests.*',
-            'appointments.*'
+            'guests.status as guest_status',
+            'appointments.*',
+            'appointments.status as appointment_status'
         )
             ->leftJoin('appointments', 'guests.id', '=', 'appointments.guest_id')
             ->where('guests.event_id', $request->eventId);

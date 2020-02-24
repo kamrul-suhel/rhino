@@ -147,8 +147,8 @@
             }),
 
             step: {
-                get(){
-                    switch(this.$store.getters.getBookingStep){
+                get() {
+                    switch (this.$store.getters.getBookingStep) {
                         case 'selectModel':
                             return 0
                             break
@@ -170,7 +170,7 @@
                     return this.$store.getters.getBookingStep
                 },
 
-                set(value){
+                set(value) {
                     this.$store.commit('setBookingStep', value)
                 }
             }
@@ -194,7 +194,7 @@
                 });
             },
 
-            onEditGuestDetail(){
+            onEditGuestDetail() {
                 this.$store.commit('setEditGuest', true)
                 this.$store.commit('setBookingStep', 3)
             }

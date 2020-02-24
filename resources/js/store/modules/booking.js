@@ -350,7 +350,7 @@ const actions = {
         const URL = `/booking`
         axios.get(URL).then((response) => {
             if (response.data.success) {
-                const dataUrl = `/api/booking/${response.data.uniqueId}`
+                const dataUrl = `/api/booking/${response.data.uniqueId}${fn.generateParams(payload)}`
                 axios.get(dataUrl).then((response) => {
                     commit('setBookingGuest', response.data.guest)
                     commit('setBookingAppointments', response.data.appointments)

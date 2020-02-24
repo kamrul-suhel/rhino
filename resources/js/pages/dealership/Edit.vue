@@ -172,8 +172,16 @@
 
                                             {{ trans.add }} {{ trans.user }}
                                         </v-btn>
-                                    </v-flex>
 
+                                        <v-btn
+                                            :color="themeOption.buttonSuccess"
+                                            small
+                                            @click=""
+                                        >
+
+                                            {{ trans.upload }} {{ trans.users }}
+                                        </v-btn>
+                                    </v-flex>
                                 </v-layout>
                             </v-tab-item>
 

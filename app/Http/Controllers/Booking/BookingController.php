@@ -85,6 +85,7 @@ class BookingController extends Controller
                 ->get();
 
             $appointments = Appointment::where('appointments.event_id', $event->id)
+                ->whereIn('appointments.status', [1,3])
                 ->get();
         }
 

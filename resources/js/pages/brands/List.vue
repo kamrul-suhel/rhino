@@ -8,7 +8,6 @@
                     lazy-validation>
 
                     <v-layout row wrap>
-
                         <v-flex xs12>
                             <h3>{{ `${trans.add} ${trans.new} ${trans.brand}` }}</h3>
                         </v-flex>
@@ -83,10 +82,14 @@
                         <v-flex xs4 class="ml-5">
                             <span>{{trans.logo}}</span>
 
+                            <v-img
+                                :src="brandImage"
+                                width="200"
+                            ></v-img>
+
                             <FileUpload :preview="false"
                                     :multiple="false"
-                                    model="brands"
-                                        >
+                                    model="brands">
                             </FileUpload>
                         </v-flex>
 
@@ -341,9 +344,7 @@
                     brandForm.append('logo', this.brandImage)
                     brandForm.append('colour', this.color)
 
-                    console.log(this.selectedBrand)
                     this.selectedBrand.company_id ? brandForm.append('company_id', this.selectedBrand.company_id) : null
-
 
                     brandForm.append('status', this.selectedBrand.status)
 
