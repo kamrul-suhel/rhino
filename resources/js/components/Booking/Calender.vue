@@ -119,7 +119,14 @@
             },
 
             storeSelectedDate(){
+                this.selectedDate = this.storeSelectedDate
                 this.initialize()
+            },
+
+            allowDates(){
+                if(this.selectedDate === ''){
+                    this.selectedDate = this.allowDates[0]
+                }
             }
         },
 

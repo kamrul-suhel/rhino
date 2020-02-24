@@ -128,6 +128,7 @@
                 color: 'getFrontendColor',
                 selectedEvent: 'getSelectedEvent',
                 vehicleType: 'getBookingVehicleType',
+                isDisable: 'getDisableEditing',
             })
         }),
 

@@ -21,6 +21,8 @@ use Illuminate\Http\Request;
 */
 Route::prefix('users')->group(function () {
     Route::post('', 'Auth\RegisterController@store');
+    Route::post('upload', 'Auth\UserUploadController@generateUsers');
+    Route::post('upload/confirm', 'Auth\UserUploadController@confirmed');
     Route::put('{id}', 'Auth\RegisterController@update');
     Route::get('', 'Auth\UserListController@list');
     Route::get('{id}/show', 'Auth\UserShowController@show');

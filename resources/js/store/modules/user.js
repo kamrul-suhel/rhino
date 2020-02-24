@@ -15,7 +15,9 @@ const defaultState = {
 
     //Tab option
     tabColor: 'dark',
-    tabSliderColor: 'white'
+    tabSliderColor: 'white',
+
+    uploadUserDialog: false
 }
 const state = {
     ...defaultState
@@ -205,6 +207,10 @@ const mutations = {
         }
 
         state.listHeader = [...header]
+    },
+
+    setUploadUserDialog(state, status){
+        state.uploadUserDialog = status
     }
 }
 
@@ -255,6 +261,10 @@ const getters = {
 
     getTotalRegionByUserId(state) {
         return state.totalRegions
+    },
+
+    getUploadUserDialog(state){
+        return state.uploadUserDialog
     }
 
 }
