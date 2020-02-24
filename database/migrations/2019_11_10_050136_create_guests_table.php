@@ -16,7 +16,7 @@ class CreateGuestsTable extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('event_id')->index();
-            $table->bigInteger('language_id')->index();
+            $table->bigInteger('language_id')->index()->default(1); // Default english language
             $table->string('unique', 120)->unique();
             $table->string('first_name');
             $table->string('surname');

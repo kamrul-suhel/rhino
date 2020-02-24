@@ -329,6 +329,7 @@
 
                         // Disable editing for guest
                         this.$store.commit('setDisableEditing', true)
+                        this.$router.push({name: 'bookingConfirmed'})
                     }
                 })
             },

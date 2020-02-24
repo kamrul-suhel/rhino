@@ -108,21 +108,30 @@
                 isDisable: 'getDisableEditing',
                 selectedEvent: 'getSelectedEvent',
                 color: 'getFrontendColor',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         },
 
         watch: {
             themeOption(value) {
                 this.$vuetify.theme = this.themeOption.theme
+            },
+            selectedLanguage(){
+                this.initialize()
             }
         },
 
         created() {
-            this.$store.commit('setUserRole', false)
-            this.$store.dispatch('fetchGuestBookingData')
+            this.initialize()
         },
 
         methods: {
+
+            initialize(){
+                this.$store.commit('setUserRole', false)
+                this.$store.dispatch('fetchGuestBookingData', {languageId: this.selectedLanguage.id})
+                this.$store.dispatch('fetchSettingFields', {languageId: this.selectedLanguage.id})
+            },
 
             /**
              * Get event banner image
