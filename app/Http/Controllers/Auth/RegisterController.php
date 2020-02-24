@@ -115,7 +115,12 @@ class RegisterController extends Controller
         $request->has('notes') ? $user->notes = $request->notes : null;
 
         $user = $this->updateUserLevel($user, $request);
-        return $user->save();
+
+        $user->save();
+
+        $user->dealerships()->attach([$request->dealershipId]);
+
+        return $user;
     }
 
     /**

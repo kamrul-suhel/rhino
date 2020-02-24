@@ -28,6 +28,11 @@ class Dealership extends Model
         return $this->belongsTo(Group::class, 'dealership_id', 'id');
     }
 
+    public function users()
+    {   
+        return $this->belongsToMany(User::class, 'dealership_id', 'user_id');
+    }
+
     public function dealershipTranslation(){
         return $this->hasOne(DealershipTranslation::class,'dealership_id', 'id');
     }

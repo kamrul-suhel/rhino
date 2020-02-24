@@ -1,6 +1,6 @@
 <template>
     <v-app
-        id="inspire"
+        id="inspire" class="admin-login"
     >
         <v-container fill-height
                      justify-center

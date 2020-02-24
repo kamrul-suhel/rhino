@@ -76,6 +76,11 @@ class User extends Authenticatable
         return $this->belongsTo(Dealership::class);
     }
 
+    public function dealerships()
+    {
+        return $this->belongsToMany(User::class, 'dealership_user', 'user_id', 'dealership_id');
+    }
+
     /**
      * Belong to one group
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
