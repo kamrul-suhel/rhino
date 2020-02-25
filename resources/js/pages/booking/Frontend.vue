@@ -1,29 +1,21 @@
 <template>
     <v-app
-        id="inspire"
+        id="rhinoFrontend"
         white
         class="rhinoFrontend"
     >
         <FDrawer></FDrawer>
         <v-content class="rhinoFrontend">
             <v-container class="content">
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <v-parallax
-                            :src="getEventBanner()"
-                            alt=""
-                            height="240">
-                            <v-layout align-center justify-end class="text-center" cols="12">
-                                <v-flex align-self-center>
-                                    <h1 class="display-1 font-weight-thin text-lg-right">
-                                        <span v-if="selectedEvent.greeting == 1">{{trans.hello}}</span> <span v-if="selectedEvent.greeting == 0">{{trans.hi}}</span>
-                                        {{  guest.first_name}} {{ trans.greetingFrontend }} {{ selectedEvent.name }}
-                                    </h1>
-                                </v-flex>
-                            </v-layout>
-                        </v-parallax>
+                <v-layout justify-end class="banner" row wrap :style="{backgroundImage: `url(${getEventBanner()})`}">
+                    <v-flex xs12 md5 align-self-center class="mt-5 mr-5">
+                        <h1 class="font-weight-thin text-md-right text-right px-4 mr-4">
+                            <span v-if="selectedEvent.greeting == 1">{{trans.hello}}</span> <span v-if="selectedEvent.greeting == 0">{{trans.hi}}</span>
+                            {{  guest.first_name}} {{ trans.greetingFrontend }} {{ selectedEvent.name }}
+                        </h1>
                     </v-flex>
-
+                </v-layout>
+                <v-layout row wrap>
                     <v-flex xs12 class="rhino-booking">
                         <div class="disabled-state" v-if="isDisable">
                         </div>
@@ -160,3 +152,14 @@
     }
 
 </script>
+
+<style  scoped>
+h1 {
+    font-size: 30px!important;
+}
+.banner{
+    min-height: 200px;
+    background-size: cover;
+    color: #fff;
+}
+</style>

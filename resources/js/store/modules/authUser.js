@@ -45,7 +45,7 @@ const defaultState = {
 
         // Default image
         brandDefaultImage : '/images/brandPlaceholder.jpg',
-        eventDefaultImage : '/images/event_default_image.jpg',
+        
         userDefaultImage : '/images/user_default_image.png',
 
         // Frontend
