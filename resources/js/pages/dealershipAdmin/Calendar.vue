@@ -265,6 +265,11 @@
                 if (this.authUser.level === CONST.SALE_EXECUTIVE) {
                     return
                 }
+
+                if(this.showDatePicker){
+                    return
+                }
+                
                 this.onGoBack()
             },
 
