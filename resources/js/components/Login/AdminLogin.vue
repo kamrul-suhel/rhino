@@ -55,7 +55,7 @@
                             <v-layout row wrap fluid class="text-xs-center">
 
                                 <v-flex xs12 v-if="errorLogin">
-                                    <p class="mb-0 red--text">Access denied user email & password is not match.</p>
+                                    <p class="mb-0 red--text">The email &amp; password entered did not match any of our records. <br> Please try again</p>
                                 </v-flex>
 
                                 <v-flex xs12>
@@ -155,9 +155,16 @@
                         .then(response => {
                             if (response.data.success) {
                                 window.location.href = '/admin/dashboard' // redirect to login
+                            } else {
+                                console.log('some error');
+                                this.loading = false
+                                this.errorLogin = true
+                                this.loginProgress = false
                             }
                         })
                         .catch(error => {
+                            console.log('login error');
+                            
                             this.loading = false
                             this.errorLogin = true
                             this.loginProgress = false

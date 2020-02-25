@@ -96,6 +96,14 @@ export default {
             params += `&saleExecutiveId=${payload.saleExecutiveId}`
         }
 
+        if (payload.ascending && typeof (payload.ascending) !== 'undefined') {
+            params += `&ascending=${payload.ascending}`
+        }
+
+        if (payload.descending && typeof (payload.descending) !== 'undefined') {
+            params += `&descending=${payload.descending}`
+        }
+
         return params
     },
 

@@ -1,9 +1,9 @@
 <?php
 return [
     [
-        'label' => 'Greeting Frontend',
+        'label' => 'Event Greeting',
         'identifier' => 'greetingFrontend',
-        'translation' => 'Hello Mr Dinsdale and welcome to our Platinum Event.'
+        'translation' => 'and welcome to our'
     ],
 
     [

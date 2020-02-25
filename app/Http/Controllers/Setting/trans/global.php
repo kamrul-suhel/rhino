@@ -1391,7 +1391,7 @@ return [
     [
         'label' => 'Description',
         'identifier' => 'description',
-        'translation' => 'Description'
-    ]
+        'translation,' => 'Description'
+    ],
 
 ];

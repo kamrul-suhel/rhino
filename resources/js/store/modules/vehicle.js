@@ -76,7 +76,8 @@ const mutations = {
                 {
                     text: payload.trans.brand,
                     align: 'left',
-                    value: 'brand'
+                    value: 'brand',
+                    filter: true
                 },
 
                 {

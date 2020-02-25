@@ -45,7 +45,24 @@ class VehicleController extends Controller
             // If sortBy has set then, sort by region, group, country
             if ($request->has('sortBy') && !empty($request->sortBy)) {
                 $sortBy = $request->sortBy;
-                $vehicles = $vehicles->orderBy('vehicles_translation.model');
+                $orderBy = 'ASC';
+
+                if ($request->descending == true){
+                    $orderBy = 'DESC';
+                }
+
+                switch($sortBy) {
+                    case "vehicle":
+                        $vehicles = $vehicles->orderBy('vehicles_translation.model', $orderBy);
+                        break;
+
+                    case "brand":
+                        $vehicles = $vehicles->orderBy('brands_translation.name', $orderBy);
+                        break;
+                }
+
+                // ascending or descending
+                // $order = $request->descending
 
             } else {
                 $vehicles = $vehicles->orderBy('vehicles.id', 'DESC');

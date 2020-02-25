@@ -178,15 +178,20 @@
                             </v-layout>
                             <v-layout row wrap>
                                 <v-flex xs12 sm8 pa-2>
-                                    <v-text-field
-                                        :rules="[v => !!v || `${trans.greeting} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.greeting} ${trans.text}`"
+                                    <p>{{ trans.greeting }}</p>
+                                    <v-radio-group
                                         v-model="event.greeting"
-                                        box
-                                        solo
-                                        flat
-                                    ></v-text-field>
+                                        :mandatory="false">
+                                        <v-radio :color="themeOption.inputColor"
+                                                 :label="trans.hello"
+                                                 :value="0">
+                                        </v-radio>
+
+                                        <v-radio :color="themeOption.inputColor"
+                                                 :label="trans.hi"
+                                                 :value="1">
+                                        </v-radio>
+                                    </v-radio-group>
                                 </v-flex>
                             </v-layout>
                             <v-layout row wrap>

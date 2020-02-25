@@ -78,14 +78,7 @@ const mutations = {
                         link: 'dealershipAnalytics',
                         access: ['dealership'],
                     },
-
-                    {
-                        icon: 'people',
-                        text: `${trans.guests}`,
-                        link: 'eventGuestList',
-                        access: ['dealership'],
-                    },
-
+                    
                     {
                         icon: 'business',
                         text: `${trans.edit} ${trans.dealership}`,

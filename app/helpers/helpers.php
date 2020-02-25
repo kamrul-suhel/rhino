@@ -3,8 +3,10 @@
 use App\Guest;
 
 if (! function_exists('generateUniqueIdForGuest')) {
-    function generateUniqueIdForGuest() {
+    function generateUniqueIdForGuest($suffix) {
+
         $unique = md5(microtime().rand());
+        $unique = $suffix.$unique;
         while(true){
             $exists = Guest::where('unique', $unique)
                 ->first();

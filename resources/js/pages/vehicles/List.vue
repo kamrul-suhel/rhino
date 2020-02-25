@@ -275,6 +275,7 @@
             pagination: {
                 handler() {
                     this.initialize();
+                    console.log(this.pagination);
                 }
             },
 

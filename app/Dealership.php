@@ -30,7 +30,7 @@ class Dealership extends Model
 
     public function users()
     {   
-        return $this->belongsToMany(User::class, 'dealership_id', 'user_id');
+        return $this->belongsToMany(User::class, 'dealership_id', 'user_id')->withTimestamps();
     }
 
     public function dealershipTranslation(){
