@@ -60,7 +60,17 @@
             return {}
         },
 
-        watch: {},
+        watch: {
+            selectedEvent() {
+                if (this.selectedEvent) {
+                    this.$store.dispatch('fetchBrandsByEventId', {
+                        themeOption: this.themeOption,
+                        trans: this.trans,
+                        eventId: this.selectedEvent.id
+                    })
+                }
+            }
+        },
 
         computed: {
             ...mapGetters({

@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <div class="rhino-admin-header">
         <v-layout
             align-center
+            justify-space-between
             row
             wrap
             fill-height
@@ -13,23 +14,35 @@
 <!--                <v-icon class="text-white">menu</v-icon>-->
 <!--            </v-flex>-->
 
-            <v-flex xs6
+            <div
                     :sm4="authUser.level === 'dealership'"
                     v-if="authUser.level === 'dealership'">
-                <div>
-                    <h2>Brands</h2>
-                </div>
-            </v-flex>
+                <div class="brands-carousel">
+                    <v-carousel height="80"
+                                hide-controls
+                                hide-delimiters>
+                        <v-carousel-item
+                            lazy
+                            v-for="(brand,i) in brands"
+                            :key="brand.id"
+                            :src="brand.logo"
+                        ></v-carousel-item>
+                    </v-carousel>
 
-            <v-flex xs6 :sm4="authUser.level === 'dealership'">
+                    <div :style="{backgroundColor: getBadgeBackgroundColor(), }"
+                         class="badge">
+                        {{ brands.length }}
+                    </div>
+                </div>
+            </div>
+
+            <div>
                 <div class="text-xs-center">
                     <h2>{{ title }}</h2>
                 </div>
-            </v-flex>
+            </div>
 
-            <v-flex xs6
-                    :sm4="authUser.level === 'dealership'"
-                    v-if="authUser.level === 'dealership'">
+            <div>
                 <v-spacer></v-spacer>
                 <v-layout row>
                     <v-autocomplete
@@ -45,7 +58,7 @@
                         return-object
                     ></v-autocomplete>
                 </v-layout>
-            </v-flex>
+            </div>
         </v-layout>
 
         <dealership-toolbar
@@ -83,7 +96,8 @@
                 isLogin: 'getIsLogin',
                 title: 'getHeaderTitle',
                 authUser: 'getAuthUser',
-                selectedLanguage: 'getSelectedLanguage'
+                selectedLanguage: 'getSelectedLanguage',
+                brands: 'getEventBrands'
             })
         },
 
@@ -125,6 +139,14 @@
                     return true
                 }
                 return false
+            },
+
+            getBadgeBackgroundColor(){
+                let color = '#444'
+                if(this.brands.length > 0){
+                    color = this.brands[0].colour
+                }
+                return color
             }
         }
     }
