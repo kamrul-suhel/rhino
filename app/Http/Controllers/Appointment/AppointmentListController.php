@@ -6,6 +6,7 @@ use App\Appointment;
 use App\EventUser;
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AppointmentListController extends Controller
@@ -21,9 +22,6 @@ class AppointmentListController extends Controller
             ->where('event_id', $eventId)
             ->pluck('user_id');
 
-//        dd($users);
-
-
         $appointments = Appointment::select(
             'appointments.*',
             'guests.first_name as guest_first_name',
@@ -36,6 +34,14 @@ class AppointmentListController extends Controller
             !empty($request->saleExecutiveId)
         ){
             $appointments = $appointments->where('appointments.user_id', $request->saleExecutiveId);
+        }
+
+        // If request has date params, then load only specific date appointment
+        if($request->has('date') && !empty($request->date)){
+            $date = Carbon::parse($request->date);
+            $startOfDay = $date->copy()->startOfDay();
+            $endOfDay = $date->copy()->endOfDay();
+            $appointments = $appointments->whereBetween('appointments.start',[$startOfDay, $endOfDay]);
         }
 
         $appointments = $appointments->whereIn('appointments.status', [

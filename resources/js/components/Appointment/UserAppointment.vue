@@ -3,7 +3,7 @@
         <v-flex xs3
                 v-for="(appointmentSlot, index) in appointmentSlots"
                 :key="index">
-            <UserAppointmentSlot :appointmentSlot="appointmentSlot">
+            <UserAppointmentSlot :appointmentSlot="appointmentSlot" :user="user">
             </UserAppointmentSlot>
         </v-flex>
     </v-layout>
@@ -30,6 +30,12 @@
             date: {
                 type: String,
                 required: true
+            },
+
+            user:{
+                type: Object,
+                required: false,
+                default: null
             }
         },
 
@@ -43,9 +49,16 @@
                 selectedEvent: 'getSelectedEvent',
                 update: 'getInitializeAppointment',
                 appointmentUsers: 'getAppointmentUsers',
-                existingAppointments: 'getAppointments'
+                existingAppointments: 'getAppointments',
+                initialize: 'getInitAppointmentByDate'
             })
         }),
+
+        watch:{
+            initialize(){
+                this.initializeUserAppointment()
+            }
+        },
 
         created() {
             this.initializeUserAppointment()
@@ -54,11 +67,14 @@
         methods: {
             initializeUserAppointment() {
                 const time = fn.getStartTimeEndTime(this.date, this.dealership)
-                this.appointmentSlots = fn.getTimeSlotsForDay(time, this.selectedEvent)
+                this.appointmentSlots = [...fn.getTimeSlotsForDay(time, this.selectedEvent)]
             },
 
             checkAvailability(currentSlot){
-                const selectedUser = {...this.selectedUser}
+                let selectedUser = {...this.selectedUser}
+                if(this.user){
+                    selectedUser = {...this.user}
+                }
                 let isSlotAvailable = true
 
                 if (this.existingAppointments.length > 0) {

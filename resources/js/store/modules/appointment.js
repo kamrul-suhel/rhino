@@ -7,6 +7,8 @@ const defaultState = {
     date: null,
     appointmentUsers:[],
 
+    initAppointmentByDate: false
+
 }
 
 const state = {
@@ -32,6 +34,10 @@ const mutations = {
 
     setAppointmentUsers(state, users){
         state.appointmentUsers = [...users]
+    },
+
+    setInitAppointmentByDate(state){
+        state.initAppointmentByDate = !state.initAppointmentByDate
     }
 }
 
@@ -54,6 +60,10 @@ const getters = {
 
     getAppointmentUsers(state){
         return state.appointmentUsers
+    },
+
+    getInitAppointmentByDate(state){
+        return state.initAppointmentByDate
     }
 }
 
