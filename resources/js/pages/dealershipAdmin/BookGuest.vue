@@ -225,7 +225,7 @@
 
         created() {
             this.generateSource()
-            this.$store.commit('setHeaderTitle', `${this.trans.book} ${this.trans.a} ${this.trans.guest}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
         },
 
         methods: {

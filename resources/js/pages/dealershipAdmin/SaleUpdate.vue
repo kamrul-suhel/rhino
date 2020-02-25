@@ -184,8 +184,7 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.update} ${this.trans.sales}`)
-            this.$store.commit('setNavTitle', `${this.trans.update} ${this.trans.sales}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
         },
 
         methods: {

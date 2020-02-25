@@ -1,6 +1,6 @@
 const defaultState = {
-    headerTitle : 'Default header',
-    navTitle: 'Nav title default'
+    headerTitle : '',
+    navTitle: ''
 }
 
 const state = {

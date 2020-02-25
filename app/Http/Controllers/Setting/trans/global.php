@@ -1394,4 +1394,16 @@ return [
         'translation' => 'Description'
     ],
 
+    [
+        'label' => 'Confirmed Appointments',
+        'identifier' => 'confirmedAppointments',
+        'translation' => 'Confirmed Appointments'
+    ],
+
+    [
+        'label' => 'Appointments Made',
+        'identifier' => 'appointmentsMade',
+        'translation' => 'Appointments Made'
+    ],
+
 ];

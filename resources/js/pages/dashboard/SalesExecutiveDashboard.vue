@@ -31,6 +31,7 @@
         watch: {},
 
         created() {
+            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
         },
 
         methods: {
