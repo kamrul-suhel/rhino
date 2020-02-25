@@ -15,7 +15,10 @@
                             height="240">
                             <v-layout align-center justify-end class="text-center" cols="12">
                                 <v-flex align-self-center>
-                                    <h1 class="display-1 font-weight-thin text-lg-right">{{trans.hello}}</h1>
+                                    <h1 class="display-1 font-weight-thin text-lg-right">
+                                        <span v-if="selectedEvent.greeting == 1">{{trans.hello}}</span> <span v-if="selectedEvent.greeting == 0">{{trans.hi}}</span>
+                                        {{  guest.first_name}} {{ trans.greetingFrontend }} {{ selectedEvent.name }}
+                                    </h1>
                                 </v-flex>
                             </v-layout>
                         </v-parallax>
@@ -94,7 +97,9 @@
         },
 
         data: () => ({
-            currentStep: ''
+            currentStep: '',
+            informal: false,
+            formal: false,
         }),
 
         computed: {
@@ -108,7 +113,9 @@
                 isDisable: 'getDisableEditing',
                 selectedEvent: 'getSelectedEvent',
                 color: 'getFrontendColor',
-                selectedLanguage: 'getSubSelectedLanguage'
+                selectedLanguage: 'getSubSelectedLanguage',
+                guest: 'getBookingGuest'
+
             })
         },
 

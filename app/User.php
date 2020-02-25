@@ -78,7 +78,7 @@ class User extends Authenticatable
 
     public function dealerships()
     {
-        return $this->belongsToMany(User::class, 'dealership_user', 'user_id', 'dealership_id');
+        return $this->belongsToMany(Dealership::class, 'dealership_user', 'user_id', 'dealership_id')->withTimestamps();
     }
 
     /**

@@ -21,6 +21,8 @@
                         :label="`${trans.monday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -58,6 +60,8 @@
                         :label="`${trans.monday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -93,6 +97,8 @@
                         :label="`${trans.tuesday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -130,6 +136,8 @@
                         :label="`${trans.tuesday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -165,6 +173,8 @@
                         :label="`${trans.wednesday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -202,6 +212,8 @@
                         :label="`${trans.wednesday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -237,6 +249,8 @@
                         :label="`${trans.thursday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -274,6 +288,8 @@
                         :label="`${trans.thursday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -309,6 +325,8 @@
                         :label="`${trans.friday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -346,6 +364,8 @@
                         :label="`${trans.friday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -381,6 +401,8 @@
                         :label="`${trans.saturday} ${trans.start}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -418,6 +440,8 @@
                         :label="`${trans.saturday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -452,7 +476,9 @@
                         v-model="dealership.sunday_start"
                         :label="`${trans.sunday} ${trans.start}`"
                         prepend-icon="access_time"
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
                         readonly
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>
@@ -490,6 +516,8 @@
                         :label="`${trans.sunday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
+                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        required
                         v-on="on"
                     ></v-text-field>
                 </template>

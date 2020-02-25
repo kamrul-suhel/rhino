@@ -174,10 +174,10 @@
                                         :slider-color="themeOption.tabSliderColor"
                                     >
                                         <v-tab
-                                            key="address"
+                                            key="times"
                                             ripple
                                         >
-                                            {{ trans.address}}
+                                            {{ trans.opening_times}}
 
                                         </v-tab>
 
@@ -189,25 +189,11 @@
 
                                         </v-tab>
 
-                                        <v-tab
-                                            key="times"
-                                            ripple
-                                        >
-                                            {{ trans.opening_times}}
-
-                                        </v-tab>
-
                                         <v-tab-item
-                                            key="address"
-                                        >
-                                            <v-layout row wrap pt-3>
-                                            </v-layout>
-
-                                            <v-layout row wrap pt-3>
-                                            </v-layout>
-
-                                            <v-layout row wrap>
-                                            </v-layout>
+                                            key="times">
+                                            <TimePicker :dealership="times"
+                                                        v-on:sendTimes="updateTimes">
+                                            </TimePicker>
                                         </v-tab-item>
 
                                         <v-tab-item
@@ -218,13 +204,6 @@
                                                             model="dealership"
                                                 ></ImageUpload>
                                             </v-layout>
-                                        </v-tab-item>
-
-                                        <v-tab-item
-                                            key="times">
-                                            <TimePicker :dealership="times"
-                                                        v-on:sendTimes="updateTimes">
-                                            </TimePicker>
                                         </v-tab-item>
                                     </v-tabs>
                                 </v-layout>

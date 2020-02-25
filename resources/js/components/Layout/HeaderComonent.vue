@@ -2,24 +2,24 @@
     <div>
         <v-layout
             align-center
-            justify-space-between
             row
             wrap
             fill-height
             class="header"
             pa-5
             :style="{height : `${themeOption.adminHeaderHeight}px`}">
-            <v-flex xs12 sm4 v-if="checkLevel()">
 
+            <v-flex xs1 class="menu-toggle hidden-lg" @click="onToggleNav">
+                <v-icon class="text-white">menu</v-icon>
             </v-flex>
 
-            <v-flex xs12 :sm4="authUser.level === 'dealership'">
+            <v-flex xs6 lg12 :sm4="authUser.level === 'dealership'" offset-xs2 offset-lg0>
                 <div class="text-xs-center">
                     <h2>{{ title }}</h2>
                 </div>
             </v-flex>
 
-            <v-flex xs12 sm4 v-if="authUser.level === 'dealership'">
+            <v-flex xs6 sm4 lg12 v-if="authUser.level === 'dealership'" offset-xs2 offset-lg0>
                 <v-spacer></v-spacer>
                 <v-layout row>
                     <v-autocomplete
@@ -102,6 +102,11 @@
                 this.$store.dispatch('fetchSettingFields', {languageId: value.id})
             },
 
+            onToggleNav(){
+            
+                this.$store.commit('setIsNavigationOpen');
+            },
+            
             checkUserAccess(){
                 if(
                     this.authUser.level === 'dealership' ||
@@ -114,3 +119,15 @@
         }
     }
 </script>
+
+<style scoped>
+.menu-toggle {
+    cursor: pointer;
+}
+
+@media ( min-width: 1263px) {
+    .menu-toggle {
+        display:none;
+    }   
+}
+</style>

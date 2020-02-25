@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Event;
 use App\Guest;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\GuestRequest;
+use App\Dealership;
 use Illuminate\Http\Request;
+use App\Http\Requests\GuestRequest;
+use App\Http\Controllers\Controller;
 
 class GuestStoreController extends Controller
 {
@@ -69,7 +71,11 @@ class GuestStoreController extends Controller
 
         // If creating new guest, then generate new unique id
         if(!$id){
-            $guest->unique = generateUniqueIdForGuest();
+
+            // Get code suffix from dealership
+            $dealershipId = Event::where('id', $request->event_id)->pluck('dealership_id');
+            $suffix = Dealership::where('id', $dealershipId)->pluck('suffix');
+            $guest->unique = generateUniqueIdForGuest($suffix[0]);
         }
 
         $guest->save();
