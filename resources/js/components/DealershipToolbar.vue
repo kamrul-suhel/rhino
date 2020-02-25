@@ -60,8 +60,7 @@
             return {}
         },
 
-        watch: {
-        },
+        watch: {},
 
         computed: {
             ...mapGetters({
@@ -74,21 +73,21 @@
                 totalGuest: 'getTotalGuests'
             }),
 
-            selectedEvent:{
-                get: function() {
+            selectedEvent: {
+                get: function () {
                     return this.$store.getters.getSelectedEvent
                 },
-                set:function(value) {
+                set: function (value) {
                     this.$store.commit('setSelectedEvent', value)
                 }
             },
 
-            selectedGuest:{
-                get: function(){
+            selectedGuest: {
+                get: function () {
                     return this.$store.getters.getSelectedGuest
                 },
 
-                set: function(selectedGuest){
+                set: function (selectedGuest) {
                     this.$store.commit('setSelectedGuest', selectedGuest)
                 }
             }
@@ -110,19 +109,19 @@
                 this.$store.commit('setIsNavigationOpen')
             },
 
-            onEventChange(){
+            onEventChange() {
                 this.$store.commit('setUpdateComponent')
                 this.$store.dispatch('fetchGuestForDropDown', {eventId: this.selectedEvent.id})
             },
 
-            onSelectGuest(){
-                if(this.$route.params.guestId === this.selectedGuest.id){
+            onSelectGuest() {
+                if (this.$route.params.guestId === this.selectedGuest.id) {
                     return
                 }
 
                 this.$router.push({
                     name: 'dealershipGuestShow',
-                    params:{
+                    params: {
                         dealershipId: this.dealership.id,
                         guestId: this.selectedGuest.id
                     }

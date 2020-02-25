@@ -21,7 +21,7 @@
             </v-layout>
             <!-- Available slot -->
 
-            <AppointmentOverview v-else :appointment="getAppointmentInfo()"></AppointmentOverview>
+            <AppointmentOverview :user="user" v-else :appointment="getAppointmentInfo()"></AppointmentOverview>
             <!-- unavailable -->
         </v-card-actions>
     </v-card>
@@ -51,6 +51,12 @@
             appointmentSlot: {
                 type: Object,
                 required: true
+            },
+
+            user:{
+                type: Object,
+                required: false,
+                default: null
             }
         },
 
@@ -68,7 +74,11 @@
 
         methods: {
             checkAvailability(currentSlot) {
-                const selectedUser = {...this.selectedUser}
+                let selectedUser = {...this.selectedUser}
+                if(this.user){
+                    selectedUser = {...this.user}
+                }
+
                 let isSlotAvailable = true
 
                 if (this.existingAppointments.length > 0) {
@@ -80,15 +90,16 @@
                             isSlotAvailable = false
                         }
                     })
-                    return isSlotAvailable
-
-                } else {
-                    return isSlotAvailable
                 }
+
+                return isSlotAvailable
             },
 
             getAppointmentInfo(){
-                const selectedUser = {...this.selectedUser}
+                let selectedUser = {...this.selectedUser}
+                if(this.user){
+                    selectedUser = {...this.user}
+                }
                 let slotInfo = {...this.appointmentSlot}
 
                 _.map(this.existingAppointments, (appointment) => {
@@ -107,6 +118,11 @@
             },
 
             onAppointmentDetail(appointmentSlot, type) {
+
+                if(this.user){
+                    this.$store.commit('setSelectedUser', this.user)
+                }
+
                 switch (type) {
                     case 'unavailable':
                         this.$store.commit('setAppointmentAvailable', false)

@@ -96,6 +96,10 @@ export default {
             params += `&saleExecutiveId=${payload.saleExecutiveId}`
         }
 
+        if (payload.date && typeof (payload.date) !== 'undefined') {
+            params += `&date=${payload.date}`
+        }
+
         return params
     },
 

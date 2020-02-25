@@ -33,6 +33,12 @@
             appointment: {
                 type: Object,
                 required: true
+            },
+
+            user:{
+                type:Object,
+                required:false,
+                default: null
             }
         },
 
@@ -50,6 +56,10 @@
 
         methods: {
             onAppointmentDetail(){
+                if(this.user){
+                    this.$store.commit('setSelectedUser', this.user)
+                }
+
                 this.$store.commit('setAppointmentAvailable', false)
                 this.$store.commit('setAppointmentUnavailable', true)
                 this.$store.commit('setAppointmentDialog', true)
