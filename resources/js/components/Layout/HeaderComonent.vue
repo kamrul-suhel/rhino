@@ -9,17 +9,27 @@
             pa-5
             :style="{height : `${themeOption.adminHeaderHeight}px`}">
 
-            <v-flex xs1 class="menu-toggle hidden-lg" @click="onToggleNav">
-                <v-icon class="text-white">menu</v-icon>
+<!--            <v-flex xs1 class="menu-toggle hidden-lg" @click="onToggleNav">-->
+<!--                <v-icon class="text-white">menu</v-icon>-->
+<!--            </v-flex>-->
+
+            <v-flex xs6
+                    :sm4="authUser.level === 'dealership'"
+                    v-if="authUser.level === 'dealership'">
+                <div>
+                    <h2>Brands</h2>
+                </div>
             </v-flex>
 
-            <v-flex xs6 lg12 :sm4="authUser.level === 'dealership'" offset-xs2 offset-lg0>
+            <v-flex xs6 :sm4="authUser.level === 'dealership'">
                 <div class="text-xs-center">
                     <h2>{{ title }}</h2>
                 </div>
             </v-flex>
 
-            <v-flex xs6 sm4 lg12 v-if="authUser.level === 'dealership'" offset-xs2 offset-lg0>
+            <v-flex xs6
+                    :sm4="authUser.level === 'dealership'"
+                    v-if="authUser.level === 'dealership'">
                 <v-spacer></v-spacer>
                 <v-layout row>
                     <v-autocomplete
@@ -103,10 +113,10 @@
             },
 
             onToggleNav(){
-            
+
                 this.$store.commit('setIsNavigationOpen');
             },
-            
+
             checkUserAccess(){
                 if(
                     this.authUser.level === 'dealership' ||
@@ -128,6 +138,6 @@
 @media ( min-width: 1263px) {
     .menu-toggle {
         display:none;
-    }   
+    }
 }
 </style>
