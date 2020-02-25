@@ -3,20 +3,20 @@
         <Overview></Overview>
 
         <v-layout row v-if="analyticsTotalGuest > 0">
-            <v-flex xs12 sm4 class="text-xs-center">
-                Confirmed Appointments
+            <v-flex xs12 sm4 class="text-xs-center graph">
+                {{ trans.confirmedAppointments }}
                 <span class="graphNumber">{{confirmedPercent}}%</span>
                 <graph :chartData="confirmed" :options="options" :styles="myStyles"></graph>
             </v-flex>
 
-            <v-flex xs12 sm4 class="text-xs-center">
-                Appointments Made
+            <v-flex xs12 sm4 class="text-xs-center graph">
+                {{ trans.appointmentsMade}}
                 <span class="graphNumber">{{madePercent}}%</span>
                 <graph :chartData="made" :options="options" :styles="myStyles"></graph>
             </v-flex>
 
-            <v-flex xs12 sm4 class="text-xs-center">
-                Sales
+            <v-flex xs12 sm4 class="text-xs-center graph">
+                {{ trans.sales}}
                 <span class="graphNumber">{{salesPercent}}%</span>
                 <graph :chartData="sales" :options="options" :styles="myStyles"></graph>
             </v-flex>
@@ -129,9 +129,8 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.analytics}`)
-            this.$store.commit('setNavTitle', `${this.trans.analytics}`)
             this.fetchAnalytics()
+            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
         },
 
         mounted() {
@@ -238,3 +237,17 @@
 
     }
 </script>
+<style>
+    .graph {
+        position: relative;
+    }
+    .graphNumber {
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        font-size: 3.25rem;
+    }
+</style>

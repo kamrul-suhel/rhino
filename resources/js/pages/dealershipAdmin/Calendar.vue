@@ -282,10 +282,11 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', this.trans.calendar)
             this.initializeCalender()
             this.fetchEventUser()
             this.allowDateForDatePicker()
+            
+            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
         },
 
         methods: {

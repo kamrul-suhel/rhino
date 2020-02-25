@@ -205,6 +205,7 @@
 
         created() {
             this.initialize()
+            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
         },
 
         mounted() {
