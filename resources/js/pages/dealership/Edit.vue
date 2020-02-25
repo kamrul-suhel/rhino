@@ -176,7 +176,7 @@
                                         <v-btn
                                             :color="themeOption.buttonSuccess"
                                             small
-                                            @click=""
+                                            @click="onUploadUsers()"
                                         >
 
                                             {{ trans.upload }} {{ trans.users }}
@@ -223,6 +223,8 @@
                 </v-flex>
             </v-layout>
         </v-form>
+
+        <UploadUsers></UploadUsers>
     </v-container>
 </template>
 
@@ -234,6 +236,7 @@
     import LanguagePicker from '@/components/Language'
     import DealershipUsers from '@/components/Dealership/Users'
     import EventList from '../event/List'
+    import UploadUsers from "@/components/User/UploadUsers"
 
     export default {
         components: {
@@ -242,7 +245,8 @@
             Brands,
             LanguagePicker,
             DealershipUsers,
-            EventList
+            EventList,
+            UploadUsers
         },
 
         data() {
@@ -336,6 +340,10 @@
                     }).catch((error)=>{
                     })
                 }
+            },
+
+            onUploadUsers(){
+                this.$store.commit('setUploadUserDialog', true)
             }
         }
     }

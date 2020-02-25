@@ -49,6 +49,8 @@ Vue.component('Flag', Global.default.Flag)
  */
 import ImageUploader from 'vue-image-upload-resize'
 
+import * as CONST from './utils/const'
+
 /**
 * Import filter
 */

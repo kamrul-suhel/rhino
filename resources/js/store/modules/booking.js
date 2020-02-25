@@ -36,7 +36,11 @@ const mutations = {
         state.disableEditing = status
     },
 
-    setBookingGuest(state, guest) {
+    setBookingGuest(state, payload) {
+
+        const guest = {...payload.guest}
+        const event = {...payload.event}
+
         // Update disable editing state if, guest status not 0
         if(guest.status > 0){
             state.disableEditing = true
@@ -77,6 +81,8 @@ const mutations = {
                     changingCar: appointment.guest_changing_car
                 }
             }
+        }else{
+            // state.selectedDate = moment(event.start).format( "YYYY-MM-DD")
         }
 
         state.guest = {...guest}
@@ -352,7 +358,7 @@ const actions = {
             if (response.data.success) {
                 const dataUrl = `/api/booking/${response.data.uniqueId}${fn.generateParams(payload)}`
                 axios.get(dataUrl).then((response) => {
-                    commit('setBookingGuest', response.data.guest)
+                    commit('setBookingGuest', {guest : response.data.guest, event: response.data.event})
                     commit('setBookingAppointments', response.data.appointments)
                     commit('updateSelectedVehicles', response.data)
                     commit('updatedSelectedSaleExecutive', response.data)

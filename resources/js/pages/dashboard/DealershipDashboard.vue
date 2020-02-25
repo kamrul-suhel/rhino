@@ -165,6 +165,7 @@
                     case 'dealershipAnalytics':
                         this.$router.push({name: 'dealershipAnalytics', params:{eventId: this.selectedEvent.id}})
                         break
+
                     case 'eventSales':
                         this.$router.push({name: 'eventSales', params:{eventId: this.selectedEvent.id}})
                         break
