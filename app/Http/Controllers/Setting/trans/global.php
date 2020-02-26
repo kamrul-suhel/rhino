@@ -1406,4 +1406,24 @@ return [
         'translation' => 'Appointments Made'
     ],
 
+    [
+        'label' => 'By',
+        'identifier' => 'by',
+        'translation' => 'By'
+    ],
+    
+    [
+        'label' => 'Online Registration',
+        'identifier' => 'onlineRegistration',
+        'translation' => 'Online Registration'
+    ],
+
+    [
+        'label' => 'Telephone',
+        'identifier' => 'telephone',
+        'translation' => 'Telephone'
+    ],
+
+    
+
 ];
