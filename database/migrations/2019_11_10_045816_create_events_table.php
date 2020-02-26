@@ -24,7 +24,7 @@ class CreateEventsTable extends Migration
             $table->text('banner')->nullable();
             $table->tinyInteger('status')->index()->default(1);
             $table->boolean('greeting')->nullable();
-            $table->bigInteger('default_language_id')->nullable()->index();
+            $table->bigInteger('default_language_id')->nullable()->index()->default(1);
             $table->text('banner_image')->nullable();
             $table->timestamps();
         });
