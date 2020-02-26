@@ -1,5 +1,9 @@
 <template>
     <div class="rhino-admin-header">
+        <div class="toggle-nav" @click="onToggleNav">
+            <v-icon class="text-white">menu</v-icon>
+        </div>
+
         <v-layout
             align-center
             justify-space-between
@@ -8,15 +12,10 @@
             fill-height
             class="header"
             pa-5
+            v-if="authUser.level !== 'admin'"
             :style="{height : `${themeOption.adminHeaderHeight}px`}">
 
-<!--            <v-flex xs1 class="menu-toggle hidden-lg" @click="onToggleNav">-->
-<!--                <v-icon class="text-white">menu</v-icon>-->
-<!--            </v-flex>-->
-
-            <div
-                    :sm4="authUser.level === 'dealership'"
-                    v-if="authUser.level === 'dealership'">
+            <div>
                 <div class="brands-carousel">
                     <v-carousel height="80"
                                 hide-controls
@@ -62,6 +61,21 @@
             </div>
         </v-layout>
 
+        <v-layout
+            align-center
+            justify-space-between
+            row
+            wrap
+            fill-height
+            class="header"
+            pa-5
+            v-if="authUser.level === 'admin'"
+            :style="{height : `${themeOption.adminHeaderHeight}px`}">
+            <v-flex xs12 class="text-xs-center">
+                <h2>{{ title }}</h2>
+            </v-flex>
+        </v-layout>
+
         <dealership-toolbar
             v-if="checkUserAccess()">
         </dealership-toolbar>
@@ -85,7 +99,6 @@
 
         watch: {
             selectedLanguage(){
-                console.log('selected language: ', this.selectedLanguage)
                 this.selectedLanguageId = this.selectedLanguage.id
             }
         },
@@ -129,7 +142,6 @@
             },
 
             onToggleNav(){
-
                 this.$store.commit('setIsNavigationOpen');
             },
 

@@ -80,7 +80,6 @@ class GuestStoreController extends Controller
 
         // If creating new guest, then generate new unique id
         if(!$id){
-
             // Get code suffix from dealership
             $dealershipId = Event::where('id', $request->event_id)->pluck('dealership_id');
             $suffix = Dealership::where('id', $dealershipId)->pluck('suffix');

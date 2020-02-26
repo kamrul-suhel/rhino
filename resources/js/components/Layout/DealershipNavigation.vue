@@ -106,7 +106,7 @@
                 themeOption: 'getThemeOption',
                 trans: 'getFields',
                 languages: 'getLanguages',
-                openNavigation: 'getDealershipIsNavigationOpen',
+                openNavigation: 'getIsNavigationOpen',
                 navs: 'getDealershipNavigation',
                 authUser: 'getAuthUser',
                 title: 'getNavTitle',

@@ -2,16 +2,13 @@
 
 </template>
 <script>
-    import { mapGetters } from 'vuex'
-    export default {
-        data(){
-            return {
+    import {mapGetters} from 'vuex'
 
-            }
+    export default {
+        data() {
+            return {}
         },
 
-        computed: ({
-
-                 }),
+        computed: ({}),
     }
 </script>
