@@ -70,8 +70,10 @@ class GuestStoreController extends Controller
         $request->has('salutation') ? $guest->salutation = $request->salutation : null;
 
         // Set default language based on event default language
-        $langId = Event::find($request->event_id);
-        $guest->language_id = $langId->default_language_id;
+        $event = Event::find($request->event_id);
+        if($event){
+            $guest->language_id = $event->default_language_id;
+        }
 
         // If creating new guest, then generate new unique id
         if(!$id){
