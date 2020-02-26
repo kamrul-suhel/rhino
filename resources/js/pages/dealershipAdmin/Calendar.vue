@@ -269,7 +269,7 @@
                 if(this.showDatePicker){
                     return
                 }
-                
+
                 this.onGoBack()
             },
 

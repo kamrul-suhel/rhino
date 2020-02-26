@@ -188,7 +188,7 @@
                                     dark
                                     :color="themeOption.buttonSecondaryColor"
                                     small
-                                    @click="$router.push({name: 'listGuests'})"
+                                    @click="$router.push({name: 'listGuest'})"
                                 >
                                     {{ `${trans.back}`}}
                                 </v-btn>
@@ -282,7 +282,6 @@
                             }
 
                             this.$router.push({name: 'listGuest'})
-
                         }
                     })
                 }

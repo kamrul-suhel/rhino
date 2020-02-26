@@ -62,6 +62,7 @@
                         v-model="selected"
                         :headers="getHeader()"
                         :items="guests"
+                        hide-actions
                         select-all
                         item-key="first_name"
                         class="elevation-1"
