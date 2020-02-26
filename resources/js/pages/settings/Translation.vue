@@ -35,7 +35,7 @@
             :rows-per-page-items="rowsPerPage"
             :total-items="totalTranslation"
             :loading="loading"
-            class="elevation-1 r-table"
+            class="elevation-1 r-table translations"
         >
             <template v-slot:items="props">
                 <td class="text-xs-left">{{ props.item.label }}</td>
@@ -43,6 +43,7 @@
                     <v-edit-dialog
                         :return-value.sync="props.item.name"
                         lazy
+                        :color="themeOption.inputColor"
                         @save="save(props.item)"
                         @cancel="cancel"
                         @open="open"
@@ -50,7 +51,7 @@
                     > {{ props.item.translation }}
                         <template v-slot:input>
                             <v-text-field
-                                :color="themeOption.inputColor"
+                                :color="themeOption.buttonDangerColor"
                                 v-model="props.item.translation"
                                 :label="trans.edit"
                                 single-line
@@ -197,3 +198,9 @@
         }
     }
 </script>
+
+<style scoped>
+    .translations .v-menu__activator{
+        background: #fff
+    }
+</style>
