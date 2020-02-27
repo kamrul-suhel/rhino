@@ -258,6 +258,7 @@
             selectedEvent() {
                 this.fetchEventUser()
                 this.allowDateForDatePicker()
+                this.onGoBack()
             },
 
             updateComponent() {
@@ -269,6 +270,8 @@
                 if(this.showDatePicker){
                     return
                 }
+
+                return
 
                 this.onGoBack()
             },
@@ -290,7 +293,7 @@
             this.initializeCalender()
             this.fetchEventUser()
             this.allowDateForDatePicker()
-            
+
             this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
         },
 
