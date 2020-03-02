@@ -125,6 +125,7 @@ Route::prefix('brands')->group(function () {
     Route::put('{id}/update', 'Brand\BrandStoreController@update');
     Route::delete('{id}/delete', 'Brand\BrandController@destroy');
     Route::get('{id}/regions', 'Brand\BrandRegionController@getRegions');
+    Route::get('sales_executive/{eventId}/{dealershipId}', 'Brand\BrandSaleExecutive@getSaleExecutives');
 });
 
 /*

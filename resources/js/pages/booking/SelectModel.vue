@@ -2,12 +2,12 @@
     <div class="model-section" px-5>
         <v-layout row wrap>
             <v-flex xs12>
-                <h5 class="headline mt-5 text-lg-center"
+                <h5 class="headline mt-5 text-xs-center"
                     :style="{color: color}">{{trans.areYouInterestedNewOrUsed}}
                 </h5>
             </v-flex>
 
-            <v-flex justify="center">
+            <v-flex justify="center">it
                 <v-layout row sm4 mt-4 justify-center>
                     <v-flex class="grow-0">
                         <div>
@@ -123,6 +123,7 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 vehicles: 'getEventVehicles',
+                guest: 'getBookingGuest',
                 dealership: 'getSelectedDealership',
                 selectedVehicles: 'getBookingSelectedVehicles',
                 color: 'getFrontendColor',
@@ -168,7 +169,25 @@
             },
 
             onContinue() {
-                this.$store.commit('setBookingStep', 1)
+
+                // if vehicle selected then load only associate sale executive
+                if(this.selectedVehicles.length > 0){
+                    const brandIds = _.map(this.selectedVehicles, (vehicle) => {
+                        return vehicle.brand_id
+                    })
+
+                    // Remove duplicate ids
+                    const uniqueBrandIds = _.uniqBy(brandIds)
+
+                    const URL = `/api/brands/sales_executive/${this.selectedEvent.id}/${this.dealership.id}?brands=${uniqueBrandIds}`
+                    axios.get(URL).then((response) => {
+                        this.$store.dispatch('fetchSaleExecutivesForBooking', {data: {guest : this.guest}, users: response.data.users })
+                        this.$store.commit('setBookingStep', 1)
+                    })
+                }else{
+                    this.$store.commit('setBookingStep', 1)
+                }
+
             },
 
             renderVehicleImage(vehicle) {

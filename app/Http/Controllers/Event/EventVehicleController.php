@@ -17,6 +17,7 @@ class EventVehicleController extends Controller
     {
         $eventVehicles = EventVehicle::select(
             'event_vehicle.*',
+            'vehicles.brand_id',
             'vehicles_translation.language_id',
             'vehicles.driver_seating_position_left_image',
             'vehicles.driver_seating_position_right_image',
