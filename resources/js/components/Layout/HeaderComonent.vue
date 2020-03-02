@@ -49,7 +49,6 @@
                         class="language-picker icon-left"
                         :color="themeOption.primaryColor"
                         :placeholder="trans.select_a_language"
-                        :prepend-icon="`flag-icon-${selectedLanguage.code2.toLowerCase()}`"
                         :items="languages"
                         item-text="name"
                         item-value="id"
