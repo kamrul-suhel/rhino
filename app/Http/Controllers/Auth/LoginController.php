@@ -42,16 +42,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('auth:api')->except(['login', 'getLoginUser','logout']);
     }
 
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
         if (Auth::attempt($credentials)) {
             if($request->ajax()){
+                $token = auth('api')->attempt($credentials);
                 return response()->json([
-                    'success' => true,
-                    'authUser' => Auth::user()
+                    'success' => false,
+                    'authUser' => Auth::user(),
+                    'token' => $token
                 ]);
             }else{
                 return redirect()->intended('dashboard');
@@ -72,6 +76,9 @@ class LoginController extends Controller
         $user = Auth::user();
 
         if($user){
+            // Generate Token for api route.
+            $token = auth('api')->tokenById($user->id);
+
             // If login user is dealership manager, then add dealership
             $dealership = null;
             $dealershipRegions = null;
@@ -90,7 +97,8 @@ class LoginController extends Controller
                 'success' => true,
                 'authUser' => $user,
                 'dealership' => $dealership['dealership'],
-                'regions' => $dealership['regions']
+                'regions' => $dealership['regions'],
+                'token' => $token
             ]);
         }
 
@@ -118,5 +126,15 @@ class LoginController extends Controller
         }
 
         return $this->loggedOut($request) ?: redirect('/admin');
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
     }
 }

@@ -27,6 +27,5 @@ class APIAuthMiddleware
                 'message' => 'Token mismatch'
             ], Response::HTTP_FORBIDDEN);
         }
-
     }
 }

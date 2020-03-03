@@ -88,6 +88,12 @@
                         if (response.data.success) {
                             const authUser = response.data.authUser
 
+                            // set Bearer token in axios headers
+                            axios.defaults.headers = {
+                                ...axios.defaults.headers,
+                                Authorization: `Bearer ${response.data.token}`
+                            }
+
                             // If auth user is dealership manager, then set dealership & regions for manager
                             if (
                                 authUser.level === CONST.MANAGER ||
