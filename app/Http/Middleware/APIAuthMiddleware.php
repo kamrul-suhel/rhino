@@ -17,7 +17,6 @@ class APIAuthMiddleware
     public function handle($request, Closure $next)
     {
         $requestToken = $request->header('API-TOKEN');
-        return $next($request);
         $verify = password_verify(env('SECURITY_CODE'), $requestToken);
 
         if($verify){
