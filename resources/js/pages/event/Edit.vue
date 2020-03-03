@@ -1,13 +1,26 @@
 <template>
     <v-container pa-0>
-        <v-layout row wrap justify-end>
-            <v-flex xs12 sm4>
-                <v-btn
-                    :color="themeOption.buttonPrimaryColor"
-                    @click="onViewCalender()">
-                    <span :style="{color: themeOption.primaryTextColor}">{{ `${trans.calendar}`}}</span>
+        <v-layout row wrap>
+            <v-flex xs12 sm9
+                    v-if="authUser.level === 'admin'">
+                <v-btn outline round
+                       @click="onViewCalender()"
+                       :color="themeOption.adminNavIconColor"
+                       class="ma-0">
+                    <v-icon left dark>calendar_today</v-icon>
+                    {{ `${trans.calendar}`}}
+                </v-btn>
+
+                <v-btn outline round
+                       @click="onManageStaff()"
+                       :color="themeOption.adminNavIconColor"
+                       class="ma-0">
+                    <v-icon left dark>people_alt</v-icon>
+                    {{ `${trans.manage} ${trans.staff} / ${trans.vehicles}`}}
                 </v-btn>
             </v-flex>
+
+            <v-spacer></v-spacer>
 
             <v-flex xs12 sm3>
                 <language-picker
@@ -18,6 +31,7 @@
                 </language-picker>
             </v-flex>
         </v-layout>
+
         <v-form
             row wrap
             ref="eventForm"
@@ -26,7 +40,7 @@
             <v-layout>
                 <v-flex xs12>
                     <v-card>
-                        <v-card-text>
+                        <v-card-text v-if="!$route.query.admin">
                             <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
@@ -386,6 +400,7 @@
 
         computed: ({
             ...mapGetters({
+                authUser: 'getAuthUser',
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 types: 'getTypes',
@@ -520,6 +535,18 @@
             },
 
             onBackToEventList() {
+                // If rhino admin then send back to edit event page
+                if(this.$route.query.admin){
+                    this.$router.push({
+                        name: 'editEvents',
+                        params:{
+                            id: this.$route.params.eventId
+                        }
+                    })
+                    this.$store.commit('setButtonLoading', false)
+                    return
+                }
+
                 if (this.subComponent) {
                     switch (this.model) {
                         case 'dealership':
@@ -578,7 +605,6 @@
             },
 
             onViewCalender() {
-                console.log('view calender', this.selectedEvent)
                 this.$router.push({
                         name: 'adminEventCalender',
                         params: {
@@ -587,7 +613,24 @@
                         }
                     }
                 )
+            },
 
+            onManageStaff() {
+                // Check is same route
+                if (this.$route.name === 'editDealershipsEvent') {
+                    return
+                }
+
+                this.$router.push({
+                    name: 'editDealershipsEvent',
+                    params: {
+                        dealershipId: this.selectedEvent.dealership_id,
+                        eventId: this.selectedEvent.id
+                    },
+                    query: {
+                        admin: true
+                    }
+                })
             }
         }
     }

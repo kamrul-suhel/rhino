@@ -324,8 +324,6 @@
             onSelectTeamMember(type) {
                 if(this.rhinoAdmin){
                     this.fetchEventUser()
-                    console.log('dealership : ', this.dealership)
-                    return
                 }
 
                 if(type === 'date'){
@@ -375,6 +373,7 @@
             },
 
             onSelectSaleExecutive(saleExecutive) {
+
                 this.isUserSelected = false
                 this.$store.commit('setSelectedUser', saleExecutive)
                 this.isUserSelected = true

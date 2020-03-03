@@ -29,7 +29,7 @@ class CheckSaleExecutiveAvailability extends Controller
                 $query->whereBetween('start', [$startTime, $endTime])
                     ->orWhereBetween('end', [$startTime, $endTime]);
             })->where('user_id', $saleExecutiveId)
-                ->whereIn('status', [1])
+                ->whereIn('status', [1,3,4])
                 ->first();
 
             if ($appointment) {

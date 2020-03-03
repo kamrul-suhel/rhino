@@ -28,10 +28,14 @@
         },
 
         created() {
+            this.selectedDealership()
         },
 
         methods:{
-
+            selectedDealership(){
+                this.$store.dispatch('fetchDealership', {id: this.$route.params.dealershipId})
+                this.$store.dispatch('fetchEvent', {id: this.$route.params.eventId})
+            }
         }
     }
 </script>
