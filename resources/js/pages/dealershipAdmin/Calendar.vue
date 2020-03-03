@@ -5,7 +5,7 @@
                 <h2>{{ trans.bookAnAppointment }}</h2>
             </v-flex>
 
-            <v-flex xs6 align-self-end v-if="authUser.level === 'dealership'">
+            <v-flex xs6 align-self-end v-if="authUser.level === 'dealership' || rhinoAdmin">
                 <v-layout row wrap justify-end>
                     <v-btn outline round
                            @click="onGoBack()"
@@ -18,7 +18,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4 v-if="isFiltering && authUser.level === 'dealership'">
+        <v-layout mt-4 v-if="isFiltering && authUser.level === 'dealership' || rhinoAdmin">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -217,12 +217,18 @@
             FilterByDate
         },
 
+        props:{
+          rhinoAdmin: {
+              type: Boolean,
+              default: false
+          }
+        },
+
         data() {
             return {
                 date: new Date().toISOString().substr(0, 10),
                 menu: false,
                 modal: false,
-
 
                 teamMemberShow: false,
                 selectedTeamMemberType: null,
@@ -316,6 +322,12 @@
             },
 
             onSelectTeamMember(type) {
+                if(this.rhinoAdmin){
+                    this.fetchEventUser()
+                    console.log('dealership : ', this.dealership)
+                    return
+                }
+
                 if(type === 'date'){
                     this.showDatePicker = true
                 }
@@ -344,8 +356,16 @@
             },
 
             fetchEventUser() {
-                const dealershipId = this.dealership.id
-                const eventId = this.selectedEvent.id
+                let dealershipId = null
+                let eventId = null
+                if(this.rhinoAdmin){
+                    dealershipId = this.$route.params.dealershipId
+                    eventId = this.$route.params.eventId
+                }else{
+                    dealershipId = this.dealership.id
+                    eventId = this.selectedEvent.id
+                }
+
                 this.$store.dispatch('fetchUsersForEvent', {
                     dealershipId: dealershipId,
                     eventId: eventId,

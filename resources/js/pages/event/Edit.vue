@@ -1,6 +1,14 @@
 <template>
     <v-container pa-0>
         <v-layout row wrap justify-end>
+            <v-flex xs12 sm4>
+                <v-btn
+                    :color="themeOption.buttonPrimaryColor"
+                    @click="onViewCalender()">
+                    <span :style="{color: themeOption.primaryTextColor}">{{ `${trans.calendar}`}}</span>
+                </v-btn>
+            </v-flex>
+
             <v-flex xs12 sm3>
                 <language-picker
                     :solo="false"
@@ -567,6 +575,19 @@
                 this.$store.dispatch('fetchTypesForDropdown')
                 this.$store.dispatch('fetchDealership', {id: this.$route.params.dealershipId})
                 this.$store.dispatch('fetchAppointmentByEventId', {eventId: this.$route.params.eventId})
+            },
+
+            onViewCalender() {
+                console.log('view calender', this.selectedEvent)
+                this.$router.push({
+                        name: 'adminEventCalender',
+                        params: {
+                            eventId: this.selectedEvent.id,
+                            dealershipId: this.selectedEvent.dealership_id
+                        }
+                    }
+                )
+
             }
         }
     }

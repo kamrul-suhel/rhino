@@ -23,6 +23,12 @@ const eventsRoute ={
             path:':id/edit',
             name: 'editEvents',
             component: lazyLoad('Edit')
+        },
+
+        {
+            path:':eventId/dealerships/:dealershipId/calendar',
+            name: 'adminEventCalender',
+            component: lazyLoad('Calender')
         }
     ]
 }

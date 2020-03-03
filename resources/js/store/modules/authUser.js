@@ -12,7 +12,7 @@ const defaultState = {
         textColor:'',
         theme: 'dark',
         inputColor: 'dark',
-        buttonPrimaryColor: 'success',
+        buttonPrimaryColor: '#E20000',
         buttonSecondaryColor: '#333',
         buttonDangerColor: '#E20000',
         buttonSuccess: 'success',
@@ -45,7 +45,7 @@ const defaultState = {
 
         // Default image
         brandDefaultImage : '/images/brandPlaceholder.jpg',
-        
+
         userDefaultImage : '/images/user_default_image.png',
 
         // Frontend

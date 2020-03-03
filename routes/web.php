@@ -306,6 +306,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
             return view('index');
         });
 
+        /**
+         * Route for rhino admin to see calender for specific event
+         */
+
+        Route::get('{eventId}/dealerships/{dealershipId}/calendar', function(){
+            return view('index');
+        });
+
         /*
         |--------------------------------------------------------------------------
         | Routes for event analytics
