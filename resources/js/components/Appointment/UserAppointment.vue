@@ -68,29 +68,6 @@
             initializeUserAppointment() {
                 const time = fn.getStartTimeEndTime(this.date, this.dealership)
                 this.appointmentSlots = [...fn.getTimeSlotsForDay(time, this.selectedEvent)]
-            },
-
-            checkAvailability(currentSlot){
-                let selectedUser = {...this.selectedUser}
-                if(this.user){
-                    selectedUser = {...this.user}
-                }
-                let isSlotAvailable = true
-
-                if (this.existingAppointments.length > 0) {
-                    _.map(this.existingAppointments, (appointment) => {
-                        if (
-                            appointment.start === currentSlot.start &&
-                            selectedUser.id === appointment.user_id
-                        ) {
-                            isSlotAvailable = false
-                        }
-                    })
-                    return isSlotAvailable
-
-                }else{
-                    return isSlotAvailable
-                }
             }
         }
     }

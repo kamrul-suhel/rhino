@@ -53,7 +53,7 @@ class LoginController extends Controller
             if($request->ajax()){
                 $token = auth('api')->attempt($credentials);
                 return response()->json([
-                    'success' => false,
+                    'success' => true,
                     'authUser' => Auth::user(),
                     'token' => $token
                 ]);

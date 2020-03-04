@@ -7,6 +7,7 @@ const defaultState = {
     guest: {},
     selectedVehicles: [],
     allAppointments: [],
+    otherAppointments:[],
     color: '#000',
     vehicleType: '',
     allAppointmentTime: [],
@@ -141,6 +142,10 @@ const mutations = {
 
     setAllAppointmentTime(state, appointments) {
         state.allAppointmentTime = [...appointments]
+    },
+
+    setOtherAppointments(state, otherAppointments){
+        state.otherAppointments = [...otherAppointments]
     },
 
     setAllAppointmentSlots(state, slots) {
@@ -328,6 +333,10 @@ const getters = {
 
     getAllBookingAppointments(state) {
         return state.allAppointments
+    },
+
+    getOtherAppointments(state){
+        return state.otherAppointments
     },
 
     getBookingSelectedSaleExecutive(sate) {

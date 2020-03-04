@@ -65,7 +65,8 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 selectedUser: 'getSelectedUser',
-                existingAppointments: 'getAppointments'
+                existingAppointments: 'getAppointments',
+                otherAppointments: 'getOtherAppointments'
             })
         }),
 
@@ -95,6 +96,11 @@
                 return isSlotAvailable
             },
 
+            checkOtherAppointments(currentSlot){
+                console.log('check other appointments: ', this.otherAppointments)
+                console.log('slot is: ', currentSlot)
+            },
+
             getAppointmentInfo(){
                 let selectedUser = {...this.selectedUser}
                 if(this.user){
@@ -118,7 +124,6 @@
             },
 
             onAppointmentDetail(appointmentSlot, type) {
-
                 if(this.user){
                     this.$store.commit('setSelectedUser', this.user)
                 }

@@ -164,10 +164,13 @@
             },
 
             save (settingTranslation) {
+                console.log('setting is; ', settingTranslation)
                 const translationId = settingTranslation.setting_translation_id
                 let translationForm = new FormData()
                 translationForm.append('setting_translation_id', translationId)
+                translationForm.append('setting_id', settingTranslation.id)
                 translationForm.append('translation', settingTranslation.translation)
+                translationForm.append('language_id', this.subSelectedLanguage.id)
                 translationForm.append('_method', 'PUT')
 
                 const URL = `/api/settings/translations/${translationId}/update`

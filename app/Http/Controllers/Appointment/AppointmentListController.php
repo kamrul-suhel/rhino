@@ -28,20 +28,25 @@ class AppointmentListController extends Controller
             'guests.surname as guest_surname'
         )->leftJoin('guests', 'appointments.guest_id', '=', 'guests.id');
 
+        $otherAppointments = clone $appointments;
+        $otherAppointments = $otherAppointments->whereIn('appointments.user_id', $users);
+
         // If saleExecutive property exists in request, then only fetch record for specific sale executive
-        if(
+        if (
             $request->has('saleExecutiveId') &&
             !empty($request->saleExecutiveId)
-        ){
+        ) {
             $appointments = $appointments->where('appointments.user_id', $request->saleExecutiveId);
+            $otherAppointments = $otherAppointments->where('appointments.user_id', $request->saleExecutiveId);
         }
 
         // If request has date params, then load only specific date appointment
-        if($request->has('date') && !empty($request->date)){
+        if ($request->has('date') && !empty($request->date)) {
             $date = Carbon::parse($request->date);
             $startOfDay = $date->copy()->startOfDay();
             $endOfDay = $date->copy()->endOfDay();
-            $appointments = $appointments->whereBetween('appointments.start',[$startOfDay, $endOfDay]);
+            $appointments = $appointments->whereBetween('appointments.start', [$startOfDay, $endOfDay]);
+            $otherAppointments = $otherAppointments->whereBetween('appointments.start', [$startOfDay, $endOfDay]);
         }
 
         $appointments = $appointments->whereIn('appointments.status', [
@@ -50,10 +55,17 @@ class AppointmentListController extends Controller
             Appointment::APPOINTMENT_BREAK_TIME
         ]);
 
+        $otherAppointments = $otherAppointments->whereIn('appointments.status', [
+            Appointment::APPOINTMENT_CONFIRMED,
+            Appointment::APPOINTMENT_BREAK_TIME
+        ]);
+
         $appointments = $appointments->where('appointments.event_id', $eventId)->get();
+        $otherAppointments = $otherAppointments->where('appointments.event_id', '!=', $eventId)->get();
 
         return response()->json([
             'appointments' => $appointments,
+            'otherAppointments' => $otherAppointments,
             'total' => $appointments->count()
         ]);
     }
