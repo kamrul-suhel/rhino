@@ -137,13 +137,13 @@
              * @returns {string|*}
              */
             getEventBanner() {
-                const defaultBanner = this.themeOption.eventDefaultImage
+                let defaultBanner = this.themeOption.eventDefaultImage
                 if (
                     this.selectedEvent.banner_image &&
                     this.selectedEvent.banner_image !== 'null' &&
                     this.selectedEvent.banner_image !== 'undefined'
                 ) {
-                    return this.selectedEvent.banner_image
+                    defaultBanner = this.selectedEvent.banner_image
                 }
 
                 return defaultBanner

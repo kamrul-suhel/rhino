@@ -312,6 +312,11 @@
             position:absolute;
             bottom:0;
             left:0;
+
+            /* fixed nav bar */
+            @media (max-height: 746px) {
+                position:relative;
+            }
         }
     }
 

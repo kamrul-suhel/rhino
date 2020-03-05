@@ -47,6 +47,7 @@ const defaultState = {
         brandDefaultImage : '/images/brandPlaceholder.jpg',
 
         userDefaultImage : '/images/user_default_image.png',
+        eventDefaultImage: '/images/default_event_image.png',
 
         // Frontend
         drawerWidthF: '280',

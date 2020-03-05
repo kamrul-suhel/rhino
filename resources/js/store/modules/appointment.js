@@ -2,6 +2,7 @@ import fn from '@/utils/function'
 
 const defaultState = {
     appointments: [],
+    otherAppointments:[],
     totalAppointment:0,
     selectedAppointment: {},
     date: null,
@@ -18,6 +19,10 @@ const state = {
 const mutations = {
     setAppointments(state, appointments){
         state.appointments = [...appointments]
+    },
+
+    setOtherAppointments(state, otherAppointments){
+        state.otherAppointments = [...otherAppointments]
     },
 
     setTotalAppointment(state, totalAppointment){
@@ -44,6 +49,10 @@ const mutations = {
 const getters = {
     getAppointments(state){
         return state.appointments
+    },
+
+    getOtherAppointments(state){
+        return state.otherAppointments
     },
 
     getTotalAppointment(state){
@@ -75,6 +84,7 @@ const actions = {
         axios.get(URL).then((response) => {
             if (response.data.appointments) {
                 commit('setAppointments', response.data.appointments)
+                commit('setOtherAppointments', response.data.otherAppointments)
                 commit('setTotalAppointment', response.data.total)
             }
         });
