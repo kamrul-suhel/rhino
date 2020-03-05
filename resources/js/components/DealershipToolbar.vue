@@ -34,16 +34,48 @@
                         </v-flex>
 
                         <v-flex xs12 sm4>
-                            <v-select
-                                :items="dropdownGuests"
-                                :color="themeOption.inputColor"
-                                :label="`${trans.searchBy} ${trans.guest}`"
-                                item-text="name"
-                                item-value="id"
-                                return-object
+                            <v-autocomplete
                                 v-model="selectedGuest"
+                                :items="dropdownGuests"
+                                :loading="isLoading"
+                                :color="themeOption.primaryColor"
+                                :search-input.sync="search"
+                                clearable
+                                hide-details
+                                hide-selected
+                                item-text="name"
+                                item-value="symbol"
+                                :label="`${trans.searchBy} ${trans.guest}`"
+                                open-on-clear
+                                return-object
                                 @change="onSelectGuest()"
-                            ></v-select>
+                            >
+                                <template v-slot:no-data>
+                                    <v-list-tile>
+                                        <v-list-tile-title>
+                                            {{ `${trans.searchBy} ${trans.guest}` }}
+                                        </v-list-tile-title>
+                                    </v-list-tile>
+                                </template>
+                                <template v-slot:selection="{ item, selected }">
+                                    <span :selected="selected" v-text="item.name"></span>
+                                </template>
+                                <template v-slot:item="{ item }">
+                                    <v-list-tile-avatar
+                                        :color="themeOption.primaryColor"
+                                        class="headline font-weight-light white--text"
+                                    >
+                                        {{ item.name.charAt(0) }}
+                                    </v-list-tile-avatar>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title v-text="item.name"></v-list-tile-title>
+                                        <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                    <v-list-tile-action>
+                                        <v-icon>mdi-coin</v-icon>
+                                    </v-list-tile-action>
+                                </template>
+                            </v-autocomplete>
                         </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -57,18 +89,9 @@
 
     export default {
         data() {
-            return {}
-        },
-
-        watch: {
-            selectedEvent() {
-                if (this.selectedEvent) {
-                    this.$store.dispatch('fetchBrandsByEventId', {
-                        themeOption: this.themeOption,
-                        trans: this.trans,
-                        eventId: this.selectedEvent.id
-                    })
-                }
+            return {
+                isLoading: false,
+                search: null
             }
         },
 
@@ -103,6 +126,29 @@
             }
         },
 
+        watch: {
+            selectedEvent() {
+                if (this.selectedEvent) {
+                    this.$store.dispatch('fetchBrandsByEventId', {
+                        themeOption: this.themeOption,
+                        trans: this.trans,
+                        eventId: this.selectedEvent.id
+                    })
+                }
+            },
+
+            search (val) {
+                // if (this.dropdownGuests.length > 0) return
+                this.isLoading = true
+                // Lazily load input items
+                this.$store.dispatch('fetchGuestForDropDown', {eventId: this.selectedEvent.id, search: val})
+            },
+
+            dropdownGuests(){
+                this.isLoading = false
+            }
+        },
+
         created() {
             this.initialize()
         },
@@ -125,6 +171,10 @@
             },
 
             onSelectGuest() {
+                // If selected guest has no id then return to dashboard
+                if(!this.selectedGuest.id){
+                    this.$router.push({name: 'dashboard'})
+                }
                 if (this.$route.params.guestId === this.selectedGuest.id) {
                     return
                 }

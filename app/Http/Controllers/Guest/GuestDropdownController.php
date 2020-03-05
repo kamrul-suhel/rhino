@@ -26,6 +26,11 @@ class GuestDropdownController extends Controller
         if ($request->has('eventId') & !empty($request->eventId)) {
             $guests = $guests->where('guests.event_id', $request->eventId);
         }
+
+        if ($request->has('search') & !empty($request->search)) {
+            $guests = $guests->where('guests.email', 'like', '%'.$request->search.'%');
+        }
+
         $data = $guests->get();
         $totalGuest = $guests->count();
         return response()->json([
