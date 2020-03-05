@@ -21,6 +21,7 @@
                         </div>
 
                         <v-tabs-items
+                            touchless
                             v-model="step"
                             color="black"
                             light

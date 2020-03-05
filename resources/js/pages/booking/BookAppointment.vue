@@ -12,17 +12,20 @@
                   mt-5
                   justify-center>
             <v-flex xs12
+                    class="border-right px-4"
                     :md4="vehicleType !== 'unsure'"
                     :md6="vehicleType === 'unsure' || vehicleType === ''">
                 <Calender></Calender>
             </v-flex>
 
             <v-flex xs12 md4
+                    class="border-right px-4"
                     v-if="vehicleType !== 'unsure' && vehicleType !== ''">
                 <SalePerson></SalePerson>
             </v-flex>
 
             <v-flex xs12
+                    class="px-4"
                     :md4="vehicleType !== 'unsure'"
                     :md6="vehicleType === 'unsure' || vehicleType === ''">
                 <ChooseTime></ChooseTime>

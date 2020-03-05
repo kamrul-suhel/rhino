@@ -30,7 +30,6 @@ class AddSetting
 
     public static function addToDatabase()
     {
-        $user = Setting::findOrFail(1000);
         $filesPath = self::getSettingArray();
 
         // Empty the table

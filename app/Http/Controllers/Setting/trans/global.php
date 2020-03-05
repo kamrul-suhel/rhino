@@ -1286,9 +1286,21 @@ return [
     ],
 
     [
-        'label' => 'Your model(s) of interest:',
-        'identifier' => 'modelsOfInterest',
-        'translation' => 'Your model(s) of interest:'
+        'label' => 'Your model',
+        'identifier' => 'yourModel',
+        'translation' => 'Your model'
+    ],
+
+    [
+        'label' => 'of interest:',
+        'identifier' => 'ofInterest',
+        'translation' => 'of interest'
+    ],
+
+    [
+        'label' => '(s)',
+        'identifier' => 's',
+        'translation' => 's'
     ],
 
     [
@@ -1411,7 +1423,7 @@ return [
         'identifier' => 'by',
         'translation' => 'By'
     ],
-    
+
     [
         'label' => 'Online Registration',
         'identifier' => 'onlineRegistration',
@@ -1424,6 +1436,6 @@ return [
         'translation' => 'Telephone'
     ],
 
-    
+
 
 ];

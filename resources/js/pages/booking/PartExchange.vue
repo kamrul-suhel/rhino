@@ -45,7 +45,7 @@
                                   @click="onPartExchangeVehicle()"
                                   justify-center
                                   fill-height pa-3
-                                  :style="{borderColor: partExchange.vehicleExchange ? color : '#444'}">
+                                  :style="{borderColor: !partExchange.vehicleExchange ? '#f0f0f0' : '#444'}">
                             <v-flex>
                                 <v-icon :style="{color:color}"
                                         large

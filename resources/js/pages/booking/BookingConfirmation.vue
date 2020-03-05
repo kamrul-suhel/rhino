@@ -16,28 +16,28 @@
                         <v-flex sm12 md5 d-flex child-flex pa-2>
                             <v-card>
                                 <v-card-text>
-                                    <v-layout row wrap pa-3>
+                                    <v-layout row wrap pa-3 align-center justify-center>
                                         <v-flex xs12 mt-2 pa-0>
                                             <h6 class="title mx-1 text-xs-center">
-                                                {{ trans.modelsOfInterest }}
+                                                {{ getTitle() }}
                                             </h6>
                                         </v-flex>
 
-                                        <v-flex xs12 mt-1 pa-0>
-<!--                                            <h6 class="xs10 mx-1 title text-xs-center">New CORSA</h6>-->
+                                        <v-flex xs10
+                                                v-if="vehicles.length > 0">
+                                            <v-carousel light
+                                                        height="250"
+                                                        :hide-delimiters="vehicles.length <= 1"
+                                                        :hide-controls="vehicles.length <= 1"
+                                                        class="mt-2">
+                                                <v-carousel-item
+                                                    cycle="false"
+                                                    v-for="vehicle in vehicles"
+                                                    :key="vehicle.id"
+                                                    :src="vehicle.driver_seating_position_left_image"
+                                                ></v-carousel-item>
+                                            </v-carousel>
                                         </v-flex>
-
-                                        <v-carousel light
-                                                    height="250"
-                                                    v-if="vehicles.length > 0"
-                                                    class="mt-2">
-                                            <v-carousel-item
-                                                cycle="false"
-                                                v-for="vehicle in vehicles"
-                                                :key="vehicle.id"
-                                                :src="vehicle.driver_seating_position_left_image"
-                                            ></v-carousel-item>
-                                        </v-carousel>
 
                                         <v-flex xs12 v-else>
                                             <v-card flat
@@ -274,6 +274,12 @@
             })
         }),
 
+        watch:{
+            vehicles(){
+                console.log('vechiele : ', this.vehicles.length)
+            }
+        },
+
         created() {
 
         },
@@ -336,6 +342,17 @@
 
             onAmend(step) {
                 this.$store.commit('setBookingStep', step)
+            },
+
+            getTitle(){
+                let title = ''
+                if(this.vehicles.length > 1){
+                    title =`${trans.yourModel} ${trans.s} ${trans.ofInterest}`
+                }else{
+                    title = `${trans.yourModel} ${trans.ofInterest}`
+                }
+
+                return title
             }
         }
     }

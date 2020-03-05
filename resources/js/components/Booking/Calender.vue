@@ -1,15 +1,14 @@
 <template>
     <v-layout row wrap
               align-center
-              class="book-step calenderComponent"
-              style="border-right: 1px solid rgb(240,240,240)">
+              class="book-step calenderComponent">
         <v-flex xs12>
             <h6 class="headline text-xs-center">{{ selectedEvent.start | dateFormat('MMMM')}} <b>{{
                 selectedEvent.start | dateFormat('YYYY')}}</b></h6>
         </v-flex>
 
         <v-flex xs12>
-            <v-layout row nowrap class="mt-4">
+            <v-layout row nowrap class="mt-4 mx-1">
                 <v-flex>
                     <label class="body-2">
                         {{ trans.available }}

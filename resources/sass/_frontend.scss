@@ -217,7 +217,7 @@
             padding: 0;
 
             .salesperson-container {
-                padding: 5px 40px 5px 5px;
+                padding: 5px 0 5px 5px;
                 border-radius: 19px;
                 cursor: pointer;
 
@@ -283,6 +283,13 @@
 
 
 .rhinoFrontend{
+    .banner{
+        h1{
+            @media only screen and (max-width:600px){
+                font-size:24px !important;
+            }
+        }
+    }
     .content{
         padding:0 0 0 280px;
         margin:0;
@@ -294,6 +301,29 @@
         .content{
             padding-left:0;
         }
+    }
+
+    // Book an appointment
+    .book-appointment{
+        .border-right{
+            border-right: 1px solid rgb(240, 240, 240);
+        }
+    }
+
+    // Calendar
+    .calender{
+        .v-date-picker-table{
+            button{
+                &:not(.v-btn--disabled){
+                    border:1px solid currentColor;
+                }
+            }
+        }
+    }
+
+    // Confirmation component
+    .confirmation-container{
+
     }
 
 }
@@ -662,6 +692,11 @@
         line-height: 25px;
         padding: 22.5px;
         max-width: 100%;
+
+        input{
+            font-family: 'CharlesWright';
+            text-transform: uppercase;
+        }
     }
 
     .exchange-details, .no-part-exchange {

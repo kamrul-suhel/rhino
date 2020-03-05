@@ -7,7 +7,7 @@
                 </h5>
             </v-flex>
 
-            <v-flex justify="center">it
+            <v-flex justify="center">
                 <v-layout row sm4 mt-4 justify-center>
                     <v-flex class="grow-0">
                         <div>
