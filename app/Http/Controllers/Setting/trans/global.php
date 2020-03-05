@@ -91,6 +91,13 @@ return [
         'identifier' => 'delete',
         'translation' => 'Delete'
     ],
+
+    [
+        'label' => 'Thank you',
+        'identifier' => 'thankYou',
+        'translation' => 'Thank you'
+    ],
+
     [
         'label' => 'Are you sure you want to delete ?',
         'identifier' => 'delete_confirmation',
@@ -1332,6 +1339,12 @@ return [
         'label' => 'Unique code mismatch',
         'identifier' => 'uniqueCodeNotFound',
         'translation' => 'Unique code mismatch'
+    ],
+
+    [
+        'label' => 'None',
+        'identifier' => 'none',
+        'translation' => 'None'
     ],
 
     [

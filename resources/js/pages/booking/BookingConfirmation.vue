@@ -10,6 +10,7 @@
                     {{ trans.areTheseDetailsStillCorrect }}
                 </h5>
             </v-flex>
+
             <v-flex row nowrap mt-5 justify-center class="confirmation-container xs12">
                 <v-container>
                     <v-layout row wrap justify-center>
@@ -17,7 +18,7 @@
                             <v-card>
                                 <v-card-text>
                                     <v-layout row wrap pa-3 align-center justify-center>
-                                        <v-flex xs12 mt-2 pa-0>
+                                        <v-flex xs12 my-3 pa-0>
                                             <h6 class="title mx-1 text-xs-center">
                                                 {{ getTitle() }}
                                             </h6>
@@ -26,6 +27,7 @@
                                         <v-flex xs10
                                                 v-if="vehicles.length > 0">
                                             <v-carousel light
+                                                        contain
                                                         height="250"
                                                         :hide-delimiters="vehicles.length <= 1"
                                                         :hide-controls="vehicles.length <= 1"
@@ -49,7 +51,7 @@
                                             </v-card>
                                         </v-flex>
 
-                                        <v-flex xs12>
+                                        <v-flex xs12 class="btnPositioning">
                                             <v-layout justify-center my-3>
                                                 <v-btn class="border-medium height-40 mx-1 rounded-25 light-grey"
                                                        @click="onAmend(0)">
@@ -170,7 +172,7 @@
                                                         </v-flex>
                                                         <v-flex mt-1>
                                                             <h6 class="registration-confirmation">
-                                                                {{ partExchange.registrationNumber }}
+                                                                {{ getPartExchangeTitle() }}
                                                             </h6>
                                                         </v-flex>
                                                         <v-flex xs12>
@@ -274,15 +276,10 @@
             })
         }),
 
-        watch:{
-            vehicles(){
-                console.log('vechiele : ', this.vehicles.length)
-            }
-        },
-
         created() {
 
         },
+
         methods: {
             onConfirmBooking() {
                 let bookingForm = new FormData()
@@ -335,7 +332,8 @@
 
                         // Disable editing for guest
                         this.$store.commit('setDisableEditing', true)
-                        this.$router.push({name: 'bookingConfirmed'})
+                        this.$store.commit('setAppointmentDialog', true)
+                        // this.$router.push({name: 'bookingConfirmed'})
                     }
                 })
             },
@@ -347,11 +345,21 @@
             getTitle(){
                 let title = ''
                 if(this.vehicles.length > 1){
-                    title =`${trans.yourModel} ${trans.s} ${trans.ofInterest}`
+                    title =`${this.trans.yourModel} (${this.trans.s}) ${this.trans.ofInterest}`
                 }else{
-                    title = `${trans.yourModel} ${trans.ofInterest}`
+                    title = `${this.trans.yourModel} ${this.trans.ofInterest}`
                 }
 
+                return title
+            },
+
+            getPartExchangeTitle(){
+                let title = ''
+                if(this.partExchange.vehicleExchange){
+                    title = this.trans.none
+                } else{
+                    title = this.partExchange.registrationNumber
+                }
                 return title
             }
         }

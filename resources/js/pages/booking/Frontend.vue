@@ -66,6 +66,8 @@
                 </v-layout>
             </v-container>
         </v-content>
+
+        <ConfirmDialog></ConfirmDialog>
     </v-app>
 </template>
 
@@ -76,6 +78,7 @@
     import FPartExchange from './PartExchange'
     import FPersonalDetails from './PersonalDetails'
     import FBookingConfirmation from './BookingConfirmation'
+    import ConfirmDialog from "@/components/Booking/ConfirmDialog";
     import {mapGetters} from 'vuex';
 
     export default {
@@ -86,7 +89,8 @@
             FBookAppointment,
             FPartExchange,
             FPersonalDetails,
-            FBookingConfirmation
+            FBookingConfirmation,
+            ConfirmDialog
         },
 
         data: () => ({
