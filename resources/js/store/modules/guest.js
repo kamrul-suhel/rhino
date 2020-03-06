@@ -73,15 +73,9 @@ const mutations = {
 
                 {
                     text: trans.complete,
-                    align: 'left',
-                    sortable: false,
-                    value: 'complete'
-                },
-                {
-                    text: '',
                     align: 'right',
                     sortable: false,
-                    value: 'action'
+                    value: 'complete'
                 }
             ]
         }else{

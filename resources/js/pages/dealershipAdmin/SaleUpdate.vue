@@ -27,7 +27,7 @@
                     <template v-slot:items="props">
                         <td>{{ `${props.item.first_name} ${props.item.surname}` }}</td>
                         <td>{{ renderGuestStatus(props.item) }}</td>
-                        <td>
+                        <td class="text-xs-right">
                             <v-menu>
                                 <template #activator="{ on: menu }">
                                     <v-tooltip bottom>
@@ -52,17 +52,6 @@
                                     </v-list-tile>
                                 </v-list>
                             </v-menu>
-                        </td>
-                        <td class="text-xs-right">
-
-                            <v-icon
-                                v-if="!subComponent"
-                                :color="themeOption.buttonDangerColor"
-                                small
-                                @click="onDeleteGuest(props.item)"
-                            >
-                                delete
-                            </v-icon>
                         </td>
                     </template>
                 </v-data-table>

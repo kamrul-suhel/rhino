@@ -12,7 +12,7 @@
             </v-flex>
 
             <v-flex row nowrap mt-5 justify-center class="confirmation-container xs12">
-                <v-container>
+                <v-container pa-0>
                     <v-layout row wrap justify-center>
                         <v-flex sm12 md5 d-flex child-flex pa-2>
                             <v-card>
@@ -51,7 +51,7 @@
                                             </v-card>
                                         </v-flex>
 
-                                        <v-flex xs12 class="btnPositioning">
+                                        <v-flex xs12 class="btnPositioning" v-if="!isDisable">
                                             <v-layout justify-center my-3>
                                                 <v-btn class="border-medium height-40 mx-1 rounded-25 light-grey"
                                                        @click="onAmend(0)">
@@ -64,9 +64,72 @@
                             </v-card>
                         </v-flex>
 
-                        <v-flex sm12 md7 d-flex child-flex pa-2>
+                        <BookingConfirmationDisable v-if="isDisable">
+                        </BookingConfirmationDisable>
+
+                        <v-flex sm12 md7
+                                d-flex
+                                child-flex
+                                pa-2
+                                v-else>
                             <v-layout row wrap>
+                                <div class="booking-confirmed">
+                                    <h1>{{ trans.yourBookingIsConfirmed }}</h1>
+                                    <p>{{ trans.sendEmailMessage }}</p>
+                                </div>
+
                                 <v-flex xs12>
+                                    <v-layout row wrap>
+                                        <v-flex xs6 sm3>
+                                            <v-layout justify-center row wrap>
+                                                <v-flex xs12 class="text-xs-center">
+                                                    <v-icon
+                                                        color="grey"
+                                                        medium dark>access_time
+                                                    </v-icon>
+                                                </v-flex>
+
+                                                <v-flex xs12 mt-2>
+                                                    <h6 class="xs12 body-2 text-xs-center">
+                                                        {{ trans.time }}
+                                                    </h6>
+                                                </v-flex>
+
+                                                <v-flex xs12>
+                                                    <h6 class="xs12 body-1 text-xs-center">
+                                                        {{ slot.start|dateFormat('LT') }} to {{
+                                                        slot.end|dateFormat('LT')}}
+                                                    </h6>
+                                                </v-flex>
+                                            </v-layout>
+                                        </v-flex>
+
+                                        <v-flex xs6 sm3>
+                                            <v-layout justify-center row wrap>
+                                                <v-flex xs12 class="text-xs-center">
+                                                    <v-icon
+                                                        color="grey"
+                                                        medium dark>person
+                                                    </v-icon>
+                                                </v-flex>
+
+                                                <v-flex xs12 mt-2>
+                                                    <h6 class="xs12 body-2 text-xs-center">
+                                                        {{ `${trans.sales} ${trans.person}`}}
+                                                    </h6>
+                                                </v-flex>
+
+                                                <v-flex xs12>
+                                                    <h6 class="xs12 body-1 text-xs-center">
+                                                        {{ saleExecutive.firstname }}
+                                                    </h6>
+                                                </v-flex>
+                                            </v-layout>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
+
+                                <v-flex xs12 v-if="!isDisable">
                                     <v-card>
                                         <v-card-text>
                                             <v-layout row wrap justify-center pa-3>
@@ -140,7 +203,7 @@
                                                     </v-layout>
                                                 </v-flex>
 
-                                                <v-flex xs12>
+                                                <v-flex xs12 v-if="!isDisable">
                                                     <v-layout justify-center row nowrap mt-4>
                                                         <v-btn class="border-medium height-40 rounded-25 light-grey"
                                                                @click="onAmend(1)">
@@ -153,7 +216,7 @@
                                     </v-card>
                                 </v-flex>
 
-                                <v-flex xs12>
+                                <v-flex v-if="!isDisable" xs12>
                                     <v-layout row wrap class="part-exchange-and-guest">
                                         <v-flex xs12 md6 d-flex child-flex pt-4 pr-2>
                                             <v-card>
@@ -175,7 +238,7 @@
                                                                 {{ getPartExchangeTitle() }}
                                                             </h6>
                                                         </v-flex>
-                                                        <v-flex xs12>
+                                                        <v-flex xs12 v-if="!isDisable">
                                                             <v-layout justify-center row nowrap mt-3>
                                                                 <v-btn @click="onAmend(2)"
                                                                        class="border-medium height-40 rounded-25 light-grey">
@@ -211,7 +274,7 @@
                                                             </h6>
                                                         </v-flex>
 
-                                                        <v-flex xs12>
+                                                        <v-flex xs12 v-if="!isDisable">
                                                             <v-layout justify-center row nowrap mt-3>
                                                                 <v-btn @click="onAmend(1)"
                                                                        class="border-medium height-40 rounded-25 light-grey">
@@ -253,8 +316,13 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import BookingConfirmationDisable from "@/components/Booking/BookingConfirmationDisable";
 
     export default {
+        components: {
+            BookingConfirmationDisable
+        },
+
         data() {
             return {}
         },
@@ -272,7 +340,8 @@
                 guest: 'getBookingGuest',
                 partExchange: 'getBookingPartExchange',
                 date: 'getBookingSelectedDate',
-                event: 'getSelectedEvent'
+                event: 'getSelectedEvent',
+                isDisable: 'getDisableEditing'
             })
         }),
 
@@ -282,6 +351,8 @@
 
         methods: {
             onConfirmBooking() {
+                if(this.isDisable) return
+
                 let bookingForm = new FormData()
 
                 // Check is existing appointment
@@ -313,7 +384,7 @@
                 bookingForm.append('_method', 'post')
 
                 _.map(this.vehicles, function (vehicle, index) {
-                    if(vehicle.appointment_vehicle_id){
+                    if (vehicle.appointment_vehicle_id) {
                         bookingForm.append(`vehicles[${index}][appointment_vehicle_id]`, vehicle.id)
                     }
 
@@ -343,22 +414,22 @@
                 this.$store.commit('setBookingStep', step)
             },
 
-            getTitle(){
+            getTitle() {
                 let title = ''
-                if(this.vehicles.length > 1){
-                    title =`${this.trans.yourModel} (${this.trans.s}) ${this.trans.ofInterest}`
-                }else{
+                if (this.vehicles.length > 1) {
+                    title = `${this.trans.yourModel} (${this.trans.s}) ${this.trans.ofInterest}`
+                } else {
                     title = `${this.trans.yourModel} ${this.trans.ofInterest}`
                 }
 
                 return title
             },
 
-            getPartExchangeTitle(){
+            getPartExchangeTitle() {
                 let title = ''
-                if(this.partExchange.vehicleExchange){
+                if (this.partExchange.vehicleExchange) {
                     title = this.trans.none
-                } else{
+                } else {
                     title = this.partExchange.registrationNumber
                 }
                 return title

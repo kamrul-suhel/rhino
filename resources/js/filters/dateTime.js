@@ -19,6 +19,10 @@ Vue.filter('dateFormat', (date, format, locale='en') => {
             filterDate = newMoment.format('LTS')
             break
 
+        case 'HH:mm':
+            filterDate = newMoment.format('HH:mm')
+            break
+
         case 'L':
             filterDate =  newMoment.format('L')
             break
@@ -29,6 +33,10 @@ Vue.filter('dateFormat', (date, format, locale='en') => {
 
         case 'LL':
             filterDate = newMoment.format('LL')   // December 23, 2019 9:57 AM
+            break
+
+        case 'DD/MM/YYYY':
+            filterDate = newMoment.format('DD/MM/YYYY')   // December 23, 2019 9:57 AM
             break
 
         case 'll':

@@ -53,6 +53,7 @@
                     </h6>
 
                     <v-text-field
+                        :disabled="isDisable"
                         :label="`${trans.guest} ${trans.name}`"
                         :color="color"
                         v-model="bringGuest.name"
@@ -69,6 +70,7 @@
                     <v-layout row class="checkboxes">
                         <v-flex>
                             <v-checkbox :color="color"
+                                        :disabled="isDisable"
                                         value="yes"
                                         v-model="guestInterestedYes"
                             ></v-checkbox>
@@ -76,6 +78,7 @@
                         </v-flex>
                         <v-flex>
                             <v-checkbox :color="color"
+                                        :disabled="isDisable"
                                         value="no"
                                         v-model="guestInterestedNo"
                                         style="flex-grow:0"
@@ -116,7 +119,8 @@
                 selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
                 existingAppointments: 'getAllBookingAppointments',
                 bringGuest: 'getBookingBringGuest',
-                selectedSlot: 'getSelectedSlot'
+                selectedSlot: 'getSelectedSlot',
+                isDisable: 'getDisableEditing'
             })
         }),
 
@@ -340,6 +344,8 @@
             },
 
             onSelectSlot(selectedSlot) {
+                if(this.isDisable) return
+
                 // Check availability
                 if (selectedSlot.status === 'unavailable') {
                     return
