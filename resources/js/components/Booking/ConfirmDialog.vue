@@ -25,7 +25,7 @@
                 <v-btn
                     @color="themeOption.primaryColor"
                     flat
-                    @click="dialog = false"
+                    @click="onDialogStatusChange()"
                 >
                     {{ trans.ok }}
                 </v-btn>
@@ -66,6 +66,17 @@
         },
 
         methods: {
+            onDialogStatusChange(){
+                this.dialog = false
+                // Check is redirect query is exists
+                if(this.$route.query.redirect){
+                    switch(this.$route.query.redirect){
+                        case 'calendar':
+                            window.open('/admin/calendar')
+                            return
+                    }
+                }
+            }
         }
     }
 </script>

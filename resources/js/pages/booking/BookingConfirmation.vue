@@ -309,6 +309,7 @@
                 bookingForm.append('part_ex_distance', this.partExchange.currentMilege)
 
                 bookingForm.append('status', 1) // Make booking confirm
+                bookingForm.append('type', 'confirmed') // Make guest status confirmed
                 bookingForm.append('_method', 'post')
 
                 _.map(this.vehicles, function (vehicle, index) {

@@ -182,7 +182,6 @@ const actions = {
         commit('setGuestLoading', payload.themeOption.loadingColor)
 
         // Setup header for list view
-        // Setup header for list view
         if(payload.eventSale && payload.eventSale !== 'undefined'){
             commit('setGuestListHeader', {trans: payload.trans, eventSale: true})
         }else{

@@ -13,6 +13,16 @@
 
             <v-layout row wrap justify-center align-item-center>
                 <v-btn :color="themeOption.primaryColor"
+                       @click="onBookAGuest('withoutUniqueCode')"
+                       :style="{color: themeOption.primaryTextColor}">{{ `${trans.book} ${trans.without} ${trans.uniqueCode}`}}
+                </v-btn>
+
+                <v-btn :color="themeOption.primaryColor"
+                       @click="onBookAGuest('withUniqueCode')"
+                       :style="{color: themeOption.primaryTextColor}">{{ `${trans.book} ${trans.with} ${trans.uniqueCode}`}}
+                </v-btn>
+
+                <v-btn :color="themeOption.primaryColor"
                        @click="onAppointmentUnavailable(3)"
                        :style="{color: themeOption.primaryTextColor}">{{ trans.unavailable}}
                 </v-btn>
@@ -24,16 +34,22 @@
             </v-layout>
         </v-flex>
 
+        <BookAGuestDialog :appointment="appointment" :existingGuest="existingGuest"></BookAGuestDialog>
     </v-layout>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
+    import BookAGuestDialog from "@components/Appointment/BookAGuestDialog";
     export default {
         data() {
             return {
-                dialog: false
+                existingGuest: true
             }
+        },
+
+        components:{
+          BookAGuestDialog
         },
 
         props: {
@@ -79,6 +95,20 @@
                         this.$store.commit('setUpdateComponent')
                     }
                 })
+            },
+
+            onBookAGuest(type){
+                switch(type){
+                    case 'withUniqueCode':
+                        this.existingGuest = true
+                        break
+
+                    case 'withoutUniqueCode':
+                        this.existingGuest = false
+                        break
+                }
+
+                this.$store.commit('setBookAGuestDialog', true)
             }
         }
     }

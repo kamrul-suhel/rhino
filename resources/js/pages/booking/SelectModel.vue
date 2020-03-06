@@ -169,6 +169,16 @@
             },
 
             onContinue() {
+                // If request from admin, dealership manager or saleexecutive
+                // Saleexecutive already selected & time then do not change timetable
+                if(
+                    this.$route.query.source === 'admin' &&
+                    this.$route.query.type === 'calendar' &&
+                    this.$route.query.redirect === 'calendar'
+                ){
+                    this.$store.commit('setBookingStep', 1)
+                    return
+                }
 
                 // if vehicle selected then load only associate sale executive
                 if(this.selectedVehicles.length > 0){
