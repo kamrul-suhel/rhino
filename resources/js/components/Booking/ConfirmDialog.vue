@@ -68,14 +68,7 @@
         methods: {
             onDialogStatusChange(){
                 this.dialog = false
-                // Check is redirect query is exists
-                if(this.$route.query.redirect){
-                    switch(this.$route.query.redirect){
-                        case 'calendar':
-                            window.open('/admin/calendar')
-                            return
-                    }
-                }
+
             }
         }
     }

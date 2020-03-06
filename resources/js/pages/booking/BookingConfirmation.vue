@@ -351,7 +351,7 @@
 
         methods: {
             onConfirmBooking() {
-                if(this.isDisable) return
+                if (this.isDisable) return
 
                 let bookingForm = new FormData()
 
@@ -404,8 +404,15 @@
 
                         // Disable editing for guest
                         this.$store.commit('setDisableEditing', true)
-                        this.$store.commit('setAppointmentDialog', true)
-                        // this.$router.push({name: 'bookingConfirmed'})
+
+                        // Check is redirect query is exists
+                        if (this.$route.query.redirect) {
+                            switch (this.$route.query.redirect) {
+                                case 'calendar':
+                                    window.location = '/admin/calendar'
+                                    return
+                            }
+                        }
                     }
                 })
             },

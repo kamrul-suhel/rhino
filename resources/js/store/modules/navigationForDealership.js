@@ -1,7 +1,9 @@
 const state = {
     dealershipNavigation: [],
     dealershipDashboard: '',
-    isDealershipNavigationOpen: true
+    isDealershipNavigationOpen: true,
+    downloadBookGuest: false,
+    downloadUnBookGuest: false
 };
 
 const mutations = {
@@ -13,8 +15,15 @@ const mutations = {
         state.isDealershipNavigationOpen = !state.isNavigationOpen
     },
 
+    setDownloadBookGuest(state, status){
+        state.downloadBookGuest = status
+    },
+
+    setDownloadUnBookGuest(state, status){
+        state.downloadUnBookGuest = status
+    },
+
     setDealershipNavigation(state, trans) {
-        console.log('Available translation field: ', trans);
         const navGroup = [
             {
                 icon: 'list',
@@ -78,7 +87,7 @@ const mutations = {
                         link: 'dealershipAnalytics',
                         access: ['dealership'],
                     },
-                    
+
                     {
                         icon: 'business',
                         text: `${trans.edit} ${trans.dealership}`,
@@ -94,6 +103,14 @@ const mutations = {
 };
 
 const getters = {
+    getDownloadBookGuest(state){
+            return state.downloadBookGuest
+    },
+
+    getDownloadUnBookGuest(state){
+        return state.downloadUnBookGuest
+    },
+
     getDealershipNavigation(state) {
         return state.dealershipNavigation
     },
