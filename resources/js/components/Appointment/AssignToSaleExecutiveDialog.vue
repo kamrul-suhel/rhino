@@ -188,14 +188,7 @@
             },
 
             setSaleExecutives() {
-                let saleExecutives = []
-                _.map(this.users, (user) => {
-                    if (user.id !== this.selectedUser.id) {
-                        saleExecutives.push(user)
-                    }
-                })
-
-                this.saleExecutives = [...saleExecutives]
+                this.saleExecutives = [...this.users]
             },
 
             generateAppointmentSlot() {
