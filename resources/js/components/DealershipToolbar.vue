@@ -36,7 +36,7 @@
                         <v-flex xs12 sm4>
                             <v-autocomplete
                                 v-model="selectedGuest"
-                                :items="dropdownGuests"
+                                :items="guests"
                                 :loading="isLoading"
                                 :color="themeOption.primaryColor"
                                 :search-input.sync="search"
@@ -91,7 +91,8 @@
         data() {
             return {
                 isLoading: false,
-                search: null
+                search: null,
+                guests:[]
             }
         },
 
@@ -121,6 +122,7 @@
                 },
 
                 set: function (selectedGuest) {
+                    this.guests = []
                     this.$store.commit('setSelectedGuest', selectedGuest)
                 }
             }
@@ -138,10 +140,18 @@
             },
 
             search (val) {
-                // if (this.dropdownGuests.length > 0) return
+                // Lazily load guest items
+                if (this.guests.length > 0) return
                 this.isLoading = true
                 // Lazily load input items
-                this.$store.dispatch('fetchGuestForDropDown', {eventId: this.selectedEvent.id, search: val})
+                const URL = `/api/guests/dropdown?eventId=${this.selectedEvent.id}&search=${val}`
+                axios.get(URL).then((response) => {
+                    if (response.data) {
+                        this.guests = [...response.data.guests]
+                        this.isLoading = false
+                    }
+                })
+
             },
 
             dropdownGuests(){
