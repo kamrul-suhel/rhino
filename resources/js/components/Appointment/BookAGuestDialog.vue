@@ -60,10 +60,11 @@
                                         :color="themeOption.primaryColor"
                                         class="headline font-weight-light white--text"
                                     >
-                                        {{ item.name.charAt(0) }}
+                                        {{ getStatus(item) }}
                                     </v-list-tile-avatar>
                                     <v-list-tile-content>
-                                        <v-list-tile-title v-text="item.name"></v-list-tile-title>
+                                        <v-list-tile-title v-html="getNameWithStatus(item)">
+                                        </v-list-tile-title>
                                         <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
                                     </v-list-tile-content>
                                     <v-list-tile-action>
@@ -258,6 +259,29 @@
             generateSource() {
                 let sources = fn.getBookGuestOptions(this.trans)
                 this.sources = [...sources]
+            },
+
+            getStatus(guest){
+                switch(guest.status){
+                    case 0:
+                        return 'P'
+                    case 1:
+                        return 'C'
+                    case 2:
+                        return 'A'
+                    case 3:
+                        return 'N'
+                    case 4:
+                        return 'S'
+                    case 5:
+                        return 'NS'
+                    default:
+                        return guest.name.charAt(0)
+                }
+            },
+
+            getNameWithStatus(guest){
+                return fn.getGuestNameWithStatus(guest, this.trans)
             }
         }
     }

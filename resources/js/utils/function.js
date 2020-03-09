@@ -252,5 +252,37 @@ export default {
                 'value': 'online'
             }
         ]
+    },
+
+    /**
+     * Function will generate guest name with status
+     * @param guest
+     * @returns {string}
+     */
+    getGuestNameWithStatus(guest, trans){
+        let name = guest.name
+        switch(guest.status){
+            case 0:
+                name = `${name} <strong>(${trans.pending}</strong>)`
+                break
+            case 1:
+                name = `${name} <strong>(${trans.confirmed}</strong>)`
+                break
+            case 2:
+                name = `${name} <strong>(${trans.arrived}</strong>)`
+                break
+            case 3:
+                name = `${name} <strong>(${trans.completedNoShow}</strong>)`
+                break
+            case 4:
+                name = `${name} <strong>(${trans.saleMade}</strong>)`
+                break
+            case 5:
+                name = `${name} <strong>(${trans.noShow}</strong>)`
+                break
+            default:
+                name = `${name}`
+        }
+        return name
     }
 }

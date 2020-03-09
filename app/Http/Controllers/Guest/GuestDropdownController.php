@@ -25,7 +25,8 @@ class GuestDropdownController extends Controller
             DB::raw("CONCAT(surname,' ', first_name) as name"),
             'email',
             'event_id',
-            'postcode'
+            'postcode',
+            'status'
         );
 
         if ($request->has('search') && !empty($request->search)) {
