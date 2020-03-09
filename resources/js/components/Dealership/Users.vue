@@ -14,7 +14,7 @@
                         :rows-per-page-items="rowsPerPage"
                         :total-items="totalUsers"
                         :loading="loading"
-                        class="elevation-0 r-table"
+                        class="elevation-1 r-table"
                     >
                         <template v-slot:items="props">
                             <td>{{ props.item.firstname }}</td>

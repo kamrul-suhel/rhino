@@ -1,12 +1,12 @@
 <template>
     <v-container fluid px-5>
         <v-layout row wrap px-4>
-            <v-flex xs6>
+            <v-flex xs12 sm6 py-3>
                 <h2>{{ trans.bookAnAppointment }}</h2>
             </v-flex>
 
-            <v-flex xs6 align-self-end v-if="authUser.level === 'dealership' || rhinoAdmin">
-                <v-layout row wrap justify-end>
+            <v-flex xs12 sm6 align-self-end v-if="authUser.level === 'dealership' || rhinoAdmin">
+                <v-layout row wrap justify-sm-end>
                     <v-btn outline round
                            @click="onGoBack()"
                            :color="themeOption.adminNavIconColor"

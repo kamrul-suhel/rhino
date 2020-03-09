@@ -6,6 +6,12 @@
     .header{
         background-image: radial-gradient(circle at top center, #31393C, #212729 28%);
         color:#fff;
+        min-height: 60px;
+        height: unset!important;
+
+        @media (min-height: 660px){
+            height: 120px;
+        }
     }
 }
 
@@ -36,4 +42,19 @@
 
 .v-input.v-text-field.v-text-field--single-line.v-input--is-readonly.theme--light {
     position: relative;
+}
+
+.search-guests .v-input__slot {
+    border: solid 1px #c7c7c7!important;
+}
+
+.dealershipAdminToolbar {
+    margin-top: 4%;
+    @media (min-width: 768px) {
+        margin-top: unset;
+    }
+}
+
+.brands-carousel .v-image__image {
+    background-size: contain!important;
 }
