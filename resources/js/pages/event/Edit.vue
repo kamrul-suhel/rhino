@@ -6,7 +6,7 @@
                 <v-btn outline round
                        @click="onViewCalender()"
                        :color="themeOption.adminNavIconColor"
-                       class="ma-0">
+                       class="ma-0 my-2">
                     <v-icon left dark>calendar_today</v-icon>
                     {{ `${trans.calendar}`}}
                 </v-btn>
@@ -239,40 +239,43 @@
                                         {{ `${trans.brands}` }}
                                     </v-tab>
 
-                                    <v-tab-item
-                                        key="eventImage"
-                                    >
-                                        <v-layout row wrap pt-3>
-                                            <v-flex xs12 sm4>
-                                                <v-card class="pa-2 my-3">
-                                                    <v-img
-                                                        cover
-                                                        :src="bannerImage|image(themeOption.brandDefaultImage)"
-                                                        aspect-ratio="2.75"
-                                                    ></v-img>
-                                                </v-card>
+                                    <v-tabs-items touchless>
 
-                                                <ImageUpload :preview="false"
-                                                                model="event"
-                                                ></ImageUpload>
-                                            </v-flex>
+                                        <v-tab-item
+                                            key="eventImage"
+                                        >
+                                            <v-layout row wrap pt-3>
+                                                <v-flex xs12 sm4>
+                                                    <v-card class="pa-2 my-3">
+                                                        <v-img
+                                                            cover
+                                                            :src="bannerImage|image(themeOption.brandDefaultImage)"
+                                                            aspect-ratio="2.75"
+                                                        ></v-img>
+                                                    </v-card>
 
-                                        </v-layout>
-                                    </v-tab-item>
+                                                    <ImageUpload :preview="false"
+                                                                    model="event"
+                                                    ></ImageUpload>
+                                                </v-flex>
 
-                                    <v-tab-item
-                                        key="eventBrand"
-                                    >
-                                        <EventGuest></EventGuest>
-                                    </v-tab-item>
+                                            </v-layout>
+                                        </v-tab-item>
 
-                                    <v-tab-item
-                                        key="eventGuest"
-                                    >
-                                        <Brand v-if="selectedEvent.id"
-                                                :eventId="selectedEvent.id"
-                                        ></Brand>
-                                    </v-tab-item>
+                                        <v-tab-item
+                                            key="eventBrand"
+                                        >
+                                            <EventGuest></EventGuest>
+                                        </v-tab-item>
+
+                                        <v-tab-item
+                                            key="eventGuest"
+                                        >
+                                            <Brand v-if="selectedEvent.id"
+                                                    :eventId="selectedEvent.id"
+                                            ></Brand>
+                                        </v-tab-item>
+                                    </v-tabs-items>
                                 </v-tabs>
                             </v-card-text>
                         </v-card>
@@ -302,17 +305,19 @@
                                         {{ trans.vehicles }}
                                     </v-tab>
 
-                                    <v-tab-item
-                                        key="saleExecutives"
-                                    >
-                                        <EventUsers></EventUsers>
-                                    </v-tab-item>
+                                    <v-tabs-items touchless>
+                                        <v-tab-item
+                                            key="saleExecutives"
+                                        >
+                                            <EventUsers></EventUsers>
+                                        </v-tab-item>
 
-                                    <v-tab-item
-                                        key="vehicle"
-                                    >
-                                        <vehicle></vehicle>
-                                    </v-tab-item>
+                                        <v-tab-item
+                                            key="vehicle"
+                                        >
+                                            <vehicle></vehicle>
+                                        </v-tab-item>
+                                    </v-tabs-items>
                                 </v-tabs>
                     </v-flex>
                 </v-layout>
