@@ -9,6 +9,13 @@
             return {}
         },
 
-        computed: ({}),
+        computed: ({
+            error: 'getAppError',
+            messages: 'getAppErrorMessages'
+        }),
+
+        methods:{
+
+        }
     }
 </script>

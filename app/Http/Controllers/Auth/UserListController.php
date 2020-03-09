@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class UserListController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+    }
+
     /**
      * Display a listing of the resource.
      *

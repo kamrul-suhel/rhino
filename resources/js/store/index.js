@@ -31,6 +31,7 @@ import Header from './modules/header'
 import Global from './modules/global'
 import SaleUpdate from "./modules/saleUpdate"
 import AssignToSaleExecutiveDialog from "./modules/assignToSaleExecutive";
+import Error from "./modules/error";
 
 
 Vue.use(Vuex)
@@ -99,7 +100,8 @@ const store = new Vuex.Store({
         Analytics,
         SpecializeBrand,
         SaleUpdate,
-        AssignToSaleExecutiveDialog
+        AssignToSaleExecutiveDialog,
+        Error
     }
 })
 

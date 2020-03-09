@@ -297,6 +297,8 @@ const actions = {
                 commit('setTotalUsers', response.data.total)
                 commit('setUserLoading', false)
             }
+        }).catch((error) => {
+            console.log('erro is: ', error.response)
         });
     },
 

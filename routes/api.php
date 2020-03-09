@@ -16,23 +16,34 @@ use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
+| UnAuthenticate route
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::get('settings', 'Setting\SettingController@index');
+Route::get('languages', 'Language\LanguageController@index');
+
+/*
+|--------------------------------------------------------------------------
 | API Route for Users
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('users')->group(function () {
-    Route::post('', 'Auth\RegisterController@store');
-    Route::post('upload', 'Auth\UserUploadController@generateUsers');
-    Route::post('upload/confirm', 'Auth\UserUploadController@confirmed');
-    Route::put('{id}', 'Auth\RegisterController@update');
-    Route::get('', 'Auth\UserListController@list');
-    Route::get('{id}/show', 'Auth\UserShowController@show');
-    Route::get('dropdown', 'Auth\UserDropdownController@list');
-    Route::delete('{id}', 'Auth\UserDeleteController@destroy');
-    Route::post('{id}/updatepassword', 'Auth\ResetPasswordController@changePassword');
+
+Route::prefix('users')->middleware('VerifyJWT')->group(function () {
+    Route::post('', 'Auth\RegisterController@store')->middleware('APIDealershipUser');
+    Route::post('upload', 'Auth\UserUploadController@generateUsers')->middleware('APIDealershipUser');
+    Route::post('upload/confirm', 'Auth\UserUploadController@confirmed')->middleware('APIDealershipUser');
+    Route::put('{id}', 'Auth\RegisterController@update')->middleware('APIDealershipUser');
+    Route::get('', 'Auth\UserListController@list')->middleware('APIDealershipUser');
+    Route::get('{id}/show', 'Auth\UserShowController@show')->middleware('APIAdminUser');
+    Route::get('dropdown', 'Auth\UserDropdownController@list')->middleware('APIDealershipUser');
+    Route::delete('{id}', 'Auth\UserDeleteController@destroy')->middleware('APIDealershipUser');
+    Route::post('{id}/updatepassword', 'Auth\ResetPasswordController@changePassword')->middleware('APIDealershipUser');
 
     // Event User
-    Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list');
+    Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list')->middleware('APISaleExecutiveUser');
 
     // Brand User route
     Route::get('{id}/brands', 'Auth\UserBrandListController@List');
@@ -49,8 +60,7 @@ Route::prefix('users')->group(function () {
 |
 */
 
-Route::prefix('settings')->group(function () {
-    Route::get('', 'Setting\SettingController@index');
+Route::prefix('settings')->middleware('VerifyJWT')->group(function () {
     Route::post('add', 'Setting\SettingController@generateDefaultSetting');
     Route::get('translations', 'Setting\TranslationController@list');
     Route::put('translations/{id}/update', 'Setting\TranslationStoreController@update');
@@ -64,7 +74,7 @@ Route::prefix('settings')->group(function () {
 |
 */
 
-Route::prefix('dealerships')->group(function () {
+Route::prefix('dealerships')->middleware('VerifyJWT')->group(function () {
     Route::get('', 'Dealership\DealershipListController@list');
     Route::get('dropdown', 'Dealership\DealershipDropDownController@index');
     Route::post('', 'Dealership\DealershipController@store');
@@ -88,7 +98,7 @@ Route::prefix('dealerships')->group(function () {
 |
 */
 
-Route::prefix('brandDealerships')->group(function () {
+Route::prefix('brandDealerships')->middleware('VerifyJWT')->group(function () {
     Route::put('{id}', 'Dealership\BrandDealershipController@update');
     Route::delete('{id}', 'Dealership\BrandDealershipController@destroy');
 });
@@ -101,7 +111,7 @@ Route::prefix('brandDealerships')->group(function () {
 |
 */
 
-Route::prefix('companies')->group(function () {
+Route::prefix('companies')->middleware('VerifyJWT')->group(function () {
     Route::get('', 'Company\CompanyController@index');
     Route::get('dropdown', 'Company\CompanyDropdownController@index');
     Route::post('', 'Company\CompanyController@store');
@@ -118,7 +128,7 @@ Route::prefix('companies')->group(function () {
 |
 */
 
-Route::prefix('brands')->group(function () {
+Route::prefix('brands')->middleware('VerifyJWT')->group(function () {
     Route::get('', 'Brand\BrandController@index');
     Route::get('dropdown', 'Brand\BrandDropDownController@getBrandsForDropDown');
     Route::post('', 'Brand\BrandStoreController@store');
@@ -136,7 +146,7 @@ Route::prefix('brands')->group(function () {
 |
 */
 
-Route::prefix('vehicles')->group(function () {
+Route::prefix('vehicles')->middleware('VerifyJWT')->group(function () {
     Route::get('', 'Vehicle\VehicleController@index');
     Route::post('', 'Vehicle\VehicleController@store');
     Route::get('{id}/show', 'Vehicle\VehicleController@show');
@@ -153,7 +163,7 @@ Route::prefix('vehicles')->group(function () {
 |
 */
 
-Route::prefix('groups')->group(function () {
+Route::prefix('groups')->middleware('VerifyJWT')->group(function () {
     Route::get('', 'Dealership\GroupController@index');
     Route::get('dropdown', 'Dealership\Group\GroupDropdownController@index');
     Route::post('', 'Dealership\GroupController@store');
@@ -170,8 +180,7 @@ Route::prefix('groups')->group(function () {
 |
 */
 
-Route::prefix('languages')->group(function () {
-    Route::get('', 'Language\LanguageController@index');
+Route::prefix('languages')->middleware('VerifyJWT')->group(function () {
     Route::post('', 'Language\LanguageStoreController@store');
     Route::put('{id}', 'Language\LanguageStoreController@update');
     Route::delete('{id}', 'Language\LanguageDeleteController@destroy');
@@ -185,7 +194,7 @@ Route::prefix('languages')->group(function () {
 |
 */
 
-Route::prefix('countries')->group(function () {
+Route::prefix('countries')->middleware('VerifyJWT')->group(function () {
     Route::get('', 'Country\CountryController@index');
     Route::post('', 'Country\CountryController@store');
     Route::get('dropdown', 'Country\CountryController@getCountriesDropDown');
@@ -203,7 +212,7 @@ Route::prefix('countries')->group(function () {
 |
 */
 
-Route::prefix('regions')->group(function () {
+Route::prefix('regions')->middleware('VerifyJWT')->group(function () {
     Route::post('', 'Region\RegionController@store');
     Route::put('{id}', 'Region\RegionController@update');
     Route::delete('{id}', 'Region\RegionController@destroy');
@@ -274,7 +283,7 @@ Route::prefix('eventvehicle')->group(function () {
 |--------------------------------------------------------------------------
 |
 */
-Route::prefix('guests')->group(function () {
+Route::prefix('guests')->middleware('VerifyJWT')->group(function () {
 
     Route::get('', 'Guest\GuestListController@list');
     Route::get('dropdown', 'Guest\GuestDropdownController@list');
@@ -307,7 +316,7 @@ Route::prefix('appointments')->group(function () {
 |
 */
 
-Route::prefix('uploadfiles')->group(function () {
+Route::prefix('uploadfiles')->middleware('VerifyJWT')->group(function () {
     Route::post('', 'File\FileUploadController@uploadFiles');
 });
 
@@ -320,7 +329,7 @@ Route::prefix('uploadfiles')->group(function () {
 */
 
 Route::prefix('booking')->group(function(){
-    Route::post('', 'Booking\BookingStoreController@store');
+    Route::post('', 'Booking\BookingStoreController@store')->middleware('VerifyJWT');
     Route::get('{uniqueId}', 'Booking\BookingController@getData');
     Route::post('{saleExecutive}/availability', 'Booking\CheckSaleExecutiveAvailability@check');
 });
@@ -333,6 +342,6 @@ Route::prefix('booking')->group(function(){
 |
 */
 
-Route::prefix('csv')->group(function(){
+Route::prefix('csv')->middleware('VerifyJWT')->group(function(){
    Route::get('guests/download', 'Guest\GuestDownloadCSVController@download');
 });

@@ -134,26 +134,26 @@
                 this.drawer = this.openNavigation
             },
 
-            trans(){
+            trans() {
                 this.$store.commit('setDealershipNavigation', this.trans)
             },
 
-            downloadBookGuest(){
-                if(this.downloadBookGuest){
+            downloadBookGuest() {
+                if (this.downloadBookGuest) {
                     this.downloadType = 'bookedGuest'
                     this.downloadGuest = true
                 }
             },
 
-            downloadUnBookGuest(){
-                if(this.downloadUnBookGuest){
+            downloadUnBookGuest() {
+                if (this.downloadUnBookGuest) {
                     this.downloadType = 'unbookedGuest'
                     this.downloadGuest = true
                 }
             },
 
-            downloadGuest(){
-                if(!this.downloadGuest){
+            downloadGuest() {
+                if (!this.downloadGuest) {
                     this.$store.commit('setDownloadUnBookGuest', false)
                     this.$store.commit('setDownloadBookGuest', false)
                 }
@@ -162,7 +162,7 @@
 
         methods: {
             async onPageChange(item) {
-                if(this.$route.name === item.link){
+                if (this.$route.name === item.link) {
                     return
                 }
 
@@ -228,7 +228,7 @@
                 }
 
                 // Sale update route
-                if(item.link === 'saleUpdate'){
+                if (item.link === 'saleUpdate') {
                     this.$router.push({
                         name: 'eventSales',
                         params: {
