@@ -38,7 +38,7 @@
                                 clearable
                                 hide-details
                                 hide-selected
-                                item-text="name"
+                                item-text="email"
                                 item-value="symbol"
                                 :label="`${trans.searchBy} ${trans.guest} ${trans.email}`"
                                 open-on-clear
@@ -141,6 +141,9 @@
                     return this.$store.getters.getBookAGuestDialog
                 }, set: function (value) {
                     this.$store.commit('setBookAGuestDialog', value)
+                    if(!value){
+                        this.guests = []
+                    }
                 }
             }
         }),
