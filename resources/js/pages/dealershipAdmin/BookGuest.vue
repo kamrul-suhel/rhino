@@ -109,9 +109,9 @@
                                             box
                                             hide-details
                                             hide-selected
-                                            item-text="name"
+                                            item-text="email"
                                             item-value="symbol"
-                                            :label="`${trans.searchBy} ${trans.guest}`"
+                                            :label="`${trans.searchBy} ${trans.guest} ${trans.email}`"
                                             open-on-clear
                                             return-object
                                         >

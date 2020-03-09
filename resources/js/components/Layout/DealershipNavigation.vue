@@ -6,7 +6,6 @@
         app
         width="300"
     >
-
         <v-layout row wrap align-content-center>
             <v-flex xs12>
                 <v-img
@@ -127,11 +126,18 @@
         },
         created() {
             this.$store.commit('setDealershipNavigation', this.trans) // set dealership navigation
+            this.onCheckMobile()
         },
 
         watch: {
             openNavigation() {
                 this.drawer = this.openNavigation
+            },
+
+            drawer(){
+                if(!this.drawer){
+                    this.$store.commit('setIsNavigationOpen')
+                }
             },
 
             trans() {
@@ -288,6 +294,14 @@
                         return fn.downloadCSV(response.data.guests, fileName)
                     }
                 })
+            },
+
+            onCheckMobile(){
+                // Hide navigation in mobile
+                const width = window.innerWidth
+                if(width <= 1263){
+                    this.drawer = false
+                }
             }
         }
     }
