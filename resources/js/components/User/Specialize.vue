@@ -14,7 +14,7 @@
                         :rows-per-page-items="rowsPerPage"
                         :total-items="totalSpecializeBrands"
                         :loading="loading"
-                        class="elevation-1"
+                        class="elevation-1 r-table"
                     >
                         <template v-slot:items="props">
                             <td>{{ props.item.brand_name }}</td>
@@ -88,8 +88,10 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn small
+                                dark
                                @click="onCreateRelation"
-                               :color="themeOption.buttonPrimaryColor"
+                               :color="themeOption.buttonSuccess"
+                               class="rounded-btn"
                         >
                             {{ `${trans.add} ${trans.brand}` }}
                         </v-btn>

@@ -20,8 +20,8 @@
                                 ref="createLanguage"
                                 v-model="valid"
                                 lazy-validation>
-                                <v-layout justify-space-between>
-                                    <v-flex xs3>
+                                <v-layout row wrap justify-space-between>
+                                    <v-flex xs12 sm3>
                                         <v-text-field :label="trans.name"
                                             :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
                                             :color="themeOption.inputColor"
@@ -30,7 +30,7 @@
                                         ></v-text-field>
                                     </v-flex>
 
-                                    <v-flex xs3>
+                                    <v-flex xs12 sm3>
                                         <v-text-field :label="`${trans.code} 2`"
                                             :color="themeOption.inputColor"
                                             :rules="[v => !!v || `${trans.code} 2 ${trans.is_required}`]"
@@ -39,7 +39,7 @@
                                         ></v-text-field>
                                     </v-flex>
 
-                                    <v-flex xs3>
+                                    <v-flex xs12 sm3>
                                         <v-text-field :label="`${trans.code} 3`"
                                                         :rules="[v => !!v || `${trans.code} 3 ${trans.is_required}`]"
                                                         :color="themeOption.inputColor"
@@ -48,7 +48,7 @@
                                         ></v-text-field>
                                     </v-flex>
 
-                                    <v-flex xs1>
+                                    <v-flex xs12 sm1>
                                         <v-switch
                                             :label="trans.status"
                                             :color="themeOption.switchOnColor"

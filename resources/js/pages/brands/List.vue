@@ -7,12 +7,12 @@
                     v-model="valid"
                     lazy-validation>
 
-                    <v-layout row wrap>
+                    <v-layout row wrap justify-space-between>
                         <v-flex xs12>
                             <h3>{{ `${trans.add} ${trans.new} ${trans.brand}` }}</h3>
                         </v-flex>
 
-                        <v-flex xs4>
+                        <v-flex xs12 sm4>
                             <v-autocomplete
                                 v-if="this.editBrand"
                                 :label="trans.languages"
@@ -32,7 +32,6 @@
                                 :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
                                 required
                                 v-model="selectedBrand.name"
-                                class="mr-4"
                                 :color="themeOption.inputColor"
                                 box
                                 solo
@@ -50,7 +49,7 @@
                             </v-autocomplete>
                             -->
 
-                        <v-flex xs2>
+                        <v-flex xs12 sm2>
                             <div class="r-color-picker" v-if="isColorSwatchActive">
                                 <div class="r-color-picker-content">
                                     <chrome v-model="selectedColor"
@@ -79,7 +78,7 @@
                             </v-text-field>
                         </v-flex>
 
-                        <v-flex xs4 class="ml-5">
+                        <v-flex xs12 sm4 class="ml-5">
                             <span>{{trans.logo}}</span>
 
                             <v-img

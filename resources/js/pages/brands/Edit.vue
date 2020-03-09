@@ -16,7 +16,7 @@
                 <v-flex xs12>
                     <v-card>
                         <v-card-text>
-                            <v-layout justify-space-between row>
+                            <v-layout justify-space-between row wrap>
                                 <v-flex xs12 sm3 pa-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"

@@ -1,23 +1,5 @@
 <template>
     <v-container pa-0>
-        <v-layout row warp pb-4>
-            <v-flex xs12>
-                <v-toolbar flat>
-                    <v-toolbar-title>
-                        <span
-                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.guest}` }}</span>
-                    </v-toolbar-title>
-
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-                </v-toolbar>
-            </v-flex>
-        </v-layout>
-
         <v-form
             row wrap
             ref="guestForm"
@@ -168,17 +150,21 @@
                         <v-card-actions class="pa-3">
                             <v-spacer></v-spacer>
                             <v-btn
-                                :class="themeOption.buttonSecondaryColor"
+                                dark
+                                :color="themeOption.buttonSecondaryColor"
                                 small
+                                class="rounded-btn"
                                 @click="$router.push({name: 'listGuest'})"
                             >
                                 {{ `${trans.back}`}}
                             </v-btn>
 
                             <v-btn
+                                dark
                                 :loading="loading"
-                                :class="themeOption.buttonSuccess"
+                                :color="themeOption.buttonDangerColor"
                                 small
+                                class="rounded-btn"
                                 @click="onUpdateGuest()"
                             >
                                 {{ `${trans.update} ${trans.guest}` }}

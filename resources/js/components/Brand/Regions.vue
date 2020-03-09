@@ -20,8 +20,8 @@
                             v-model="valid"
                             lazy-validation
                         >
-                            <v-layout row>
-                                <v-flex xs3 px-2>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm3 px-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.region} ${trans.name} ${trans.is_required}`]"
                                         :label="`${trans.region} ${trans.name}`"
@@ -31,7 +31,7 @@
                                     </v-text-field>
                                 </v-flex>
 
-                                <v-flex xs3 px-2>
+                                <v-flex xs12 sm3 px-2>
                                     <v-autocomplete
                                         :rules="[v => !!v || `${trans.select} ${trans.country}`]"
                                         :items="countries"

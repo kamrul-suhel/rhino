@@ -28,7 +28,7 @@
                         </v-autocomplete>
                     </v-flex>
                 </v-layout>
-                <v-layout row>
+                <v-layout row wrap>
                     <v-flex xs12 sm4 mr-3>
                         <v-text-field
                             :label="trans.name"

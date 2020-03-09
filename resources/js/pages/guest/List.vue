@@ -9,6 +9,7 @@
             </v-text-field>
 
             <v-btn
+                dark
                 :color="themeOption.buttonSuccess"
                 v-if="!subComponent"
                 small

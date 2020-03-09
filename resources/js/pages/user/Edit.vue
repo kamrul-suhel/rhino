@@ -7,8 +7,8 @@
             lazy-validation>
             <v-layout>
                 <v-flex xs12>
-                    <v-card>
-                        <v-card-text>
+                    
+                        
                             <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
@@ -41,7 +41,7 @@
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2 v-if="authUser.level === 'admin'">
+                                <v-flex xs12 sm4 pa-2 v-if="authUser.level === 'admin'">
                                     <v-select
                                         :items="levels"
                                         :rules="[v => !!v || `${trans.select_a} ${trans.role}`]"
@@ -56,7 +56,7 @@
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2
+                                <v-flex xs12 sm4 pa-2
                                         v-if="authUser.level === 'admin'">
                                     <v-select
                                         :items="dealerships"
@@ -71,7 +71,7 @@
                                     </v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2
+                                <v-flex xs12 sm4 pa-2
                                         v-if="user.level === 'group'">
                                     <v-select
                                         :items="groups"
@@ -85,7 +85,7 @@
                                     ></v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2
+                                <v-flex xs12 sm4 pa-2
                                         v-if="user.level ==='country' || user.level === 'region'"
                                 >
                                     <v-autocomplete
@@ -101,7 +101,7 @@
                                     ></v-autocomplete>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2
+                                <v-flex xs12 sm4 pa-2
                                         v-if="user.level === 'brand' || user.level === 'region'">
                                     <v-autocomplete
                                         :items="brands"
@@ -116,7 +116,7 @@
                                     ></v-autocomplete>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2
+                                <v-flex xs12 sm4 pa-2
                                         v-if="user.level === 'region'">
                                     <v-select :items="regions"
                                               item-text="name"
@@ -129,7 +129,7 @@
                                     ></v-select>
                                 </v-flex>
 
-                                <v-flex xs12 sm3 pa-2
+                                <v-flex xs12 sm4 pa-2
                                         v-if="user.level === 'company'">
                                     <v-select
                                         :items="companies"
@@ -145,7 +145,7 @@
                             </v-layout>
 
                             <v-layout row wrap>
-                                <v-flex xs12 pa-2>
+                                <v-flex xs12 sm8 pa-2>
                                     <v-textarea
                                         :label="`${trans.notes}`"
                                         :color="themeOption.inputColor"
@@ -165,15 +165,6 @@
                                     >
                                         Change Password
                                     </v-btn>
-                                </v-flex>
-                                <v-flex xs12 sm6 pa-2>
-                                    <v-switch
-                                        :false-value="0"
-                                        :true-value="1"
-                                        :label="trans.status"
-                                        :color="themeOption.switchOnColor"
-                                        v-model="user.status">
-                                    </v-switch>
                                 </v-flex>
                             </v-layout>
                             <v-layout row wrap>
@@ -224,9 +215,9 @@
 
                                 </v-flex>
                             </v-layout>
-                        </v-card-text>
-
-                        <v-card-actions class="justify-center pa-3">
+                        
+                    <v-layout row wrap>
+                        <v-flex class="justify-center pa-3">
                             <v-btn
                                 dark
                                 :color="themeOption.buttonSecondaryColor"
@@ -248,8 +239,8 @@
                             >
                                 {{ `${trans.update} ${trans.user}` }}
                             </v-btn>
-                        </v-card-actions>
-                    </v-card>
+                        </v-flex>
+                    </v-layout>
                 </v-flex>
             </v-layout>
         </v-form>

@@ -1,9 +1,9 @@
 <template>
 
     <v-container grid-list-md>
-        <v-layout row wrap>
+        <v-layout row wrap class=" d-none d-md-block">
             <v-flex xs12 class="pa-0">
-                <v-card-text class="pa-0 text-xs-center">
+                <v-card-text class="pa-0 mb-4 text-xs-center">
                     <h2>{{trans.dashboard}}</h2>
                 </v-card-text>
             </v-flex>
@@ -22,7 +22,7 @@
 
         <v-container pt-0>
             <v-layout row wrap justify-space-around>
-                <v-flex xs5>
+                <v-flex xs12 md5>
                     <v-layout column mb-3>
                         <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listUsers'}">
                             <v-layout row justify-space-around>
@@ -91,7 +91,7 @@
                     </v-layout>
                 </v-flex>
 
-                <v-flex xs5 class="py-0">
+                <v-flex xs12 md5 class="py-0">
                     <v-layout row wrap>
                         <v-flex xs6>
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCompanies'}">

@@ -34,7 +34,7 @@
                                     ></v-text-field>
                                 </v-flex>
 
-                                <v-flex xs4 pa-2>
+                                <v-flex xs12 sm-4 pa-2>
                                     <v-select
                                         :items="dealerships"
                                         item-text="name"

@@ -39,292 +39,287 @@
             lazy-validation>
             <v-layout>
                 <v-flex xs12>
-                    <v-card>
-                        <v-card-text v-if="!$route.query.admin">
-                            <v-layout row wrap>
-                                <v-flex xs12 sm4 pa-2>
+                    <v-layout row wrap>
+                        <v-flex xs12 sm4 pa-2>
+                            <v-text-field
+                                :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
+                                :color="themeOption.inputColor"
+                                :label="`${trans.name} ${trans.of} ${trans.event}`"
+                                v-model="selectedEvent.name"
+                                solo box flat
+                            ></v-text-field>
+                        </v-flex>
+
+                        <v-flex xs12 sm4 pa-2>
+                            <v-select
+                                :items="dealerships"
+                                item-text="name"
+                                item-value="id"
+                                :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                                :color="themeOption.inputColor"
+                                :label="trans.dealership"
+                                v-model="selectedEvent.dealership_id"
+                                solo box flat
+                            >
+                            </v-select>
+                        </v-flex>
+                    </v-layout>
+
+                    <v-layout row wrap>
+                        <v-flex xs12 sm4 pa-2>
+                            <v-menu
+                                ref="startEvent"
+                                v-model="startEvent"
+                                :close-on-content-click="false"
+                                :nudge-right="40"
+                                :return-value.sync="selectedEvent.start"
+                                lazy
+                                transition="scale-transition"
+                                offset-y
+                                full-width
+                                min-width="290px"
+                            >
+                                <template v-slot:activator="{ on }">
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.start} ${trans.date} ${trans.is_required}`]"
+                                        required
+                                        v-model="selectedEvent.start"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.name} ${trans.of} ${trans.event}`"
-                                        v-model="selectedEvent.name"
+                                        :label="`${trans.start} ${trans.date}`"
+                                        prepend-icon="event"
+                                        readonly
+                                        v-on="on"
                                         solo box flat
                                     ></v-text-field>
-                                </v-flex>
+                                </template>
+                                <v-date-picker
+                                    :color="themeOption.inputColor"
+                                    v-model="selectedEvent.start" no-title scrollable>
+                                    <v-spacer></v-spacer>
 
-                                <v-flex xs12 sm4 pa-2>
-                                    <v-select
-                                        :items="dealerships"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                                    <v-btn flat :color="themeOption.buttonSecondaryColor"
+                                            @click="startEvent = false">{{ trans.cancel }}
+                                    </v-btn>
+
+                                    <v-btn flat :color="themeOption.buttonPrimaryColor"
+                                            @click="$refs.startEvent.save(selectedEvent.start)">{{ trans.ok }}
+                                    </v-btn>
+                                </v-date-picker>
+                            </v-menu>
+                        </v-flex>
+
+                        <v-flex xs12 sm4 pa-2>
+                            <v-menu
+                                ref="endEvent"
+                                v-model="endEvent"
+                                :close-on-content-click="false"
+                                :nudge-right="40"
+                                :return-value.sync="selectedEvent.end"
+                                lazy
+                                transition="scale-transition"
+                                offset-y
+                                full-width
+                                min-width="290px"
+                            >
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                        :rules="[v => !!v || `${trans.end} ${trans.date} ${trans.is_required}`]"
+                                        required
+                                        v-model="selectedEvent.end"
                                         :color="themeOption.inputColor"
-                                        :label="trans.dealership"
-                                        v-model="selectedEvent.dealership_id"
+                                        :label="`${trans.end} ${trans.date}`"
+                                        prepend-icon="event"
+                                        readonly
+                                        v-on="on"
                                         solo box flat
+                                    ></v-text-field>
+                                </template>
+                                <v-date-picker
+                                    :color="themeOption.inputColor"
+                                    v-model="selectedEvent.end" no-title scrollable>
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn flat :color="themeOption.buttonSecondaryColor"
+                                            @click="endEvent = false">{{ trans.cancel }}
+                                    </v-btn>
+
+                                    <v-btn flat :color="themeOption.buttonPrimaryColor"
+                                            @click="$refs.endEvent.save(selectedEvent.end)">{{ trans.ok }}
+                                    </v-btn>
+                                </v-date-picker>
+                            </v-menu>
+                        </v-flex>
+                    </v-layout>
+
+                    <v-layout row wrap>
+                        <v-flex xs12 sm4 pa-2>
+                            <v-select
+                                :items="appointmentDuration"
+                                item-value="value"
+                                item-text="text"
+                                :label="trans.appointment_duration"
+                                :color="themeOption.inputColor"
+                                v-model="selectedEvent.appointment_duration"
+                                solo box flat>
+                            </v-select>
+                        </v-flex>
+
+                        <v-flex xs12 sm4 pa-2>
+                            <v-select
+                                :items="types"
+                                item-text="name"
+                                item-value="id"
+                                :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
+                                :color="themeOption.inputColor"
+                                :label="`${trans.type}`"
+                                v-model="selectedEvent.type_id"
+                                solo box flat
+                            >
+                            </v-select>
+                        </v-flex>
+
+                        <v-flex xs12 sm8 pa-2>
+                            <p>{{ trans.greeting }}</p>
+                            <v-radio-group
+                                v-model="selectedEvent.greeting"
+                                :mandatory="false">
+                                <v-radio :color="themeOption.inputColor"
+                                            :label="trans.hello"
+                                            :value="0">
+                                </v-radio>
+
+                                <v-radio :color="themeOption.inputColor"
+                                            :label="trans.hi"
+                                            :value="1">
+                                </v-radio>
+                            </v-radio-group>
+                        </v-flex>
+                    </v-layout>
+
+                    <v-layout row wrap>
+                        <v-flex xs12 sm8 pa-2>
+                            <v-textarea
+                                :color="themeOption.inputColor"
+                                :label="trans.notes"
+                                v-model="selectedEvent.notes"
+                                :hint="trans.notes"
+                                solo flat box
+                            ></v-textarea>
+                        </v-flex>
+                    </v-layout>
+                </v-card-text>
+
+                <v-layout row wrap v-if="!subComponent">
+                    <v-flex xs12>
+                        <v-card flat>
+                            <v-card-text>
+                                <v-tabs
+                                    dark
+                                    :slider-color="themeOption.tabSliderColor"
+                                >
+                                    <v-tab
+                                        key="eventImage"
+                                        ripple
                                     >
-                                    </v-select>
-                                </v-flex>
-                            </v-layout>
+                                        {{ `${trans.event} ${trans.banner}`}}
 
-                            <v-layout row wrap>
-                                <v-flex xs12 sm4 pa-2>
-                                    <v-menu
-                                        ref="startEvent"
-                                        v-model="startEvent"
-                                        :close-on-content-click="false"
-                                        :nudge-right="40"
-                                        :return-value.sync="selectedEvent.start"
-                                        lazy
-                                        transition="scale-transition"
-                                        offset-y
-                                        full-width
-                                        min-width="290px"
+                                    </v-tab>
+
+                                    <v-tab
+                                        key="eventGuest"
+                                        ripple
                                     >
-                                        <template v-slot:activator="{ on }">
-                                            <v-text-field
-                                                :rules="[v => !!v || `${trans.start} ${trans.date} ${trans.is_required}`]"
-                                                required
-                                                v-model="selectedEvent.start"
-                                                :color="themeOption.inputColor"
-                                                :label="`${trans.start} ${trans.date}`"
-                                                prepend-icon="event"
-                                                readonly
-                                                v-on="on"
-                                                solo box flat
-                                            ></v-text-field>
-                                        </template>
-                                        <v-date-picker
-                                            :color="themeOption.inputColor"
-                                            v-model="selectedEvent.start" no-title scrollable>
-                                            <v-spacer></v-spacer>
+                                        {{ `${trans.guests}` }}
+                                    </v-tab>
 
-                                            <v-btn flat :color="themeOption.buttonSecondaryColor"
-                                                   @click="startEvent = false">{{ trans.cancel }}
-                                            </v-btn>
-
-                                            <v-btn flat :color="themeOption.buttonPrimaryColor"
-                                                   @click="$refs.startEvent.save(selectedEvent.start)">{{ trans.ok }}
-                                            </v-btn>
-                                        </v-date-picker>
-                                    </v-menu>
-                                </v-flex>
-
-                                <v-flex xs12 sm4 pa-2>
-                                    <v-menu
-                                        ref="endEvent"
-                                        v-model="endEvent"
-                                        :close-on-content-click="false"
-                                        :nudge-right="40"
-                                        :return-value.sync="selectedEvent.end"
-                                        lazy
-                                        transition="scale-transition"
-                                        offset-y
-                                        full-width
-                                        min-width="290px"
+                                    <v-tab
+                                        key="eventBrand"
+                                        ripple
                                     >
-                                        <template v-slot:activator="{ on }">
-                                            <v-text-field
-                                                :rules="[v => !!v || `${trans.end} ${trans.date} ${trans.is_required}`]"
-                                                required
-                                                v-model="selectedEvent.end"
-                                                :color="themeOption.inputColor"
-                                                :label="`${trans.end} ${trans.date}`"
-                                                prepend-icon="event"
-                                                readonly
-                                                v-on="on"
-                                                solo box flat
-                                            ></v-text-field>
-                                        </template>
-                                        <v-date-picker
-                                            :color="themeOption.inputColor"
-                                            v-model="selectedEvent.end" no-title scrollable>
-                                            <v-spacer></v-spacer>
+                                        {{ `${trans.brands}` }}
+                                    </v-tab>
 
-                                            <v-btn flat :color="themeOption.buttonSecondaryColor"
-                                                   @click="endEvent = false">{{ trans.cancel }}
-                                            </v-btn>
-
-                                            <v-btn flat :color="themeOption.buttonPrimaryColor"
-                                                   @click="$refs.endEvent.save(selectedEvent.end)">{{ trans.ok }}
-                                            </v-btn>
-                                        </v-date-picker>
-                                    </v-menu>
-                                </v-flex>
-                            </v-layout>
-
-                            <v-layout row wrap>
-                                <v-flex xs12 sm4 pa-2>
-                                    <v-select
-                                        :items="appointmentDuration"
-                                        item-value="value"
-                                        item-text="text"
-                                        :label="trans.appointment_duration"
-                                        :color="themeOption.inputColor"
-                                        v-model="selectedEvent.appointment_duration"
-                                        solo box flat>
-                                    </v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm4 pa-2>
-                                    <v-select
-                                        :items="types"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.type}`"
-                                        v-model="selectedEvent.type_id"
-                                        solo box flat
+                                    <v-tab-item
+                                        key="eventImage"
                                     >
-                                    </v-select>
-                                </v-flex>
+                                        <v-layout row wrap pt-3>
+                                            <v-flex xs12 sm4>
+                                                <v-card class="pa-2 my-3">
+                                                    <v-img
+                                                        cover
+                                                        :src="bannerImage|image(themeOption.brandDefaultImage)"
+                                                        aspect-ratio="2.75"
+                                                    ></v-img>
+                                                </v-card>
 
-                                <v-flex xs12 sm8 pa-2>
-                                    <p>{{ trans.greeting }}</p>
-                                    <v-radio-group
-                                        v-model="selectedEvent.greeting"
-                                        :mandatory="false">
-                                        <v-radio :color="themeOption.inputColor"
-                                                 :label="trans.hello"
-                                                 :value="0">
-                                        </v-radio>
+                                                <ImageUpload :preview="false"
+                                                                model="event"
+                                                ></ImageUpload>
+                                            </v-flex>
 
-                                        <v-radio :color="themeOption.inputColor"
-                                                 :label="trans.hi"
-                                                 :value="1">
-                                        </v-radio>
-                                    </v-radio-group>
-                                </v-flex>
-                            </v-layout>
+                                        </v-layout>
+                                    </v-tab-item>
 
-                            <v-layout row wrap>
-                                <v-flex xs12 sm8 pa-2>
-                                    <v-textarea
-                                        :color="themeOption.inputColor"
-                                        :label="trans.notes"
-                                        v-model="selectedEvent.notes"
-                                        :hint="trans.notes"
-                                        solo flat box
-                                    ></v-textarea>
-                                </v-flex>
-                            </v-layout>
-                        </v-card-text>
+                                    <v-tab-item
+                                        key="eventBrand"
+                                    >
+                                        <EventGuest></EventGuest>
+                                    </v-tab-item>
 
-                        <v-layout row wrap v-if="!subComponent">
-                            <v-flex xs12>
-                                <v-card flat>
-                                    <v-card-text>
-                                        <v-tabs
-                                            dark
-                                            :slider-color="themeOption.tabSliderColor"
-                                        >
-                                            <v-tab
-                                                key="eventImage"
-                                                ripple
-                                            >
-                                                {{ `${trans.event} ${trans.banner}`}}
+                                    <v-tab-item
+                                        key="eventGuest"
+                                    >
+                                        <Brand v-if="selectedEvent.id"
+                                                :eventId="selectedEvent.id"
+                                        ></Brand>
+                                    </v-tab-item>
+                                </v-tabs>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
 
-                                            </v-tab>
+                <!-- Dealership Admin can see -->
+                <v-layout row wrap v-if="subComponent && model==='dealership'">
+                    <v-flex xs12>
+                        <v-divider v-if="!subComponent"></v-divider>
 
-                                            <v-tab
-                                                key="eventGuest"
-                                                ripple
-                                            >
-                                                {{ `${trans.guests}` }}
-                                            </v-tab>
+                                <v-tabs
+                                    dark
+                                    :slider-color="themeOption.tabSliderColor"
+                                >
+                                    <v-tab
+                                        key="saleExecutives"
+                                        ripple
+                                    >
+                                        {{ trans.sales_executives }}
+                                    </v-tab>
 
-                                            <v-tab
-                                                key="eventBrand"
-                                                ripple
-                                            >
-                                                {{ `${trans.brands}` }}
-                                            </v-tab>
+                                    <v-tab
+                                        key="vehicle"
+                                        ripple
+                                    >
+                                        {{ trans.vehicles }}
+                                    </v-tab>
 
-                                            <v-tab-item
-                                                key="eventImage"
-                                            >
-                                                <v-layout row wrap pt-3>
-                                                    <v-flex xs12 sm4>
-                                                        <v-card class="pa-2 my-3">
-                                                            <v-img
-                                                                cover
-                                                                :src="bannerImage|image(themeOption.brandDefaultImage)"
-                                                                aspect-ratio="2.75"
-                                                            ></v-img>
-                                                        </v-card>
+                                    <v-tab-item
+                                        key="saleExecutives"
+                                    >
+                                        <EventUsers></EventUsers>
+                                    </v-tab-item>
 
-                                                        <ImageUpload :preview="false"
-                                                                     model="event"
-                                                        ></ImageUpload>
-                                                    </v-flex>
+                                    <v-tab-item
+                                        key="vehicle"
+                                    >
+                                        <vehicle></vehicle>
+                                    </v-tab-item>
+                                </v-tabs>
+                    </v-flex>
+                </v-layout>
 
-                                                </v-layout>
-                                            </v-tab-item>
+                    <v-layout>
 
-                                            <v-tab-item
-                                                key="eventBrand"
-                                            >
-                                                <EventGuest></EventGuest>
-                                            </v-tab-item>
-
-                                            <v-tab-item
-                                                key="eventGuest"
-                                            >
-                                                <Brand v-if="selectedEvent.id"
-                                                       :eventId="selectedEvent.id"
-                                                ></Brand>
-                                            </v-tab-item>
-                                        </v-tabs>
-                                    </v-card-text>
-                                </v-card>
-                            </v-flex>
-                        </v-layout>
-
-                        <!-- Dealership Admin can see -->
-                        <v-layout row wrap v-if="subComponent && model==='dealership'">
-                            <v-flex xs12>
-                                <v-divider v-if="!subComponent"></v-divider>
-
-                                <v-card flat>
-                                    <v-card-text>
-                                        <v-tabs
-                                            dark
-                                            :slider-color="themeOption.tabSliderColor"
-                                        >
-                                            <v-tab
-                                                key="saleExecutives"
-                                                ripple
-                                            >
-                                                {{ trans.sales_executives }}
-                                            </v-tab>
-
-                                            <v-tab
-                                                key="vehicle"
-                                                ripple
-                                            >
-                                                {{ trans.vehicles }}
-                                            </v-tab>
-
-                                            <v-tab-item
-                                                key="saleExecutives"
-                                            >
-                                                <EventUsers></EventUsers>
-                                            </v-tab-item>
-
-                                            <v-tab-item
-                                                key="vehicle"
-                                            >
-                                                <vehicle></vehicle>
-                                            </v-tab-item>
-                                        </v-tabs>
-                                    </v-card-text>
-                                </v-card>
-                            </v-flex>
-                        </v-layout>
-
-
-                        <v-card-actions class="pa-3 justify-center">
+                        <v-flex class="pa-3 justify-center">
                             <r-button :text="`${trans.back}`"
                                       dark
                                       identifier="'eventBack'"
@@ -341,8 +336,8 @@
                                       :loadingBar="true"
                                       @click="onUpdateEvent"
                                       :color="themeOption.buttonDangerColor"/>
-                        </v-card-actions>
-                    </v-card>
+                        </v-flex>
+                    </v-layout>
                 </v-flex>
             </v-layout>
         </v-form>

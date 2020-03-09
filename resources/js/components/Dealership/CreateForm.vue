@@ -41,8 +41,10 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn small
-                       @click="onCreateRelation"
-                       :color="themeOption.buttonPrimaryColor"
+                    dark
+                    @click="onCreateRelation"
+                    class="rounded-btn"
+                    :color="themeOption.buttonPrimaryColor"
                 >{{`${trans.add} ${trans.brand}` }}</v-btn>
             </v-card-actions>
         </v-card>

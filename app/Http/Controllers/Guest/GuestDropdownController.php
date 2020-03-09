@@ -28,7 +28,9 @@ class GuestDropdownController extends Controller
         }
 
         if ($request->has('search') & !empty($request->search)) {
-            $guests = $guests->where('guests.email', 'like', '%'.$request->search.'%');
+            $guests = $guests->where('guests.email', 'like', '%'.$request->search.'%')
+                            ->orWhere('guests.first_name', 'LIKE', '%'.$request->search.'%')
+                            ->orWhere('guests.surname', 'LIKE', '%'.$request->search.'%');
         }
 
         $data = $guests->get();
