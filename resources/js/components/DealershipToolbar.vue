@@ -68,7 +68,7 @@
                                         {{ item.name.charAt(0) }}
                                     </v-list-tile-avatar>
                                     <v-list-tile-content>
-                                        <v-list-tile-title v-text="item.name"></v-list-tile-title>
+                                        <v-list-tile-title  v-html="getNameWithStatus(item)"></v-list-tile-title>
                                         <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
                                     </v-list-tile-content>
                                     <v-list-tile-action>
@@ -86,6 +86,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import fn from '@/utils/function'
 
     export default {
         data() {
@@ -196,6 +197,10 @@
                         guestId: this.selectedGuest.id
                     }
                 })
+            },
+
+            getNameWithStatus(guest){
+                return fn.getGuestNameWithStatus(guest, this.trans)
             }
         }
     }

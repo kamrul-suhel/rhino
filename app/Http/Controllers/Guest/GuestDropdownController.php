@@ -25,17 +25,20 @@ class GuestDropdownController extends Controller
             DB::raw("CONCAT(surname,' ', first_name) as name"),
             'email',
             'event_id',
-            'postcode'
+            'postcode',
+            'status'
         );
-        // If request has eventId, then load specific event guest.
-        if ($request->has('eventId') & !empty($request->eventId)) {
-            $guests = $guests->where('guests.event_id', $request->eventId);
-        }
 
-        if ($request->has('search') & !empty($request->search)) {
-            $guests = $guests->where('guests.email', 'like', '%'.$request->search.'%')
-                            ->orWhere('guests.first_name', 'LIKE', '%'.$request->search.'%')
-                            ->orWhere('guests.surname', 'LIKE', '%'.$request->search.'%');
+        if ($request->has('search') && !empty($request->search)) {
+            $guests = $guests->where(function ($guest) use ($request) {
+                $guest->where('guests.email', 'like', '%' . $request->search . '%')
+                    ->orWhere('guests.first_name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('guests.surname', 'LIKE', '%' . $request->search . '%');
+            });
+        }
+        // If request has eventId, then load specific event guest.
+        if ($request->has('eventId') && !empty($request->eventId)) {
+            $guests = $guests->where('event_id', '=', $request->eventId);
         }
 
         $data = $guests->get();
