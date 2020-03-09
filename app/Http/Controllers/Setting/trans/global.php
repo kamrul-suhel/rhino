@@ -1204,6 +1204,18 @@ return [
     ],
 
     [
+        'label' => 'Your booking is confirmed!',
+        'identifier' => 'yourBookingIsConfirmed',
+        'translation' => 'Your booking is confirmed!'
+    ],
+
+    [
+        'label' => 'We will send you an email confirming your appointment. We look forward to welcoming',
+        'identifier' => 'sendEmailMessage',
+        'translation' => 'We will send you an email confirming your appointment. We look forward to welcoming'
+    ],
+
+    [
         'label' => 'Submit',
         'identifier' => 'submit',
         'translation' => 'Submit'

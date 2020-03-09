@@ -184,6 +184,7 @@
                             <v-flex>
                                 <v-spacer></v-spacer>
                                 <v-btn
+                                    v-if="!subComponent"
                                     class="rounded-btn"
                                     dark
                                     :color="themeOption.buttonSecondaryColor"
@@ -237,6 +238,18 @@
             })
         }),
 
+        props:{
+          subComponent:{
+              type: Boolean,
+              default: false
+          },
+
+          type:{
+              type: String,
+              required: false
+          }
+        },
+
         watch: {},
 
         created() {
@@ -262,7 +275,10 @@
                     })
 
                     // Check if auth user is dealership then get eventId from selected event
-                    if(this.$route.name === 'dealershipAdminBookAGuest'){
+                    if(
+                        this.$route.name === 'dealershipAdminBookAGuest' ||
+                        this.subComponent
+                    ){
                         guestForm.append('event_id', this.selectedEvent.id)
                     }
 
@@ -276,7 +292,10 @@
                             })
 
                             // If request coming from book guest page then return to book guest journey
-                            if(this.$route.name === 'dealershipAdminBookAGuest'){
+                            if(
+                                this.$route.name === 'dealershipAdminBookAGuest' ||
+                                this.subComponent
+                            ){
                                this.$emit('guest', response.data.guest)
                                 return
                             }

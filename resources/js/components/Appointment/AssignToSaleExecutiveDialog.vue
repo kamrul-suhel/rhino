@@ -87,6 +87,7 @@
                 <v-spacer></v-spacer>
                 <v-btn
                     @color="themeOption.primaryColor"
+                    :disabled="!selectedSlot.slotId"
                     flat
                     @click="onAssignAppointment()"
                 >
@@ -166,6 +167,7 @@
             },
 
             selectedDate() {
+                this.selectedSlot = {}
                 this.generateAppointmentSlot()
             }
 
@@ -176,6 +178,7 @@
 
         methods: {
             onSelectSaleExecutive() {
+                this.selectedSlot = {}
                 this.generateAppointmentSlot()
             },
 
@@ -240,7 +243,7 @@
 
             onAssignAppointment() {
                 let appointmentForm = new FormData()
-                appointmentForm.append('delete_vehicle', false) // canceled the appointment
+                appointmentForm.append('delete_vehicle', false) // do not need to update appointment vehicle table
                 _.forOwn(this.appointment, (value, key) => {
                     switch (key) {
                         case 'id':

@@ -73,15 +73,9 @@ const mutations = {
 
                 {
                     text: trans.complete,
-                    align: 'left',
-                    sortable: false,
-                    value: 'complete'
-                },
-                {
-                    text: '',
                     align: 'right',
                     sortable: false,
-                    value: 'action'
+                    value: 'complete'
                 }
             ]
         }else{
@@ -181,7 +175,6 @@ const actions = {
         // Set loading is true
         commit('setGuestLoading', payload.themeOption.loadingColor)
 
-        // Setup header for list view
         // Setup header for list view
         if(payload.eventSale && payload.eventSale !== 'undefined'){
             commit('setGuestListHeader', {trans: payload.trans, eventSale: true})

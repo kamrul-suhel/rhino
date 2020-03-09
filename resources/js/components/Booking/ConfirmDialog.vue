@@ -25,7 +25,7 @@
                 <v-btn
                     @color="themeOption.primaryColor"
                     flat
-                    @click="dialog = false"
+                    @click="onDialogStatusChange()"
                 >
                     {{ trans.ok }}
                 </v-btn>
@@ -66,6 +66,10 @@
         },
 
         methods: {
+            onDialogStatusChange(){
+                this.dialog = false
+
+            }
         }
     }
 </script>

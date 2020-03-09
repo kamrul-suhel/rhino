@@ -79,12 +79,16 @@
                 languages: 'getLanguages',
                 color: 'getFrontendColor',
                 saleExecutives: 'getUsers',
-                vehicleType: 'getBookingVehicleType'
+                vehicleType: 'getBookingVehicleType',
+                isDisable: 'getDisableEditing',
             })
         }),
 
         methods:{
             onSelectSaleExecutive(saleExecutive){
+                if(this.isDisable){
+                    return
+                }
                 this.$store.commit('setBookingSelectedSaleExecutive', saleExecutive)
                 this.$store.commit('updateUserForBooking', saleExecutive)
             },

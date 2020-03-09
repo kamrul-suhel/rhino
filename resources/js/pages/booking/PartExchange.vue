@@ -11,18 +11,21 @@
                             <v-flex>
                                 <h6 class="headline">{{ trans.enterYour }} <b>{{ trans.details }}</b></h6>
                                 <v-text-field class="registration-input mt-4"
+                                              :disabled="isDisable"
                                               :color="color"
                                               v-model="partExchange.registrationNumber"
                                               :placeholder="trans.registrationNumber"
                                 ></v-text-field>
 
                                 <v-text-field class="mt-4"
+                                              :disabled="isDisable"
                                               :color="color"
                                               v-model="partExchange.makeAndModel"
                                               :label="trans.makeAndModel"
                                 ></v-text-field>
 
                                 <v-text-field class="mt-2"
+                                              :disabled="isDisable"
                                               :color="color"
                                               v-model="partExchange.currentMilege"
                                               :label="trans.currentMileage"
@@ -30,6 +33,7 @@
 
                                 <v-layout row>
                                     <v-checkbox class="mt-1" style="flex-grow:0"
+                                                :disabled="isDisable"
                                                 :color="color"
                                                 v-model="partExchange.termCondition"
                                     ></v-checkbox>
@@ -103,12 +107,15 @@
                 themeOption: 'getThemeOption',
                 languages: 'getLanguages',
                 color: 'getFrontendColor',
-                partExchange: 'getBookingPartExchange'
+                partExchange: 'getBookingPartExchange',
+                isDisable: 'getDisableEditing'
             })
         }),
 
         methods: {
             onPartExchangeVehicle() {
+                if(this.isDisable) return
+
                 let partExchange = {
                     ...this.partExchange,
                     vehicleExchange: !this.partExchange.vehicleExchange

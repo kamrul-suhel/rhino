@@ -17,9 +17,6 @@
                 </v-layout>
                 <v-layout row wrap>
                     <v-flex xs12 class="rhino-booking">
-                        <div class="disabled-state" v-if="isDisable">
-                        </div>
-
                         <v-tabs-items
                             touchless
                             v-model="step"

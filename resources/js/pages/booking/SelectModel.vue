@@ -135,6 +135,11 @@
 
         methods: {
             onSelectVehicle(vehicle) {
+                // Check appointment status
+                if(this.isDisable){
+                    return
+                }
+
                 // If vehicle type not select then do not add into vehicle list
                 if (this.vehicleType === '') {
                     return
@@ -144,6 +149,11 @@
             },
 
             onVehicleSelected(vehicle) {
+                // Check appointment status
+                if(this.isDisable){
+                    return
+                }
+
                 if (this.vehicleType === '') {
                     return;
                 }
@@ -159,6 +169,11 @@
             },
 
             onFilterVehicle(type) {
+                // Check appointment status
+                if(this.isDisable){
+                    return
+                }
+
                 this.$store.commit('setBookingVehicleType', type)
                 this.$store.dispatch('fetchEventVehicles', {
                     id: this.selectedEvent.id,
@@ -169,6 +184,22 @@
             },
 
             onContinue() {
+                // Check appointment status
+                if(this.isDisable){
+                    this.$store.commit('setBookingStep', 1)
+                    return
+                }
+
+                // If request from admin, dealership manager or saleexecutive
+                // Saleexecutive already selected & time then do not change timetable
+                if(
+                    this.$route.query.source === 'admin' &&
+                    this.$route.query.type === 'calendar' &&
+                    this.$route.query.redirect === 'calendar'
+                ){
+                    this.$store.commit('setBookingStep', 1)
+                    return
+                }
 
                 // if vehicle selected then load only associate sale executive
                 if(this.selectedVehicles.length > 0){

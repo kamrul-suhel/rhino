@@ -1,6 +1,7 @@
 const defaultState = {
     updateComponent: false,
     appointmentDialog: false,
+    bookAGuestDialog: false,
     appointmentAvailable: false,
     appointmentUnavailable: false,
     appointmentDialogSlot:{}
@@ -17,6 +18,10 @@ const mutations = {
 
     setAppointmentDialog(state, status){
         state.appointmentDialog = status
+    },
+
+    setBookAGuestDialog(state, status){
+        state.bookAGuestDialog = status
     },
 
     setAppointmentAvailable(state, status){
@@ -39,6 +44,10 @@ const getters = {
 
     getAppointmentDialog(state){
         return state.appointmentDialog
+    },
+
+    getBookAGuestDialog(state){
+        return state.bookAGuestDialog
     },
 
     getAppointmentAvailable(state){

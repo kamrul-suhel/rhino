@@ -112,7 +112,9 @@
                 title: 'getNavTitle',
                 selectedEvent: 'getSelectedEvent',
                 selectedDealership: 'getSelectedDealership',
-                eventsForDropDown: 'getEventsForDropDown'
+                eventsForDropDown: 'getEventsForDropDown',
+                downloadBookGuest: 'getDownloadBookGuest',
+                downloadUnBookGuest: 'getDownloadUnBookGuest'
             })
         },
 
@@ -134,6 +136,27 @@
 
             trans(){
                 this.$store.commit('setDealershipNavigation', this.trans)
+            },
+
+            downloadBookGuest(){
+                if(this.downloadBookGuest){
+                    this.downloadType = 'bookedGuest'
+                    this.downloadGuest = true
+                }
+            },
+
+            downloadUnBookGuest(){
+                if(this.downloadUnBookGuest){
+                    this.downloadType = 'unbookedGuest'
+                    this.downloadGuest = true
+                }
+            },
+
+            downloadGuest(){
+                if(!this.downloadGuest){
+                    this.$store.commit('setDownloadUnBookGuest', false)
+                    this.$store.commit('setDownloadBookGuest', false)
+                }
             }
         },
 

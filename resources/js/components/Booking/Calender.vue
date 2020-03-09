@@ -50,6 +50,7 @@
                         full-width
                         no-title
                         reactive
+                        :readonly="isDisable"
                         :color="color"
                         v-model="selectedDate"
                         :allowed-dates="val => allowDates.indexOf(val) !== -1"
