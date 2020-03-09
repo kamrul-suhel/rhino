@@ -2,9 +2,11 @@
     position:relative;
 
     .toggle-nav{
+        cursor: pointer;
         position:absolute;
         top:25%;
         left:20px;
+        z-index: 10;
 
         @media(min-width: 600px){
             top: 32%;
@@ -17,10 +19,9 @@
 
     .brands-carousel{
         position:relative;
-        width: 80px;
-        height: 80px;
+        max-width: 120px;
         border: transparent;
-        border-radius: 50%;
         overflow: hidden;
+        margin: 0 auto;
     }
 }

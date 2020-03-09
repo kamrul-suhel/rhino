@@ -28,6 +28,7 @@
                         :label="`${trans.searchBy} ${trans.guest} ${trans.email}`"
                         open-on-clear
                         return-object
+                        class="search-guests"
                         @change="onSelectGuest()"
                     >
                         <template v-slot:no-data>

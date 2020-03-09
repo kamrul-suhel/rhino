@@ -128,80 +128,85 @@
                     </v-layout>
 
 
-                    <v-layout column wrap>
-                        <v-tabs
-                            v-model="active"
-                            dark
-                            :slider-color="themeOption.tabSliderColor"
-                        >
+                    <v-layout row wrap>
+                        <v-flex xs12>
+                            <v-tabs
+                                v-model="active"
+                                dark
+                                :slider-color="themeOption.tabSliderColor"
 
-                            <v-tab
-                                key="staff"
-                                ripple
                             >
-                                {{ trans.staff }}
-                            </v-tab>
 
-                            <v-tab
-                                key="brands"
-                                v-if="authUser.level === 'admin'"
-                                ripple
-                            >
-                                {{ trans.brands }}
-                            </v-tab>
+                                <v-tab
+                                    key="staff"
+                                    ripple
+                                >
+                                    {{ trans.staff }}
+                                </v-tab>
 
-                            <v-tab
-                                key="times"
-                                ripple
-                            >
-                                {{ trans.opening_times}}
-                            </v-tab>
+                                <v-tab
+                                    key="brands"
+                                    v-if="authUser.level === 'admin'"
+                                    ripple
+                                >
+                                    {{ trans.brands }}
+                                </v-tab>
 
-                            <v-tab-item
-                                key="staff"
-                            >
-                                <v-layout row wrap pt-3>
-                                    <dealership-users></dealership-users>
+                                <v-tab
+                                    key="times"
+                                    ripple
+                                >
+                                    {{ trans.opening_times}}
+                                </v-tab>
 
-                                    <v-flex xs12 sm6 pa-2>
-                                        <v-btn
-                                            :color="themeOption.buttonSuccess"
-                                            small
-                                            @click="$router.push({name: 'createDealershipUser', params: {dealershipId: dealership.id}})"
-                                        >
+                                <v-tabs-items touchless>
+                                    <v-tab-item
+                                        key="staff"
+                                    >
+                                        <v-layout row wrap pt-3>
+                                            <dealership-users></dealership-users>
 
-                                            {{ trans.add }} {{ trans.user }}
-                                        </v-btn>
+                                            <v-flex xs12 sm6 pa-2>
+                                                <v-btn
+                                                    :color="themeOption.buttonSuccess"
+                                                    small
+                                                    @click="$router.push({name: 'createDealershipUser', params: {dealershipId: dealership.id}})"
+                                                >
 
-                                        <v-btn
-                                            :color="themeOption.buttonSuccess"
-                                            small
-                                            @click="onUploadUsers()"
-                                        >
+                                                    {{ trans.add }} {{ trans.user }}
+                                                </v-btn>
 
-                                            {{ trans.upload }} {{ trans.users }}
-                                        </v-btn>
-                                    </v-flex>
-                                </v-layout>
-                            </v-tab-item>
+                                                <v-btn
+                                                    :color="themeOption.buttonSuccess"
+                                                    small
+                                                    @click="onUploadUsers()"
+                                                >
 
-                            <v-tab-item
-                                key="brands"
-                                v-if="authUser.level === 'admin'"
-                            >
-                                <Brands v-if="dealership.id"
-                                        :dealershipId="dealership.id">
-                                </Brands>
-                            </v-tab-item>
+                                                    {{ trans.upload }} {{ trans.users }}
+                                                </v-btn>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-tab-item>
+
+                                    <v-tab-item
+                                        key="brands"
+                                        v-if="authUser.level === 'admin'"
+                                    >
+                                        <Brands v-if="dealership.id"
+                                                :dealershipId="dealership.id">
+                                        </Brands>
+                                    </v-tab-item>
 
 
-                            <v-tab-item
-                                key="times">
-                                <TimePicker :dealership="dealership"
-                                            v-on:sendTimes="updateTimes">
-                                </TimePicker>
-                            </v-tab-item>
-                        </v-tabs>
+                                    <v-tab-item
+                                        key="times">
+                                        <TimePicker :dealership="dealership"
+                                                    v-on:sendTimes="updateTimes">
+                                        </TimePicker>
+                                    </v-tab-item>
+                                </v-tabs-items>
+                            </v-tabs>
+                        </v-flex>
                     </v-layout>
                     <v-divider class="py-3"></v-divider>
                     <v-layout>

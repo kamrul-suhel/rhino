@@ -11,32 +11,32 @@
             wrap
             fill-height
             class="header"
-            pa-5
-            v-if="authUser.level !== 'admin'"
-            :style="{height : `${themeOption.adminHeaderHeight}px`}">
+            v-if="authUser.level !== 'admin'">
 
-            <div>
-                <div class="brands-carousel">
-                    <v-carousel height="80"
+            <v-flex xs12 sm4 >
+                <div class="brands-carousel align-center">
+                    <v-carousel height="120"
                                 hide-controls
-                                hide-delimiters>
+                                hide-delimiters
+                                >
                         <v-carousel-item
                             lazy
                             v-for="(brand,i) in brands"
                             :key="brand.id"
                             :src="brand.logo"
+                            
                         ></v-carousel-item>
                     </v-carousel>
                 </div>
-            </div>
+            </v-flex>
 
-            <div>
+            <v-flex xs12 sm4 my-2>
                 <div class="text-xs-center">
                     <h2>{{ title }}</h2>
                 </div>
-            </div>
+            </v-flex>
 
-            <div>
+            <v-flex xs10 sm4>
                 <v-spacer></v-spacer>
                 <v-layout row>
                     <v-autocomplete
@@ -53,7 +53,7 @@
                         return-object
                     ></v-autocomplete>
                 </v-layout>
-            </div>
+            </v-flex>
         </v-layout>
 
         <v-layout
@@ -63,9 +63,8 @@
             wrap
             fill-height
             class="header"
-            pa-5
             v-if="authUser.level === 'admin'"
-            :style="{height : `${themeOption.adminHeaderHeight}px`}">
+            >
             <v-flex xs12 class="text-xs-center">
                 <h2>{{ title }}</h2>
             </v-flex>
