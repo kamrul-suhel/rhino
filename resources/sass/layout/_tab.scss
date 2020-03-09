@@ -41,7 +41,13 @@
         i {
             margin-right: 1rem;
         }
-        
+
+        .r-tab-title-close{
+            position: absolute;
+            top: 20px;
+            right: 0;
+
+        }
     }
 
     .r-tab-content{

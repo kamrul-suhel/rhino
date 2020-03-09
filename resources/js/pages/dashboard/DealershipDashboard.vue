@@ -63,6 +63,7 @@
                 <v-layout row wrap>
                     <v-flex xs12 sm4>
                         <v-card flat hover
+                                height="136"
                                 @click="onNavigateTo('bookAGuest')"
                                 class="guest-card">
                             <v-card-title class="guest-card-title pb-0">
@@ -72,7 +73,7 @@
                                        src="/images/icons/book_a_guest.jpg"/>
                             </v-card-title>
 
-                            <v-card-text>
+                            <v-card-text class="text-xs-center">
                                 {{ `${trans.book} ${trans.a} ${trans.guest}` }}
                             </v-card-text>
                         </v-card>
@@ -80,6 +81,7 @@
 
                     <v-flex xs12 sm4>
                         <v-card flat hover
+                                height="136"
                                 @click="onNavigateTo('downloadUnbookedGuest')"
                                 class="guest-card">
                             <v-card-title class="guest-card-title pb-0">
@@ -97,6 +99,7 @@
 
                     <v-flex xs12 sm4>
                         <v-card flat hover
+                                height="136"
                                 @click="onNavigateTo('downloadBookedGuest')"
                                 class="guest-card">
                             <v-card-title class="guest-card-title pb-0">
