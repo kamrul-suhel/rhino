@@ -122,8 +122,8 @@
                 },
 
                 set: function (selectedGuest) {
-                    this.guests = []
                     this.$store.commit('setSelectedGuest', selectedGuest)
+                    this.guests = []
                 }
             }
         },

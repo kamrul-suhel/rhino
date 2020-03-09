@@ -160,8 +160,9 @@
                 <div>
                     {{ `${trans.appointment}` }}
                 </div>
-                <div>
+                <div class="r-tab-title-close">
                     <v-icon
+                        @click="onGoBack()"
                         :color="themeOption.adminNavIconColor">close
                     </v-icon>
                 </div>

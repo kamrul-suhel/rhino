@@ -72,7 +72,7 @@
                     <div>
                         {{ `${trans.with} ${trans.a} ${trans.uniqueCode}` }}
                     </div>
-                    <div>
+                    <div class="r-tab-title-close">
                         <v-icon
                             :color="themeOption.adminNavIconColor">close
                         </v-icon>
@@ -99,41 +99,46 @@
 
                                     <v-flex xs12 sm6>
                                         <v-autocomplete
-                                            :items="guests"
-                                            class="eventDropdown"
-                                            :color="themeOption.inputColor"
-                                            append-icon="keyboard_arrow_down"
-                                            item-text="unique"
                                             v-model="selectedGuest"
-                                            flat
+                                            :items="guests"
+                                            :loading="isLoading"
+                                            :color="themeOption.primaryColor"
+                                            :search-input.sync="search"
+                                            clearable
+                                            solo
                                             box
+                                            hide-details
+                                            hide-selected
+                                            item-text="name"
+                                            item-value="symbol"
+                                            :label="`${trans.searchBy} ${trans.guest}`"
+                                            open-on-clear
                                             return-object
                                         >
                                             <template v-slot:no-data>
                                                 <v-list-tile>
                                                     <v-list-tile-title>
-                                                        {{`${trans.no} ${trans.user} ${trans.found}`}}
+                                                        {{ `${trans.searchBy} ${trans.guest}` }}
                                                     </v-list-tile-title>
                                                 </v-list-tile>
                                             </template>
-
                                             <template v-slot:selection="{ item, selected }">
-                                                <span v-text="`${item.first_name}`"></span>
+                                                <span :selected="selected" v-text="item.name"></span>
                                             </template>
-
                                             <template v-slot:item="{ item }">
                                                 <v-list-tile-avatar
                                                     :color="themeOption.primaryColor"
                                                     class="headline font-weight-light white--text"
                                                 >
-                                                    {{ item.first_name.charAt(0) }}
+                                                    {{ item.name.charAt(0) }}
                                                 </v-list-tile-avatar>
-
                                                 <v-list-tile-content>
-                                                    <v-list-tile-title
-                                                        v-text="`${item.surname} ${item.first_name}`"></v-list-tile-title>
+                                                    <v-list-tile-title v-text="item.name"></v-list-tile-title>
                                                     <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
                                                 </v-list-tile-content>
+                                                <v-list-tile-action>
+                                                    <v-icon>mdi-coin</v-icon>
+                                                </v-list-tile-action>
                                             </template>
                                         </v-autocomplete>
                                     </v-flex>
@@ -154,7 +159,6 @@
                 </div>
             </div>
         </v-layout>
-
 
         <v-layout row wrap mt-5 v-if="withoutUnique">
             <CreateGuest @dialogStatus="onDialogStatusChange" @guest="onCreateGuest"></CreateGuest>
@@ -197,7 +201,6 @@
         data() {
             return {
                 dialog: false,
-                loading: false,
                 selectedGuest: null,
                 guests: [],
                 selectedSource: null,
@@ -205,7 +208,9 @@
                 select: null,
                 withUnique: false,
                 withoutUnique: false,
-                showNav: true
+                showNav: true,
+                isLoading: false,
+                search: null
             }
         },
         computed: ({
@@ -220,7 +225,22 @@
         watch: {
             selectedEvent() {
                 this.generateSource()
-            }
+            },
+
+            search(val) {
+                // Lazily load guest items
+                if (this.guests.length > 0) return
+                this.isLoading = true
+                // Lazily load input items
+                const URL = `/api/guests/dropdown?eventId=${this.selectedEvent.id}&search=${val}`
+                axios.get(URL).then((response) => {
+                    if (response.data) {
+                        this.guests = [...response.data.guests]
+                        this.isLoading = false
+                    }
+                })
+
+            },
         },
 
         created() {
@@ -233,14 +253,6 @@
                 let sources = fn.getBookGuestOptions(this.trans)
 
                 this.sources = [...sources]
-
-                if (this.selectedEvent.id) {
-                    // Load all guest by event id
-                    let URL = `/api/guests/?search=true&uniqueId=true&eventId=${this.selectedEvent.id}`
-                    await axios.get(URL).then((response) => {
-                        this.guests = response.data.guests
-                    })
-                }
             },
 
             onGoBack() {
@@ -255,7 +267,7 @@
                 this.withoutUnique = false
             },
 
-            onWithoutUniqueCode(){
+            onWithoutUniqueCode() {
                 this.withUnique = false
                 this.showNav = false
                 this.withoutUnique = true
@@ -289,15 +301,15 @@
                 })
             },
 
-            onDialogStatusChange(status){
+            onDialogStatusChange(status) {
                 this.dialog = status
             },
 
-            onCreateGuest(guest){
+            onCreateGuest(guest) {
                 this.onRedirectToBooking(guest)
             },
 
-            onRedirectToBooking(guest){
+            onRedirectToBooking(guest) {
                 axios.get('/refresh_csrf_token').then((csrfResponse) => {
                     let csrfToken = csrfResponse.data.csrfToken
 
