@@ -3,8 +3,16 @@
 
     .toggle-nav{
         position:absolute;
-        top:20px;
+        top:25%;
         left:20px;
+
+        @media(min-width: 600px){
+            top: 32%;
+        }
+
+        @media(min-width: 1264px){
+            display: none!important;
+        }
     }
 
     .brands-carousel{
@@ -14,17 +22,5 @@
         border: transparent;
         border-radius: 50%;
         overflow: hidden;
-
-        .badge{
-            position: absolute;
-            top: calc(50% - 10px);
-            right: 2px;
-            background: #444;
-            height: 20px;
-            text-align: center;
-            line-height: 20px;
-            width: 20px;
-            border-radius: 50%;
-        }
     }
 }

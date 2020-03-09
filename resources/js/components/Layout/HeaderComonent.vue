@@ -27,11 +27,6 @@
                             :src="brand.logo"
                         ></v-carousel-item>
                     </v-carousel>
-
-                    <div :style="{backgroundColor: getBadgeBackgroundColor(), }"
-                         class="badge">
-                        {{ brands.length }}
-                    </div>
                 </div>
             </div>
 
@@ -155,13 +150,6 @@
                 return false
             },
 
-            getBadgeBackgroundColor(){
-                let color = '#444'
-                if(this.brands.length > 0){
-                    color = this.brands[0].colour
-                }
-                return color
-            }
         }
     }
 </script>
