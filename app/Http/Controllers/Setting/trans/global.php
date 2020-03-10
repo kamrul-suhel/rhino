@@ -199,6 +199,12 @@ return [
         'translation' => 'Event'
     ],
 
+    [
+        'label' => 'At other event',
+        'identifier' => 'atOtherEvent',
+        'translation' => 'At other event'
+    ],
+
 
     [
         'label' => 'Country',

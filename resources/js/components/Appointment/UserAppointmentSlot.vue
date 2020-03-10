@@ -101,7 +101,7 @@
                                 const startTimeStart = new Date(currentSlot.start).getTime()
                                 const startTimeEnd = new Date(currentSlot.end).getTime() - 1000
 
-                                const endTimeStart = new Date(currentSlot.start).getTime() - 1000
+                                const endTimeStart = new Date(currentSlot.start).getTime() + 1000
                                 const endTimeEnd = new Date(currentSlot.end).getTime()
 
                                 const otherAppointmentStart = new Date(otherAppointment.start).getTime()
@@ -110,7 +110,7 @@
                                 if(
                                     otherAppointmentStart >= startTimeStart &&
                                     otherAppointmentStart <= startTimeEnd ||
-                                    otherAppointmentStart >= endTimeStart &&
+                                    otherAppointmentEnd >= endTimeStart &&
                                     otherAppointmentEnd <= endTimeEnd
                                 ){
                                     isSlotAvailable = false
@@ -153,7 +153,7 @@
                             const startTimeStart = new Date(slotInfo.start).getTime()
                             const startTimeEnd = new Date(slotInfo.end).getTime() - 1000
 
-                            const endTimeStart = new Date(slotInfo.start).getTime() - 1000
+                            const endTimeStart = new Date(slotInfo.start).getTime() + 1000
                             const endTimeEnd = new Date(slotInfo.end).getTime()
 
                             const otherAppointmentStart = new Date(otherAppointment.start).getTime()
@@ -162,7 +162,7 @@
                             if(
                                 otherAppointmentStart >= startTimeStart &&
                                 otherAppointmentStart <= startTimeEnd ||
-                                otherAppointmentStart >= endTimeStart &&
+                                otherAppointmentEnd >= endTimeStart &&
                                 otherAppointmentEnd <= endTimeEnd
                             ){
                                 slotInfo = {

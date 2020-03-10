@@ -13,9 +13,8 @@
         </v-flex>
 
         <v-flex xs12 v-else>
-            <div class="appointment-button disable"
-                 @click="onAppointmentDetail()">
-                <span>{{ `cascade with other event`}}</span>
+            <div class="appointment-button disable">
+                <span>{{ trans.atOtherEvent }}</span>
             </div>
         </v-flex>
     </v-layout>
