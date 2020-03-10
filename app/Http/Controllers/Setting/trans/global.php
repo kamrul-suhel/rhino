@@ -279,6 +279,12 @@ return [
     ],
 
     [
+        'label' => 'Sales Made',
+        'identifier' => 'salesMade',
+        'translation' => 'Sales Made'
+    ],
+
+    [
         'label' => 'Completed No Show',
         'identifier' => 'completedNoShow',
         'translation' => 'Completed No Show'
@@ -290,6 +296,11 @@ return [
         'translation' => 'No Show'
     ],
 
+    [
+        'label' => 'Show',
+        'identifier' => 'show',
+        'translation' => 'Show'
+    ],
 
     [
         'label' => 'Unknown',
@@ -1467,6 +1478,34 @@ return [
         'translation' => 'Telephone'
     ],
 
+    [
+        'label' => 'Social Media',
+        'identifier' => 'social_media',
+        'translation' => 'Social Media'
+    ],
 
+    [
+        'label' => 'Walk In',
+        'identifier' => 'walk_in',
+        'translation' => 'Walk-in'
+    ],
+    
+    [
+        'label' => 'SMS',
+        'identifier' => 'sms',
+        'translation' => 'SMS'
+    ],
+
+    [
+        'label' => 'Prospecting',
+        'identifier' => 'prospecting',
+        'translation' => 'Prospecting'
+    ],
+
+    [
+        'label' => 'New Customers',
+        'identifier' => 'new_customers',
+        'translation' => 'New Customers'
+    ],
 
 ];

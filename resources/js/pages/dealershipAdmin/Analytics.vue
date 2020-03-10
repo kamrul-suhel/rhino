@@ -1,21 +1,21 @@
 <template>
-    <v-container fluid px-5>
+    <v-container fluid px-md-5>
         <Overview></Overview>
 
-        <v-layout row v-if="analyticsTotalGuest > 0">
-            <v-flex xs12 sm4 class="text-xs-center graph">
+        <v-layout row wrap v-if="analyticsTotalGuest > 0">
+            <v-flex xs12 sm4 my-4 my-md-0 class="text-xs-center graph">
                 {{ trans.confirmedAppointments }}
                 <span class="graphNumber">{{confirmedPercent}}%</span>
                 <graph :chartData="confirmed" :options="options" :styles="myStyles"></graph>
             </v-flex>
 
-            <v-flex xs12 sm4 class="text-xs-center graph">
+            <v-flex xs12 sm4 my-4 my-md-0 class="text-xs-center graph">
                 {{ trans.appointmentsMade}}
                 <span class="graphNumber">{{madePercent}}%</span>
                 <graph :chartData="made" :options="options" :styles="myStyles"></graph>
             </v-flex>
 
-            <v-flex xs12 sm4 class="text-xs-center graph">
+            <v-flex xs12 sm4 my-4 my-md-0 class="text-xs-center graph">
                 {{ trans.sales}}
                 <span class="graphNumber">{{salesPercent}}%</span>
                 <graph :chartData="sales" :options="options" :styles="myStyles"></graph>
