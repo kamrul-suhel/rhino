@@ -29,7 +29,6 @@ class AppointmentListController extends Controller
         )->leftJoin('guests', 'appointments.guest_id', '=', 'guests.id');
 
         $otherAppointments = clone $appointments;
-        $otherAppointments = $otherAppointments->whereIn('appointments.user_id', $users);
 
         // If saleExecutive property exists in request, then only fetch record for specific sale executive
         if (
@@ -38,6 +37,8 @@ class AppointmentListController extends Controller
         ) {
             $appointments = $appointments->where('appointments.user_id', $request->saleExecutiveId);
             $otherAppointments = $otherAppointments->where('appointments.user_id', $request->saleExecutiveId);
+        }else{
+            $otherAppointments = $otherAppointments->whereIn('appointments.user_id', $users);
         }
 
         // If request has date params, then load only specific date appointment

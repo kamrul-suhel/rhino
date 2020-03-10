@@ -1,6 +1,6 @@
 <template>
     <v-layout row wrap justify-center align-center>
-        <v-flex xs12>
+        <v-flex xs12 v-if="selectedEvent.id === appointment.event_id">
             <div class="appointment-button disable"
                  @click="onAppointmentDetail()">
                 <span v-if="appointment.status === 3">{{ `${trans.not} ${trans.available}`}}</span>
@@ -9,6 +9,13 @@
                     {{ `${trans.confirmed}`}}
                     <span v-if="appointment.guest_id">{{ appointment.guest_first_name }}</span>
                 </span>
+            </div>
+        </v-flex>
+
+        <v-flex xs12 v-else>
+            <div class="appointment-button disable"
+                 @click="onAppointmentDetail()">
+                <span>{{ `cascade with other event`}}</span>
             </div>
         </v-flex>
     </v-layout>
@@ -47,11 +54,13 @@
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
                 selectedUser: 'getSelectedUser',
-                existingAppointments: 'getAppointments'
+                existingAppointments: 'getAppointments',
+                selectedEvent: 'getSelectedEvent'
             })
         }),
 
         created() {
+            console.log('appointment is: ', this.appointment)
         },
 
         methods: {

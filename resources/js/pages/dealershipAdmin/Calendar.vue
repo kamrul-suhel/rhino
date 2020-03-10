@@ -176,6 +176,7 @@
                         </v-flex>
                         <v-flex xs6 class="text-xs-right">
                             <v-btn round
+                                   @click="onDownloadCSV()"
                                    :color="themeOption.adminNavIconColor"
                                    class="ma-0">
                                 <span style="color:#fff;">{{ `${trans.download}` }}</span>
@@ -416,6 +417,23 @@
                     this.allowDates = [...fn.allowedDates(event, dealership)]
                     this.date = this.allowDates[0]
                 }
+            },
+
+            onDownloadCSV(){
+                console.log('service;', this.selectedUser);
+                return
+                const URL = `/api/csv/guests/download?downloadType=${this.downloadType}&eventId=${this.selectedEvent.id}`
+                const fileName = `${this.trans.booked}${this.trans.guest}`
+
+                axios.get(URL).then((response) => {
+                    // Check response success & have some data
+                    if (
+                        response.data.success &&
+                        response.data.guests.length > 0
+                    ) {
+                        return fn.downloadCSV(response.data.guests, fileName)
+                    }
+                })
             }
         }
     }

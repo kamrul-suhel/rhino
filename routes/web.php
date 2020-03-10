@@ -68,6 +68,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
         });
 
         Route::get('{id}/users', function () {
+
             return view('index');
         });
 

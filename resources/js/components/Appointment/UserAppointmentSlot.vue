@@ -2,7 +2,7 @@
     <v-card flat
             tile>
         <v-card-text class="appointmentSlot">
-            <div>{{ appointmentSlot.start|dateFormat('LT', 'en') }} - {{ appointmentSlot.end| dateFormat('LT', 'en')
+            <div>{{ appointmentSlot.start|dateFormat('LT', selectedLanguage.code2) }} - {{ appointmentSlot.end| dateFormat('LT', selectedLanguage.code2)
                 }}
             </div>
         </v-card-text>
@@ -15,7 +15,7 @@
                       align-center>
                 <v-flex xs12>
                     <div class="appointment-button available"
-                         @click="onAppointmentDetail(appointmentSlot, 'available')">Available
+                         @click="onAppointmentDetail(appointmentSlot, 'available')">{{ trans.available }}
                     </div>
                 </v-flex>
             </v-layout>
@@ -66,7 +66,8 @@
                 themeOption: 'getThemeOption',
                 selectedUser: 'getSelectedUser',
                 existingAppointments: 'getAppointments',
-                otherAppointments: 'getOtherAppointments'
+                otherAppointments: 'getOtherAppointments',
+                selectedLanguage: 'getSelectedLanguage'
             })
         }),
 
@@ -92,13 +93,38 @@
                         }
                     })
                 }
+                if(isSlotAvailable){
+                    if(this.otherAppointments.length > 0){
+                        _.map(this.otherAppointments, (otherAppointment) => {
+                            if(otherAppointment.user_id === selectedUser.id){
+
+                                const startTimeStart = new Date(currentSlot.start).getTime()
+                                const startTimeEnd = new Date(currentSlot.end).getTime() - 1000
+
+                                const endTimeStart = new Date(currentSlot.start).getTime() - 1000
+                                const endTimeEnd = new Date(currentSlot.end).getTime()
+
+                                const otherAppointmentStart = new Date(otherAppointment.start).getTime()
+                                const otherAppointmentEnd = new Date(otherAppointment.end).getTime()
+
+                                if(
+                                    otherAppointmentStart >= startTimeStart &&
+                                    otherAppointmentStart <= startTimeEnd ||
+                                    otherAppointmentStart >= endTimeStart &&
+                                    otherAppointmentEnd <= endTimeEnd
+                                ){
+                                    isSlotAvailable = false
+                                }
+                            }
+
+                        })
+                    }
+                }
 
                 return isSlotAvailable
             },
 
             checkOtherAppointments(currentSlot){
-                console.log('check other appointments: ', this.otherAppointments)
-                console.log('slot is: ', currentSlot)
             },
 
             getAppointmentInfo(){
@@ -119,6 +145,34 @@
                         }
                     }
                 })
+
+                if(this.otherAppointments.length > 0){
+                    _.map(this.otherAppointments, (otherAppointment) => {
+                        if(otherAppointment.user_id === selectedUser.id){
+
+                            const startTimeStart = new Date(slotInfo.start).getTime()
+                            const startTimeEnd = new Date(slotInfo.end).getTime() - 1000
+
+                            const endTimeStart = new Date(slotInfo.start).getTime() - 1000
+                            const endTimeEnd = new Date(slotInfo.end).getTime()
+
+                            const otherAppointmentStart = new Date(otherAppointment.start).getTime()
+                            const otherAppointmentEnd = new Date(otherAppointment.end).getTime()
+
+                            if(
+                                otherAppointmentStart >= startTimeStart &&
+                                otherAppointmentStart <= startTimeEnd ||
+                                otherAppointmentStart >= endTimeStart &&
+                                otherAppointmentEnd <= endTimeEnd
+                            ){
+                                slotInfo = {
+                                    ...slotInfo,
+                                    ...otherAppointment
+                                }
+                            }
+                        }
+                    })
+                }
 
                 return slotInfo
             },
