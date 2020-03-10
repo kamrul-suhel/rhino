@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Country;
 
-use App\Country;
-use App\Http\Controllers\Controller;
+use App\Brand;
 use App\Region;
+use App\Country;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CountryController extends Controller
 {
@@ -117,6 +118,16 @@ class CountryController extends Controller
         $request->has('seating_position') ? $country->driver_seating_position = $request->seating_position : null;
         $request->has('status') ? $country->status = $request->status  : $country->status = 0;
         $country->save();
+
+        // Create "no region" for each brand for this country
+        $brands = Brand::all();
+        foreach ($brands as $brand){
+            $region = new Region;
+            $region->brand_id = $brand->id;
+            $region->country_id = $country->id;
+            $region->name = 'No Region';
+            $region->save();
+        }
 
         return $country;
     }

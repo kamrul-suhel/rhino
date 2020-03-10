@@ -104,7 +104,6 @@ const actions = {
         if (!payload.dropDown && typeof(payload.dropDown) === 'undefined') {
             commit('setGroupLoading', payload.themeOption.loadingColor)
 
-            console.log('fecthgroups ', payload)
             // Setup header for list view
             commit('setGroupListHeader', payload.trans)
         }

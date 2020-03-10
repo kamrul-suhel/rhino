@@ -214,7 +214,6 @@
             },
 
             headers(value) {
-                console.log('header is; ', value)
             },
 
             // When language is change it will trigger

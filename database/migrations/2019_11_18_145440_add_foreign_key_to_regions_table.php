@@ -17,7 +17,7 @@ class AddForeignKeyToRegionsTable extends Migration
             $table->foreign('country_id')
                 ->references('id')
                 ->on('countries')
-                ->onDelete('set null');
+                ->onDelete('cascade');
 
             $table->foreign('brand_id')
                 ->references('id')

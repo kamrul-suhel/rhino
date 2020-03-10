@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Brand;
 
 use App\Brand;
+use App\Region;
+use App\Country;
 use App\BrandTranslation;
 use Illuminate\Http\Request;
 use App\Http\Requests\BrandRequest;
@@ -32,6 +34,18 @@ class BrandStoreController extends Controller
         $brandTranslation->brand_id = $brand->id;
         $brandTranslation->language_id = $this->languageId;
         $brandTranslation->save();
+
+        // Create default "No Region" for brand in each country
+        $countries = Country::all();
+        
+        foreach ( $countries as $country){
+            $region = new Region();
+            $region->brand_id = $brand->id;
+            $region->country_id = $country->id;
+            $region->name = 'No Region';
+            $region->save();
+
+        }
 
         return response()->json(['success' => true]);
     }
