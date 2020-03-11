@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Vehicle;
 
 use App\Brand;
+use App\Event;
+use App\EventVehicle;
 use App\Vehicle;
 use App\VehicleTranslation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VehicleRequest;
@@ -107,6 +110,24 @@ class VehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         $vehicle = $this->saveVehicle($request);
+
+        // If newly created vehicle then, attached vehicle to event vehicle table automatically, based on current time
+        if($vehicle){
+            // get All eventId
+            $events = Event::select('id')
+                ->where('start', '>=', Carbon::now())
+                ->get();
+
+            $events->map(function($event) use ($vehicle){
+                $eventVehicle = new EventVehicle();
+                $eventVehicle->event_id = $event->id;
+                $eventVehicle->vehicle_id = $vehicle->id;
+                $eventVehicle->new = 1;
+                $eventVehicle->used = 1;
+                $eventVehicle->save();
+            });
+        }
+
         return response()->json(['success' => true]);
     }
 
@@ -227,6 +248,6 @@ class VehicleController extends Controller
 
         $vehicleTranslation->save();
 
-        return true;
+        return $vehicle;
     }
 }
