@@ -70,12 +70,12 @@
                                     </v-btn>
                                 </v-flex>
 
-                                <v-flex xs12>
-                                    <a @click.stop="onForgotPassword()"
-                                       class="forgot-password">
-                                        {{ trans.forgot }} {{ trans.password}}
-                                    </a>
-                                </v-flex>
+<!--                                <v-flex xs12>-->
+<!--                                    <a @click.stop="onForgotPassword()"-->
+<!--                                       class="forgot-password">-->
+<!--                                        {{ trans.forgot }} {{ trans.password}}-->
+<!--                                    </a>-->
+<!--                                </v-flex>-->
                             </v-layout>
                         </v-container>
                     </v-form>
@@ -164,7 +164,7 @@
                         })
                         .catch(error => {
                             console.log('login error');
-                            
+
                             this.loading = false
                             this.errorLogin = true
                             this.loginProgress = false

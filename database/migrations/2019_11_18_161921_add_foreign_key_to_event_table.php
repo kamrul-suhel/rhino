@@ -14,7 +14,11 @@ class AddForeignKeyToEventTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('types')
+                ->onDelete('set null');
+
             $table->foreign('dealership_id')
                 ->references('id')
                 ->on('dealerships')

@@ -14,8 +14,15 @@ class AddForeignKeyForSettingsTranslationTable extends Migration
     public function up()
     {
         Schema::table('settings_translation', function (Blueprint $table) {
-            $table->foreign('setting_id')->references('id')->on('settings');
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('setting_id')
+                ->references('id')
+                ->on('settings')
+                ->onDelete('cascade');
+
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages')
+                ->onDelete('cascade');
         });
     }
 

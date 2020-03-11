@@ -14,8 +14,15 @@ class AddForeignKeyBetweenDealershipAndUser extends Migration
     public function up()
     {
         Schema::table('dealership_user', function (Blueprint $table) {
-            $table->foreign('dealership_id')->references('id')->on('dealerships');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('dealership_id')
+                ->references('id')
+                ->on('dealerships')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

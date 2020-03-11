@@ -14,18 +14,39 @@ class AddForeignKeyBetweenDealershipAndDealershipTranslation extends Migration
     public function up()
     {
         Schema::table('dealerships', function(Blueprint $table){
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('set null');
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('set null');
+
+            $table->foreign('group_id')
+                ->references('id')
+                ->on('groups')
+                ->onDelete('set null');
         });
 
         Schema::table('dealerships_translation', function (Blueprint $table) {
-            $table->foreign('dealership_id')->references('id')->on('dealerships')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('dealership_id')
+                ->references('id')
+                ->on('dealerships')
+                ->onDelete('cascade');
+
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages')
+                ->onDelete('cascade');
         });
 
         Schema::table('groups_translation', function (Blueprint $table) {
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('group_id')
+                ->references('id')
+                ->on('groups')
+                ->onDelete('cascade');
+
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages')
+                ->onDelete('cascade');
         });
     }
 

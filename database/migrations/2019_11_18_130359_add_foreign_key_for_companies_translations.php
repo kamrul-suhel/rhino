@@ -19,7 +19,10 @@ class AddForeignKeyForCompaniesTranslations extends Migration
                 ->on('companies')
                 ->onDelete('cascade');
 
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages')
+                ->onDelete('cascade');
         });
     }
 

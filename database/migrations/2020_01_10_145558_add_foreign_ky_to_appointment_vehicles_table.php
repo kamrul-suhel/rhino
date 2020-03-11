@@ -22,7 +22,7 @@ class AddForeignKyToAppointmentVehiclesTable extends Migration
             $table->foreign('vehicle_id')
                 ->on('vehicles')
                 ->references('id')
-                ->onDelete('set null');
+                ->onDelete('cascade');
         });
     }
 

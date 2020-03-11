@@ -21,7 +21,8 @@ class AddForeignKeyToAppointmentsTable extends Migration
 
             $table->foreign('user_id')
                 ->on('users')
-                ->references('id');
+                ->references('id')
+                ->onDelete('set null');
 
             $table->foreign('guest_id')
                 ->on('guests')
