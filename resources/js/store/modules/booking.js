@@ -107,7 +107,7 @@ const mutations = {
         const selectedVehicles = [...state.selectedVehicles]
 
         const isExists = _.findIndex(selectedVehicles, (currVehicle) => {
-            return currVehicle.id === vehicle.id
+            return currVehicle.id === vehicle.id && currVehicle.condition === type
         })
 
         if (isExists === -1) {

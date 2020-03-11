@@ -158,9 +158,27 @@
                     return;
                 }
 
+                let type = 1
+                switch (this.vehicleType) {
+                    case 'new':
+                        type = 1
+                        break
+
+                    case 'used':
+                        type = 2
+                        break
+
+                    case 'unsure':
+                        type = 3
+                        break
+                }
+
                 let selected = ''
                 _.map(this.selectedVehicles, (currentVehicle) => {
-                    if (vehicle.id === currentVehicle.id) {
+                    if (
+                        vehicle.id === currentVehicle.id &&
+                        currentVehicle.condition === type
+                    ) {
                         selected = this.color
                     }
                 })
@@ -191,7 +209,7 @@
                 }
 
                 // If request from admin, dealership manager or saleexecutive
-                // Saleexecutive already selected & time then do not change timetable
+                // Sales executive already selected & time then do not change timetable
                 if(
                     this.$route.query.source === 'admin' &&
                     this.$route.query.type === 'calendar' &&
