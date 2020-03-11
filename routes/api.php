@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('settings', 'Setting\SettingController@index');
 Route::get('languages', 'Language\LanguageController@index');
+Route::post('generate-token', 'Auth\GenerateToken@generateToken');
 
 /*
 |--------------------------------------------------------------------------
@@ -61,11 +62,10 @@ Route::prefix('users')->middleware('VerifyJWT')->group(function () {
 */
 
 Route::prefix('settings')->middleware('VerifyJWT')->group(function () {
-    Route::post('add', 'Setting\SettingController@generateDefaultSetting');
+    Route::post('add', 'Setting\SettingController@generateDefaultSetting')->middleware('APIAdminUser');
     Route::get('translations', 'Setting\TranslationController@list');
     Route::put('translations/{id}/update', 'Setting\TranslationStoreController@update');
 });
-
 
 /*
 |--------------------------------------------------------------------------

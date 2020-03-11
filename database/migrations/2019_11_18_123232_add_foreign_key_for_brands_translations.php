@@ -14,12 +14,22 @@ class AddForeignKeyForBrandsTranslations extends Migration
     public function up()
     {
         Schema::table('brands', function(Blueprint $table){
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('set null');
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onDelete('set null');
         });
 
         Schema::table('brands_translation', function (Blueprint $table) {
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('brand_id')
+                ->references('id')
+                ->on('brands')
+                ->onDelete('cascade');
+
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages')
+                ->onDelete('cascade');
         });
     }
 

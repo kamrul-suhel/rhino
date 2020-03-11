@@ -59,7 +59,6 @@
         }),
 
         created() {
-            console.log('appointment is: ', this.appointment)
         },
 
         methods: {

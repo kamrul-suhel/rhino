@@ -14,8 +14,15 @@ class AddForeignKeyToBrandUserTable extends Migration
     public function up()
     {
         Schema::table('brand_user', function (Blueprint $table) {
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('brand_id')
+                ->references('id')
+                ->on('brands')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

@@ -21,7 +21,8 @@ class AddForeignKeyToTypesTranslationTable extends Migration
 
             $table->foreign('language_id')
                 ->references('id')
-                ->on('languages');
+                ->on('languages')
+                ->onDelete('cascade');
         });
     }
 

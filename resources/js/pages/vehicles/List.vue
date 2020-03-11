@@ -17,35 +17,35 @@
                 <div class="r-tab-content" :class="[showForm ? 'open' : '']">
                     <v-container fluid pa-0 grid-list-xl>
                         <v-form
-                        row wrap
-                        ref="vehicleForm"
-                        v-model="valid"
-                        lazy-validation>
+                            row wrap
+                            ref="vehicleForm"
+                            v-model="valid"
+                            lazy-validation>
                             <v-layout row wrap>
                                 <v-flex xs12 sm5 pa-2>
                                     <v-select box
-                                        :items="brands"
-                                        item-text="name"
-                                        item-value="id"
-                                        :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
-                                        :color="themeOption.inputColor"
-                                        :label="`${trans.select_a} ${trans.brand}`"
-                                        v-model="vehicle.brand_id"
-                                        style="width: 70%"
-                                        solo
-                                        flat
+                                              :items="brands"
+                                              item-text="name"
+                                              item-value="id"
+                                              :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                              :color="themeOption.inputColor"
+                                              :label="`${trans.select_a} ${trans.brand}`"
+                                              v-model="vehicle.brand_id"
+                                              style="width: 70%"
+                                              solo
+                                              flat
                                     >
                                     </v-select>
                                 </v-flex>
                                 <v-flex xs12 sm5 pa-2>
                                     <v-text-field box
-                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
-                                        :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
-                                        :color="themeOption.inputColor"
-                                        v-model="vehicle.model"
-                                        style="width: 70%"
-                                        solo
-                                        flat
+                                                  :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
+                                                  :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                                  :color="themeOption.inputColor"
+                                                  v-model="vehicle.model"
+                                                  style="width: 70%"
+                                                  solo
+                                                  flat
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -89,15 +89,15 @@
                             <v-layout>
                                 <v-flex xs12 text-center>
                                     <v-card-actions class="pa-3">
-                                    <v-btn
-                                        dark
-                                        small
-                                        @click="onCreateVehicle()"
-                                        :color="themeOption.buttonDangerColor"
-                                        class="rounded-btn"
-                                    >
-                                        {{ `${trans.submit}` }}
-                                    </v-btn>
+                                        <v-btn
+                                            dark
+                                            small
+                                            @click="onCreateVehicle()"
+                                            :color="themeOption.buttonDangerColor"
+                                            class="rounded-btn"
+                                        >
+                                            {{ `${trans.submit}` }}
+                                        </v-btn>
                                     </v-card-actions>
                                 </v-flex>
                             </v-layout>
@@ -129,7 +129,7 @@
                                     contain
                                     :src="props.item.driver_seating_position_left_image"
                                     aspect-ratio="1"
-                                    >
+                                >
                                 </v-img>
                             </td>
                             <td width="10%">
@@ -137,16 +137,16 @@
                                     contain
                                     :src="props.item.driver_seating_position_right_image"
                                     aspect-ratio="1"
-                                    >
+                                >
                                 </v-img>
                             </td>
                             <td width="20%">{{ props.item.model }}</td>
                             <td v-if="!subComponent">{{ props.item.brand }}</td>
                             <td class="text-xs-right">
                                 <v-icon
-                                small
-                                class="mr-2"
-                                @click.stop="onEditVehicle(props.item)">
+                                    small
+                                    class="mr-2"
+                                    @click.stop="onEditVehicle(props.item)">
                                     edit
                                 </v-icon>
 
@@ -243,15 +243,15 @@
             }
         },
 
-        props:{
-          subComponent: {
-              type: Boolean,
-              default: false
-          },
+        props: {
+            subComponent: {
+                type: Boolean,
+                default: false
+            },
 
-          model: {
-              type: String
-          }
+            model: {
+                type: String
+            }
         },
 
         computed: ({
@@ -275,7 +275,6 @@
             pagination: {
                 handler() {
                     this.initialize();
-                    console.log(this.pagination);
                 }
             },
 
@@ -300,7 +299,7 @@
             initialize() {
 
                 let extraOption = {}
-                if(this.subComponent){
+                if (this.subComponent) {
                     extraOption = {
                         filterBy: this.model,
                         brandId: this.$route.params.id
@@ -313,32 +312,23 @@
 
             onCreateVehicle() {
 
-                console.log('create vehicle');
-
                 if (this.$refs.vehicleForm.validate()) {
-
-                    console.log('Passed validate');
-
                     let vehicleForm = new FormData()
-
-                    this.vehicle.leftImage = this.leftImage;
-                    this.vehicle.rightImage = this.rightImage;
-
                     // Set form object for vehicle
                     _.forOwn(this.vehicle, (value, key) => {
-                            vehicleForm.append(key, value)
+                        vehicleForm.append(key, value)
                     });
 
-                    if(this.subComponent){
+                    vehicleForm.append('leftImage', this.leftImage)
+                    vehicleForm.append('rightImage', this.rightImage)
+
+                    if (this.subComponent) {
                         vehicleForm.append('brand_id', this.$route.params.brandId)
                     }
 
                     // send form data to save
                     axios.post('/api/vehicles', vehicleForm).then((response) => {
                         if (response.data.success) {
-                            console.log('success');
-                            console.log(response.data);
-
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
@@ -348,7 +338,7 @@
                             console.log(this.getPagination());
 
                             this.$store.commit('setUpdateComponent')
-                            
+
                             this.vehicle = {}
                             this.leftImage = ''
                             this.rightImage = ''
@@ -359,14 +349,12 @@
                         }
                     })
                 } else {
-                    console.log('failed validate');
                 }
             },
 
 
-
-            getPagination(){
-                const pagination = {
+            getPagination() {
+                return {
                     ...this.pagination,
                     trans: this.trans,
                     themeOption: this.themeOption,
@@ -374,9 +362,6 @@
                     search: this.searchVehicle,
                     subComponent: this.subComponent,
                 }
-
-                return pagination
-
             },
 
             setLeftImage() {
@@ -385,23 +370,23 @@
                 this.hasLeftImage = true
             },
 
-            setRightImage(){
+            setRightImage() {
                 const image = this.$refs.rightImage.files[0]
                 this.uploadImage(image, 'vehicles', 'rightImage')
                 this.hasRightImage = true
             },
 
-            uploadImage(file, identifier, image){
+            uploadImage(file, identifier, image) {
                 let formData = new FormData()
                 formData.append('file', file)
                 formData.append('model', identifier)
 
                 axios.post('/api/uploadfiles', formData).then((response) => {
-                    if(image === 'leftImage'){
+                    if (image === 'leftImage') {
                         this.leftImage = response.data
                     }
 
-                    if(image === 'rightImage'){
+                    if (image === 'rightImage') {
                         this.rightImage = response.data
                     }
                 })
@@ -409,10 +394,13 @@
 
             onEditVehicle(vehicle) {
                 // $router.push({name: 'editVehicles', params:{id: props.item.id}})
-                if (this.subComponent){
-                    switch(this.model){
+                if (this.subComponent) {
+                    switch (this.model) {
                         case 'brand':
-                            this.$router.push({name: 'editBrandVehicle', params:{brandId: this.$route.params.id, vehicleId: vehicle.id}})
+                            this.$router.push({
+                                name: 'editBrandVehicle',
+                                params: {brandId: this.$route.params.id, vehicleId: vehicle.id}
+                            })
                             break
                     }
 
@@ -426,7 +414,7 @@
                 this.$store.commit('setSelectedVehicle', vehicle)
             },
 
-            onDeleteCancel(){
+            onDeleteCancel() {
                 this.deleteDialog = false
                 this.$refs.createVehicle.resetValidation()
                 this.$store.commit('setSelectedVehicle', {})
