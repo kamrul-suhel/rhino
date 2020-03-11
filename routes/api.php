@@ -38,7 +38,7 @@ Route::prefix('users')->middleware('VerifyJWT')->group(function () {
     Route::post('upload/confirm', 'Auth\UserUploadController@confirmed')->middleware('APIDealershipUser');
     Route::put('{id}', 'Auth\RegisterController@update')->middleware('APIDealershipUser');
     Route::get('', 'Auth\UserListController@list')->middleware('APIDealershipUser');
-    Route::get('{id}/show', 'Auth\UserShowController@show')->middleware('APIAdminUser');
+    Route::get('{id}/show', 'Auth\UserShowController@show')->middleware('APIDealershipUser');
     Route::get('dropdown', 'Auth\UserDropdownController@list')->middleware('APIDealershipUser');
     Route::delete('{id}', 'Auth\UserDeleteController@destroy')->middleware('APIDealershipUser');
     Route::post('{id}/updatepassword', 'Auth\ResetPasswordController@changePassword')->middleware('APIDealershipUser');
@@ -128,15 +128,18 @@ Route::prefix('companies')->middleware('VerifyJWT')->group(function () {
 |
 */
 
-Route::prefix('brands')->middleware('VerifyJWT')->group(function () {
-    Route::get('', 'Brand\BrandController@index');
-    Route::get('dropdown', 'Brand\BrandDropDownController@getBrandsForDropDown');
-    Route::post('', 'Brand\BrandStoreController@store');
-    Route::get('{id}/show', 'Brand\BrandController@show');
-    Route::put('{id}/update', 'Brand\BrandStoreController@update');
-    Route::delete('{id}/delete', 'Brand\BrandController@destroy');
-    Route::get('{id}/regions', 'Brand\BrandRegionController@getRegions');
+Route::prefix('brands')->group(function () {
     Route::get('sales_executive/{eventId}/{dealershipId}', 'Brand\BrandSaleExecutive@getSaleExecutives');
+
+    Route::middleware('VerifyJWT')->group(function(){
+        Route::get('', 'Brand\BrandController@index');
+        Route::get('dropdown', 'Brand\BrandDropDownController@getBrandsForDropDown');
+        Route::post('', 'Brand\BrandStoreController@store');
+        Route::get('{id}/show', 'Brand\BrandController@show');
+        Route::put('{id}/update', 'Brand\BrandStoreController@update');
+        Route::delete('{id}/delete', 'Brand\BrandController@destroy');
+        Route::get('{id}/regions', 'Brand\BrandRegionController@getRegions');
+    });
 });
 
 /*
@@ -329,7 +332,7 @@ Route::prefix('uploadfiles')->middleware('VerifyJWT')->group(function () {
 */
 
 Route::prefix('booking')->group(function(){
-    Route::post('', 'Booking\BookingStoreController@store')->middleware('VerifyJWT');
+    Route::post('', 'Booking\BookingStoreController@store');
     Route::get('{uniqueId}', 'Booking\BookingController@getData');
     Route::post('{saleExecutive}/availability', 'Booking\CheckSaleExecutiveAvailability@check');
 });

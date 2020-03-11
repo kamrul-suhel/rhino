@@ -17,8 +17,8 @@ class CreateBrandUserTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('brand_id')->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->boolean('new');
-            $table->boolean('used');
+            $table->boolean('new')->default(1);
+            $table->boolean('used')->default(1);
             $table->timestamps();
         });
     }

@@ -60,6 +60,7 @@
             <v-form ref="brandUserForm"
                     v-model="valid"
                     lazy-validation
+                    class="pl-2"
             >
                 <v-card>
                     <v-card-title>
@@ -170,7 +171,7 @@
 
                 this.$store.dispatch('fetchSpecializeBrandByDealershipId', paginateOption)
                 }
-            
+
             },
 
             fetchBrandByDealership() {
@@ -183,7 +184,7 @@
                     themeOption: this.themeOption
                 })
                 }
-            
+
             },
 
             updateBrandDropdown() {
@@ -245,7 +246,9 @@
                             const brand = {
                                 ...response.data.brand,
                                 brand_name: this.selectedBrand.brand,
-                                user_name: null
+                                user_name: null,
+                                new: 1,
+                                used: 1
                             }
 
                             this.updateRecord(brand, true)

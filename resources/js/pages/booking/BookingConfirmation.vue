@@ -73,62 +73,6 @@
                                 pa-2
                                 v-else>
                             <v-layout row wrap>
-                                <div class="booking-confirmed">
-                                    <h1>{{ trans.yourBookingIsConfirmed }}</h1>
-                                    <p>{{ trans.sendEmailMessage }}</p>
-                                </div>
-
-                                <v-flex xs12>
-                                    <v-layout row wrap>
-                                        <v-flex xs6 sm3>
-                                            <v-layout justify-center row wrap>
-                                                <v-flex xs12 class="text-xs-center">
-                                                    <v-icon
-                                                        color="grey"
-                                                        medium dark>access_time
-                                                    </v-icon>
-                                                </v-flex>
-
-                                                <v-flex xs12 mt-2>
-                                                    <h6 class="xs12 body-2 text-xs-center">
-                                                        {{ trans.time }}
-                                                    </h6>
-                                                </v-flex>
-
-                                                <v-flex xs12>
-                                                    <h6 class="xs12 body-1 text-xs-center">
-                                                        {{ slot.start|dateFormat('LT') }} to {{
-                                                        slot.end|dateFormat('LT')}}
-                                                    </h6>
-                                                </v-flex>
-                                            </v-layout>
-                                        </v-flex>
-
-                                        <v-flex xs6 sm3>
-                                            <v-layout justify-center row wrap>
-                                                <v-flex xs12 class="text-xs-center">
-                                                    <v-icon
-                                                        color="grey"
-                                                        medium dark>person
-                                                    </v-icon>
-                                                </v-flex>
-
-                                                <v-flex xs12 mt-2>
-                                                    <h6 class="xs12 body-2 text-xs-center">
-                                                        {{ `${trans.sales} ${trans.person}`}}
-                                                    </h6>
-                                                </v-flex>
-
-                                                <v-flex xs12>
-                                                    <h6 class="xs12 body-1 text-xs-center">
-                                                        {{ saleExecutive.firstname }}
-                                                    </h6>
-                                                </v-flex>
-                                            </v-layout>
-                                        </v-flex>
-                                    </v-layout>
-                                </v-flex>
-
                                 <v-flex xs12 v-if="!isDisable">
                                     <v-card>
                                         <v-card-text>

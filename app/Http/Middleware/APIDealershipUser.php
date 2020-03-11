@@ -26,6 +26,7 @@ class APIDealershipUser
 
         if ($authUser->level === 'dealership') {
             $dealershipId = null;
+            return $next($request);
             if(
             $request->has('dealershipId') &&
                 !empty($request->dealershipId))
