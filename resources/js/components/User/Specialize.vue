@@ -31,7 +31,7 @@
 
                             <td class="text-xs-center">
                                 <v-checkbox
-                                    class="eventVehicleSwitch"
+                                    class="eventVehicleSwitch mx-auto"
                                     :false-value="0"
                                     :true-value="1"
                                     :color="themeOption.inputColor"
@@ -139,6 +139,15 @@
 
             specializeBrands() {
                 this.updateBrandDropdown()
+            },
+
+            user(){
+                this.initialize()
+                this.fetchBrandByDealership()
+            },
+
+            brands(){
+                this.updateBrandDropdown()
             }
         },
 
@@ -149,7 +158,8 @@
         methods: {
             // Initialize data when first render
             initialize() {
-                const paginateOption = {
+                if(this.user){
+                    const paginateOption = {
                     ...this.pagination,
                     trans: this.trans,
                     themeOption: this.themeOption,
@@ -159,16 +169,21 @@
                 }
 
                 this.$store.dispatch('fetchSpecializeBrandByDealershipId', paginateOption)
+                }
+            
             },
 
             fetchBrandByDealership() {
-                const dealershipId = this.user.dealership_id
+                if(this.user){
+                    const dealershipId = this.user.dealership_id
 
                 this.$store.dispatch('fetchBrandsByDealershipId', {
                     dealershipId: dealershipId,
                     trans: this.trans,
                     themeOption: this.themeOption
                 })
+                }
+            
             },
 
             updateBrandDropdown() {

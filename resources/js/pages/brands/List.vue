@@ -81,7 +81,7 @@
                         <v-flex xs12 sm4 class="ml-5">
                             <span>{{trans.logo}}</span>
 
-                            <v-img
+                            <v-img class="my-2" 
                                 :src="brandImage"
                                 width="200"
                             ></v-img>
@@ -123,7 +123,7 @@
                 >
                     <template v-slot:items="props">
                         <tr @click="onEditBrand(props.item)">
-                            <td width="25%">
+                            <td width="25%" class="py-2">
                                 <v-img
                                     v-if="props.item.logo"
                                     contain
