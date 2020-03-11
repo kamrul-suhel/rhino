@@ -67,7 +67,6 @@ Route::prefix('settings')->middleware('VerifyJWT')->group(function () {
     Route::put('translations/{id}/update', 'Setting\TranslationStoreController@update');
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | API Route for Dealership
