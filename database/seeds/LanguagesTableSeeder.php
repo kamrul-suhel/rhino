@@ -24,21 +24,5 @@ class LanguagesTableSeeder extends Seeder
             'status'    => 1,
             'name'   => 'English (UK)'
         ]);
-        
-
-        Languages::create([
-            'code2'    => 'US',
-            'code3'    => 'USA',
-            'status'    => 1,
-            'name'   => 'English (US)'
-        ]);
-
-        
-        Languages::create([
-            'code2'    => 'FR',
-            'code3'    => 'FRA',
-            'status'    => 1,
-            'name'   => 'French'
-        ]);
     }
 }
