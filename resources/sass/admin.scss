@@ -10,7 +10,7 @@
         height: unset!important;
 
         @media (min-height: 660px){
-            height: 120px;
+            min-height: 120px;
         }
     }
 }
