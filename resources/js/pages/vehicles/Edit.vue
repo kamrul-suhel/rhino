@@ -53,8 +53,9 @@
                                             <label class="mb-3">{{ `${trans.left_hand_drive_image}` }}</label>
                                             <v-card class="pa-2 my-3">
                                                 <v-img
+                                                    contain
+                                                    aspect-ratio="2.2"
                                                     :src="leftImage"
-                                                    aspect-ratio="2.75"
                                                 ></v-img>
                                             </v-card>
 
@@ -74,8 +75,9 @@
                                             <label for="">{{`${trans.right_hand_drive_image}`}} </label>
                                             <v-card class="pa-2 my-3">
                                                 <v-img
+                                                    aspect-ratio="2.2"
+                                                    contain
                                                     :src="rightImage"
-                                                    aspect-ratio="2.75"
                                                 ></v-img>
                                             </v-card>
 
@@ -199,13 +201,13 @@
                 if (this.$refs.vehicleForm.validate()) {
                     let vehicleForm = new FormData()
 
-                    this.vehicle.leftImage = this.leftImage;
-                    this.vehicle.rightImage = this.rightImage;
-
                     // Set form object for vehicle
                     _.forOwn(this.vehicle, (value, key) => {
                         vehicleForm.append(key, value)
                     })
+
+                    vehicleForm.append('leftImage', this.leftImage)
+                    vehicleForm.append('rightImage', this.rightImage)
 
                     vehicleForm.append('_method', 'put')
 
@@ -220,6 +222,7 @@
                             })
                         }
                     }).catch((error) => {
+                        this.$store.commit('setAppErrorMessages', error)
                     })
                 }
             },

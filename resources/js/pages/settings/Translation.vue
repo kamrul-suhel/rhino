@@ -13,8 +13,7 @@
             <v-flex xs12 sm6>
                 <v-layout row wrap justify-end align-content-end>
                     <v-flex xs12 sm8>
-                        <LanguagePicker :languageId="selectedLanguage.id"
-                                        :solo="false"
+                        <LanguagePicker :solo="false"
                                         :flat="false"
                                         :chip="false"
                                         model="translation">
@@ -164,7 +163,6 @@
             },
 
             save (settingTranslation) {
-                console.log('setting is; ', settingTranslation)
                 const translationId = settingTranslation.setting_translation_id
                 let translationForm = new FormData()
                 translationForm.append('setting_translation_id', translationId)

@@ -19,8 +19,10 @@ class TranslationStoreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $settingTranslation = SettingTranslation::findOrFail($id);
+        $settingTranslation = $request->setting_translation_id === 'null' ? new SettingTranslation() : SettingTranslation::find($id);
         $request->has('translation') ? $settingTranslation->translation = $request->translation : null;
+        $request->has('setting_id') ? $settingTranslation->setting_id = $request->setting_id : null;
+        $request->has('language_id') ? $settingTranslation->language_id = $request->language_id : null;
 
         $settingTranslation->save();
 

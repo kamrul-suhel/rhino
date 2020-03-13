@@ -29,6 +29,7 @@ class BrandSaleExecutive extends Controller
             ->where('event_user.event_id', $eventId)
             ->with('specializeBrands')
             ->where('users.dealership_id', $dealershipId)
+            ->groupBy('users.id')
             ->get();
 
         return response()->json([
