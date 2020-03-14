@@ -11,8 +11,7 @@
             <v-layout row nowrap class="mt-4 mx-1">
                 <v-flex>
                     <label class="body-2">
-                        {{ trans.available }}
-                        {{ trans.dates }}
+                        {{ trans.availableDates }}
                     </label>
                 </v-flex>
 
@@ -22,9 +21,7 @@
 
                 <v-flex ml-2>
                     <label class="body-2">
-                        {{ trans.no }}
-                        {{ trans.available }}
-                        {{ trans.times }}
+                        {{ trans.notAvailableDates }}
                     </label>
                 </v-flex>
 

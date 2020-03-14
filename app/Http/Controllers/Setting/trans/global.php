@@ -1,6 +1,392 @@
 <?php
 return [
     [
+        'label' => 'Appointments by online registration',
+        'identifier' => 'appointmentsByOnlineRegistration',
+        'translation' => 'Appointments by online registration'
+    ],
+
+    [
+        'label' => 'Appointments by telephone',
+        'identifier' => 'appointmentsByTelephone',
+        'translation' => 'Appointments by telephone'
+    ],
+
+    [
+        'label' => 'Appointments by email',
+        'identifier' => 'appointmentsByEmail',
+        'translation' => 'Appointments by email'
+    ],
+
+    [
+        'label' => 'Appointments by social media',
+        'identifier' => 'appointmentsBySocialMedia',
+        'translation' => 'Appointments by social media'
+    ],
+
+    [
+        'label' => 'Appointments by walk-in',
+        'identifier' => 'appointmentsByWalkIn',
+        'translation' => 'Appointments by walk-in'
+    ],
+
+    [
+        'label' => 'Appointments by SMS',
+        'identifier' => 'appointmentsBySms',
+        'translation' => 'Appointments by SMS'
+    ],
+
+    [
+        'label' => 'Appointments by prospecting',
+        'identifier' => 'appointmentsByProspecting',
+        'translation' => 'Appointments by prospecting'
+    ],
+
+    [
+        'label' => 'Appointments confirmed',
+        'identifier' => 'appointmentsConfirmed',
+        'translation' => 'Appointments confirmed'
+    ],
+
+    [
+        'label' => 'Appointments show',
+        'identifier' => 'appointmentsShow',
+        'translation' => 'Appointments show'
+    ],
+
+    [
+        'label' => 'Appointments no show',
+        'identifier' => 'appointmentsNoShow',
+        'translation' => 'Appointments no show'
+    ],
+
+    [
+        'label' => 'Select date',
+        'identifier' => 'selectDate',
+        'translation' => 'Select date'
+    ],
+
+    [
+        'label' => 'Not available',
+        'identifier' => 'notAvailable',
+        'translation' => 'Not available'
+    ],
+
+    [
+        'label' => 'Select sales executive',
+        'identifier' => 'selectSalesExecutive',
+        'translation' => 'Select sales executive'
+    ],
+
+    [
+        'label' => 'Book without unique code',
+        'identifier' => 'bookWithoutUniqueCode',
+        'translation' => 'Book without unique code'
+    ],
+
+    [
+        'label' => 'Book with unique code',
+        'identifier' => 'bookWithUniqueCode',
+        'translation' => 'Book with unique code'
+    ],
+
+    [
+        'label' => 'Book a guest',
+        'identifier' => 'bookAGuest',
+        'translation' => 'Book a guest'
+    ],
+
+    [
+        'label' => 'Select source',
+        'identifier' => 'selectSource',
+        'translation' => 'Select source'
+    ],
+
+    [
+        'label' => 'Search guest by email',
+        'identifier' => 'searchGuestByEmail',
+        'translation' => 'Search guest by email'
+    ],
+
+    [
+        'label' => 'Search by guest',
+        'identifier' => 'searchByGuest',
+        'translation' => 'Search by guest'
+    ],
+
+    [
+        'label' => 'Remove break time',
+        'identifier' => 'removeBreakTime',
+        'translation' => 'Remove break time'
+    ],
+
+    [
+        'label' => 'Remove not available',
+        'identifier' => 'removeNotAvailable',
+        'translation' => 'Remove not available'
+    ],
+
+    [
+        'label' => 'Assign to sales executive',
+        'identifier' => 'assignToSalesExecutive',
+        'translation' => 'Assign to sales executive'
+    ],
+
+    [
+        'label' => 'Cancel appointment',
+        'identifier' => 'cancelAppointment',
+        'translation' => 'Cancel appointment'
+    ],
+
+    [
+        'label' => 'Sales person',
+        'identifier' => 'salesPerson',
+        'translation' => 'Sales person'
+    ],
+
+    [
+        'label' => 'Available dates',
+        'identifier' => 'availableDates',
+        'translation' => 'Available dates'
+    ],
+
+    [
+        'label' => 'Not available dates',
+        'identifier' => 'notAvailableDates',
+        'translation' => 'Not available dates'
+    ],
+
+    [
+        'label' => 'Choose a',
+        'identifier' => 'chooseA',
+        'translation' => 'Choose a'
+    ],
+
+    [
+        'label' => 'Guest name',
+        'identifier' => 'guestName',
+        'translation' => 'Guest name'
+    ],
+
+    [
+        'label' => 'Create region',
+        'identifier' => 'createRegion',
+        'translation' => 'Create region'
+    ],
+
+    [
+        'label' => 'Region name',
+        'identifier' => 'regionName',
+        'translation' => 'Region name'
+    ],
+
+    [
+        'label' => 'User successfully remove from event',
+        'identifier' => 'userSuccessFullyRemoveFromEvent',
+        'translation' => 'User successfully remove from event'
+    ],
+
+    [
+        'label' => 'No brand found',
+        'identifier' => 'noBrandFound',
+        'translation' => 'No brand found'
+    ],
+
+    [
+        'label' => 'No brands found',
+        'identifier' => 'noBrandsFound',
+        'translation' => 'No brands found'
+    ],
+
+    [
+        'label' => 'Select a brand',
+        'identifier' => 'selectABrand',
+        'translation' => 'Select a brand'
+    ],
+
+    [
+        'label' => 'Select a region',
+        'identifier' => 'selectARegion',
+        'translation' => 'Select A region'
+    ],
+
+    [
+        'label' => 'Add brand',
+        'identifier' => 'addBrand',
+        'translation' => 'Add brand'
+    ],
+
+    [
+        'label' => 'No users found',
+        'identifier' => 'noUsersFound',
+        'translation' => 'No users found'
+    ],
+
+    [
+        'label' => 'Upload image',
+        'identifier' => 'uploadImage',
+        'translation' => 'Upload image'
+    ],
+
+    [
+        'label' => 'Upload guests',
+        'identifier' => 'uploadGuests',
+        'translation' => 'Upload guests'
+    ],
+
+    [
+        'label' => 'Upload CSV',
+        'identifier' => 'uploadCsv',
+        'translation' => 'Upload CSV'
+    ],
+
+    [
+        'label' => 'Guests successfully uploaded',
+        'identifier' => 'guestSuccessfullyUploaded',
+        'translation' => 'Guests successfully uploaded'
+    ],
+
+    [
+        'label' => 'Guests successfully updated',
+        'identifier' => 'guestSuccessfullyUpdated',
+        'translation' => 'Guests successfully updated'
+    ],
+
+    [
+        'label' => 'Booked guest',
+        'identifier' => 'bookedGuest',
+        'translation' => 'Booked guest'
+    ],
+
+    [
+        'label' => 'Brand successfully updated',
+        'identifier' => 'brandSuccessfullyUpdated',
+        'translation' => 'Brand successfully updated'
+    ],
+
+    [
+        'label' => 'Brand successfully added',
+        'identifier' => 'brandSuccessfullyAdded',
+        'translation' => 'Brand successfully added'
+    ],
+
+    [
+        'label' => 'Brand successfully removed',
+        'identifier' => 'brandSuccessfullyRemoved',
+        'translation' => 'Brand successfully removed'
+    ],
+
+    [
+        'label' => 'Upload users',
+        'identifier' => 'uploadUsers',
+        'translation' => 'Upload users'
+    ],
+
+    [
+        'label' => 'Guests successfully uploaded',
+        'identifier' => 'guestsSuccessfullyUploaded',
+        'translation' => 'Guests successfully uploaded'
+    ],
+
+    [
+        'label' => 'Select A country',
+        'identifier' => 'selectACountry',
+        'translation' => 'Select a country'
+    ],
+
+    [
+        'label' => 'Select A time',
+        'identifier' => 'selectATime',
+        'translation' => 'Select a time'
+    ],
+
+    [
+        'label' => 'No vehicle selected',
+        'identifier' => 'noVehicleSelected',
+        'translation' => 'No vehicle selected'
+    ],
+
+    [
+        'label' => 'Your models of interest',
+        'identifier' => 'yourModelsOfInterest',
+        'translation' => 'Your models of interest'
+    ],
+
+    [
+        'label' => 'Your model of interest',
+        'identifier' => 'yourModelOfInterest',
+        'translation' => 'Your model of interest'
+    ],
+
+    [
+        'label' => 'Part exchange details',
+        'identifier' => 'partExchangeDetails',
+        'translation' => 'Part exchange details'
+    ],
+
+    [
+        'label' => 'Confirm your details',
+        'identifier' => 'confirmYourDetails',
+        'translation' => 'Confirm your details'
+    ],
+
+    [
+        'label' => 'Email address',
+        'identifier' => 'emailAddress',
+        'translation' => 'Email address'
+    ],
+
+    [
+        'label' => 'Mailing address',
+        'identifier' => 'mailingAddress',
+        'translation' => 'Mailing address'
+    ],
+
+    [
+        'label' => 'Edit details',
+        'identifier' => 'editDetails',
+        'translation' => 'Edit details'
+    ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // =======================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [
         'label' => 'Home',
         'identifier' => 'home',
         'translation' => 'Home'
@@ -330,6 +716,12 @@ return [
         'label' => 'Select A',
         'identifier' => 'select_a',
         'translation' => 'Select A'
+    ],
+
+    [
+        'label' => 'Select A brand',
+        'identifier' => 'selectABrand',
+        'translation' => 'Select A brand'
     ],
 
     [
@@ -1489,7 +1881,7 @@ return [
         'identifier' => 'walk_in',
         'translation' => 'Walk-in'
     ],
-    
+
     [
         'label' => 'SMS',
         'identifier' => 'sms',

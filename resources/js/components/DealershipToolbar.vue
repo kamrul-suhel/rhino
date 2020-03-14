@@ -45,7 +45,7 @@
                                 hide-selected
                                 item-text="email"
                                 item-value="symbol"
-                                :label="`${trans.searchBy} ${trans.guest} ${trans.email}`"
+                                :label="`${trans.searchGuestByEmail}`"
                                 open-on-clear
                                 return-object
                                 @change="onSelectGuest()"
@@ -53,7 +53,7 @@
                                 <template v-slot:no-data>
                                     <v-list-tile>
                                         <v-list-tile-title>
-                                            {{ `${trans.searchBy} ${trans.guest}` }}
+                                            {{ `${trans.searchByGuest}` }}
                                         </v-list-tile-title>
                                     </v-list-tile>
                                 </template>

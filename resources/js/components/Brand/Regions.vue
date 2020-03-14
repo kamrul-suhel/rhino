@@ -10,7 +10,7 @@
                     </div>
 
                     <div>
-                        {{ `${trans.create} ${trans.region}` }}
+                        {{ `${trans.createRegion}` }}
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                                 <v-flex xs12 sm3 px-2>
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.region} ${trans.name} ${trans.is_required}`]"
-                                        :label="`${trans.region} ${trans.name}`"
+                                        :label="`${trans.regionName}`"
                                         v-model="selectedRegion.name"
                                         :color="themeOption.inputColor"
                                         box solo flat>
@@ -51,7 +51,7 @@
                                         class="rounded-btn"
                                         @click="onCreateRegion()"
                                         :color="themeOption.buttonDangerColor">
-                                        {{ editRegion ? `${trans.update}` : `${trans.add} ${trans.region}` }}
+                                        {{ editRegion ? `${trans.update}` : `${trans.add}` }}
                                     </v-btn>
                                 </v-flex>
                             </v-layout>

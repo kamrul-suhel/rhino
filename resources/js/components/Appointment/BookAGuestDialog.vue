@@ -10,7 +10,7 @@
                 primary-title
             >
                 <span :style="{color: themeOption.primaryTextColor}">
-                    {{ `${trans.book} ${trans.a} ${trans.guest}` }}
+                    {{ `${trans.bookAGuest}` }}
                 </span>
             </v-card-title>
 
@@ -24,7 +24,7 @@
                                 :items="sources"
                                 item-text="text"
                                 item-value="value"
-                                :label="`${trans.select} ${trans.source}`"
+                                :label="`${trans.selectSource}`"
                             ></v-select>
                         </v-flex>
 
@@ -40,7 +40,7 @@
                                 hide-selected
                                 item-text="email"
                                 item-value="symbol"
-                                :label="`${trans.searchBy} ${trans.guest} ${trans.email}`"
+                                :label="`${trans.searchGuestByEmail}`"
                                 open-on-clear
                                 return-object
                                 @change="onSelectGuest()"
@@ -48,7 +48,7 @@
                                 <template v-slot:no-data>
                                     <v-list-tile>
                                         <v-list-tile-title>
-                                            {{ `${trans.searchBy} ${trans.guest}` }}
+                                            {{ `${trans.searchByGuest}` }}
                                         </v-list-tile-title>
                                     </v-list-tile>
                                 </template>

@@ -8,8 +8,8 @@
                         :items="specializeBrands"
                         disable-initial-sort
                         :pagination.sync="pagination"
-                        :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                        :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                        :no-results-text="`${trans.noBrandsFound}`"
+                        :no-data-text="`${trans.noBrandsFound}`"
                         :rows-per-page-text="trans.rows_per_page"
                         :rows-per-page-items="rowsPerPage"
                         :total-items="totalSpecializeBrands"
@@ -64,7 +64,7 @@
             >
                 <v-card>
                     <v-card-title>
-                        <h3>{{ `${trans.add} ${trans.brand}` }}</h3>
+                        <h3>{{ `${trans.addBrand}` }}</h3>
                     </v-card-title>
 
                     <v-divider></v-divider>
@@ -72,11 +72,11 @@
                     <v-card-text>
                         <v-layout row wrap>
                             <v-flex xs12>
-                                <v-select :label="`${trans.select_a} ${trans.brand}`"
+                                <v-select :label="`${trans.selectABrand}`"
                                           :color="themeOption.inputColor"
                                           :items="availableBrands"
                                           item-text="brand"
-                                          :rules="[v => !!v || `${trans.select_a} ${trans.brand}`]"
+                                          :rules="[v => !!v || `${trans.selectABrand}`]"
                                           required
                                           v-model="selectedBrand"
                                           return-object
@@ -94,7 +94,7 @@
                                :color="themeOption.buttonSuccess"
                                class="rounded-btn"
                         >
-                            {{ `${trans.add} ${trans.brand}` }}
+                            {{ `${trans.addBrand}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -218,7 +218,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.brand} ${this.trans.successfully_updated}`
+                            message: `${this.trans.brandSuccessfullyUpdated}`
                         })
                     }
                 })
@@ -261,7 +261,7 @@
                 // Update add brand reset
                 this.$refs.brandUserForm.reset()
 
-                const message = `${this.trans.brand} ${add ? this.trans.successfully_added : this.trans.successfully_removed}`
+                const message = `${add ? this.trans.brandSuccessfullyAdded : this.trans.brandSuccessfullyRemoved}`
                 this.$store.commit('setSnackbarMessage', {
                     openMessage: true,
                     timeOut: this.themeOption.snackBarTimeout,

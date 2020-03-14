@@ -4,7 +4,7 @@
               align-center>
         <v-flex xs12>
             <h6 class="headline text-xs-center">
-                {{ `${trans.choose} ${trans.a}` }} <b> {{ `${trans.time}`}} </b>
+                {{ `${trans.chooseA}` }} <b> {{ `${trans.time}`}} </b>
             </h6>
         </v-flex>
 
@@ -54,7 +54,7 @@
 
                     <v-text-field
                         :disabled="isDisable"
-                        :label="`${trans.guest} ${trans.name}`"
+                        :label="`${trans.guestName}`"
                         :color="color"
                         v-model="bringGuest.name"
                         outline

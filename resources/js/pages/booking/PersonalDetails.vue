@@ -59,7 +59,7 @@
                         <v-flex my-2 xs12 sm6>
                             <v-layout row wrap justify-start>
                                 <v-flex md8 sm12>
-                                    <h6 class="body-1">{{ `${trans.email} ${trans.address}`}}</h6>
+                                    <h6 class="body-1">{{ `${trans.emailAddress}`}}</h6>
                                     <v-text-field :color="color"
                                         v-model="guest.email"
                                         outline
@@ -72,7 +72,7 @@
                         <v-flex md8 sm12 v-if="editGuest">
                             <v-layout row wrap justify-start>
                                 <v-flex md8 sm12>
-                                    <h6 class="body-1">{{ `${trans.mailing} ${trans.address}`}}</h6>
+                                    <h6 class="body-1">{{ `${trans.mailingAddress}`}}</h6>
                                     <v-text-field :color="color"
                                                   v-model="guest.address_line_1"
                                                   outline
@@ -149,7 +149,7 @@
 
                                 <v-btn v-else class="border-medium height-40 rounded-25 light-grey"
                                         @click="onClickEdit('edit')">
-                                    {{ `${trans.edit} ${trans.details}`}}
+                                    {{ `${trans.editDetails}`}}
                                 </v-btn>
                             </v-layout>
                         </v-flex>
@@ -229,7 +229,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.guest.first_name}  ${this.trans.successfully_updated}`
+                                message: `${this.trans.guestSuccessfullyUpdated}`
                             })
                             this.isEditable = false
 

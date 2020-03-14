@@ -148,7 +148,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                            message: `${this.trans.userSuccessFullyRemoveFromEvent}`
                         })
 
                         this.$store.commit('removeUserFromUserList', user)

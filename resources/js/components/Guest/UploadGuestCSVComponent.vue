@@ -13,7 +13,7 @@
                         <v-icon>close</v-icon>
                     </v-btn>
 
-                    <v-toolbar-title>{{ `${trans.upload} ${trans.guests}` }}</v-toolbar-title>
+                    <v-toolbar-title>{{ `${trans.uploadGuests}` }}</v-toolbar-title>
 
                     <v-spacer></v-spacer>
 
@@ -53,7 +53,7 @@
                            dark
                            small
                            @click="onClickUploadCSV()">
-                        {{ `${trans.upload} ${trans.csv}`}}
+                        {{ `${trans.uploadCsv}`}}
                     </v-btn>
 
                     <v-divider class="my-3"></v-divider>
@@ -129,7 +129,7 @@
         <v-btn :color="themeOption.buttonPrimaryColor"
                small
                @click="onAddGuests()"
-        >{{ `${trans.upload} ${trans.guests}` }}
+        >{{ `${trans.uploadGuests}` }}
         </v-btn>
     </div>
 </template>
@@ -194,7 +194,7 @@
                     },
 
                     {
-                        title: `${this.trans.upload} ${this.trans.csv}`,
+                        title: `${this.trans.uploadCsv}`,
                         type: 'upload'
                     }
                 ]
@@ -295,7 +295,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.guests}  ${this.trans.successfully_upload}`
+                            message: `${this.trans.guestSuccessfullyUploaded}`
                         })
                         this.$store.commit('setInitializeGuest')
                         this.dialog = false

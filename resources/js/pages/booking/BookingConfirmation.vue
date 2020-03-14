@@ -46,7 +46,7 @@
                                                     elevation="0"
                                                     height="250">
                                                 <v-card-text>
-                                                    <h3>{{ `${trans.no} ${trans.vehicle} ${trans.selected}`}}</h3>
+                                                    <h3>{{ `${trans.noVehicleSelected}`}}</h3>
                                                 </v-card-text>
                                             </v-card>
                                         </v-flex>
@@ -112,7 +112,7 @@
 
                                                         <v-flex xs12 mt-2>
                                                             <h6 class="xs12 body-2 text-xs-center">
-                                                                {{ `${trans.sales} ${trans.person}`}}
+                                                                {{ `${trans.salesPerson}`}}
                                                             </h6>
                                                         </v-flex>
 
@@ -368,9 +368,9 @@
             getTitle() {
                 let title = ''
                 if (this.vehicles.length > 1) {
-                    title = `${this.trans.yourModel} (${this.trans.s}) ${this.trans.ofInterest}`
+                    title = `${this.trans.yourModelsOfInterest}`
                 } else {
-                    title = `${this.trans.yourModel} ${this.trans.ofInterest}`
+                    title = `${this.trans.yourModelOfInterest}`
                 }
 
                 return title

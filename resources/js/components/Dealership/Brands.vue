@@ -9,8 +9,8 @@
                             :items="brands"
                             disable-initial-sort
                             :pagination.sync="pagination"
-                            :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                            :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
+                            :no-results-text="`${trans.noBrandFound}`"
+                            :no-data-text="`${trans.noBrandFound}`"
                             :rows-per-page-text="trans.rows_per_page"
                             :rows-per-page-items="rowsPerPage"
                             :total-items="totalBrands"

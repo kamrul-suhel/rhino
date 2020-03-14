@@ -1,5 +1,8 @@
 <template>
-    <span v-if="iso" class="flag-icon" :class="flagIconClass" :title="title || iso">
+    <span v-if="iso"
+          class="flag-icon"
+          :class="flagIconClass"
+          :title="title || iso">
     </span>
 </template>
 <script>
