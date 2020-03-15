@@ -3,15 +3,15 @@
         <v-flex xs12 md4 justify-center >
             <v-card width="90%" height="auto">
                 <v-img
-                    
+
                     :src="brand.logo"
                     aspect-ratio="2.75"
                 ></v-img>
             </v-card>
         </v-flex>
-        
+
         <v-flex xs12 md8>
-            <h2>Create Vehicle from Brand</h2>
+            <h2>{{ trans.createVehicleFromBrand }}</h2>
             <vehicle model="brand" subComponent></vehicle>
         </v-flex>
 
@@ -30,7 +30,7 @@
 
         data(){
             return {
-            
+
             }
         },
         computed: ({

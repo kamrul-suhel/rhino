@@ -50,7 +50,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label class="mb-3">{{ `${trans.left_hand_drive_image}` }}</label>
+                                            <label class="mb-3">{{ `${trans.leftHandDriveImage}` }}</label>
                                             <v-card class="pa-2 my-3">
                                                 <v-img
                                                     contain
@@ -72,7 +72,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label for="">{{`${trans.right_hand_drive_image}`}} </label>
+                                            <label for="">{{`${trans.rightHandDriveImage}`}} </label>
                                             <v-card class="pa-2 my-3">
                                                 <v-img
                                                     aspect-ratio="2.2"
@@ -218,7 +218,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.vehicle.model}  ${this.trans.successfully_updated}`
+                                message: `${this.vehicle.model}  ${this.trans.successfullyUpdated}`
                             })
                         }
                     }).catch((error) => {

@@ -10,7 +10,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.create} ${trans.new}  ${trans.group}` }}
+                    {{ `${trans.createNewGroup}` }}
                 </div>
             </div>
             <div class="r-tab-content"  :class="[showForm ? 'open' : '']">
@@ -26,7 +26,7 @@
                             :label="trans.name"
                             v-model="selectedGroup.name"
                             :color="themeOption.inputColor"
-                            solo 
+                            solo
                             box
                             flat>
                         </v-text-field>
@@ -50,7 +50,7 @@
                     <v-flex xs12>
                         <v-btn
                             small
-                            dark 
+                            dark
                             class="rounded-btn"
                             :color="themeOption.buttonDangerColor"
                             @click="onCreateGroup">
@@ -70,19 +70,19 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.group} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.group} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGroup"
                     :loading="loading"
                     class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
-                        <td width="10%" class="text-xs-left"> 
+                        <td width="10%" class="text-xs-left">
                             <v-img
                                 contain
                                 :src="props.item.logo"
                                 py-2>
-                            </v-img> 
+                            </v-img>
                         </td>
                         <td>{{ props.item.name }}</td>
                         <td class="text-xs-right">
@@ -126,7 +126,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -276,11 +276,11 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedGroup.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedGroup.name}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()
-                            
+
                             this.onResetGroup()
 
                             this.deleteDialog = false
@@ -315,7 +315,7 @@
                     this.$store.commit('setSnackbarMessage', {
                         openMessage: true,
                         timeOut: this.themeOption.snackBarTimeout,
-                        message: `${this.selectedGroup.name} ${this.editGroup ? this.trans.successfully_updated: this.trans.successfully_created}`
+                        message: `${this.selectedGroup.name} ${this.editGroup ? this.trans.successfullyUpdated: this.trans.successfullyCreated}`
                     })
 
                     this.onResetGroup()

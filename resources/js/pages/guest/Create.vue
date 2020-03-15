@@ -81,7 +81,7 @@
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 1`"
+                                        :label="`${trans.addressLine} 1`"
                                         v-model="guest.address_line_1"
                                         box solo flat
                                         required
@@ -91,7 +91,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 2`"
+                                        :label="`${trans.addressLine} 2`"
                                         v-model="guest.address_line_2"
                                         box solo flat
                                     ></v-text-field>
@@ -100,7 +100,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 3`"
+                                        :label="`${trans.addressLine} 3`"
                                         v-model="guest.address_line_3"
                                         box solo flat
                                     ></v-text-field>
@@ -109,7 +109,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 4`"
+                                        :label="`${trans.addressLine} 4`"
                                         v-model="guest.address_line_4"
                                         box solo flat
                                     ></v-text-field>
@@ -118,7 +118,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 5`"
+                                        :label="`${trans.addressLine} 5`"
                                         v-model="guest.address_line_5"
                                         box solo flat
                                     ></v-text-field>
@@ -127,7 +127,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 6`"
+                                        :label="`${trans.addressLine} 6`"
                                         v-model="guest.address_line_6"
                                         box solo flat
                                     ></v-text-field>
@@ -288,7 +288,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.guest.first_name}  ${this.trans.successfully_created}`
+                                message: `${this.guest.first_name}  ${this.trans.successfullyCreated}`
                             })
 
                             // If request coming from book guest page then return to book guest journey

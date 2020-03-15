@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.create} ${trans.dealership}` }}
+                    {{ `${trans.createDealership}` }}
                 </div>
             </div>
             <div class="r-tab-content" :class="[showForm ? 'open' : '']">
@@ -23,7 +23,7 @@
                                 <v-layout row wrap>
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
-                                            :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                            :rules="[v => !!v || `${trans.nameIsRequired}`]"
                                             :color="themeOption.inputColor"
                                             :label="`${trans.name}`"
                                             v-model="dealership.name"
@@ -54,8 +54,8 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :color="themeOption.inputColor"
-                                            :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
-                                            :label="`${trans.address_line} 1`"
+                                            :rules="[v => !!v || `${trans.addressIsRequired}`]"
+                                            :label="`${trans.addressLine} 1`"
                                             v-model="dealership.address_line_1"
                                             box solo flat>
                                         </v-text-field>
@@ -66,7 +66,7 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :color="themeOption.inputColor"
-                                            :label="`${trans.address_line} 2`"
+                                            :label="`${trans.addressLine} 2`"
                                             v-model="dealership.address_line_2"
                                             box solo flat
                                         >
@@ -76,7 +76,7 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :color="themeOption.inputColor"
-                                            :label="`${trans.address_line} 3`"
+                                            :label="`${trans.addressLine} 3`"
                                             v-model="dealership.address_line_3"
                                             box solo flat
                                         >
@@ -86,7 +86,7 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :color="themeOption.inputColor"
-                                            :label="`${trans.address_line} 4`"
+                                            :label="`${trans.addressLine} 4`"
                                             v-model="dealership.address_line_4"
                                             box solo flat
                                         >
@@ -96,7 +96,7 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :color="themeOption.inputColor"
-                                            :label="`${trans.address_line} 5`"
+                                            :label="`${trans.addressLine} 5`"
                                             v-model="dealership.address_line_5"
                                             box solo flat
                                         >
@@ -109,7 +109,7 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :color="themeOption.inputColor"
-                                            :label="`${trans.address_line} 6`"
+                                            :label="`${trans.addressLine} 6`"
                                             v-model="dealership.address_line_6"
                                             box solo flat
                                         >
@@ -121,9 +121,9 @@
                                             :items="countries"
                                             item-text="name"
                                             item-value="id"
-                                            :rules="[v => !!v || `${trans.select_a} ${trans.country}`]"
+                                            :rules="[v => !!v || `${trans.selectACountry}`]"
                                             :color="themeOption.inputColor"
-                                            :label="trans.select_country"
+                                            :label="trans.selectCountry"
                                             v-model="dealership.country_id"
                                             box solo flat
                                         >
@@ -136,7 +136,7 @@
                                             item-text="name"
                                             item-value="id"
                                             :color="themeOption.inputColor"
-                                            :label="`${trans.select_a} ${trans.group}`"
+                                            :label="`${trans.selectAGroup}`"
                                             v-model="dealership.group_id"
                                             box solo flat>
                                         </v-select>
@@ -177,7 +177,7 @@
                                             key="times"
                                             ripple
                                         >
-                                            {{ trans.opening_times}}
+                                            {{ trans.openingTimes}}
 
                                         </v-tab>
 
@@ -185,7 +185,7 @@
                                             key="dealershipImage"
                                             ripple
                                         >
-                                            {{ `${trans.dealership} ${trans.banner}`}}
+                                            {{ `${trans.dealershipBanner}`}}
 
                                         </v-tab>
 
@@ -299,7 +299,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.dealership.name}  ${this.trans.successfully_created}`
+                                message: `${this.dealership.name}  ${this.trans.successfullyCreated}`
                             })
                         }
 

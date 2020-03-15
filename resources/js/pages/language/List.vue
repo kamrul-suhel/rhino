@@ -86,7 +86,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.language} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.language} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalLanguages"
                     :loading="loading"
@@ -139,7 +139,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -267,7 +267,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedLanguage.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedLanguage.name}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()
@@ -296,7 +296,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedLanguage.name}  ${this.editLanguage ? `${this.trans.successfully_updated}` : `${this.trans.successfully_created}`}`
+                                message: `${this.selectedLanguage.name}  ${this.editLanguage ? `${this.trans.successfullyUpdated}` : `${this.trans.successfullyCreated}`}`
                             })
 
                             this.initialize()

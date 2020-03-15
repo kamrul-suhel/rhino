@@ -35,7 +35,7 @@
             </div>
             <v-divider class="pa-1"></v-divider>
             <div class="d-flex my-2 justify-between metric">
-                <span>{{ `${trans.new_customers}` }}</span> <span class="text-xs-right">{{ analyticsData.prosecting ? analyticsData.prospecting : 0 + analyticsData.walkin ? analyticsData.walkin : 0 }}</span>
+                <span>{{ `${trans.newCustomers}` }}</span> <span class="text-xs-right">{{ analyticsData.prosecting ? analyticsData.prospecting : 0 + analyticsData.walkin ? analyticsData.walkin : 0 }}</span>
             </div>
             <v-divider class="pa-1"></v-divider>
             <div class="d-flex my-2 justify-between metric">

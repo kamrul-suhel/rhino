@@ -25,7 +25,7 @@
                         </tr>
 
                         <tr>
-                            <td><strong>{{ `${trans.address_line} 1` }}:</strong> {{ guest.address_line_1 }}</td>
+                            <td><strong>{{ `${trans.addressLine} 1` }}:</strong> {{ guest.address_line_1 }}</td>
                             <td class="text-xs-left"><strong>{{ `${trans.landline} 2` }}:</strong> {{
                                 guest.address_line_2 }}
                             </td>
@@ -63,7 +63,7 @@
 
                                 <v-layout row wrap>
                                     <v-flex xs6>
-                                        <strong>{{ trans.sales_executive }}:</strong> {{ appointment.user ?
+                                        <strong>{{ trans.salesExecutive }}:</strong> {{ appointment.user ?
                                         `${appointment.user.firstname} ${appointment.user.surname}` : ''}}
                                     </v-flex>
 

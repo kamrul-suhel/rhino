@@ -223,32 +223,32 @@
                     },
 
                     {
-                        text: `${trans.address_line} 1`,
+                        text: `${trans.addressLine} 1`,
                         value: 'add1'
                     },
 
                     {
-                        text: `${trans.address_line} 2`,
+                        text: `${trans.addressLine} 2`,
                         value: 'add2'
                     },
 
                     {
-                        text: `${trans.address_line} 3`,
+                        text: `${trans.addressLine} 3`,
                         value: 'add1'
                     },
 
                     {
-                        text: `${trans.address_line} 4`,
+                        text: `${trans.addressLine} 4`,
                         value: 'add1'
                     },
 
                     {
-                        text: `${trans.address_line} 5`,
+                        text: `${trans.addressLine} 5`,
                         value: 'add5'
                     },
 
                     {
-                        text: `${trans.address_line} 6`,
+                        text: `${trans.addressLine} 6`,
                         value: 'add6'
                     },
 

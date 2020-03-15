@@ -10,7 +10,7 @@
                         :pagination.sync="pagination"
                         :no-results-text="`${trans.noUsersFound}`"
                         :no-data-text="`${trans.noUsersFound}`"
-                        :rows-per-page-text="trans.rows_per_page"
+                        :rows-per-page-text="trans.rowsPerPage"
                         :rows-per-page-items="rowsPerPage"
                         :total-items="totalUsers"
                         :loading="loading"

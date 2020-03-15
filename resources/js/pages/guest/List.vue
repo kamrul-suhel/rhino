@@ -30,7 +30,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.guest} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGuests"
                     :loading="loading"
@@ -82,7 +82,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -226,7 +226,7 @@
                     this.$store.commit('setSnackbarMessage', {
                         openMessage: true,
                         timeOut: this.themeOption.snackBarTimeout,
-                        message: `${this.selectedGuest.first_name}  ${this.trans.successfully_deleted}`
+                        message: `${this.selectedGuest.first_name}  ${this.trans.successfullyDeleted}`
                     })
                 })
             }

@@ -66,7 +66,7 @@
                                     :items="seatingPosition"
                                     :color="themeOption.inputColor"
                                     v-model="selectedCountry.driver_seating_position"
-                                    :label="trans.seating_position"
+                                    :label="trans.seatingPosition"
                                 ></v-select>
                             </v-flex>
                         </v-layout>
@@ -192,7 +192,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedCountry.full_name}  ${this.trans.successfully_updated}`
+                            message: `${this.selectedCountry.full_name}  ${this.trans.successfullyUpdated}`
                         })
                         // reset selectedCountry in store
                         this.$store.commit('setSelectedCountry', {})

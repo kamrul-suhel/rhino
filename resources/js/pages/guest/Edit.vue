@@ -56,7 +56,7 @@
                                     <v-text-field
                                         :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 1`"
+                                        :label="`${trans.addressLine} 1`"
                                         v-model="guest.address_line_1"
                                         required
                                     ></v-text-field>
@@ -65,7 +65,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 2`"
+                                        :label="`${trans.addressLine} 2`"
                                         v-model="guest.address_line_2"
                                     ></v-text-field>
                                 </v-flex>
@@ -73,7 +73,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 3`"
+                                        :label="`${trans.addressLine} 3`"
                                         v-model="guest.address_line_3"
                                     ></v-text-field>
                                 </v-flex>
@@ -81,7 +81,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 4`"
+                                        :label="`${trans.addressLine} 4`"
                                         v-model="guest.address_line_4"
                                     ></v-text-field>
                                 </v-flex>
@@ -89,7 +89,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 5`"
+                                        :label="`${trans.addressLine} 5`"
                                         v-model="guest.address_line_5"
                                     ></v-text-field>
                                 </v-flex>
@@ -97,7 +97,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 6`"
+                                        :label="`${trans.addressLine} 6`"
                                         v-model="guest.address_line_6"
                                     ></v-text-field>
                                 </v-flex>
@@ -231,7 +231,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.guest.first_name}  ${this.trans.successfully_updated}`
+                                message: `${this.guest.first_name}  ${this.trans.successfullyUpdated}`
                             })
                         }
                         this.loading = false

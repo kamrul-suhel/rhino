@@ -20,7 +20,7 @@
                     lazy-validation>
                     <v-layout>
                         <v-flex xs12>
-                                
+
                             <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
@@ -150,7 +150,7 @@
                                         :items="appointmentDuration"
                                         item-value="value"
                                         item-text="text"
-                                        :label="trans.appointment_duration"
+                                        :label="trans.appointmentDuration"
                                         :color="themeOption.inputColor"
                                         v-model="event.appointment_duration"
                                         box
@@ -207,7 +207,7 @@
                             </v-layout>
                             <v-layout row wrap class="justify-center">
                                 <v-flex xs12 pa-2>
-                                    <r-button 
+                                    <r-button
                                         :text="`${trans.submit}`"
                                         class="rounded-btn text-white"
                                         dark
@@ -217,7 +217,7 @@
                                         @click="onCreateEvent"
                                         :color="themeOption.buttonDangerColor" />
                                 </v-flex>
-                            </v-layout>                            
+                            </v-layout>
                         </v-flex>
                     </v-layout>
                 </v-form>
@@ -283,7 +283,7 @@
                     _.forOwn(this.event, (value, key) => {
 
                         eventForm.append(key, value)
-                        
+
                     })
 
                     // Set form object for times
@@ -297,7 +297,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.event.name}  ${this.trans.successfully_created}`
+                                message: `${this.event.name}  ${this.trans.successfullyCreated}`
                             })
                             this.$store.commit('setButtonLoading', false)
                         }
@@ -332,7 +332,7 @@
                     }
                 ]
             },
-            
+
             toggleForm() {
                 this.showForm = !this.showForm
 

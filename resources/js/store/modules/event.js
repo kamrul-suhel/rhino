@@ -94,7 +94,7 @@ const mutations = {
 
 
             {
-                text: trans.appointment_duration,
+                text: trans.appointmentDuration,
                 value: 'appointment_duration'
             },
 

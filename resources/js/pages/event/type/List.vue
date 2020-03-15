@@ -21,7 +21,7 @@
                     <!-- Language Selector for translations -->
                     <v-layout row wrap justify-end>
                         <v-flex xs12 sm3 v-if="editType">
-                            <Language 
+                            <Language
                                     :languageId="selectedType.language_id">
                             </Language>
                         </v-flex>
@@ -53,7 +53,7 @@
                                 box solo flat>
                             </v-text-field>
                         </v-flex>
-                                                
+
                         <v-flex xs12 sm3 mr-3>
                             <v-text-field
                                 :label="trans.displayName"
@@ -98,7 +98,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="trans.no_type_found"
                     :no-data-text="trans.no_type_found"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :rows-per-page-text="trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalType"
                     :loading="loading"
@@ -110,7 +110,7 @@
                                 contain
                                 width="50px"
                                 :src="props.item.image">
-                            </v-img> 
+                            </v-img>
                         </td>
                         <td>{{ props.item.display_name }}</td>
                         <td>{{ props.item.name }}</td>
@@ -154,7 +154,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -303,7 +303,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedType.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedType.name}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()
@@ -334,7 +334,7 @@
 
                     axios.post(URL, typeForm).then((response) => {
                         this.initialize()
-                        const message = this.editType ? `${this.trans.successfully_updated}` : `${this.trans.successfully_created}`
+                        const message = this.editType ? `${this.trans.successfullyUpdated}` : `${this.trans.successfullyCreated}`
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
@@ -364,8 +364,8 @@
 
             onCancelType() {
 
-            }, 
-                        
+            },
+
             toggleForm() {
                 this.showForm = !this.showForm
             }

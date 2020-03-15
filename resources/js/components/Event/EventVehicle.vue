@@ -8,7 +8,7 @@
                 :pagination.sync="pagination"
                 :no-results-text="`${trans.noBrandsFound}`"
                 :no-data-text="`${trans.noBrandsFound}`"
-                :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                 :rows-per-page-items="rowsPerPage"
                 :total-items="totalEvents"
                 :loading="loading"

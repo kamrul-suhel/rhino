@@ -56,7 +56,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
+                                            <label class="mb-3">{{ trans.leftHandDriveImage}}</label>
                                             <v-divider class="my-2"></v-divider>
 
                                             <v-card class="pa-2 my-3">
@@ -79,7 +79,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                        <v-flex xs12>
-                                           <label for="">{{ trans.right_hand_drive_image }}</label>
+                                           <label for="">{{ trans.rightHandDriveImage }}</label>
 
                                            <v-divider class="my-2"></v-divider>
 
@@ -167,7 +167,7 @@
 
         created() {
             this.initialize();
-            
+
         },
 
         methods: {
@@ -176,7 +176,7 @@
                 this.$store.dispatch('fetchBrand', {id: this.$route.params.brandId});
             },
 
-            
+
             onCreateVehicle() {
                 console.log('create vehicle');
 
@@ -192,8 +192,8 @@
                     // Set form object for vehicle
                     _.forOwn(this.vehicle, (value, key) => {
                             vehicleForm.append(key, value)
-                    });          
-                    
+                    });
+
                     if(this.subComponent){
                         vehicleForm.append('brand_id', this.$route.params.brandId)
                     }
@@ -207,9 +207,9 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.vehicle.model}  ${this.trans.successfully_created}`
+                                message: `${this.vehicle.model}  ${this.trans.successfullyCreated}`
                             })
-                        
+
 
                             this.$store.commit('setUpdateComponent')
 
@@ -220,9 +220,9 @@
                                 this.$router.push({name: 'listVehicles'});
                             }
 
-                            
+
                             this.vehicle = {}
-                        
+
                         }
                     })
                 } else {

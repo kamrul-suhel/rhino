@@ -13,7 +13,7 @@
                     <h4>{{trans.event}}</h4>
                 </v-card-text>
             </v-flex>
-            <v-flex xs6 class="pa-0">    
+            <v-flex xs6 class="pa-0">
                 <v-card-text class="px-0 text-xs-center">
                     <h4>{{trans.reporting}}</h4>
                 </v-card-text>
@@ -29,13 +29,13 @@
                                 <v-flex align-self-center>
                                     <v-icon color="#000">person</v-icon>
                                 </v-flex>
-                                
+
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manage}  ${trans.users}` }}</h3>
+                                        <h3>{{ `${trans.manageUsers}` }}</h3>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.add}, ${trans.edit} ${trans.or} ${trans.remove} ${trans.users}` }}</small>
+                                        <small>{{ `${trans.addEditOrRemoveUser}` }}</small>
                                     </v-card-text>
                                 </v-flex>
 
@@ -51,13 +51,13 @@
                                 <v-flex align-self-center>
                                     <v-icon color="#000">person</v-icon>
                                 </v-flex>
-                                
+
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manage}  ${trans.vehicles}` }}</h3>
+                                        <h3>{{ `${trans.manageVehicles}` }}</h3>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.add}, ${trans.edit} ${trans.or} ${trans.remove} ${trans.vehicles}` }}</small>
+                                        <small>{{ `${trans.addEditOrRemoveVehicle}` }}</small>
                                     </v-card-text>
                                 </v-flex>
 
@@ -73,13 +73,13 @@
                                 <v-flex align-self-center>
                                     <v-icon color="#000">person</v-icon>
                                 </v-flex>
-                                
+
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manage}  ${trans.events}` }}</h3>
+                                        <h3>{{ `${trans.manageEvents}` }}</h3>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.add}, ${trans.edit} ${trans.or} ${trans.remove} ${trans.events}` }}</small>
+                                        <small>{{ `${trans.addEditOrRemoveEvents}` }}</small>
                                     </v-card-text>
                                 </v-flex>
 
@@ -100,7 +100,7 @@
                                     {{ `${trans.companies}` }}
                                 </v-card-text>
                             </v-card>
-                        </v-flex> 
+                        </v-flex>
 
                         <v-flex xs6>
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listBrands'}">
@@ -149,7 +149,7 @@
                     </v-layout>
                 </v-flex>
             </v-layout>
-                
+
         </v-container>
 
     </v-container>
@@ -162,7 +162,7 @@
 
     export default {
         components: {
-            
+
         },
 
         data() {

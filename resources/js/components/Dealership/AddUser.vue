@@ -127,7 +127,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.user}  ${this.trans.has_been_added.toLowerCase()} ${this.trans.to.toLowerCase()} ${this.trans.event}`
+                            message: `${this.trans.user}  ${this.trans.hasBeenAdded.toLowerCase()} ${this.trans.to.toLowerCase()} ${this.trans.event}`
                         })
 
                         this.$store.commit('addUserToUserList', user)

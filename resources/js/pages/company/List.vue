@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.add} ${trans.new} ${trans.company}` }}
+                    {{ `${trans.addNewCompany}` }}
                 </div>
             </div>
 
@@ -73,21 +73,21 @@
                     :items="companies"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.group} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.group} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :no-results-text="`${trans.noGroupsFound}`"
+                    :no-data-text="`${trans.noGroupsFound}`"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalCompanies"
                     :loading="loading"
                     class="elevation-1 r-table"
                 >
                     <template v-slot:items="props">
-                        <td width="10%"> 
+                        <td width="10%">
                             <v-img
                                 contain
                                 width="50px"
                                 :src="props.item.logo">
-                            </v-img> 
+                            </v-img>
                         </td>
                         <td>{{ props.item.name }}</td>
                         <td class="text-xs-right">
@@ -129,7 +129,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -211,9 +211,9 @@
         },
 
         created() {
-            
-            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.companies}` )
-            this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.companies}` )
+
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manageCompanies}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.manageCompanies}` )
         },
 
         mounted() {
@@ -259,7 +259,7 @@
                                 bgColor: this.themeOption.snackBarBgDanger,
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedCompany.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedCompany.name}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()
@@ -292,13 +292,13 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedCompany.name}  ${this.trans.successfully_updated}`
+                                message: `${this.selectedCompany.name}  ${this.trans.successfullyUpdated}`
                             })
                         }else{
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedCompany.name}  ${this.trans.successfully_created}`
+                                message: `${this.selectedCompany.name}  ${this.trans.successfullyCreated}`
                             })
                             this.onResetCompany()
                         }

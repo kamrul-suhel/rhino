@@ -2,7 +2,7 @@
     <v-container fluid px-5>
         <v-layout row wrap px-4>
             <v-flex xs6>
-                <h2>{{ `${trans.book} ${trans.a} ${trans.guest}`}}</h2>
+                <h2>{{ `${trans.bookAGuest}`}}</h2>
             </v-flex>
 
             <v-flex xs 6align-self-end>
@@ -34,7 +34,7 @@
 
                             <v-list-tile-content>
                                 <v-list-tile-title>
-                                    {{ `${trans.with} ${trans.a} ${trans.uniqueCode}` }}
+                                    {{ `${trans.withAUniqueCode}` }}
                                 </v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
@@ -51,7 +51,7 @@
 
                             <v-list-tile-content>
                                 <v-list-tile-title>
-                                    {{ `${trans.without} ${trans.a} ${trans.uniqueCode}` }}
+                                    {{ `${trans.withoutAUniqueCode}` }}
                                 </v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
@@ -70,7 +70,7 @@
                     </div>
 
                     <div>
-                        {{ `${trans.with} ${trans.a} ${trans.uniqueCode}` }}
+                        {{ `${trans.withAUniqueCode}` }}
                     </div>
                     <div class="r-tab-title-close">
                         <v-icon
@@ -93,7 +93,7 @@
                                             item-value="value"
                                             flat
                                             box
-                                            :label="`${trans.select} ${trans.source}`"
+                                            :label="`${trans.selectSource}`"
                                         ></v-select>
                                     </v-flex>
 
@@ -111,14 +111,14 @@
                                             hide-selected
                                             item-text="email"
                                             item-value="symbol"
-                                            :label="`${trans.searchBy} ${trans.guest} ${trans.email}`"
+                                            :label="`${trans.searchGuestByEmail}`"
                                             open-on-clear
                                             return-object
                                         >
                                             <template v-slot:no-data>
                                                 <v-list-tile>
                                                     <v-list-tile-title>
-                                                        {{ `${trans.searchBy} ${trans.guest}` }}
+                                                        {{ `${trans.searchGuestByEmail}` }}
                                                     </v-list-tile-title>
                                                 </v-list-tile>
                                             </template>
@@ -245,7 +245,7 @@
 
         created() {
             this.generateSource()
-            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcomeBack}`)
         },
 
         methods: {

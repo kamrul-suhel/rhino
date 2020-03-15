@@ -54,7 +54,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
+                                            <label class="mb-3">{{ trans.leftHandDriveImage}}</label>
                                             <v-img
                                                 :src="leftImage"
                                                 width="150"
@@ -71,7 +71,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label for="">{{ trans.right_hand_drive_image }}</label>
+                                            <label for="">{{ trans.rightHandDriveImage }}</label>
                                             <v-img
                                                 :src="rightImage"
                                                 width="150"
@@ -116,7 +116,7 @@
                     :pagination.sync="pagination"
                     :no-results-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
                     :no-data-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalVehicles"
                     :loading="loading"
@@ -182,7 +182,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -332,7 +332,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.vehicle.model}  ${this.trans.successfully_created}`
+                                message: `${this.vehicle.model}  ${this.trans.successfullyCreated}`
                             })
 
                             console.log(this.getPagination());
@@ -430,7 +430,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedVehicle.model}  ${this.trans.successfully_deleted}`
+                                message: `${selectedVehicle.model}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()

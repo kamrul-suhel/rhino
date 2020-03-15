@@ -67,9 +67,9 @@
                 :items="regions"
                 disable-initial-sort
                 :pagination.sync="pagination"
-                :no-results-text="`${trans.no} ${trans.region} ${trans.has_been_added}`"
-                :no-data-text="`${trans.no} ${trans.region} ${trans.has_been_added}`"
-                :rows-per-page-text="trans.rows_per_page"
+                :no-results-text="`${trans.no} ${trans.region} ${trans.hasBeenAdded}`"
+                :no-data-text="`${trans.no} ${trans.region} ${trans.hasBeenAdded}`"
+                :rows-per-page-text="trans.rowsPerPage"
                 :rows-per-page-items="rowsPerPage"
                 :total-items="totalRegions"
                 :loading="loading"
@@ -116,7 +116,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -230,7 +230,7 @@
                                 themeOption: this.themeOption,
                                 id: this.$route.params.id
                             })
-                            const message = this.editRegion ? `${this.selectedRegion.name}  ${this.trans.successfully_created}` : `${this.selectedRegion.name}  ${this.trans.successfully_updated}`
+                            const message = this.editRegion ? `${this.selectedRegion.name}  ${this.trans.successfullyCreated}` : `${this.selectedRegion.name}  ${this.trans.successfullyUpdated}`
 
                             this.onResetRegionForm()
 
@@ -270,7 +270,7 @@
                             openMessage: true,
                             bgColor: this.themeOption.snackBarBgDanger,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedRegion.name}  ${this.trans.successfully_deleted}`
+                            message: `${this.selectedRegion.name}  ${this.trans.successfullyDeleted}`
                         })
                     }
                 })

@@ -332,7 +332,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.user}  ${this.trans.successfully_created}`
+                            message: `${this.trans.user}  ${this.trans.successfullyCreated}`
                         })
 
                         this.showForm = false

@@ -55,7 +55,7 @@ const mutations = {
             },
 
             {
-                text: trans.seating_position,
+                text: trans.seatingPosition,
                 value: 'seating_position',
                 sortable: false,
             },

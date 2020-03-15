@@ -157,7 +157,7 @@
                                 :items="appointmentDuration"
                                 item-value="value"
                                 item-text="text"
-                                :label="trans.appointment_duration"
+                                :label="trans.appointmentDuration"
                                 :color="themeOption.inputColor"
                                 v-model="selectedEvent.appointment_duration"
                                 solo box flat>
@@ -295,7 +295,7 @@
                                         key="saleExecutives"
                                         ripple
                                     >
-                                        {{ trans.sales_executives }}
+                                        {{ trans.salesExecutive }}
                                     </v-tab>
 
                                     <v-tab
@@ -523,7 +523,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedEvent.name}  ${this.trans.successfully_updated}`
+                                message: `${this.selectedEvent.name}  ${this.trans.successfullyUpdated}`
                             })
                             this.$store.commit('setButtonLoading', false)
                             // this.$router.push({name: 'listEvents'})

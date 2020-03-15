@@ -7,8 +7,8 @@
             lazy-validation>
             <v-layout>
                 <v-flex xs12>
-                    
-                        
+
+
                             <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
@@ -46,7 +46,7 @@
                                         :items="levels"
                                         :rules="[v => !!v || `${trans.select_a} ${trans.role}`]"
                                         :color="themeOption.inputColor"
-                                        :label="trans.access_level"
+                                        :label="trans.accessLevel"
                                         item-text="text"
                                         item-value="value"
                                         v-model="user.level"
@@ -215,7 +215,7 @@
 
                                 </v-flex>
                             </v-layout>
-                        
+
                     <v-layout row wrap>
                         <v-flex class="justify-center pa-3">
                             <v-btn
@@ -447,7 +447,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.user.firstname}  ${this.trans.successfully_updated}`
+                            message: `${this.user.firstname}  ${this.trans.successfullyUpdated}`
                         })
 
                         this.processing = false
@@ -478,7 +478,7 @@
                     this.$store.commit('setSnackbarMessage', {
                         openMessage: true,
                         timeOut: this.themeOption.snackBarTimeout,
-                        message: `${this.trans.password} ${this.trans.successfully_updated}`
+                        message: `${this.trans.password} ${this.trans.successfullyUpdated}`
                     })
                 })
             },

@@ -11,7 +11,7 @@
                             :pagination.sync="pagination"
                             :no-results-text="`${trans.noBrandsFound}`"
                             :no-data-text="`${trans.noBrandsFound}`"
-                            :rows-per-page-text="trans.rows_per_page"
+                            :rows-per-page-text="trans.rowsPerPage"
                             :rows-per-page-items="rowsPerPage"
                             :total-items="totalBrands"
                             :loading="loading"

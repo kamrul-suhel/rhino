@@ -46,7 +46,7 @@
                         >
                             <v-list-tile-content>
                                 <v-list-tile-title>
-                                    {{ `${trans.sales} ${trans.teamMember}` }}
+                                    {{ `${trans.salesTeamMember}` }}
                                 </v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
@@ -83,7 +83,7 @@
                             <v-text-field
                                 :color="themeOption.primaryColor"
                                 v-model="date"
-                                :label="`${trans.select} ${trans.date}`"
+                                :label="`${trans.selectDate}`"
                                 prepend-icon="calendar_today"
                                 readonly
                                 v-on="on"
@@ -302,7 +302,7 @@
             this.fetchEventUser()
             this.allowDateForDatePicker()
 
-            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcomeBack}`)
         },
 
         methods: {
@@ -339,7 +339,7 @@
                 switch (this.selectedTeamMemberType) {
                     case 'team':
                         this.saleExecutive = true
-                        return `${this.trans.sales} ${this.trans.teamMember}`
+                        return `${this.trans.salesTeamMember}`
 
                     case 'date':
                         this.saleExecutive = false
@@ -347,7 +347,7 @@
 
                     default:
                         this.saleExecutive = false
-                        return `${this.trans.teamMember} / ${this.trans.date}`
+                        return `${this.trans.teamMemberDate}`
                 }
             },
 
@@ -423,7 +423,7 @@
                 console.log('service;', this.selectedUser);
                 return
                 const URL = `/api/csv/guests/download?downloadType=${this.downloadType}&eventId=${this.selectedEvent.id}`
-                const fileName = `${this.trans.booked}${this.trans.guest}`
+                const fileName = `${this.trans.bookedGuest}`
 
                 axios.get(URL).then((response) => {
                     // Check response success & have some data

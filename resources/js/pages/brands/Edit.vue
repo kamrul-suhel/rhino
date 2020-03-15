@@ -19,14 +19,14 @@
                             <v-layout justify-space-between row wrap>
                                 <v-flex xs12 sm3 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.brandNameIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.name"
                                         v-model="brand.name"
                                         box solo flat
                                     ></v-text-field>
                                 </v-flex>
-                            
+
                                 <v-flex xs12 sm3 pa-2>
                                     <v-select
                                         :items="companies"
@@ -59,7 +59,7 @@
                                     <v-text-field
                                         :label="trans.color"
                                         v-model="brand.colour"
-                                        :rules="[v => !!v || `${trans.color} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.colorIsRequired}`]"
                                         required
                                         @focus="isColorSwatchActive = true"
                                         :color="themeOption.inputColor"
@@ -91,9 +91,9 @@
 
 
                             <v-layout column wrap>
-                                
+
                                 <Regions model="brand"></Regions>
-                                
+
                             </v-layout>
                         </v-card-text>
 
@@ -204,8 +204,8 @@
         created() {
             this.initialize()
             this.fetchCompany()
-            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.brand}`)
-            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.brand}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.editBrand}`)
+            this.$store.commit('setNavTitle', `${this.trans.editBrand}`)
         },
 
         methods: {
@@ -240,7 +240,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.brand.name}  ${this.trans.successfully_updated}`
+                                message: `${this.brand.name}  ${this.trans.successfullyUpdated}`
                             })
                             this.$store.commit('setThemeOption', {buttonLoading: false})
                             // this.$router.push({name: 'listbrands'})
