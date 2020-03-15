@@ -48,7 +48,7 @@
                                 <template v-slot:no-data>
                                     <v-list-tile>
                                         <v-list-tile-title>
-                                            {{ `${trans.searchByGuest}` }}
+                                            {{ `${trans.searchGuestByEmail}` }}
                                         </v-list-tile-title>
                                     </v-list-tile>
                                 </template>

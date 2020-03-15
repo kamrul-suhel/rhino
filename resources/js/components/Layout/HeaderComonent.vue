@@ -24,7 +24,7 @@
                             v-for="(brand,i) in brands"
                             :key="brand.id"
                             :src="brand.logo"
-                            
+
                         ></v-carousel-item>
                     </v-carousel>
                 </div>
@@ -43,7 +43,7 @@
                         dark
                         class="language-picker icon-left"
                         :color="themeOption.primaryColor"
-                        :placeholder="trans.select_a_language"
+                        :placeholder="trans.selectALanguage"
                         :prepend-icon="`flag-icon-${selectedLanguage.code2.toLowerCase()}`"
                         :items="languages"
                         item-text="name"

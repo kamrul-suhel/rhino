@@ -2,7 +2,7 @@
     <v-card min-height="400"
             max-height="600">
         <v-card-title>
-            <h3>{{ `${trans.dealership} ${trans.users}`}}</h3>
+            <h3>{{ `${trans.dealershipUsers}`}}</h3>
         </v-card-title>
 
         <v-divider></v-divider>
@@ -127,7 +127,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.user}  ${this.trans.hasBeenAdded.toLowerCase()} ${this.trans.to.toLowerCase()} ${this.trans.event}`
+                            message: `${this.trans.user}  ${this.trans.hasBeenAddedToEvent}`
                         })
 
                         this.$store.commit('addUserToUserList', user)

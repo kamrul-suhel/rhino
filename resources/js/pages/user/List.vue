@@ -10,8 +10,8 @@
                     :items="users"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.users} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.users} ${trans.found}`"
+                    :no-results-text="`${trans.noUsersFound}`"
+                    :no-data-text="`${trans.noUsersFound}`"
                     :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalUsers"
@@ -165,7 +165,7 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.users}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.manageUsers}`)
             this.$store.commit('setNavTitle', `${this.trans.users}`)
         },
 
@@ -217,7 +217,7 @@
                                 this.$store.commit('setSnackbarMessage', {
                                     openMessage: true,
                                     timeOut: this.themeOption.snackBarTimeout,
-                                    message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                                    message: `${this.trans.userSuccessfullyRemoveFromEvent}`
                                 })
 
                                 if (response.data.success) {
@@ -242,7 +242,7 @@
                                     this.$store.commit('setSnackbarMessage', {
                                         openMessage: true,
                                         timeOut: this.themeOption.snackBarTimeout,
-                                        message: `${this.selectedUser.firstname}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                                        message: `${this.selectedUser.firstname}  ${this.trans.userSuccessfullyRemoveFromEvent}`
                                     })
                                     this.$store.commit('setInitialize')
                                 }

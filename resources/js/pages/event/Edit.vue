@@ -16,7 +16,7 @@
                        :color="themeOption.adminNavIconColor"
                        class="ma-0">
                     <v-icon left dark>people_alt</v-icon>
-                    {{ `${trans.manage} ${trans.staff} / ${trans.vehicles}`}}
+                    {{ `${trans.manageStaffVehicles}`}}
                 </v-btn>
             </v-flex>
 
@@ -42,9 +42,9 @@
                     <v-layout row wrap>
                         <v-flex xs12 sm4 pa-2>
                             <v-text-field
-                                :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.eventNameIsRequired}`]"
                                 :color="themeOption.inputColor"
-                                :label="`${trans.name} ${trans.of} ${trans.event}`"
+                                :label="`${trans.nameOfEvent}`"
                                 v-model="selectedEvent.name"
                                 solo box flat
                             ></v-text-field>
@@ -55,7 +55,7 @@
                                 :items="dealerships"
                                 item-text="name"
                                 item-value="id"
-                                :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.dealershipIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.dealership"
                                 v-model="selectedEvent.dealership_id"
@@ -81,11 +81,11 @@
                             >
                                 <template v-slot:activator="{ on }">
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.start} ${trans.date} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.startDateIsRequired}`]"
                                         required
                                         v-model="selectedEvent.start"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.start} ${trans.date}`"
+                                        :label="`${trans.startDate}`"
                                         prepend-icon="event"
                                         readonly
                                         v-on="on"
@@ -123,11 +123,11 @@
                             >
                                 <template v-slot:activator="{ on }">
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.end} ${trans.date} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.endDateIsRequired}`]"
                                         required
                                         v-model="selectedEvent.end"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.end} ${trans.date}`"
+                                        :label="`${trans.endDate}`"
                                         prepend-icon="event"
                                         readonly
                                         v-on="on"
@@ -169,7 +169,7 @@
                                 :items="types"
                                 item-text="name"
                                 item-value="id"
-                                :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.typeIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="`${trans.type}`"
                                 v-model="selectedEvent.type_id"
@@ -221,7 +221,7 @@
                                         key="eventImage"
                                         ripple
                                     >
-                                        {{ `${trans.event} ${trans.banner}`}}
+                                        {{ `${trans.eventBanner}`}}
 
                                     </v-tab>
 
@@ -334,7 +334,7 @@
                                       @click="onBackToEventList"
                                       :color="themeOption.buttonSecondaryColor"/>
 
-                            <r-button :text="`${trans.update} ${trans.event}`"
+                            <r-button :text="`${trans.updateEvent}`"
                                       identifier="'eventEdit'"
                                       small
                                       class="rounded-btn text-white"
@@ -461,8 +461,8 @@
             this.initialize()
             this.setAppointmentDuration()
 
-            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.event}`)
-            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.event}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.editEvent}`)
+            this.$store.commit('setNavTitle', `${this.trans.editEvent}`)
 
             // Load dealership & type when it is subcomponent
             if (this.subComponent) {

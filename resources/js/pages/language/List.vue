@@ -11,7 +11,7 @@
                         </div>
 
                         <div>
-                            {{ `${trans.add}  ${trans.language}` }}
+                            {{ `${trans.addLanguage}` }}
                         </div>
                     </div>
                     <div class="r-tab-content"  :class="[showForm ? 'open' : '']">
@@ -23,7 +23,7 @@
                                 <v-layout row wrap justify-space-between>
                                     <v-flex xs12 sm3>
                                         <v-text-field :label="trans.name"
-                                            :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                            :rules="[v => !!v || `${trans.nameIsRequired}`]"
                                             :color="themeOption.inputColor"
                                             v-model="selectedLanguage.name"
                                             box flat solo
@@ -33,7 +33,7 @@
                                     <v-flex xs12 sm3>
                                         <v-text-field :label="`${trans.code} 2`"
                                             :color="themeOption.inputColor"
-                                            :rules="[v => !!v || `${trans.code} 2 ${trans.is_required}`]"
+                                            :rules="[v => !!v || `${trans.code2IsRequired}`]"
                                             v-model="selectedLanguage.code2"
                                             box flat solo
                                         ></v-text-field>
@@ -41,7 +41,7 @@
 
                                     <v-flex xs12 sm3>
                                         <v-text-field :label="`${trans.code} 3`"
-                                                        :rules="[v => !!v || `${trans.code} 3 ${trans.is_required}`]"
+                                                        :rules="[v => !!v || `${trans.code3IsRequired}`]"
                                                         :color="themeOption.inputColor"
                                                         v-model="selectedLanguage.code3"
                                                         box flat solo
@@ -84,8 +84,8 @@
                     :items="languages"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.language} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.language} ${trans.found}`"
+                    :no-results-text="`${trans.noLanguageFound}`"
+                    :no-data-text="`${trans.noLanguageFound}`"
                     :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalLanguages"
@@ -219,8 +219,8 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.languages}`)
-            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.languages}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.manageLanguages}`)
+            this.$store.commit('setNavTitle', `${this.trans.manageLanguages}`)
         },
 
         mounted() {

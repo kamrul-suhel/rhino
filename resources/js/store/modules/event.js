@@ -99,7 +99,7 @@ const mutations = {
             },
 
             {
-                text: `${trans.event} ${trans.type}`,
+                text: `${trans.eventType}`,
                 align: 'left',
                 sortable: false,
                 value: 'type'

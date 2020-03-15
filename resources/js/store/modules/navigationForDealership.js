@@ -27,19 +27,19 @@ const mutations = {
         const navGroup = [
             {
                 icon: 'list',
-                text: `${trans.guest} ${trans.services}`,
+                text: `${trans.guestServices}`,
                 access: ['dealership'],
                 subGroups:[
                     {
                         icon: 'person',
-                        text: `${trans.book} ${trans.a} ${trans.guest}`,
+                        text: `${trans.bookAGuest}`,
                         link: 'dealershipAdminBookAGuest',
                         access: ['dealership'],
                     },
 
                     {
                         icon: 'cloud_download',
-                        text: `${trans.download} ${trans.booked} ${trans.guests}`,
+                        text: `${trans.downloadBookedGuests}`,
                         link: 'bookedGuest',
                         access: ['dealership', 'sales_executive'],
                         isDialog: true
@@ -47,7 +47,7 @@ const mutations = {
 
                     {
                         icon: 'cloud_download',
-                        text: `${trans.download} ${trans.unbooked} ${trans.guests}`,
+                        text: `${trans.downloadUnbookedGuests}`,
                         link: 'unbookedGuest',
                         access: ['dealership', 'sales_executive'],
                         isDialog: true
@@ -69,14 +69,14 @@ const mutations = {
 
                     {
                         icon: 'directions_car',
-                        text: `${trans.edit} ${trans.event}`,
+                        text: `${trans.editEvent}`,
                         link: 'editDealershipsEvent',
                         access: ['dealership'],
                     },
 
                     {
                         icon: 'add',
-                        text: `${trans.update} ${trans.sales}`,
+                        text: `${trans.updateSales}`,
                         link: 'saleUpdate',
                         access: ['dealership', 'sales_executive'],
                     },
@@ -90,7 +90,7 @@ const mutations = {
 
                     {
                         icon: 'business',
-                        text: `${trans.edit} ${trans.dealership}`,
+                        text: `${trans.editDealership}`,
                         link: 'editDealership',
                         access: ['dealership'],
                     }

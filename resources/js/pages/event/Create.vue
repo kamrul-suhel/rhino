@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.create} ${trans.event}` }}
+                    {{ `${trans.createEvent}` }}
                 </div>
             </div>
             <div class="r-tab-content" :class="[showForm ? 'open' : '']">
@@ -24,9 +24,9 @@
                             <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.eventNameIsRequired}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.event} ${trans.name}`"
+                                        :label="`${trans.eventName}`"
                                         v-model="event.name"
                                         box
                                         solo
@@ -39,7 +39,7 @@
                                         :items="dealerships"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.dealershipIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
                                         v-model="event.dealership_id"
@@ -67,11 +67,11 @@
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
-                                                :rules="[v => !!v || `${trans.start} ${trans.date} ${trans.is_required}`]"
+                                                :rules="[v => !!v || `${trans.startDateIsRequired}`]"
                                                 required
                                                 v-model="event.start"
                                                 :color="themeOption.inputColor"
-                                                :label="`${trans.start} ${trans.date}`"
+                                                :label="`${trans.startDate}`"
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
@@ -114,11 +114,11 @@
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
-                                                :rules="[v => !!v || `${trans.end} ${trans.date} ${trans.is_required}`]"
+                                                :rules="[v => !!v || `${trans.endDateIsRequired}`]"
                                                 required
                                                 v-model="event.end"
                                                 :color="themeOption.inputColor"
-                                                :label="`${trans.end} ${trans.date}`"
+                                                :label="`${trans.endDate}`"
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
@@ -165,9 +165,9 @@
                                         :items="types"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.typeIsRequired}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.select} ${trans.event} ${trans.type}`"
+                                        :label="`${trans.selectEventType}`"
                                         v-model="event.type_id"
                                         box
                                         solo
@@ -337,11 +337,11 @@
                 this.showForm = !this.showForm
 
                 if (this.showForm) {
-                    this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
-                    this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.createNewEvent}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.createNewEvent}` )
                 } else {
-                    this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
-                    this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.events}` )
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.manageEvents}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.manageEvents}` )
                 }
             }
         }

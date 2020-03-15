@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.vehicle}` }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.createVehicle}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -29,8 +29,8 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
-                                        :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                        :rules="[v => !!v || `${trans.modelIsRequired}`]"
+                                        :label="`${trans.modelOfVehicle}`"
                                         :color="themeOption.inputColor"
                                         v-model="vehicle.model"
                                     ></v-text-field>
@@ -43,9 +43,9 @@
                                         :items="brands"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.vehicleBrandIsRequired}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.select_a} ${trans.brand}`"
+                                        :label="`${trans.selectABrand}`"
                                         v-model="vehicle.brand_id"
                                     >
                                     </v-select>
@@ -112,7 +112,7 @@
                             small
                             @click="onCreateVehicle()"
                         >
-                            {{ `${trans.create} ${trans.vehicle}` }}
+                            {{ `${trans.createVehicle}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-flex>

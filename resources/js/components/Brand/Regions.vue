@@ -23,7 +23,7 @@
                             <v-layout row wrap>
                                 <v-flex xs12 sm3 px-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.region} ${trans.name} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.regionIsRequired}`]"
                                         :label="`${trans.regionName}`"
                                         v-model="selectedRegion.name"
                                         :color="themeOption.inputColor"
@@ -33,7 +33,7 @@
 
                                 <v-flex xs12 sm3 px-2>
                                     <v-autocomplete
-                                        :rules="[v => !!v || `${trans.select} ${trans.country}`]"
+                                        :rules="[v => !!v || `${trans.selectCountry}`]"
                                         :items="countries"
                                         item-text="name"
                                         item-value="id"
@@ -67,8 +67,8 @@
                 :items="regions"
                 disable-initial-sort
                 :pagination.sync="pagination"
-                :no-results-text="`${trans.no} ${trans.region} ${trans.hasBeenAdded}`"
-                :no-data-text="`${trans.no} ${trans.region} ${trans.hasBeenAdded}`"
+                :no-results-text="`${trans.noRegionsFound}`"
+                :no-data-text="`${trans.noRegionsFound}`"
                 :rows-per-page-text="trans.rowsPerPage"
                 :rows-per-page-items="rowsPerPage"
                 :total-items="totalRegions"

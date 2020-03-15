@@ -91,6 +91,11 @@ return [
     ],
 
     [
+        'label' => 'Book guest',
+        'identifier' => 'bookGuest'
+    ],
+
+    [
         'label' => 'Select source',
         'identifier' => 'selectSource'
     ],
@@ -103,6 +108,11 @@ return [
     [
         'label' => 'Search by guest',
         'identifier' => 'searchByGuest'
+    ],
+
+    [
+        'label' => 'Search by name',
+        'identifier' => 'searchByName'
     ],
 
     [
@@ -246,6 +256,11 @@ return [
     ],
 
     [
+        'label' => 'Update user',
+        'identifier' => 'updateUser'
+    ],
+
+    [
         'label' => 'Guests successfully uploaded',
         'identifier' => 'guestsSuccessfullyUploaded'
     ],
@@ -263,6 +278,11 @@ return [
     [
         'label' => 'No vehicle selected',
         'identifier' => 'noVehicleSelected'
+    ],
+
+    [
+        'label' => 'No vehicles found',
+        'identifier' => 'noVehiclesFound'
     ],
 
     [
@@ -386,8 +406,18 @@ return [
     ],
 
     [
+        'label' => 'Create new user',
+        'identifier' => 'createNewUser'
+    ],
+
+    [
         'label' => 'Manage users',
         'identifier' => 'manageUsers'
+    ],
+
+    [
+        'label' => 'User successfully remove from event',
+        'identifier' => 'userSuccessfullyRemoveFromEvent'
     ],
 
     [
@@ -506,6 +536,11 @@ return [
     ],
 
     [
+        'label' => 'Group is required',
+        'identifier' => 'groupIsRequired'
+    ],
+
+    [
         'label' => 'Dealership banner',
         'identifier' => 'dealershipBanner'
     ],
@@ -569,6 +604,11 @@ return [
     ],
 
     [
+        'label' => 'Update guest',
+        'identifier' => 'updateGuest'
+    ],
+
+    [
         'label' => 'Action',
         'identifier' => 'action'
     ],
@@ -589,6 +629,11 @@ return [
     [
         'label' => 'Reebok',
         'identifier' => 'reebok'
+    ],
+
+    [
+        'label' => 'Reebok appointment',
+        'identifier' => 'reebokAppointment'
     ],
 
     [
@@ -676,6 +721,11 @@ return [
     ],
 
     [
+        'label' => 'Dealership users',
+        'identifier' => 'dealershipUsers'
+    ],
+
+    [
         'label' => 'Brands',
         'identifier' => 'brands'
     ],
@@ -683,6 +733,11 @@ return [
     [
         'label' => 'Brand',
         'identifier' => 'brand'
+    ],
+
+    [
+        'label' => 'Brand is required',
+        'identifier' => 'brandIsRequired'
     ],
 
     [
@@ -696,6 +751,21 @@ return [
     ],
 
     [
+        'label' => 'Add a vehicle',
+        'identifier' => 'addAVehicle'
+    ],
+
+    [
+        'label' => 'Create vehicle',
+        'identifier' => 'createVehicle'
+    ],
+
+    [
+        'label' => 'Edit vehicle',
+        'identifier' => 'editVehicle'
+    ],
+
+    [
         'label' => 'Events',
         'identifier' => 'events'
     ],
@@ -703,6 +773,21 @@ return [
     [
         'label' => 'Event',
         'identifier' => 'event'
+    ],
+
+    [
+        'label' => 'Event name',
+        'identifier' => 'eventName'
+    ],
+
+    [
+        'label' => 'Create event',
+        'identifier' => 'createEvent'
+    ],
+
+    [
+        'label' => 'Event name is required',
+        'identifier' => 'eventNameIsRequired'
     ],
 
     [
@@ -717,8 +802,23 @@ return [
     ],
 
     [
+        'label' => 'Country is required',
+        'identifier' => 'countryIsRequired'
+    ],
+
+    [
         'label' => 'Countries',
         'identifier' => 'countries'
+    ],
+
+    [
+        'label' => 'Search by country name',
+        'identifier' => 'searchByCountryName'
+    ],
+
+    [
+        'label' => 'No countries found',
+        'identifier' => 'noCountriesFound'
     ],
 
     [
@@ -729,6 +829,16 @@ return [
     [
         'label' => 'Regions',
         'identifier' => 'regions'
+    ],
+
+    [
+        'label' => 'Region is required',
+        'identifier' => 'regionIsRequired'
+    ],
+
+    [
+        'label' => 'No regions found',
+        'identifier' => 'noRegionsFound'
     ],
 
     [
@@ -757,6 +867,11 @@ return [
     ],
 
     [
+        'label' => 'Confirmed cancel',
+        'identifier' => 'confirmedCancel'
+    ],
+
+    [
         'label' => 'Arrived',
         'identifier' => 'arrived'
     ],
@@ -779,6 +894,16 @@ return [
     [
         'label' => 'Completed No Show',
         'identifier' => 'completedNoShow'
+    ],
+
+    [
+        'label' => 'Complete - no sale',
+        'identifier' => 'completeNoSale'
+    ],
+
+    [
+        'label' => 'Complete - sale made',
+        'identifier' => 'completeSaleMade'
     ],
 
     [
@@ -812,6 +937,11 @@ return [
     ],
 
     [
+        'label' => 'Vehicle model is required',
+        'identifier' => 'vehicleModelIsRequired'
+    ],
+
+    [
         'label' => 'Select Country',
         'identifier' => 'selectCountry',
     ],
@@ -824,6 +954,11 @@ return [
     [
         'label' => 'Postcode',
         'identifier' => 'postcode'
+    ],
+
+    [
+        'label' => 'Postcode is required',
+        'identifier' => 'postcodeIsRequired'
     ],
 
     [
@@ -847,8 +982,38 @@ return [
     ],
 
     [
+        'label' => 'Manage groups',
+        'identifier' => 'manageGroups'
+    ],
+
+    [
         'label' => 'Guests',
         'identifier' => 'guests'
+    ],
+
+    [
+        'label' => 'Guest services',
+        'identifier' => 'guestServices'
+    ],
+
+    [
+        'label' => 'Manage Guests',
+        'identifier' => 'manageGuests'
+    ],
+
+    [
+        'label' => 'Add guest',
+        'identifier' => 'addGuest'
+    ],
+
+    [
+        'label' => 'No guest found',
+        'identifier' => 'noGuestFound'
+    ],
+
+    [
+        'label' => 'Create guest',
+        'identifier' => 'createGuest'
     ],
 
     [
@@ -857,8 +1022,23 @@ return [
     ],
 
     [
+        'label' => 'Edit user',
+        'identifier' => 'editUser'
+    ],
+
+    [
+        'label' => 'User status',
+        'identifier' => 'userStatus'
+    ],
+
+    [
         'label' => 'Add user',
         'identifier' => 'addUser'
+    ],
+
+    [
+        'label' => 'Create user',
+        'identifier' => 'createUser'
     ],
 
     [
@@ -887,6 +1067,26 @@ return [
     ],
 
     [
+        'label' => 'Select a language',
+        'identifier' => 'selectALanguage'
+    ],
+
+    [
+        'label' => 'Add language',
+        'identifier' => 'addLanguage'
+    ],
+
+    [
+        'label' => 'No language found',
+        'identifier' => 'noLanguageFound'
+    ],
+
+    [
+        'label' => 'Manage languages',
+        'identifier' => 'manageLanguages'
+    ],
+
+    [
         'label' => 'Types',
         'identifier' => 'types'
     ],
@@ -894,6 +1094,26 @@ return [
     [
         'label' => 'Type',
         'identifier' => 'type'
+    ],
+
+    [
+        'label' => 'Add type',
+        'identifier' => 'addType'
+    ],
+
+    [
+        'label' => 'No type found',
+        'identifier' => 'noTypeFound'
+    ],
+
+    [
+        'label' => 'Manage event type',
+        'identifier' => 'manageEventType'
+    ],
+
+    [
+        'label' => 'Update type',
+        'identifier' => 'updateType'
     ],
 
     [
@@ -922,13 +1142,28 @@ return [
     ],
 
     [
+        'label' => 'First name is required',
+        'identifier' => 'firstNameIsRequired'
+    ],
+
+    [
+        'label' => 'Surname is required',
+        'identifier' => 'surnameIsRequired'
+    ],
+
+    [
         'label' => 'Surname',
         'identifier' => 'surName'
     ],
 
     [
-        'label' => 'Passwords',
+        'label' => 'Password',
         'identifier' => 'passwords'
+    ],
+
+    [
+        'label' => 'Password successfully updated',
+        'identifier' => 'passwordSuccessfullyUpdated'
     ],
 
     [
@@ -942,18 +1177,38 @@ return [
     ],
 
     [
+        'label' => 'Confirm password',
+        'identifier' => 'confirmPassword'
+    ],
+
+    [
+        'label' => 'Select a rule',
+        'identifier' => 'selectARule'
+    ],
+
+    [
+        'label' => 'Confirm password is required',
+        'identifier' => 'confirmPasswordIsRequired'
+    ],
+
+    [
+        'label' => 'Password is required',
+        'identifier' => 'passwordIsRequired'
+    ],
+
+    [
         'label' => 'Enter your password',
         'identifier' => 'enterYourPassword'
     ],
 
     [
-        'label' => 'minimum 8 character',
-        'identifier' => 'minimum8Character'
+        'label' => 'Password minimum 8 character',
+        'identifier' => 'passwordMinimum8Character'
     ],
 
     [
-        'label' => 'not matching',
-        'identifier' => 'notMatching'
+        'label' => 'Password not match',
+        'identifier' => 'passwordNotMatch'
     ],
 
     [
@@ -964,6 +1219,11 @@ return [
     [
         'label' => 'Profile',
         'identifier' => 'profile'
+    ],
+
+    [
+        'label' => 'Profile image',
+        'identifier' => 'profileImage'
     ],
 
     [
@@ -1002,6 +1262,11 @@ return [
     ],
 
     [
+        'label' => 'End Date is required',
+        'identifier' => 'endDateIsRequired'
+    ],
+
+    [
         'label' => 'Search',
         'identifier' => 'search'
     ],
@@ -1009,6 +1274,11 @@ return [
     [
         'label' => 'Email',
         'identifier' => 'email'
+    ],
+
+    [
+        'label' => 'Email is required',
+        'identifier' => 'emailIsRequired'
     ],
 
     [
@@ -1034,6 +1304,11 @@ return [
     ],
 
     [
+        'label' => 'Select a role',
+        'identifier' => 'selectARole'
+    ],
+
+    [
         'label' => 'Walk in',
         'identifier' => 'walkIn'
     ],
@@ -1054,6 +1329,11 @@ return [
     ],
 
     [
+        'label' => 'Mobile is required',
+        'identifier' => 'mobileIsRequired'
+    ],
+
+    [
         'label' => 'Landline',
         'identifier' => 'landline'
     ],
@@ -1061,6 +1341,11 @@ return [
     [
         'label' => 'Method',
         'identifier' => 'method'
+    ],
+
+    [
+        'label' => 'Method is required',
+        'identifier' => 'methodIsRequired'
     ],
 
     [
@@ -1091,6 +1376,21 @@ return [
     [
         'label' => 'Model',
         'identifier' => 'model'
+    ],
+
+    [
+        'label' => 'Model is required',
+        'identifier' => 'modelIsRequired'
+    ],
+
+    [
+        'label' => 'Model of vehicle',
+        'identifier' => 'modelOfVehicle'
+    ],
+
+    [
+        'label' => 'Vehicle brand is required',
+        'identifier' => 'vehicleBrandIsRequired'
     ],
 
     [
@@ -1139,6 +1439,11 @@ return [
     ],
 
     [
+        'label' => 'Has been added to event',
+        'identifier' => 'hasBeenAddedToEvent'
+    ],
+
+    [
         'label' => 'Settings',
         'identifier' => 'settings'
     ],
@@ -1174,13 +1479,48 @@ return [
     ],
 
     [
+        'label' => 'No translations found',
+        'identifier' => 'noTranslationsFound'
+    ],
+
+    [
+        'label' => 'Manage translations',
+        'identifier' => 'manageTranslations'
+    ],
+
+    [
+        'label' => 'Translation save',
+        'identifier' => 'translationSave'
+    ],
+
+    [
+        'label' => 'Update translation',
+        'identifier' => 'updateTranslation'
+    ],
+
+    [
         'label' => 'Code',
         'identifier' => 'code'
     ],
 
     [
+        'label' => 'Code 2 is required',
+        'identifier' => 'code2IsRequired'
+    ],
+
+    [
+        'label' => 'Code 3 is required',
+        'identifier' => 'code3IsRequired'
+    ],
+
+    [
         'label' => 'Company',
         'identifier' => 'company'
+    ],
+
+    [
+        'label' => 'Company is required',
+        'identifier' => 'companyIsRequired'
     ],
 
     [
@@ -1341,6 +1681,16 @@ return [
     [
         'label' => 'Download',
         'identifier' => 'download'
+    ],
+
+    [
+        'label' => 'Download booked guests',
+        'identifier' => 'downloadBookedGuests'
+    ],
+
+    [
+        'label' => 'Download unbooked guests',
+        'identifier' => 'downloadUnbookedGuests'
     ],
 
     [
@@ -1626,6 +1976,11 @@ return [
     ],
 
     [
+        'label' => 'UniqueId is required',
+        'identifier' => 'uniqueIdIsRequired'
+    ],
+
+    [
         'label' => 'None',
         'identifier' => 'none'
     ],
@@ -1726,7 +2081,77 @@ return [
     ],
 
     [
+        'label' => 'Dealership is required',
+        'identifier' => 'dealershipIsRequired'
+    ],
+
+    [
+        'label' => 'Start date is required',
+        'identifier' => 'startDateIsRequired'
+    ],
+
+    [
         'label' => 'Manage dealerships',
         'identifier' => 'manageDealerships'
+    ],
+
+    [
+        'label' => 'Event type',
+        'identifier' => 'eventType'
+    ],
+
+    [
+        'label' => 'Add event type',
+        'identifier' => 'addEventType'
+    ],
+
+    [
+        'label' => 'Type is required',
+        'identifier' => 'typeIsRequired'
+    ],
+
+    [
+        'label' => 'Select event type',
+        'identifier' => 'selectEventType'
+    ],
+
+    [
+        'label' => 'Create new event',
+        'identifier' => 'createNewEvent'
+    ],
+
+    [
+        'label' => 'Manage events',
+        'identifier' => 'manageEvents'
+    ],
+
+    [
+        'label' => 'Manage staff / vehicles',
+        'identifier' => 'manageStaffVehicles'
+    ],
+
+    [
+        'label' => 'Name of event',
+        'identifier' => 'nameOfEvent'
+    ],
+
+    [
+        'label' => 'Event banner',
+        'identifier' => 'eventBanner'
+    ],
+
+    [
+        'label' => 'Update event',
+        'identifier' => 'updateEvent'
+    ],
+
+    [
+        'label' => 'No events found',
+        'identifier' => 'noEventsFound'
+    ],
+
+    [
+        'label' => 'Event is required',
+        'identifier' => 'eventIsRequired'
     ],
 ];

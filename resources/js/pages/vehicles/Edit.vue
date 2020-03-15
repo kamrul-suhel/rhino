@@ -24,7 +24,7 @@
                                     <v-select
                                         :items="brands"
                                         item-text="name"
-                                        :rules="[v => !!v || `${trans.select_a} ${trans.brand}`]"
+                                        :rules="[v => !!v || `${trans.selectABrand}`]"
                                         item-value="id"
                                         :color="themeOption.inputColor"
                                         :label="trans.brand"
@@ -36,7 +36,7 @@
 
                                 <v-flex xs12 sm5 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.vehicle} ${trans.model} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.vehicleModelIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.model"
                                         v-model="vehicle.model"
@@ -72,7 +72,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label for="">{{`${trans.rightHandDriveImage}`}} </label>
+                                            <label>{{`${trans.rightHandDriveImage}`}} </label>
                                             <v-card class="pa-2 my-3">
                                                 <v-img
                                                     aspect-ratio="2.2"
@@ -182,8 +182,8 @@
 
         created() {
             this.initialize()
-            this.$store.commit('setHeaderTitle', `${this.trans.edit} ${this.trans.vehicle}`)
-            this.$store.commit('setNavTitle', `${this.trans.edit} ${this.trans.vehicle}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.editVehicle}`)
+            this.$store.commit('setNavTitle', `${this.trans.editVehicle}`)
         },
 
         methods: {

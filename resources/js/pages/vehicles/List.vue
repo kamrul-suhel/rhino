@@ -10,7 +10,7 @@
                     </div>
 
                     <div>
-                        {{ `${trans.add} ${trans.a} ${trans.vehicle}` }}
+                        {{ `${trans.addAVehicle}` }}
                     </div>
                 </div>
 
@@ -27,9 +27,9 @@
                                               :items="brands"
                                               item-text="name"
                                               item-value="id"
-                                              :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                              :rules="[v => !!v || `${trans.vehicleBrandIsRequired}`]"
                                               :color="themeOption.inputColor"
-                                              :label="`${trans.select_a} ${trans.brand}`"
+                                              :label="`${trans.selectABrand}`"
                                               v-model="vehicle.brand_id"
                                               style="width: 70%"
                                               solo
@@ -39,8 +39,8 @@
                                 </v-flex>
                                 <v-flex xs12 sm5 pa-2>
                                     <v-text-field box
-                                                  :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
-                                                  :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                                  :rules="[v => !!v || `${trans.modelIsRequired}`]"
+                                                  :label="`${trans.modelOfVehicle}`"
                                                   :color="themeOption.inputColor"
                                                   v-model="vehicle.model"
                                                   style="width: 70%"
@@ -71,7 +71,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label for="">{{ trans.rightHandDriveImage }}</label>
+                                            <label>{{ trans.rightHandDriveImage }}</label>
                                             <v-img
                                                 :src="rightImage"
                                                 width="150"
@@ -114,8 +114,8 @@
                     :items="vehicles"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
+                    :no-results-text="`${trans.noVehiclesFound}`"
+                    :no-data-text="`${trans.noVehiclesFound}`"
                     :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalVehicles"
@@ -288,8 +288,8 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.vehicles}`)
-            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.vehicles}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.manageVehicles}`)
+            this.$store.commit('setNavTitle', `${this.trans.manageVehicles}`)
         },
 
         mounted() {
@@ -334,8 +334,6 @@
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.vehicle.model}  ${this.trans.successfullyCreated}`
                             })
-
-                            console.log(this.getPagination());
 
                             this.$store.commit('setUpdateComponent')
 

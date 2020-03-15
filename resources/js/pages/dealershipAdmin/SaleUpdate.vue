@@ -4,7 +4,7 @@
                    :color="subComponent ? themeOption.toolbarColor : 'adminHeader'">
             <v-text-field xs12 sm4
                           :color="themeOption.inputColor"
-                          :label="`${trans.searchBy} ${trans.name}`"
+                          :label="`${trans.searchByName}`"
                           v-model="searchGuests">
             </v-text-field>
         </v-toolbar>
@@ -16,8 +16,8 @@
                     :items="guests"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.guest} ${trans.found}`"
+                    :no-results-text="`${trans.noBrandFound}`"
+                    :no-data-text="`${trans.noBrandFound}`"
                     :rows-per-page-text="trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGuests"
@@ -36,10 +36,10 @@
                                                 :color="themeOption.buttonColor"
                                                 flat
                                                 v-on="{ ...tooltip, ...menu }"
-                                            >{{ `${trans.user} ${trans.status}` }}
+                                            >{{ `${trans.userStatus}` }}
                                             </v-btn>
                                         </template>
-                                        <span>{{ `${trans.update} ${trans.guest}` }}</span>
+                                        <span>{{ `${trans.updateGuest}` }}</span>
                                     </v-tooltip>
                                 </template>
                                 <v-list>
@@ -173,7 +173,7 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcomeBack}`)
         },
 
         methods: {
@@ -264,12 +264,12 @@
             generateButton() {
                 this.items = [
                     {
-                        title: `${this.trans.complete} - ${this.trans.noSale}`,
+                        title: `${this.trans.completeNoSale}`,
                         status: 3, // No sale
                     },
 
                     {
-                        title: `${this.trans.complete} - ${this.trans.saleMade}`,
+                        title: `${this.trans.completeSaleMade}`,
                         status: 4 // Sale made
                     },
 

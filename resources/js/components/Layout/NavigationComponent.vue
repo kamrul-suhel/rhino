@@ -26,7 +26,7 @@
             <v-flex xs12 sm4>
                 <v-layout row>
                     <v-autocomplete
-                        :placeholder="trans.select_a_language"
+                        :placeholder="trans.selectALanguage"
                         :color="themeOption.primaryColor"
                         :items="languages"
                         item-text="code2"

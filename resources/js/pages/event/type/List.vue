@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.add} ${trans.event} ${trans.type}` }}
+                    {{ `${trans.addEventType}` }}
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
                         <v-flex xs12 sm3 mr-3>
                             <v-text-field
                                 :label="trans.name"
-                                :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.nameIsRequired}`]"
                                 required
                                 v-model="selectedType.name"
                                 :color="themeOption.inputColor"
@@ -81,7 +81,7 @@
                                 class="rounded-btn"
                                 :color="themeOption.buttonDangerColor"
                                 @click="onCreateType">
-                                {{ editType ? `${trans.update} ${trans.type}` : `${trans.add} ${trans.type}`}}
+                                {{ editType ? `${trans.updateType}` : `${trans.addType}`}}
                             </v-btn>
                         </v-flex>
                     </v-layout>
@@ -96,8 +96,8 @@
                     :items="types"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_type_found"
-                    :no-data-text="trans.no_type_found"
+                    :no-results-text="trans.noTypeFound"
+                    :no-data-text="trans.noTypeFound"
                     :rows-per-page-text="trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalType"
@@ -253,7 +253,7 @@
         },
 
         created() {
-            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.event} ${this.trans.types}` )
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manageEventType}` )
             this.$store.commit( 'setNavTitle', `${this.trans.events}` )
         },
 

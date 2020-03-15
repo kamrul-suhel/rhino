@@ -18,7 +18,7 @@
                         </v-flex>
 
                         <v-flex xs12>
-                            <h2 class="login-title">{{ trans.welcome + ' ' + trans.back }}!</h2>
+                            <h2 class="login-title">{{ trans.welcomeBack }}!</h2>
                             <h3>{{ trans.EnterYourUniqueCode }}</h3>
                         </v-flex>
 
@@ -27,7 +27,7 @@
                                 color="dark"
                                 :hint="trans.egnchfge23sxs"
                                 v-model="user.unique"
-                                :rules="[v => !!v || `${trans.uniqueId} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.uniqueIdIsRequired}`]"
                                 required
                                 validate-on-blur
                                 :error="validation.error"

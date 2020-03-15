@@ -233,7 +233,7 @@ export default {
                 return trans.confirmed
 
             case 3:
-                return `${trans.not} ${trns.available}`
+                return `${trans.notAvailable}`
             case 4:
                 return `${trans.breakTime}`
             case 6:

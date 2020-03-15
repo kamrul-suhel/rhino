@@ -4,7 +4,7 @@
             :color="subComponent ? themeOption.toolbarColor : 'adminHeader'">
             <v-text-field xs12 sm4
                 :color="themeOption.inputColor"
-                :label="`${trans.searchBy} ${trans.name}`"
+                :label="`${trans.searchByName}`"
                 v-model="searchGuests">
             </v-text-field>
 
@@ -15,7 +15,7 @@
                 small
                 @click="$router.push({name: 'createGuest'})"
             >
-                {{ `${trans.add} ${trans.guest}` }}
+                {{ `${trans.addGuest}` }}
             </v-btn>
 
             <UploadGuestCSVComponent v-if="subComponent"></UploadGuestCSVComponent>
@@ -28,8 +28,8 @@
                     :items="guests"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.guest} ${trans.found}`"
+                    :no-results-text="`${trans.noGuestFound}`"
+                    :no-data-text="`${trans.noGuestFound}`"
                     :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGuests"
@@ -174,7 +174,7 @@
 
         created() {
             if(!this.subComponent){
-                this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.guests}` )
+                this.$store.commit('setHeaderTitle', `${this.trans.manageGuests}` )
                 this.$store.commit('setNavTitle', `${this.trans.guests}`)
             }
         },
