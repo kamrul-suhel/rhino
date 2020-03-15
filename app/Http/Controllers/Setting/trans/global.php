@@ -1519,6 +1519,16 @@ return [
     ],
 
     [
+        'label' => 'Create company',
+        'identifier' => 'createCompany'
+    ],
+
+    [
+        'label' => 'Update company',
+        'identifier' => 'updateCompany'
+    ],
+
+    [
         'label' => 'Company is required',
         'identifier' => 'companyIsRequired'
     ],
@@ -1852,7 +1862,7 @@ return [
 
     [
         'label' => 'Do you have a car to part exchange?',
-        'identifier' => 'DoYouHaveACarToPartExchange',
+        'identifier' => 'doYouHaveACarToPartExchange',
     ],
 
     [

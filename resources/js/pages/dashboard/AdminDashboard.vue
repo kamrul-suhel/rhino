@@ -1,5 +1,4 @@
 <template>
-
     <v-container grid-list-md>
         <v-layout row wrap class=" d-none d-md-block">
             <v-flex xs12 class="pa-0">

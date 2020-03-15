@@ -59,7 +59,7 @@
                             dark
                             :color="themeOption.buttonDangerColor"
                             @click="onCreateCompany">
-                            {{ editCompany ? `${trans.update} ${trans.company}` : `${trans.create} ${trans.company}` }}
+                            {{ editCompany ? `${trans.updateCompany}` : `${trans.createCompany}` }}
                         </v-btn>
                     </v-flex>
                 </v-layout>
