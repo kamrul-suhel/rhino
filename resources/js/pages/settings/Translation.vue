@@ -37,8 +37,10 @@
             class="elevation-1 r-table translations"
         >
             <template v-slot:items="props">
-                <td class="text-xs-left">{{ props.item.label }}</td>
-                <td class="text-xs-left">
+                <td>
+                    <span class="label">{{ props.item.label }}</span>
+                    </td>
+                <td>
                     <v-edit-dialog
                         :return-value.sync="props.item.name"
                         lazy
@@ -199,9 +201,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .translations .v-menu__activator{
-        background: #fff
-    }
-</style>
