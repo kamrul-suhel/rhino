@@ -1575,7 +1575,7 @@ return [
 
     [
         'label' => 'Tuesday',
-        'translation' => 'Tuesday'
+        'identifier' => 'Tuesday'
     ],
 
     [
