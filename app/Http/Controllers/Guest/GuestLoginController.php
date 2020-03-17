@@ -28,6 +28,15 @@ class GuestLoginController extends Controller
             // Update method & last login time
             $request->has('method') ? $guest->method = $request->{'method'} : null;
             $guest->last_logged_in = Carbon::now();
+
+            //Update language id
+            if(
+                $request->has('languageId') &&
+                !empty($request->languageId)
+            ){
+                $guest->language_id = $request->languageId;
+            }
+
             $guest->save();
 
             if (

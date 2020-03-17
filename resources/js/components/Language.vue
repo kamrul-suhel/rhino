@@ -105,6 +105,7 @@
 
         methods: {
             onSubLanguageChange(selectedLanguage) {
+                console.log('selected language is: ', selectedLanguage)
                 this.$store.commit('setSubSelectedLanguage', selectedLanguage)
             },
 
