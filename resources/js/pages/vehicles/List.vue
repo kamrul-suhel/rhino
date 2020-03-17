@@ -10,7 +10,7 @@
                     </div>
 
                     <div>
-                        {{ `${trans.add} ${trans.a} ${trans.vehicle}` }}
+                        {{ `${trans.addAVehicle}` }}
                     </div>
                 </div>
 
@@ -27,9 +27,9 @@
                                               :items="brands"
                                               item-text="name"
                                               item-value="id"
-                                              :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                              :rules="[v => !!v || `${trans.vehicleBrandIsRequired}`]"
                                               :color="themeOption.inputColor"
-                                              :label="`${trans.select_a} ${trans.brand}`"
+                                              :label="`${trans.selectABrand}`"
                                               v-model="vehicle.brand_id"
                                               style="width: 70%"
                                               solo
@@ -39,8 +39,8 @@
                                 </v-flex>
                                 <v-flex xs12 sm5 pa-2>
                                     <v-text-field box
-                                                  :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
-                                                  :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                                  :rules="[v => !!v || `${trans.modelIsRequired}`]"
+                                                  :label="`${trans.modelOfVehicle}`"
                                                   :color="themeOption.inputColor"
                                                   v-model="vehicle.model"
                                                   style="width: 70%"
@@ -54,7 +54,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
+                                            <label class="mb-3">{{ trans.leftHandDriveImage}}</label>
                                             <v-img
                                                 :src="leftImage"
                                                 width="150"
@@ -71,7 +71,7 @@
                                 <v-flex xs12 sm5 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label for="">{{ trans.right_hand_drive_image }}</label>
+                                            <label>{{ trans.rightHandDriveImage }}</label>
                                             <v-img
                                                 :src="rightImage"
                                                 width="150"
@@ -114,9 +114,9 @@
                     :items="vehicles"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.vehicle} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :no-results-text="`${trans.noVehiclesFound}`"
+                    :no-data-text="`${trans.noVehiclesFound}`"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalVehicles"
                     :loading="loading"
@@ -182,7 +182,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -288,8 +288,8 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.vehicles}`)
-            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.vehicles}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.manageVehicles}`)
+            this.$store.commit('setNavTitle', `${this.trans.manageVehicles}`)
         },
 
         mounted() {
@@ -332,10 +332,8 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.vehicle.model}  ${this.trans.successfully_created}`
+                                message: `${this.vehicle.model}  ${this.trans.successfullyCreated}`
                             })
-
-                            console.log(this.getPagination());
 
                             this.$store.commit('setUpdateComponent')
 
@@ -430,7 +428,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedVehicle.model}  ${this.trans.successfully_deleted}`
+                                message: `${selectedVehicle.model}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()

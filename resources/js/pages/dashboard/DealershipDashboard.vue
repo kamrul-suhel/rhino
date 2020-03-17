@@ -25,7 +25,7 @@
                         hide-selected
                         item-text="name"
                         item-value="symbol"
-                        :label="`${trans.searchBy} ${trans.guest} ${trans.email}`"
+                        :label="`${trans.searchGuestByEmail}`"
                         open-on-clear
                         return-object
                         class="search-guests"
@@ -34,7 +34,7 @@
                         <template v-slot:no-data>
                             <v-list-tile>
                                 <v-list-tile-title>
-                                    {{ `${trans.searchBy} ${trans.guest}` }}
+                                    {{ `${trans.searchGuestByEmail}` }}
                                 </v-list-tile-title>
                             </v-list-tile>
                         </template>
@@ -75,7 +75,7 @@
                             </v-card-title>
 
                             <v-card-text class="text-xs-center">
-                                {{ `${trans.book} ${trans.a} ${trans.guest}` }}
+                                {{ `${trans.bookAGuest}` }}
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -93,7 +93,7 @@
                             </v-card-title>
 
                             <v-card-text class="text-xs-center">
-                                {{ trans.download }} <br/> {{trans.unbooked}} {{trans.guest}}
+                                {{ trans.download }} <br/> {{trans.unbookedGuest}}
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -111,7 +111,7 @@
                             </v-card-title>
 
                             <v-card-text class="text-xs-center">
-                                {{ trans.download }} <br/> {{trans.booked}} {{trans.guest}}
+                                {{ trans.download }} <br/> {{trans.bookedGuest}}
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -144,7 +144,7 @@
                                 @click="onNavigateTo('editDealershipEvent')">
                             <v-icon color="#000">access_time</v-icon>
                             <v-card-text class="px-2">
-                                {{ `${trans.edit} ${trans.event}` }}
+                                {{ `${trans.editEvent}` }}
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -155,7 +155,7 @@
                                 @click="onNavigateTo('eventSales')">
                             <v-icon color="#000">languages</v-icon>
                             <v-card-text class="px-2">
-                                {{ `${trans.update} ${trans.sales}` }}
+                                {{ `${trans.updateSales}` }}
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -230,7 +230,7 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcomeBack}`)
             this.guests = []
         },
 

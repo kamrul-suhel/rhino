@@ -44,7 +44,7 @@ class AddSetting
 
             foreach ($settingArray as $item) {
                 /*
-                 * Check exist identifier to prevent duplication
+                 * Check exist identifier, to prevent duplication
                  */
                 $existsSetting = Setting::where('identifier', $item['identifier'])->first();
                 if($existsSetting){
@@ -59,7 +59,7 @@ class AddSetting
                 $settingTranslation = new SettingTranslation();
                 $settingTranslation->setting_id = $setting->id;
                 $settingTranslation->language_id = $languageId;
-                $settingTranslation->translation = $item['translation'];
+                $settingTranslation->translation = $item['label'];
 
                 $settingTranslation->save();
             }

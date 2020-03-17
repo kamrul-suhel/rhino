@@ -10,7 +10,7 @@
         height: unset!important;
 
         @media (min-height: 660px){
-            height: 120px;
+            min-height: 120px;
         }
     }
 }
@@ -64,4 +64,45 @@
     .metric {
         width: 100%;
     }
+}
+
+// Translation table styling
+.translations table thead {
+    display: none;
+    @media (min-width: 768px) {
+        display: table-header-group;
+    }
+}
+.translations table th {
+    display: none;
+    @media (min-width: 768px) {
+        display: table-cell!important;
+        width: 50%!important;
+    }
+}
+.translations table td {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    @media (min-width: 768px) {
+        text-align: left;
+        display: table-cell;
+        width: 50%;
+    }
+
+    span.label {
+        margin-top: 5px;
+        display: block;
+        align-self: center;
+    }
+}
+.translations .v-menu__activator a {
+    border: solid 1px #c3c3c3;
+    text-indent: 15px;
+    background:#fefefe;
+    height: 40px;
+    width: 100%;
+    margin: 3px auto;
 }

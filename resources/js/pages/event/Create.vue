@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.create} ${trans.event}` }}
+                    {{ `${trans.createEvent}` }}
                 </div>
             </div>
             <div class="r-tab-content" :class="[showForm ? 'open' : '']">
@@ -20,13 +20,13 @@
                     lazy-validation>
                     <v-layout>
                         <v-flex xs12>
-                                
+
                             <v-layout row wrap>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.event} ${trans.name} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.eventNameIsRequired}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.event} ${trans.name}`"
+                                        :label="`${trans.eventName}`"
                                         v-model="event.name"
                                         box
                                         solo
@@ -39,7 +39,7 @@
                                         :items="dealerships"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.dealershipIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.dealership"
                                         v-model="event.dealership_id"
@@ -67,11 +67,11 @@
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
-                                                :rules="[v => !!v || `${trans.start} ${trans.date} ${trans.is_required}`]"
+                                                :rules="[v => !!v || `${trans.startDateIsRequired}`]"
                                                 required
                                                 v-model="event.start"
                                                 :color="themeOption.inputColor"
-                                                :label="`${trans.start} ${trans.date}`"
+                                                :label="`${trans.startDate}`"
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
@@ -114,11 +114,11 @@
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
-                                                :rules="[v => !!v || `${trans.end} ${trans.date} ${trans.is_required}`]"
+                                                :rules="[v => !!v || `${trans.endDateIsRequired}`]"
                                                 required
                                                 v-model="event.end"
                                                 :color="themeOption.inputColor"
-                                                :label="`${trans.end} ${trans.date}`"
+                                                :label="`${trans.endDate}`"
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
@@ -150,7 +150,7 @@
                                         :items="appointmentDuration"
                                         item-value="value"
                                         item-text="text"
-                                        :label="trans.appointment_duration"
+                                        :label="trans.appointmentDuration"
                                         :color="themeOption.inputColor"
                                         v-model="event.appointment_duration"
                                         box
@@ -165,9 +165,9 @@
                                         :items="types"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || `${trans.type} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.typeIsRequired}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.select} ${trans.event} ${trans.type}`"
+                                        :label="`${trans.selectEventType}`"
                                         v-model="event.type_id"
                                         box
                                         solo
@@ -207,7 +207,7 @@
                             </v-layout>
                             <v-layout row wrap class="justify-center">
                                 <v-flex xs12 pa-2>
-                                    <r-button 
+                                    <r-button
                                         :text="`${trans.submit}`"
                                         class="rounded-btn text-white"
                                         dark
@@ -217,7 +217,7 @@
                                         @click="onCreateEvent"
                                         :color="themeOption.buttonDangerColor" />
                                 </v-flex>
-                            </v-layout>                            
+                            </v-layout>
                         </v-flex>
                     </v-layout>
                 </v-form>
@@ -283,7 +283,7 @@
                     _.forOwn(this.event, (value, key) => {
 
                         eventForm.append(key, value)
-                        
+
                     })
 
                     // Set form object for times
@@ -297,7 +297,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.event.name}  ${this.trans.successfully_created}`
+                                message: `${this.event.name}  ${this.trans.successfullyCreated}`
                             })
                             this.$store.commit('setButtonLoading', false)
                         }
@@ -332,16 +332,16 @@
                     }
                 ]
             },
-            
+
             toggleForm() {
                 this.showForm = !this.showForm
 
                 if (this.showForm) {
-                    this.$store.commit( 'setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
-                    this.$store.commit( 'setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.event}` )
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.createNewEvent}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.createNewEvent}` )
                 } else {
-                    this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
-                    this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.events}` )
+                    this.$store.commit( 'setHeaderTitle', `${this.trans.manageEvents}` )
+                    this.$store.commit( 'setNavTitle', `${this.trans.manageEvents}` )
                 }
             }
         }

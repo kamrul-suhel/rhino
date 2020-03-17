@@ -51,7 +51,9 @@
 
         props: {
             languageId: {
-                required: true
+                required: false,
+                type: Number,
+                default: 1
             },
             isFrontend: {
                 required: false,
@@ -59,14 +61,14 @@
                 default: false
             },
 
-            model:{
+            model: {
                 type: String,
                 required: false
             },
 
             solo: {
                 type: Boolean,
-                required:false,
+                required: false,
                 default: true
             },
 
@@ -75,8 +77,8 @@
                 required: false,
                 default: true
             },
-            chip:{
-                type:Boolean,
+            chip: {
+                type: Boolean,
                 required: false,
                 default: true
             }

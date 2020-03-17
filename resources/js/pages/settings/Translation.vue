@@ -4,7 +4,7 @@
             <v-flex xs12 sm6>
                 <v-text-field
                     :color="themeOption.inputColor"
-                    :label="`${trans.searchBy} ${trans.name}`"
+                    :label="`${trans.searchByName}`"
                     v-model="searchField"
                     box solo flat>
                 </v-text-field>
@@ -13,8 +13,7 @@
             <v-flex xs12 sm6>
                 <v-layout row wrap justify-end align-content-end>
                     <v-flex xs12 sm8>
-                        <LanguagePicker :languageId="selectedLanguage.id"
-                                        :solo="false"
+                        <LanguagePicker :solo="false"
                                         :flat="false"
                                         :chip="false"
                                         model="translation">
@@ -29,17 +28,19 @@
             :headers="headers"
             :items="translations"
             :pagination.sync="pagination"
-            :no-results-text="`${trans.no} ${trans.country} ${trans.found}`"
-            :no-data-text="`${trans.no} ${trans.translation} ${trans.found}`"
-            :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+            :no-results-text="`${trans.noTranslationsFound}`"
+            :no-data-text="`${trans.noTranslationsFound}`"
+            :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
             :rows-per-page-items="rowsPerPage"
             :total-items="totalTranslation"
             :loading="loading"
             class="elevation-1 r-table translations"
         >
             <template v-slot:items="props">
-                <td class="text-xs-left">{{ props.item.label }}</td>
-                <td class="text-xs-left">
+                <td>
+                    <span class="label">{{ props.item.label }}</span>
+                    </td>
+                <td>
                     <v-edit-dialog
                         :return-value.sync="props.item.name"
                         lazy
@@ -151,8 +152,8 @@
 
         created() {
 
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.translations}`)
-            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.translations}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.manageTranslations}`)
+            this.$store.commit('setNavTitle', `${this.trans.manageTranslations}`)
         },
 
         mounted() {
@@ -164,7 +165,6 @@
             },
 
             save (settingTranslation) {
-                console.log('setting is; ', settingTranslation)
                 const translationId = settingTranslation.setting_translation_id
                 let translationForm = new FormData()
                 translationForm.append('setting_translation_id', translationId)
@@ -178,7 +178,7 @@
                 axios.post(URL, translationForm).then((response) => {
                     if(response.data.success){
                         this.snackColor = 'success'
-                        this.snackText = `${this.trans.translation} ${this.trans.save}`
+                        this.snackText = `${this.trans.translationSave}`
                         this.snack = true
                     }
                 })
@@ -193,7 +193,7 @@
             open () {
                 this.snack = true
                 this.snackColor = 'info'
-                this.snackText = `${this.trans.update} ${this.trans.translation}`
+                this.snackText = `${this.trans.updateTranslation}`
             },
 
             close () {
@@ -201,9 +201,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .translations .v-menu__activator{
-        background: #fff
-    }
-</style>

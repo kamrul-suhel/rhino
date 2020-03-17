@@ -25,7 +25,7 @@
                         </tr>
 
                         <tr>
-                            <td><strong>{{ `${trans.address_line} 1` }}:</strong> {{ guest.address_line_1 }}</td>
+                            <td><strong>{{ `${trans.addressLine} 1` }}:</strong> {{ guest.address_line_1 }}</td>
                             <td class="text-xs-left"><strong>{{ `${trans.landline} 2` }}:</strong> {{
                                 guest.address_line_2 }}
                             </td>
@@ -63,7 +63,7 @@
 
                                 <v-layout row wrap>
                                     <v-flex xs6>
-                                        <strong>{{ trans.sales_executive }}:</strong> {{ appointment.user ?
+                                        <strong>{{ trans.salesExecutive }}:</strong> {{ appointment.user ?
                                         `${appointment.user.firstname} ${appointment.user.surname}` : ''}}
                                     </v-flex>
 
@@ -80,7 +80,7 @@
                                        flat
                                        v-if="appointment.status === 1"
                                        @click="onCancel(appointment)">
-                                    <span :style="{color: themeOption.primaryColor}">{{ `${trans.cancel} ${trans.appointment}` }}</span>
+                                    <span :style="{color: themeOption.primaryColor}">{{ `${trans.cancelAppointment}` }}</span>
                                 </v-btn>
 
                                 <v-btn :color="themeOption.primaryColor"
@@ -88,7 +88,7 @@
                                        v-if="appointment.status === 6"
                                        @click="onReebok(appointment)">
                                     <span :style="{color: themeOption.primaryColor}">
-                                        {{ `${trans.reebok} ${trans.appointment}` }}
+                                        {{ `${trans.reebokAppointment}` }}
                                     </span>
                                 </v-btn>
 
@@ -142,7 +142,7 @@
                         flat
                         @click="onConfirmAction('confirmedCancel')"
                     >
-                        {{ `${trans.confirmed} ${trans.cancel}` }}
+                        {{ `${trans.confirmedCancel}` }}
                     </v-btn>
 
                     <v-btn
@@ -151,7 +151,7 @@
                         flat
                         @click="onConfirmAction('reebokAppointment')"
                     >
-                        {{ `${trans.reebok} ${trans.appointment}` }}
+                        {{ `${trans.reebokAppointment}` }}
                     </v-btn>
 
                     <v-btn
@@ -205,7 +205,7 @@
 
         created() {
             this.initialize()
-            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcomeBack}`)
         },
 
         mounted() {
@@ -222,7 +222,7 @@
             },
 
             onCancel(appointment) {
-                this.dialogTitle = `${this.trans.cancel} ${this.trans.appointment}`
+                this.dialogTitle = `${this.trans.cancelAppointment}`
                 this.dialogDescription = `${this.trans.confirmationForCancel}`
                 this.selectedAppointment = {...appointment}
                 this.dialogButtonCancel = true
@@ -231,7 +231,7 @@
 
             onReebok(appointment) {
                 this.selectedAppointment = {...appointment}
-                this.dialogTitle = `${this.trans.reebok} ${this.trans.appointment}`
+                this.dialogTitle = `${this.trans.reebokAppointment}`
                 this.dialogDescription = `${this.trans.confirmationForReebok}`
                 this.dialogButtonCancel = false
                 this.dialog = true
@@ -239,7 +239,7 @@
 
             onBookGuest(appointment) {
                 this.selectedAppointment = {...appointment}
-                this.dialogTitle = `${this.trans.book} ${this.trans.guest}`
+                this.dialogTitle = `${this.trans.bookGuest}`
                 this.dialogDescription = `${this.trans.confirmationForBook}`
                 this.dialogButtonCancel = false
                 this.dialog = true

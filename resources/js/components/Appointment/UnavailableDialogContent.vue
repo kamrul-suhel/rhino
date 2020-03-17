@@ -30,7 +30,7 @@
                 <v-btn :color="themeOption.primaryColor"
                        @click="onRemoveBreakTime()">
                     <span
-                        :style="{color: themeOption.primaryTextColor}">{{ `${trans.remove} ${trans.breakTime}`}}</span>
+                        :style="{color: themeOption.primaryTextColor}">{{ `${trans.removeBreakTime}`}}</span>
                 </v-btn>
             </v-layout>
 
@@ -43,7 +43,7 @@
                       align-item-center>
                 <v-btn :color="themeOption.primaryColor"
                        @click="onRemoveBreakTime()">
-                    <span :style="{color: themeOption.primaryTextColor}">{{ `${trans.remove} ${trans.not} ${trans.available}`}}</span>
+                    <span :style="{color: themeOption.primaryTextColor}">{{ `${trans.removeNotAvailable}`}}</span>
                 </v-btn>
             </v-layout>
 
@@ -83,14 +83,14 @@
                 <v-btn :color="themeOption.primaryColor"
                        @click="onAssignToSaleExecutive()">
                     <span :style="{color: themeOption.primaryTextColor}">
-                        {{ `${trans.assign} ${trans.to} ${trans.sales_executive}`}}
+                        {{ `${trans.assignToSalesExecutive}`}}
                     </span>
                 </v-btn>
 
                 <v-btn :color="themeOption.primaryColor"
                        @click="onCancelAppointment()">
                     <span
-                        :style="{color: themeOption.primaryTextColor}">{{ `${trans.cancel} ${trans.appointment}`}}</span>
+                        :style="{color: themeOption.primaryTextColor}">{{ `${trans.cancelAppointment}`}}</span>
                 </v-btn>
             </v-layout>
         </v-flex>

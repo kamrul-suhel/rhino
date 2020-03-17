@@ -23,7 +23,7 @@
                                 :items="saleExecutives"
                                 item-text="firstname"
                                 :color="themeOption.inputColor"
-                                :label="`${trans.select} ${trans.sales_executive}`"
+                                :label="`${trans.selectSalesExecutive}`"
                                 v-model="selectedSaleExecutive"
                                 @change="onSelectSaleExecutive"
                                 return-object
@@ -45,7 +45,7 @@
                                     <v-text-field
                                         v-model="selectedDate"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.select} ${trans.date}`"
+                                        :label="`${trans.selectDate}`"
                                         prepend-icon="event"
                                         readonly
                                         v-on="on"

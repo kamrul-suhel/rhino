@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.add} ${trans.new} ${trans.country}` }}
+                    {{ `${trans.addNewCountry}` }}
                 </div>
             </div>
             <div class="r-tab-content" :class="[showForm ? 'open' : '']">
@@ -17,15 +17,15 @@
                 <v-form
                     ref="countryForm"
                     v-model="valid"
-                    lazy-validation>        
-                                    
+                    lazy-validation>
+
                     <v-layout row wrap>
                         <v-flex xs12 sm3 wrap class="mr-2">
                             <v-text-field
                                 :color="themeOption.inputColor"
                                 :label="trans.name"
                                 v-model="country.name"
-                                :rules="[v => !!v ||  `${trans.country} ${trans.name} ${trans.is_required}` ]" 
+                                :rules="[v => !!v ||  `${trans.countryNameIsRequired}` ]"
                                 solo box flat
                             ></v-text-field>
                         </v-flex>
@@ -35,7 +35,7 @@
                                 :color="themeOption.inputColor"
                                 :label="trans.code"
                                 v-model="country.code"
-                                :rules="[v => !!v || `${trans.country} ${trans.code} ${trans.is_required}`]" 
+                                :rules="[v => !!v || `${trans.countryCodeIsRequired}`]"
                                 solo box flat
                             ></v-text-field>
                         </v-flex>
@@ -44,13 +44,13 @@
                             <v-select
                                 :items="seatingPosition"
                                 :color="themeOption.inputColor"
-                                :label="trans.seating_position"
+                                :label="trans.seatingPosition"
                                 v-model="country.seating_position"
-                                :rules="[v => !!v ||  `${trans.seating_positions} ${trans.is_required}`]" 
+                                :rules="[v => !!v ||  `${trans.seatingPositionIsRequired}`]"
                                 solo box flat
                             ></v-select>
                         </v-flex>
-                        
+
                         <v-flex xs12 sm3 class="mr-2">
                             <v-switch
                                 :color="themeOption.switchOnColor"
@@ -82,7 +82,7 @@
     import {mapGetters} from 'vuex'
     import country from "../../store/modules/country";
 
-    export default {        
+    export default {
         data() {
             return {
                 valid: true,
@@ -126,7 +126,7 @@
 
         methods: {
             initialize() {
-                
+
             },
 
             createCountry(){
@@ -142,16 +142,14 @@
                         countryForm.append(key, value)
                     });
 
-                    
                     const URL = `/api/countries`
                     axios.post(URL, countryForm).then((response)=>{
                         if(response.data){
-                            console.log(response.data);
                             // Show success message
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.trans.successfully_updated}`
+                                message: `${this.trans.successfullyUpdated}`
                             })
                             // reset selectedCountry in store
                             // this.$store.commit('setSelectedCountry', {})
@@ -162,11 +160,11 @@
                         }
                     });
                 } else {
-                    console.log('Nahhh');
+
                 }
 
             },
-            
+
             toggleForm() {
                 this.showForm = !this.showForm
             }

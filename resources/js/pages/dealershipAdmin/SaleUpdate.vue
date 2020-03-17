@@ -4,7 +4,7 @@
                    :color="subComponent ? themeOption.toolbarColor : 'adminHeader'">
             <v-text-field xs12 sm4
                           :color="themeOption.inputColor"
-                          :label="`${trans.searchBy} ${trans.name}`"
+                          :label="`${trans.searchByName}`"
                           v-model="searchGuests">
             </v-text-field>
         </v-toolbar>
@@ -16,9 +16,9 @@
                     :items="guests"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.guest} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :no-results-text="`${trans.noBrandFound}`"
+                    :no-data-text="`${trans.noBrandFound}`"
+                    :rows-per-page-text="trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalGuests"
                     :loading="loading"
@@ -36,10 +36,10 @@
                                                 :color="themeOption.buttonColor"
                                                 flat
                                                 v-on="{ ...tooltip, ...menu }"
-                                            >{{ `${trans.user} ${trans.status}` }}
+                                            >{{ `${trans.userStatus}` }}
                                             </v-btn>
                                         </template>
-                                        <span>{{ `${trans.update} ${trans.guest}` }}</span>
+                                        <span>{{ `${trans.updateGuest}` }}</span>
                                     </v-tooltip>
                                 </template>
                                 <v-list>
@@ -75,7 +75,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -173,7 +173,7 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.welcome} ${this.trans.back}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.welcomeBack}`)
         },
 
         methods: {
@@ -217,7 +217,7 @@
                     this.$store.commit('setSnackbarMessage', {
                         openMessage: true,
                         timeOut: this.themeOption.snackBarTimeout,
-                        message: `${this.selectedGuest.first_name}  ${this.trans.successfully_deleted}`
+                        message: `${this.selectedGuest.first_name}  ${this.trans.successfullyDeleted}`
                     })
                 })
             },
@@ -264,12 +264,12 @@
             generateButton() {
                 this.items = [
                     {
-                        title: `${this.trans.complete} - ${this.trans.noSale}`,
+                        title: `${this.trans.completeNoSale}`,
                         status: 3, // No sale
                     },
 
                     {
-                        title: `${this.trans.complete} - ${this.trans.saleMade}`,
+                        title: `${this.trans.completeSaleMade}`,
                         status: 4 // Sale made
                     },
 
@@ -298,7 +298,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${guest.first_name}  ${this.trans.successfully_updated}`
+                            message: `${guest.first_name}  ${this.trans.successfullyUpdated}`
                         })
                         this.initialize()
                     }

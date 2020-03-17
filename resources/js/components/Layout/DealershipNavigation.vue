@@ -66,7 +66,7 @@
             <v-card>
                 <v-card-title class="headline">
                     <h4>{{ trans.download }}</h4>
-                    <h5>{{ `${trans.booked} ${trans.guest}` }}</h5>
+                    <h5>{{ `${trans.bookedGuest}` }}</h5>
                 </v-card-title>
 
                 <v-card-text>
@@ -283,7 +283,7 @@
 
             onDownloadGuest() {
                 const URL = `/api/csv/guests/download?downloadType=${this.downloadType}&eventId=${this.selectedEvent.id}`
-                const fileName = `${this.trans.booked}${this.trans.guest}`
+                const fileName = `${this.trans.bookedGuest}`
 
                 axios.get(URL).then((response) => {
                     // Check response success & have some data

@@ -10,7 +10,7 @@
                     </div>
 
                     <div>
-                        {{ `${trans.create} ${trans.region}` }}
+                        {{ `${trans.createRegion}` }}
                     </div>
                 </div>
 
@@ -23,8 +23,8 @@
                             <v-layout row wrap>
                                 <v-flex xs12 sm3 px-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.region} ${trans.name} ${trans.is_required}`]"
-                                        :label="`${trans.region} ${trans.name}`"
+                                        :rules="[v => !!v || `${trans.regionIsRequired}`]"
+                                        :label="`${trans.regionName}`"
                                         v-model="selectedRegion.name"
                                         :color="themeOption.inputColor"
                                         box solo flat>
@@ -33,7 +33,7 @@
 
                                 <v-flex xs12 sm3 px-2>
                                     <v-autocomplete
-                                        :rules="[v => !!v || `${trans.select} ${trans.country}`]"
+                                        :rules="[v => !!v || `${trans.selectCountry}`]"
                                         :items="countries"
                                         item-text="name"
                                         item-value="id"
@@ -51,7 +51,7 @@
                                         class="rounded-btn"
                                         @click="onCreateRegion()"
                                         :color="themeOption.buttonDangerColor">
-                                        {{ editRegion ? `${trans.update}` : `${trans.add} ${trans.region}` }}
+                                        {{ editRegion ? `${trans.update}` : `${trans.add}` }}
                                     </v-btn>
                                 </v-flex>
                             </v-layout>
@@ -67,9 +67,9 @@
                 :items="regions"
                 disable-initial-sort
                 :pagination.sync="pagination"
-                :no-results-text="`${trans.no} ${trans.region} ${trans.has_been_added}`"
-                :no-data-text="`${trans.no} ${trans.region} ${trans.has_been_added}`"
-                :rows-per-page-text="trans.rows_per_page"
+                :no-results-text="`${trans.noRegionsFound}`"
+                :no-data-text="`${trans.noRegionsFound}`"
+                :rows-per-page-text="trans.rowsPerPage"
                 :rows-per-page-items="rowsPerPage"
                 :total-items="totalRegions"
                 :loading="loading"
@@ -116,7 +116,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -230,7 +230,7 @@
                                 themeOption: this.themeOption,
                                 id: this.$route.params.id
                             })
-                            const message = this.editRegion ? `${this.selectedRegion.name}  ${this.trans.successfully_created}` : `${this.selectedRegion.name}  ${this.trans.successfully_updated}`
+                            const message = this.editRegion ? `${this.selectedRegion.name}  ${this.trans.successfullyCreated}` : `${this.selectedRegion.name}  ${this.trans.successfullyUpdated}`
 
                             this.onResetRegionForm()
 
@@ -270,7 +270,7 @@
                             openMessage: true,
                             bgColor: this.themeOption.snackBarBgDanger,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedRegion.name}  ${this.trans.successfully_deleted}`
+                            message: `${this.selectedRegion.name}  ${this.trans.successfullyDeleted}`
                         })
                     }
                 })

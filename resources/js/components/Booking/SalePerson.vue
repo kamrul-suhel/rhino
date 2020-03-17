@@ -3,7 +3,7 @@
               row wrap
               align-center>
         <v-flex xs12>
-            <h6 class="headline text-xs-center">{{ trans.choose + ' ' + trans.a}} <b>{{ trans.sales + ' ' + trans.person }}</b></h6>
+            <h6 class="headline text-xs-center">{{ trans.chooseA}} <b>{{ trans.salesPerson }}</b></h6>
         </v-flex>
 
         <v-flex xs12>

@@ -19,25 +19,25 @@ const mutations = {
 
             {
                 icon: 'person',
-                text: `${trans.manage} ${trans.users}`,
+                text: `${trans.manageUsers}`,
                 link: 'listUsers',
                 access: ['admin', 'dealership'],
                 divider: false
             },
 
-            
+
             {
                 icon: 'drive_eta',
-                text: `${trans.manage} ${trans.vehicles}`,
+                text: `${trans.manageVehicles}`,
                 link: 'listVehicles',
                 access: ['admin'],
                 divider: false
             },
 
-            
+
             {
                 icon: 'event',
-                text: `${trans.manage} ${trans.events}`,
+                text: `${trans.manageEvents}`,
                 link: 'listEvents',
                 access: ['admin'],
                 divider: false
@@ -45,7 +45,7 @@ const mutations = {
 
             {
                 icon: 'grade',
-                text: `${trans.manage}  ${trans.event} ${trans.types}`,
+                text: `${trans.manageEventType}`,
                 link: 'listEventTypes',
                 access: ['admin'],
                 divider: false
@@ -53,7 +53,7 @@ const mutations = {
 
             {
                 icon: 'flag',
-                text: `${trans.manage} ${trans.languages}`,
+                text: `${trans.manageLanguages}`,
                 link: 'listLanguages',
                 access: ['admin'],
                 divider: true
@@ -61,7 +61,7 @@ const mutations = {
 
             {
                 icon: 'business',
-                text: `${trans.manage} ${trans.companies}`,
+                text: `${trans.manageCompanies}`,
                 link: 'listCompanies',
                 access: ['admin'],
                 divider: false
@@ -69,16 +69,16 @@ const mutations = {
 
             {
                 icon: 'assignment_ind',
-                text: `${trans.manage} ${trans.brands}`,
+                text: `${trans.manageBrands}`,
                 link: 'listBrands',
                 access: ['admin'],
                 divider: false
             },
 
-            
+
             {
                 icon: 'language',
-                text: `${trans.manage} ${trans.countries}`,
+                text: `${trans.manageCountries}`,
                 link: 'listCountries',
                 access: ['admin'],
                 divider: false
@@ -86,7 +86,7 @@ const mutations = {
 
             {
                 icon: 'blur_linear',
-                text: `${trans.manage} ${trans.groups}`,
+                text: `${trans.manageGroups}`,
                 link: 'listDealershipsGroups',
                 access: ['admin'],
                 divider: false
@@ -94,7 +94,7 @@ const mutations = {
 
             {
                 icon: 'tag_faces',
-                text: `${trans.manage} ${trans.dealerships}`,
+                text: `${trans.manageDealerships}`,
                 link: 'listDealerships',
                 access: ['admin'],
                 divider: false
@@ -102,7 +102,7 @@ const mutations = {
 
             {
                 icon: 'people',
-                text: `${trans.manage} ${trans.guests}`,
+                text: `${trans.manageGuests}`,
                 link: 'listGuest',
                 access: ['admin'],
                 divider: false

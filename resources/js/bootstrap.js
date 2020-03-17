@@ -8,7 +8,7 @@ const token = document.head.querySelector('meta[name="csrf-token"]');
 window.axios.defaults.headers.common = {
     'X-CSRF-Token': token.content,
     'X-Requested-With': 'XMLHttpRequest',
-    'API-Token' : '43caac08dc45bc82ea9e08d0d4e4c0af'
+    'API-Token' : '8c4955934af8524c934904d699d1c344'
 };
 
 import 'babel-polyfill'

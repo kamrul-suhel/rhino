@@ -9,7 +9,7 @@
 
                     <v-layout row wrap justify-space-between>
                         <v-flex xs12>
-                            <h3>{{ `${trans.add} ${trans.new} ${trans.brand}` }}</h3>
+                            <h3>{{ `${trans.addNawBrand}` }}</h3>
                         </v-flex>
 
                         <v-flex xs12 sm4>
@@ -29,7 +29,7 @@
 
                             <v-text-field
                                 :label="trans.name"
-                                :rules="[v => !!v || `${trans.brand} ${trans.name} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.brandNameIsRequired}`]"
                                 required
                                 v-model="selectedBrand.name"
                                 :color="themeOption.inputColor"
@@ -38,16 +38,6 @@
                                 flat
                             ></v-text-field>
                         </v-flex>
-
-                            <!--
-                            <v-autocomplete :label="trans.company"
-                                            :color="themeOption.inputColor"
-                                            :items="companies"
-                                            item-text="name"
-                                            item-value="id"
-                                            v-model="selectedBrand.company_id">
-                            </v-autocomplete>
-                            -->
 
                         <v-flex xs12 sm2>
                             <div class="r-color-picker" v-if="isColorSwatchActive">
@@ -69,7 +59,7 @@
                                 box
                                 :label="trans.color"
                                 v-model="color"
-                                :rules="[v => !!v || `${trans.select_a} ${trans.color}`]"
+                                :rules="[v => !!v || `${trans.selectAColor}`]"
                                 required
                                 @focus="isColorSwatchActive = true"
                                 :color="themeOption.inputColor"
@@ -81,7 +71,7 @@
                         <v-flex xs12 sm4 class="ml-5">
                             <span>{{trans.logo}}</span>
 
-                            <v-img class="my-2" 
+                            <v-img class="my-2"
                                 :src="brandImage"
                                 width="200"
                             ></v-img>
@@ -113,9 +103,9 @@
                     :items="brands"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :no-results-text="`${trans.noBrandsFound}`"
+                    :no-data-text="`${trans.noBrandsFound}`"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalBrands"
                     :loading="loading"
@@ -176,7 +166,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -274,8 +264,8 @@
         created() {
             this.fetchCompany()
             this.selectedBrand.status = 1;
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.brands}`)
-            this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.brands}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.manageBrands}`)
+            this.$store.commit('setNavTitle', `${this.trans.manageBrands}`)
         },
 
         mounted() {
@@ -325,7 +315,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedBrand.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedBrand.name}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()
@@ -353,7 +343,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedBrand.name}  ${this.trans.successfully_created}`
+                                message: `${this.selectedBrand.name}  ${this.trans.successfullyCreated}`
                             })
 
                         }

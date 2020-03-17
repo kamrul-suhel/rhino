@@ -6,9 +6,9 @@
                 :items="vehicles"
                 disable-initial-sort
                 :pagination.sync="pagination"
-                :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                :no-results-text="`${trans.noBrandsFound}`"
+                :no-data-text="`${trans.noBrandsFound}`"
+                :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                 :rows-per-page-items="rowsPerPage"
                 :total-items="totalEvents"
                 :loading="loading"
@@ -90,7 +90,7 @@
         >
             <v-card>
                 <v-card-title>
-                    {{ `${trans.upload} ${trans.image}`}}
+                    {{ `${trans.uploadImage}`}}
                 </v-card-title>
 
                 <v-card-text>

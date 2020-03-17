@@ -9,9 +9,9 @@
                             :items="brands"
                             disable-initial-sort
                             :pagination.sync="pagination"
-                            :no-results-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                            :no-data-text="`${trans.no} ${trans.brand} ${trans.found}`"
-                            :rows-per-page-text="trans.rows_per_page"
+                            :no-results-text="`${trans.noBrandFound}`"
+                            :no-data-text="`${trans.noBrandFound}`"
+                            :rows-per-page-text="trans.rowsPerPage"
                             :rows-per-page-items="rowsPerPage"
                             :total-items="totalBrands"
                             :loading="loading"
@@ -58,7 +58,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -184,7 +184,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedBrand.brand}  ${this.trans.successfully_deleted}`
+                                message: `${this.selectedBrand.brand}  ${this.trans.successfullyDeleted}`
                             })
                             this.$store.commit('setInitializeBrands')
                         }

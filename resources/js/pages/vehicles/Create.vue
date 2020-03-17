@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-toolbar flat>
                     <v-toolbar-title>
-                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.vehicle}` }}</span>
+                        <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.createVehicle}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -29,8 +29,8 @@
                             <v-layout row wrap>
                                 <v-flex xs12 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.model} ${trans.is_required}`]"
-                                        :label="`${trans.model} ${trans.of} ${trans.vehicle}`"
+                                        :rules="[v => !!v || `${trans.modelIsRequired}`]"
+                                        :label="`${trans.modelOfVehicle}`"
                                         :color="themeOption.inputColor"
                                         v-model="vehicle.model"
                                     ></v-text-field>
@@ -43,9 +43,9 @@
                                         :items="brands"
                                         item-text="name"
                                         item-value="id"
-                                        :rules="[v => !!v || `${trans.vehicle} ${trans.brand} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.vehicleBrandIsRequired}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.select_a} ${trans.brand}`"
+                                        :label="`${trans.selectABrand}`"
                                         v-model="vehicle.brand_id"
                                     >
                                     </v-select>
@@ -56,7 +56,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                         <v-flex xs12>
-                                            <label class="mb-3">{{ trans.left_hand_drive_image}}</label>
+                                            <label class="mb-3">{{ trans.leftHandDriveImage}}</label>
                                             <v-divider class="my-2"></v-divider>
 
                                             <v-card class="pa-2 my-3">
@@ -79,7 +79,7 @@
                                 <v-flex xs12 sm6 pa-2>
                                     <v-layout row wrap pt-3>
                                        <v-flex xs12>
-                                           <label for="">{{ trans.right_hand_drive_image }}</label>
+                                           <label for="">{{ trans.rightHandDriveImage }}</label>
 
                                            <v-divider class="my-2"></v-divider>
 
@@ -112,7 +112,7 @@
                             small
                             @click="onCreateVehicle()"
                         >
-                            {{ `${trans.create} ${trans.vehicle}` }}
+                            {{ `${trans.createVehicle}` }}
                         </v-btn>
                     </v-card-actions>
                 </v-flex>
@@ -167,7 +167,7 @@
 
         created() {
             this.initialize();
-            
+
         },
 
         methods: {
@@ -176,7 +176,7 @@
                 this.$store.dispatch('fetchBrand', {id: this.$route.params.brandId});
             },
 
-            
+
             onCreateVehicle() {
                 console.log('create vehicle');
 
@@ -192,8 +192,8 @@
                     // Set form object for vehicle
                     _.forOwn(this.vehicle, (value, key) => {
                             vehicleForm.append(key, value)
-                    });          
-                    
+                    });
+
                     if(this.subComponent){
                         vehicleForm.append('brand_id', this.$route.params.brandId)
                     }
@@ -207,9 +207,9 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.vehicle.model}  ${this.trans.successfully_created}`
+                                message: `${this.vehicle.model}  ${this.trans.successfullyCreated}`
                             })
-                        
+
 
                             this.$store.commit('setUpdateComponent')
 
@@ -220,9 +220,9 @@
                                 this.$router.push({name: 'listVehicles'});
                             }
 
-                            
+
                             this.vehicle = {}
-                        
+
                         }
                     })
                 } else {

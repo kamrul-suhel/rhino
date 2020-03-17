@@ -8,9 +8,9 @@
                     :items="events"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.events} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.events} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :no-results-text="`${trans.noEventsFound}`"
+                    :no-data-text="`${trans.noEventsFound}`"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalEvents"
                     :loading="loading"
@@ -62,7 +62,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -170,8 +170,8 @@
 
         created() {
             this.fetchCompany()
-            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.events}` )
-            this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.events}` )
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manageEvents}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.manageEvents}`)
         },
 
         mounted() {
@@ -240,7 +240,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.trans.event}  ${this.trans.successfully_deleted}`
+                                message: `${this.trans.event}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()

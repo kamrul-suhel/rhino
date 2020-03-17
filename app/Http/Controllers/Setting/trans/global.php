@@ -1,1511 +1,2167 @@
 <?php
 return [
     [
+        'label' => 'Appointments by online registration',
+        'identifier' => 'appointmentsByOnlineRegistration'
+    ],
+
+    [
+        'label' => 'Appointments by telephone',
+        'identifier' => 'appointmentsByTelephone'
+    ],
+
+    [
+        'label' => 'Appointments by email',
+        'identifier' => 'appointmentsByEmail'
+    ],
+
+    [
+        'label' => 'Appointments by social media',
+        'identifier' => 'appointmentsBySocialMedia'
+    ],
+
+    [
+        'label' => 'Appointments by walk-in',
+        'identifier' => 'appointmentsByWalkIn'
+    ],
+
+    [
+        'label' => 'Appointments by SMS',
+        'identifier' => 'appointmentsBySms'
+    ],
+
+    [
+        'label' => 'Appointments by prospecting',
+        'identifier' => 'appointmentsByProspecting'
+    ],
+
+    [
+        'label' => 'Appointments confirmed',
+        'identifier' => 'appointmentsConfirmed'
+    ],
+
+    [
+        'label' => 'Appointments show',
+        'identifier' => 'appointmentsShow'
+    ],
+
+    [
+        'label' => 'Appointments no show',
+        'identifier' => 'appointmentsNoShow'
+    ],
+
+    [
+        'label' => 'Select date',
+        'identifier' => 'selectDate'
+    ],
+
+    [
+        'label' => 'Not available',
+        'identifier' => 'notAvailable'
+    ],
+
+    [
+        'label' => 'Select sales executive',
+        'identifier' => 'selectSalesExecutive'
+    ],
+
+    [
+        'label' => 'Book without unique code',
+        'identifier' => 'bookWithoutUniqueCode'
+    ],
+
+    [
+        'label' => 'Book with unique code',
+        'identifier' => 'bookWithUniqueCode'
+    ],
+
+    [
+        'label' => 'With a unique code',
+        'identifier' => 'withAUniqueCode'
+    ],
+
+    [
+        'label' => 'Without a unique code',
+        'identifier' => 'withoutAUniqueCode'
+    ],
+
+    [
+        'label' => 'Book a guest',
+        'identifier' => 'bookAGuest'
+    ],
+
+    [
+        'label' => 'Book guest',
+        'identifier' => 'bookGuest'
+    ],
+
+    [
+        'label' => 'Select source',
+        'identifier' => 'selectSource'
+    ],
+
+    [
+        'label' => 'Search guest by email',
+        'identifier' => 'searchGuestByEmail'
+    ],
+
+    [
+        'label' => 'Search by guest',
+        'identifier' => 'searchByGuest'
+    ],
+
+    [
+        'label' => 'Search by name',
+        'identifier' => 'searchByName'
+    ],
+
+    [
+        'label' => 'Remove break time',
+        'identifier' => 'removeBreakTime'
+    ],
+
+    [
+        'label' => 'Remove not available',
+        'identifier' => 'removeNotAvailable'
+    ],
+
+    [
+        'label' => 'Assign to sales executive',
+        'identifier' => 'assignToSalesExecutive'
+    ],
+
+    [
+        'label' => 'Cancel appointment',
+        'identifier' => 'cancelAppointment'
+    ],
+
+    [
+        'label' => 'Sales person',
+        'identifier' => 'salesPerson'
+    ],
+
+    [
+        'label' => 'Available dates',
+        'identifier' => 'availableDates'
+    ],
+
+    [
+        'label' => 'Not available dates',
+        'identifier' => 'notAvailableDates'
+    ],
+
+    [
+        'label' => 'Choose a',
+        'identifier' => 'chooseA'
+    ],
+
+    [
+        'label' => 'Guest name',
+        'identifier' => 'guestName'
+    ],
+
+    [
+        'label' => 'Create region',
+        'identifier' => 'createRegion'
+    ],
+
+    [
+        'label' => 'Region name',
+        'identifier' => 'regionName'
+    ],
+
+    [
+        'label' => 'User successfully remove from event',
+        'identifier' => 'userSuccessFullyRemoveFromEvent'
+    ],
+
+    [
+        'label' => 'No brand found',
+        'identifier' => 'noBrandFound'
+    ],
+
+    [
+        'label' => 'No brands found',
+        'identifier' => 'noBrandsFound'
+    ],
+
+    [
+        'label' => 'Select a brand',
+        'identifier' => 'selectABrand'
+    ],
+
+    [
+        'label' => 'Select a region',
+        'identifier' => 'selectARegion'
+    ],
+
+    [
+        'label' => 'Add brand',
+        'identifier' => 'addBrand'
+    ],
+
+    [
+        'label' => 'No users found',
+        'identifier' => 'noUsersFound'
+    ],
+
+    [
+        'label' => 'Upload image',
+        'identifier' => 'uploadImage'
+    ],
+
+    [
+        'label' => 'Upload guests',
+        'identifier' => 'uploadGuests'
+    ],
+
+    [
+        'label' => 'Upload CSV',
+        'identifier' => 'uploadCsv'
+    ],
+
+    [
+        'label' => 'Guests successfully uploaded',
+        'identifier' => 'guestSuccessfullyUploaded'
+    ],
+
+    [
+        'label' => 'Guests successfully updated',
+        'identifier' => 'guestSuccessfullyUpdated'
+    ],
+
+    [
+        'label' => 'Booked guest',
+        'identifier' => 'bookedGuest'
+    ],
+
+    [
+        'label' => 'Brand successfully updated',
+        'identifier' => 'brandSuccessfullyUpdated'
+    ],
+
+    [
+        'label' => 'Brand successfully added',
+        'identifier' => 'brandSuccessfullyAdded'
+    ],
+
+    [
+        'label' => 'Brand successfully removed',
+        'identifier' => 'brandSuccessfullyRemoved'
+    ],
+
+    [
+        'label' => 'Upload users',
+        'identifier' => 'uploadUsers'
+    ],
+
+    [
+        'label' => 'Update user',
+        'identifier' => 'updateUser'
+    ],
+
+    [
+        'label' => 'Guests successfully uploaded',
+        'identifier' => 'guestsSuccessfullyUploaded'
+    ],
+
+    [
+        'label' => 'Select A country',
+        'identifier' => 'selectACountry'
+    ],
+
+    [
+        'label' => 'Select A time',
+        'identifier' => 'selectATime'
+    ],
+
+    [
+        'label' => 'No vehicle selected',
+        'identifier' => 'noVehicleSelected'
+    ],
+
+    [
+        'label' => 'No vehicles found',
+        'identifier' => 'noVehiclesFound'
+    ],
+
+    [
+        'label' => 'Your models of interest',
+        'identifier' => 'yourModelsOfInterest'
+    ],
+
+    [
+        'label' => 'Your model of interest',
+        'identifier' => 'yourModelOfInterest'
+    ],
+
+    [
+        'label' => 'Part exchange details',
+        'identifier' => 'partExchangeDetails'
+    ],
+
+    [
+        'label' => 'Confirm your details',
+        'identifier' => 'confirmYourDetails'
+    ],
+
+    [
+        'label' => 'Email address',
+        'identifier' => 'emailAddress'
+    ],
+
+    [
+        'label' => 'Mailing address',
+        'identifier' => 'mailingAddress'
+    ],
+
+    [
+        'label' => 'Edit details',
+        'identifier' => 'editDetails'
+    ],
+
+    [
+        'label' => 'Create Vehicle from Brand',
+        'identifier' => 'createVehicleFromBrand'
+    ],
+
+    [
+        'label' => 'Brand name is required',
+        'identifier' => 'brandNameIsRequired'
+    ],
+
+    [
+        'label' => 'Color is required',
+        'identifier' => 'colorIsRequired'
+    ],
+
+    [
+        'label' => 'Edit brand',
+        'identifier' => 'editBrand'
+    ],
+
+    [
+        'label' => 'Add new brand',
+        'identifier' => 'addNawBrand'
+    ],
+
+    [
+        'label' => 'Select a color',
+        'identifier' => 'selectAColor'
+    ],
+
+    [
+        'label' => 'No brands found',
+        'identifier' => 'noBrandsFound'
+    ],
+
+    [
+        'label' => 'Manage brands',
+        'identifier' => 'manageBrands'
+    ],
+
+    [
+        'label' => 'Add new company',
+        'identifier' => 'addNewCompany'
+    ],
+
+    [
+        'label' => 'No groups found',
+        'identifier' => 'noGroupsFound'
+    ],
+
+    [
+        'label' => 'Manage companies',
+        'identifier' => 'manageCompanies'
+    ],
+
+    [
+        'label' => 'Add new country',
+        'identifier' => 'addNewCountry'
+    ],
+
+    [
+        'label' => 'Country name is required',
+        'identifier' => 'countryNameIsRequired'
+    ],
+
+    [
+        'label' => 'Country code is required',
+        'identifier' => 'countryCodeIsRequired'
+    ],
+
+    [
+        'label' => 'Seating position is required',
+        'identifier' => 'seatingPositionIsRequired'
+    ],
+
+    [
+        'label' => 'No countries found',
+        'identifier' => 'noCountriesFound'
+    ],
+
+    [
+        'label' => 'Manage countries',
+        'identifier' => 'manageCountries'
+    ],
+
+    [
+        'label' => 'Create new user',
+        'identifier' => 'createNewUser'
+    ],
+
+    [
+        'label' => 'Manage users',
+        'identifier' => 'manageUsers'
+    ],
+
+    [
+        'label' => 'User successfully remove from event',
+        'identifier' => 'userSuccessfullyRemoveFromEvent'
+    ],
+
+    [
+        'label' => 'Add, edit or remove user',
+        'identifier' => 'addEditOrRemoveUser'
+    ],
+
+    [
+        'label' => 'Add, edit or remove vehicle',
+        'identifier' => 'addEditOrRemoveVehicle'
+    ],
+
+    [
+        'label' => 'Add, edit or remove events',
+        'identifier' => 'addEditOrRemoveEvents'
+    ],
+
+    [
+        'label' => 'Manage vehicles',
+        'identifier' => 'manageVehicles'
+    ],
+
+    [
+        'label' => 'Manage events',
+        'identifier' => 'manageEvents'
+    ],
+
+    [
+        'label' => 'Book a guest',
+        'identifier' => 'bookAGuest'
+    ],
+
+    [
+        'label' => 'unbooked guest',
+        'identifier' => 'unbookedGuest'
+    ],
+
+    [
+        'label' => 'booked guest',
+        'identifier' => 'bookedGuest'
+    ],
+
+    [
+        'label' => 'Update sales',
+        'identifier' => 'updateSales'
+    ],
+
+    [
+        'label' => 'Welcome back',
+        'identifier' => 'welcomeBack'
+    ],
+
+    [
+        'label' => 'Edit event',
+        'identifier' => 'editEvent'
+    ],
+
+    [
+        'label' => 'Create new group',
+        'identifier' => 'createNewGroup'
+    ],
+
+    [
+        'label' => 'Create dealership',
+        'identifier' => 'createDealership'
+    ],
+
+    [
+        'label' => 'Update dealership',
+        'identifier' => 'updateDealership'
+    ],
+
+    [
+        'label' => 'Edit dealership',
+        'identifier' => 'editDealership'
+    ],
+
+    [
+        'label' => 'Name is required',
+        'identifier' => 'nameIsRequired'
+    ],
+
+    [
+        'label' => 'Address is required',
+        'identifier' => 'addressIsRequired'
+    ],
+
+    [
+        'label' => 'Name',
+        'identifier' => 'name'
+    ],
+
+    [
+        'label' => 'Latitude',
+        'identifier' => 'latitude'
+    ],
+
+    [
+        'label' => 'Longitude',
+        'identifier' => 'longitude'
+    ],
+
+    [
+        'label' => 'Address line',
+        'identifier' => 'addressLine'
+    ],
+
+    [
+        'label' => 'Select a country',
+        'identifier' => 'selectACountry'
+    ],
+
+    [
+        'label' => 'Select a group',
+        'identifier' => 'selectAGroup'
+    ],
+
+    [
+        'label' => 'Group is required',
+        'identifier' => 'groupIsRequired'
+    ],
+
+    [
+        'label' => 'Dealership banner',
+        'identifier' => 'dealershipBanner'
+    ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // =======================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [
         'label' => 'Home',
-        'identifier' => 'home',
-        'translation' => 'Home'
+        'identifier' => 'home'
     ],
     [
         'label' => 'Name',
-        'identifier' => 'name',
-        'translation' => 'Name'
+        'identifier' => 'name'
     ],
 
-    [
-        'label' => 'of',
-        'identifier' => 'of',
-        'translation' => 'of'
-    ],
 
     [
         'label' => 'Edit',
-        'identifier' => 'edit',
-        'translation' => 'Edit'
+        'identifier' => 'edit'
     ],
 
     [
         'label' => 'Update',
-        'identifier' => 'update',
-        'translation' => 'Update'
+        'identifier' => 'update'
+    ],
+
+    [
+        'label' => 'Update guest',
+        'identifier' => 'updateGuest'
     ],
 
     [
         'label' => 'Action',
-        'identifier' => 'action',
-        'translation' => 'Action'
+        'identifier' => 'action'
     ],
     [
         'label' => 'Active',
-        'identifier' => 'active',
-        'translation' => 'Active'
+        'identifier' => 'active'
     ],
     [
         'label' => 'Inactive',
-        'identifier' => 'inactive',
-        'translation' => 'Inactive'
+        'identifier' => 'inactive'
     ],
 
     [
         'label' => 'Successfully created',
-        'identifier' => 'successfully_created',
-        'translation' => 'Successfully created'
+        'identifier' => 'successfullyCreated',
     ],
 
     [
         'label' => 'Reebok',
-        'identifier' => 'reebok',
-        'translation' => 'Reebok'
+        'identifier' => 'reebok'
+    ],
+
+    [
+        'label' => 'Reebok appointment',
+        'identifier' => 'reebokAppointment'
     ],
 
     [
         'label' => 'Successfully added',
-        'identifier' => 'successfully_added',
-        'translation' => 'Successfully added'
+        'identifier' => 'successfullyAdded'
     ],
 
     [
         'label' => 'Successfully removed',
-        'identifier' => 'successfully_removed',
-        'translation' => 'Successfully removed'
+        'identifier' => 'successfullyRemoved'
     ],
 
     [
         'label' => 'Create',
-        'identifier' => 'create',
-        'translation' => 'Create'
+        'identifier' => 'create'
     ],
 
     [
         'label' => 'Add',
-        'identifier' => 'add',
-        'translation' => 'Add'
+        'identifier' => 'add'
     ],
 
     [
         'label' => 'Rows Per Page test',
-        'identifier' => 'rows_per_page',
-        'translation' => 'Rows Per Page'
+        'identifier' => 'rowsPerPage'
     ],
     [
         'label' => 'Delete',
-        'identifier' => 'delete',
-        'translation' => 'Delete'
+        'identifier' => 'delete'
     ],
 
     [
         'label' => 'Thank you',
-        'identifier' => 'thankYou',
-        'translation' => 'Thank you'
+        'identifier' => 'thankYou'
     ],
 
     [
         'label' => 'Are you sure you want to delete ?',
-        'identifier' => 'delete_confirmation',
-        'translation' => 'Are you sure you want to delete ?'
+        'identifier' => 'deleteConfirmation'
     ],
 
     [
         'label' => 'Are you sure you want to cancel this appointment ?',
-        'identifier' => 'confirmationForCancel',
-        'translation' => 'Are you sure you want to cancel this appointment ?'
+        'identifier' => 'confirmationForCancel'
     ],
 
     [
         'label' => 'Are you sure you want to reebok this appointment ?',
-        'identifier' => 'confirmationForReebok',
-        'translation' => 'Are you sure you want to reebok this appointment ?'
+        'identifier' => 'confirmationForReebok'
     ],
 
     [
         'label' => 'Are you sure you want to book this appointment ?',
-        'identifier' => 'confirmationForBook',
-        'translation' => 'Are you sure you want to book this appointment ?'
+        'identifier' => 'confirmationForBook'
     ],
 
     [
         'label' => 'Cancel',
-        'identifier' => 'cancel',
-        'translation' => 'Cancel'
+        'identifier' => 'cancel'
     ],
+
     [
         'label' => 'Successfully updated',
-        'identifier' => 'successfully_updated',
-        'translation' => 'Successfully updated'
+        'identifier' => 'successfullyUpdated'
     ],
 
     [
         'label' => 'Suffix',
-        'identifier' => 'suffix',
-        'translation' => 'Suffix'
-    ],
-
-    [
-        'label' => 'Successfully upload',
-        'identifier' => 'successfully_upload',
-        'translation' => 'Successfully upload'
+        'identifier' => 'suffix'
     ],
 
     [
         'label' => 'Successfully deleted',
-        'identifier' => 'successfully_deleted',
-        'translation' => 'Successfully deleted'
+        'identifier' => 'successfullyDeleted'
     ],
 
     [
         'label' => 'Dealerships',
-        'identifier' => 'dealerships',
-        'translation' => 'Dealerships'
+        'identifier' => 'dealerships'
     ],
 
     [
         'label' => 'Dealership',
-        'identifier' => 'dealership',
-        'translation' => 'Dealership'
+        'identifier' => 'dealership'
+    ],
+
+    [
+        'label' => 'Dealership users',
+        'identifier' => 'dealershipUsers'
     ],
 
     [
         'label' => 'Brands',
-        'identifier' => 'brands',
-        'translation' => 'Brands'
+        'identifier' => 'brands'
     ],
 
     [
         'label' => 'Brand',
-        'identifier' => 'brand',
-        'translation' => 'Brand'
+        'identifier' => 'brand'
+    ],
+
+    [
+        'label' => 'Brand is required',
+        'identifier' => 'brandIsRequired'
     ],
 
     [
         'label' => 'Vehicles',
-        'identifier' => 'vehicles',
-        'translation' => 'Vehicles'
+        'identifier' => 'vehicles'
     ],
 
     [
         'label' => 'Vehicle',
-        'identifier' => 'vehicle',
-        'translation' => 'Vehicle'
+        'identifier' => 'vehicle'
+    ],
+
+    [
+        'label' => 'Add a vehicle',
+        'identifier' => 'addAVehicle'
+    ],
+
+    [
+        'label' => 'Create vehicle',
+        'identifier' => 'createVehicle'
+    ],
+
+    [
+        'label' => 'Edit vehicle',
+        'identifier' => 'editVehicle'
     ],
 
     [
         'label' => 'Events',
-        'identifier' => 'events',
-        'translation' => 'Events'
+        'identifier' => 'events'
     ],
 
     [
         'label' => 'Event',
-        'identifier' => 'event',
-        'translation' => 'Event'
+        'identifier' => 'event'
+    ],
+
+    [
+        'label' => 'Event name',
+        'identifier' => 'eventName'
+    ],
+
+    [
+        'label' => 'Create event',
+        'identifier' => 'createEvent'
+    ],
+
+    [
+        'label' => 'Event name is required',
+        'identifier' => 'eventNameIsRequired'
     ],
 
     [
         'label' => 'At other event',
-        'identifier' => 'atOtherEvent',
-        'translation' => 'At other event'
+        'identifier' => 'atOtherEvent'
     ],
 
 
     [
         'label' => 'Country',
-        'identifier' => 'country',
-        'translation' => 'Country'
+        'identifier' => 'country'
+    ],
+
+    [
+        'label' => 'Country is required',
+        'identifier' => 'countryIsRequired'
     ],
 
     [
         'label' => 'Countries',
-        'identifier' => 'countries',
-        'translation' => 'Countries'
+        'identifier' => 'countries'
+    ],
+
+    [
+        'label' => 'Search by country name',
+        'identifier' => 'searchByCountryName'
+    ],
+
+    [
+        'label' => 'No countries found',
+        'identifier' => 'noCountriesFound'
     ],
 
     [
         'label' => 'Region',
-        'identifier' => 'region',
-        'translation' => 'Region'
+        'identifier' => 'region'
     ],
 
     [
         'label' => 'Regions',
-        'identifier' => 'regions',
-        'translation' => 'Regions'
+        'identifier' => 'regions'
+    ],
+
+    [
+        'label' => 'Region is required',
+        'identifier' => 'regionIsRequired'
+    ],
+
+    [
+        'label' => 'No regions found',
+        'identifier' => 'noRegionsFound'
     ],
 
     [
         'label' => 'Address',
-        'identifier' => 'address',
-        'translation' => 'Address'
+        'identifier' => 'address'
     ],
 
     [
         'label' => 'Opening Times',
-        'identifier' => 'opening_times',
-        'translation' => 'Opening Times'
+        'identifier' => 'openingTimes'
     ],
 
     [
         'label' => 'Status',
-        'identifier' => 'status',
-        'translation' => 'Status'
+        'identifier' => 'status'
     ],
 
     [
         'label' => 'Pending',
-        'identifier' => 'pending',
-        'translation' => 'Pending'
+        'identifier' => 'pending'
     ],
 
     [
         'label' => 'Confirmed',
-        'identifier' => 'confirmed',
-        'translation' => 'Confirmed'
+        'identifier' => 'confirmed'
+    ],
+
+    [
+        'label' => 'Confirmed cancel',
+        'identifier' => 'confirmedCancel'
     ],
 
     [
         'label' => 'Arrived',
-        'identifier' => 'arrived',
-        'translation' => 'Arrived'
+        'identifier' => 'arrived'
     ],
 
     [
         'label' => 'No Sale',
-        'identifier' => 'noSale',
-        'translation' => 'No Sale'
+        'identifier' => 'noSale'
     ],
 
     [
         'label' => 'Sale Made',
-        'identifier' => 'saleMade',
-        'translation' => 'Sale Made'
+        'identifier' => 'saleMade'
     ],
 
     [
         'label' => 'Sales Made',
-        'identifier' => 'salesMade',
-        'translation' => 'Sales Made'
+        'identifier' => 'salesMade'
     ],
 
     [
         'label' => 'Completed No Show',
-        'identifier' => 'completedNoShow',
-        'translation' => 'Completed No Show'
+        'identifier' => 'completedNoShow'
+    ],
+
+    [
+        'label' => 'Complete - no sale',
+        'identifier' => 'completeNoSale'
+    ],
+
+    [
+        'label' => 'Complete - sale made',
+        'identifier' => 'completeSaleMade'
     ],
 
     [
         'label' => 'No Show',
-        'identifier' => 'noShow',
-        'translation' => 'No Show'
+        'identifier' => 'noShow'
     ],
 
     [
         'label' => 'Show',
-        'identifier' => 'show',
-        'translation' => 'Show'
+        'identifier' => 'show'
     ],
 
     [
         'label' => 'Unknown',
-        'identifier' => 'unknown',
-        'translation' => 'Unknown'
-    ],
-
-    [
-        'label' => 'Select',
-        'identifier' => 'select',
-        'translation' => 'Select'
+        'identifier' => 'unknown'
     ],
 
     [
         'label' => 'Source',
-        'identifier' => 'source',
-        'translation' => 'Source'
+        'identifier' => 'source'
     ],
 
     [
         'label' => 'Selected',
-        'identifier' => 'selected',
-        'translation' => 'Selected'
+        'identifier' => 'selected'
     ],
 
     [
-        'label' => 'Select A',
-        'identifier' => 'select_a',
-        'translation' => 'Select A'
+        'label' => 'Select A brand',
+        'identifier' => 'selectABrand'
+    ],
+
+    [
+        'label' => 'Vehicle model is required',
+        'identifier' => 'vehicleModelIsRequired'
     ],
 
     [
         'label' => 'Select Country',
-        'identifier' => 'select_country',
-        'translation' => 'Select Country'
+        'identifier' => 'selectCountry',
     ],
 
     [
         'label' => 'Select Region',
-        'identifier' => 'select_region',
-        'translation' => 'Select region'
+        'identifier' => 'selectRegion'
     ],
 
     [
         'label' => 'Postcode',
-        'identifier' => 'postcode',
-        'translation' => 'Postcode'
+        'identifier' => 'postcode'
+    ],
+
+    [
+        'label' => 'Postcode is required',
+        'identifier' => 'postcodeIsRequired'
     ],
 
     [
         'label' => 'Capital',
-        'identifier' => 'capital',
-        'translation' => 'Capital'
+        'identifier' => 'capital'
     ],
 
     [
         'label' => 'Region',
-        'identifier' => 'region',
-        'translation' => 'Region'
+        'identifier' => 'region'
     ],
 
     [
         'label' => 'Group',
-        'identifier' => 'group',
-        'translation' => 'group'
+        'identifier' => 'group'
     ],
 
     [
         'label' => 'Groups',
-        'identifier' => 'groups',
-        'translation' => 'Groups'
+        'identifier' => 'groups'
+    ],
+
+    [
+        'label' => 'Manage groups',
+        'identifier' => 'manageGroups'
     ],
 
     [
         'label' => 'Guests',
-        'identifier' => 'guests',
-        'translation' => 'Guests'
+        'identifier' => 'guests'
+    ],
+
+    [
+        'label' => 'Guest services',
+        'identifier' => 'guestServices'
+    ],
+
+    [
+        'label' => 'Manage Guests',
+        'identifier' => 'manageGuests'
+    ],
+
+    [
+        'label' => 'Add guest',
+        'identifier' => 'addGuest'
+    ],
+
+    [
+        'label' => 'No guest found',
+        'identifier' => 'noGuestFound'
+    ],
+
+    [
+        'label' => 'Create guest',
+        'identifier' => 'createGuest'
     ],
 
     [
         'label' => 'Users',
-        'identifier' => 'users',
-        'translation' => 'Users'
+        'identifier' => 'users'
+    ],
+
+    [
+        'label' => 'Edit user',
+        'identifier' => 'editUser'
+    ],
+
+    [
+        'label' => 'User status',
+        'identifier' => 'userStatus'
+    ],
+
+    [
+        'label' => 'Add user',
+        'identifier' => 'addUser'
+    ],
+
+    [
+        'label' => 'Create user',
+        'identifier' => 'createUser'
+    ],
+
+    [
+        'label' => 'Upload users',
+        'identifier' => 'uploadUsers'
     ],
 
     [
         'label' => 'User',
-        'identifier' => 'user',
-        'translation' => 'User'
+        'identifier' => 'user'
     ],
 
     [
         'label' => 'Guest',
-        'identifier' => 'guest',
-        'translation' => 'Guest'
+        'identifier' => 'guest'
     ],
 
     [
         'label' => 'Languages',
-        'identifier' => 'languages',
-        'translation' => 'Languages'
+        'identifier' => 'languages'
     ],
 
     [
         'label' => 'Language',
-        'identifier' => 'language',
-        'translation' => 'Language'
+        'identifier' => 'language'
+    ],
+
+    [
+        'label' => 'Select a language',
+        'identifier' => 'selectALanguage'
+    ],
+
+    [
+        'label' => 'Add language',
+        'identifier' => 'addLanguage'
+    ],
+
+    [
+        'label' => 'No language found',
+        'identifier' => 'noLanguageFound'
+    ],
+
+    [
+        'label' => 'Manage languages',
+        'identifier' => 'manageLanguages'
     ],
 
     [
         'label' => 'Types',
-        'identifier' => 'types',
-        'translation' => 'Types'
+        'identifier' => 'types'
     ],
 
     [
         'label' => 'Type',
-        'identifier' => 'type',
-        'translation' => 'Type'
+        'identifier' => 'type'
+    ],
+
+    [
+        'label' => 'Add type',
+        'identifier' => 'addType'
+    ],
+
+    [
+        'label' => 'No type found',
+        'identifier' => 'noTypeFound'
+    ],
+
+    [
+        'label' => 'Manage event type',
+        'identifier' => 'manageEventType'
+    ],
+
+    [
+        'label' => 'Update type',
+        'identifier' => 'updateType'
     ],
 
     [
         'label' => 'Logo',
-        'identifier' => 'logo',
-        'translation' => 'Logo'
+        'identifier' => 'logo'
     ],
 
     [
         'label' => 'Color',
-        'identifier' => 'color',
-        'translation' => 'Color'
+        'identifier' => 'color'
     ],
 
     [
         'label' => 'Select',
-        'identifier' => 'select',
-        'translation' => 'Select'
+        'identifier' => 'select'
     ],
 
     [
         'label' => 'Actions',
-        'identifier' => 'actions',
-        'translation' => 'Actions'
+        'identifier' => 'actions'
     ],
 
     [
         'label' => 'First name',
-        'identifier' => 'firstName',
-        'translation' => 'First name'
+        'identifier' => 'firstName'
+    ],
+
+    [
+        'label' => 'First name is required',
+        'identifier' => 'firstNameIsRequired'
+    ],
+
+    [
+        'label' => 'Surname is required',
+        'identifier' => 'surnameIsRequired'
     ],
 
     [
         'label' => 'Surname',
-        'identifier' => 'surName',
-        'translation' => 'Surname'
-    ],
-
-    [
-        'label' => 'Passwords',
-        'identifier' => 'passwords',
-        'translation' => 'Passwords'
-    ],
-
-    [
-        'label' => 'Assign',
-        'identifier' => 'assign',
-        'translation' => 'Assign'
+        'identifier' => 'surName'
     ],
 
     [
         'label' => 'Password',
-        'identifier' => 'password',
-        'translation' => 'Password'
+        'identifier' => 'passwords'
+    ],
+
+    [
+        'label' => 'Password successfully updated',
+        'identifier' => 'passwordSuccessfullyUpdated'
+    ],
+
+    [
+        'label' => 'Assign',
+        'identifier' => 'assign'
+    ],
+
+    [
+        'label' => 'Password',
+        'identifier' => 'password'
+    ],
+
+    [
+        'label' => 'Confirm password',
+        'identifier' => 'confirmPassword'
+    ],
+
+    [
+        'label' => 'Select a rule',
+        'identifier' => 'selectARule'
+    ],
+
+    [
+        'label' => 'Confirm password is required',
+        'identifier' => 'confirmPasswordIsRequired'
+    ],
+
+    [
+        'label' => 'Password is required',
+        'identifier' => 'passwordIsRequired'
     ],
 
     [
         'label' => 'Enter your password',
-        'identifier' => 'enterYourPassword',
-        'translation' => 'Enter your password'
+        'identifier' => 'enterYourPassword'
     ],
 
     [
-        'label' => 'minimum 8 character',
-        'identifier' => 'minimum8Character',
-        'translation' => 'minimum 8 character'
+        'label' => 'Password minimum 8 character',
+        'identifier' => 'passwordMinimum8Character'
     ],
 
     [
-        'label' => 'not matching',
-        'identifier' => 'notMatching',
-        'translation' => 'not matching'
+        'label' => 'Password not match',
+        'identifier' => 'passwordNotMatch'
     ],
 
     [
         'label' => 'Rule',
-        'identifier' => 'rule',
-        'translation' => 'Rule'
+        'identifier' => 'rule'
     ],
 
     [
         'label' => 'Profile',
-        'identifier' => 'profile',
-        'translation' => 'Profile'
+        'identifier' => 'profile'
+    ],
+
+    [
+        'label' => 'Profile image',
+        'identifier' => 'profileImage'
     ],
 
     [
         'label' => 'Flag',
-        'identifier' => 'flag',
-        'translation' => 'Flag'
+        'identifier' => 'flag'
     ],
 
     [
         'label' => 'Back',
-        'identifier' => 'back',
-        'translation' => 'Back'
+        'identifier' => 'back'
     ],
 
     [
         'label' => 'Dashboard',
-        'identifier' => 'dashboard',
-        'translation' => 'Dashboard'
-    ],
-
-    [
-        'label' => 'List Of',
-        'identifier' => 'list_of',
-        'translation' => 'List Of'
+        'identifier' => 'dashboard'
     ],
 
     [
         'label' => 'List',
-        'identifier' => 'list',
-        'translation' => 'List'
-    ],
-
-    [
-        'label' => 'is required',
-        'identifier' => 'is_required',
-        'translation' => 'is required'
+        'identifier' => 'list'
     ],
 
     [
         'label' => 'Ok',
-        'identifier' => 'ok',
-        'translation' => 'Ok'
+        'identifier' => 'ok'
     ],
 
     [
         'label' => 'Start Date',
-        'identifier' => 'startDate',
-        'translation' => 'Start Date'
+        'identifier' => 'startDate'
     ],
 
     [
         'label' => 'End Date',
-        'identifier' => 'endDate',
-        'translation' => 'End Date'
+        'identifier' => 'endDate'
     ],
 
     [
-        'label' => 'Search by',
-        'identifier' => 'searchBy',
-        'translation' => 'Search by'
+        'label' => 'End Date is required',
+        'identifier' => 'endDateIsRequired'
     ],
 
     [
         'label' => 'Search',
-        'identifier' => 'search',
-        'translation' => 'Search'
+        'identifier' => 'search'
     ],
 
     [
         'label' => 'Email',
-        'identifier' => 'email',
-        'translation' => 'Email'
+        'identifier' => 'email'
+    ],
+
+    [
+        'label' => 'Email is required',
+        'identifier' => 'emailIsRequired'
     ],
 
     [
         'label' => 'Mailing',
-        'identifier' => 'mailing',
-        'translation' => 'Mailing'
+        'identifier' => 'mailing'
     ],
 
     [
         'label' => 'Marketing Preferences',
-        'identifier' => 'marketingPreferences',
-        'translation' => 'Marketing Preferences'
+        'identifier' => 'marketingPreferences'
     ],
 
 
 
     [
         'label' => 'Phone',
-        'identifier' => 'phone',
-        'translation' => 'Phone'
+        'identifier' => 'phone'
     ],
 
     [
         'label' => 'Role',
-        'identifier' => 'role',
-        'translation' => 'Role'
+        'identifier' => 'role'
+    ],
+
+    [
+        'label' => 'Select a role',
+        'identifier' => 'selectARole'
     ],
 
     [
         'label' => 'Walk in',
-        'identifier' => 'walkIn',
-        'translation' => 'Walk in'
+        'identifier' => 'walkIn'
     ],
 
     [
         'label' => 'Confirm',
-        'identifier' => 'confirm',
-        'translation' => 'Confirm'
+        'identifier' => 'confirm'
     ],
 
     [
         'label' => 'Admin',
-        'identifier' => 'admin',
-        'translation' => 'Admin'
+        'identifier' => 'admin'
     ],
 
     [
         'label' => 'Mobile',
-        'identifier' => 'mobile',
-        'translation' => 'Mobile'
+        'identifier' => 'mobile'
+    ],
+
+    [
+        'label' => 'Mobile is required',
+        'identifier' => 'mobileIsRequired'
     ],
 
     [
         'label' => 'Landline',
-        'identifier' => 'landline',
-        'translation' => 'Landline'
+        'identifier' => 'landline'
     ],
 
     [
         'label' => 'Method',
-        'identifier' => 'method',
-        'translation' => 'Method'
+        'identifier' => 'method'
+    ],
+
+    [
+        'label' => 'Method is required',
+        'identifier' => 'methodIsRequired'
     ],
 
     [
         'label' => 'Appointment Duration',
-        'identifier' => 'appointment_duration',
-        'translation' => 'Appointment Duration'
+        'identifier' => 'appointmentDuration'
     ],
 
     [
         'label' => 'Minutes',
-        'identifier' => 'minutes',
-        'translation' => 'Minutes'
+        'identifier' => 'minutes'
     ],
 
     [
         'label' => 'Hours',
-        'identifier' => 'Hours',
-        'translation' => 'Hours'
+        'identifier' => 'Hours'
     ],
 
     [
         'label' => 'New',
-        'identifier' => 'new',
-        'translation' => 'New'
+        'identifier' => 'new'
     ],
 
     [
         'label' => 'Used',
-        'identifier' => 'used',
-        'translation' => 'Used'
+        'identifier' => 'used'
     ],
 
     [
         'label' => 'Model',
-        'identifier' => 'model',
-        'translation' => 'Model'
+        'identifier' => 'model'
+    ],
+
+    [
+        'label' => 'Model is required',
+        'identifier' => 'modelIsRequired'
+    ],
+
+    [
+        'label' => 'Model of vehicle',
+        'identifier' => 'modelOfVehicle'
+    ],
+
+    [
+        'label' => 'Vehicle brand is required',
+        'identifier' => 'vehicleBrandIsRequired'
     ],
 
     [
         'label' => 'Order',
-        'identifier' => 'order',
-        'translation' => 'Order'
+        'identifier' => 'order'
     ],
 
     [
         'label' => 'Upload',
-        'identifier' => 'upload',
-        'translation' => 'Upload'
+        'identifier' => 'upload'
     ],
 
     [
         'label' => 'image',
-        'identifier' => 'image',
-        'translation' => 'image'
+        'identifier' => 'image'
     ],
 
     [
         'label' => 'Left hand drive image',
-        'identifier' => 'left_hand_drive_image',
-        'translation' => 'Left hand drive image'
+        'identifier' => 'leftHandDriveImage',
     ],
 
     [
         'label' => 'Right hand drive image',
-        'identifier' => 'right_hand_drive_image',
-        'translation' => 'Right hand drive image'
+        'identifier' => 'rightHandDriveImage'
     ],
 
     [
         'label' => 'Sales executive',
-        'identifier' => 'sales_executive',
-        'translation' => 'Sales executive'
+        'identifier' => 'salesExecutive'
     ],
 
     [
         'label' => 'Analytics',
-        'identifier' => 'analytics',
-        'translation' => 'Analytics'
+        'identifier' => 'analytics'
     ],
 
     [
         'label' => 'Organize',
-        'identifier' => 'organize',
-        'translation' => 'Organize'
-    ],
-
-    [
-        'label' => 'Sales executives',
-        'identifier' => 'sales_executives',
-        'translation' => 'Sales executives'
+        'identifier' => 'organize'
     ],
 
     [
         'label' => 'Has been added',
-        'identifier' => 'has_been_added',
-        'translation' => 'Has been added'
+        'identifier' => 'hasBeenAdded'
+    ],
+
+    [
+        'label' => 'Has been added to event',
+        'identifier' => 'hasBeenAddedToEvent'
     ],
 
     [
         'label' => 'Settings',
-        'identifier' => 'settings',
-        'translation' => 'Settings'
+        'identifier' => 'settings'
     ],
 
     [
         'label' => 'To',
-        'identifier' => 'to',
-        'translation' => 'To'
-    ],
-
-    [
-        'label' => 'Or',
-        'identifier' => 'or',
-        'translation' => 'Or'
+        'identifier' => 'to'
     ],
 
     [
         'label' => 'No',
-        'identifier' => 'no',
-        'translation' => 'No'
-    ],
-
-    [
-        'label' => 'Found',
-        'identifier' => 'found',
-        'translation' => 'Found'
+        'identifier' => 'no'
     ],
 
     [
         'label' => 'Submit',
-        'identifier' => 'submit',
-        'translation' => 'Submit'
+        'identifier' => 'submit'
     ],
 
     [
         'label' => 'Remove',
-        'identifier' => 'remove',
-        'translation' => 'Remove'
+        'identifier' => 'remove'
     ],
 
     [
         'label' => 'Reporting',
-        'identifier' => 'reporting',
-        'translation' => 'Reporting'
+        'identifier' => 'reporting'
     ],
 
     [
         'label' => 'Translations',
-        'identifier' => 'translations',
-        'translation' => 'Translations'
+        'identifier' => 'translations'
     ],
 
     [
-        'label' => 'Break',
-        'identifier' => 'break',
-        'translation' => 'Break'
+        'label' => 'No translations found',
+        'identifier' => 'noTranslationsFound'
+    ],
+
+    [
+        'label' => 'Manage translations',
+        'identifier' => 'manageTranslations'
+    ],
+
+    [
+        'label' => 'Translation save',
+        'identifier' => 'translationSave'
+    ],
+
+    [
+        'label' => 'Update translation',
+        'identifier' => 'updateTranslation'
     ],
 
     [
         'label' => 'Code',
-        'identifier' => 'code',
-        'translation' => 'Code'
+        'identifier' => 'code'
+    ],
+
+    [
+        'label' => 'Code 2 is required',
+        'identifier' => 'code2IsRequired'
+    ],
+
+    [
+        'label' => 'Code 3 is required',
+        'identifier' => 'code3IsRequired'
     ],
 
     [
         'label' => 'Company',
-        'identifier' => 'company',
-        'translation' => 'Company'
+        'identifier' => 'company'
+    ],
+
+    [
+        'label' => 'Create company',
+        'identifier' => 'createCompany'
+    ],
+
+    [
+        'label' => 'Update company',
+        'identifier' => 'updateCompany'
+    ],
+
+    [
+        'label' => 'Company is required',
+        'identifier' => 'companyIsRequired'
     ],
 
     [
         'label' => 'Companies',
-        'identifier' => 'companies',
-        'translation' => 'Companies'
+        'identifier' => 'companies'
     ],
 
     [
         'label' => 'Seating Position',
-        'identifier' => 'seating_position',
-        'translation' => 'Seating Position'
+        'identifier' => 'seatingPosition'
     ],
 
     [
         'label' => 'Left',
-        'identifier' => 'left',
-        'translation' => 'Left'
+        'identifier' => 'left'
     ],
 
     [
         'label' => 'Right',
-        'identifier' => 'right',
-        'translation' => 'Right'
+        'identifier' => 'right'
     ],
 
     [
         'label' => 'Banner',
-        'identifier' => 'banner',
-        'translation' => 'Banner'
+        'identifier' => 'banner'
     ],
 
     [
         'label' => 'Latitude',
-        'identifier' => 'latitude',
-        'translation' => 'Latitude'
+        'identifier' => 'latitude'
     ],
 
     [
         'label' => 'Longitude',
-        'identifier' => 'longitude',
-        'translation' => 'Longitude'
+        'identifier' => 'longitude'
     ],
 
     [
         'label' => 'Monday',
-        'identifier' => 'monday',
-        'translation' => 'Monday'
+        'identifier' => 'monday'
     ],
 
     [
         'label' => 'Tuesday',
-        'identifier' => 'tuesday',
-        'translation' => 'Tuesday'
+        'identifier' => 'Tuesday'
     ],
 
     [
         'label' => 'Wednesday',
-        'identifier' => 'wednesday',
-        'translation' => 'Wednesday'
+        'identifier' => 'wednesday'
     ],
 
 
     [
         'label' => 'Thursday',
-        'identifier' => 'thursday',
-        'translation' => 'Thursday'
+        'identifier' => 'thursday'
     ],
 
     [
         'label' => 'Friday',
-        'identifier' => 'friday',
-        'translation' => 'Friday'
+        'identifier' => 'friday'
     ],
 
     [
         'label' => 'Saturday',
-        'identifier' => 'saturday',
-        'translation' => 'Saturday'
+        'identifier' => 'saturday'
     ],
 
     [
         'label' => 'Sunday',
-        'identifier' => 'sunday',
-        'translation' => 'Sunday'
-    ],
-
-    [
-        'label' => 'Start',
-        'identifier' => 'start',
-        'translation' => 'Start'
-    ],
-
-    [
-        'label' => 'End',
-        'identifier' => 'end',
-        'translation' => 'End'
+        'identifier' => 'sunday'
     ],
 
     [
         'label' => 'Address Line',
-        'identifier' => 'address_line',
-        'translation' => 'Address Line'
+        'identifier' => 'addressLine'
     ],
 
     [
         'label' => 'Appointment',
-        'identifier' => 'appointment',
-        'translation' => 'Appointment'
+        'identifier' => 'appointment'
     ],
 
     [
         'label' => 'Appointments',
-        'identifier' => 'appointments',
-        'translation' => 'Appointments'
+        'identifier' => 'appointments'
     ],
 
     [
         'label' => 'Time',
-        'identifier' => 'time',
-        'translation' => 'Time'
+        'identifier' => 'time'
     ],
 
     [
         'label' => 'Greeting',
-        'identifier' => 'greeting',
-        'translation' => 'Greeting'
+        'identifier' => 'greeting'
     ],
     [
         'label' => 'Complete',
-        'identifier' => 'complete',
-        'translation' => 'Complete'
+        'identifier' => 'complete'
     ],
-
 
     [
         'label' => 'Notes',
-        'identifier' => 'notes',
-        'translation' => 'Notes'
+        'identifier' => 'notes'
     ],
 
     [
         'label' => 'Text',
-        'identifier' => 'text',
-        'translation' => 'text'
+        'identifier' => 'text'
     ],
 
     [
         'label' => 'Date',
-        'identifier' => 'date',
-        'translation' => 'Date'
+        'identifier' => 'date'
     ],
 
     [
         'label' => 'Surname',
-        'identifier' => 'surname',
-        'translation' => 'Surname'
-    ],
-
-    [
-        'label' => 'Your Details',
-        'identifier' => 'your_details',
-        'translation' => 'Your Details'
+        'identifier' => 'surname'
     ],
 
     [
         'label' => 'Part exchange',
-        'identifier' => 'partExchange',
-        'translation' => 'Part exchange'
+        'identifier' => 'partExchange'
     ],
 
     [
         'label' => 'Select model',
-        'identifier' => 'selectModel',
-        'translation' => 'Select model'
+        'identifier' => 'selectModel'
     ],
 
     [
         'label' => 'Book',
         'identifier' => 'book',
-        'translation' => 'Book'
     ],
 
     [
         'label' => 'Book an appointment',
-        'identifier' => 'bookAnAppointment',
-        'translation' => 'Book an appointment'
+        'identifier' => 'bookAnAppointment'
     ],
 
     [
         'label' => 'Booked',
-        'identifier' => 'booked',
-        'translation' => 'Booked'
+        'identifier' => 'booked'
     ],
 
     [
         'label' => 'Services',
-        'identifier' => 'services',
-        'translation' => 'Services'
+        'identifier' => 'services'
     ],
 
     [
         'label' => 'Unbooked',
-        'identifier' => 'unbooked',
-        'translation' => 'Unbooked'
+        'identifier' => 'unbooked'
     ],
 
     [
         'label' => 'Download',
-        'identifier' => 'download',
-        'translation' => 'Download'
+        'identifier' => 'download'
+    ],
+
+    [
+        'label' => 'Download booked guests',
+        'identifier' => 'downloadBookedGuests'
+    ],
+
+    [
+        'label' => 'Download unbooked guests',
+        'identifier' => 'downloadUnbookedGuests'
     ],
 
     [
         'label' => 'Book your appointment',
-        'identifier' => 'bookYourAppointment',
-        'translation' => 'Book your appointment'
+        'identifier' => 'bookYourAppointment'
     ],
 
     [
         'label' => 'Booking confirmation',
-        'identifier' => 'bookingConfirmation',
-        'translation' => 'Booking confirmation'
+        'identifier' => 'bookingConfirmation'
     ],
 
     [
         'label' => 'Logout',
-        'identifier' => 'logOut',
-        'translation' => 'Logout'
+        'identifier' => 'logOut'
     ],
 
     [
         'label' => 'Login',
-        'identifier' => 'login',
-        'translation' => 'Login'
+        'identifier' => 'login'
     ],
 
     [
         'label' => 'Skip this step',
-        'identifier' => 'skipThisStep',
-        'translation' => 'Skip this step'
+        'identifier' => 'skipThisStep'
     ],
 
     [
         'label' => 'Team member',
-        'identifier' => 'teamMember',
-        'translation' => 'Team member'
+        'identifier' => 'teamMember'
+    ],
+
+    [
+        'label' => 'Team member / date',
+        'identifier' => 'teamMemberDate'
+    ],
+
+    [
+        'label' => 'Sales team member',
+        'identifier' => 'salesTeamMember'
+    ],
+
+    [
+        'label' => 'Select date',
+        'identifier' => 'selectDate'
     ],
 
     [
         'label' => 'Unsure',
-        'identifier' => 'unsure',
-        'translation' => 'Unsure'
+        'identifier' => 'unsure'
     ],
 
     [
         'label' => 'Now book your appointment',
-        'identifier' => 'nowBookYourAppointment',
-        'translation' => 'Now book your appointment'
+        'identifier' => 'nowBookYourAppointment'
     ],
 
 
     [
         'label' => 'Choose',
-        'identifier' => 'choose',
-        'translation' => 'Choose'
-    ],
-
-    [
-        'label' => 'a',
-        'identifier' => 'a',
-        'translation' => 'a'
+        'identifier' => 'choose'
     ],
 
     [
         'label' => 'time',
-        'identifier' => 'time',
-        'translation' => 'Time'
+        'identifier' => 'time'
     ],
 
     [
         'label' => 'Sales',
-        'identifier' => 'sales',
-        'translation' => 'Sales'
+        'identifier' => 'sales'
     ],
 
     [
         'label' => 'Person',
-        'identifier' => 'person',
-        'translation' => 'Person'
+        'identifier' => 'person'
     ],
 
     [
         'label' => 'Would you like to bring guest?',
-        'identifier' => 'wouldYouLikeToBringGuest',
-        'translation' => 'Would you like to bring guest?'
+        'identifier' => 'wouldYouLikeToBringGuest'
     ],
 
     [
         'label' => 'Bring guest?',
-        'identifier' => 'bringGuest',
-        'translation' => 'bring guest?'
+        'identifier' => 'bringGuest'
     ],
 
     [
         'label' => 'Might your guest also be interested in changing their car?',
-        'identifier' => 'mightYourGuestAlsoBeInterested',
-        'translation' => 'Might your guest also be interested in changing their car?'
+        'identifier' => 'mightYourGuestAlsoBeInterested'
     ],
 
     [
         'label' => 'Yes',
-        'identifier' => 'yes',
-        'translation' => 'Yes'
+        'identifier' => 'yes'
     ],
 
     [
         'label' => 'Calendar',
-        'identifier' => 'calendar',
-        'translation' => 'Calendar'
-    ],
-
-    [
-        'label' => 'Not',
-        'identifier' => 'not',
-        'translation' => 'Not'
+        'identifier' => 'calendar'
     ],
 
     [
         'label' => 'Available',
-        'identifier' => 'available',
-        'translation' => 'Available'
+        'identifier' => 'available'
     ],
 
     [
         'label' => 'Unavailable',
-        'identifier' => 'unavailable',
-        'translation' => 'Unavailable'
+        'identifier' => 'unavailable'
     ],
 
     [
         'label' => 'Break time',
-        'identifier' => 'breakTime',
-        'translation' => 'Break time'
+        'identifier' => 'breakTime'
     ],
 
     [
         'label' => 'Dates',
-        'identifier' => 'dates',
-        'translation' => 'dates'
+        'identifier' => 'dates'
     ],
 
     [
         'label' => 'Times',
-        'identifier' => 'times',
-        'translation' => 'times'
+        'identifier' => 'times'
     ],
 
     [
         'label' => 'Continue',
-        'identifier' => 'continue',
-        'translation' => 'Continue'
+        'identifier' => 'continue'
     ],
     [
         'label' => 'Sign in',
-        'identifier' => 'signin',
-        'translation' => 'Sign in'
+        'identifier' => 'signin'
     ],
     [
         'label' => 'Welcome',
-        'identifier' => 'welcome',
-        'translation' => 'Welcome'
+        'identifier' => 'welcome'
     ],
     [
         'label' => 'Multi',
-        'identifier' => 'multi',
-        'translation' => 'Multi'
+        'identifier' => 'multi'
     ],
     [
         'label' => 'Access Level',
-        'identifier' => 'access_level',
-        'translation' => 'Access Level'
+        'identifier' => 'accessLevel',
     ],
 
     [
         'label' => 'Staff',
-        'identifier' => 'staff',
-        'translation' => 'Staff'
+        'identifier' => 'staff'
     ],
 
     [
         'label' => 'Member',
-        'identifier' => 'member',
-        'translation' => 'Member'
+        'identifier' => 'member'
     ],
 
     [
         'label' => 'Do you have a car to part exchange?',
-        'identifier' => 'DoYouHaveACarToPartExchange',
-        'translation' => 'Do you have a car to part exchange?'
+        'identifier' => 'doYouHaveACarToPartExchange',
     ],
 
     [
         'label' => 'Enter your',
-        'identifier' => 'enterYour',
-        'translation' => 'Enter your'
+        'identifier' => 'enterYour'
     ],
 
     [
         'label' => 'With',
-        'identifier' => 'with',
-        'translation' => 'With'
+        'identifier' => 'with'
     ],
 
     [
         'label' => 'Your booking is confirmed!',
-        'identifier' => 'yourBookingIsConfirmed',
-        'translation' => 'Your booking is confirmed!'
+        'identifier' => 'yourBookingIsConfirmed'
     ],
 
     [
         'label' => 'We will send you an email confirming your appointment. We look forward to welcoming',
-        'identifier' => 'sendEmailMessage',
-        'translation' => 'We will send you an email confirming your appointment. We look forward to welcoming'
+        'identifier' => 'sendEmailMessage'
     ],
 
     [
         'label' => 'Submit',
-        'identifier' => 'submit',
-        'translation' => 'Submit'
-    ],
-
-    [
-        'label' => 'Without',
-        'identifier' => 'without',
-        'translation' => 'Without'
-    ],
-
-    [
-        'label' => 'Unique code',
-        'identifier' => 'uniqueCode',
-        'translation' => 'Unique code'
+        'identifier' => 'submit'
     ],
 
     [
         'label' => 'Details',
-        'identifier' => 'details',
-        'translation' => 'Details'
+        'identifier' => 'details'
     ],
 
     [
         'label' => 'Registration Number',
-        'identifier' => 'registrationNumber',
-        'translation' => 'Registration Number'
+        'identifier' => 'registrationNumber'
     ],
 
     [
         'label' => 'Make and Model',
-        'identifier' => 'makeAndModel',
-        'translation' => 'Make and Model'
+        'identifier' => 'makeAndModel'
     ],
 
     [
         'label' => 'Current Mileage',
-        'identifier' => 'currentMileage',
-        'translation' => 'Current Mileage'
+        'identifier' => 'currentMileage'
     ],
 
     [
         'label' => 'By checking this box, you agree to us obtaining a settlement figure for your part exchange vehicle',
-        'identifier' => 'byCheckingThisBox',
-        'translation' => 'By checking this box, you agree to us obtaining a settlement figure for your part exchange vehicle'
+        'identifier' => 'byCheckingThisBox'
     ],
     [
         'label' => 'Click here if you don\'t have a part exchange vehicle',
-        'identifier' => 'clickHereDoNotExchangeVehicle',
-        'translation' => 'Click here if you don\'t have a part exchange vehicle'
+        'identifier' => 'clickHereDoNotExchangeVehicle'
     ],
 
     [
         'label' => 'Please confirm or amend your contact details',
-        'identifier' => 'pleaseConfirmAmendYourContactDetails',
-        'translation' => 'Please confirm or amend your contact details'
+        'identifier' => 'pleaseConfirmAmendYourContactDetails'
     ],
 
     [
         'label' => 'Are these details still correct?',
-        'identifier' => 'areTheseDetailsStillCorrect',
-        'translation' => 'Are these details still correct?'
+        'identifier' => 'areTheseDetailsStillCorrect'
     ],
 
     [
         'label' => 'Phone Number',
-        'identifier' => 'phoneNumber',
-        'translation' => 'Phone Number'
+        'identifier' => 'phoneNumber'
     ],
 
     [
         'label' => 'Save',
-        'identifier' => 'save',
-        'translation' => 'Save'
+        'identifier' => 'save'
     ],
 
     [
         'label' => 'Please check the following details are correct',
-        'identifier' => 'followingDetailsAreCorrect',
-        'translation' => 'Please check the following details are correct'
+        'identifier' => 'followingDetailsAreCorrect'
     ],
 
     [
         'label' => 'Are these details still correct?',
-        'identifier' => 'areTheseDetailsStillCorrect',
-        'translation' => 'Are these details still correct?'
+        'identifier' => 'areTheseDetailsStillCorrect'
     ],
 
     [
         'label' => 'Your model',
-        'identifier' => 'yourModel',
-        'translation' => 'Your model'
+        'identifier' => 'yourModel'
     ],
 
     [
         'label' => 'of interest:',
-        'identifier' => 'ofInterest',
-        'translation' => 'of interest'
-    ],
-
-    [
-        'label' => '(s)',
-        'identifier' => 's',
-        'translation' => 's'
+        'identifier' => 'ofInterest'
     ],
 
     [
         'label' => 'Finish guest booking journey',
-        'identifier' => 'finishGuestBookingJourney',
-        'translation' => 'Finish guest booking journey'
+        'identifier' => 'finishGuestBookingJourney'
     ],
 
     [
         'label' => 'Amend',
-        'identifier' => 'amend',
-        'translation' => 'Amend'
+        'identifier' => 'amend'
     ],
 
 
     [
         'label' => 'your reservation has been confirmed',
-        'identifier' => 'yourReservationConfirmed',
-        'translation' => 'your reservation has been confirmed'
+        'identifier' => 'yourReservationConfirmed'
     ],
 
     [
         'label' => 'Translation',
-        'identifier' => 'translation',
-        'translation' => 'Translation'
+        'identifier' => 'translation'
     ],
 
     [
         'label' => 'Unique code mismatch',
-        'identifier' => 'uniqueCodeNotFound',
-        'translation' => 'Unique code mismatch'
+        'identifier' => 'uniqueCodeNotFound'
+    ],
+
+    [
+        'label' => 'UniqueId is required',
+        'identifier' => 'uniqueIdIsRequired'
     ],
 
     [
         'label' => 'None',
-        'identifier' => 'none',
-        'translation' => 'None'
+        'identifier' => 'none'
     ],
 
     [
         'label' => 'Identifier',
-        'identifier' => 'identifier',
-        'translation' => 'Identifier'
+        'identifier' => 'identifier'
     ],
 
     [
         'label' => 'CSV',
-        'identifier' => 'csv',
-        'translation' => 'CSV'
+        'identifier' => 'csv'
     ],
 
     [
         'label' => 'Clear',
-        'identifier' => 'clear',
-        'translation' => 'Clear'
+        'identifier' => 'clear'
     ],
 
     [
         'label' => 'Online',
-        'identifier' => 'online',
-        'translation' => 'Online'
+        'identifier' => 'online'
     ],
 
     [
         'label' => 'Reset',
-        'identifier' => 'reset',
-        'translation' => 'Reset'
+        'identifier' => 'reset'
     ],
 
     [
         'label' => 'Specialized',
-        'identifier' => 'specialized',
-        'translation' => 'Specialized'
+        'identifier' => 'specialized'
     ],
 
     [
         'label' => 'Manage',
-        'identifier' => 'manage',
-        'translation' => 'Manage'
+        'identifier' => 'manage'
     ],
 
     [
         'label' => 'You already booked, you can not change',
-        'identifier' => 'alreadyConfirm',
-        'translation' => 'You already booked, you can not change'
+        'identifier' => 'alreadyConfirm'
     ],
 
     [
         'label' => 'Hello',
-        'identifier' => 'hello',
-        'translation' => 'Hello'
+        'identifier' => 'hello'
     ],
 
     [
         'label' => 'Hi',
-        'identifier' => 'hi',
-        'translation' => 'Hi'
+        'identifier' => 'hi'
     ],
 
     [
         'label' => 'Display Name',
-        'identifier' => 'displayName',
-        'translation' => 'Display Name'
+        'identifier' => 'displayName'
     ],
 
     [
         'label' => 'Description',
-        'identifier' => 'description',
-        'translation' => 'Description'
+        'identifier' => 'description'
     ],
 
     [
         'label' => 'Confirmed Appointments',
-        'identifier' => 'confirmedAppointments',
-        'translation' => 'Confirmed Appointments'
+        'identifier' => 'confirmedAppointments'
     ],
 
     [
         'label' => 'Appointments Made',
-        'identifier' => 'appointmentsMade',
-        'translation' => 'Appointments Made'
-    ],
-
-    [
-        'label' => 'By',
-        'identifier' => 'by',
-        'translation' => 'By'
+        'identifier' => 'appointmentsMade'
     ],
 
     [
         'label' => 'Online Registration',
-        'identifier' => 'onlineRegistration',
-        'translation' => 'Online Registration'
+        'identifier' => 'onlineRegistration'
     ],
 
     [
         'label' => 'Telephone',
-        'identifier' => 'telephone',
-        'translation' => 'Telephone'
-    ],
-
-    [
-        'label' => 'Social Media',
-        'identifier' => 'social_media',
-        'translation' => 'Social Media'
-    ],
-
-    [
-        'label' => 'Walk In',
-        'identifier' => 'walk_in',
-        'translation' => 'Walk-in'
-    ],
-    
-    [
-        'label' => 'SMS',
-        'identifier' => 'sms',
-        'translation' => 'SMS'
+        'identifier' => 'telephone'
     ],
 
     [
         'label' => 'Prospecting',
-        'identifier' => 'prospecting',
-        'translation' => 'Prospecting'
+        'identifier' => 'prospecting'
     ],
 
     [
         'label' => 'New Customers',
-        'identifier' => 'new_customers',
-        'translation' => 'New Customers'
+        'identifier' => 'newCustomers'
     ],
 
+    [
+        'label' => 'No dealership found',
+        'identifier' => 'noDealershipFound'
+    ],
+
+    [
+        'label' => 'Dealership is required',
+        'identifier' => 'dealershipIsRequired'
+    ],
+
+    [
+        'label' => 'Start date is required',
+        'identifier' => 'startDateIsRequired'
+    ],
+
+    [
+        'label' => 'Manage dealerships',
+        'identifier' => 'manageDealerships'
+    ],
+
+    [
+        'label' => 'Event type',
+        'identifier' => 'eventType'
+    ],
+
+    [
+        'label' => 'Add event type',
+        'identifier' => 'addEventType'
+    ],
+
+    [
+        'label' => 'Type is required',
+        'identifier' => 'typeIsRequired'
+    ],
+
+    [
+        'label' => 'Select event type',
+        'identifier' => 'selectEventType'
+    ],
+
+    [
+        'label' => 'Create new event',
+        'identifier' => 'createNewEvent'
+    ],
+
+    [
+        'label' => 'Manage events',
+        'identifier' => 'manageEvents'
+    ],
+
+    [
+        'label' => 'Manage staff / vehicles',
+        'identifier' => 'manageStaffVehicles'
+    ],
+
+    [
+        'label' => 'Name of event',
+        'identifier' => 'nameOfEvent'
+    ],
+
+    [
+        'label' => 'Event banner',
+        'identifier' => 'eventBanner'
+    ],
+
+    [
+        'label' => 'Update event',
+        'identifier' => 'updateEvent'
+    ],
+
+    [
+        'label' => 'No events found',
+        'identifier' => 'noEventsFound'
+    ],
+
+    [
+        'label' => 'Event is required',
+        'identifier' => 'eventIsRequired'
+    ],
 ];

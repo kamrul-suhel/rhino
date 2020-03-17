@@ -102,7 +102,7 @@ const mutations = {
             },
 
             {
-                'text': trans.sales_executive,
+                'text': trans.salesExecutive,
                 'value': 'sales_executive'
             }
         ]

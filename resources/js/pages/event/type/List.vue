@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.add} ${trans.event} ${trans.type}` }}
+                    {{ `${trans.addEventType}` }}
                 </div>
             </div>
 
@@ -21,7 +21,7 @@
                     <!-- Language Selector for translations -->
                     <v-layout row wrap justify-end>
                         <v-flex xs12 sm3 v-if="editType">
-                            <Language 
+                            <Language
                                     :languageId="selectedType.language_id">
                             </Language>
                         </v-flex>
@@ -46,14 +46,14 @@
                         <v-flex xs12 sm3 mr-3>
                             <v-text-field
                                 :label="trans.name"
-                                :rules="[v => !!v || `${trans.name} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.nameIsRequired}`]"
                                 required
                                 v-model="selectedType.name"
                                 :color="themeOption.inputColor"
                                 box solo flat>
                             </v-text-field>
                         </v-flex>
-                                                
+
                         <v-flex xs12 sm3 mr-3>
                             <v-text-field
                                 :label="trans.displayName"
@@ -81,7 +81,7 @@
                                 class="rounded-btn"
                                 :color="themeOption.buttonDangerColor"
                                 @click="onCreateType">
-                                {{ editType ? `${trans.update} ${trans.type}` : `${trans.add} ${trans.type}`}}
+                                {{ editType ? `${trans.updateType}` : `${trans.addType}`}}
                             </v-btn>
                         </v-flex>
                     </v-layout>
@@ -96,9 +96,9 @@
                     :items="types"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="trans.no_type_found"
-                    :no-data-text="trans.no_type_found"
-                    :rows-per-page-text="trans.rows_per_page"
+                    :no-results-text="trans.noTypeFound"
+                    :no-data-text="trans.noTypeFound"
+                    :rows-per-page-text="trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalType"
                     :loading="loading"
@@ -110,7 +110,7 @@
                                 contain
                                 width="50px"
                                 :src="props.item.image">
-                            </v-img> 
+                            </v-img>
                         </td>
                         <td>{{ props.item.display_name }}</td>
                         <td>{{ props.item.name }}</td>
@@ -154,7 +154,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -253,7 +253,7 @@
         },
 
         created() {
-            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.event} ${this.trans.types}` )
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manageEventType}` )
             this.$store.commit( 'setNavTitle', `${this.trans.events}` )
         },
 
@@ -303,7 +303,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedType.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedType.name}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()
@@ -334,7 +334,7 @@
 
                     axios.post(URL, typeForm).then((response) => {
                         this.initialize()
-                        const message = this.editType ? `${this.trans.successfully_updated}` : `${this.trans.successfully_created}`
+                        const message = this.editType ? `${this.trans.successfullyUpdated}` : `${this.trans.successfullyCreated}`
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
@@ -364,8 +364,8 @@
 
             onCancelType() {
 
-            }, 
-                        
+            },
+
             toggleForm() {
                 this.showForm = !this.showForm
             }

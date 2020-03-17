@@ -19,7 +19,7 @@
                             <v-text-field
                                 :color="themeOption.inputColor"
                                 v-model="date"
-                                :label="`${trans.select} ${trans.date}`"
+                                :label="`${trans.selectDate}`"
                                 prepend-icon="event"
                                 readonly
                                 v-on="on"
@@ -105,7 +105,6 @@
 
         watch:{
             update(){
-                console.log('update now generate appointment')
             },
 
             appointmentOpen(index){

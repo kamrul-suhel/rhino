@@ -3,7 +3,7 @@
         <v-flex xs12 v-if="selectedEvent.id === appointment.event_id">
             <div class="appointment-button disable"
                  @click="onAppointmentDetail()">
-                <span v-if="appointment.status === 3">{{ `${trans.not} ${trans.available}`}}</span>
+                <span v-if="appointment.status === 3">{{ `${trans.notAvailable}`}}</span>
                 <span v-if="appointment.status === 4">{{ `${trans.breakTime}`}}</span>
                 <span v-if="appointment.status === 1">
                     {{ `${trans.confirmed}`}}

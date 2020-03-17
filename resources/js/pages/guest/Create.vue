@@ -5,7 +5,7 @@
                 <v-toolbar flat>
                     <v-toolbar-title>
                         <span
-                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.create} ${trans.guest}` }}</span>
+                            :class="themeOption.textHeadingColor+'--text'">{{ `${trans.createGuest}` }}</span>
                     </v-toolbar-title>
 
                     <v-divider
@@ -32,7 +32,7 @@
                                     <v-select
                                         :color="themeOption.inputColor"
                                         :items="events"
-                                        :rules="[v => !!v || `${trans.event} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.eventIsRequired}`]"
                                         item-value="id"
                                         item-text="event"
                                         :label="`${trans.event}`"
@@ -46,7 +46,7 @@
                             <v-layout row wrap py-4>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.firstNameIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.firstName"
                                         v-model="guest.first_name"
@@ -56,7 +56,7 @@
 
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.surnameIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.surName"
                                         v-model="guest.surname"
@@ -67,7 +67,7 @@
 
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.emailIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.email"
                                         v-model="guest.email"
@@ -79,9 +79,9 @@
                             <v-layout row wrap py-4>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.address} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.addressIsRequired}`]"
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 1`"
+                                        :label="`${trans.addressLine} 1`"
                                         v-model="guest.address_line_1"
                                         box solo flat
                                         required
@@ -91,7 +91,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 2`"
+                                        :label="`${trans.addressLine} 2`"
                                         v-model="guest.address_line_2"
                                         box solo flat
                                     ></v-text-field>
@@ -100,7 +100,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 3`"
+                                        :label="`${trans.addressLine} 3`"
                                         v-model="guest.address_line_3"
                                         box solo flat
                                     ></v-text-field>
@@ -109,7 +109,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 4`"
+                                        :label="`${trans.addressLine} 4`"
                                         v-model="guest.address_line_4"
                                         box solo flat
                                     ></v-text-field>
@@ -118,7 +118,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 5`"
+                                        :label="`${trans.addressLine} 5`"
                                         v-model="guest.address_line_5"
                                         box solo flat
                                     ></v-text-field>
@@ -127,7 +127,7 @@
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
                                         :color="themeOption.inputColor"
-                                        :label="`${trans.address_line} 6`"
+                                        :label="`${trans.addressLine} 6`"
                                         v-model="guest.address_line_6"
                                         box solo flat
                                     ></v-text-field>
@@ -135,7 +135,7 @@
 
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.postcode} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.postcodeIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.postcode"
                                         v-model="guest.postcode"
@@ -156,7 +156,7 @@
 
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.mobile} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.mobileIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.mobile"
                                         v-model="guest.mobile"
@@ -169,7 +169,7 @@
                                     <v-select
                                         :color="themeOption.inputColor"
                                         :items="methods"
-                                        :rules="[v => !!v || `${trans.method} ${trans.is_required}`]"
+                                        :rules="[v => !!v || `${trans.methodIsRequired}`]"
                                         item-text="text"
                                         item-value="value"
                                         :label="trans.method"
@@ -201,7 +201,7 @@
                                     small
                                     @click="onCreateGuest()"
                                 >
-                                    {{ `${trans.create} ${trans.guest}` }}
+                                    {{ `${trans.createGuest}` }}
                                 </v-btn>
                             </v-flex>
                         </v-layout>
@@ -288,7 +288,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.guest.first_name}  ${this.trans.successfully_created}`
+                                message: `${this.guest.first_name}  ${this.trans.successfullyCreated}`
                             })
 
                             // If request coming from book guest page then return to book guest journey

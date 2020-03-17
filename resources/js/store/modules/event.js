@@ -94,12 +94,12 @@ const mutations = {
 
 
             {
-                text: trans.appointment_duration,
+                text: trans.appointmentDuration,
                 value: 'appointment_duration'
             },
 
             {
-                text: `${trans.event} ${trans.type}`,
+                text: `${trans.eventType}`,
                 align: 'left',
                 sortable: false,
                 value: 'type'

@@ -14,12 +14,12 @@
             <v-layout row wrap justify-center align-item-center>
                 <v-btn :color="themeOption.primaryColor"
                        @click="onBookAGuest('withoutUniqueCode')"
-                       :style="{color: themeOption.primaryTextColor}">{{ `${trans.book} ${trans.without} ${trans.uniqueCode}`}}
+                       :style="{color: themeOption.primaryTextColor}">{{ `${trans.bookWithoutUniqueCode}`}}
                 </v-btn>
 
                 <v-btn :color="themeOption.primaryColor"
                        @click="onBookAGuest('withUniqueCode')"
-                       :style="{color: themeOption.primaryTextColor}">{{ `${trans.book} ${trans.with} ${trans.uniqueCode}`}}
+                       :style="{color: themeOption.primaryTextColor}">{{ `${trans.bookWithUniqueCode}`}}
                 </v-btn>
 
                 <v-btn :color="themeOption.primaryColor"

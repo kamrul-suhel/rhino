@@ -45,7 +45,7 @@
 
                                 <v-flex xs12 pa-0>
                                     <h6 class="xs12 body-2 text-xs-center">
-                                        {{ `${trans.sales} ${trans.person}`}}
+                                        {{ `${trans.salesPerson}`}}
                                     </h6>
                                 </v-flex>
 

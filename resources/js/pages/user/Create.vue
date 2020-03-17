@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    {{ `${trans.create} ${trans.user}` }}
+                    {{ `${trans.createUser}` }}
                 </div>
             </div>
             <div class="r-tab-content" :class="[showForm ? 'open' : '']">
@@ -22,7 +22,7 @@
                     <v-layout row wrap>
                         <v-flex xs12 sm3 pa-2>
                             <v-text-field
-                                :rules="[v => !!v || `${trans.firstName} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.firstNameIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.firstName"
                                 v-model="user.name"
@@ -32,7 +32,7 @@
 
                         <v-flex xs12 sm3 pa-2>
                             <v-text-field
-                                :rules="[v => !!v || `${trans.surName} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.surnameIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.surName"
                                 v-model="user.surname"
@@ -42,7 +42,7 @@
 
                         <v-flex xs12 sm3 pa-2>
                             <v-text-field
-                                :rules="[v => !!v || `${trans.email} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.emailIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.email"
                                 v-model="user.email"
@@ -61,7 +61,7 @@
                                 :type="password ? `text` : `password`"
                                 v-model="user.password"
                                 @click:append="password = !password"
-                                :hint="`${trans.password} ${trans.minimum8Character}`"
+                                :hint="`${trans.passwordMinimum8Character}`"
                                 box solo flat
                             ></v-text-field>
                         </v-flex>
@@ -69,10 +69,10 @@
                         <v-flex xs12 sm3 pa-2>
                             <v-text-field
                                 :append-icon="confirmPassword ? 'visibility' : 'visibility_off'"
-                                :rules="[v => !!v || `${trans.confirm} ${trans.is_required}`, confirmRule]"
+                                :rules="[v => !!v || `${trans.confirmPasswordIsRequired}`, confirmRule]"
                                 required
                                 :color="themeOption.inputColor"
-                                :label="`${trans.confirm} ${trans.password}`"
+                                :label="`${trans.confirmPassword}`"
                                 :type="confirmPassword ? `text` : `password`"
                                 @click:append="confirmPassword = !confirmPassword"
                                 v-model="user.password_confirmation"
@@ -83,7 +83,7 @@
                         <v-flex xs12 sm3 pa-2 v-if="authUser.level !== 'dealership'">
                             <v-select
                                 :items="levels"
-                                :rules="[v => !!v || `${trans.select_a} ${trans.rule}`]"
+                                :rules="[v => !!v || `${trans.selectARule}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.rule"
                                 v-model="user.level"
@@ -99,7 +99,7 @@
                                 :items="dealerships"
                                 item-text="name"
                                 item-value="id"
-                                :rules="[v => !!v || `${trans.dealership} ${trans.is_required}`]"
+                                :rules="[v => !!v || `${trans.dealershipIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.dealership"
                                 v-model="user.dealershipId"
@@ -114,7 +114,7 @@
                                 :items="groups"
                                 item-text="name"
                                 item-value="id"
-                                :rules="[ v => !!v || `${trans.group} ${trans.is_required}`]"
+                                :rules="[ v => !!v || `${trans.groupIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.group"
                                 v-model="user.group_id"
@@ -129,7 +129,7 @@
                                 :items="countries"
                                 item-text="name"
                                 item-value="id"
-                                :rules="[ v => !!v || `${trans.country} ${trans.is_required}`]"
+                                :rules="[ v => !!v || `${trans.countryIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.country"
                                 v-model="user.country_id"
@@ -144,7 +144,7 @@
                                 :items="brands"
                                 item-text="name"
                                 item-value="id"
-                                :rules="[ v => !!v || `${trans.brand} ${trans.is_required}`]"
+                                :rules="[ v => !!v || `${trans.brandIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.brand"
                                 v-model="user.brand_id"
@@ -159,7 +159,7 @@
                                       item-text="name"
                                       item-value="id"
                                       :color="themeOption.inputColor"
-                                      :rules="[v => !!v || `${trans.region} ${trans.is_required}`]"
+                                      :rules="[v => !!v || `${trans.regionIsRequired}`]"
                                       :label="trans.region"
                                       v-model="user.region_id"
                                       box solo flat
@@ -173,7 +173,7 @@
                                 item-text="name"
                                 item-value="id"
                                 :color="themeOption.inputColor"
-                                :rules="[ v => !!v || `${trans.company} ${trans.is_required}`]"
+                                :rules="[ v => !!v || `${trans.companyIsRequired}`]"
                                 :label="trans.company"
                                 v-model="user.company_id"
                                 box solo flat
@@ -245,13 +245,13 @@
 
             passwordRule() {
                 return [
-                    v => !!v || `${this.trans.password} ${this.trans.is_required}`,
-                    v => v && v.length >= 8 || `${this.trans.password} ${this.trans.minimum8Character}`
+                    v => !!v || `${this.trans.passwordIsRequired}`,
+                    v => v && v.length >= 8 || `${this.trans.passwordMinimum8Character}`
                 ]
             },
 
             confirmRule() {
-                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.password} ${this.trans.notMatch}`
+                return () => (this.user.password === this.user.password_confirmation) || `${this.trans.passwordNotMatch}`
             }
         }),
 
@@ -332,7 +332,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.user}  ${this.trans.successfully_created}`
+                            message: `${this.trans.user}  ${this.trans.successfullyCreated}`
                         })
 
                         this.showForm = false
@@ -359,11 +359,11 @@
 
 
                 if (this.showForm) {
-                    this.$store.commit('setHeaderTitle', `${this.trans.create} ${this.trans.new} ${this.trans.user}`)
-                    this.$store.commit('setNavTitle', `${this.trans.create} ${this.trans.new} ${this.trans.user}`)
+                    this.$store.commit('setHeaderTitle', `${this.trans.createNewUser}`)
+                    this.$store.commit('setNavTitle', `${this.trans.createNewUser}`)
                 } else {
-                    this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.users}`)
-                    this.$store.commit('setNavTitle', `${this.trans.manage} ${this.trans.users}`)
+                    this.$store.commit('setHeaderTitle', `${this.trans.manageUsers}`)
+                    this.$store.commit('setNavTitle', `${this.trans.manageUsers}`)
                 }
             }
         }

@@ -8,9 +8,9 @@
             :items="dealerships"
             disable-initial-sort
             :pagination.sync="pagination"
-            :no-results-text="trans.no_dealership_found"
-            :no-data-text="trans.no_dealership_found"
-            :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+            :no-results-text="trans.noDealershipFound"
+            :no-data-text="trans.noDealershipFound"
+            :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
             :rows-per-page-items="rowsPerPage"
             :total-items="totalDealership"
             :loading="loading"
@@ -58,7 +58,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -144,8 +144,8 @@
         },
 
         created() {
-            this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.dealerships}` )
-            this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.dealerships}` )
+            this.$store.commit( 'setHeaderTitle', `${this.trans.manageDealerships}` )
+            this.$store.commit( 'setNavTitle', `${this.trans.manageDealerships}` )
         },
 
         methods: {
@@ -182,7 +182,7 @@
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
-                                message: `${selectedDealership.name}  ${this.trans.successfully_deleted}`
+                                message: `${selectedDealership.name}  ${this.trans.successfullyDeleted}`
                             })
 
                             this.initialize()

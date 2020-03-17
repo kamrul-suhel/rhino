@@ -66,7 +66,7 @@
                         value="partExchange"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
-                        <span :style="{color: color}">{{ `${trans.partExchange} ${trans.details}` }}</span>
+                        <span :style="{color: color}">{{ `${trans.partExchangeDetails}` }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -75,7 +75,7 @@
                         value="confirmYourDetail"
                     >
                         <v-avatar :style="{borderColor: color, color:color}">4</v-avatar>
-                        <span :style="{color: color}">{{ `${trans.confirm} ${trans.your_details}` }}</span>
+                        <span :style="{color: color}">{{ `${trans.confirmYourDetails}` }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 

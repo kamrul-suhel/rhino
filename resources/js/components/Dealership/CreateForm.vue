@@ -5,7 +5,7 @@
     >
         <v-card>
             <v-card-title>
-                <h3>{{ `${trans.add} ${trans.brand}` }}</h3>
+                <h3>{{ `${trans.addBrand}` }}</h3>
             </v-card-title>
             <v-divider></v-divider>
 
@@ -13,10 +13,10 @@
 
                 <v-layout row wrap>
                     <v-flex xs12>
-                        <v-select :label="`${trans.select_a} ${trans.brand}`"
+                        <v-select :label="`${trans.selectABrand}`"
                                   :color="themeOption.inputColor"
                                   item-text="name"
-                                  :rules="[v => !!v || `${trans.select_a} ${trans.brand}`]"
+                                  :rules="[v => !!v || `${trans.selectABrand}`]"
                                   item-value="id"
                                   v-model="selectedBrand.brand_id"
                                   @change="onBrandChange"
@@ -28,7 +28,7 @@
                     <v-flex xs12>
                         <v-select :label="trans.region"
                                   :items="regions"
-                                  :rules="[v => !!v || `${trans.select_a} ${trans.region}`]"
+                                  :rules="[v => !!v || `${trans.selectARegion}`]"
                                   item-text="name"
                                   v-model="selectedBrand.region_id"
                                   item-value="id"
@@ -45,7 +45,7 @@
                     @click="onCreateRelation"
                     class="rounded-btn"
                     :color="themeOption.buttonPrimaryColor"
-                >{{`${trans.add} ${trans.brand}` }}</v-btn>
+                >{{`${trans.addBrand}` }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-form>

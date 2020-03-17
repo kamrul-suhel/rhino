@@ -10,9 +10,9 @@
                     :items="users"
                     disable-initial-sort
                     :pagination.sync="pagination"
-                    :no-results-text="`${trans.no} ${trans.users} ${trans.found}`"
-                    :no-data-text="`${trans.no} ${trans.users} ${trans.found}`"
-                    :rows-per-page-text="trans.rows_per_page === null ? 'Row per page' : trans.rows_per_page"
+                    :no-results-text="`${trans.noUsersFound}`"
+                    :no-data-text="`${trans.noUsersFound}`"
+                    :rows-per-page-text="trans.rowsPerPage === null ? 'Row per page' : trans.rowsPerPage"
                     :rows-per-page-items="rowsPerPage"
                     :total-items="totalUsers"
                     :loading="loading"
@@ -63,7 +63,7 @@
 
                 <v-card-text>
                     <v-flex xs12>
-                        {{ trans.delete_confirmation }}
+                        {{ trans.deleteConfirmation }}
                     </v-flex>
                 </v-card-text>
 
@@ -165,7 +165,7 @@
         },
 
         created() {
-            this.$store.commit('setHeaderTitle', `${this.trans.manage} ${this.trans.users}`)
+            this.$store.commit('setHeaderTitle', `${this.trans.manageUsers}`)
             this.$store.commit('setNavTitle', `${this.trans.users}`)
         },
 
@@ -217,7 +217,7 @@
                                 this.$store.commit('setSnackbarMessage', {
                                     openMessage: true,
                                     timeOut: this.themeOption.snackBarTimeout,
-                                    message: `${this.trans.user}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                                    message: `${this.trans.userSuccessfullyRemoveFromEvent}`
                                 })
 
                                 if (response.data.success) {
@@ -242,7 +242,7 @@
                                     this.$store.commit('setSnackbarMessage', {
                                         openMessage: true,
                                         timeOut: this.themeOption.snackBarTimeout,
-                                        message: `${this.selectedUser.firstname}  ${this.trans.successfully_remove} ${this.trans.from} ${this.trans.event}`
+                                        message: `${this.selectedUser.firstname}  ${this.trans.userSuccessfullyRemoveFromEvent}`
                                     })
                                     this.$store.commit('setInitialize')
                                 }
@@ -258,7 +258,7 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedUser.firstname}  ${this.trans.successfully_deleted}`
+                            message: `${this.selectedUser.firstname}  ${this.trans.successfullyDeleted}`
                         })
                     })
                 }
