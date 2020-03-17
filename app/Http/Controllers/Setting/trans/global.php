@@ -1257,8 +1257,18 @@ return [
     ],
 
     [
+        'label' => 'Start',
+        'identifier' => 'start'
+    ],
+
+    [
         'label' => 'End Date',
         'identifier' => 'endDate'
+    ],
+
+    [
+        'label' => 'End',
+        'identifier' => 'end'
     ],
 
     [
@@ -1575,7 +1585,7 @@ return [
 
     [
         'label' => 'Tuesday',
-        'identifier' => 'Tuesday'
+        'identifier' => 'tuesday'
     ],
 
     [

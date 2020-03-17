@@ -97,11 +97,15 @@
               languages: 'getLanguages',
               trans: 'getFields',
               companies: 'getCompanies',
-              themeOption: 'getThemeOption'
+              themeOption: 'getThemeOption',
+              selectedLanguage: 'getSubSelectedLanguage'
           })
         },
 
         watch: {
+            selectedLanguage(){
+                this.$store.dispatch('fetchSettingFields', {languageId: this.selectedLanguage.id});
+            }
         },
 
         created() {
@@ -121,6 +125,7 @@
 
                     guestLogin.append('uniqueId', this.user.unique)
                     guestLogin.append('method', 'online')
+                    guestLogin.append('languageId', this.selectedLanguage.id)
 
                     // submit data with ajax request
                     await axios.post('/guests/login', guestLogin)
