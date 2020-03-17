@@ -125,7 +125,11 @@
 
                     guestLogin.append('uniqueId', this.user.unique)
                     guestLogin.append('method', 'online')
-                    guestLogin.append('languageId', this.selectedLanguage.id)
+
+                    // Check language has been changed
+                    if(this.selectedLanguage.id){
+                        guestLogin.append('languageId', this.selectedLanguage.id)
+                    }
 
                     // submit data with ajax request
                     await axios.post('/guests/login', guestLogin)
