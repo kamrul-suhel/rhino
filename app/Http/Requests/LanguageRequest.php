@@ -25,8 +25,8 @@ class LanguageRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'code2' => 'required|string',
-            'code3' => 'required|string',
+            'language_code' => 'required|string',
+            'country_code' => 'required|string',
             'status' => 'required|integer'
         ];
     }

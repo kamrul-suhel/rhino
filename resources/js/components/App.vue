@@ -113,7 +113,7 @@
                             this.$store.commit('setUserRole', true)
                             this.$store.commit('setInitialize', true)
 
-                            // Get selected langauage from auth user
+                            // Get selected language from auth user
                             _.map(this.languages, (language) => {
                                 if (language.id === this.authUser.language_id) {
                                     this.$store.commit('setSelectedLanguage', {...language})

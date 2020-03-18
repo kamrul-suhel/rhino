@@ -48,15 +48,15 @@ const mutations = {
             },
 
             {
-                text: `${trans.code} 2`,
+                text: `${trans.languageCode}`,
                 align: 'left',
                 sortable: false,
-                value: 'code2'
+                value: 'language_code'
             },
 
             {
-                text: `${trans.code} 3`,
-                value: 'code3'
+                text: `${trans.countryCode}`,
+                value: 'country_code'
             },
 
             {

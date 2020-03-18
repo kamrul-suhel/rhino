@@ -356,6 +356,18 @@ const actions = {
         const URL = `/booking`
         axios.get(URL).then((response) => {
             if (response.data.success) {
+
+                if(
+                    payload.languageId == null &&
+                    typeof payload.languageId === 'undefined'
+                ){
+                    payload = {
+                        ...payload,
+                        languageId: response.data.language.id
+                    }
+                    dispatch('fetchSettingFields', {...payload})
+                }
+
                 const dataUrl = `/api/booking/${response.data.uniqueId}${fn.generateParams(payload)}`
                 axios.get(dataUrl).then((response) => {
                     commit('setBookingGuest', {guest : response.data.guest, event: response.data.event})

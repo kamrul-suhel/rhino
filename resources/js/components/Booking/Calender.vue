@@ -3,8 +3,8 @@
               align-center
               class="book-step calenderComponent">
         <v-flex xs12>
-            <h6 class="headline text-xs-center">{{ selectedEvent.start | dateFormat('MMMM')}} <b>{{
-                selectedEvent.start | dateFormat('YYYY')}}</b></h6>
+            <h6 class="headline text-xs-center">{{ selectedEvent.start | dateFormat('MMMM', selectedLanguage.language_code)}} <b>{{
+                selectedEvent.start | dateFormat('YYYY', selectedLanguage.language_code)}}</b></h6>
         </v-flex>
 
         <v-flex xs12>
@@ -45,6 +45,7 @@
                     <v-date-picker
                         class="calender mt-3"
                         full-width
+                        :locale="selectedLanguage.language_code"
                         no-title
                         reactive
                         :readonly="isDisable"
@@ -89,6 +90,7 @@
                 isDisable: 'getDisableEditing',
                 storeSelectedDate: 'getBookingSelectedDate',
                 vehicleType: 'getBookingVehicleType',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 

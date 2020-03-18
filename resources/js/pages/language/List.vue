@@ -31,19 +31,19 @@
                                     </v-flex>
 
                                     <v-flex xs12 sm3>
-                                        <v-text-field :label="`${trans.code} 2`"
+                                        <v-text-field :label="`${trans.languageCode}`"
                                             :color="themeOption.inputColor"
-                                            :rules="[v => !!v || `${trans.code2IsRequired}`]"
-                                            v-model="selectedLanguage.code2"
+                                            :rules="[v => !!v || `${trans.languageCodeIsRequired}`]"
+                                            v-model="selectedLanguage.language_code"
                                             box flat solo
                                         ></v-text-field>
                                     </v-flex>
 
                                     <v-flex xs12 sm3>
-                                        <v-text-field :label="`${trans.code} 3`"
-                                                        :rules="[v => !!v || `${trans.code3IsRequired}`]"
+                                        <v-text-field :label="`${trans.countryCode}`"
+                                                        :rules="[v => !!v || `${trans.countryCodeIsRequired}`]"
                                                         :color="themeOption.inputColor"
-                                                        v-model="selectedLanguage.code3"
+                                                        v-model="selectedLanguage.country_code"
                                                         box flat solo
                                         ></v-text-field>
                                     </v-flex>
@@ -95,8 +95,8 @@
                     <template v-slot:items="props">
                         <tr>
                             <td>{{ props.item.name }}</td>
-                            <td>{{ props.item.code2 }}</td>
-                            <td>{{ props.item.code3 }}</td>
+                            <td>{{ props.item.language_code }}</td>
+                            <td>{{ props.item.country_code }}</td>
                             <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                             <td class="text-xs-right">
                                 <v-icon
@@ -282,8 +282,8 @@
                     let URL = '/api/languages'
                     let languageForm = new FormData()
                     languageForm.append('name', this.selectedLanguage.name)
-                    languageForm.append('code2', this.selectedLanguage.code2)
-                    languageForm.append('code3', this.selectedLanguage.code3)
+                    languageForm.append('language_code', this.selectedLanguage.language_code)
+                    languageForm.append('country_code', this.selectedLanguage.country_code)
                     languageForm.append('status', this.selectedLanguage.status)
 
                     if(this.editLanguage){

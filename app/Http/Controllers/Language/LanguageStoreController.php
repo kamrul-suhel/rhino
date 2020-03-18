@@ -61,9 +61,9 @@ class LanguageStoreController extends Controller
         $language = empty($id) ? new Language() : Language::findOrFail($id);
 
         $request->has('name') ? $language->name = $request->name : null;
-        $request->has('code2') ? $language->code2 = $request->code2 : null;
-        $request->has('code3') ? $language->code3 = $request->code3 : null;
-        $request->has('status') ? $language->status = $request->status : null;
+        $request->has('language_code') ? $language->language_code = $request->language_code : null;
+        $request->has('country_code') ? $language->country_code = $request->country_code : null;
+        $request->has('status') && $request->undefined !== 'undefined' ? $language->status = $request->status : 1; // default state
 
         $language->save();
 

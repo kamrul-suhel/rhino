@@ -1,14 +1,14 @@
 <template>
     <v-autocomplete
         :items="languages"
-        item-text="code2"
+        item-text="language_code"
         item-value="id"
         :color="themeOption.inputColor"
         v-model="selectedLanguageId"
         return-object
         :class="[isFrontend ? 'frontend-language' : '', model]"
         :append-icon="isFrontend ? 'expand_more' : 'arrow_drop_down'"
-        :prepend-icon="`flag-icon-${selectedLanguage.code2}`"
+        :prepend-icon="`flag-icon-${selectedLanguage.language_code}`"
         @change="onSubLanguageChange"
         :label="trans.language"
         :solo="solo"
@@ -20,17 +20,17 @@
                 v-if="chip"
             >
                 <v-avatar>
-                    <flag :iso="data.item.code2"></flag>
+                    <flag :iso="data.item.country_code"></flag>
                 </v-avatar>
-                {{ data.item.code2 }}
+                {{ data.item.country_code }}
             </v-chip>
-            <span v-else>{{ `${data.item.name} (${data.item.code2})` }}</span>
+            <span v-else>{{ `${data.item.name} (${data.item.country_code})` }}</span>
         </template>
 
         <template v-slot:item="data">
 
             <v-list-tile-avatar>
-                <flag :iso="data.item.code2"></flag>
+                <flag :iso="data.item.country_code"></flag>
             </v-list-tile-avatar>
             <v-list-tile-content>
                 <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
@@ -105,7 +105,6 @@
 
         methods: {
             onSubLanguageChange(selectedLanguage) {
-                console.log('selected language is: ', selectedLanguage)
                 this.$store.commit('setSubSelectedLanguage', selectedLanguage)
             },
 

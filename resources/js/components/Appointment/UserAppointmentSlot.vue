@@ -2,7 +2,7 @@
     <v-card flat
             tile>
         <v-card-text class="appointmentSlot">
-            <div>{{ appointmentSlot.start|dateFormat('LT', selectedLanguage.code2) }} - {{ appointmentSlot.end| dateFormat('LT', selectedLanguage.code2)
+            <div>{{ appointmentSlot.start|dateFormat('LT', selectedLanguage.language_code) }} - {{ appointmentSlot.end| dateFormat('LT', selectedLanguage.language_code)
                 }}
             </div>
         </v-card-text>

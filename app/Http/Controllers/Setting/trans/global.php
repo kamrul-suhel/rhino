@@ -1514,13 +1514,23 @@ return [
     ],
 
     [
-        'label' => 'Code 2 is required',
-        'identifier' => 'code2IsRequired'
+        'label' => 'Language code',
+        'identifier' => 'languageCode'
     ],
 
     [
-        'label' => 'Code 3 is required',
-        'identifier' => 'code3IsRequired'
+        'label' => 'Country code',
+        'identifier' => 'countryCode'
+    ],
+
+    [
+        'label' => 'Language code is required',
+        'identifier' => 'languageCodeIsRequired'
+    ],
+
+    [
+        'label' => 'Country code is required',
+        'identifier' => 'CountryCodeIsRequired'
     ],
 
     [
@@ -2173,5 +2183,5 @@ return [
     [
         'label' => 'Event is required',
         'identifier' => 'eventIsRequired'
-    ],
+    ]
 ];
