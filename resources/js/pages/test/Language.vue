@@ -63,7 +63,7 @@
         methods: {
             changeLanguage(){
                 let newMoment = new moment()
-                newMoment.locale(this.selectedLanguage.code2)
+                newMoment.locale(this.selectedLanguage.language_code)
 
                 this.date = newMoment.format('LT')   // 18:15
                 this.date2 = newMoment.format('LTS') // 18:15:31

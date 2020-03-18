@@ -44,7 +44,7 @@
                         class="language-picker icon-left"
                         :color="themeOption.primaryColor"
                         :placeholder="trans.selectALanguage"
-                        :prepend-icon="`flag-icon-${selectedLanguage.code2.toLowerCase()}`"
+                        :prepend-icon="`flag-icon-${selectedLanguage.language_code.toLowerCase()}`"
                         :items="languages"
                         item-text="name"
                         item-value="id"

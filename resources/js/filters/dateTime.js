@@ -7,7 +7,7 @@ Vue.filter('dateFormat', (date, format, locale='en') => {
     }
 
     let newMoment = new moment(date)
-    newMoment.locale(locale)
+    newMoment.locale(locale.toLowerCase())
 
     let filterDate = null
     switch(format){

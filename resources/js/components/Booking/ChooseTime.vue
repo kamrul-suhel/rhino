@@ -37,7 +37,7 @@
                                         border: '1px solid rgb(220,220,220)',
                                          backgroundColor: slot.status === 'selected' ? color: ''
                                       }">
-                            <h6 class="body-2">{{ slot.start | dateFormat('HH')}}-<br>{{ slot.end | dateFormat('HH')}}
+                            <h6 class="body-2">{{ slot.start | dateFormat('HH', selectedLanguage.language_code)}}-<br>{{ slot.end | dateFormat('HH', selectedLanguage.language_code)}}
                             </h6>
                         </v-layout>
                     </v-responsive>
@@ -120,7 +120,8 @@
                 existingAppointments: 'getAllBookingAppointments',
                 bringGuest: 'getBookingBringGuest',
                 selectedSlot: 'getSelectedSlot',
-                isDisable: 'getDisableEditing'
+                isDisable: 'getDisableEditing',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 

@@ -67,6 +67,7 @@ const getters = {
 const actions = {
     fetchSettingFields({commit,dispatch}, payload = null){
         return new Promise((resolve, reject) => {
+            console.log('payload : ', payload)
             const URL = `/api/settings${fn.generateParams(payload)}`
             commit('setIsLoading', true)
             axios.get(URL).then((response) => {

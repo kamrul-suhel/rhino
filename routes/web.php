@@ -408,10 +408,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']],function(){
 Route::middleware(['guestAuth'])->prefix('booking')->group(function () {
     Route::get('', function(Request $request){
         if($request->ajax()){
-            return response()->json([
-                'success' => true,
-                'uniqueId' => session()->get('uniqueId')
-            ]);
+            $sessionId = session()->get('uniqueId');
+
+            if($sessionId){
+                $guest = \App\Guest::where('unique', $sessionId)->first();
+                $language = \App\Language::find($guest->language_id);
+                return response()->json([
+                    'success' => true,
+                    'uniqueId' => session()->get('uniqueId'),
+                    'language' => $language
+                ]);
+            }else{
+                return response()->json([
+                    'success' => false
+                ]);
+            }
+
+
         }
 
         return view('index');

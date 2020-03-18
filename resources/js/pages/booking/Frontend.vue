@@ -119,6 +119,7 @@
             },
             selectedLanguage(){
                 this.initialize()
+                this.$store.commit('setBookingStep', 0)
             }
         },
 

@@ -29,19 +29,19 @@
                         :placeholder="trans.selectALanguage"
                         :color="themeOption.primaryColor"
                         :items="languages"
-                        item-text="code2"
+                        item-text="country_code"
                         @change="onSelectLanguage"
                         item-value="id"
                         v-model="languageId"
                         return-object
                     >
                         <template v-slot:selection="data">
-                            {{ `${data.item.code2}` }}
+                            {{ `${data.item.country_code}` }}
                         </template>
 
                         <template v-slot:item="data">
                             <v-list-tile-avatar>
-                                <flag :iso="data.item.code2"></flag>
+                                <flag :iso="data.item.country_code"></flag>
                             </v-list-tile-avatar>
 
                             <v-list-tile-content>

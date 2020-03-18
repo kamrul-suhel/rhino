@@ -19,8 +19,8 @@ class LanguagesTableSeeder extends Seeder
 
 
         Languages::create([
-            'code2'    => 'GB',
-            'code3'    => 'GBR',
+            'language_code'    => 'GB',
+            'country_code'    => 'GBR',
             'status'    => 1,
             'name'   => 'English (UK)'
         ]);

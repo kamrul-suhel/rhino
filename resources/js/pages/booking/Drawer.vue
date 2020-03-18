@@ -35,7 +35,7 @@
             </v-flex>
 
             <v-flex xs12>
-                <h4 :style="{color:color}">{{ event.start | dateFormat('LL') }} - {{ event.end| dateFormat('LL') }}</h4>
+                <h4 :style="{color:color}">{{ event.start | dateFormat('LL', selectedLanguage.language_code) }} - {{ event.end| dateFormat('LL', selectedLanguage.language_code) }}</h4>
             </v-flex>
 
             <v-flex xs12>
@@ -47,8 +47,8 @@
                         key="selectModel"
                         value="selectModel"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">1</v-avatar>
-                        <span :style="{color: color}">{{ `${trans.selectModel}` }}</span>
+                        <v-avatar :style="{borderColor: color, color:color}">{{ numberFormat(1) }}</v-avatar>
+                        <span :style="{color: color}">{{ `${trans.selectModel}` | trans }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -56,8 +56,8 @@
                         key="bookYourSlot"
                         value="bookYourSlot"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">2</v-avatar>
-                        <span :style="{color: color}">{{ `${trans.bookYourAppointment}` }}</span>
+                        <v-avatar :style="{borderColor: color, color:color}">{{ numberFormat(2) }}</v-avatar>
+                        <span :style="{color: color}">{{ `${trans.bookYourAppointment}` | trans }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -65,8 +65,8 @@
                         key="partExchange"
                         value="partExchange"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">3</v-avatar>
-                        <span :style="{color: color}">{{ `${trans.partExchangeDetails}` }}</span>
+                        <v-avatar :style="{borderColor: color, color:color}">{{ numberFormat(3) }}</v-avatar>
+                        <span :style="{color: color}">{{ `${trans.partExchangeDetails}` | trans }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -74,8 +74,8 @@
                         key="confirmYourDetail"
                         value="confirmYourDetail"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">4</v-avatar>
-                        <span :style="{color: color}">{{ `${trans.confirmYourDetails}` }}</span>
+                        <v-avatar :style="{borderColor: color, color:color}">{{ numberFormat(4) }}</v-avatar>
+                        <span :style="{color: color}">{{ `${trans.confirmYourDetails}` | trans }}</span>
                         <span class="link" :style="{backgroundColor: color}"></span>
                     </v-tab>
 
@@ -83,8 +83,8 @@
                         key="bookingConfirmation"
                         value="bookingConfirmation"
                     >
-                        <v-avatar :style="{borderColor: color, color:color}">5</v-avatar>
-                        <span :style="{color: color}">{{ `${trans.bookingConfirmation}` }}</span>
+                        <v-avatar :style="{borderColor: color, color:color}">{{ numberFormat(5) }}</v-avatar>
+                        <span :style="{color: color}">{{ `${trans.bookingConfirmation}`| trans }}</span>
                     </v-tab>
                 </v-tabs>
             </v-flex>
@@ -143,7 +143,8 @@
                 languages: 'getLanguages',
                 guest: 'getBookingGuest',
                 color: 'getFrontendColor',
-                event: 'getSelectedEvent'
+                event: 'getSelectedEvent',
+                selectedLanguage: 'getSubSelectedLanguage'
             }),
 
             step: {
@@ -177,7 +178,7 @@
         }),
 
         watch: {
-            guest() {
+            selectedLanguage(){
             }
         },
 
@@ -197,6 +198,14 @@
             onEditGuestDetail() {
                 this.$store.commit('setEditGuest', true)
                 this.$store.commit('setBookingStep', 3)
+            },
+
+            numberFormat(number){
+                if(this.selectedLanguage.id){
+                    return number.toLocaleString(`${this.selectedLanguage.language_code}-${this.selectedLanguage.country_code}`)
+                }
+
+                return number
             }
         }
     }

@@ -35,7 +35,7 @@
                                                 <v-carousel-item
                                                     cycle="false"
                                                     v-for="vehicle in vehicles"
-                                                    :key="vehicle.id"
+                                                    :key="`${vehicle.id}-${vehicle.condition}`"
                                                     :src="vehicle.driver_seating_position_left_image"
                                                 ></v-carousel-item>
                                             </v-carousel>
@@ -94,8 +94,8 @@
 
                                                         <v-flex xs12>
                                                             <h6 class="xs12 body-1 text-xs-center">
-                                                                {{ slot.start|dateFormat('LT') }} to {{
-                                                                slot.end|dateFormat('LT')}}
+                                                                {{ slot.start|dateFormat('LT', selectedLanguage.language_code) }} to {{
+                                                                slot.end|dateFormat('LT', selectedLanguage.language_code)}}
                                                             </h6>
                                                         </v-flex>
                                                     </v-layout>
@@ -141,7 +141,7 @@
 
                                                         <v-flex xs12>
                                                             <h6 class="xs12 body-1 text-xs-center">
-                                                                {{ date| dateFormat }}
+                                                                {{ date| dateFormat('MMM do YYYY', selectedLanguage.language_code) }}
                                                             </h6>
                                                         </v-flex>
                                                     </v-layout>
@@ -285,7 +285,8 @@
                 partExchange: 'getBookingPartExchange',
                 date: 'getBookingSelectedDate',
                 event: 'getSelectedEvent',
-                isDisable: 'getDisableEditing'
+                isDisable: 'getDisableEditing',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 

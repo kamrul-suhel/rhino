@@ -136,7 +136,7 @@
         methods: {
             onSelectVehicle(vehicle) {
                 // Check appointment status
-                if(this.isDisable){
+                if (this.isDisable) {
                     return
                 }
 
@@ -150,7 +150,7 @@
 
             onVehicleSelected(vehicle) {
                 // Check appointment status
-                if(this.isDisable){
+                if (this.isDisable) {
                     return
                 }
 
@@ -188,7 +188,7 @@
 
             onFilterVehicle(type) {
                 // Check appointment status
-                if(this.isDisable){
+                if (this.isDisable) {
                     return
                 }
 
@@ -203,24 +203,24 @@
 
             onContinue() {
                 // Check appointment status
-                if(this.isDisable){
+                if (this.isDisable) {
                     this.$store.commit('setBookingStep', 1)
                     return
                 }
 
                 // If request from admin, dealership manager or saleexecutive
                 // Sales executive already selected & time then do not change timetable
-                if(
+                if (
                     this.$route.query.source === 'admin' &&
                     this.$route.query.type === 'calendar' &&
                     this.$route.query.redirect === 'calendar'
-                ){
+                ) {
                     this.$store.commit('setBookingStep', 1)
                     return
                 }
 
                 // if vehicle selected then load only associate sale executive
-                if(this.selectedVehicles.length > 0){
+                if (this.selectedVehicles.length > 0) {
                     const brandIds = _.map(this.selectedVehicles, (vehicle) => {
                         return vehicle.brand_id
                     })
@@ -230,10 +230,13 @@
 
                     const URL = `/api/brands/sales_executive/${this.selectedEvent.id}/${this.dealership.id}?brands=${uniqueBrandIds}`
                     axios.get(URL).then((response) => {
-                        this.$store.dispatch('fetchSaleExecutivesForBooking', {data: {guest : this.guest}, users: response.data.users })
+                        this.$store.dispatch('fetchSaleExecutivesForBooking', {
+                            data: {guest: this.guest},
+                            users: response.data.users
+                        })
                         this.$store.commit('setBookingStep', 1)
                     })
-                }else{
+                } else {
                     this.$store.commit('setBookingStep', 1)
                 }
 
@@ -244,18 +247,27 @@
                     return vehicle.image
                 }
 
+                let image = null
+
                 const dealershipSeatingPosition = this.dealership.driver_seating_position
 
                 switch (dealershipSeatingPosition) {
                     case 'right':
-                        return vehicle.driver_seating_position_right_image
+                        image = vehicle.driver_seating_position_right_image
+                        break
 
                     case 'left':
-                        return vehicle.driver_seating_position_left_image
+                        image = vehicle.driver_seating_position_left_image
+                        break
 
                     default:
-                        return this.themeOption.brandDefaultImage
+                        image = this.themeOption.brandDefaultImage
                 }
+                if (image !== null) {
+                    return image
+                }
+
+                return this.themeOption.brandDefaultImage
             }
         }
     }

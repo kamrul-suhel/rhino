@@ -17,7 +17,7 @@ class BookingController extends Controller
     public function getData($uniqueId)
     {
 
-        $guest = Guest::with(['appointment' => function($appointment){
+        $guest = Guest::with(['appointment' => function ($appointment) {
             $appointment->with('vehicles');
             $appointment->orderBy('id', 'DESC')
                 ->first();
@@ -60,8 +60,11 @@ class BookingController extends Controller
             )
                 ->leftJoin('vehicles', function ($vehicle) {
                     $vehicle->on('vehicles.id', '=', 'event_vehicle.vehicle_id')
-                        ->leftJoin('vehicles_translation', 'vehicles_translation.vehicle_id', 'vehicles.id')
-                        ->where('vehicles_translation.language_id', $this->languageId);
+                        ->leftJoin('vehicles_translation', function ($vehicleT) {
+                            $vehicleT->on('vehicles_translation.vehicle_id', 'vehicles.id')
+                                ->where('vehicles_translation.language_id', $this->languageId);
+                        });
+
                 })
                 ->where('event_id', $event->id)
                 ->get();
@@ -85,7 +88,7 @@ class BookingController extends Controller
                 ->get();
 
             $appointments = Appointment::where('appointments.event_id', $event->id)
-                ->whereIn('appointments.status', [1,3])
+                ->whereIn('appointments.status', [1, 3])
                 ->get();
         }
 

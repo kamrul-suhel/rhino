@@ -27,7 +27,7 @@
                                 <v-flex xs12>
                                     <h6 class="xs12 body-1 text-xs-center">
                                         <strong :style="{color: color}">
-                                            {{ slot.start|dateFormat('HH:mm') }} - {{ slot.end|dateFormat('LT')}}
+                                            {{ slot.start|dateFormat('HH:mm', selectedLanguage.language_code) }} - {{ slot.end|dateFormat('LT', selectedLanguage.language_code)}}
                                         </strong>
                                     </h6>
                                 </v-flex>
@@ -74,7 +74,7 @@
 
                                 <v-flex xs12>
                                     <h6 class="xs12 body-1 text-xs-center">
-                                        <strong :style="{color: color}">{{ date| dateFormat('DD/MM/YYYY') }}</strong>
+                                        <strong :style="{color: color}">{{ date| dateFormat('DD/MM/YYYY', selectedLanguage.language_code) }}</strong>
                                     </h6>
                                 </v-flex>
                             </v-layout>
@@ -154,7 +154,8 @@
                 partExchange: 'getBookingPartExchange',
                 date: 'getBookingSelectedDate',
                 event: 'getSelectedEvent',
-                isDisable: 'getDisableEditing'
+                isDisable: 'getDisableEditing',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 
