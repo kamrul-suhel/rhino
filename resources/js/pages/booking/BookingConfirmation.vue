@@ -238,7 +238,7 @@
                 </v-container>
             </v-flex>
 
-            <v-flex xs12 my-5>
+            <v-flex xs12 my-5 v-if="!isDisable">
                 <v-layout xs12 row justify-center>
                     <v-btn class="border-medium height-50 rounded-25 padding-l-85 padding-r-45"
                            :style="{backgroundColor: color}"

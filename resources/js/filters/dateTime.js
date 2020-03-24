@@ -88,7 +88,7 @@ Vue.filter('dateFormat', (date, format, locale='en') => {
             break
 
         default:
-            filterDate = newMoment.format('MMMM Do YYYY, h:mm:ss a')  // December 23rd 2019, 9:59:26 am
+            filterDate = newMoment.format('MMMM Do YYYY')  // December 23rd 2019, 9:59:26 am
     }
 
     return filterDate

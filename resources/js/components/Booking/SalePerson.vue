@@ -47,7 +47,7 @@
                                     </v-flex>
 
                                     <v-flex class="text-flex">
-                                        <label>{{ saleExecutive.firstname}}</label>
+                                        <label>{{ `${saleExecutive.firstname} ${saleExecutive.surname}`}}</label>
                                     </v-flex>
                                 </v-layout>
                             </v-flex>
