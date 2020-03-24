@@ -191,7 +191,8 @@
                 loading: 'getCountryLoading',
                 rowsPerPage: 'getCountryListRowsPerPage',
                 selectedCountry: 'getSelectedCountry',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                subSelectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 
@@ -228,10 +229,12 @@
         methods: {
             // Initialize data when first render
             initialize() {
+                console.log('paginateion: ', this.pagination)
                 const paginateOption = {
                     ...this.pagination,
                     trans: this.trans,
                     themeOption: this.themeOption,
+                    languageId: this.subSelectedLanguage.id,
                     paginate: true,
                     search: this.searchCountry
                 }

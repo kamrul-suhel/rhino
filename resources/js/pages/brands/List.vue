@@ -39,7 +39,22 @@
                             ></v-text-field>
                         </v-flex>
 
-                        <v-flex xs12 sm2>
+                        <v-flex xs12 sm4 px-2>
+                            <v-select
+                                :items="companies"
+                                :rules="[v => !!v || `${trans.companyIsRequired}`]"
+                                required
+                                item-text="name"
+                                item-value="id"
+                                :color="themeOption.inputColor"
+                                :label="trans.company"
+                                v-model="selectedBrand.company_id"
+                                solo flat box
+                            >
+                            </v-select>
+                        </v-flex>
+
+                        <v-flex xs12 sm4>
                             <div class="r-color-picker" v-if="isColorSwatchActive">
                                 <div class="r-color-picker-content">
                                     <chrome v-model="selectedColor"
@@ -345,9 +360,7 @@
                                 timeOut: this.themeOption.snackBarTimeout,
                                 message: `${this.selectedBrand.name}  ${this.trans.successfullyCreated}`
                             })
-
                         }
-
                         this.$store.commit('setSelectedBrand', {})
                         this.color = ''
                     })

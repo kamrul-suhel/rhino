@@ -60,7 +60,7 @@
                         :label="`${trans.monday} ${trans.end}`"
                         prepend-icon="access_time"
                         readonly
-                        :rules="[v => !!v || `${trans.select_a} ${trans.time}`]"
+                        :rules="[v => !!v || `${trans.selectATime}`]"
                         required
                         v-on="on"
                     ></v-text-field>

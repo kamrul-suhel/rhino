@@ -37,7 +37,7 @@ class BrandStoreController extends Controller
 
         // Create default "No Region" for brand in each country
         $countries = Country::all();
-        
+
         foreach ( $countries as $country){
             $region = new Region();
             $region->brand_id = $brand->id;

@@ -129,6 +129,11 @@ export default {
         do {
             let newDate = moment(dayStart).add(appointmentDuration, 'minutes')
 
+            // if end day is same as new date then do not put
+            if(dayEnd === newDate){
+                break
+            }
+
             let time = {}
             if(dayEnd <= newDate){
                  time = {
