@@ -301,5 +301,34 @@ export default {
                 name = `${name}`
         }
         return name
+    },
+
+    renderVehicleImage(vehicle, dealership, defaultImage) {
+        if (vehicle.image !== null) {
+            return vehicle.image
+        }
+
+        let image = null
+
+        const dealershipSeatingPosition = dealership.driver_seating_position
+
+        switch (dealershipSeatingPosition) {
+            case 'right':
+                image = vehicle.driver_seating_position_right_image
+                break
+
+            case 'left':
+                image = vehicle.driver_seating_position_left_image
+                break
+
+            default:
+                image = this.themeOption.brandDefaultImage
+        }
+
+        if (image !== null) {
+            return image
+        }
+
+        return defaultImage
     }
 }

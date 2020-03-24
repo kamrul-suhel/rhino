@@ -15,15 +15,21 @@ class EventShowController extends Controller
      */
     public function show(Request $request, $id){
 
-        if($request->has('edit') && !empty($request->edit)){
-            EventTranslation::firstOrCreate([
-                'language_id' => $this->languageId,
-                'event_id' => $id
-            ],
-                [
-                    'notes' => '',
-                    'name' => ''
-                ]);
+        if(
+            $request->has('edit') &&
+            !empty($request->edit)
+        ){
+            $eventTranslation = EventTranslation::where([
+                'event_id'=> $id,
+                'language_id' =>$this->languageId
+            ])->first();
+
+            if(!$eventTranslation){
+                $eventTranslation = new EventTranslation();
+                $eventTranslation->language_id = $this->languageId;
+                $eventTranslation->event_id = $id;
+                $eventTranslation->save();
+            }
         }
 
 

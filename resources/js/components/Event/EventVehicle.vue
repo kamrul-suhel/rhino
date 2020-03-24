@@ -45,7 +45,7 @@
                             color="grey lighten-4"
                             @click="onImageChange(props.item)"
                         >
-                            <img :src="props.item.image|image(themeOption.brandDefaultImage)" alt="avatar">
+                            <img :src="getEventVehicleImage(props.item)" alt="avatar">
                         </v-avatar>
                     </td>
 
@@ -128,6 +128,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import fn from '@/utils/function'
 
     export default {
         data() {
@@ -147,7 +148,8 @@
                 totalEvents: 'getTotalEventVehicle',
                 loading: 'getEventVehiclesLoading',
                 rowsPerPage: 'getEventVehiclesListRowsPerPage',
-                selectedEvent: 'getSelectedEventVehicle'
+                selectedEvent: 'getSelectedEventVehicle',
+                dealership: 'getSelectedDealership'
             })
         }),
 
@@ -253,6 +255,10 @@
                         this.initialize()
                     }
                 })
+            },
+
+            getEventVehicleImage(vehicle){
+                return fn.renderVehicleImage(vehicle, this.dealership, this.themeOption.brandDefaultImage)
             }
         }
     }

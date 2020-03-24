@@ -25,7 +25,16 @@ class SettingController extends Controller
             ->orderBy('settings.identifier')
             ->pluck('translation', 'identifier');
 
-        return response()->json($settings);
+        $modifySettings = [];
+        foreach($settings as $key => $value){
+            if($value == null){
+                $modifySettings[$key] = '*';
+            }else{
+                $modifySettings[$key] = $value;
+            }
+        }
+
+        return response()->json($modifySettings);
     }
 
     /**

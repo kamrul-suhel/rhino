@@ -323,7 +323,6 @@
                 </v-layout>
 
                     <v-layout>
-
                         <v-flex class="pa-3 justify-center">
                             <r-button :text="`${trans.back}`"
                                       dark
@@ -432,7 +431,7 @@
                 }
 
                 this.$store.dispatch('fetchEvent', {
-                    id: this.$route.params.id,
+                    id: id,
                     languageId: this.selectedLanguage.id,
                     edit: true
                 })

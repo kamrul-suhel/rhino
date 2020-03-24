@@ -2,13 +2,13 @@
     <v-layout row wrap py-md-5 justify-space-between class="analyticsMetrics">
         <v-flex xs12 sm5 px-md-3>
             <div class="d-flex my-2  metric">
-                <span>{{ `${trans.appointmentsByOnlineRegistration}` }}</span> <span class="text-xs-right">{{ analyticsData.online ? analyticsData.online : 0 }}</span>
+                <span>{{ trans.appointmentsByOnlineRegistration|trans }}</span> <span class="text-xs-right">{{ analyticsData.online ? analyticsData.online : 0 }}</span>
             </div>
 
             <v-divider class="pa-1"></v-divider>
 
             <div class="d-flex my-2 justify-between metric">
-                <span>{{ `${trans.appointmentsByTelephone}` }}</span> <span class="text-xs-right">{{ analyticsData.phone ? analyticsData.phone : 0 }}</span>
+                <span>{{ `${trans.appointmentsByTelephone}`|trans }}</span> <span class="text-xs-right">{{ analyticsData.phone ? analyticsData.phone : 0 }}</span>
             </div>
 
             <v-divider class="pa-1"></v-divider>

@@ -3,18 +3,18 @@
         <v-layout row wrap class=" d-none d-md-block">
             <v-flex xs12 class="pa-0">
                 <v-card-text class="pa-0 mb-4 text-xs-center">
-                    <h2>{{trans.dashboard}}</h2>
+                    <h2>{{`${trans.dashboard}`|trans}}</h2>
                 </v-card-text>
             </v-flex>
 
             <v-flex xs6 class="pa-0">
                 <v-card-text class="px-0 text-xs-center">
-                    <h4>{{trans.event}}</h4>
+                    <h4>{{trans.event |trans}}</h4>
                 </v-card-text>
             </v-flex>
             <v-flex xs6 class="pa-0">
                 <v-card-text class="px-0 text-xs-center">
-                    <h4>{{trans.reporting}}</h4>
+                    <h4>{{trans.reporting |trans}}</h4>
                 </v-card-text>
             </v-flex>
         </v-layout>
@@ -31,10 +31,10 @@
 
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manageUsers}` }}</h3>
+                                        <h3>{{ `${trans.manageUsers}`|trans }}</h3>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.addEditOrRemoveUser}` }}</small>
+                                        <small>{{ `${trans.addEditOrRemoveUser}` |trans }}</small>
                                     </v-card-text>
                                 </v-flex>
 
@@ -53,10 +53,10 @@
 
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manageVehicles}` }}</h3>
+                                        <h3>{{ `${trans.manageVehicles}` |trans }}</h3>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.addEditOrRemoveVehicle}` }}</small>
+                                        <small>{{ `${trans.addEditOrRemoveVehicle}` |trans }}</small>
                                     </v-card-text>
                                 </v-flex>
 
@@ -75,10 +75,10 @@
 
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manageEvents}` }}</h3>
+                                        <h3>{{ `${trans.manageEvents}` |trans }}</h3>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.addEditOrRemoveEvents}` }}</small>
+                                        <small>{{ `${trans.addEditOrRemoveEvents}`|trans }}</small>
                                     </v-card-text>
                                 </v-flex>
 
@@ -96,7 +96,7 @@
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCompanies'}">
                                 <v-icon color="#000">business</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.companies}` }}
+                                    {{ `${trans.companies}`|trans }}
                                 </v-card-text>
                             </v-card>
                         </v-flex>
@@ -105,7 +105,7 @@
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listBrands'}">
                                 <v-icon color="#000">access_time</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.brands}` }}
+                                    {{ `${trans.brands}`|trans }}
                                 </v-card-text>
                             </v-card>
                         </v-flex>
@@ -114,7 +114,7 @@
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCountries'}">
                                 <v-icon color="#000">languages</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.countries}` }}
+                                    {{ `${trans.countries}`|trans }}
                                 </v-card-text>
                             </v-card>
                         </v-flex>
@@ -123,7 +123,7 @@
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCompanies'}">
                                 <v-icon color="#000">bar_chart</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.regions}` }}
+                                    {{ `${trans.regions}`|trans }}
                                 </v-card-text>
                             </v-card>
                         </v-flex>
@@ -132,7 +132,7 @@
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listDealershipsGroups'}">
                                 <v-icon color="#000">contacts</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.groups}` }}
+                                    {{ `${trans.groups}`|trans }}
                                 </v-card-text>
                             </v-card>
                         </v-flex>
@@ -141,7 +141,7 @@
                             <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listDealerships'}">
                                 <v-icon color="#000">contacts</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.dealerships}` }}
+                                    {{ `${trans.dealerships}`|trans }}
                                 </v-card-text>
                             </v-card>
                         </v-flex>

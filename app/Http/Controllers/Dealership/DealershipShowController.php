@@ -34,7 +34,6 @@ class DealershipShowController extends Controller
             ]);
         }
 
-
         $dealership = Dealership::select(
             'dealerships.*',
             'dealerships_translation.name',
@@ -49,7 +48,8 @@ class DealershipShowController extends Controller
             'groups_translation.name as group',
             'groups.logo as group_logo',
             'countries.name as country',
-            'countries.id as country_id'
+            'countries.id as country_id',
+            'countries.driver_seating_position'
         )
             ->leftJoin('dealerships_translation', function($dealershipTranslation){
                 $dealershipTranslation->on('dealerships_translation.dealership_id', '=', 'dealerships.id');

@@ -145,7 +145,7 @@ class VehicleController extends Controller
                 'language_id' => $this->languageId,
                 'vehicle_id' => $id
             ],[
-                'model' => '',
+                'model' => ''
             ]);
         }
 
