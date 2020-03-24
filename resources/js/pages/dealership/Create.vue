@@ -24,6 +24,7 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :rules="[v => !!v || `${trans.nameIsRequired}`]"
+                                            required
                                             :color="themeOption.inputColor"
                                             :label="`${trans.name}`"
                                             v-model="dealership.name"
@@ -122,6 +123,7 @@
                                             item-text="name"
                                             item-value="id"
                                             :rules="[v => !!v || `${trans.selectACountry}`]"
+                                            required
                                             :color="themeOption.inputColor"
                                             :label="trans.selectCountry"
                                             v-model="dealership.country_id"
@@ -228,9 +230,8 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import TimePicker from "../../components/TimePicker";
-    import ImageUpload from "../../components/ImageUpload";
-    import dealership from "../../store/modules/dealership";
+    import TimePicker from "@/components/TimePicker";
+    import ImageUpload from "@/components/ImageUpload";
 
     export default {
         components: {
@@ -242,7 +243,6 @@
             return {
                 valid: true,
                 dealership: {
-                    country_id: 1,
                     status: 1
                 },
                 times: {},
