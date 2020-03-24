@@ -199,6 +199,8 @@
 
                         this.$router.push({name: 'listCountries'});
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             }
         }

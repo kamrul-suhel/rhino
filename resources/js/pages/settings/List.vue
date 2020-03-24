@@ -262,7 +262,9 @@
                         this.$store.commit('setSelectedCountry', {})
                         this.dialog = false
                     }
-                });
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
             }
         }
     }

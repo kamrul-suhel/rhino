@@ -241,6 +241,8 @@
                                 message: message
                             })
                         }
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             },
@@ -273,6 +275,8 @@
                             message: `${this.selectedRegion.name}  ${this.trans.successfullyDeleted}`
                         })
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 

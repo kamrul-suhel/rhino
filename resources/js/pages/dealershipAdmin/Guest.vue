@@ -279,6 +279,8 @@
                                 this.initialize()
                                 this.dialog = false
                             }
+                        }).catch(error => {
+                            this.$store.dispatch('initializeError', error)
                         })
                         return
 
@@ -301,9 +303,13 @@
                                         if (loginResponse.data.success) {
                                             window.location.href = '/booking'
                                         }
+                                    }).catch(error => {
+                                        this.$store.dispatch('initializeError', error)
                                     })
                                 })
                             }
+                        }).catch(error => {
+                            this.$store.dispatch('initializeError', error)
                         })
                         return
 
@@ -320,7 +326,11 @@
                                 if (loginResponse.data.success) {
                                     window.location.href = '/booking'
                                 }
+                            }).catch(error => {
+                                this.$store.dispatch('initializeError', error)
                             })
+                        }).catch(error => {
+                            this.$store.dispatch('initializeError', error)
                         })
                 }
 

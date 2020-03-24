@@ -97,7 +97,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchRegions({commit}, payload = {}) {
+    fetchRegions({commit, dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setRegionLoading', payload.themeOption.loadingColor)
@@ -114,7 +114,9 @@ const actions = {
                 commit('setTotalRegions', response.data.total)
                 commit('setRegionLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -127,12 +129,12 @@ const actions = {
             if (response.data) {
                 commit('setSelectedRegion', response.data.brand)
             }
-        }).catch((error) => {
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
-    fetchRegionsByBrandIdAndCountryId({commit}, payload = {}) {
+    fetchRegionsByBrandIdAndCountryId({commit, dispatch}, payload = {}) {
         const URL = `/api/brands/${payload.brandId}/regions${fn.generateParams(payload)}`
         axios.get(URL)
             .then((response) => {
@@ -141,7 +143,9 @@ const actions = {
                     commit('setTotalRegions', response.data.total)
                 }
             })
-            .catch()
+            .catch(error => {
+                dispatch('initializeError', error)
+            })
     }
 }
 

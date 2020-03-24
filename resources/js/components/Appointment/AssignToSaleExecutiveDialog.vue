@@ -214,6 +214,9 @@
                             this.slots = [...response.data.slots]
                         }
                     })
+                        .catch(error => {
+                            this.$store.dispatch('initializeError', error)
+                        })
                 }
             },
 
@@ -284,6 +287,8 @@
                         this.$store.commit('setAppointmentDialogSlot', {})
                         this.$store.commit('setUpdateComponent')
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 

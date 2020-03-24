@@ -225,6 +225,8 @@
                         this.guests = [...response.data.guests]
                         this.isLoading = false
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             }
         },

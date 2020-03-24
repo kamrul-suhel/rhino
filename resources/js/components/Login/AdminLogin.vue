@@ -168,6 +168,8 @@
                             this.loading = false
                             this.errorLogin = true
                             this.loginProgress = false
+
+                            this.$store.dispatch('initializeError', error)
                         });
                 }
             },

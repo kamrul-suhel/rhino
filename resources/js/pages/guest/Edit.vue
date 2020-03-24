@@ -235,8 +235,9 @@
                             })
                         }
                         this.loading = false
-                    }).catch(()=>{
+                    }).catch((error)=>{
                         this.loading = false
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             }

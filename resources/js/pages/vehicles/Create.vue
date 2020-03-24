@@ -224,6 +224,8 @@
                             this.vehicle = {}
 
                         }
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 } else {
                     console.log('failed validate');
@@ -255,6 +257,8 @@
                     if(image === 'rightImage'){
                         this.rightImage = response.data
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             }
         }

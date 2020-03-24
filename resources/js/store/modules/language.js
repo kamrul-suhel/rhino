@@ -119,7 +119,7 @@ const getters = {
 
 const actions = {
 
-    fetchLanguagesForCRUD({commit}, payload = {}) {
+    fetchLanguagesForCRUD({commit, dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setLanguageLoading', payload.themeOption.loadingColor)
@@ -136,7 +136,9 @@ const actions = {
                 commit('setTotalLanguage', response.data.total)
                 commit('setLanguageLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -145,7 +147,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchLanguages({commit}, payload = {}) {
+    fetchLanguages({commit, dispatch}, payload = {}) {
         return new Promise((resolve, reject) => {
             const params = typeof (payload.type) != 'undefined' ? '?type=' + payload.type : '';
             const URL = '/api/languages' + params
@@ -153,16 +155,20 @@ const actions = {
             axios.get(URL).then((response) => {
                 commit('setLanguages', response.data)
                 resolve()
+            }).catch(error => {
+                dispatch('initializeError', error)
             })
         })
     },
 
-    fetchSubLanguage({commit}, payload = {}) {
+    fetchSubLanguage({commit, dispatch}, payload = {}) {
         const URL = `/api/languages/${payload.id}/show`
         axios.get(URL).then((response) => {
             if (response.data) {
                 commit('setSubSelectedLanguage', response.data.language)
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     }
 }

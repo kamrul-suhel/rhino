@@ -173,7 +173,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchBrands({commit}, payload = {}) {
+    fetchBrands({commit,dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setBrandLoading', payload.themeOption.loadingColor)
@@ -190,7 +190,9 @@ const actions = {
                 commit('setTotalBrands', response.data.total)
                 commit('setBrandLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -204,12 +206,12 @@ const actions = {
             if (response.data) {
                 commit('setSelectedBrand', response.data.brand)
             }
-        }).catch((error) => {
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
-    fetchRegionByBranId({commit}, payload = {}) {
+    fetchRegionByBranId({commit,dispatch}, payload = {}) {
         // Set loading is true
         commit('setBrandLoading', payload.themeOption.loadingColor)
 
@@ -223,20 +225,21 @@ const actions = {
                 commit('setTotalRegionByBrandId', response.data.total)
                 commit('setBrandLoading', false)
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
-    fetchBrandForDropDown({commit}, payload = {}) {
+    fetchBrandForDropDown({commit,dispatch}, payload = {}) {
         const URL = `/api/brands/dropdown${fn.generateParams(payload)}`
 
         axios.get(URL).then((response) => {
             if (response.data) {
                 commit('setBrandsForDropDown', response.data)
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
-            .catch((error) => {
-
-            })
     },
 
     /**
@@ -245,17 +248,16 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchBrandForEvent({commit}, payload = {}) {
+    fetchBrandForEvent({commit,dispatch}, payload = {}) {
         const URL = `/api/events/${payload.id}/brands/dropdown`
 
         axios.get(URL).then((response) => {
             if (response.data) {
                 commit('setBrandsForDropDown', response.data)
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
-            .catch((error) => {
-
-            })
     },
 
     /**

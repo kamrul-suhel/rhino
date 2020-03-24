@@ -214,7 +214,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchEvents({commit}, payload = {}) {
+    fetchEvents({commit, dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setEventLoading', payload.themeOption.loadingColor)
@@ -232,7 +232,9 @@ const actions = {
                 commit('setTotalEvents', response.data.total)
                 commit('setEventLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -245,8 +247,8 @@ const actions = {
             if (response.data) {
                 commit('setSelectedEvent', response.data.event)
             }
-        }).catch((error) => {
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
@@ -268,10 +270,9 @@ const actions = {
                     dispatch('fetchGuestForDropDown', {eventId: event.id})
                 }
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
-            .catch((error) => {
-
-            })
     },
 
     /**
@@ -279,7 +280,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchBrandsByEventId({commit}, payload = {}) {
+    fetchBrandsByEventId({commit, dispatch}, payload = {}) {
         // Set loading is true
         commit('setEventLoading', payload.themeOption.loadingColor)
         // Setup header for list view
@@ -295,7 +296,9 @@ const actions = {
                 commit('setTotalEvents', response.data.total)
                 commit('setEventLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
 

@@ -158,7 +158,9 @@
                             // push country to store to update list
                             this.$store.commit('setUpdateComponent')
                         }
-                    });
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
+                    })
                 } else {
 
                 }

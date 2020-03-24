@@ -217,6 +217,8 @@
                             this.initialize()
                         }
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 
@@ -245,6 +247,8 @@
                         ...this.selectedVehicle,
                         image: response.data
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 
@@ -254,6 +258,8 @@
                     if(response.data.success){
                         this.initialize()
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 

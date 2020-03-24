@@ -285,7 +285,9 @@
 
                             this.deleteDialog = false
                         }
-                    });
+                    }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
             },
 
             onCreateGroup() {
@@ -319,6 +321,8 @@
                     })
 
                     this.onResetGroup()
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 

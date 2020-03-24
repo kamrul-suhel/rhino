@@ -83,7 +83,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchTranslations({commit}, payload = {}) {
+    fetchTranslations({commit, dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setTranslationLoading', payload.themeOption.loadingColor)
@@ -100,7 +100,9 @@ const actions = {
                 commit('setTotalTranslation', response.data.total)
                 commit('setTranslationLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     }
 }
 

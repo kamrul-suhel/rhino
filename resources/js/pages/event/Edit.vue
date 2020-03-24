@@ -527,6 +527,8 @@
                             this.$store.commit('setButtonLoading', false)
                             // this.$router.push({name: 'listEvents'})
                         }
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 } else {
                     this.$store.commit('setButtonLoading', false)

@@ -40,7 +40,7 @@ const mutations = {
                 text: trans.logo,
                 value: 'logo'
             },
-            
+
             {
                 text: trans.name,
                 align: 'left',
@@ -97,7 +97,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchCompanies({commit}, payload = {}) {
+    fetchCompanies({commit,dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setCompanyLoading', payload.themeOption.loadingColor)
@@ -114,7 +114,9 @@ const actions = {
                 commit('setTotalCompanies', response.data.total)
                 commit('setCompanyLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -127,12 +129,12 @@ const actions = {
             if(response.data){
                 commit('setSelectedCompany', response.data.company)
             }
-        }).catch((error)=>{
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
-    fetchCompanyForDropdown({commit}, payload ={}){
+    fetchCompanyForDropdown({commit,dispatch}, payload ={}){
         const URL = `/api/companies/dropdown${fn.generateParams(payload)}`
         axios.get(URL).then((response) => {
             if(response.data.companies){
@@ -146,8 +148,8 @@ const actions = {
                 commit('setCompanies', companies)
                 commit('setTotalCompanies', response.data.total)
             }
-        }).catch((error)=>{
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     }
 }

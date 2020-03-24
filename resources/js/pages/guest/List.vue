@@ -228,6 +228,8 @@
                         timeOut: this.themeOption.snackBarTimeout,
                         message: `${this.selectedGuest.first_name}  ${this.trans.successfullyDeleted}`
                     })
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             }
         }

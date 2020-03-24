@@ -26,7 +26,7 @@ const mutations = {
                 sortable: false,
                 value: 'logo'
             },
-            
+
             {
                 text: trans.name,
                 align: 'left',
@@ -98,8 +98,8 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchGroups({commit}, payload = {}) {
-        
+    fetchGroups({commit, dispatch}, payload = {}) {
+
         // Set loading is true, if not dropdown
         if (!payload.dropDown && typeof(payload.dropDown) === 'undefined') {
             commit('setGroupLoading', payload.themeOption.loadingColor)
@@ -117,20 +117,24 @@ const actions = {
                 commit('setTotalGroup', response.data.total)
                 commit('setGroupLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
-    fetchGroup({commit}, payload = {}){
+    fetchGroup({commit, dispatch}, payload = {}){
         const URL = `/api/groups/${payload.id}${fn.generateParams(payload)}`
 
         axios.get(URL).then((response)=>{
             if(response.data.group){
                 commit('setSelectedGroup', response.data.group)
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
-    fetchGroupsForDropdown({commit}, payload ={}){
+    fetchGroupsForDropdown({commit, dispatch}, payload ={}){
         const URL = `/api/groups/dropdown${fn.generateParams(payload)}`
 
         axios.get(URL).then((response)=>{
@@ -138,6 +142,8 @@ const actions = {
                 commit('setGroups', response.data.groups)
                 commit('setTotalGroup', response.data.total)
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     }
 }

@@ -122,7 +122,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchCountries({commit}, payload = {}){
+    fetchCountries({commit,dispatch}, payload = {}){
         // Set loading is true
         commit('setCountryLoading', payload.themeOption.loadingColor)
 
@@ -137,7 +137,9 @@ const actions = {
                 commit('setTotalCountry', response.data.total)
                 commit('setCountryLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -145,27 +147,29 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchCountriesForDropdown({commit}, payload = {}){
+    fetchCountriesForDropdown({commit,dispatch}, payload = {}){
         const URL = '/api/countries/dropdown'
         axios.get(URL).then((response)=>{
             if(response.data){
                 commit('setCountries', response.data)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
      * Get Selected country & regions
      * @param id // required
      */
-    fetchCountry({commit}, payload){
+    fetchCountry({commit, dispatch}, payload){
         const URL = `/api/countries/${payload.id}/show`
         axios.get(URL).then((response) => {
             if(response.data){
                 commit('setSelectedCountry', response.data)
             }
-        }).catch((error)=>{
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
@@ -173,10 +177,12 @@ const actions = {
      * Regions based on country
      */
 
-    fetchCountryRegions({commit}, payload){
+    fetchCountryRegions({commit, dispatch}, payload){
         const URL = `/api/countries/${payload.id}/regions`
         axios.get(URL).then((response)=>{
             commit('setRegions', response.data)
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     }
 }

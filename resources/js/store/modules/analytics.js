@@ -39,7 +39,7 @@ const getters = {
 }
 
 const actions = {
-    fetchAnalytics({commit}, payload = {}) {
+    fetchAnalytics({commit,dispatch}, payload = {}) {
 
         const URL = `/api/events/${payload.eventId}/analytics`
 
@@ -50,7 +50,9 @@ const actions = {
                 commit('setAnalyticsGuestInfo', response.data.guest_info)
 
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 }
 

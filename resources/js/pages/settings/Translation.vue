@@ -181,6 +181,8 @@
                         this.snackText = `${this.trans.translationSave}`
                         this.snack = true
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 

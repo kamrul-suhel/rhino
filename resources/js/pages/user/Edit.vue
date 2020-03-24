@@ -450,6 +450,8 @@
 
                         this.processing = false
                         this.buttonDisabled = false
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             },
@@ -463,6 +465,8 @@
 
                 axios.post('/api/uploadfiles', formData).then((response) => {
                     this.profileImage = response.data
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 
@@ -478,6 +482,8 @@
                         timeOut: this.themeOption.snackBarTimeout,
                         message: `${this.trans.passwordSuccessfullyUpdated}`
                     })
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 

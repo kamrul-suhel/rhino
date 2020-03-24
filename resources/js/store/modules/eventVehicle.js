@@ -121,7 +121,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchEventVehicles({commit}, payload = {}) {
+    fetchEventVehicles({commit, dispatch}, payload = {}) {
         // Set loading is true
         commit('setEventVehiclesLoading', payload.themeOption.loadingColor)
 
@@ -137,7 +137,9 @@ const actions = {
                 commit('setTotalEventVehicles', response.data.total)
                 commit('setEventVehiclesLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**

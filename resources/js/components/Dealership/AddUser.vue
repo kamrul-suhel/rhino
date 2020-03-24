@@ -132,6 +132,8 @@
 
                         this.$store.commit('addUserToUserList', user)
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 
@@ -153,6 +155,8 @@
 
                         this.$store.commit('removeUserFromUserList', user)
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 

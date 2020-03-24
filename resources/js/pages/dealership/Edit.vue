@@ -342,7 +342,8 @@
                                 message: `${this.dealership.name}  ${this.trans.successfullyUpdated}`
                             })
                         }
-                    }).catch((error)=>{
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             },

@@ -223,6 +223,8 @@
                                 if (response.data.success) {
                                     this.$store.commit('removeUserFromUserList', user)
                                 }
+                            }).catch(error => {
+                                this.$store.dispatch('initializeError', error)
                             })
                     }
                 } else {
@@ -246,6 +248,8 @@
                                     })
                                     this.$store.commit('setInitialize')
                                 }
+                            }).catch(error => {
+                                this.$store.dispatch('initializeError', error)
                             })
                     }
                 } else {
@@ -260,6 +264,8 @@
                             timeOut: this.themeOption.snackBarTimeout,
                             message: `${this.selectedUser.firstname}  ${this.trans.successfullyDeleted}`
                         })
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             }

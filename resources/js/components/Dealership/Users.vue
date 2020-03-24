@@ -114,6 +114,8 @@
                     if (response.data.success) {
                         this.$store.commit('setInitializeBrands')
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             }
         }

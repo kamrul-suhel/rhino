@@ -280,7 +280,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchUsers({commit}, payload = {}) {
+    fetchUsers({commit, dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setUserLoading', payload.themeOption.loadingColor)
@@ -297,12 +297,12 @@ const actions = {
                 commit('setTotalUsers', response.data.total)
                 commit('setUserLoading', false)
             }
-        }).catch((error) => {
-            console.log('erro is: ', error.response)
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
-    fetchUsersForEvent({commit}, payload = {}) {
+    fetchUsersForEvent({commit, dispatch}, payload = {}) {
         // Set loading is true
         commit('setUserLoading', payload.themeOption.loadingColor)
 
@@ -318,7 +318,9 @@ const actions = {
                 commit('setTotalUsers', response.data.total)
                 commit('setUserLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -331,22 +333,21 @@ const actions = {
             if (response.data) {
                 commit('setSelectedUser', response.data.user)
             }
-        }).catch((error) => {
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     },
 
-    fetchUserForDropDown({commit}, payload = {}) {
+    fetchUserForDropDown({commit, dispatch}, payload = {}) {
         const URL = `/api/users/dropdown${fn.generateParams(payload)}`
 
         axios.get(URL).then((response) => {
             if (response.data) {
                 commit('setUsersForDropDown', response.data)
             }
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
-            .catch((error) => {
-
-            })
     },
 
     fetchSaleExecutivesForBooking({commit}, payload){

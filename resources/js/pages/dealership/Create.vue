@@ -304,6 +304,8 @@
                         }
 
                         this.$store.commit('setUpdateComponent')
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             },

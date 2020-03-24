@@ -363,6 +363,8 @@
                             this.showForm = false
 
                         }
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 } else {
                 }
@@ -405,6 +407,8 @@
                     if (image === 'rightImage') {
                         this.rightImage = response.data
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             },
 
@@ -454,7 +458,9 @@
                             this.onResetVehicle()
                             this.deleteDialog = false
                         }
-                    });
+                    }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
             },
 
             onLanguageChange(selectedLanguage) {

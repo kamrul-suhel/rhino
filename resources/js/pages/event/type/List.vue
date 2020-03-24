@@ -312,7 +312,9 @@
 
                             this.deleteDialog = false
                         }
-                    });
+                    }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
             },
 
             onCreateType() {
@@ -342,6 +344,8 @@
                         })
 
                         this.onResetType()
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
 

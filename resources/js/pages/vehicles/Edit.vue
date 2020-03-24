@@ -221,8 +221,8 @@
                                 message: `${this.vehicle.model}  ${this.trans.successfullyUpdated}`
                             })
                         }
-                    }).catch((error) => {
-                        this.$store.commit('setAppErrorMessages', error)
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             },
@@ -258,6 +258,8 @@
                     if (image === 'rightImage') {
                         this.rightImage = response.data
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             }
 

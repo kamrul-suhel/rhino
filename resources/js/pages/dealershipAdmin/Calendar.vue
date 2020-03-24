@@ -433,6 +433,8 @@
                     ) {
                         return fn.downloadCSV(response.data.guests, fileName)
                     }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
                 })
             }
         }

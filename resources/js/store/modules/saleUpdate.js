@@ -101,7 +101,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchSales({commit}, payload = {}) {
+    fetchSales({commit, dispatch}, payload = {}) {
 
         // Set loading is true
         commit('setSaleLoading', payload.themeOption.loadingColor)
@@ -118,7 +118,9 @@ const actions = {
                 commit('setTotalSales', response.data.total)
                 commit('setSaleLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     }
 }
 

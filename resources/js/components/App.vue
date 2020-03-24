@@ -59,7 +59,8 @@
                 trans: 'getFields',
                 languages: 'getLanguages',
                 isSettingLanguageLoaded: 'getSettingLanguage',
-                updateComponent: 'getUpdateComponent'
+                updateComponent: 'getUpdateComponent',
+                tokenExpired: 'getTokenExpired'
             })
         },
 
@@ -74,6 +75,10 @@
 
             initialize() {
                 this.isInitialize()
+            },
+
+            tokenExpired(){
+                this.onLogout()
             }
         },
 
@@ -145,7 +150,18 @@
                 }
 
                 return false
-            }
+            },
+
+            onLogout() {
+                axios.post('/logout').then((response) => {
+
+                    if (response.data.success) {
+                        window.location = '/admin'
+                        // reset auth user
+                        // this.$store.commit('setAuthUser', {})
+                    }
+                })
+            },
         }
     }
 </script>

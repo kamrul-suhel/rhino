@@ -77,7 +77,7 @@ const getters = {
 }
 
 const actions = {
-    fetchAppointmentByEventId({commit}, payload){
+    fetchAppointmentByEventId({commit,dispatch}, payload){
         const params = fn.generateParams(payload)
         const URL = `/api/appointments/${payload.eventId}${params}`
 
@@ -87,7 +87,9 @@ const actions = {
                 commit('setOtherAppointments', response.data.otherAppointments)
                 commit('setTotalAppointment', response.data.total)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     }
 }
 

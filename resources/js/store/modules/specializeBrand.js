@@ -107,7 +107,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchSpecializeBrandByDealershipId({commit}, payload = {}) {
+    fetchSpecializeBrandByDealershipId({commit, dispatch}, payload = {}) {
         // Set loading is true
         commit('setSpecializeBrandLoading', payload.themeOption.loadingColor)
         commit('setSpecializeBrandListHeader', payload.trans)
@@ -121,7 +121,9 @@ const actions = {
                 commit('setSpecializeTotalBrand', response.data.total)
                 commit('setSpecializeBrandLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     }
 }
 

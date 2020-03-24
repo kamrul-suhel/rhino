@@ -512,6 +512,8 @@
                         if (response.data.success) {
                             this.$store.commit('setAllAppointmentSlots', response.data.slots)
                         }
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
                     })
                 }
             }

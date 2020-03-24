@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class Handler extends ExceptionHandler
 {
@@ -70,6 +71,10 @@ class Handler extends ExceptionHandler
     private function handleException($request, Exception $exception){
         if($exception instanceof ValidationException){
             return $this->convertValidationExceptionToResponse($exception, $request);
+        }
+
+        if($exception instanceof TokenExpiredException){
+            return $this->errorResponse("tokenExpired", 401);
         }
 
         if($exception instanceof ModelNotFoundException){

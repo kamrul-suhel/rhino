@@ -155,7 +155,7 @@ const actions = {
      * @param commit
      * @param payload
      */
-    fetchVehicles({commit}, payload = {}) {
+    fetchVehicles({commit, dispatch}, payload = {}) {
         // Set loading is true
         commit('setVehicleLoading', payload.themeOption.loadingColor)
 
@@ -174,7 +174,9 @@ const actions = {
                 commit('setTotalVehicles', response.data.total)
                 commit('setVehicleLoading', false)
             }
-        });
+        }).catch(error => {
+            dispatch('initializeError', error)
+        })
     },
 
     /**
@@ -188,8 +190,8 @@ const actions = {
                 commit('setSelectedVehicle', response.data.vehicle)
                 dispatch('fetchBrands', {id: response.data.brand.id})
             }
-        }).catch((error)=>{
-            // Generate error message
+        }).catch(error => {
+            dispatch('initializeError', error)
         })
     }
 }

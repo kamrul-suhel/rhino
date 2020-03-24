@@ -246,7 +246,9 @@
                             this.initialize()
                             this.deleteDialog = false
                         }
-                    });
+                    }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
             }
         }
     }

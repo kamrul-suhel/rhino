@@ -188,7 +188,10 @@
                             })
                             this.$store.commit('setInitializeBrands')
                         }
-                    });
+                    })
+                    .catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
             }
         }
     };
