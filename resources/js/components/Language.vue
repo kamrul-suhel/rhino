@@ -110,6 +110,13 @@
 
             initialize() {
                 this.selectedLanguageId = this.languageId
+
+                if(this.languageId){
+                    const subSelectedLanguage = _.filter(this.languages, (language) => {
+                        return language.id === this.languageId
+                    })
+                    this.$store.commit('setSubSelectedLanguage', subSelectedLanguage[0])
+                }
             }
         }
     }

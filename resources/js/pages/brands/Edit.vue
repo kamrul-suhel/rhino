@@ -78,7 +78,6 @@
                                 </v-flex>
                             </v-layout>
                             <v-layout row wrap>
-
                                 <v-flex xs12 sm3 pa-2>
                                     <v-switch :label="trans.status"
                                               :color="themeOption.switchOnColor"

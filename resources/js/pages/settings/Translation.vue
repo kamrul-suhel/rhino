@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-layout row wrap >
+        <v-layout row wrap>
             <v-flex xs12 sm6>
                 <v-text-field
                     :color="themeOption.inputColor"
@@ -14,6 +14,7 @@
                 <v-layout row wrap justify-end align-content-end>
                     <v-flex xs12 sm8>
                         <LanguagePicker :solo="false"
+                                        :languageId="selectedLanguage.id"
                                         :flat="false"
                                         :chip="false"
                                         model="translation">
@@ -39,7 +40,7 @@
             <template v-slot:items="props">
                 <td>
                     <span class="label">{{ props.item.label }}</span>
-                    </td>
+                </td>
                 <td>
                     <v-edit-dialog
                         :return-value.sync="props.item.name"
@@ -78,7 +79,7 @@
     import LanguagePicker from '@/components/Language'
 
     export default {
-        components:{
+        components: {
             LanguagePicker
         },
 
@@ -114,6 +115,7 @@
                         ...this.pagination,
                         trans: this.trans,
                         themeOption: this.themeOption,
+                        languageId: this.subSelectedLanguage.id,
                         paginate: true
                     }
                     this.initialize(paginateOption)
@@ -134,11 +136,10 @@
                 this.initialize(paginateOption)
             },
 
-            subSelectedLanguage(){
-
+            subSelectedLanguage() {
                 const paginateOption = {
                     ...this.pagination,
-                    page: 1, // Setup first page,
+                    page: 1, // Set first page,
                     languageId: this.subSelectedLanguage.id,
                     trans: this.trans,
                     themeOption: this.themeOption,
@@ -151,7 +152,6 @@
         },
 
         created() {
-
             this.$store.commit('setHeaderTitle', `${this.trans.manageTranslations}`)
             this.$store.commit('setNavTitle', `${this.trans.manageTranslations}`)
         },
@@ -164,7 +164,7 @@
                 this.$store.dispatch('fetchTranslations', paginateOption)
             },
 
-            save (settingTranslation) {
+            save(settingTranslation) {
                 const translationId = settingTranslation.setting_translation_id
                 let translationForm = new FormData()
                 translationForm.append('setting_translation_id', translationId)
@@ -176,7 +176,7 @@
                 const URL = `/api/settings/translations/${translationId}/update`
 
                 axios.post(URL, translationForm).then((response) => {
-                    if(response.data.success){
+                    if (response.data.success) {
                         this.snackColor = 'success'
                         this.snackText = `${this.trans.translationSave}`
                         this.snack = true
@@ -184,19 +184,19 @@
                 })
             },
 
-            cancel () {
+            cancel() {
                 this.snack = true
                 this.snackColor = 'error'
                 this.snackText = 'Canceled'
             },
 
-            open () {
+            open() {
                 this.snack = true
                 this.snackColor = 'info'
                 this.snackText = `${this.trans.updateTranslation}`
             },
 
-            close () {
+            close() {
             }
         }
     }
