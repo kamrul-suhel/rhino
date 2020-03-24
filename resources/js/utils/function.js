@@ -23,7 +23,7 @@ export default {
      * @returns {string}
      */
     generateParams(payload) {
-        if(payload === null){
+        if (payload === null) {
             return ''
         }
 
@@ -129,20 +129,21 @@ export default {
         do {
             let newDate = moment(dayStart).add(appointmentDuration, 'minutes')
 
-            // if end day is same as new date then do not put
-            if(dayEnd === newDate){
-                break
-            }
-
             let time = {}
-            if(dayEnd <= newDate){
-                 time = {
+            if (dayEnd <= newDate) {
+                if (
+                    dayStart.format('HH:mm:ss') === dayEnd.format('HH:mm:ss')
+                ) {
+                    break;
+                }
+
+                time = {
                     start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
                     end: dayEnd.format('YYYY-MM-DD HH:mm:ss'),
                     slotId: timeSlots.length
                 }
 
-            }else{
+            } else {
                 time = {
                     start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
                     end: newDate.format('YYYY-MM-DD HH:mm:ss'),
@@ -198,7 +199,7 @@ export default {
         return dateArray
     },
 
-    downloadCSV(data, fileName){
+    downloadCSV(data, fileName) {
         const {Parser} = require('json2csv')
         const json2csvParser = new Parser()
         const csv = json2csvParser.parse(data)
@@ -229,8 +230,8 @@ export default {
         return dates
     },
 
-    appointmentStatusString(appointment, trans){
-        switch(appointment.status){
+    appointmentStatusString(appointment, trans) {
+        switch (appointment.status) {
             case 0:
                 return trans.pending
 
@@ -246,8 +247,8 @@ export default {
         }
     },
 
-    getBookGuestOptions(trans){
-        return  [
+    getBookGuestOptions(trans) {
+        return [
             {
                 'text': trans.email,
                 'value': 'email'
@@ -275,9 +276,9 @@ export default {
      * @param guest
      * @returns {string}
      */
-    getGuestNameWithStatus(guest, trans){
+    getGuestNameWithStatus(guest, trans) {
         let name = guest.name
-        switch(guest.status){
+        switch (guest.status) {
             case 0:
                 name = `${name} <strong>(${trans.pending}</strong>)`
                 break

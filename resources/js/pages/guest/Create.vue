@@ -79,12 +79,10 @@
                             <v-layout row wrap py-4>
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.addressIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="`${trans.addressLine} 1`"
                                         v-model="guest.address_line_1"
                                         box solo flat
-                                        required
                                     ></v-text-field>
                                 </v-flex>
 
@@ -135,12 +133,10 @@
 
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.postcodeIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.postcode"
                                         v-model="guest.postcode"
                                         box solo flat
-                                        required
                                     ></v-text-field>
                                 </v-flex>
                             </v-layout>
@@ -156,12 +152,10 @@
 
                                 <v-flex xs12 sm4 pa-2>
                                     <v-text-field
-                                        :rules="[v => !!v || `${trans.mobileIsRequired}`]"
                                         :color="themeOption.inputColor"
                                         :label="trans.mobile"
                                         v-model="guest.mobile"
                                         box solo flat
-                                        required
                                     ></v-text-field>
                                 </v-flex>
 

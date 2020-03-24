@@ -66,6 +66,7 @@
                                             />
                                         </v-flex>
                                     </v-layout>
+                                    <span class="error--text" v-if="validateLeftImage">{{ trans.leftHandDriveImageRequired }}</span>
                                 </v-flex>
 
                                 <v-flex xs12 sm5 pa-2>
@@ -83,6 +84,7 @@
                                             />
                                         </v-flex>
                                     </v-layout>
+                                    <span class="error--text" v-if="validateRightImage">{{ trans.rightHandDriveImageRequired }}</span>
                                 </v-flex>
                             </v-layout>
 
@@ -239,7 +241,9 @@
                 rightImage: '',
                 hasLeftImage: false,
                 hasRightImage: false,
-                showForm: false
+                showForm: false,
+                validateLeftImage: false,
+                validateRightImage: false
             }
         },
 
@@ -311,6 +315,20 @@
             },
 
             onCreateVehicle() {
+                let error = false
+
+                // Check left & right image is exists
+                if(this.leftImage === ''){
+                    this.validateLeftImage = true
+                }
+
+                if(this.rightImage === ''){
+                    this.validateRightImage = true
+                }
+
+                if(error){
+                    return
+                }
 
                 if (this.$refs.vehicleForm.validate()) {
                     let vehicleForm = new FormData()

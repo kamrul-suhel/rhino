@@ -1424,6 +1424,16 @@ return [
     ],
 
     [
+        'label' => 'Left hand drive image required',
+        'identifier' => 'leftHandDriveImageRequired',
+    ],
+
+    [
+        'label' => 'Right hand drive image required',
+        'identifier' => 'rightHandDriveImageRequired',
+    ],
+
+    [
         'label' => 'Right hand drive image',
         'identifier' => 'rightHandDriveImage'
     ],

@@ -27,9 +27,9 @@ class CreateGuestsTable extends Migration
             $table->string('address_line_4')->nullable();
             $table->string('address_line_5')->nullable();
             $table->string('address_line_6')->nullable();
-            $table->string('postcode');
+            $table->string('postcode')->nullable();
             $table->string('landline', 20)->nullable()->index();
-            $table->string('mobile', 20)->index();
+            $table->string('mobile', 20)->index()->nullable();
             $table->string('method', 20)->nullable()->index();
             $table->dateTime('last_logged_in')->nullable();
             $table->smallInteger('stage')->default(1)->index();
