@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="r-tab" :class="[showForm ? 'open' : '']" >
+        <div class="r-tab" :class="[showForm ? 'open' : '']">
             <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>
                     <v-icon
@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class="r-tab-content" :class="[showForm ? 'open' : '']" >
+            <div class="r-tab-content" :class="[showForm ? 'open' : '']">
                 <v-form ref="eventTypeForm"
                         v-model="valid"
                         lazy-validation>
@@ -21,15 +21,17 @@
                     <!-- Language Selector for translations -->
                     <v-layout row wrap justify-end>
                         <v-flex xs12 sm3 v-if="editType">
-                            <Language
-                                    :languageId="selectedType.language_id">
+                            <Language :solo="false"
+                                      :flat="false"
+                                      :chip="false"
+                                      :languageId="selectedType.language_id">
                             </Language>
                         </v-flex>
                     </v-layout>
 
 
                     <v-layout row wrap>
-                        <v-flex xs12 sm1 ml-3 >
+                        <v-flex xs12 sm1 ml-3>
                             <span>{{trans.icon}}</span>
 
                             <v-img
@@ -234,8 +236,8 @@
                 }
             },
 
-            selectedType(){
-              this.resetValidationEventTypeForm()
+            selectedType() {
+                this.resetValidationEventTypeForm()
             },
 
             searchType(value) {
@@ -253,8 +255,8 @@
         },
 
         created() {
-            this.$store.commit( 'setHeaderTitle', `${this.trans.manageEventType}` )
-            this.$store.commit( 'setNavTitle', `${this.trans.events}` )
+            this.$store.commit('setHeaderTitle', `${this.trans.manageEventType}`)
+            this.$store.commit('setNavTitle', `${this.trans.events}`)
         },
 
         mounted() {
@@ -362,7 +364,7 @@
                 this.$refs.eventTypeForm.resetValidation()
             },
 
-            resetEventTypeForm(){
+            resetEventTypeForm() {
                 this.$refs.eventTypeForm.reset()
             },
 
