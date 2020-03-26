@@ -485,9 +485,9 @@
                 const selectedSaleExecutive = this.selectedSaleExecutive
                 const selectedSlot = this.selectedSlot
 
-                if (selectedSlot.start) {
-                    return // do not run if time is taken
-                }
+                // if (selectedSlot.start) {
+                //     return // do not run if time is taken
+                // }
 
                 if (
                     !_.isEmpty(selectedDate) &&
