@@ -131,17 +131,17 @@ export default {
 
             let time = {}
             if (dayEnd <= newDate) {
-                // if (
-                //     dayStart.format('HH:mm:ss') === dayEnd.format('HH:mm:ss')
-                // ) {
-                //     break;
-                // }
-                //
-                // time = {
-                //     start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
-                //     end: dayEnd.format('YYYY-MM-DD HH:mm:ss'),
-                //     slotId: timeSlots.length
-                // }
+                if (
+                    dayStart.format('HH:mm:ss') === dayEnd.format('HH:mm:ss')
+                ) {
+                    break;
+                }
+
+                time = {
+                    start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
+                    end: dayEnd.format('YYYY-MM-DD HH:mm:ss'),
+                    slotId: timeSlots.length
+                }
 
             } else {
                 time = {
