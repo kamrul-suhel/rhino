@@ -76,6 +76,11 @@ return [
     ],
 
     [
+        'label' => 'Search by unique code',
+        'identifier' => 'searchByUniqueCode'
+    ],
+
+    [
         'label' => 'With a unique code',
         'identifier' => 'withAUniqueCode'
     ],

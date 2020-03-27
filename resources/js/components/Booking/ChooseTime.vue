@@ -483,7 +483,6 @@
             checkCascadeTime() {
                 const selectedDate = this.selectedDate
                 const selectedSaleExecutive = this.selectedSaleExecutive
-                const selectedSlot = this.selectedSlot
 
                 // if (selectedSlot.start) {
                 //     return // do not run if time is taken
@@ -510,6 +509,7 @@
                     const URL = `/api/booking/${selectedSaleExecutive.id}/availability`
                     axios.post(URL, checkTimeForm).then((response) => {
                         if (response.data.success) {
+
                             this.$store.commit('setAllAppointmentSlots', response.data.slots)
                         }
                     }).catch(error => {

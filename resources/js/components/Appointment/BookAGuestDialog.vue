@@ -38,9 +38,9 @@
                                 clearable
                                 hide-details
                                 hide-selected
-                                item-text="email"
-                                item-value="symbol"
-                                :label="`${trans.searchGuestByEmail}`"
+                                item-text="unique"
+                                item-value="unique"
+                                :label="`${trans.searchByUniqueCode}`"
                                 open-on-clear
                                 return-object
                                 @change="onSelectGuest()"
@@ -166,7 +166,7 @@
                 if (this.guests.length > 0) return
                 this.isLoading = true
                 // Lazily load input items
-                const URL = `/api/guests/dropdown?eventId=${this.selectedEvent.id}&search=${val}`
+                const URL = `/api/guests/dropdown?type=uniqueId&eventId=${this.selectedEvent.id}&search=${val}`
                 axios.get(URL).then((response) => {
                     if (response.data) {
                         this.guests = [...response.data.guests]

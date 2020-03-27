@@ -30,11 +30,21 @@ class GuestDropdownController extends Controller
         );
 
         if ($request->has('search') && !empty($request->search)) {
-            $guests = $guests->where(function ($guest) use ($request) {
-                $guest->where('guests.email', 'like', '%' . $request->search . '%')
-                    ->orWhere('guests.first_name', 'LIKE', '%' . $request->search . '%')
-                    ->orWhere('guests.surname', 'LIKE', '%' . $request->search . '%');
-            });
+
+            // If request has type params, then search by type
+            if ($request->has('type') && !empty($request->type)) {
+                switch($request->type){
+                    case 'uniqueId':
+                        $guests = $guests->where('guests.unique', 'LIKE', '%' . $request->search . '%');
+                    break;
+                }
+            } else {
+                $guests = $guests->where(function ($guest) use ($request) {
+                    $guest->where('guests.email', 'like', '%' . $request->search . '%')
+                        ->orWhere('guests.first_name', 'LIKE', '%' . $request->search . '%')
+                        ->orWhere('guests.surname', 'LIKE', '%' . $request->search . '%');
+                });
+            }
         }
         // If request has eventId, then load specific event guest.
         if ($request->has('eventId') && !empty($request->eventId)) {
