@@ -201,7 +201,17 @@
             },
 
             onNavItemClick(nav) {
+                switch(nav.type){
+                    case 'clear':
+                        this.guests = []
+                        this.selected = []
+                        this.$refs.guestCSV.value = null
+                        return
 
+                    case 'upload':
+                        this.onClickUploadCSV()
+                        return
+                }
             },
 
 
