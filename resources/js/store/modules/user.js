@@ -17,7 +17,9 @@ const defaultState = {
     tabColor: 'dark',
     tabSliderColor: 'white',
 
-    uploadUserDialog: false
+    uploadUserDialog: false,
+
+    initializeUser: false
 }
 const state = {
     ...defaultState
@@ -211,6 +213,10 @@ const mutations = {
 
     setUploadUserDialog(state, status){
         state.uploadUserDialog = status
+    },
+
+    setInitializeUser(state){
+        state.initializeUser = !state.initializeUser
     }
 }
 
@@ -265,6 +271,10 @@ const getters = {
 
     getUploadUserDialog(state){
         return state.uploadUserDialog
+    },
+
+    getInitializeUser(state){
+        return state.initializeUser
     }
 
 }

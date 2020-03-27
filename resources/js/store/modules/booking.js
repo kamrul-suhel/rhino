@@ -17,7 +17,6 @@ const defaultState = {
     bringGuest: {},
     step: 'selectModel',
     partExchange: {
-        vehicleExchange: false
     },
 
     confirmDetail: {}
@@ -53,7 +52,7 @@ const mutations = {
                 makeAndModel:appointment.part_ex_vehicle,
                 currentMilege:appointment.part_ex_distance,
                 termCondition: true,
-                vehicleExchange:false
+                noVehicleExchange:false
             }
 
             state.partExchange = partExchange

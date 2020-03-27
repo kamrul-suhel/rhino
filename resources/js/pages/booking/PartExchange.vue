@@ -49,7 +49,7 @@
                                   @click="onPartExchangeVehicle()"
                                   justify-center
                                   fill-height pa-3
-                                  :style="{borderColor: !partExchange.vehicleExchange ? '#f0f0f0' : '#444'}">
+                                  :style="{borderColor: typeof partExchange.noVehicleExchange === 'undefined' || !partExchange.noVehicleExchange ? '#f0f0f0' : '#444'}">
                             <v-flex>
                                 <v-icon :style="{color:color}"
                                         large
@@ -97,6 +97,12 @@
             }
         },
 
+        watch: {
+            partExchange() {
+                console.log('part exchange: ', this.partExchange)
+            }
+        },
+
         created() {
 
         },
@@ -114,17 +120,41 @@
 
         methods: {
             onPartExchangeVehicle() {
-                if(this.isDisable) return
+                if (this.isDisable) return
+                let partExchange = {}
 
-                let partExchange = {
-                    ...this.partExchange,
-                    vehicleExchange: !this.partExchange.vehicleExchange
+                if (typeof this.partExchange.noVehicleExchange === 'undefined') {
+                    partExchange = {
+                        ...this.partExchange,
+                        noVehicleExchange: true
+                    }
+                } else {
+                    partExchange = {
+                        ...this.partExchange,
+                        noVehicleExchange: !this.partExchange.noVehicleExchange
+                    }
                 }
 
                 this.$store.commit('setPartExchange', partExchange)
             },
 
             onContinue() {
+                // Validate before go to next stage
+                if(
+                    typeof this.partExchange.noVehicleExchange === 'undefined' ||
+                    this.partExchange.noVehicleExchange === false
+
+                ){
+                    if(
+                        typeof this.partExchange.registrationNumber === 'undefined' &&
+                        typeof this.partExchange.makeAndModel === 'undefined'
+                    ){
+                        return
+                    }
+                }
+
+                console.log('pare: ', this.partExchange)
+
                 this.$store.commit('setBookingStep', 3)
             }
         }

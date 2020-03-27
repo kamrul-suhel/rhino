@@ -379,7 +379,7 @@
 
             getPartExchangeTitle() {
                 let title = ''
-                if (this.partExchange.vehicleExchange) {
+                if (this.partExchange.noVehicleExchange) {
                     title = this.trans.none
                 } else {
                     title = this.partExchange.registrationNumber

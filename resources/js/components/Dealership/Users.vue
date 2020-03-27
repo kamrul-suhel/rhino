@@ -62,7 +62,8 @@
                 loading: 'getUserLoading',
                 rowsPerPage: 'getUserListRowsPerPage',
                 initializeBrands: 'getInitializeBrands',
-                selectedEvent: 'getSelectedEvent'
+                selectedEvent: 'getSelectedEvent',
+                initializeUser: 'getInitializeUser'
             })
         }),
 
@@ -80,6 +81,10 @@
             },
 
             initializeBrands() {
+                this.initialize()
+            },
+
+            initializeUser(){
                 this.initialize()
             }
         },

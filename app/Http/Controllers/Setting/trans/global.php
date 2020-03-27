@@ -181,6 +181,11 @@ return [
     ],
 
     [
+        'label' => 'Sales executive successfully uploaded',
+        'identifier' => 'salesExecutiveSuccessUploaded'
+    ],
+
+    [
         'label' => 'No brand found',
         'identifier' => 'noBrandFound'
     ],

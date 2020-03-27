@@ -43,7 +43,7 @@
 
                 <v-card-text>
                     <input
-                        ref="guestCSV"
+                        ref="salesExecutiveCSV"
                         type="file"
                         accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                         class="hidden-screen-only"
@@ -182,11 +182,11 @@
             },
 
             onClickUploadCSV() {
-                this.$refs.guestCSV.click()
+                this.$refs.salesExecutiveCSV.click()
             },
 
             onUploadCSV() {
-                const csvFile = this.$refs.guestCSV.files[0]
+                const csvFile = this.$refs.salesExecutiveCSV.files[0]
                 let guestForm = new FormData()
                 guestForm.append('file', csvFile)
                 guestForm.append('eventId', this.$route.params.id)
@@ -225,7 +225,16 @@
             },
 
             onNavItemClick(nav) {
+                switch(nav.type){
+                    case 'clear':
+                        this.users = []
+                        this.$refs.salesExecutiveCSV.value = null
+                        return
 
+                    case 'upload':
+                        this.onClickUploadCSV()
+                        return
+                }
             },
 
 
@@ -284,11 +293,12 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.trans.guestsSuccessfullyUploaded}`
+                            message: `${this.trans.salesExecutiveSuccessUploaded}`
                         })
                         this.existingUsers = [...response.data.existingUsers]
-                        this.$store.commit('setInitializeGuest')
-                        console.log('existins: ', this.existingUsers)
+                        this.$store.commit('setInitializeUser')
+                        // Set all user null
+                        this.users = []
 
                         // this.$store.commit('setUploadUserDialog', false)
                     }
