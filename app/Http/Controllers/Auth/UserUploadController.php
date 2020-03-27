@@ -36,22 +36,7 @@ class UserUploadController extends Controller
             ]);
         }
 
-        $handle = fopen($request->file, "r");
-        $users = [];
-        while (($data = fgetcsv($handle)) !== FALSE) {
-            $users[] = $data;
-        }
-
-        $header = array_shift($users);
-        $modifyUsers = [];
-        foreach ($users as $key => $value) {
-            $currentUser = [];
-            foreach ($value as $objectKey => $objectValue) {
-                $currentUser[$header[$objectKey]] = $objectValue;
-            }
-
-            $modifyUsers[] = $currentUser;
-        }
+        $modifyUsers = $this->csvToArray($request->file);
 
         return response()->json([
             'success' => true,
@@ -95,5 +80,39 @@ class UserUploadController extends Controller
             'success' => true,
             'existingUsers' => $existingUsers
         ]);
+    }
+
+
+    /**
+     * Remove any BOM from string
+     * @param $text
+     * @return string|string[]|null
+     */
+    private function removeUtf8Bom($text) {
+        $bom = pack('H*','EFBBBF');
+        $text = preg_replace("/^$bom/", '', $text);
+        return $text;
+    }
+
+    /**
+     * Generate array from csv file
+     * @param $file
+     * @param string $delimiter
+     * @param string $seperator
+     * @return array
+     */
+    private function csvToArray($file, $delimiter=',', $seperator = '"') {
+        $csvdata = file($file);
+        $header = NULL;
+        $data = array();
+        foreach ($csvdata as $line) {
+            $row = $this->removeUtf8Bom($line);
+            $row = str_getcsv($row,$delimiter,$seperator);
+            if(!$header)
+                $header = $row;
+            else
+                $data[] = array_combine($header, $row);
+        }
+        return $data;
     }
 }

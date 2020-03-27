@@ -297,8 +297,10 @@
                         })
                         this.existingUsers = [...response.data.existingUsers]
                         this.$store.commit('setInitializeUser')
-                        // Set all user null
+
+                        // reset upload form
                         this.users = []
+                        this.selected = []
 
                         // this.$store.commit('setUploadUserDialog', false)
                     }
