@@ -130,19 +130,14 @@ export default {
             let newDate = moment(dayStart).add(appointmentDuration, 'minutes')
 
             let time = {}
-            if (dayEnd <= newDate) {
-                if (
-                    dayStart.format('HH:mm:ss') === dayEnd.format('HH:mm:ss')
-                ) {
-                    break;
+            if (dayEnd < newDate) {
+                if(dayEnd === newDate){
+                    time = {
+                        start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
+                        end: dayEnd.format('YYYY-MM-DD HH:mm:ss'),
+                        slotId: timeSlots.length
+                    }
                 }
-
-                time = {
-                    start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
-                    end: dayEnd.format('YYYY-MM-DD HH:mm:ss'),
-                    slotId: timeSlots.length
-                }
-
             } else {
                 time = {
                     start: dayStart.format('YYYY-MM-DD HH:mm:ss'),
@@ -152,7 +147,8 @@ export default {
             }
 
             dayStart.add(appointmentDuration, 'minutes')
-            timeSlots.push(time)
+
+            !_.isEmpty(time) && timeSlots.push(time)
         } while (dayStart <= dayEnd);
 
         return [...timeSlots]
