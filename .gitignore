@@ -27,3 +27,4 @@ yarn.lock
 resources/js/store/modules/authUser.js
 /public/*.js
 /public/*.map
+package-lock.json
