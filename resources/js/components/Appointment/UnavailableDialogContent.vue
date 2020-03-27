@@ -58,20 +58,23 @@
                 </v-flex>
 
                 <v-flex xs12>
-                    <strong>Name:</strong> {{ `${appointment.guest_surname| trans} ${appointment.guest_first_name |
-                    trans}` }}
-                </v-flex>
-
-                <v-flex xs12>
-                    <strong>{{ trans.bringGuest|trans }}:</strong> {{ `${appointment.bring_guest|trans}` }}
+                    <strong>Name:</strong> {{ `${appointment.guest_surname} ${appointment.guest_first_name}` }}
                 </v-flex>
 
                 <v-flex xs12>
                     <strong>{{ trans.bringGuest|trans }}:</strong> {{ `${appointment.bring_guest}` }}
                 </v-flex>
 
-                <v-flex xs12>
+                <v-flex xs12 sm6>
                     <strong>{{ trans.partExchange|trans }}:</strong> {{ `${appointment.part_ex_vrm}` }}
+                </v-flex>
+
+                <v-flex xs12 sm6>
+                    <strong>{{ trans.model|trans }}:</strong> {{ `${appointment.part_ex_vehicle}` }}
+                </v-flex>
+
+                <v-flex xs12 sm6>
+                    <strong>{{ trans.currentMileage|trans }}:</strong> {{ `${appointment.part_ex_distance}` }}
                 </v-flex>
             </v-layout>
 
