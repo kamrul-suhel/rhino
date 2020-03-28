@@ -51,7 +51,7 @@
                         </v-flex>
 
                         <v-flex xs12 sm4 pa-2>
-                            <v-select
+                            <v-autocomplete
                                 :items="dealerships"
                                 item-text="name"
                                 item-value="id"
@@ -61,7 +61,7 @@
                                 v-model="selectedEvent.dealership_id"
                                 solo box flat
                             >
-                            </v-select>
+                            </v-autocomplete>
                         </v-flex>
                     </v-layout>
 
@@ -428,6 +428,8 @@
                         default:
                             id = this.$route.params.id
                     }
+                }else{
+                    id = this.$route.params.id
                 }
 
                 this.$store.dispatch('fetchEvent', {

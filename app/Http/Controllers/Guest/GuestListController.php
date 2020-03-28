@@ -21,10 +21,13 @@ class GuestListController extends Controller
             'guests.*',
             'events_translation.name as event'
         )
-            ->leftJoin('events', function ($eventT) {
-                $eventT->on('events.id', '=', 'guests.event_id');
-                $eventT->leftJoin('events_translation', 'events_translation.event_id', 'events.id');
-                $eventT->where('events_translation.language_id', $this->languageId);
+            ->leftJoin('events', function ($event) {
+                $event->on('guests.event_id', '=', 'events.id');
+                $event->leftJoin('events_translation', function($eventT){
+                    $eventT->on('events.id', '=', 'events_translation.event_id');
+                    $eventT->where('events_translation.language_id', $this->languageId);
+                });
+
             });
 
         // If request has eventId, then load specific event guest.
@@ -36,7 +39,9 @@ class GuestListController extends Controller
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search dealership name
             if ($request->has('search') && !empty($request->search)) {
-                $guests = $guests->where('guests.first_name', 'LIKE', '%' . $request->search . '%');
+                $guests = $guests->where('guests.first_name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('guests.surname', 'LIKE', '%'. $request->search . '%')
+                    ->orWhere('guests.email', 'LIKE', '%'. $request->search . '%');
             }
 
             // Get Only active country

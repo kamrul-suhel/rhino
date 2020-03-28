@@ -35,7 +35,7 @@
                                 </v-flex>
 
                                 <v-flex xs12 sm-4 pa-2>
-                                    <v-select
+                                    <v-autocomplete
                                         :items="dealerships"
                                         item-text="name"
                                         item-value="id"
@@ -47,7 +47,7 @@
                                         solo
                                         flat
                                     >
-                                    </v-select>
+                                    </v-autocomplete>
                                 </v-flex>
                             </v-layout>
 
