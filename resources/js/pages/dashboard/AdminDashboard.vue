@@ -22,6 +22,59 @@
         <v-container pt-0>
             <v-layout row wrap justify-space-around>
                 <v-flex xs12 md5>
+                    <v-layout column mb-4>
+                            <v-layout row justify-space-around>
+                                <v-flex xs12>
+                                    <v-autocomplete
+                                        v-model="selectedUser"
+                                        :items="users"
+                                        :loading="isLoading"
+                                        :color="themeOption.primaryColor"
+                                        append-icon="search"
+                                        :search-input.sync="search"
+                                        clearable
+                                        outline
+                                        small
+                                        hide-details
+                                        hide-selected
+                                        item-text="email"
+                                        item-value="id"
+                                        :label="`${trans.searchUserByEmail}`"
+                                        open-on-clear
+                                        return-object
+                                        class="search-guests"
+                                        @change="onSelectUser()"
+                                    >
+                                        <template v-slot:no-data>
+                                            <v-list-tile>
+                                                <v-list-tile-title>
+                                                    {{ `${trans.searchUserByEmail}` }}
+                                                </v-list-tile-title>
+                                            </v-list-tile>
+                                        </template>
+                                        <template v-slot:selection="{ item, selected }">
+                                            <span :selected="selected" v-text="item.name"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                            <v-list-tile-avatar
+                                                :color="themeOption.primaryColor"
+                                                class="headline font-weight-light white--text"
+                                            >
+                                                {{ item.name.charAt(0) }}
+                                            </v-list-tile-avatar>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title v-html="getNameWithStatus(item)"></v-list-tile-title>
+                                                <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
+                                            </v-list-tile-content>
+                                            <v-list-tile-action>
+                                                <v-icon>mdi-coin</v-icon>
+                                            </v-list-tile-action>
+                                        </template>
+                                    </v-autocomplete>
+                                </v-flex>
+                            </v-layout>
+                    </v-layout>
+
                     <v-layout column mb-3>
                         <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listUsers'}">
                             <v-layout row justify-space-around>
@@ -44,6 +97,7 @@
                             </v-layout>
                         </v-card>
                     </v-layout>
+
                     <v-layout column mb-3>
                         <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listVehicles'}">
                             <v-layout row justify-space-around>
@@ -66,6 +120,7 @@
                             </v-layout>
                         </v-card>
                     </v-layout>
+
                     <v-layout column mb-3>
                         <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listEvents'}">
                             <v-layout row justify-space-around>
@@ -156,8 +211,8 @@
 </template>
 
 <script>
-
     import {mapGetters} from 'vuex'
+    import fn from '@/utils/function'
 
     export default {
         components: {
@@ -166,7 +221,10 @@
 
         data() {
             return {
-
+                selectedUser:{},
+                users:[],
+                isLoading: false,
+                search:''
             }
         },
 
@@ -179,6 +237,20 @@
         }),
 
         watch: {
+            search(val) {
+                if (this.users.length > 0) return
+                this.isLoading = true
+                // Lazily load input items
+                const URL = `/api/users/dropdown?search=${val}`
+                axios.get(URL).then((response) => {
+                    if (response.data) {
+                        this.users = [...response.data.users]
+                        this.isLoading = false
+                    }
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
+            }
 
         },
 
@@ -188,6 +260,23 @@
         },
 
         methods: {
+
+            onSelectUser(){
+                if(typeof this.selectedUser === "undefined"){
+                    return
+                }
+
+                this.$router.push({
+                    name: 'editUsers',
+                    params: {
+                        id: this.selectedUser.id
+                    }
+                })
+            },
+
+            getNameWithStatus(guest){
+                return fn.getGuestNameWithStatus(guest, this.trans)
+            }
         }
     }
 

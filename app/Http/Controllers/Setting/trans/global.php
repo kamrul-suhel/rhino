@@ -116,6 +116,11 @@ return [
     ],
 
     [
+        'label' => 'Search user by email',
+        'identifier' => 'searchUserByEmail'
+    ],
+
+    [
         'label' => 'Search by name',
         'identifier' => 'searchByName'
     ],
