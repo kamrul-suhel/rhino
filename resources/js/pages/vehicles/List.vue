@@ -142,8 +142,8 @@
                                 >
                                 </v-img>
                             </td>
-                            <td width="20%">{{ props.item.model }}</td>
                             <td v-if="!subComponent">{{ props.item.brand }}</td>
+                            <td width="20%">{{ props.item.model }}</td>
                             <td class="text-xs-right">
                                 <v-icon
                                     small

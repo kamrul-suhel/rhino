@@ -1197,8 +1197,8 @@ return [
     ],
 
     [
-        'label' => 'Select a rule',
-        'identifier' => 'selectARule'
+        'label' => 'Select a level',
+        'identifier' => 'selectALevel'
     ],
 
     [
@@ -1227,8 +1227,8 @@ return [
     ],
 
     [
-        'label' => 'Rule',
-        'identifier' => 'rule'
+        'label' => 'Level',
+        'identifier' => 'level'
     ],
 
     [

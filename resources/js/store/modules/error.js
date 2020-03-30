@@ -44,7 +44,7 @@ const getters = {
 
 const actions = {
     initializeError({state,commit}, errorObj){
-        const data = errorObj.response.data
+        const data = errorObj.response && errorObj.response.data
         const status = errorObj.response.status
         const headers = errorObj.response.headers
 

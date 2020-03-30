@@ -54,8 +54,8 @@
                             </v-select>
                         </v-flex>
 
-                        <v-flex xs12 sm4 pa-2
-                                v-if="authUser.level === 'admin'">
+                        <v-flex xs12 sm3 pa-2
+                                v-if="user.level ==='dealership' || user.level === 'sales_executive'">
                             <v-select
                                 :items="dealerships"
                                 item-text="name"
@@ -63,14 +63,14 @@
                                 :rules="[v => !!v || `${trans.dealershipIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.dealership"
-                                v-model="user.dealership_id"
+                                v-model="user.dealershipId"
                                 box solo flat
                             >
                             </v-select>
                         </v-flex>
 
-                        <v-flex xs12 sm4 pa-2
-                                v-if="user.level === 'group'">
+                        <v-flex xs12 sm3 pa-2
+                                v-if="user.level === 'group' || user.level ==='dealership'|| user.level === 'sales_executive'">
                             <v-select
                                 :items="groups"
                                 item-text="name"
@@ -83,8 +83,10 @@
                             ></v-select>
                         </v-flex>
 
-                        <v-flex xs12 sm4 pa-2
-                                v-if="user.level ==='country' || user.level === 'region'"
+                        <v-flex xs12 sm3 pa-2
+                                v-if="user.level ==='country' ||
+                                user.level === 'region' ||
+                                user.level ==='dealership' || user.level === 'sales_executive'"
                         >
                             <v-autocomplete
                                 :items="countries"
@@ -99,8 +101,8 @@
                             ></v-autocomplete>
                         </v-flex>
 
-                        <v-flex xs12 sm4 pa-2
-                                v-if="user.level === 'brand' || user.level === 'region'">
+                        <v-flex xs12 sm3 pa-2
+                                v-if="user.level === 'brand' || user.level === 'region' || user.level === 'country'">
                             <v-autocomplete
                                 :items="brands"
                                 item-text="name"
@@ -114,8 +116,8 @@
                             ></v-autocomplete>
                         </v-flex>
 
-                        <v-flex xs12 sm4 pa-2
-                                v-if="user.level === 'region'">
+                        <v-flex xs12 sm3 pa-2
+                                v-if="user.level === 'region' || user.level ==='dealership' || user.level === 'sales_executive'">
                             <v-select :items="regions"
                                       item-text="name"
                                       item-value="id"
@@ -127,7 +129,7 @@
                             ></v-select>
                         </v-flex>
 
-                        <v-flex xs12 sm4 pa-2
+                        <v-flex xs12 sm3 pa-2
                                 v-if="user.level === 'company'">
                             <v-select
                                 :items="companies"
@@ -382,6 +384,8 @@
                 switch (level) {
                     case 'dealership':
                     case 'sales_executive':
+                        this.$store.dispatch('fetchCountriesForDropdown')
+                        this.$store.dispatch('fetchGroupsForDropdown')
                         this.$store.dispatch('fetchDealershipsForDropdown')
                         break
 
@@ -394,7 +398,8 @@
                         this.$store.dispatch('fetchCountriesForDropdown')
                         break
 
-                    case 'countries':
+                    case 'country':
+                        this.$store.dispatch('fetchBrandForDropDown')
                         this.$store.dispatch('fetchCountriesForDropdown')
                         break
 

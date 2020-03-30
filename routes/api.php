@@ -217,6 +217,7 @@ Route::prefix('countries')->middleware('VerifyJWT')->group(function () {
 
 Route::prefix('regions')->middleware('VerifyJWT')->group(function () {
     Route::post('', 'Region\RegionController@store');
+    Route::get('dropdown', 'Region\RegionDropdownController@getRegions');
     Route::put('{id}', 'Region\RegionController@update');
     Route::delete('{id}', 'Region\RegionController@destroy');
 });

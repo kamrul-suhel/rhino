@@ -134,11 +134,25 @@ const actions = {
         })
     },
 
+    fetchRegionsByCountryId({commit, dispatch}, payload = {}) {
+        const URL = `/api/regions/dropdown${fn.generateParams(payload)}`
+        axios.get(URL)
+            .then((response) => {
+                if (response.data.regions) {
+                    commit('setRegions', response.data.regions)
+                    commit('setTotalRegions', response.data.total)
+                }
+            })
+            .catch(error => {
+                dispatch('initializeError', error)
+            })
+    },
+
     fetchRegionsByBrandIdAndCountryId({commit, dispatch}, payload = {}) {
         const URL = `/api/brands/${payload.brandId}/regions${fn.generateParams(payload)}`
         axios.get(URL)
             .then((response) => {
-                if(response.data.regions){
+                if (response.data.regions) {
                     commit('setRegions', response.data.regions)
                     commit('setTotalRegions', response.data.total)
                 }

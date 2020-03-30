@@ -83,9 +83,9 @@
                         <v-flex xs12 sm3 pa-2 v-if="authUser.level !== 'dealership'">
                             <v-select
                                 :items="levels"
-                                :rules="[v => !!v || `${trans.selectARule}`]"
+                                :rules="[v => !!v || `${trans.selectALevel}`]"
                                 :color="themeOption.inputColor"
-                                :label="trans.rule"
+                                :label="trans.level"
                                 v-model="user.level"
                                 @change="onFetchData"
                                 box solo flat
@@ -109,7 +109,7 @@
                         </v-flex>
 
                         <v-flex xs12 sm3 pa-2
-                                v-if="user.level === 'group'">
+                                v-if="user.level === 'group' || user.level ==='dealership'|| user.level === 'sales_executive'">
                             <v-select
                                 :items="groups"
                                 item-text="name"
@@ -123,7 +123,9 @@
                         </v-flex>
 
                         <v-flex xs12 sm3 pa-2
-                                v-if="user.level ==='country' || user.level === 'region'"
+                                v-if="user.level ==='country' ||
+                                user.level === 'region' ||
+                                user.level ==='dealership' || user.level === 'sales_executive'"
                         >
                             <v-autocomplete
                                 :items="countries"
@@ -139,7 +141,7 @@
                         </v-flex>
 
                         <v-flex xs12 sm3 pa-2
-                                v-if="user.level === 'brand' || user.level === 'region'">
+                                v-if="user.level === 'brand' || user.level === 'region' || user.level === 'country'">
                             <v-autocomplete
                                 :items="brands"
                                 item-text="name"
@@ -154,7 +156,7 @@
                         </v-flex>
 
                         <v-flex xs12 sm3 pa-2
-                                v-if="user.level === 'region'">
+                                v-if="user.level === 'region' || user.level ==='dealership' || user.level === 'sales_executive'">
                             <v-select :items="regions"
                                       item-text="name"
                                       item-value="id"
@@ -275,6 +277,8 @@
                 switch (level) {
                     case 'dealership':
                     case 'sales_executive':
+                        this.$store.dispatch('fetchCountriesForDropdown')
+                        this.$store.dispatch('fetchGroupsForDropdown')
                         this.$store.dispatch('fetchDealershipsForDropdown')
                         break
 
@@ -287,7 +291,8 @@
                         this.$store.dispatch('fetchCountriesForDropdown')
                         break
 
-                    case 'countries':
+                    case 'country':
+                        this.$store.dispatch('fetchBrandForDropDown')
                         this.$store.dispatch('fetchCountriesForDropdown')
                         break
 
@@ -308,6 +313,16 @@
                         countryId: this.user.country_id
                     })
                 }
+
+                if(
+                    this.user.level === 'dealership' ||
+                    this.user.level === 'sales_executive'
+                ){
+                    this.$store.dispatch('fetchRegionsByCountryId', {
+                        countryId: this.user.country_id
+                    })
+                }
+
             },
 
             onCreateUser() {
@@ -329,6 +344,7 @@
                     userForm.append('profile_image', this.profileImage)
                     const URL = `/api/users`
                     axios.post(URL, userForm).then((response) => {
+
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,

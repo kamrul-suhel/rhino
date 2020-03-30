@@ -68,16 +68,16 @@ const mutations = {
                 },
 
                 {
-                    text: payload.trans.vehicle,
-                    align: 'left',
-                    value: 'vehicle'
-                },
-
-                {
                     text: payload.trans.brand,
                     align: 'left',
                     value: 'brand',
                     filter: true
+                },
+
+                {
+                    text: payload.trans.vehicle,
+                    align: 'left',
+                    value: 'vehicle'
                 },
 
                 {

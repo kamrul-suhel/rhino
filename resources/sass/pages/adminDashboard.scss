@@ -1,0 +1,13 @@
+.dashboard{
+    .search-user{
+        .v-input__slot{
+            min-height:40px;
+        }
+        .v-input__append-inner{
+            margin-top:8px;
+        }
+        .v-select__selections{
+            padding-top:0 !important;
+        }
+    }
+}

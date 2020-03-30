@@ -82,7 +82,6 @@ class RegisterController extends Controller
             // validation is failed
         }
 
-
         $user = $this->save($request);
         return response()->json([
             'success' => true
@@ -100,19 +99,19 @@ class RegisterController extends Controller
 
     /**
      * @param Request $request
-     * @param null $id
+     * @param '' $id
      * @return mixed
      */
-    protected function save(Request $request, $id = null){
+    protected function save(Request $request, $id = ''){
         $user = $id ? User::findOrFail($id) : new User() ;
-        $request->has('name') ? $user->firstname = $request->name : null;
-        $request->has('surname') ? $user->surname = $request->surname : null;
-        $request->has('email') ? $user->email = $request->email : null;
-        $request->has('password') ? $user->password = Hash::make($request->password) : null;
-        $request->has('level') ? $user->level = $request->level : null;
-        $request->has('status') ? $user->status = $request->status : null;
-        $request->has('profile_image') ? $user->profile_image = $request->profile_image : null;
-        $request->has('notes') ? $user->notes = $request->notes : null;
+        $request->has('name') ? $user->firstname = $request->name : '';
+        $request->has('surname') ? $user->surname = $request->surname : '';
+        $request->has('email') ? $user->email = $request->email : '';
+        $request->has('password') ? $user->password = Hash::make($request->password) : '';
+        $request->has('level') ? $user->level = $request->level : '';
+        $request->has('status') ? $user->status = $request->status : '';
+        $request->has('profile_image') ? $user->profile_image = $request->profile_image : '';
+        $request->has('notes') ? $user->notes = $request->notes : '';
 
         $user = $this->updateUserLevel($user, $request);
 
@@ -131,66 +130,66 @@ class RegisterController extends Controller
     protected function updateUserLevel($user, $request){
         switch($request->level){
             case User::USERADMIN:
-                $user->dealership_id = null;
-                $user->group_id = null;
-                $user->region_id = null;
-                $user->country_id = null;
-                $user->manufacturer_id = null;
-                $user->company_id = null;
+                $user->dealership_id = '';
+                $user->group_id = '';
+                $user->region_id = '';
+                $user->country_id = '';
+                $user->manufacturer_id = '';
+                $user->company_id = '';
                 break;
 
             case User::USERDEALERSHIP:
                 $user->dealership_id = $request->dealershipId;
-                $user->group_id = null;
-                $user->region_id = null;
-                $user->country_id = null;
-                $user->manufacturer_id = null;
-                $user->company_id = null;
+                $user->group_id = $request->has('group_id') ? $request->group_id : '';
+                $user->region_id = $request->has('region_id') ? $request->region_id : '';
+                $user->country_id = $request->has('country_id') ? $request->country_id : '';
+                $user->manufacturer_id = '';
+                $user->company_id = '';
                 break;
 
             case User::USERSALEEXECUTIVE:
                 $user->dealership_id = $request->dealershipId;
-                $user->group_id = null;
-                $user->region_id = null;
-                $user->country_id = null;
-                $user->manufacturer_id = null;
-                $user->company_id = null;
+                $user->group_id = $request->has('group_id') ? $request->group_id : '';
+                $user->region_id = $request->has('region_id') ? $request->region_id : '';
+                $user->country_id = $request->has('country_id') ? $request->country_id : '';
+                $user->manufacturer_id = '';
+                $user->company_id = '';
                 break;
 
             case User::USERGROUP:
-                $user->dealership_id = null;
+                $user->dealership_id = '';
                 $user->group_id = $request->group_id;
-                $user->region_id = null;
-                $user->country_id = null;
-                $user->manufacturer_id = null;
-                $user->company_id = null;
+                $user->region_id = '';
+                $user->country_id = '';
+                $user->manufacturer_id = '';
+                $user->company_id = '';
                 break;
 
             case User::USERREGION:
-                $user->dealership_id = null;
-                $user->group_id = null;
+                $user->dealership_id = '';
+                $user->group_id = '';
                 $user->region_id = $request->region_id;
                 $user->country_id = $request->country_id;
                 $user->manufacturer_id = $request->brand_id;
-                $user->company_id = null;
+                $user->company_id = '';
                 break;
 
             case User::USERRCOUNTRY:
-                $user->dealership_id = null;
-                $user->group_id = null;
-                $user->region_id = null;
+                $user->dealership_id = '';
+                $user->group_id = '';
+                $user->region_id = '';
                 $user->country_id = $request->country_id;
-                $user->manufacturer_id = null;
-                $user->company_id = null;
+                $user->manufacturer_id = $request->has('brand_id') ? $request->$request->brand_id : '';
+                $user->company_id = '';
                 break;
 
             case User::USERBRAND:
-                $user->dealership_id = null;
-                $user->group_id = null;
-                $user->region_id = null;
-                $user->country_id = null;
+                $user->dealership_id = '';
+                $user->group_id = '';
+                $user->region_id = '';
+                $user->country_id = '';
                 $user->manufacturer_id = $request->brand_id;
-                $user->company_id = null;
+                $user->company_id = '';
                 break;
 
         }

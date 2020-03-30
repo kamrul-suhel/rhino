@@ -1,144 +1,143 @@
 <template>
-    <v-container grid-list-md>
-        <v-layout row wrap class=" d-none d-md-block">
-            <v-flex xs12 class="pa-0">
-                <v-card-text class="pa-0 mb-4 text-xs-center">
-                    <h2>{{`${trans.dashboard}`|trans}}</h2>
-                </v-card-text>
-            </v-flex>
-
-            <v-flex xs6 class="pa-0">
-                <v-card-text class="px-0 text-xs-center">
-                    <h4>{{trans.event |trans}}</h4>
-                </v-card-text>
-            </v-flex>
-            <v-flex xs6 class="pa-0">
-                <v-card-text class="px-0 text-xs-center">
-                    <h4>{{trans.reporting |trans}}</h4>
-                </v-card-text>
+    <v-container grid-list-md class="dashboard">
+        <v-layout row wrap class="mb-5">
+            <v-flex xs12 class="pa-0 text-xs-center">
+                <h2>{{`${trans.dashboard}`.toUpperCase()|trans}}</h2>
             </v-flex>
         </v-layout>
 
         <v-container pt-0>
             <v-layout row wrap justify-space-around>
                 <v-flex xs12 md5>
-                    <v-layout column mb-4>
-                            <v-layout row justify-space-around>
-                                <v-flex xs12>
-                                    <v-autocomplete
-                                        v-model="selectedUser"
-                                        :items="users"
-                                        :loading="isLoading"
+                    <v-layout row wrap mb-4>
+                        <v-flex xs12 class="text-xs-center">
+                            <span class="title">{{trans.events}}</span>
+                        </v-flex>
+
+                        <v-flex xs12>
+                            <v-autocomplete
+                                v-model="selectedUser"
+                                :items="users"
+                                :loading="isLoading"
+                                :color="themeOption.primaryColor"
+                                append-icon="search"
+                                :search-input.sync="search"
+                                clearable
+                                outline
+                                small
+                                hide-details
+                                hide-selected
+                                item-text="email"
+                                item-value="id"
+                                :placeholder="`${trans.searchUserByEmail}`"
+                                open-on-clear
+                                return-object
+                                class="search-user"
+                                @change="onSelectUser()"
+                            >
+                                <template v-slot:no-data>
+                                    <v-list-tile>
+                                        <v-list-tile-title>
+                                            {{ `${trans.searchUserByEmail}` }}
+                                        </v-list-tile-title>
+                                    </v-list-tile>
+                                </template>
+                                <template v-slot:selection="{ item, selected }">
+                                    <span :selected="selected" v-text="item.name"></span>
+                                </template>
+                                <template v-slot:item="{ item }">
+                                    <v-list-tile-avatar
                                         :color="themeOption.primaryColor"
-                                        append-icon="search"
-                                        :search-input.sync="search"
-                                        clearable
-                                        outline
-                                        small
-                                        hide-details
-                                        hide-selected
-                                        item-text="email"
-                                        item-value="id"
-                                        :label="`${trans.searchUserByEmail}`"
-                                        open-on-clear
-                                        return-object
-                                        class="search-guests"
-                                        @change="onSelectUser()"
+                                        class="headline font-weight-light white--text"
                                     >
-                                        <template v-slot:no-data>
-                                            <v-list-tile>
-                                                <v-list-tile-title>
-                                                    {{ `${trans.searchUserByEmail}` }}
-                                                </v-list-tile-title>
-                                            </v-list-tile>
-                                        </template>
-                                        <template v-slot:selection="{ item, selected }">
-                                            <span :selected="selected" v-text="item.name"></span>
-                                        </template>
-                                        <template v-slot:item="{ item }">
-                                            <v-list-tile-avatar
-                                                :color="themeOption.primaryColor"
-                                                class="headline font-weight-light white--text"
-                                            >
-                                                {{ item.name.charAt(0) }}
-                                            </v-list-tile-avatar>
-                                            <v-list-tile-content>
-                                                <v-list-tile-title v-html="getNameWithStatus(item)"></v-list-tile-title>
-                                                <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
-                                            </v-list-tile-content>
-                                            <v-list-tile-action>
-                                                <v-icon>mdi-coin</v-icon>
-                                            </v-list-tile-action>
-                                        </template>
-                                    </v-autocomplete>
-                                </v-flex>
-                            </v-layout>
+                                        {{ item.name.charAt(0) }}
+                                    </v-list-tile-avatar>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title v-html="getNameWithStatus(item)"></v-list-tile-title>
+                                        <v-list-tile-sub-title v-text="item.email"></v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                    <v-list-tile-action>
+                                        <v-icon>mdi-coin</v-icon>
+                                    </v-list-tile-action>
+                                </template>
+                            </v-autocomplete>
+                        </v-flex>
+
                     </v-layout>
 
                     <v-layout column mb-3>
-                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listUsers'}">
-                            <v-layout row justify-space-around>
-                                <v-flex align-self-center>
-                                    <v-icon color="#000">person</v-icon>
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
+                                :to="{name: 'listUsers'}">
+                            <v-layout row align-center>
+                                <v-flex>
+                                    <v-img aspect-ratio="2.0"
+                                           contain
+                                           src="/images/icons/book_a_guest.jpg"/>
                                 </v-flex>
 
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manageUsers}`|trans }}</h3>
+                                        <span class="title">{{ `${trans.manageUsers}`|trans }}</span>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.addEditOrRemoveUser}` |trans }}</small>
+                                        <span class="body-2">{{ `${trans.addEditOrRemoveUser}` |trans }}</span>
                                     </v-card-text>
                                 </v-flex>
 
                                 <v-flex align-self-center>
-                                    <v-icon>keyboard_arrow_right</v-icon>
+                                    <v-icon large>keyboard_arrow_right</v-icon>
                                 </v-flex>
                             </v-layout>
                         </v-card>
                     </v-layout>
 
                     <v-layout column mb-3>
-                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listVehicles'}">
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
+                                :to="{name: 'listVehicles'}">
                             <v-layout row justify-space-around>
                                 <v-flex align-self-center>
-                                    <v-icon color="#000">person</v-icon>
+                                    <v-img aspect-ratio="2.0"
+                                           contain
+                                           src="/images/icons/book_a_guest.jpg"/>
                                 </v-flex>
 
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manageVehicles}` |trans }}</h3>
+                                        <span class="title">{{ `${trans.manageVehicles}` |trans }}</span>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.addEditOrRemoveVehicle}` |trans }}</small>
+                                        <span class="body-2">{{ `${trans.addEditOrRemoveVehicle}` |trans }}</span>
                                     </v-card-text>
                                 </v-flex>
 
                                 <v-flex align-self-center>
-                                    <v-icon>keyboard_arrow_right</v-icon>
+                                    <v-icon large>keyboard_arrow_right</v-icon>
                                 </v-flex>
                             </v-layout>
                         </v-card>
                     </v-layout>
 
                     <v-layout column mb-3>
-                        <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listEvents'}">
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
+                                :to="{name: 'listEvents'}">
                             <v-layout row justify-space-around>
                                 <v-flex align-self-center>
-                                    <v-icon color="#000">person</v-icon>
+                                    <v-img aspect-ratio="2.0"
+                                           contain
+                                           src="/images/icons/book_a_guest.jpg"/>
                                 </v-flex>
 
                                 <v-flex>
                                     <v-card-title text-sm-left class="pa-0">
-                                        <h3>{{ `${trans.manageEvents}` |trans }}</h3>
+                                        <span class="title">{{ `${trans.manageEvents}` |trans }}</span>
                                     </v-card-title>
                                     <v-card-text class="text-sm-left pa-0">
-                                        <small>{{ `${trans.addEditOrRemoveEvents}`|trans }}</small>
+                                        <span class="body-2">{{ `${trans.addEditOrRemoveEvents}`|trans }}</span>
                                     </v-card-text>
                                 </v-flex>
 
                                 <v-flex align-self-center>
-                                    <v-icon>keyboard_arrow_right</v-icon>
+                                    <v-icon large>keyboard_arrow_right</v-icon>
                                 </v-flex>
                             </v-layout>
                         </v-card>
@@ -147,56 +146,60 @@
 
                 <v-flex xs12 md5 class="py-0">
                     <v-layout row wrap>
-                        <v-flex xs6>
-                            <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCompanies'}">
-                                <v-icon color="#000">business</v-icon>
+                        <v-flex xs6 pa-2>
+                            <v-card class="elevation-8 pa-4 rounded-10 text-xs-center " :to="{name: 'listCompanies'}">
+                                <v-icon large color="#000">business</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.companies}`|trans }}
+                                    <span class="title">{{ `${trans.companies}`|trans }}</span>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
 
-                        <v-flex xs6>
-                            <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listBrands'}">
-                                <v-icon color="#000">access_time</v-icon>
+                        <v-flex xs6 pa-2>
+                            <v-card class="elevation-8 pa-4 rounded-10 text-xs-center" :to="{name: 'listBrands'}">
+                                <v-icon large color="#000">access_time</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.brands}`|trans }}
+                                    <span class="title">{{ `${trans.brands}`|trans }}</span>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
 
-                        <v-flex xs6>
-                            <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCountries'}">
-                                <v-icon color="#000">languages</v-icon>
+                        <v-flex xs6 pa-2>
+                            <v-card class="elevation-8 rounded-10 pa-4 text-xs-center" :to="{name: 'listCountries'}">
+                                <v-img width="36"
+                                       height="36"
+                                       class="mx-auto"
+                                       contain
+                                       src="/images/icons/country.jpg"/>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.countries}`|trans }}
+                                    <span class="title">{{ `${trans.countries}`|trans }}</span>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
 
-                        <v-flex xs6>
-                            <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listCompanies'}">
-                                <v-icon color="#000">bar_chart</v-icon>
+                        <v-flex xs6 pa-2>
+                            <v-card class="elevation-8 pa-4 rounded-10 text-xs-center" :to="{name: 'listCompanies'}">
+                                <v-icon large color="#000">bar_chart</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.regions}`|trans }}
+                                    <span class="title">{{ `${trans.regions}`|trans }}</span>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
 
-                        <v-flex xs6>
-                            <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listDealershipsGroups'}">
-                                <v-icon color="#000">contacts</v-icon>
+                        <v-flex xs6 pa-2>
+                            <v-card class="elevation-8 pa-4 rounded-10 text-xs-center" :to="{name: 'listDealershipsGroups'}">
+                                <v-icon large color="#000">contacts</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.groups}`|trans }}
+                                    <span class="title">{{ `${trans.groups}`|trans }}</span>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
 
-                        <v-flex xs6>
-                            <v-card class="elevation-12 py-4 text-xs-center" :to="{name: 'listDealerships'}">
-                                <v-icon color="#000">contacts</v-icon>
+                        <v-flex xs6 pa-2>
+                            <v-card class="elevation-8 rounded-10 pa-4 text-xs-center" :to="{name: 'listDealerships'}">
+                                <v-icon large color="#000">contacts</v-icon>
                                 <v-card-text class="px-2">
-                                    {{ `${trans.dealerships}`|trans }}
+                                    <span class="title">{{ `${trans.dealerships}`|trans }}</span>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
