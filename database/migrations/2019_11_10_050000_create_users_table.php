@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('country_id')->index()->nullable();
             $table->unsignedBigInteger('manufacturer_id')->index()->nullable();
             $table->unsignedBigInteger('company_id')->index()->nullable();
-            $table->longText('notes');
+            $table->longText('notes')->nullable();
             $table->text('profile_image')->nullable();
             $table->boolean('send_mail');
             $table->tinyInteger('status')->index()->default(1);

@@ -50,7 +50,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -65,7 +65,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'firstname' => $data['firstname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -102,9 +102,9 @@ class RegisterController extends Controller
      * @param '' $id
      * @return mixed
      */
-    protected function save(Request $request, $id = ''){
+    protected function save(Request $request, $id = null){
         $user = $id ? User::findOrFail($id) : new User() ;
-        $request->has('name') ? $user->firstname = $request->name : '';
+        $request->has('firstname') ? $user->firstname = $request->firstname : '';
         $request->has('surname') ? $user->surname = $request->surname : '';
         $request->has('email') ? $user->email = $request->email : '';
         $request->has('password') ? $user->password = Hash::make($request->password) : '';
@@ -117,7 +117,12 @@ class RegisterController extends Controller
 
         $user->save();
 
-        $user->dealerships()->attach([$request->dealershipId]);
+        if(
+            $request->has('dealershipId') &&
+            !empty($request->dealershipId)
+        ){
+            $user->dealerships()->attach([$request->dealershipId]);
+        }
 
         return $user;
     }
@@ -130,68 +135,76 @@ class RegisterController extends Controller
     protected function updateUserLevel($user, $request){
         switch($request->level){
             case User::USERADMIN:
-                $user->dealership_id = '';
-                $user->group_id = '';
-                $user->region_id = '';
-                $user->country_id = '';
-                $user->manufacturer_id = '';
-                $user->company_id = '';
+                $user->dealership_id = null;
+                $user->group_id = null;
+                $user->region_id = null;
+                $user->country_id = null;
+                $user->manufacturer_id = null;
+                $user->company_id = null;
                 break;
 
             case User::USERDEALERSHIP:
                 $user->dealership_id = $request->dealershipId;
-                $user->group_id = $request->has('group_id') ? $request->group_id : '';
-                $user->region_id = $request->has('region_id') ? $request->region_id : '';
-                $user->country_id = $request->has('country_id') ? $request->country_id : '';
-                $user->manufacturer_id = '';
-                $user->company_id = '';
+                $user->group_id = $request->has('group_id') ? $request->group_id : null;
+                $user->region_id = $request->has('region_id') ? $request->region_id : null;
+                $user->country_id = $request->has('country_id') ? $request->country_id : null;
+                $user->manufacturer_id = null;
+                $user->company_id = null;
                 break;
 
             case User::USERSALEEXECUTIVE:
                 $user->dealership_id = $request->dealershipId;
-                $user->group_id = $request->has('group_id') ? $request->group_id : '';
-                $user->region_id = $request->has('region_id') ? $request->region_id : '';
-                $user->country_id = $request->has('country_id') ? $request->country_id : '';
-                $user->manufacturer_id = '';
-                $user->company_id = '';
+                $user->group_id = $request->has('group_id') ? $request->group_id : null;
+                $user->region_id = $request->has('region_id') ? $request->region_id : null;
+                $user->country_id = $request->has('country_id') ? $request->country_id : null;
+                $user->manufacturer_id = null;
+                $user->company_id = null;
                 break;
 
             case User::USERGROUP:
-                $user->dealership_id = '';
+                $user->dealership_id = null;
                 $user->group_id = $request->group_id;
-                $user->region_id = '';
-                $user->country_id = '';
-                $user->manufacturer_id = '';
-                $user->company_id = '';
+                $user->region_id = null;
+                $user->country_id = null;
+                $user->manufacturer_id = null;
+                $user->company_id = null;
                 break;
 
             case User::USERREGION:
-                $user->dealership_id = '';
-                $user->group_id = '';
+                $user->dealership_id = null;
+                $user->group_id = null;
                 $user->region_id = $request->region_id;
                 $user->country_id = $request->country_id;
                 $user->manufacturer_id = $request->brand_id;
-                $user->company_id = '';
+                $user->company_id = null;
                 break;
 
             case User::USERRCOUNTRY:
-                $user->dealership_id = '';
-                $user->group_id = '';
-                $user->region_id = '';
+                $user->dealership_id = null;
+                $user->group_id = null;
+                $user->region_id = null;
                 $user->country_id = $request->country_id;
-                $user->manufacturer_id = $request->has('brand_id') ? $request->$request->brand_id : '';
-                $user->company_id = '';
+                $user->manufacturer_id = $request->has('brand_id') ? $request->brand_id : null;
+                $user->company_id = null;
                 break;
 
             case User::USERBRAND:
-                $user->dealership_id = '';
-                $user->group_id = '';
-                $user->region_id = '';
-                $user->country_id = '';
+                $user->dealership_id = null;
+                $user->group_id = null;
+                $user->region_id = null;
+                $user->country_id = null;
                 $user->manufacturer_id = $request->brand_id;
-                $user->company_id = '';
+                $user->company_id = null;
                 break;
 
+            case User::USERCOMPANY:
+                $user->dealership_id = null;
+                $user->group_id = null;
+                $user->region_id = null;
+                $user->country_id = null;
+                $user->manufacturer_id = null;
+                $user->company_id = $request->company_id;
+                break;
         }
 
         return $user;

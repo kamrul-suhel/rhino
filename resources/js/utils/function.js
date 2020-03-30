@@ -195,7 +195,7 @@ export default {
         return dateArray
     },
 
-    downloadCSV(data, fileName) {
+    downloadCSV(data, fileName='users') {
         const {Parser} = require('json2csv')
         const json2csvParser = new Parser()
         const csv = json2csvParser.parse(data)
@@ -326,5 +326,37 @@ export default {
         }
 
         return defaultImage
+    },
+
+    renderUserRole(user, trans){
+        switch(user.level){
+            case 'admin':
+                return trans.admin
+
+            case 'dealership':
+                return trans.dealership
+
+            case 'group':
+                return trans.group
+
+            case 'region':
+                return trans.region
+
+            case 'country':
+                return trans.country
+
+            case 'sales_executive':
+                return trans.salesExecutive
+
+            case 'brand':
+                return trans.brand
+
+            default:
+                return `${trans.no} ${trans.role}`
+        }
+    },
+
+    onGoBack(){
+        window.history.back()
     }
 }

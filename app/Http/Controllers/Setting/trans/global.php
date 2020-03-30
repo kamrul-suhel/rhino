@@ -186,6 +186,11 @@ return [
     ],
 
     [
+        'label' => 'Users successfully uploaded',
+        'identifier' => 'usersSuccessFullyUploaded'
+    ],
+
+    [
         'label' => 'Sales executive successfully uploaded',
         'identifier' => 'salesExecutiveSuccessUploaded'
     ],
@@ -1746,6 +1751,11 @@ return [
     [
         'label' => 'Download unbooked guests',
         'identifier' => 'downloadUnbookedGuests'
+    ],
+
+    [
+        'label' => 'Download user CSV',
+        'identifier' => 'downloadUserCSV'
     ],
 
     [

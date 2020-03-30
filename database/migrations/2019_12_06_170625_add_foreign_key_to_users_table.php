@@ -17,7 +17,7 @@ class AddForeignKeyToUsersTable extends Migration
             $table->foreign('dealership_id')
                 ->on('dealerships')
                 ->references('id')
-            ->onDelete('cascade');
+            ->onDelete('set null');
 
             $table->foreign('group_id')
                 ->on('groups')

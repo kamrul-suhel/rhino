@@ -53,9 +53,10 @@ class UserUploadController extends Controller
     {
         $dealershipId = $request->dealershipId;
         $users = collect($request->users);
+        $type = $request->type;
         $existingUsers = [];
 
-        $users->map(function ($user) use ($dealershipId, &$existingUsers) {
+        $users->map(function ($user) use ($dealershipId,$type, &$existingUsers) {
 
             $existingUser = User::select('email')
                 ->where('email', $user['email'])
@@ -65,7 +66,14 @@ class UserUploadController extends Controller
                 $existingUsers[] = $user;
             } else {
                 $userRequest = new Request();
-                $userRequest->merge(['dealershipId' => $dealershipId]);
+                if($dealershipId){
+                    $userRequest->merge(['dealershipId' => $dealershipId]);
+                }
+
+                if($type){
+                    $userRequest->merge(['type' => $type]);
+                }
+
                 foreach ($user as $key => $value) {
                     $userRequest->merge([$key => $value]);
                 }

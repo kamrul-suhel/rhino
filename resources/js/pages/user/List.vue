@@ -22,7 +22,7 @@
                         <td>{{ props.item.firstname }}</td>
                         <td>{{ props.item.surname }}</td>
                         <td>{{ props.item.email }}</td>
-                        <td class="text-xs-left" v-if="!subComponent">{{ props.item.level }}</td>
+                        <td class="text-xs-left" v-if="!subComponent">{{ getRole(props.item) }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 v-if="!subComponent"
@@ -91,16 +91,21 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
+        <UploadUsers type="admin"/>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
     import addUserForm from './Create'
+    import fn from '@/utils/function'
+    import UploadUsers from "@/components/User/UploadUsers";
 
     export default {
         components: {
-            addUserForm
+            addUserForm,
+            UploadUsers
         },
 
         props: {
@@ -268,6 +273,10 @@
                         this.$store.dispatch('initializeError', error)
                     })
                 }
+            },
+
+            getRole(user){
+                return fn.renderUserRole(user, this.trans)
             }
         }
     }

@@ -1,19 +1,48 @@
 <template>
     <v-container pa-0>
         <div class="r-tab" :class="[showForm ? 'open' : '']">
-            <div class="r-tab-title r-border-round" @click="toggleForm">
-                <div>
-                    <v-icon
-                        :color="themeOption.adminNavIconColor">person
-                    </v-icon>
+            <div class="r-tab-header">
+                <div class="r-tab-title r-border-round" @click="toggleForm">
+                    <div>
+                        <v-icon
+                            :color="themeOption.adminNavIconColor">person
+                        </v-icon>
+                    </div>
+
+                    <div>
+                        {{ `${trans.createUser}` }}
+                    </div>
                 </div>
 
-                <div>
-                    {{ `${trans.createUser}` }}
+                <div class="r-tab-actions">
+                    <div class="user-download">
+                        <div>
+                            <v-btn  flat
+                                    @click="onDownloadUser()">
+                                <v-icon left dark>cloud_download</v-icon>
+                                {{ trans.downloadUserCSV }}
+                            </v-btn>
+
+                            <v-btn  flat
+                                    @click="onUploadUsers()">
+                                <v-icon left dark>cloud_upload</v-icon>
+                                {{ trans.uploadUsers }}
+                            </v-btn>
+                        </div>
+
+                        <v-btn outline round
+                               @click="onGoBack()"
+                               :color="themeOption.adminNavIconColor"
+                               class="ma-0 ml-4">
+                            <v-icon left dark>reply</v-icon>
+                            {{ `${trans.back}` }}
+                        </v-btn>
+                    </div>
                 </div>
             </div>
-            <div class="r-tab-content" :class="[showForm ? 'open' : '']">
 
+
+            <div class="r-tab-content" :class="[showForm ? 'open' : '']">
                 <v-form
                     row wrap
                     ref="userForm"
@@ -25,7 +54,7 @@
                                 :rules="[v => !!v || `${trans.firstNameIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.firstName"
-                                v-model="user.name"
+                                v-model="user.firstname"
                                 box solo flat
                             ></v-text-field>
                         </v-flex>
@@ -202,7 +231,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import {log} from 'util'
+    import fn from '@/utils/function'
 
     export default {
         data() {
@@ -314,10 +343,10 @@
                     })
                 }
 
-                if(
+                if (
                     this.user.level === 'dealership' ||
                     this.user.level === 'sales_executive'
-                ){
+                ) {
                     this.$store.dispatch('fetchRegionsByCountryId', {
                         countryId: this.user.country_id
                     })
@@ -385,6 +414,23 @@
                     this.$store.commit('setHeaderTitle', `${this.trans.manageUsers}`)
                     this.$store.commit('setNavTitle', `${this.trans.manageUsers}`)
                 }
+            },
+
+            onDownloadUser(){
+                // get all users
+                axios.get('/api/users').then((response) => {
+                    fn.downloadCSV(response.data.users, 'users')
+                }).catch((error) => {
+                    this.$store.commit('initializeError', error)
+                })
+            },
+
+            onUploadUsers(){
+                this.$store.commit('setUploadUserDialog', true)
+            },
+
+            onGoBack(){
+                window.history.back()
             }
         }
     }

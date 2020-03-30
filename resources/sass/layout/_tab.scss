@@ -50,6 +50,24 @@
         }
     }
 
+    .r-tab-actions{
+        position:absolute;
+        top:0;
+        left:280px;
+        height:60px;
+        display:flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: calc(100% - 280px);
+
+        .user-download{
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: space-between;
+        }
+    }
+
     .r-tab-content{
         width:100%;
         padding:40px 30px 30px;

@@ -24,7 +24,7 @@ class UploadMultipleUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'dealershipId' => 'required|exists:dealerships,id',
+            'dealershipId' => 'exists:dealerships,id',
             'users' => 'required|array'
         ];
     }
