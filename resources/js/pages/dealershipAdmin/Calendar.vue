@@ -193,6 +193,7 @@
 
         <FilterByDate v-if="filterByDate"
                       :date="date"
+                      @onDownload="onDownloadCSV"
                       :filterByDate="filterByDate">
         </FilterByDate>
 
@@ -420,99 +421,202 @@
                 }
             },
 
-            onDownloadCSV() {
-                const dates = fn.allowedDates(this.selectedEvent, this.deactivate)
+            onDownloadCSV(date = null) {
                 let appointments = []
-                _.map(dates, (date) => {
-                    const time = fn.getStartTimeEndTime(date, this.dealership)
-                    const currentAppointments = fn.getTimeSlotsForDay(time, this.selectedEvent)
-
-                    appointments = [
-                        ...appointments,
-                        ...currentAppointments
-                    ]
-                })
-
                 let modifyAppointments = []
-                _.map(appointments, (currentSlot) => {
-                    let status = this.trans.available
-                    let guest = ''
 
-                    let selectedUser = {...this.selectedUser}
+                if (date) {
+                    const time = fn.getStartTimeEndTime(date, this.dealership)
+                    appointments = [...fn.getTimeSlotsForDay(time, this.selectedEvent)]
 
-                    let isSlotAvailable = true
+                    _.map(this.users, (user) => {
+                        _.map(appointments, (currentSlot) => {
+                            let status = this.trans.available
+                            let guest = ''
 
-                    if (this.appointments.length > 0) {
-                        _.map(this.appointments, (appointment) => {
-                            if (
-                                appointment.start === currentSlot.start &&
-                                selectedUser.id === appointment.user_id
-                            ) {
-                                isSlotAvailable = false
+                            let selectedUser = {...user}
 
-                                switch (appointment.status) {
-                                    case 1:
-                                        status = this.trans.confirmed
-                                        break
+                            let isSlotAvailable = true
 
-                                    case 3:
-                                        status = this.trans.notAvailable
-                                        break
-
-                                    case 4:
-                                        status = this.trans.breakTime
-                                        break
-                                }
-
-                                guest = `${appointment.guest_first_name} ${appointment.guest_surname}`
-                            }
-                        })
-                    }
-
-                    if (isSlotAvailable) {
-                        if (this.otherAppointments.length > 0) {
-                            _.map(this.otherAppointments, (otherAppointment) => {
-                                if (otherAppointment.user_id === selectedUser.id) {
-
-                                    const startTimeStart = new Date(currentSlot.start).getTime()
-                                    const startTimeEnd = new Date(currentSlot.end).getTime() - 1000
-
-                                    const endTimeStart = new Date(currentSlot.start).getTime() + 1000
-                                    const endTimeEnd = new Date(currentSlot.end).getTime()
-
-                                    const otherAppointmentStart = new Date(otherAppointment.start).getTime()
-                                    const otherAppointmentEnd = new Date(otherAppointment.end).getTime()
-
+                            if (this.appointments.length > 0) {
+                                _.map(this.appointments, (appointment) => {
                                     if (
-                                        otherAppointmentStart >= startTimeStart &&
-                                        otherAppointmentStart <= startTimeEnd ||
-                                        otherAppointmentEnd >= endTimeStart &&
-                                        otherAppointmentEnd <= endTimeEnd
+                                        appointment.start === currentSlot.start &&
+                                        selectedUser.id === appointment.user_id
                                     ) {
                                         isSlotAvailable = false
-                                        status = this.trans.unavailable
-                                        guest = `${otherAppointment.guest_first_name} ${otherAppointment.guest_surname}`
+
+                                        guest = `${appointment.guest_first_name} ${appointment.guest_surname}`
+
+                                        switch (appointment.status) {
+                                            case 1:
+                                                status = this.trans.confirmed
+                                                break
+
+                                            case 3:
+                                                status = this.trans.notAvailable
+                                                guest = ''
+                                                break
+
+                                            case 4:
+                                                status = this.trans.breakTime
+                                                guest = ''
+                                                break
+                                        }
+                                    }
+                                })
+                            }
+
+                            if (isSlotAvailable) {
+                                if (this.otherAppointments.length > 0) {
+                                    _.map(this.otherAppointments, (otherAppointment) => {
+                                        if (otherAppointment.user_id === selectedUser.id) {
+
+                                            const startTimeStart = new Date(currentSlot.start).getTime()
+                                            const startTimeEnd = new Date(currentSlot.end).getTime() - 1000
+
+                                            const endTimeStart = new Date(currentSlot.start).getTime() + 1000
+                                            const endTimeEnd = new Date(currentSlot.end).getTime()
+
+                                            const otherAppointmentStart = new Date(otherAppointment.start).getTime()
+                                            const otherAppointmentEnd = new Date(otherAppointment.end).getTime()
+
+                                            if (
+                                                otherAppointmentStart >= startTimeStart &&
+                                                otherAppointmentStart <= startTimeEnd ||
+                                                otherAppointmentEnd >= endTimeStart &&
+                                                otherAppointmentEnd <= endTimeEnd
+                                            ) {
+                                                isSlotAvailable = false
+                                                status = this.trans.unavailable
+                                                guest = `${otherAppointment.guest_first_name} ${otherAppointment.guest_surname}`
+                                            }
+                                        }
+
+                                    })
+                                }
+                            }
+
+                            const newAppointment = {
+                                'event': this.selectedEvent.name,
+                                'country': this.selectedEvent.country,
+                                'sales executive': `${selectedUser.firstname} ${selectedUser.surname}`,
+                                'date': moment(currentSlot.start).format('YYYY-MM-DD'),
+                                'start': moment(currentSlot.start).format('LT'),
+                                'end': moment(currentSlot.end).format('LT'),
+                                'status': status,
+                                'guest': guest
+                            }
+
+                            modifyAppointments.push(newAppointment)
+                        })
+                    })
+
+
+
+
+                } else {
+                    const dates = fn.allowedDates(this.selectedEvent, this.dealership)
+                    _.map(dates, (date) => {
+                        const time = fn.getStartTimeEndTime(date, this.dealership)
+                        const currentAppointments = fn.getTimeSlotsForDay(time, this.selectedEvent)
+
+                        appointments = [
+                            ...appointments,
+                            ...currentAppointments
+                        ]
+                    })
+
+                    _.map(appointments, (currentSlot) => {
+                        let status = this.trans.available
+                        let guest = ''
+
+                        let selectedUser = {...this.selectedUser}
+
+                        let isSlotAvailable = true
+
+                        if (this.appointments.length > 0) {
+                            _.map(this.appointments, (appointment) => {
+                                if (
+                                    appointment.start === currentSlot.start &&
+                                    selectedUser.id === appointment.user_id
+                                ) {
+                                    isSlotAvailable = false
+
+                                    guest = `${appointment.guest_first_name} ${appointment.guest_surname}`
+
+                                    switch (appointment.status) {
+                                        case 1:
+                                            status = this.trans.confirmed
+                                            break
+
+                                        case 3:
+                                            status = this.trans.notAvailable
+                                            guest = ''
+                                            break
+
+                                        case 4:
+                                            status = this.trans.breakTime
+                                            guest = ''
+                                            break
                                     }
                                 }
-
                             })
                         }
-                    }
 
-                    const newAppointment = {
-                        'event': this.selectedEvent.name,
-                        'country': this.selectedEvent.country,
-                        'sales executive': `${this.selectedUser.firstname} ${this.selectedUser.surname}`,
-                        'start': currentSlot.start,
-                        'end': currentSlot.end,
-                        'status': status,
-                        'guest': guest
-                    }
+                        if (isSlotAvailable) {
+                            if (this.otherAppointments.length > 0) {
+                                _.map(this.otherAppointments, (otherAppointment) => {
+                                    if (otherAppointment.user_id === selectedUser.id) {
 
-                    modifyAppointments.push(newAppointment)
-                })
+                                        const startTimeStart = new Date(currentSlot.start).getTime()
+                                        const startTimeEnd = new Date(currentSlot.end).getTime() - 1000
 
-                return fn.downloadCSV(modifyAppointments, `${this.selectedUser.firstname}-${this.selectedUser.surname}-appointments`)
+                                        const endTimeStart = new Date(currentSlot.start).getTime() + 1000
+                                        const endTimeEnd = new Date(currentSlot.end).getTime()
+
+                                        const otherAppointmentStart = new Date(otherAppointment.start).getTime()
+                                        const otherAppointmentEnd = new Date(otherAppointment.end).getTime()
+
+                                        if (
+                                            otherAppointmentStart >= startTimeStart &&
+                                            otherAppointmentStart <= startTimeEnd ||
+                                            otherAppointmentEnd >= endTimeStart &&
+                                            otherAppointmentEnd <= endTimeEnd
+                                        ) {
+                                            isSlotAvailable = false
+                                            status = this.trans.unavailable
+                                            guest = `${otherAppointment.guest_first_name} ${otherAppointment.guest_surname}`
+                                        }
+                                    }
+
+                                })
+                            }
+                        }
+
+                        const newAppointment = {
+                            'event': this.selectedEvent.name,
+                            'country': this.selectedEvent.country,
+                            'sales executive': `${this.selectedUser.firstname} ${this.selectedUser.surname}`,
+                            'date': moment(currentSlot.start).format('YYYY-MM-DD'),
+                            'start': moment(currentSlot.start).format('LT'),
+                            'end': moment(currentSlot.end).format('LT'),
+                            'status': status,
+                            'guest': guest
+                        }
+
+                        modifyAppointments.push(newAppointment)
+                    })
+                }
+
+                let fileName = ''
+                if(date){
+                    fileName = moment().format('YYYY-MM-DD')
+                }else{
+                    fileName = `${this.selectedUser.firstname}-${this.selectedUser.surname}-appointments`
+                }
+
+                return fn.downloadCSV(modifyAppointments, fileName)
             }
         }
     }

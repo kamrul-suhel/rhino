@@ -29,6 +29,7 @@
                             <v-flex xs6 class="text-xs-right">
                                 <v-btn round
                                        :color="themeOption.adminNavIconColor"
+                                       @click="onDownloadCSV()"
                                        class="ma-0">
                                     <span style="color:#fff;">{{ `${trans.download}` }}</span>
                                 </v-btn>
@@ -98,6 +99,9 @@
         },
 
         methods: {
+            onDownloadCSV(){
+                this.$emit('onDownload', this.date)
+            }
         }
     }
 </script>
