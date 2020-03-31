@@ -1,5 +1,5 @@
 <template>
-    <div class="rhino-admin-header">
+    <div class="rhino-admin-header" style="background-image:url('/images/admin-banner.jpg')">
         <div class="toggle-nav" @click="onToggleNav">
             <v-icon class="text-white">menu</v-icon>
         </div>

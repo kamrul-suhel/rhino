@@ -3,6 +3,7 @@ import Vue from 'vue'
 Vue.filter('trans', (trans, options = {}) => {
     // Replace all null to *
     let string = _.replace(trans, new RegExp("null", "g"), '*')
+     string = _.replace(trans, new RegExp("undefined", "g"), '')
 
     // For string transform
     if (options.type) {

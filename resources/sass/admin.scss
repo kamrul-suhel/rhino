@@ -4,7 +4,8 @@
 
 #rhino{
     .header{
-        background-image: radial-gradient(circle at top center, #31393C, #212729 28%);
+        background:no-repeat;
+
         color:#fff;
         min-height: 60px;
         height: unset!important;
@@ -26,14 +27,14 @@
         background: #F7F7F7;
         &:hover {
             background: #F7F7F7!important;
-        
+
         }
     }
     &:nth-child(even) {
         background: #EDEDED;
         &:hover {
             background: #EDEDED!important;
-        
+
         }
     }
 }
