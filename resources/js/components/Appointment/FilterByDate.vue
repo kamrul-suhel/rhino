@@ -37,7 +37,7 @@
 
                             <v-flex xs12 v-for="(user, index) in users"
                                     :key="index">
-                                <h2>{{ user.firstname }}</h2>
+                                <h2>{{ `${user.firstname} ${user.surname}` }}</h2>
 
                                 <UserAppointment :date="date" :user="user"></UserAppointment>
                             </v-flex>

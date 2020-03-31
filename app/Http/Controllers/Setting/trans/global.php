@@ -1969,6 +1969,11 @@ return [
         'label' => 'By checking this box, you agree to us obtaining a settlement figure for your part exchange vehicle',
         'identifier' => 'byCheckingThisBox'
     ],
+
+    [
+        'label' => 'Closed',
+        'identifier' => 'closed'
+    ],
     [
         'label' => 'Click here if you don\'t have a part exchange vehicle',
         'identifier' => 'clickHereDoNotExchangeVehicle'

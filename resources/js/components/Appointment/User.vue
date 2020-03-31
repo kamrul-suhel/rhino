@@ -13,8 +13,7 @@
                     </v-flex>
 
                     <v-flex xs12 v-if="isClosed(date)">
-                        <h2>close date</h2>
-                        <h2>{{ trans.close }}</h2>
+                        <h2>{{ trans.closed }}</h2>
                     </v-flex>
 
                     <v-flex xs12 v-else>
