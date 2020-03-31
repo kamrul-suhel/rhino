@@ -114,9 +114,9 @@
                                 :src="props.item.image">
                             </v-img>
                         </td>
-                        <td>{{ props.item.display_name }}</td>
+                        <td>{{ props.item.display_name |trans }}</td>
                         <td>{{ props.item.name }}</td>
-                        <td>{{ props.item.description }}</td>
+                        <td>{{ props.item.description| trans }}</td>
                         <td class="text-xs-right">
                             <v-icon
                                 small
