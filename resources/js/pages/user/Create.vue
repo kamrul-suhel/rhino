@@ -210,6 +210,10 @@
                                 box solo flat
                             ></v-select>
                         </v-flex>
+
+                        <v-flex xs12 sm3 pa-2 v-if="duplicateEmailError">
+                            <span class="error--text">{{trans.emailDuplicate}}</span>
+                        </v-flex>
                     </v-layout>
 
                     <v-layout class="justify-center">
@@ -244,7 +248,8 @@
                 confirmPassword: false,
                 accessLevels: [],
                 profileImage: '',
-                showForm: false
+                showForm: false,
+                duplicateEmailError: false
             }
         },
 
@@ -271,7 +276,7 @@
                 brands: 'getBrandsForDropDown',
                 countries: 'getCountries',
                 regions: 'getRegions',
-                companies: 'getCompanies',
+                companies: 'getCompanies'
             }),
 
             passwordRule() {
@@ -384,6 +389,14 @@
                         this.$refs.userForm.reset()
                         this.$store.commit('setUpdateComponent')
                     }).catch(error => {
+                        if(
+                            error.response.data &&
+                            error.response.data.error === "duplicateEntry"
+                        ){
+                            this.duplicateEmailError = true
+                        }
+
+                        // Set global error
                         this.$store.dispatch('initializeError', error)
                     })
                 }

@@ -331,6 +331,11 @@ return [
     ],
 
     [
+        'label' => 'Email already exists',
+        'identifier' => 'emailDuplicate'
+    ],
+
+    [
         'label' => 'Mailing address',
         'identifier' => 'mailingAddress'
     ],

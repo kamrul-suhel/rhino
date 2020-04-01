@@ -111,6 +111,10 @@ class Handler extends ExceptionHandler
             if($errorcode == 1451){
                 return $this->errorResponse("Cannot remove this resource permantlaly it is related with any other query", 409);
             }
+
+            if($errorcode == 1062){
+                return $this->errorResponse("duplicateEntry", 409);
+            }
         }
 
         if($exception instanceof TokenMismatchException){
