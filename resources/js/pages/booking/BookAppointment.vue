@@ -142,8 +142,8 @@
                     }
 
                     if (
-                        !this.selectedSlot &&
-                        this.selectedSlot.slotId
+                        !this.selectedSlot ||
+                        !this.selectedSlot.slotId
                     ) {
                         this.messages.push(this.trans.selectATime)
                         error = true
