@@ -274,6 +274,15 @@
     }
 }
 
+.appointmentValidationError{
+    ul{
+        list-style: disc;
+        li{
+            display:block;
+        }
+    }
+}
+
 /*
 *****************************************
     End Time Booking Component

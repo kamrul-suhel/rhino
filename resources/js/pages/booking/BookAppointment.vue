@@ -35,17 +35,37 @@
 
         <v-layout row wrap class="my-5">
             <v-flex xs12 class="text-xs-center">
-                    <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
-                           outline
-                           @click="onContinue()"
-                           :color="color"
-                           depressed>{{ trans.continue }}
-                    </v-btn>
+                <v-btn class="border-medium height-50 rounded-25 theme-color padding-x-85"
+                       outline
+                       @click="onContinue()"
+                       :color="color"
+                       depressed>{{ trans.continue }}
+                </v-btn>
             </v-flex>
         </v-layout>
+
+        <v-snackbar
+            class="appointmentValidationError"
+            v-model="error"
+            right
+            :timeout="timeOut"
+            multi-line
+            top
+            color="error"
+        >
+            <ul>
+                <li v-for="message in messages">{{ message }}</li>
+            </ul>
+            <v-btn
+                color="white"
+                flat
+                @click="error = false"
+            >
+                {{ trans.close }}
+            </v-btn>
+        </v-snackbar>
     </div>
 </template>
-
 
 
 <script>
@@ -55,14 +75,17 @@
     import Calender from "@/components/Booking/Calender"
 
     export default {
-        components:{
+        components: {
             SalePerson,
             ChooseTime,
             Calender
         },
 
-        data(){
+        data() {
             return {
+                error: false,
+                messages: [],
+                timeOut: 5000
             }
         },
 
@@ -75,15 +98,62 @@
                 selectedVehicles: 'getBookingSelectedVehicles',
                 color: 'getFrontendColor',
                 selectedEvent: 'getSelectedEvent',
-                vehicleType: 'getBookingVehicleType'
+                vehicleType: 'getBookingVehicleType',
+                selectedDate: 'getBookingSelectedDate',
+                selectedSaleExecutive: 'getBookingSelectedSaleExecutive',
+                selectedSlot: 'getSelectedSlot'
             })
         }),
 
-        created(){
+        created() {
         },
 
-        methods:{
-            onContinue(){
+        methods: {
+            onContinue() {
+                let error = false
+                this.messages = []
+                // Validate appointment
+                if (this.vehicleType !== 'unsure') {
+                    // Validate selected date, sales executive & slot
+                    if (!this.selectedDate) {
+                        this.messages.push(this.trans.selectADate)
+                        error = true
+                    }
+
+                    if (
+                        !this.selectedSaleExecutive ||
+                        !this.selectedSaleExecutive.id
+                    ) {
+                        this.messages.push(this.trans.selectSalesExecutive)
+                        error = true
+                    }
+
+                    if (
+                        !this.selectedSlot ||
+                        !this.selectedSlot.slotId
+                    ) {
+                        this.messages.push(this.trans.selectATime)
+                        error = true
+                    }
+                } else {
+                    if (!this.selectedDate) {
+                        this.messages.push(this.trans.selectADate)
+                        error = true
+                    }
+
+                    if (
+                        !this.selectedSlot &&
+                        this.selectedSlot.slotId
+                    ) {
+                        this.messages.push(this.trans.selectATime)
+                        error = true
+                    }
+                }
+                if(error){
+                    this.error = true
+                    return
+                }
+
                 this.$store.commit('setBookingStep', 2)
             }
         }

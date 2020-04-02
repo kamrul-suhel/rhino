@@ -376,6 +376,11 @@ return [
     ],
 
     [
+        'label' => 'Please select a date',
+        'identifier' => 'selectADate'
+    ],
+
+    [
         'label' => 'No brands found',
         'identifier' => 'noBrandsFound'
     ],
@@ -1979,6 +1984,12 @@ return [
         'label' => 'Closed',
         'identifier' => 'closed'
     ],
+
+    [
+        'label' => 'Close',
+        'identifier' => 'close'
+    ],
+
     [
         'label' => 'Click here if you don\'t have a part exchange vehicle',
         'identifier' => 'clickHereDoNotExchangeVehicle'
