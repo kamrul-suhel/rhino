@@ -68,7 +68,7 @@ const mutations = {
                     slotId: appointment.slot_id,
                     start: appointment.start,
                     end: appointment.end,
-                    status: 'available'
+                    status: 'selected'
                 }
 
                 state.selectedDate = moment(appointment.start).format( "YYYY-MM-DD")
