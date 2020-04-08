@@ -1,11 +1,11 @@
 <template>
     <v-layout row wrap pa-5
-              class="dealership-dashboard"
+              class="dealership-dashboard dashboard"
               justify-center>
         <v-flex xs12 sm6>
             <v-layout row wrap align-center mb-2>
-                <v-flex>
-                    <h2 class="text-xs-center">{{ trans.guests.toUpperCase() }}</h2>
+                <v-flex class="text-xs-center">
+                    <span class="title">{{ trans.guests.toUpperCase() }}</span>
                 </v-flex>
             </v-layout>
 
@@ -25,10 +25,10 @@
                         hide-selected
                         item-text="name"
                         item-value="symbol"
-                        :label="`${trans.searchGuestByEmail}`"
+                        :placeholder="`${trans.searchGuestByEmail}`"
                         open-on-clear
                         return-object
-                        class="search-guests"
+                        class="search-user"
                         @change="onSelectGuest()"
                     >
                         <template v-slot:no-data>
@@ -121,17 +121,17 @@
 
         <v-flex xs12 sm6>
             <v-layout row wrap align-center mb-2>
-                <v-flex>
-                    <h2 class="text-xs-center">{{ trans.organize.toUpperCase() }}</h2>
+                <v-flex  class="text-xs-center">
+                    <span class="title">{{ trans.organize.toUpperCase() }}</span>
                 </v-flex>
             </v-layout>
 
             <v-container grid-list-lg pt-0>
                 <v-layout row wrap>
                     <v-flex xs6>
-                        <v-card class="elevation-12 py-4 text-xs-center"
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 :to="{name: 'dealershipAdminCalendar'}">
-                            <v-icon color="#000">business</v-icon>
+                            <v-icon large color="#000">business</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.calendar}` }}
                             </v-card-text>
@@ -139,10 +139,10 @@
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-card class="elevation-12 py-4 text-xs-center"
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('editDealershipEvent')">
-                            <v-icon color="#000">access_time</v-icon>
+                            <v-icon large color="#000">access_time</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.editEvent}` }}
                             </v-card-text>
@@ -150,10 +150,10 @@
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-card class="elevation-12 py-4 text-xs-center"
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('eventSales')">
-                            <v-icon color="#000">languages</v-icon>
+                            <v-icon large color="#000">languages</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.updateSales}` }}
                             </v-card-text>
@@ -161,10 +161,10 @@
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-card class="elevation-12 py-4 text-xs-center"
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('dealershipAnalytics')">
-                            <v-icon color="#000">bar_chart</v-icon>
+                            <v-icon large color="#000">bar_chart</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.analytics}` }}
                             </v-card-text>
@@ -172,10 +172,10 @@
                     </v-flex>
 
                     <v-flex xs6>
-                        <v-card class="elevation-12 py-4 text-xs-center"
+                        <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('editDealership')">
-                            <v-icon color="#000">contacts</v-icon>
+                            <v-icon large color="#000">contacts</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.users}` }}
                             </v-card-text>
