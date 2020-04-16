@@ -12,13 +12,13 @@
                             <v-layout row wrap id="login-section">
 
                                 <v-flex xs12>
-                                    <h2 class="login-title text-xs-center">{{ trans.login }}</h2>
+                                    <h2 class="login-title text-xs-center">{{ trans.forgotPassword }}</h2>
                                 </v-flex>
 
                                 <v-flex xs12>
                                     <v-text-field
                                         color="dark"
-                                        :label="trans.email"
+                                        :label="trans.enterYourEmail"
                                         v-model="user.email"
                                         :rules="emailRules"
                                         required
@@ -27,23 +27,6 @@
                                     >
                                     </v-text-field>
                                 </v-flex>
-
-                                <v-flex xs12>
-                                    <v-text-field
-                                        class="email"
-                                        color="dark"
-                                        :label="`${trans.enterYourPassword}`"
-                                        v-model="user.password"
-                                        :append-icon="showpassword ? 'visibility' : 'visibility_off'"
-                                        @click:append="showpassword = !showpassword"
-                                        :type="showpassword ? 'password' : 'text'"
-                                        :rules="passwordRules"
-                                        @keyup.enter="onSubmit()"
-                                        :error="validation.error"
-                                        required
-                                    ></v-text-field>
-                                </v-flex>
-
                             </v-layout>
 
                             <v-layout row justify-center v-if="validation.error">
@@ -66,15 +49,8 @@
                                         :loading="loading"
                                         :disabled="loading"
                                         @click="onSubmit()">
-                                        LOGIN
+                                        {{trans.send}}
                                     </v-btn>
-                                </v-flex>
-
-                                <v-flex xs12>
-                                    <a @click.stop="onForgotPassword()"
-                                       class="forgot-password">
-                                        {{ trans.forgot }} {{ trans.password}}
-                                    </a>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -122,7 +98,6 @@
 
         computed: {
             ...mapGetters({
-                isLogin: 'getIsLogin',
                 isLoading: 'getIsLoading',
                 themeOption: 'getThemeOption',
                 isAdmin: 'getIsAdmin',
@@ -146,36 +121,32 @@
                     this.loading = true;
 
                     // prepare submitting data
-                    let loginForm = new FormData()
-                    loginForm.append('email', this.user.email)
-                    loginForm.append('password', this.user.password)
+                    let passwordResetForm = new FormData()
+                    passwordResetForm.append('email', this.user.email)
 
                     // submit data with ajax request
-                    axios.post('/login', loginForm)
+                    axios.post('/password/email', passwordResetForm)
                         .then(response => {
-                            if (response.data.success) {
-                                window.location.href = '/admin/dashboard' // redirect to login
-                            } else {
+                            console.log('reponse is : ', response)
+                            return
+
                                 console.log('some error');
                                 this.loading = false
                                 this.errorLogin = true
                                 this.loginProgress = false
-                            }
                         })
                         .catch(error => {
-                            console.log('login error');
+                            console.log('login error', error);
 
                             this.loading = false
                             this.errorLogin = true
                             this.loginProgress = false
-
-                            this.$store.dispatch('initializeError', error)
                         });
                 }
             },
 
             onForgotPassword() {
-                this.$router.push({name: 'forgotPassword'})
+                this.open_login_dialog = false
             },
         }
     }

@@ -1232,6 +1232,16 @@ return [
     ],
 
     [
+        'label' => 'Enter your email',
+        'identifier' => 'enterYourEmail'
+    ],
+
+    [
+        'label' => 'Forgot password',
+        'identifier' => 'forgotPassword'
+    ],
+
+    [
         'label' => 'Password minimum 8 character',
         'identifier' => 'passwordMinimum8Character'
     ],
@@ -1953,6 +1963,11 @@ return [
     [
         'label' => 'Submit',
         'identifier' => 'submit'
+    ],
+
+    [
+        'label' => 'Send',
+        'identifier' => 'send'
     ],
 
     [

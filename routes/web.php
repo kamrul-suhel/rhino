@@ -7,12 +7,20 @@ use Illuminate\Http\Request;
 Auth::routes();
 
 /**
- * AUth route
+ * Auth route
  */
 
 Route::get('auth/me', 'Auth\LoginController@getLoginUser');
 Route::get('refresh_csrf_token', 'Auth\RefreshCSRFToken@refreshCSRFToken');
 Route::get('generate_security_token', 'Auth\GenerateSecurityTokenController@generateToken');
+
+/**
+ * User route
+ */
+
+Route::get('forgot_password', function(){
+   return view('index');
+});
 
 /*
 |--------------------------------------------------------------------------
