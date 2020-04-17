@@ -5,14 +5,23 @@
                 <h2>{{ trans.bookAnAppointment }}</h2>
             </v-flex>
 
-            <v-flex xs12 sm6 align-self-end v-if="authUser.level === 'dealership' || rhinoAdmin">
-                <v-layout row wrap justify-sm-end>
+            <v-flex xs12 sm6 py-3 v-if="authUser.level === 'admin' || rhinoAdmin">
+                <v-layout row wrap justify-end>
+                    <v-btn outline round  align-self-end :color="themeOption.adminNavIconColor" 
+                        @click="$router.push({name: 'editEvents', params: {id: selectedEvent.id}})"> 
+                        <v-icon left dark>reply</v-icon>
+                            Back to event
+                    </v-btn>
+                </v-layout>
+            </v-flex>
+
+            <v-flex xs12 align-self-end v-if="authUser.level === 'dealership' || rhinoAdmin">
+                <v-layout row wrap justify-end>
                     <v-btn outline round
                            @click="onGoBack()"
                            :color="themeOption.adminNavIconColor"
                            class="ma-0">
-                        <v-icon left dark>reply</v-icon>
-                        {{ `${trans.back}` }}
+                        {{ `${trans.reset}` }}
                     </v-btn>
                 </v-layout>
             </v-flex>
