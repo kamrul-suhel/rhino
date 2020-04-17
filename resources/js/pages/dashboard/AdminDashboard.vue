@@ -3,6 +3,7 @@
         <v-layout row wrap class="mb-5">
             <v-flex xs12 class="pa-0 text-xs-center">
                 <h2>{{`${trans.dashboard}`.toUpperCase()|trans}}</h2>
+                <h2><v-btn @click="onEmailSend()">Send mail Test</v-btn></h2>
             </v-flex>
         </v-layout>
 
@@ -279,6 +280,12 @@
 
             getNameWithStatus(guest){
                 return fn.getGuestNameWithStatus(guest, this.trans)
+            },
+
+            onEmailSend(){
+                axios.get('/admin/sendMail').then((response) => {
+                    console.log('response', response)
+                })
             }
         }
     }

@@ -7,7 +7,9 @@ use App\AppointmentVehicle;
 use App\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookingRequest;
+use App\Mail\GuestConfirmed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BookingStoreController extends Controller
 {
@@ -20,7 +22,10 @@ class BookingStoreController extends Controller
      */
     public function store(BookingRequest $request)
     {
-        if ($request->has('appointment_id') && !empty($request->appointment_id)) {
+        if (
+            $request->has('appointment_id') &&
+            !empty($request->appointment_id))
+        {
             $appointment = $this->save($request, $request->appointment_id);
         } else {
             $appointment = $this->save($request);
@@ -105,6 +110,13 @@ class BookingStoreController extends Controller
             if ($id) {
                 $appointment->vehicles()->delete();
             }
+        }
+
+        // Send email if appointment is new
+        if(!$id){
+            Mail::send(new GuestConfirmed($request->guest_id, $this->languageId));
+            Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'dealerManager'));
+            Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'sellerExecutive'));
         }
 
         return $appointment;
