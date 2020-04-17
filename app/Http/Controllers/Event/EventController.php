@@ -23,7 +23,8 @@ class EventController extends Controller
         $event = $this->save($request);
 
         return response()->json([
-            'success' => $event
+            'success' => true,
+            'event' => $event
         ]);
     }
 
@@ -103,6 +104,6 @@ class EventController extends Controller
 
         $eventTranslation->save();
 
-        return true;
+        return $event;
     }
 }
