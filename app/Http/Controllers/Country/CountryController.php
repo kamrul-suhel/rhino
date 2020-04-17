@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Country;
 
 use App\Brand;
+use App\CountyTranslation;
 use App\Region;
 use App\Country;
 use Illuminate\Http\Request;
@@ -113,11 +114,17 @@ class CountryController extends Controller
 
         $country = new Country;
 
-        $request->has('name') ? $country->name = $request->name : null;
         $request->has('code') ? $country->country_code = $request->code : null;
         $request->has('seating_position') ? $country->driver_seating_position = $request->seating_position : null;
         $request->has('status') ? $country->status = $request->status  : $country->status = 0;
         $country->save();
+
+        // Add record to country translation table
+        $countyTranslation = new CountyTranslation();
+        $countyTranslation->name = $request->name;
+        $countyTranslation->country_id = $country->id;
+        $countyTranslation->language_id = $this->languageId;
+        $countyTranslation->save();
 
         // Create "no region" for each brand for this country
         $brands = Brand::all();
@@ -138,9 +145,30 @@ class CountryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $country = Country::find($id);
+        if (
+            $request->has('edit') &&
+            !empty($request->edit) &&
+            $request->edit == true
+        ) {
+            dd($id);
+            CountyTranslation::firstOrCreate([
+                'language_id' => $this->languageId,
+                'country_id' => $id
+            ],
+                [
+                    'name' => ''
+                ]
+            );
+        }
+        $country = Country::select(
+            'countries.*',
+            'countries_translation.name'
+        )->leftJoin('countries_translation', function($countryT){
+            $countryT->on('countries.id', '=', 'countries_translation.country_id')
+                ->where('countries_translation.language_id', $this->languageId);
+        });
 
         return response()->json($country);
     }
@@ -158,18 +186,6 @@ class CountryController extends Controller
 
         $request->has('name') ? $country->name = $request->name : null;
         $request->has('country_code') ? $country->country_code = $request->country_code : null;
-        $request->has('currency') ? $country->currency = $request->currency : null;
-        $request->has('currency_code') ? $country->currency_code = $request->currency_code : null;
-        $request->has('currency_sub_unit') ? $country->currency_sub_unit = $request->currency_sub_unit : null;
-        $request->has('full_name') ? $country->full_name = $request->full_name : null;
-        $request->has('iso_3166_2') ? $country->iso_3166_2 = $request->iso_3166_2 : null;
-        $request->has('iso_3166_3') ? $country->iso_3166_3 = $request->iso_3166_3 : null;
-        $request->has('region_code') ? $country->region_code = $request->region_code : null;
-        $request->has('sub_region_code') ? $country->sub_region_code = $request->sub_region_code : null;
-        $request->has('eea') ? $country->eea = $request->eea : null;
-        $request->has('calling_code') ? $country->calling_code = $request->calling_code : null;
-        $request->has('currency_symbol') ? $country->currency_symbol = $request->currency_symbol : null;
-        $request->has('flag') ? $country->flag = $request->flag : null;
         $request->has('driver_seating_position') ? $country->driver_seating_position = $request->driver_seating_position : null;
         $request->has('status') ? $country->status = 1 : 0;
 

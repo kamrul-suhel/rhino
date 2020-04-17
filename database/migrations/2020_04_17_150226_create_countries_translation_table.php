@@ -17,7 +17,7 @@ class CreateCountriesTranslationTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('country_id')->index();
             $table->unsignedBigInteger('language_id')->index();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }
