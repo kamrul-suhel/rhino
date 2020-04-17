@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin';
 
 
     public function changePassword(Request $request, $id)
@@ -38,5 +38,5 @@ class ResetPasswordController extends Controller
         $user->save();
         return $user;
     }
-    
+
 }

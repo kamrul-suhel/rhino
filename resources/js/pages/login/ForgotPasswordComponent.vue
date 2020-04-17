@@ -7,10 +7,9 @@
                      align-content-center>
             <v-card raised width="450px">
                 <v-card-text class="login-section pa-0">
-                    <v-form method="post" v-model="valid" ref="login_form">
+                    <v-form v-model="valid" ref="login_form">
                         <v-container grid-list-lg>
                             <v-layout row wrap id="login-section">
-
                                 <v-flex xs12>
                                     <h2 class="login-title text-xs-center">{{ trans.forgotPassword }}</h2>
                                 </v-flex>
@@ -38,11 +37,10 @@
                             <v-layout row wrap fluid class="text-xs-center">
 
                                 <v-flex xs12 v-if="errorLogin">
-                                    <p class="mb-0 red--text">The email &amp; password entered did not match any of our records. <br> Please try again</p>
+                                    <p class="mb-0 red--text">{{message}}</p>
                                 </v-flex>
 
                                 <v-flex xs12>
-                                    <input type="hidden" name="_token"/>
                                     <v-btn
                                         raised
                                         dark
@@ -93,6 +91,8 @@
                 //Loading button
                 loading: false,
                 loader: null,
+
+                message: ''
             }
         },
 
@@ -119,7 +119,6 @@
                     // make spinner visible
                     this.loginProgress = true;
                     this.loading = true;
-
                     // prepare submitting data
                     let passwordResetForm = new FormData()
                     passwordResetForm.append('email', this.user.email)
@@ -127,17 +126,13 @@
                     // submit data with ajax request
                     axios.post('/password/email', passwordResetForm)
                         .then(response => {
-                            console.log('reponse is : ', response)
-                            return
-
-                                console.log('some error');
-                                this.loading = false
-                                this.errorLogin = true
-                                this.loginProgress = false
+                            this.message = this.trans.sentEmail
+                            this.loading = false
+                            this.errorLogin = true
+                            this.loginProgress = false
                         })
                         .catch(error => {
-                            console.log('login error', error);
-
+                            this.message = this.trans.emailNotFound
                             this.loading = false
                             this.errorLogin = true
                             this.loginProgress = false

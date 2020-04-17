@@ -336,6 +336,16 @@ return [
     ],
 
     [
+        'label' => 'Email not found',
+        'identifier' => 'emailNotFound'
+    ],
+
+    [
+        'label' => 'We sent an email to your account',
+        'identifier' => 'sentEmail'
+    ],
+
+    [
         'label' => 'Mailing address',
         'identifier' => 'mailingAddress'
     ],
