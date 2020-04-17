@@ -300,6 +300,9 @@
                                 message: `${this.event.name}  ${this.trans.successfullyCreated}`
                             })
                             this.$store.commit('setButtonLoading', false)
+                            setTimeout(() => {
+                                this.$router.push({name: 'editEvents', params: {id: response.data.event.id}})
+                            }, 1000)
                         }
 
                         this.showForm = false

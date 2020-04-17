@@ -35,9 +35,10 @@
                                   @click="onSelectSlot(slot)"
                                   :style="{
                                         border: '1px solid rgb(220,220,220)',
-                                         backgroundColor: slot.status === 'selected' ? color: ''
+                                         backgroundColor: slot.status === 'selected' ? color : ''
                                       }">
-                            <h6 class="body-2">{{ slot.start | dateFormat('HH', selectedLanguage.language_code)}}-<br>{{ slot.end | dateFormat('HH', selectedLanguage.language_code)}}
+                            <h6 class="body-2">{{ slot.start | dateFormat('HH', selectedLanguage.language_code)}}-<br>{{
+                                slot.end | dateFormat('HH', selectedLanguage.language_code)}}
                             </h6>
                         </v-layout>
                     </v-responsive>
@@ -295,10 +296,8 @@
                             }
                             modifySlots.push(currentSlot)
                         })
-
                         this.$store.commit('setAllAppointmentSlots', modifySlots)
                     }
-
                     return
                 }
 
@@ -345,7 +344,7 @@
             },
 
             onSelectSlot(selectedSlot) {
-                if(this.isDisable) return
+                if (this.isDisable) return
 
                 // Check availability
                 if (selectedSlot.status === 'unavailable') {
@@ -359,9 +358,9 @@
                     let selectedSaleExecutive = {}
                     _.map(this.saleExecutives, (saleExecutive) => {
                         _.map(this.existingAppointments, (appointment) => {
-                            if(
+                            if (
                                 saleExecutive.id !== appointment.user_id
-                            ){
+                            ) {
                                 selectedSaleExecutive = {...saleExecutive}
                             }
                         })
@@ -477,7 +476,7 @@
             onClearSlot() {
                 this.onSelectSlot({})
                 this.$store.commit('setSelectedSlot', {})
-                this.generateSlots()
+                this.checkCascadeTime()
             },
 
             checkCascadeTime() {

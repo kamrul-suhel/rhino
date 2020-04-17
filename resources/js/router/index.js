@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LoginComponent from '../pages/login/LoginComponent'
+import ForgotPasswordComponent from '../pages/login/ForgotPasswordComponent'
 import DealershipRoutes from './Modules/dealership'
 import LanguageRoutes from './Modules/languages'
 import BrandsRoutes from './Modules/brands'
@@ -28,6 +29,12 @@ const routes = [
         path: '/',
         name: 'login',
         component: LoginComponent
+    },
+
+    {
+        path: '/forgot_password',
+        name: 'forgotPassword',
+        component: ForgotPasswordComponent
     },
 
     // Dealership Routes

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Guest;
 use App\Event;
 use App\Guest;
 use App\Dealership;
+use App\Mail\GuestInvitation;
 use Illuminate\Http\Request;
 use App\Http\Requests\GuestRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class GuestStoreController extends Controller
 {
@@ -21,6 +23,11 @@ class GuestStoreController extends Controller
     public function store(GuestRequest $request)
     {
         $guest = $this->save($request);
+
+        // Send invitation email to guest
+        if($guest){
+            Mail::send(new GuestInvitation($guest->id), $this->languageId);
+        }
 
        return response()->json([
            'success' => true,

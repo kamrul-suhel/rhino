@@ -326,13 +326,115 @@ return [
     ],
 
     [
+        'label' => 'Thank you for confirming your appointment',
+        'identifier' => 'thankYouForConfirmingYourAppointment'
+    ],
+
+    [
+        'label' => 'Great news!',
+        'identifier' => 'greatNews'
+    ],
+    [
+        'label' => 'Your appointment is confirmed.',
+        'identifier' => 'yourAppointmentIsConfirmed'
+    ],
+    [
+        'label' => 'Thank you for the interest you have shown in attending our',
+        'identifier' => 'thankYouForTheInterestYouHaveShown'
+    ],
+    [
+        'label' => 'I am pleased to confirm your appointment has been made on',
+        'identifier' => 'iAmPleasedToConfirmYourAppointmentHasBeenMade'
+    ],
+    [
+        'label' => 'Vehicles the customer has expressed an interest in:',
+        'identifier' => 'vehiclesTheCustomer'
+    ],
+    [
+        'label' => 'Your unique code is:',
+        'identifier' => 'yourUniqueCodeIs'
+    ],
+    [
+        'label' => 'In order for us to be as prepared as possible for your visit, a member of our management team will be in touch with you by telephone to let you know what to expect during your visit.',
+        'identifier' => 'confirmGuestMailDescription'
+    ],
+
+    [
+        'label' => 'If you have any further questions, please do not hesitate to contact us.',
+        'identifier' => 'confirmGuestMailFurtherQuestions'
+    ],
+
+    [
+        'label' => 'We look forward to welcoming you in our showroom.',
+        'identifier' => 'confirmGuestMailForwardWelcoming'
+    ],
+
+    [
+        'label' => 'Kind Regards,',
+        'identifier' => 'kindRegards'
+    ],
+    [
+        'label' => 'Events Team',
+        'identifier' => 'eventsTeam'
+    ],
+
+    [
+        'label' => 'Rhino Event',
+        'identifier' => 'rhinoEvent'
+    ],
+
+    [
+        'label' => 'You have a new booking',
+        'identifier' => 'youHaveNewBooking'
+    ],
+    [
+        'label' => 'Booking Confirmation<br />for your Rhino sales event!',
+        'identifier' => 'bookingConfirmationForYourRhinoSalesEvent'
+    ],
+
+    [
+        'label' => 'You have been invited to join our',
+        'identifier' => 'youHaveBennInvitedToJoinOur'
+    ],
+
+    [
         'label' => 'Email address',
         'identifier' => 'emailAddress'
     ],
 
     [
+        'label' => 'Dear',
+        'identifier' => 'dear'
+    ],
+
+    [
+        'label' => 'Please be advised that',
+        'identifier' => 'pleaseBeAdvisedThat'
+    ],
+
+    [
+        'label' => 'has made an appointment at the following times to attend your',
+        'identifier' => 'hasMadeAnAppointment'
+    ],
+
+    [
+        'label' => 'Appointment Confirmed:',
+        'identifier' => 'appointmentConfirmed'
+    ],
+
+    [
         'label' => 'Email already exists',
         'identifier' => 'emailDuplicate'
+    ],
+
+    [
+        'label' => 'Email not found',
+        'identifier' => 'emailNotFound'
+    ],
+
+    [
+        'label' => 'We sent an email to your account',
+        'identifier' => 'sentEmail'
     ],
 
     [
@@ -1232,6 +1334,16 @@ return [
     ],
 
     [
+        'label' => 'Enter your email',
+        'identifier' => 'enterYourEmail'
+    ],
+
+    [
+        'label' => 'Forgot password',
+        'identifier' => 'forgotPassword'
+    ],
+
+    [
         'label' => 'Password minimum 8 character',
         'identifier' => 'passwordMinimum8Character'
     ],
@@ -1819,6 +1931,15 @@ return [
     ],
 
     [
+        'label' => 'Please can you ensure that you send out the letter of confirmation and also execute your pre-qualification call in the week leading up to your Event.',
+        'identifier' => 'pleaseCanYouEnsure'
+    ],
+    [
+        'label' => 'We wish you every success for your forthcoming Event.',
+        'identifier' => 'weWishYouEverySuccess'
+    ],
+
+    [
         'label' => 'Now book your appointment',
         'identifier' => 'nowBookYourAppointment'
     ],
@@ -1953,6 +2074,11 @@ return [
     [
         'label' => 'Submit',
         'identifier' => 'submit'
+    ],
+
+    [
+        'label' => 'Send',
+        'identifier' => 'send'
     ],
 
     [

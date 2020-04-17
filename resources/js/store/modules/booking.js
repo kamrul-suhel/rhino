@@ -67,9 +67,9 @@ const mutations = {
                 state.selectedSlot = {
                     slotId: appointment.slot_id,
                     start: appointment.start,
-                    end: appointment.end
+                    end: appointment.end,
+                    status: 'selected'
                 }
-
                 state.selectedDate = moment(appointment.start).format( "YYYY-MM-DD")
             }
 
@@ -253,8 +253,6 @@ const mutations = {
                 })
 
                 // Now generate slot
-                let allSlots = []
-
                 const time = fn.getStartTimeEndTime(
                     moment(appointment.start).format('YYYY-MM-DD'),
                     data.dealership

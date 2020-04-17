@@ -349,3 +349,6 @@ Route::prefix('booking')->group(function(){
 Route::prefix('csv')->middleware('VerifyJWT')->group(function(){
    Route::get('guests/download', 'Guest\GuestDownloadCSVController@download');
 });
+
+
+Route::get('mail/test', 'Guest\GuestDownloadCSVController@download');

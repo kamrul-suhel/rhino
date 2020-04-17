@@ -193,12 +193,12 @@
                 }
 
                 this.$store.commit('setBookingVehicleType', type)
-                this.$store.dispatch('fetchEventVehicles', {
-                    id: this.selectedEvent.id,
-                    vehicleType: type,
-                    themeOption: this.themeOption,
-                    trans: this.trans
-                })
+                // this.$store.dispatch('fetchEventVehicles', {
+                //     id: this.selectedEvent.id,
+                //     vehicleType: type,
+                //     themeOption: this.themeOption,
+                //     trans: this.trans
+                // })
             },
 
             onContinue() {

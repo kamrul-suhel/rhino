@@ -98,9 +98,6 @@
         },
 
         watch: {
-            partExchange() {
-                console.log('part exchange: ', this.partExchange)
-            }
         },
 
         created() {
