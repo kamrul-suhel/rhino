@@ -147,7 +147,7 @@
                                     <v-flex xs12 sm3 pa-2>
                                         <v-text-field
                                             :color="themeOption.inputColor"
-                                            :label="`${trans.suffix}`"
+                                            :label="`${trans.dealershipCode}`"
                                             v-model="dealership.suffix"
                                             box solo flat>
                                         </v-text-field>
@@ -216,9 +216,15 @@
                                         dark
                                         small
                                         @click="onCreateDealership()"
+                                        :disabled="submitDisabled"
                                     >
                                         {{ `${trans.submit}` }}
                                     </v-btn>
+                                        <v-progress-circular
+                                            v-if="submitDisabled"
+                                            indeterminate
+                                            color="red"
+                                            ></v-progress-circular>
                                 </v-layout>
                         </v-flex>
                     </v-layout>
@@ -248,7 +254,8 @@
                 times: {},
                 active: null,
                 model: null,
-                showForm: false
+                showForm: false,
+                submitDisabled: false
             }
         },
 
@@ -302,6 +309,11 @@
                                 message: `${this.dealership.name}  ${this.trans.successfullyCreated}`
                             })
                         }
+
+                        
+                        this.dealership = {}
+                        this.times = {}
+                        this.showForm = false
 
                         this.$store.commit('setUpdateComponent')
                     }).catch(error => {

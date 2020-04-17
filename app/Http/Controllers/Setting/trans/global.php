@@ -2365,5 +2365,10 @@ return [
     [
         'label' => 'Event is required',
         'identifier' => 'eventIsRequired'
+    ], 
+
+    [
+        'label' => 'Dealership Code',
+        'identifier' => 'dealershipCode'
     ]
 ];
