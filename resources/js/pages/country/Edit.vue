@@ -1,5 +1,5 @@
 <template>
-    <v-container pa-0>
+    <v-container pa-0 grid-list-lg>
         <v-layout row warp pb-4>
             <v-flex xs12>
                 <v-toolbar flat>
@@ -120,6 +120,9 @@
         },
 
         watch:{
+            selectedLanguage(){
+                this.initialize()
+            }
         },
 
         computed: ({
@@ -150,7 +153,7 @@
         methods: {
             initialize() {
                 const Id = this.$route.params.id;
-                this.$store.dispatch('fetchCountry', {id: Id,edit:true})
+                this.$store.dispatch('fetchCountry', {id: Id,edit:true, languageId: this.selectedLanguage.id})
             },
 
             updateCountry(){
@@ -163,12 +166,12 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedCountry.full_name}  ${this.trans.successfullyUpdated}`
+                            message: `${this.selectedCountry.name}  ${this.trans.successfullyUpdated}`
                         })
                         // reset selectedCountry in store
-                        this.$store.commit('setSelectedCountry', {})
+                        // this.$store.commit('setSelectedCountry', {})
 
-                        this.$router.push({name: 'listCountries'});
+                        // this.$router.push({name: 'listCountries'});
                     }
                 })
             }

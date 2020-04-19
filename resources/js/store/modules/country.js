@@ -168,6 +168,10 @@ const actions = {
         if(payload.edit){
             URL = `${URL}?edit=true`
         }
+
+        if(payload.languageId){
+            URL = `${URL}&languageId=${payload.languageId}`
+        }
         axios.get(URL).then((response) => {
             if(response.data){
                 commit('setSelectedCountry', response.data)

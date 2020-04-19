@@ -33,8 +33,9 @@ class AddForeignKeyToTypesTranslationTable extends Migration
      */
     public function down()
     {
-        Schema::table('types', function (Blueprint $table) {
-            $table->dropForeign(['type_id', 'language_id']);
+        Schema::table('types_translation', function (Blueprint $table) {
+            $table->dropForeign('types_translation_type_id_foreign');
+            $table->dropForeign('types_translation_language_id_foreign');
         });
     }
 }

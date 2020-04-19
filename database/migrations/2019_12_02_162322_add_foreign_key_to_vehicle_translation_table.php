@@ -34,7 +34,8 @@ class AddForeignKeyToVehicleTranslationTable extends Migration
     public function down()
     {
         Schema::table('vehicles_translation', function (Blueprint $table) {
-            $table->dropForeign(['vehicle_id', 'language_id']);
+            $table->dropForeign('vehicles_translation_vehicle_id_foreign');
+            $table->dropForeign('vehicles_translation_language_id_foreign');
         });
     }
 }

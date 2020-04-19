@@ -24,12 +24,12 @@ class CountryController extends Controller
     public function index(Request $request)
     {
         $countries = Country::select(
-            'id',
-            'name',
-            'country_code',
-            'driver_seating_position',
-            'status'
-        );
+            'countries.*',
+            'countries_translation.name'
+        )->leftJoin('countries_translation', function($countryT){
+            $countryT->on('countries_translation.country_id', '=', 'countries.id')
+                ->where('countries_translation.language_id', $this->languageId);
+        });
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search by name
@@ -75,9 +75,13 @@ class CountryController extends Controller
     public function getCountriesDropDown()
     {
         $countries = Country::select(
-            'id',
-            'name'
-        )->where('status', 1)
+            'countries.*',
+            'countries_translation.name'
+        )->leftJoin('countries_translation', function($countryT){
+            $countryT->on('countries_translation.country_id','=', 'countries.id')
+                ->where('countries_translation.language_id', $this->languageId);
+        })
+            ->where('status', 1)
             ->orderBy('name')
             ->get();
 
@@ -152,23 +156,25 @@ class CountryController extends Controller
             !empty($request->edit) &&
             $request->edit == true
         ) {
-            dd($id);
             CountyTranslation::firstOrCreate([
-                'language_id' => $this->languageId,
-                'country_id' => $id
+                'language_id' => (int)$this->languageId,
+                'country_id' => (int)$id
             ],
                 [
+                    'language_id' => $this->languageId,
+                    'country_id' => $id,
                     'name' => ''
                 ]
             );
         }
         $country = Country::select(
             'countries.*',
-            'countries_translation.name'
+            'countries_translation.name',
+            'countries_translation.language_id'
         )->leftJoin('countries_translation', function($countryT){
             $countryT->on('countries.id', '=', 'countries_translation.country_id')
                 ->where('countries_translation.language_id', $this->languageId);
-        });
+        })->first();
 
         return response()->json($country);
     }
@@ -183,14 +189,21 @@ class CountryController extends Controller
     public function update(Request $request, $id)
     {
         $country = Country::findOrFail($id);
-
-        $request->has('name') ? $country->name = $request->name : null;
         $request->has('country_code') ? $country->country_code = $request->country_code : null;
         $request->has('driver_seating_position') ? $country->driver_seating_position = $request->driver_seating_position : null;
         $request->has('status') ? $country->status = 1 : 0;
 
         // Save country
         $country->save();
+
+        // Update country translation record
+        $countryTranslation = CountyTranslation::where([
+            'language_id' => $this->languageId,
+            'country_id' => $id
+        ])->first();
+
+        $request->has('name') ? $countryTranslation->name = $request->name : null;
+        $countryTranslation->save();
 
         return response()->json(['success' => true]);
     }
