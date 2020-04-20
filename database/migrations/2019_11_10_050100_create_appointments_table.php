@@ -21,8 +21,10 @@ class CreateAppointmentsTable extends Migration
             $table->mediumInteger('slot_id')->index()->nullable();
             $table->string('bring_guest', 120)->nullable();
             $table->tinyInteger('guest_changing_car')->default(0);
-            $table->dateTime('start')->nullable();
-            $table->dateTime('end')->nullable();
+            $table->dateTime('start')->index()->nullable();
+            $table->dateTime('end')->index()->nullable();
+            $table->dateTime('scheduled_start')->nullable();
+            $table->dateTime('scheduled_end')->nullable();
             $table->string('part_ex_vrm')->nullable();
             $table->string('part_ex_vehicle')->nullable();
             $table->string('part_ex_distance')->nullable();
