@@ -22,9 +22,13 @@ class BrandRegionController extends Controller
             'regions.country_id',
             'regions.id',
             'regions.name',
-            'countries.name as country'
+            'countries_translation.name as country'
         )
-            ->leftJoin('countries', 'countries.id', '=', 'regions.country_id');
+            ->leftJoin('countries', function($country){
+                $country->on('countries.id', '=', 'regions.country_id')
+                    ->leftJoin('countries_translation', 'countries_translation.country_id', '=', 'countries.id')
+                    ->where('countries_translation.language_id', $this->languageId);
+            });
 
         if ($request->has('model') && !empty($request->model)) {
             $modelId = $request->model . '_id';

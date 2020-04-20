@@ -1,5 +1,5 @@
 <template>
-    <v-container pa-0>
+    <v-container pa-0 grid-list-lg>
         <v-layout row warp pb-4>
             <v-flex xs12>
                 <v-toolbar flat>
@@ -10,6 +10,17 @@
                         vertical
                     ></v-divider>
                     <v-spacer></v-spacer>
+
+                    <!-- Language Selector for translations -->
+                    <v-layout row wrap justify-end>
+                        <v-flex xs12 sm8 v-if="editType">
+                            <Language :solo="false"
+                                      :flat="false"
+                                      :chip="false"
+                                      :languageId="selectedCountry.language_id">
+                            </Language>
+                        </v-flex>
+                    </v-layout>
                 </v-toolbar>
             </v-flex>
         </v-layout>
@@ -88,24 +99,30 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import Regions from "../../components/Brand/Regions";
-    import FileUpload from '../../components/ImageUpload'
+    import Regions from "@/components/Brand/Regions"
+    import FileUpload from '@/components/ImageUpload'
+    import Language from "@/components/Language"
 
     export default {
         components:{
             Regions,
-            FileUpload
+            FileUpload,
+            Language
         },
 
         data() {
             return {
                 active: null,
-                seatingPosition:[]
+                seatingPosition:[],
+                editType: true,
             }
 
         },
 
         watch:{
+            selectedLanguage(){
+                this.initialize()
+            }
         },
 
         computed: ({
@@ -113,7 +130,8 @@
                 trans: 'getFields',
                 headers: 'getCountriesListHeader',
                 selectedCountry: 'getSelectedCountry',
-                themeOption: 'getThemeOption'
+                themeOption: 'getThemeOption',
+                selectedLanguage: 'getSubSelectedLanguage'
             })
         }),
 
@@ -135,7 +153,7 @@
         methods: {
             initialize() {
                 const Id = this.$route.params.id;
-                this.$store.dispatch('fetchCountry', {id: Id})
+                this.$store.dispatch('fetchCountry', {id: Id,edit:true, languageId: this.selectedLanguage.id})
             },
 
             updateCountry(){
@@ -148,12 +166,12 @@
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedCountry.full_name}  ${this.trans.successfullyUpdated}`
+                            message: `${this.selectedCountry.name}  ${this.trans.successfullyUpdated}`
                         })
                         // reset selectedCountry in store
-                        this.$store.commit('setSelectedCountry', {})
+                        // this.$store.commit('setSelectedCountry', {})
 
-                        this.$router.push({name: 'listCountries'});
+                        // this.$router.push({name: 'listCountries'});
                     }
                 })
             }

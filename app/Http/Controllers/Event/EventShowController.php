@@ -42,7 +42,7 @@ class EventShowController extends Controller
             'dealerships.country_id',
             'dealerships_translation.name as dealership',
             'countries.driver_seating_position as country_driver_seating_position',
-            'countries.name as country',
+            'countries_translation.name as country',
 
             'types.id as type_id',
             'types_translation.name as type'
@@ -65,7 +65,13 @@ class EventShowController extends Controller
             ->leftJoin('dealerships', function($dealership){
                 $dealership->on('dealerships.id', '=', 'events.dealership_id');
                 $dealership->leftJoin('dealerships_translation', 'dealerships_translation.dealership_id', '=', 'dealerships.id');
-                $dealership->leftJoin('countries', 'dealerships.country_id', '=', 'countries.id');
+                $dealership->leftJoin('countries', function($country){
+                    $country->on('dealerships.country_id', '=', 'countries.id')
+                        ->leftJoin('countries_translation', function($countryT){
+                            $countryT->on('countries_translation.country_id', '=', 'countries.id')
+                                ->where('countries_translation.language_id', $this->languageId);
+                        });
+                });
                 $dealership->where('dealerships_translation.language_id', $this->languageId);
             })
             ->where('events_translation.language_id', $this->languageId)

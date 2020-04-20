@@ -30,7 +30,7 @@ class DealershipListController extends Controller
             'groups_translation.language_id',
             'groups.logo as group_logo',
             'groups.id as group_id',
-            'countries.name as country'
+            'countries_translation.name as country'
         )
             ->leftJoin('dealerships_translation', function($dealershipT){
                 $dealershipT->on('dealerships_translation.dealership_id', '=', 'dealerships.id')
@@ -41,7 +41,13 @@ class DealershipListController extends Controller
                 $group->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id');
                 $group->where('groups_translation.language_id', '=', $this->languageId);
             })
-            ->leftJoin('countries', 'countries.id', '=', 'dealerships.country_id');
+            ->leftJoin('countries', function($country){
+                $country->on('countries.id', '=', 'dealerships.country_id')
+                    ->leftJoin('countries_translation', function($countryT){
+                       $countryT->on('countries_translation.country_id', '=', 'countries.id')
+                       ->where('countries_translation.language_id', $this->languageId);
+                    });
+            });
 
         // To get the list view populate
         if ($request->has('paginate') && !empty($request->paginate)) {
@@ -72,7 +78,7 @@ class DealershipListController extends Controller
                         break;
 
                     case 'country':
-                        $dealerships = $dealerships->orderBy('countries.name');
+                        $dealerships = $dealerships->orderBy('countries_translation.name');
                         break;
                 }
             } else {

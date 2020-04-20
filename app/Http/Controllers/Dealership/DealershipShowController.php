@@ -47,7 +47,7 @@ class DealershipShowController extends Controller
             'dealerships_translation.language_id',
             'groups_translation.name as group',
             'groups.logo as group_logo',
-            'countries.name as country',
+            'countries_translation.name as country',
             'countries.id as country_id',
             'countries.driver_seating_position'
         )
@@ -60,7 +60,13 @@ class DealershipShowController extends Controller
                 $group->leftJoin('groups_translation', 'groups_translation.group_id', '=', 'groups.id');
                 $group->where('groups_translation.language_id', '=', $this->languageId);
             })
-            ->leftJoin('countries', 'countries.id', '=', 'dealerships.country_id')
+            ->leftJoin('countries', function($country){
+                $country->on('countries.id', '=', 'dealerships.country_id')
+                    ->jeftJoin('countries_translation', function($countryT){
+                        $countryT->on('countries_translation.country_id', '=', 'countries.id')
+                            ->where('countries_translation.language_id', $this->languageId);
+                    });
+            })
             ->where('dealerships.id', $id)
             ->first();
 

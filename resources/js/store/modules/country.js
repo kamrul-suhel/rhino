@@ -163,7 +163,15 @@ const actions = {
      * @param id // required
      */
     fetchCountry({commit, dispatch}, payload){
-        const URL = `/api/countries/${payload.id}/show`
+        let URL = `/api/countries/${payload.id}/show`
+
+        if(payload.edit){
+            URL = `${URL}?edit=true`
+        }
+
+        if(payload.languageId){
+            URL = `${URL}&languageId=${payload.languageId}`
+        }
         axios.get(URL).then((response) => {
             if(response.data){
                 commit('setSelectedCountry', response.data)

@@ -44,7 +44,10 @@ class AddForeignKeyToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['dealership_id', 'group_id', 'region_id', 'country_id']);
+            $table->dropForeign('users_dealership_id_foreign');
+            $table->dropForeign('users_group_id_foreign');
+            $table->dropForeign('users_region_id_foreign');
+            $table->dropForeign('users_country_id_foreign');
         });
     }
 }

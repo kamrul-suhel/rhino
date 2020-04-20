@@ -34,12 +34,8 @@ class AddForeignKyToAppointmentVehiclesTable extends Migration
     public function down()
     {
         Schema::table('appointment_vehicles', function (Blueprint $table) {
-            $table->dropForeign(
-                [
-                    'appointment_id',
-                    'vehicle_id'
-                ]
-            );
+            $table->dropForeign('appointment_vehicles_appointment_id_foreign');
+            $table->dropForeign('appointment_vehicles_vehicle_id_foreign');
         });
     }
 }

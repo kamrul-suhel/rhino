@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyToTypesTranslationTable extends Migration
+class AddForeignKeyToCountriesTranslationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class AddForeignKeyToTypesTranslationTable extends Migration
      */
     public function up()
     {
-        Schema::table('types_translation', function (Blueprint $table) {
-            $table->foreign('type_id')
+        Schema::table('countries_translation', function (Blueprint $table) {
+            $table->foreign('language_id')
+                ->on('languages')
                 ->references('id')
-                ->on('types')
                 ->onDelete('cascade');
 
-            $table->foreign('language_id')
+            $table->foreign('country_id')
+                ->on('countries')
                 ->references('id')
-                ->on('languages')
                 ->onDelete('cascade');
         });
     }
@@ -33,9 +33,9 @@ class AddForeignKeyToTypesTranslationTable extends Migration
      */
     public function down()
     {
-        Schema::table('types_translation', function (Blueprint $table) {
-            $table->dropForeign('types_translation_type_id_foreign');
-            $table->dropForeign('types_translation_language_id_foreign');
+        Schema::table('countries_translation', function (Blueprint $table) {
+            $table->dropForeign('countries_translation_language_id_foreign');
+            $table->dropForeign('countries_translation_country_id_foreign');
         });
     }
 }

@@ -106,6 +106,16 @@ const mutations = {
             {
                 'text': trans.salesExecutive,
                 'value': 'sales_executive'
+            },
+
+            {
+                'text': trans.callHandler,
+                'value': 'call_handler'
+            },
+
+            {
+                'text': trans.receptionist,
+                'value': 'receptionist'
             }
         ]
 

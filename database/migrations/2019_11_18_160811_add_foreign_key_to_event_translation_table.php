@@ -33,8 +33,9 @@ class AddForeignKeyToEventTranslationTable extends Migration
      */
     public function down()
     {
-        Schema::table('event_translation', function (Blueprint $table) {
-            $table->dropForeign(['event_id', 'language_id']);
+        Schema::table('events_translation', function (Blueprint $table) {
+            $table->dropForeign('events_translation_event_id_foreign');
+            $table->dropForeign('events_translation_language_id_foreign');
         });
     }
 }

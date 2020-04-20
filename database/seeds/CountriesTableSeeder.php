@@ -1,5 +1,6 @@
 <?php
 
+use App\CountyTranslation;
 use Illuminate\Database\Seeder;
 use ErnySans\Laraworld\Models\Countries;
 use Faker\Factory as Faker;
@@ -20,11 +21,13 @@ class CountriesTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $country = Countries::create([
-            'name'                      => 'United Kingdom',
             'country_code'              => 'GB',
-            'iso_3166_2'              => 'GB',
-            'iso_3166_3'              => 'GBR',
             'driver_seating_position'   => 'right',
+        ]);
+        CountyTranslation::create([
+           'name'=> 'United Kingdom',
+           'language_id' => 1,
+           'country_id' => $country->id
         ]);
 
     }

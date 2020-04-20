@@ -16,8 +16,6 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('country_code')->nullable();
-            $table->string('iso_3166_2')->nullable();
-            $table->string('iso_3166_3')->nullable();
             $table->string('driver_seating_position');
             $table->tinyInteger('status')->default(1)->index();
             $table->timestamps();
