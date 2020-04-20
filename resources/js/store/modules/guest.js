@@ -72,6 +72,14 @@ const mutations = {
                 },
 
                 {
+                    text: trans.letterSent,
+                    align: 'left',
+                    sortable: false,
+                    value: 'letter'
+                },
+
+
+                {
                     text: trans.complete,
                     align: 'right',
                     sortable: false,
