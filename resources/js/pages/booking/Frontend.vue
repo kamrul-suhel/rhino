@@ -8,7 +8,7 @@
         <v-content class="rhinoFrontend">
             <v-container class="content">
                 <v-layout justify-end class="banner" row wrap :style="{backgroundImage: `url(${getEventBanner()})`}">
-                    <v-flex xs12 md5 align-self-center class="mt-5 mr-5">
+                    <v-flex xs12 md5 align-self-center class="mt-md-5 mr-md-5">
                         <h1 class="font-weight-thin text-md-right text-right px-4 mr-4">
                             <span v-if="selectedEvent.greeting == 0">{{trans.hello}}</span> <span v-if="selectedEvent.greeting == 1">{{trans.hi}}</span>
                             {{  guest.first_name}} {{ trans.greetingFrontend }} {{ selectedEvent.name }}
@@ -125,6 +125,8 @@
 
         created() {
             this.initialize()
+
+            console.log('frotend vue logged', this.selectedEvent)
         },
 
         methods: {
@@ -161,8 +163,51 @@ h1 {
     font-size: 30px!important;
 }
 .banner{
-    min-height: 200px;
-    background-size: cover;
+    min-height: 150px;
+    background-size: contain;
     color: #fff;
+    background-position: top center;
+    background-color: #000;
 }
+
+.mt-md-5 {
+    margin-top: 100px!important;
+}
+
+
+@media( min-width: 480px){
+    .mt-md-5 {
+        margin-top: 150px!important;
+    }
+}
+
+
+@media( min-width: 632){
+    .mt-md-5 {
+        margin-top: 180px!important;
+    }
+}
+
+@media( min-width: 768px){
+    .banner{
+        min-height: 250px;
+        background-position: center;
+    }
+
+    .mr-md-5 {
+        margin-right: 48px!important;
+    }
+
+    .mt-md-5 {
+        margin-top: 48px!important;
+    }
+}
+
+
+@media( min-width: 1200px){
+    .banner {
+        background-size: cover;
+    }
+}
+
 </style>

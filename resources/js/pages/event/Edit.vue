@@ -195,18 +195,6 @@
                             </v-radio-group>
                         </v-flex>
                     </v-layout>
-
-                    <v-layout row wrap>
-                        <v-flex xs12 sm8 pa-2>
-                            <v-textarea
-                                :color="themeOption.inputColor"
-                                :label="trans.notes"
-                                v-model="selectedEvent.notes"
-                                :hint="trans.notes"
-                                solo flat box
-                            ></v-textarea>
-                        </v-flex>
-                    </v-layout>
                 </v-card-text>
 
                 <v-layout row wrap v-if="!subComponent">
@@ -245,12 +233,13 @@
                                             key="eventImage"
                                         >
                                             <v-layout row wrap pt-3>
-                                                <v-flex xs12 sm4>
+                                                <v-flex xs12>
                                                     <v-card class="pa-2 my-3">
+                                                        <label for=""><small>Recommended dimensions: 2000x446px</small></label>
                                                         <v-img
                                                             cover
-                                                            :src="bannerImage|image(themeOption.brandDefaultImage)"
-                                                            aspect-ratio="2.75"
+                                                            :src="bannerImage|image(themeOption.eventDefaultImage)"
+                                                            aspect-ratio="4.48"
                                                         ></v-img>
                                                     </v-card>
 

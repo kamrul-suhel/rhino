@@ -27,6 +27,7 @@
                     <template v-slot:items="props">
                         <td>{{ `${props.item.first_name} ${props.item.surname}` }}</td>
                         <td>{{ renderGuestStatus(props.item) }}</td>
+                        <td>TEST</td>
                         <td class="text-xs-right">
                             <v-menu>
                                 <template #activator="{ on: menu }">

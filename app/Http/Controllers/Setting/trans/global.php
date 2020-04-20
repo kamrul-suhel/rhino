@@ -2399,5 +2399,11 @@ return [
     [
         'label' => 'Dealership Code',
         'identifier' => 'dealershipCode'
+    ],
+
+    
+    [
+        'label' => 'Letter sent',
+        'identifier' => 'letterSent'
     ]
 ];

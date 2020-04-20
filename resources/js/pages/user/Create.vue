@@ -385,7 +385,6 @@
                     userForm.append('profile_image', this.profileImage)
                     const URL = `/api/users`
                     axios.post(URL, userForm).then((response) => {
-
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
@@ -395,6 +394,11 @@
                         this.showForm = false
                         this.$refs.userForm.reset()
                         this.$store.commit('setUpdateComponent')
+
+                        setTimeout(() => {
+                            this.$router.push({name: 'editUsers', params: {id: response.data.user.id}})
+                        }, 1000)
+
                     }).catch(error => {
                         if(
                             error.response.data &&

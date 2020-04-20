@@ -77,6 +77,7 @@ class EventShowController extends Controller
             ->where('events_translation.language_id', $this->languageId)
             ->where('events.id', $id)
             ->first();
+            
 
         return response()->json([
             'event' => $event
