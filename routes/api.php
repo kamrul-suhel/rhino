@@ -44,7 +44,7 @@ Route::prefix('users')->middleware('VerifyJWT')->group(function () {
     Route::post('{id}/updatepassword', 'Auth\ResetPasswordController@changePassword')->middleware('APIDealershipUser');
 
     // Event User
-    Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list')->middleware('APISaleExecutiveUser');
+    Route::get('events/{eventId}/dealerships/{dealershipId}', 'Event\EventUserListController@list')->middleware('APICallHandlerReceptionist');
 
     // Brand User route
     Route::get('{id}/brands', 'Auth\UserBrandListController@List');
@@ -307,6 +307,7 @@ Route::prefix('guests')->middleware('VerifyJWT')->group(function () {
 */
 Route::prefix('appointments')->group(function () {
     Route::get('{eventId}', 'Appointment\AppointmentListController@list');
+    Route::put('{appointmentId}/update', 'Appointment\AppointmentUpdateController@update');
     Route::put('{appointmentId}/reebok', 'Appointment\AppointmentReebokController@reebok');
     Route::put('{appointmentId}', 'Booking\BookingStoreController@store');
     Route::delete('{appointmentId}', 'Appointment\AppointmentDestroyController@destroy');

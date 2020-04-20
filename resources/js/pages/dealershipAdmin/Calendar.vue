@@ -1,22 +1,22 @@
 <template>
     <v-container fluid px-5>
-        <v-layout row wrap px-4>
+        <v-layout row wrap px-4
+                  v-if="checkAccessLevel()">
             <v-flex xs12 sm6 py-3>
                 <h2>{{ trans.bookAnAppointment }}</h2>
             </v-flex>
 
-            <v-flex xs12 sm6 py-3 v-if="authUser.level === 'admin' || rhinoAdmin">
+            <v-flex xs12 sm6 py-3 >
                 <v-layout row wrap justify-end>
-                    <v-btn outline round  align-self-end :color="themeOption.adminNavIconColor" 
-                        @click="$router.push({name: 'editEvents', params: {id: selectedEvent.id}})"> 
+                    <v-btn outline round
+                           v-if="authUser.level === 'dealership' || authUser.level === 'admin'"
+                           class="ma-0 mr-2"
+                           align-self-end :color="themeOption.adminNavIconColor"
+                        @click="$router.push({name: 'editEvents', params: {id: selectedEvent.id}})">
                         <v-icon left dark>reply</v-icon>
-                            Back to event
+                        {{ trans.backToEvent }}
                     </v-btn>
-                </v-layout>
-            </v-flex>
 
-            <v-flex xs12 align-self-end v-if="authUser.level === 'dealership' || rhinoAdmin">
-                <v-layout row wrap justify-end>
                     <v-btn outline round
                            @click="onGoBack()"
                            :color="themeOption.adminNavIconColor"
@@ -27,7 +27,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4 v-if="isFiltering && authUser.level === 'dealership' || rhinoAdmin">
+        <v-layout mt-4 v-if="isFiltering && checkAccessLevel()">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -626,6 +626,20 @@
                 }
 
                 return fn.downloadCSV(modifyAppointments, fileName)
+            },
+
+            checkAccessLevel(){
+                if(
+                    this.authUser.level === CONST.ADMIN ||
+                    this.authUser.level === CONST.MANAGER ||
+                    this.authUser.level === CONST.RECEPTIONIST ||
+                    this.authUser.level === CONST.CALL_HANDLER ||
+                    this.rhinoAdmin
+                ){
+                    return true;
+                }
+
+                return false
             }
         }
     }

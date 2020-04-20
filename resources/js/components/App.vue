@@ -102,7 +102,9 @@
                             // If auth user is dealership manager, then set dealership & regions for manager
                             if (
                                 authUser.level === CONST.MANAGER ||
-                                authUser.level === CONST.SALE_EXECUTIVE
+                                authUser.level === CONST.SALE_EXECUTIVE ||
+                                authUser.level === CONST.RECEPTIONIST ||
+                                authUser.level === CONST.CALL_HANDLER
                             ) {
                                 const dealership = {...response.data.dealership}
                                 const regions = [...response.data.regions]
@@ -143,8 +145,10 @@
 
             checkUserAccess(){
                 if(
-                    this.authUser.level === 'dealership' ||
-                    this.authUser.level === 'sales_executive'
+                    this.authUser.level === CONST.MANAGER ||
+                    this.authUser.level === CONST.SALE_EXECUTIVE ||
+                    this.authUser.level === CONST.RECEPTIONIST ||
+                    this.authUser.level === CONST.CALL_HANDLER
                 ){
                     return true
                 }

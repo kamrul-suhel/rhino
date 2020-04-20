@@ -1,3 +1,5 @@
+import CONST from "../../utils/const";
+
 const state = {
     dealershipNavigation: [],
     dealershipDashboard: '',
@@ -28,20 +30,27 @@ const mutations = {
             {
                 icon: 'list',
                 text: `${trans.guestServices}`,
-                access: ['dealership'],
+                access: [
+                    CONST.MANAGER
+                ],
                 subGroups:[
                     {
                         icon: 'person',
                         text: `${trans.bookAGuest}`,
                         link: 'dealershipAdminBookAGuest',
-                        access: ['dealership'],
+                        access: [
+                            CONST.MANAGER
+                        ]
                     },
 
                     {
                         icon: 'cloud_download',
                         text: `${trans.downloadBookedGuests}`,
                         link: 'bookedGuest',
-                        access: ['dealership', 'sales_executive'],
+                        access: [
+                            CONST.MANAGER,
+                            CONST.SALE_EXECUTIVE,
+                        ],
                         isDialog: true
                     },
 
@@ -49,7 +58,10 @@ const mutations = {
                         icon: 'cloud_download',
                         text: `${trans.downloadUnbookedGuests}`,
                         link: 'unbookedGuest',
-                        access: ['dealership', 'sales_executive'],
+                        access: [
+                            CONST.MANAGER,
+                            CONST.SALE_EXECUTIVE
+                        ],
                         isDialog: true
                     }
                 ]
@@ -64,35 +76,51 @@ const mutations = {
                         icon: 'date_range',
                         text: `${trans.calendar}`,
                         link: 'dealershipAdminCalendar',
-                        access: ['dealership', 'sales_executive'],
+                        access: [
+                            CONST.MANAGER,
+                            CONST.SALE_EXECUTIVE,
+                            CONST.RECEPTIONIST,
+                            CONST.CALL_HANDLER
+                        ],
                     },
 
                     {
                         icon: 'directions_car',
                         text: `${trans.editEvent}`,
                         link: 'editDealershipsEvent',
-                        access: ['dealership'],
+                        access: [
+                            CONST.MANAGER
+                        ],
                     },
 
                     {
                         icon: 'add',
                         text: `${trans.updateSales}`,
                         link: 'saleUpdate',
-                        access: ['dealership', 'sales_executive'],
+                        access: [
+                            CONST.MANAGER,
+                            CONST.SALE_EXECUTIVE,
+                            CONST.CALL_HANDLER,
+                            CONST.RECEPTIONIST
+                        ],
                     },
 
                     {
                         icon: 'insert_chart_outlined',
                         text: `${trans.analytics}`,
                         link: 'dealershipAnalytics',
-                        access: ['dealership'],
+                        access: [
+                            CONST.MANAGER
+                        ],
                     },
 
                     {
                         icon: 'business',
                         text: `${trans.editDealership}`,
                         link: 'editDealership',
-                        access: ['dealership'],
+                        access: [
+                            CONST.MANAGER
+                        ]
                     }
                 ]
             }

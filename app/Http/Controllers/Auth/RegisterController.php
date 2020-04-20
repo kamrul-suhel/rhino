@@ -205,6 +205,24 @@ class RegisterController extends Controller
                 $user->manufacturer_id = null;
                 $user->company_id = $request->company_id;
                 break;
+
+            case User::USERRECEPTIONIST:
+                $user->dealership_id = $request->dealershipId;
+                $user->group_id = null;
+                $user->region_id = null;
+                $user->country_id = null;
+                $user->manufacturer_id = null;
+                $user->company_id = null;
+                break;
+
+            case User::USERCALLHANDLER:
+                $user->dealership_id = $request->dealershipId;
+                $user->group_id = null;
+                $user->region_id = null;
+                $user->country_id = null;
+                $user->manufacturer_id = null;
+                $user->company_id = null;
+                break;
         }
 
         return $user;

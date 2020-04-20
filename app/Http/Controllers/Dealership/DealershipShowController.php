@@ -61,11 +61,11 @@ class DealershipShowController extends Controller
                 $group->where('groups_translation.language_id', '=', $this->languageId);
             })
             ->leftJoin('countries', function($country){
-                $country->on('countries.id', '=', 'dealerships.country_id')
-                    ->jeftJoin('countries_translation', function($countryT){
-                        $countryT->on('countries_translation.country_id', '=', 'countries.id')
-                            ->where('countries_translation.language_id', $this->languageId);
-                    });
+                $country->on('countries.id', '=', 'dealerships.country_id');
+                $country->leftJoin('countries_translation', function($countryT){
+                    $countryT->on('countries_translation.country_id', '=', 'countries.id')
+                        ->where('countries_translation.language_id', $this->languageId);
+                });
             })
             ->where('dealerships.id', $id)
             ->first();

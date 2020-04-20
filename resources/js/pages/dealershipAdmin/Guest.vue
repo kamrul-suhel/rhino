@@ -15,19 +15,19 @@
                         </tr>
 
                         <tr>
-                            <td><strong>{{ trans.email }}:</strong> {{ guest.email }}</td>
-                            <td class="text-xs-left"><strong>{{ trans.mobile }}:</strong> {{ guest.mobile }}</td>
+                            <td><strong>{{ trans.email }}:</strong> {{ guest.email | trans }}</td>
+                            <td class="text-xs-left"><strong>{{ trans.mobile }}:</strong> {{ guest.mobile | trans }}</td>
                         </tr>
 
                         <tr>
-                            <td><strong>{{ trans.postcode }}:</strong> {{ guest.postcode }}</td>
-                            <td class="text-xs-left"><strong>{{ trans.landline }}:</strong> {{ guest.landline }}</td>
+                            <td><strong>{{ trans.postcode }}:</strong> {{ guest.postcode | trans }}</td>
+                            <td class="text-xs-left"><strong>{{ trans.landline }}:</strong> {{ guest.landline | trans }}</td>
                         </tr>
 
                         <tr>
-                            <td><strong>{{ `${trans.addressLine} 1` }}:</strong> {{ guest.address_line_1 }}</td>
+                            <td><strong>{{ `${trans.addressLine} 1` }}:</strong> {{ guest.address_line_1 | trans }}</td>
                             <td class="text-xs-left"><strong>{{ `${trans.landline} 2` }}:</strong> {{
-                                guest.address_line_2 }}
+                                guest.address_line_2 | trans }}
                             </td>
                         </tr>
                     </template>
@@ -43,7 +43,7 @@
                             :key="appointment.id">
                         <v-card class="mb-3">
                             <v-card-title>
-                                <strong>{{ trans.name }}:</strong> {{ appointment.event.event_name}}
+                                <strong>{{ trans.name }}:</strong> {{ appointment.event.event_name | trans}}
                                 <v-spacer></v-spacer>
                                 <strong>{{ trans.status }}: </strong> {{ getAppointmentStatus(appointment) }}
                             </v-card-title>

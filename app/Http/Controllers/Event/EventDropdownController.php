@@ -19,12 +19,17 @@ class EventDropdownController extends Controller
             'events.*',
             'events_translation.name as event',
             'events_translation.name',
-            'events_translation.language_id'
+            'events_translation.language_id',
+            'types_translation.name as type'
         )
             ->leftJoin('events_translation', function ($eventT) {
                 $eventT->on('events_translation.event_id', '=', 'events.id');
                 $eventT->where('events_translation.language_id', $this->languageId);
 
+            })
+            ->leftJoin('types_translation', function($typeT){
+                $typeT->on('types_translation.type_id', '=', 'events.type_id')
+                    ->where('types_translation.language_id', $this->languageId);
             })
             ->where('events.status', 1);
 

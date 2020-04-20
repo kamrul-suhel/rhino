@@ -43,6 +43,15 @@
                         if(this.authUser.level === CONST.MANAGER){
                             return true
                         }
+
+                        if(this.authUser.level === CONST.RECEPTIONIST){
+                            return true
+                        }
+
+                        if(this.authUser.level === CONST.CALL_HANDLER){
+                            return true
+                        }
+
                         break
                     case 'salesExecutive':
                         if(this.authUser.level === CONST.SALE_EXECUTIVE){

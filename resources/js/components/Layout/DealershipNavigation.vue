@@ -30,7 +30,7 @@
             </v-list-tile>
 
             <div v-for="(navGroup, i) in navs" :key="i">
-                <h2 class="px-3 mt-3">{{ navGroup.text }}</h2>
+                <h2 class="px-3 mt-3" v-if="onCheckAccessLevel(navGroup)">{{ navGroup.text }}</h2>
 
                 <template v-for="(nav, i) in navGroup.subGroups">
                     <v-list-tile

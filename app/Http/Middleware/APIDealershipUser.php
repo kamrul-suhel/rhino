@@ -24,7 +24,9 @@ class APIDealershipUser
             return $next($request);
         }
 
-        if ($authUser->level === 'dealership') {
+        if (
+            $authUser->level === 'dealership'
+        ) {
             $dealershipId = null;
             return $next($request);
             if(
@@ -32,13 +34,6 @@ class APIDealershipUser
                 !empty($request->dealershipId))
             {
                 $dealershipId = $request->dealershipId;
-            }
-
-            if(
-                $request->has('dealership_id') &&
-                !empty($request->dealership_id))
-            {
-                $dealershipId = $request->dealership_id;
             }
 
             if((int) $dealershipId === (int) $authUser->dealership_id){

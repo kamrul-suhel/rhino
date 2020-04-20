@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\APIAdminUser;
+use App\Http\Middleware\APICallHandlerReceptionist;
 use App\Http\Middleware\APIDealershipUser;
 use App\Http\Middleware\APISalesExecutiveUser;
 use App\Http\Middleware\VerifyJWT;
@@ -69,7 +70,8 @@ class Kernel extends HttpKernel
         'VerifyJWT' => VerifyJWT::class,
         'APIAdminUser' => APIAdminUser::class,
         'APIDealershipUser' => APIDealershipUser::class,
-        'APISaleExecutiveUser' => APISalesExecutiveUser::class
+        'APISaleExecutiveUser' => APISalesExecutiveUser::class,
+        'APICallHandlerReceptionist' => APICallHandlerReceptionist::class
     ];
 
     /**

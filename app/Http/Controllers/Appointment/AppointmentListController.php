@@ -25,7 +25,9 @@ class AppointmentListController extends Controller
         $appointments = Appointment::select(
             'appointments.*',
             'guests.first_name as guest_first_name',
-            'guests.surname as guest_surname'
+            'guests.surname as guest_surname',
+            'guests.email as guest_email'
+
         )->leftJoin('guests', 'appointments.guest_id', '=', 'guests.id');
 
         $otherAppointments = clone $appointments;

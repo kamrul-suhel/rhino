@@ -23,7 +23,7 @@
                             lazy
                             v-for="(brand,i) in brands"
                             :key="brand.id"
-                            :src="brand.logo"
+                            :src="brand.logo === 'null' ? themeOption.brandDefaultImage : brand.logo"
 
                         ></v-carousel-item>
                     </v-carousel>
@@ -141,8 +141,10 @@
 
             checkUserAccess(){
                 if(
-                    this.authUser.level === 'dealership' ||
-                    this.authUser.level === 'sales_executive'
+                    this.authUser.level === CONST.MANAGER ||
+                    this.authUser.level === CONST.SALE_EXECUTIVE ||
+                    this.authUser.level === CONST.CALL_HANDLER ||
+                    this.authUser.level === CONST.RECEPTIONIST
                 ){
                     return true
                 }

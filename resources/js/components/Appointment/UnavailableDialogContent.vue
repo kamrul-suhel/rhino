@@ -52,13 +52,17 @@
                       v-if="appointment.status === 1"
                       mb-4
                       wrap>
-                <v-flex xs12>
+                <v-flex xs12 class="mb-2">
                     <h3>{{ trans.guest }}</h3>
                     <v-divider></v-divider>
                 </v-flex>
 
-                <v-flex xs12>
-                    <strong>Name:</strong> {{ `${appointment.guest_surname} ${appointment.guest_first_name}` }}
+                <v-flex xs12 sm6>
+                    <strong>{{ trans.name }}:</strong> {{ `${appointment.guest_surname} ${appointment.guest_first_name}` }}
+                </v-flex>
+
+                <v-flex xs12 sm6>
+                    <strong>{{ trans.email }}:</strong> {{ appointment.guest_email | trans }}
                 </v-flex>
 
                 <v-flex xs12>
@@ -95,6 +99,18 @@
                     <span
                         :style="{color: themeOption.primaryTextColor}">{{ `${trans.cancelAppointment}`}}</span>
                 </v-btn>
+
+                <v-btn :color="themeOption.primaryColor"
+                       @click="onUpdateScheduleTime()">
+                    <span
+                        :style="{color: themeOption.primaryTextColor}">
+                        {{ `${trans.updateArrivedLeaveTime}`}}
+                    </span>
+                </v-btn>
+
+                <UpdateScheduledDialog :dialog="updateSchedule"
+                                       @onUpdateSchedule="onUpdateSchedule"
+                                       :appointment="appointment"/>
             </v-layout>
         </v-flex>
     </v-layout>
@@ -102,10 +118,16 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import UpdateScheduledDialog from "@/components/Appointment/UpdateScheduledDialog";
 
     export default {
+        components: {
+            UpdateScheduledDialog
+        },
         data() {
-            return {}
+            return {
+                updateSchedule: false
+            }
         },
 
         props: {
@@ -201,6 +223,14 @@
                 }
 
                 return showUser
+            },
+
+            onUpdateScheduleTime(){
+                this.updateSchedule = true
+            },
+
+            onUpdateSchedule(schedule){
+                this.updateSchedule = schedule
             }
         }
     }

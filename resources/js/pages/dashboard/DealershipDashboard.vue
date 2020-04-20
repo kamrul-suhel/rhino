@@ -80,7 +80,7 @@
                         </v-card>
                     </v-flex>
 
-                    <v-flex xs12 sm4>
+                    <v-flex xs12 sm4 v-if="checkAccessLevel('dealership')">
                         <v-card flat hover
                                 height="136"
                                 @click="onNavigateTo('downloadUnbookedGuest')"
@@ -98,8 +98,9 @@
                         </v-card>
                     </v-flex>
 
-                    <v-flex xs12 sm4>
+                    <v-flex xs12 sm4 v-if="checkAccessLevel('dealership')">
                         <v-card flat hover
+
                                 height="136"
                                 @click="onNavigateTo('downloadBookedGuest')"
                                 class="guest-card">
@@ -138,7 +139,7 @@
                         </v-card>
                     </v-flex>
 
-                    <v-flex xs6>
+                    <v-flex xs6 v-if="checkAccessLevel('dealership')">
                         <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('editDealershipEvent')">
@@ -160,7 +161,7 @@
                         </v-card>
                     </v-flex>
 
-                    <v-flex xs6>
+                    <v-flex xs6 v-if="checkAccessLevel('dealership')">
                         <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('dealershipAnalytics')">
@@ -171,7 +172,7 @@
                         </v-card>
                     </v-flex>
 
-                    <v-flex xs6>
+                    <v-flex xs6 v-if="checkAccessLevel('dealership')">
                         <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('editDealership')">
@@ -190,6 +191,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import fn from '@/utils/function'
+    import CONST from "../../utils/const";
 
     export default {
         components: {},
@@ -210,7 +212,8 @@
                 dealership: 'getSelectedDealership',
                 themeOption: 'getThemeOption',
                 selectedEvent: 'getSelectedEvent',
-                selectedDealership: 'getSelectedDealership'
+                selectedDealership: 'getSelectedDealership',
+                authUser: 'getAuthUser',
             })
         }),
 
@@ -292,6 +295,21 @@
 
             getNameWithStatus(guest){
                 return fn.getGuestNameWithStatus(guest, this.trans)
+            },
+
+            checkAccessLevel(type){
+                const authLevel = this.authUser.level
+                switch(type){
+                    case CONST.MANAGER:
+                        return authLevel === type ? true : false
+
+                    case CONST.RECEPTIONIST:
+                        return authLevel === type ? true : false
+
+                    case CONST.CALL_HANDLER:
+                        return authLevel === type ? true : false
+                }
+
             }
         }
     }

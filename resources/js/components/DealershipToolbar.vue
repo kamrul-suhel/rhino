@@ -9,7 +9,7 @@
                         <v-flex xs12 sm8>
                             <v-layout row wrap fill-height align-center>
                                 <v-flex xs12 sm4>
-                                    VIP Event
+                                    {{ selectedEvent.type }}
                                 </v-flex>
 
                                 <v-flex xs12 sm4>

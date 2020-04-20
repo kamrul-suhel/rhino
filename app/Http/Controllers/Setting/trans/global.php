@@ -643,6 +643,21 @@ return [
     ],
 
     [
+        'label' => 'Update guest arrived & leave time',
+        'identifier' => 'updateArrivedLeaveTime'
+    ],
+
+    [
+        'label' => 'Guest Arrived',
+        'identifier' => 'guestArrived'
+    ],
+
+    [
+        'label' => 'Guest Leave',
+        'identifier' => 'guestLeave'
+    ],
+
+    [
         'label' => 'Latitude',
         'identifier' => 'latitude'
     ],
@@ -1376,6 +1391,11 @@ return [
     [
         'label' => 'Back',
         'identifier' => 'back'
+    ],
+
+    [
+        'label' => 'Back to event',
+        'identifier' => 'backToEvent'
     ],
 
     [

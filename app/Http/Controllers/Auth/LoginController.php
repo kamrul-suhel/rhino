@@ -86,7 +86,9 @@ class LoginController extends Controller
             if(
                 $user->level === User::USERDEALERSHIP &&
                 !empty($user->dealership_id) ||
-                $user->level === User::USERSALEEXECUTIVE
+                $user->level === User::USERSALEEXECUTIVE ||
+                $user->level === User::USERRECEPTIONIST ||
+                $user->level === User::USERCALLHANDLER
             )
             {
                 $dealershipController = new DealershipShowController($request);

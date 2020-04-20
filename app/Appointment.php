@@ -27,6 +27,8 @@ class Appointment extends Model
         'guest_changing_car',
         'start',
         'end',
+        'scheduled_start',
+        'scheduled_end',
         'part_ex_vrm',
         'part_ex_vehicle',
         'part_ex_distance',
