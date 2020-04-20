@@ -34,12 +34,8 @@ class AddForeignKeyToCountriesTranslationTable extends Migration
     public function down()
     {
         Schema::table('countries_translation', function (Blueprint $table) {
-//            $table->dropForeign(
-//                [
-//                    'language_id',
-//                    'country_id'
-//                ]
-//            );
+            $table->dropForeign('countries_translation_language_id_foreign');
+            $table->dropForeign('countries_translation_country_id_foreign');
         });
     }
 }

@@ -123,7 +123,10 @@
                         </v-flex>
 
                         <v-flex xs12 sm3 pa-2
-                                v-if="user.level ==='dealership' || user.level === 'sales_executive'">
+                                v-if="user.level ==='dealership' ||
+                                user.level === 'sales_executive' ||
+                                user.level === 'call_handler' ||
+                                user.level === 'receptionist'">
                             <v-select
                                 :items="dealerships"
                                 item-text="name"
@@ -336,6 +339,10 @@
 
                     case 'company':
                         this.$store.dispatch('fetchCompanyForDropdown')
+
+                    case 'call_handler':
+                    case 'receptionist':
+                        this.$store.dispatch('fetchDealershipsForDropdown')
 
                 }
             },

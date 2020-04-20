@@ -18,7 +18,7 @@ class BrandDealershipController extends Controller
             'brand_dealership.*',
             'brands_translation.name as brand',
             'regions.name as region',
-            'countries.name as country'
+            '$trans[' as country'
         )->leftJoin('brands', function ($brand) {
             $brand->on('brands.id', '=', 'brand_dealership.brand_id');
             $brand->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id');

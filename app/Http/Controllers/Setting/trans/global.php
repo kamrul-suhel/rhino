@@ -1586,6 +1586,15 @@ return [
     ],
 
     [
+        'label' => 'Receptionist',
+        'identifier' => 'receptionist'
+    ],
+    [
+        'label' => 'Call handler',
+        'identifier' => 'callHandler'
+    ],
+
+    [
         'label' => 'Analytics',
         'identifier' => 'analytics'
     ],
@@ -2365,7 +2374,7 @@ return [
     [
         'label' => 'Event is required',
         'identifier' => 'eventIsRequired'
-    ], 
+    ],
 
     [
         'label' => 'Dealership Code',

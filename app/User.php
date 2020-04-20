@@ -23,6 +23,8 @@ class User extends Authenticatable implements JWTSubject
     const USERBRAND = 'brand';
     const USERSALEEXECUTIVE = 'sales_executive';
     const USERCOMPANY = 'company';
+    const USERRECEPTIONIST = 'receptionist';
+    const USERCALLHANDLER = 'call_handler';
 
 
     /**
