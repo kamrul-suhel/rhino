@@ -71,6 +71,35 @@
                                         <strong>{{ trans.email }}</strong>{{ appointment.user ? appointment.user.email : '' }}
                                     </v-flex>
                                 </v-layout>
+
+                                <v-divider class="my-2"></v-divider>
+
+                                <v-layout row wrap>
+                                    <v-flex xs12>
+                                        <h3>Interested in vehicles</h3>
+                                    </v-flex>
+
+                                    <v-flex xs12 sm4 v-for="vehicle in appointment.vehicles"
+                                            :key="vehicle.id"
+                                            class="pa-2">
+
+                                        <v-card>
+                                            <v-img
+                                                :src="renderVehicleImage(vehicle)"
+                                                aspect-ratio="2"
+                                            ></v-img>
+
+                                            <v-card-title primary-title>
+                                                <div>
+                                                    <h5 class="mb-0"><strong>{{ trans.model }}:</strong> {{ vehicle.vehicle_name }}</h5>
+                                                    <div>
+                                                        <strong>{{trans.condition}} :</strong> {{ vehicle.vehicle_condition === 1 ? trans.new : trans.used }}
+                                                    </div>
+                                                </div>
+                                            </v-card-title>
+                                        </v-card>
+                                    </v-flex>
+                                </v-layout>
                             </v-card-text>
                             <v-divider light></v-divider>
 
@@ -81,6 +110,13 @@
                                        v-if="appointment.status === 1"
                                        @click="onCancel(appointment)">
                                     <span :style="{color: themeOption.primaryColor}">{{ `${trans.cancelAppointment}` }}</span>
+                                </v-btn>
+
+                                <v-btn :color="themeOption.primaryColor"
+                                       flat
+                                       v-if="appointment.status === 1"
+                                       @click="onUpdateScheduleTime(appointment)">
+                                    <span :style="{color: themeOption.primaryColor}">{{ `${trans.updateArrivedLeaveTime}`}}</span>
                                 </v-btn>
 
                                 <v-btn :color="themeOption.primaryColor"
@@ -165,14 +201,22 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
+        <UpdateScheduledDialog :dialog="updateSchedule"
+                               @onUpdateSchedule="onUpdateSchedule"
+                               :appointment="appointment"/>
     </v-container>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
     import fn from '@/utils/function'
+    import UpdateScheduledDialog from "@/components/Appointment/UpdateScheduledDialog";
 
     export default {
+        components:{
+          UpdateScheduledDialog
+        },
 
         data() {
             return {
@@ -185,7 +229,9 @@
                 dialogTitle: null,
                 dialogDescription: null,
                 dialogButtonCancel: true,
-                selectedAppointment: {}
+                selectedAppointment: {},
+                updateSchedule: false,
+                appointment:{}
             }
         },
 
@@ -193,7 +239,8 @@
             ...mapGetters({
                 trans: 'getFields',
                 themeOption: 'getThemeOption',
-                guest: 'getGuestDetail'
+                guest: 'getGuestDetail',
+                dealership: 'getSelectedDealership',
             })
         }),
 
@@ -334,6 +381,20 @@
                         })
                 }
 
+            },
+
+            renderVehicleImage(vehicle){
+                const image = fn.renderVehicleImage(vehicle, this.dealership, this.themeOption.brandDefaultImage)
+                return image
+            },
+
+            onUpdateScheduleTime(appointment){
+                this.appointment = {...appointment}
+                this.updateSchedule = true
+            },
+
+            onUpdateSchedule(schedule){
+                this.updateSchedule = schedule
             }
         }
     }

@@ -30,7 +30,21 @@ class GuestShowController extends Controller
             })
             ->with([
                 'appointment.user',
-                'appointment.vehicles',
+                'appointment.vehicles' => function($appointmentV){
+                    $appointmentV->select(
+                        'appointment_vehicles.*',
+                        'vehicles.*',
+                        'vehicles_translation.model as vehicle_name'
+                    );
+                    $appointmentV->leftJoin('vehicles', function($vehicle){
+                       $vehicle->on('vehicles.id', '=', 'appointment_vehicles.vehicle_id');
+                       $vehicle->leftJoin('vehicles_translation', function($vehicleT){
+                          $vehicleT->on('vehicles_translation.vehicle_id', '=', 'vehicles.id')
+                          ->where('vehicles_translation.language_id', $this->languageId);
+                       });
+                    });
+                },
+
                 'appointment.event' => function ($event) {
                     $languageId = $this->languageId;
                     $event->select(

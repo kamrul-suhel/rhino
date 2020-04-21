@@ -828,6 +828,11 @@ return [
     ],
 
     [
+        'label' => 'Condition',
+        'identifier' => 'condition'
+    ],
+
+    [
         'label' => 'Are you sure you want to cancel this appointment ?',
         'identifier' => 'confirmationForCancel'
     ],
