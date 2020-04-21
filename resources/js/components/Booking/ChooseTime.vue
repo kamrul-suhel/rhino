@@ -72,7 +72,6 @@
                         <v-flex>
                             <v-checkbox :color="color"
                                         :disabled="isDisable"
-                                        value="yes"
                                         v-model="guestInterestedYes"
                             ></v-checkbox>
                             <label class="body-2 mr-5 ml-2">{{ trans.yes }}</label>
@@ -80,7 +79,6 @@
                         <v-flex>
                             <v-checkbox :color="color"
                                         :disabled="isDisable"
-                                        value="no"
                                         v-model="guestInterestedNo"
                                         style="flex-grow:0"
                             ></v-checkbox>
@@ -130,6 +128,17 @@
         },
 
         watch: {
+            bringGuest(){
+                if(this.bringGuest.changingCar === 1){
+                    this.guestInterestedNo = false
+                    this.guestInterestedYes = true
+                }
+
+                if(this.bringGuest.changingCar === 0){
+                    this.guestInterestedNo = true
+                    this.guestInterestedYes = false
+                }
+            },
             guestInterestedYes() {
                 if (this.guestInterestedYes) {
                     const guest = {
@@ -480,6 +489,10 @@
             },
 
             checkCascadeTime() {
+                if(this.isDisable){
+                    return
+                }
+
                 const selectedDate = this.selectedDate
                 const selectedSaleExecutive = this.selectedSaleExecutive
 

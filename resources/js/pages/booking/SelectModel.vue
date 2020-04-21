@@ -114,6 +114,14 @@
                 } else {
                     this.skipStep = false
                 }
+            },
+
+            guest(){
+                if(
+                    this.guest.status === 1
+                ){
+                    this.$store.commit('setBookingStep', 4)
+                }
             }
         },
 
@@ -149,11 +157,6 @@
             },
 
             onVehicleSelected(vehicle) {
-                // Check appointment status
-                if (this.isDisable) {
-                    return
-                }
-
                 if (this.vehicleType === '') {
                     return;
                 }

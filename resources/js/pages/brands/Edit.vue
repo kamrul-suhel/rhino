@@ -3,7 +3,11 @@
 
         <v-layout row wrap justify-end>
             <v-flex xs12 sm3>
-                <language-picker :languageId="brand.language_id"></language-picker>
+                <language-picker :solo="false"
+                                 :flat="false"
+                                 :chip="false"
+                                 :languageId="brand.language_id">
+                </language-picker>
              </v-flex>
         </v-layout>
 

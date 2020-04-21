@@ -756,6 +756,11 @@ return [
     ],
 
     [
+        'label' => 'Update Appointment',
+        'identifier' => 'updateAppointment'
+    ],
+
+    [
         'label' => 'Action',
         'identifier' => 'action'
     ],
@@ -2401,7 +2406,7 @@ return [
         'identifier' => 'dealershipCode'
     ],
 
-    
+
     [
         'label' => 'Letter sent',
         'identifier' => 'letterSent'

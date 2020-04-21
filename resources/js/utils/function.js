@@ -321,11 +321,7 @@ export default {
                 image = this.themeOption.brandDefaultImage
         }
 
-        if (image !== null) {
-            return image
-        }
-
-        return defaultImage
+        return image
     },
 
     renderUserRole(user, trans){

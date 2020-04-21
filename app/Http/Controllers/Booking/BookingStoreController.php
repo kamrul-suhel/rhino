@@ -113,7 +113,11 @@ class BookingStoreController extends Controller
         }
 
         // Send email if appointment is new
-        if(!$id){
+        if(
+            !$id &&
+            $request->has('sendEmail') &&
+            $request->sendEmail == true
+        ){
             Mail::send(new GuestConfirmed($request->guest_id, $this->languageId));
             Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'dealerManager'));
             Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'sellerExecutive'));

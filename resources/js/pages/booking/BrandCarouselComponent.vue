@@ -6,7 +6,7 @@
         <v-carousel-item
             v-for="brand in brands"
             :key="brand.id"
-            :src="brand.logo"
+            :src="renderBrandLogo(brand)"
         ></v-carousel-item>
     </v-carousel>
 </template>
@@ -30,6 +30,19 @@
 
         created() {
 
+        },
+
+        methods:{
+            renderBrandLogo(brand){
+                let logo = this.themeOption.brandDefaultImage
+                if(
+                    brand.logo !== 'null'
+                ){
+                    logo = brand.logo
+                }
+
+                return logo
+            }
         }
     }
 </script>

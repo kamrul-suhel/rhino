@@ -116,7 +116,10 @@ const mutations = {
             })
         } else {
             _.remove(selectedVehicles, function (currentVehicle) {
-                if (vehicle.id === currentVehicle.id) {
+                if (
+                    vehicle.id === currentVehicle.id &&
+                    currentVehicle.condition === type
+                ) {
                     return currentVehicle
                 }
             })

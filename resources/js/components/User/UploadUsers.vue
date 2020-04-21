@@ -64,7 +64,8 @@
                                     </v-flex>
 
                                     <v-flex xs12 sm3 pa-2
-                                            v-if="user.level ==='dealership' || user.level === 'sales_executive'">
+                                            v-if="user.level ==='dealership' ||
+                                            user.level === 'sales_executive' || user.level === 'receptionist' || user.level === 'call_handler'">
                                         <v-select
                                             :items="dealerships"
                                             item-text="name"
@@ -329,6 +330,8 @@
                 switch (level) {
                     case 'dealership':
                     case 'sales_executive':
+                    case 'receptionist':
+                    case 'call_handler':
                         this.$store.dispatch('fetchCountriesForDropdown')
                         this.$store.dispatch('fetchGroupsForDropdown')
                         this.$store.dispatch('fetchDealershipsForDropdown')

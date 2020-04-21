@@ -27,7 +27,8 @@
                                 <v-flex xs12>
                                     <h6 class="xs12 body-1 text-xs-center">
                                         <strong :style="{color: color}">
-                                            {{ slot.start|dateFormat('HH:mm', selectedLanguage.language_code) }} - {{ slot.end|dateFormat('LT', selectedLanguage.language_code)}}
+                                            {{ slot.start|dateFormat('HH:mm', selectedLanguage.language_code) }} - {{
+                                            slot.end|dateFormat('LT', selectedLanguage.language_code)}}
                                         </strong>
                                     </h6>
                                 </v-flex>
@@ -74,7 +75,8 @@
 
                                 <v-flex xs12>
                                     <h6 class="xs12 body-1 text-xs-center">
-                                        <strong :style="{color: color}">{{ date| dateFormat('DD/MM/YYYY', selectedLanguage.language_code) }}</strong>
+                                        <strong :style="{color: color}">{{ date| dateFormat('DD/MM/YYYY',
+                                            selectedLanguage.language_code) }}</strong>
                                     </h6>
                                 </v-flex>
                             </v-layout>
@@ -125,6 +127,18 @@
                                 </v-flex>
                             </v-layout>
                         </v-flex>
+
+                        <v-flex xs12 class="text-xs-center mt-2">
+                            <v-btn class="border-medium rounded-25"
+                                   outline
+                                   :loading="loading"
+                                   :disabled="loading"
+                                   @click="onUpdateAppointment"
+                                   :color="color"
+                                   depressed>
+                                {{ trans.updateAppointment | trans }}
+                            </v-btn>
+                        </v-flex>
                     </v-layout>
                 </v-container>
             </v-flex>
@@ -137,7 +151,10 @@
 
     export default {
         data() {
-            return {}
+            return {
+                loader: null,
+                loading: false
+            }
         },
 
         computed: ({
@@ -155,7 +172,8 @@
                 date: 'getBookingSelectedDate',
                 event: 'getSelectedEvent',
                 isDisable: 'getDisableEditing',
-                selectedLanguage: 'getSubSelectedLanguage'
+                selectedLanguage: 'getSubSelectedLanguage',
+                users: 'getUsers'
             })
         }),
 
@@ -172,6 +190,50 @@
                     title = this.partExchange.registrationNumber
                 }
                 return title
+            },
+
+            onUpdateAppointment() {
+                this.loader = 'loading'
+                this.loading = true
+
+                const appointmentId = this.guest.appointment[0].id
+                const guestId = this.guest.id
+
+                let updateAppointmentForm = new FormData()
+                updateAppointmentForm.append('appointment_id', appointmentId)
+                updateAppointmentForm.append('guest_id', guestId)
+                updateAppointmentForm.append('type', 'updateByGuest')
+                updateAppointmentForm.append('updateByGuest', true)
+                updateAppointmentForm.append('_method', 'PUT')
+
+                const URL = `/api/appointments/${appointmentId}/update`
+                axios.post(URL, updateAppointmentForm).then((response) => {
+                    if (response.data.success) {
+                        // Initialize selected slot, selected sale executive, selected Date
+                        this.$store.commit('setSelectedSlot',{})
+                        this.$store.commit('setBookingSelectedDate','')
+                        this.$store.commit('setBookingSelectedSaleExecutive',{})
+
+
+                        // reset saleExecutives
+                        const users = _.map(this.users, (user) => {
+                            return {
+                                ...user,
+                                selected:''
+                            }
+                        })
+                        this.$store.commit('setUsers', users)
+
+
+                        this.$store.commit('setDisableEditing', false)
+                        this.loading = false
+                        this.loader = null
+                        this.$store.commit('setBookingStep',    1)
+                    }
+                }, error => {
+                    this.loader = null
+                    this.loading = false
+                })
             }
         }
     }
