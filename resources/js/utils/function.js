@@ -300,7 +300,10 @@ export default {
     },
 
     renderVehicleImage(vehicle, dealership, defaultImage) {
-        if (vehicle.image !== null) {
+        if (
+            vehicle.image &&
+            vehicle.image !== null
+        ) {
             return vehicle.image
         }
 
@@ -318,7 +321,7 @@ export default {
                 break
 
             default:
-                image = this.themeOption.brandDefaultImage
+                image = defaultImage
         }
 
         return image

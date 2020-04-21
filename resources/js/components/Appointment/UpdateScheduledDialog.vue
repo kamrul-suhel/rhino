@@ -157,6 +157,21 @@
                 if(!this.updatedScheduleDialog){
                     this.$emit('onUpdateSchedule', false)
                 }
+            },
+
+            appointment(){
+                if(
+                    this.appointment.scheduled_start ||
+                    this.appointment.scheduled_start !== null
+                ) {
+                    this.scheduledStart = moment(this.appointment.scheduled_start).format('HH:mm')
+                }
+                if(
+                    this.appointment.scheduled_end ||
+                    this.appointment.scheduled_end !== null
+                ){
+                    this.scheduledEnd = moment(this.appointment.scheduled_end).format('HH:mm')
+                }
             }
         },
 
@@ -170,8 +185,19 @@
         }),
 
         created() {
-            this.scheduledStart = this.appointment.scheduled_start !== 'null' ? moment(this.appointment.scheduled_start).format('HH:mm') :''
-            this.scheduledEnd = this.appointment.scheduled_end !== 'null' ? moment(this.appointment.scheduled_end).format('HH:mm') :''
+
+            if(
+                this.appointment.scheduled_start ||
+                this.appointment.scheduled_start !== null
+            ) {
+                this.scheduledStart = moment(this.appointment.scheduled_start).format('HH:mm')
+            }
+            if(
+                this.appointment.scheduled_end ||
+                this.appointment.scheduled_end !== null
+            ){
+                this.scheduledEnd = moment(this.appointment.scheduled_end).format('HH:mm')
+            }
         },
 
         methods: {

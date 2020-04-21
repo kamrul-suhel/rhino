@@ -341,6 +341,8 @@
 
                 if (type === 'date') {
                     this.showDatePicker = true
+                }else{
+                    this.showDatePicker = false
                 }
                 this.selectedTeamMemberType = type
                 this.teamMemberShow = !this.teamMemberShow

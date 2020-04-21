@@ -267,6 +267,11 @@
             generateButton() {
                 this.items = [
                     {
+                        title: `${this.trans.guestArrived}`,
+                        status: 2, // No sale
+                    },
+
+                    {
                         title: `${this.trans.completeNoSale}`,
                         status: 3, // No sale
                     },
