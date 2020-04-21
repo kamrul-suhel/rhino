@@ -159,6 +159,13 @@
                                     {{ trans.openingTimes}}
                                 </v-tab>
 
+                                <v-tab
+                                    key="settings"
+                                    ripple
+                                >
+                                    {{ trans.settings}}
+                                </v-tab>
+
                                 <v-tabs-items touchless>
                                     <v-tab-item
                                         key="staff"
@@ -203,6 +210,23 @@
                                         <TimePicker :dealership="dealership"
                                                     v-on:sendTimes="updateTimes">
                                         </TimePicker>
+                                    </v-tab-item>
+
+                                    <v-tab-item
+                                        key="settings">
+                                            <v-checkbox
+                                                v-model="dealership.calendar_access"
+                                                :label="`Allow Calendar Access`"
+                                                >
+                                            </v-checkbox>
+
+                                            <v-checkbox
+                                                v-model="dealership.enable_emails"
+                                                :label="`Send System Emails`"
+                                                >
+                                            </v-checkbox>
+
+                                            <label class="d-block" for="">Update Guest Contact Preferences</label>
                                     </v-tab-item>
                                 </v-tabs-items>
                             </v-tabs>
@@ -251,7 +275,7 @@
             LanguagePicker,
             DealershipUsers,
             EventList,
-            UploadUsers
+            UploadUsers,
         },
 
         data() {
