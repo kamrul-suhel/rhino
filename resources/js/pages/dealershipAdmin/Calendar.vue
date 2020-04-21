@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid px-5>
+    <v-container fluid px-5 v-if="checkAccessUse()">
         <v-layout row wrap px-4
                   v-if="checkAccessLevel()">
             <v-flex xs12 sm6 py-3>
@@ -208,6 +208,14 @@
 
         <AppointmentDialog></AppointmentDialog>
         <AssignToSaleExecutiveDialog></AssignToSaleExecutiveDialog>
+    </v-container>
+
+    <v-container fluid px-5 v-else>
+    <v-layout row wrap px-4>
+        <v-flex xs12 sm6 py-3>
+            <h2>Can not access</h2>
+        </v-flex>
+    </v-layout>
     </v-container>
 </template>
 
@@ -642,6 +650,24 @@
                 }
 
                 return false
+            },
+
+            checkAccessUse(){
+                const authUserLevel = this.authUser.level
+                switch(authUserLevel){
+                    case CONST.ADMIN:
+                    case CONST.CALL_HANDLER:
+                    case CONST.MANAGER:
+                    case CONST.RECEPTIONIST:
+                        return true
+
+                    case CONST.SALE_EXECUTIVE:
+                        if(this.dealership.calendar_access === 1){
+                            return true
+                        }else{
+                            return false
+                        }
+                }
             }
         }
     }
