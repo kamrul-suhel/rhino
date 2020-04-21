@@ -152,6 +152,7 @@
                 bringGuest: 'getBookingBringGuest',
                 partExchange: 'getBookingPartExchange',
                 date: 'getBookingSelectedDate',
+                isDisable: 'getDisableEditing'
             }),
 
             step: {
@@ -179,61 +180,63 @@
                 },
 
                 set(value) {
-                    // validate before forward
-                    switch (value) {
-                        case 1:
-                            // check vehicle selected of not
-                            if (this.vehicles.length <= 0) {
-                                return
-                            }
+                    if(!this.isDisable){
+                        // validate before forward
+                        switch (value) {
+                            case 1:
+                                // check vehicle selected of not
+                                if (this.vehicles.length <= 0) {
+                                    return
+                                }
 
-                        case 2:
-                            if (
-                                !this.slot.slotId ||
-                                !this.saleExecutive.id ||
-                                !this.date
-                            ) {
-                                return
-                            }
-
-                        case 3:
-                            if (
-                                typeof this.partExchange.noVehicleExchange === 'undefined' ||
-                                this.partExchange.noVehicleExchange === false
-
-                            ) {
+                            case 2:
                                 if (
-                                    typeof this.partExchange.registrationNumber === 'undefined' &&
-                                    typeof this.partExchange.makeAndModel === 'undefined'
+                                    !this.slot.slotId ||
+                                    !this.saleExecutive.id ||
+                                    !this.date
                                 ) {
                                     return
                                 }
-                            }
 
-                        case 4:
-                            if (this.vehicles.length <= 0) {
-                                return
-                            }
-
-                            if (
-                                !this.slot.slotId ||
-                                !this.saleExecutive.id ||
-                                !this.date
-                            ) {
-                                return
-                            }
-                            if (
-                                typeof this.partExchange.noVehicleExchange === 'undefined' ||
-                                this.partExchange.noVehicleExchange === false
-
-                            ) {
+                            case 3:
                                 if (
-                                    typeof this.partExchange.registrationNumber === 'undefined' &&
-                                    typeof this.partExchange.makeAndModel === 'undefined'
+                                    typeof this.partExchange.noVehicleExchange === 'undefined' ||
+                                    this.partExchange.noVehicleExchange === false
+
+                                ) {
+                                    if (
+                                        typeof this.partExchange.registrationNumber === 'undefined' &&
+                                        typeof this.partExchange.makeAndModel === 'undefined'
+                                    ) {
+                                        return
+                                    }
+                                }
+
+                            case 4:
+                                if (this.vehicles.length <= 0) {
+                                    return
+                                }
+
+                                if (
+                                    !this.slot.slotId ||
+                                    !this.saleExecutive.id ||
+                                    !this.date
                                 ) {
                                     return
                                 }
-                            }
+                                if (
+                                    typeof this.partExchange.noVehicleExchange === 'undefined' ||
+                                    this.partExchange.noVehicleExchange === false
+
+                                ) {
+                                    if (
+                                        typeof this.partExchange.registrationNumber === 'undefined' &&
+                                        typeof this.partExchange.makeAndModel === 'undefined'
+                                    ) {
+                                        return
+                                    }
+                                }
+                        }
                     }
                     this.$store.commit('setBookingStep', value)
                 }
