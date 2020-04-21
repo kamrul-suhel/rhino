@@ -5,6 +5,7 @@
         class="rhinoFrontend"
     >
         <FDrawer></FDrawer>
+
         <v-content class="rhinoFrontend">
             <v-container class="content">
                 <v-layout justify-end class="banner" row wrap :style="{backgroundImage: `url(${getEventBanner()})`}">
@@ -109,7 +110,6 @@
                 color: 'getFrontendColor',
                 selectedLanguage: 'getSubSelectedLanguage',
                 guest: 'getBookingGuest'
-
             })
         },
 
@@ -125,8 +125,6 @@
 
         created() {
             this.initialize()
-
-            console.log('frotend vue logged', this.selectedEvent)
         },
 
         methods: {

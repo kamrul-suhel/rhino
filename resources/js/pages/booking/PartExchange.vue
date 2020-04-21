@@ -150,8 +150,6 @@
                     }
                 }
 
-                console.log('pare: ', this.partExchange)
-
                 this.$store.commit('setBookingStep', 3)
             }
         }

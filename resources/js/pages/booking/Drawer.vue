@@ -35,7 +35,8 @@
             </v-flex>
 
             <v-flex xs12>
-                <h4 :style="{color:color}">{{ event.start | dateFormat('LL', selectedLanguage.language_code) }} - {{ event.end| dateFormat('LL', selectedLanguage.language_code) }}</h4>
+                <h4 :style="{color:color}">{{ event.start | dateFormat('LL', selectedLanguage.language_code) }} - {{
+                    event.end| dateFormat('LL', selectedLanguage.language_code) }}</h4>
             </v-flex>
 
             <v-flex xs12>
@@ -144,7 +145,13 @@
                 guest: 'getBookingGuest',
                 color: 'getFrontendColor',
                 event: 'getSelectedEvent',
-                selectedLanguage: 'getSubSelectedLanguage'
+                selectedLanguage: 'getSubSelectedLanguage',
+                vehicles: 'getBookingSelectedVehicles',
+                slot: 'getSelectedSlot',
+                saleExecutive: 'getBookingSelectedSaleExecutive',
+                bringGuest: 'getBookingBringGuest',
+                partExchange: 'getBookingPartExchange',
+                date: 'getBookingSelectedDate',
             }),
 
             step: {
@@ -172,13 +179,69 @@
                 },
 
                 set(value) {
+                    // validate before forward
+                    switch (value) {
+                        case 1:
+                            // check vehicle selected of not
+                            if (this.vehicles.length <= 0) {
+                                return
+                            }
+
+                        case 2:
+                            if (
+                                !this.slot.slotId ||
+                                !this.saleExecutive.id ||
+                                !this.date
+                            ) {
+                                return
+                            }
+
+                        case 3:
+                            if (
+                                typeof this.partExchange.noVehicleExchange === 'undefined' ||
+                                this.partExchange.noVehicleExchange === false
+
+                            ) {
+                                if (
+                                    typeof this.partExchange.registrationNumber === 'undefined' &&
+                                    typeof this.partExchange.makeAndModel === 'undefined'
+                                ) {
+                                    return
+                                }
+                            }
+
+                        case 4:
+                            if (this.vehicles.length <= 0) {
+                                return
+                            }
+
+                            if (
+                                !this.slot.slotId ||
+                                !this.saleExecutive.id ||
+                                !this.date
+                            ) {
+                                return
+                            }
+                            if (
+                                typeof this.partExchange.noVehicleExchange === 'undefined' ||
+                                this.partExchange.noVehicleExchange === false
+
+                            ) {
+                                if (
+                                    typeof this.partExchange.registrationNumber === 'undefined' &&
+                                    typeof this.partExchange.makeAndModel === 'undefined'
+                                ) {
+                                    return
+                                }
+                            }
+                    }
                     this.$store.commit('setBookingStep', value)
                 }
             }
         }),
 
         watch: {
-            selectedLanguage(){
+            selectedLanguage() {
             }
         },
 
@@ -200,8 +263,8 @@
                 this.$store.commit('setBookingStep', 3)
             },
 
-            numberFormat(number){
-                if(this.selectedLanguage.id){
+            numberFormat(number) {
+                if (this.selectedLanguage.id) {
                     return number.toLocaleString(`${this.selectedLanguage.language_code}-${this.selectedLanguage.country_code}`)
                 }
 

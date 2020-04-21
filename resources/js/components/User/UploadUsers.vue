@@ -64,7 +64,8 @@
                                     </v-flex>
 
                                     <v-flex xs12 sm3 pa-2
-                                            v-if="user.level ==='dealership' || user.level === 'sales_executive'">
+                                            v-if="user.level ==='dealership' ||
+                                            user.level === 'sales_executive' || user.level === 'receptionist' || user.level === 'call_handler'">
                                         <v-select
                                             :items="dealerships"
                                             item-text="name"
@@ -164,6 +165,8 @@
                                 @change="onUploadCSV"
                             />
                             <v-btn :color="themeOption.buttonPrimaryColor"
+                                   :disabled="loading"
+                                   :loading="loader"
                                    dark
                                    small
                                    @click="onClickUploadCSV()">
@@ -277,7 +280,9 @@
                     status: 1
                 },
                 users: [],
-                existingUsers: []
+                existingUsers: [],
+                loading:false,
+                loader: null
             }
         },
 
@@ -329,6 +334,8 @@
                 switch (level) {
                     case 'dealership':
                     case 'sales_executive':
+                    case 'receptionist':
+                    case 'call_handler':
                         this.$store.dispatch('fetchCountriesForDropdown')
                         this.$store.dispatch('fetchGroupsForDropdown')
                         this.$store.dispatch('fetchDealershipsForDropdown')
@@ -385,6 +392,9 @@
 
                 const URL = `/api/users/upload`
 
+                this.loader = 'loading'
+                this.loading = true
+
                 axios.post(URL, guestForm).then((response) => {
                     if (response.data.success) {
                         let users = [...response.data.users]
@@ -394,6 +404,12 @@
 
                         this.users = [...users]
                     }
+
+                    this.loader = null
+                    this.loading = false
+                },error => {
+                    this.loader = null
+                    this.loading = false
                 })
             },
 

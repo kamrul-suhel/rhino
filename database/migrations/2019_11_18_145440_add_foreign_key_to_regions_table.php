@@ -34,7 +34,8 @@ class AddForeignKeyToRegionsTable extends Migration
     public function down()
     {
         Schema::table('regions', function (Blueprint $table) {
-            $table->dropForeign(['country_id', 'brand_id']);
+            $table->dropForeign('regions_country_id_foreign');
+            $table->dropForeign('regions_brand_id_foreign');
         });
     }
 }

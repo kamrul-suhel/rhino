@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-layout row wrap align-center justify-center class="booking-confirmation" px-5>
-            <v-flex class="xs12" align-center>
+            <v-flex class="xs12" align-center v-if="!isDisable">
                 <h4 class="display-1 mt-5 mx-2 text-xs-center">
                     {{ trans.FollowingDetailsAreCorrect }}
                 </h4>
@@ -36,7 +36,7 @@
                                                     cycle="false"
                                                     v-for="vehicle in vehicles"
                                                     :key="`${vehicle.id}-${vehicle.condition}`"
-                                                    :src="vehicle.driver_seating_position_left_image"
+                                                    :src="renderVehicleImage(vehicle)"
                                                 ></v-carousel-item>
                                             </v-carousel>
                                         </v-flex>
@@ -243,6 +243,8 @@
                     <v-btn class="border-medium height-50 rounded-25 padding-l-85 padding-r-45"
                            :style="{backgroundColor: color}"
                            @click="onConfirmBooking()"
+                           :loading="loading"
+                           :disabled="loading"
                            outline
                            :color="color"
                            depressed>
@@ -261,6 +263,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import BookingConfirmationDisable from "@/components/Booking/BookingConfirmationDisable";
+    import fn from "@/utils/function"
 
     export default {
         components: {
@@ -268,7 +271,10 @@
         },
 
         data() {
-            return {}
+            return {
+                loader: null,
+                loading: false
+            }
         },
 
         computed: ({
@@ -286,7 +292,8 @@
                 date: 'getBookingSelectedDate',
                 event: 'getSelectedEvent',
                 isDisable: 'getDisableEditing',
-                selectedLanguage: 'getSubSelectedLanguage'
+                selectedLanguage: 'getSubSelectedLanguage',
+                dealership: 'getSelectedDealership'
             })
         }),
 
@@ -297,6 +304,9 @@
         methods: {
             onConfirmBooking() {
                 if (this.isDisable) return
+
+                this.loader = 'loading'
+                this.loading = true
 
                 let bookingForm = new FormData()
 
@@ -359,6 +369,11 @@
                             }
                         }
                     }
+                    this.loading = false
+                    this.loader = null
+                },error => {
+                    this.loading = false
+                    this.loader = null
                 })
             },
 
@@ -385,6 +400,13 @@
                     title = this.partExchange.registrationNumber
                 }
                 return title
+            },
+
+            renderVehicleImage(vehicle) {
+                if(this.dealership){
+                    const image =  fn.renderVehicleImage(vehicle, this.dealership, this.themeOption.brandDefaultImage)
+                    return image
+                }
             }
         }
     }
