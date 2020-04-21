@@ -75,7 +75,13 @@ class UserUploadController extends Controller
                 }
 
                 foreach ($user as $key => $value) {
-                    $userRequest->merge([$key => $value]);
+                    if($key == 'password'){
+                        $password = $string = str_replace(' ', '', $value); // remove whitespace
+                        $userRequest->merge([$key => $password]);
+                    }else{
+                        $userRequest->merge([$key => $value]);
+                    }
+
                 }
 
                 $userController = new RegisterController($userRequest);

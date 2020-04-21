@@ -18,13 +18,18 @@ class BrandDealershipController extends Controller
             'brand_dealership.*',
             'brands_translation.name as brand',
             'regions.name as region',
-            '$trans[' as country'
+            'countries_translation.name as country'
         )->leftJoin('brands', function ($brand) {
             $brand->on('brands.id', '=', 'brand_dealership.brand_id');
             $brand->leftJoin('brands_translation', 'brands_translation.brand_id', '=', 'brands.id');
             $brand->where('brands_translation.language_id', $this->languageId);
-        })->leftJoin('regions', 'regions.id', '=', 'brand_dealership.region_id')
-            ->leftJoin('countries', 'regions.country_id', '=', 'countries.id')
+        })->leftJoin('regions', function($region){
+            $region->on('regions.id', '=', 'brand_dealership.region_id')
+                ->leftJoin('countries_translation', function($countryT){
+                      $countryT->on('countries_translation.country_id', '=', 'regions.country_id')
+                      ->where('countries_translation.language_id', $this->languageId);
+                });
+        })
             ->where('brand_dealership.dealership_id', $dealershipId);
 
         if ($request->has('paginate')) {

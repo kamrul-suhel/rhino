@@ -165,6 +165,8 @@
                                 @change="onUploadCSV"
                             />
                             <v-btn :color="themeOption.buttonPrimaryColor"
+                                   :disabled="loading"
+                                   :loading="loader"
                                    dark
                                    small
                                    @click="onClickUploadCSV()">
@@ -278,7 +280,9 @@
                     status: 1
                 },
                 users: [],
-                existingUsers: []
+                existingUsers: [],
+                loading:false,
+                loader: null
             }
         },
 
@@ -388,6 +392,9 @@
 
                 const URL = `/api/users/upload`
 
+                this.loader = 'loading'
+                this.loading = true
+
                 axios.post(URL, guestForm).then((response) => {
                     if (response.data.success) {
                         let users = [...response.data.users]
@@ -397,6 +404,12 @@
 
                         this.users = [...users]
                     }
+
+                    this.loader = null
+                    this.loading = false
+                },error => {
+                    this.loader = null
+                    this.loading = false
                 })
             },
 
