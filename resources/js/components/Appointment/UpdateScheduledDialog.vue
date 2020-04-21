@@ -170,8 +170,8 @@
         }),
 
         created() {
-            this.scheduledStart = this.appointment.scheduled_start !== 'null' ? moment(this.appointment.scheduled_start).format('HH:mm') :''
-            this.scheduledEnd = this.appointment.scheduled_end !== 'null' ? moment(this.appointment.scheduled_end).format('HH:mm') :''
+            this.scheduledStart = this.appointment.scheduled_start !== 'null' ? moment(this.appointment.scheduled_start).format('HH:mm') : null
+            this.scheduledEnd = this.appointment.scheduled_end !== 'null' ? moment(this.appointment.scheduled_end).format('HH:mm') : null
         },
 
         methods: {
