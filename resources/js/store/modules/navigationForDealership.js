@@ -35,7 +35,7 @@ const mutations = {
                 ],
                 subGroups:[
                     {
-                        icon: 'person',
+                        icon: 'fa-user',
                         text: `${trans.bookAGuest}`,
                         link: 'dealershipAdminBookAGuest',
                         access: [
@@ -44,7 +44,7 @@ const mutations = {
                     },
 
                     {
-                        icon: 'cloud_download',
+                        icon: 'fa-cloud-download-alt',
                         text: `${trans.downloadBookedGuests}`,
                         link: 'bookedGuest',
                         access: [
@@ -55,7 +55,7 @@ const mutations = {
                     },
 
                     {
-                        icon: 'cloud_download',
+                        icon: 'fa-cloud-download-alt',
                         text: `${trans.downloadUnbookedGuests}`,
                         link: 'unbookedGuest',
                         access: [
@@ -73,7 +73,7 @@ const mutations = {
                 access: ['dealership'],
                 subGroups:[
                     {
-                        icon: 'date_range',
+                        icon: 'fa-calendar-alt',
                         text: `${trans.calendar}`,
                         link: 'dealershipAdminCalendar',
                         access: [
@@ -85,7 +85,7 @@ const mutations = {
                     },
 
                     {
-                        icon: 'directions_car',
+                        icon: 'fa-car',
                         text: `${trans.editEvent}`,
                         link: 'editDealershipsEvent',
                         access: [
@@ -94,7 +94,7 @@ const mutations = {
                     },
 
                     {
-                        icon: 'add',
+                        icon: 'fa-plus',
                         text: `${trans.updateSales}`,
                         link: 'saleUpdate',
                         access: [
@@ -106,7 +106,7 @@ const mutations = {
                     },
 
                     {
-                        icon: 'insert_chart_outlined',
+                        icon: 'fa-chart-bar',
                         text: `${trans.analytics}`,
                         link: 'dealershipAnalytics',
                         access: [
@@ -115,7 +115,7 @@ const mutations = {
                     },
 
                     {
-                        icon: 'business',
+                        icon: 'fa-building',
                         text: `${trans.editDealership}`,
                         link: 'editDealership',
                         access: [

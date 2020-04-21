@@ -70,9 +70,7 @@
                                 :to="{name: 'listUsers'}">
                             <v-layout row align-center>
                                 <v-flex>
-                                    <v-img aspect-ratio="2.0"
-                                           contain
-                                           src="/images/icons/book_a_guest.jpg"/>
+                                    <v-icon :color="themeOption.dashboardIcon">fa-users</v-icon>
                                 </v-flex>
 
                                 <v-flex>
@@ -96,9 +94,7 @@
                                 :to="{name: 'listVehicles'}">
                             <v-layout row justify-space-around>
                                 <v-flex align-self-center>
-                                    <v-img aspect-ratio="2.0"
-                                           contain
-                                           src="/images/icons/book_a_guest.jpg"/>
+                                    <v-icon :color="themeOption.dashboardIcon">fa-car</v-icon>
                                 </v-flex>
 
                                 <v-flex>
@@ -122,9 +118,7 @@
                                 :to="{name: 'listEvents'}">
                             <v-layout row justify-space-around>
                                 <v-flex align-self-center>
-                                    <v-img aspect-ratio="2.0"
-                                           contain
-                                           src="/images/icons/book_a_guest.jpg"/>
+                                    <v-icon :color="themeOption.dashboardIcon">fa-calendar-alt</v-icon>
                                 </v-flex>
 
                                 <v-flex>
@@ -148,7 +142,7 @@
                     <v-layout row wrap>
                         <v-flex xs6 pa-2>
                             <v-card class="elevation-8 pa-4 rounded-10 text-xs-center " :to="{name: 'listCompanies'}">
-                                <v-icon large color="#000">business</v-icon>
+                                <v-icon large color="#000">fa-building</v-icon>
                                 <v-card-text class="px-2">
                                     <span class="title">{{ `${trans.companies}`|trans }}</span>
                                 </v-card-text>

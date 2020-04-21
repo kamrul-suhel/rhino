@@ -5,6 +5,7 @@
             v-model="drawer"
             app
             width="300"
+            class="navigationMenu"
     >
 
         <v-layout row wrap align-content-center>
@@ -58,7 +59,7 @@
         <v-list>
             <v-list-tile @click="$router.push({name: 'dashboard'})">
                 <v-list-tile-action>
-                    <v-icon :color="themeOption.adminNavIconColor">home</v-icon>
+                    <v-icon :color="themeOption.adminNavIconColor">fa-home</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-title>{{ trans.dashboard |trans }}</v-list-tile-title>
             </v-list-tile>
@@ -81,7 +82,7 @@
 
             <v-list-tile @click="onLogout">
                 <v-list-tile-action>
-                    <v-icon :color="themeOption.adminNavIconColor">power_settings_new
+                    <v-icon :color="themeOption.adminNavIconColor">fa-power-off
                     </v-icon>
                 </v-list-tile-action>
 

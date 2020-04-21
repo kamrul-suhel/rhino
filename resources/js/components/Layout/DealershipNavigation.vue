@@ -5,6 +5,7 @@
         v-model="drawer"
         app
         width="300"
+        class="navigationMenu"
     >
         <v-layout row wrap align-content-center>
             <v-flex xs12>
@@ -24,7 +25,7 @@
         <v-list>
             <v-list-tile @click="onPageChange({link: 'dashboard'})">
                 <v-list-tile-action>
-                    <v-icon :color="themeOption.dealershipAdminNavColor">home</v-icon>
+                    <v-icon :color="themeOption.dealershipAdminNavColor">fa-home</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-title>{{ trans.dashboard }}</v-list-tile-title>
             </v-list-tile>
@@ -51,7 +52,7 @@
 
             <v-list-tile @click="onLogout">
                 <v-list-tile-action>
-                    <v-icon :color="themeOption.dealershipAdminNavColor">power_settings_new
+                    <v-icon :color="themeOption.dealershipAdminNavColor">fa-power-off
                     </v-icon>
                 </v-list-tile-action>
 

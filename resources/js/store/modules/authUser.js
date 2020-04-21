@@ -19,6 +19,7 @@ const defaultState = {
         buttonLoading: false,
         buttonLoadingStyle: 'loading',
         switchOnColor: '#212729',
+        dashboardIcon: '#000',
 
         adminHeader: '#31393C',
         adminHeaderHeight: 150,

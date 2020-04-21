@@ -10,6 +10,8 @@
     <title>{{ isset($title) ? $title  : "Rhino" }}</title>
 
     <!-- Scripts -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -18,12 +20,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito|Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
+    
     <!-- Styles -->
     <link href="{{ asset('css/vuetify.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
     </div>
+
 </body>
 </html>

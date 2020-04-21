@@ -132,7 +132,7 @@
                     <v-flex xs6>
                         <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 :to="{name: 'dealershipAdminCalendar'}">
-                            <v-icon large color="#000">business</v-icon>
+                            <v-icon :color="themeOption.dashboardIcon">fa-calendar-alt</v-icon>
                             <v-card-text class="px-2">
                                 {{ `${trans.calendar}` }}
                             </v-card-text>
@@ -154,7 +154,11 @@
                         <v-card class="elevation-8 py-4 text-xs-center rounded-10"
                                 hover
                                 @click="onNavigateTo('eventSales')">
-                            <v-icon large color="#000">languages</v-icon>
+                            <v-img width="36"
+                                       height="36"
+                                       class="mx-auto"
+                                       contain
+                                       src="/images/icons/country.jpg"/>
                             <v-card-text class="px-2">
                                 {{ `${trans.updateSales}` }}
                             </v-card-text>

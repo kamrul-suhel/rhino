@@ -18,7 +18,7 @@ const mutations = {
         const navItems = [
 
             {
-                icon: 'person',
+                icon: 'fa-user',
                 text: `${trans.manageUsers}`,
                 link: 'listUsers',
                 access: ['admin', 'dealership'],
@@ -27,7 +27,7 @@ const mutations = {
 
 
             {
-                icon: 'drive_eta',
+                icon: 'fa-car',
                 text: `${trans.manageVehicles}`,
                 link: 'listVehicles',
                 access: ['admin'],
@@ -36,7 +36,7 @@ const mutations = {
 
 
             {
-                icon: 'event',
+                icon: 'fa-calendar-alt',
                 text: `${trans.manageEvents}`,
                 link: 'listEvents',
                 access: ['admin'],
@@ -44,7 +44,7 @@ const mutations = {
             },
 
             {
-                icon: 'grade',
+                icon: 'fa-certificate',
                 text: `${trans.manageEventType}`,
                 link: 'listEventTypes',
                 access: ['admin'],
@@ -52,7 +52,7 @@ const mutations = {
             },
 
             {
-                icon: 'flag',
+                icon: 'fa-flag',
                 text: `${trans.manageLanguages}`,
                 link: 'listLanguages',
                 access: ['admin'],
@@ -60,7 +60,7 @@ const mutations = {
             },
 
             {
-                icon: 'business',
+                icon: 'fa-building',
                 text: `${trans.manageCompanies}`,
                 link: 'listCompanies',
                 access: ['admin'],
@@ -68,7 +68,7 @@ const mutations = {
             },
 
             {
-                icon: 'assignment_ind',
+                icon: 'fa-id-badge',
                 text: `${trans.manageBrands}`,
                 link: 'listBrands',
                 access: ['admin'],
@@ -77,7 +77,7 @@ const mutations = {
 
 
             {
-                icon: 'language',
+                icon: 'fa-globe',
                 text: `${trans.manageCountries}`,
                 link: 'listCountries',
                 access: ['admin'],
@@ -85,7 +85,7 @@ const mutations = {
             },
 
             {
-                icon: 'blur_linear',
+                icon: 'fa-braille',
                 text: `${trans.manageGroups}`,
                 link: 'listDealershipsGroups',
                 access: ['admin'],
@@ -93,7 +93,7 @@ const mutations = {
             },
 
             {
-                icon: 'tag_faces',
+                icon: 'fa-smile',
                 text: `${trans.manageDealerships}`,
                 link: 'listDealerships',
                 access: ['admin'],
@@ -101,7 +101,7 @@ const mutations = {
             },
 
             {
-                icon: 'people',
+                icon: 'fa-users',
                 text: `${trans.manageGuests}`,
                 link: 'listGuest',
                 access: ['admin'],
@@ -109,7 +109,7 @@ const mutations = {
             },
 
             {
-                icon: 'keyboard_arrow_right',
+                icon: 'fa-language',
                 text: trans.translations,
                 link: 'translationSetting',
                 access: ['admin'],
