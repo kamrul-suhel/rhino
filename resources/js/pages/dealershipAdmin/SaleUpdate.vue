@@ -23,11 +23,14 @@
                     :total-items="totalGuests"
                     :loading="loading"
                     class="elevation-1 r-table"
-                >
+                > 
                     <template v-slot:items="props">
                         <td>{{ `${props.item.first_name} ${props.item.surname}` }}</td>
                         <td>{{ renderGuestStatus(props.item) }}</td>
-                        <td>TEST</td>
+                        <td>
+                            <input type="checkbox" v-model="props.item.confirmation_letter_sent"
+                                @click="onLetterSentChange(props.item.id, props.item.confirmation_letter_sent)" />
+                            </td>
                         <td class="text-xs-right">
                             <v-menu>
                                 <template #activator="{ on: menu }">
@@ -37,7 +40,7 @@
                                                 :color="themeOption.buttonColor"
                                                 flat
                                                 v-on="{ ...tooltip, ...menu }"
-                                            >{{ `${trans.userStatus}` }}
+                                            >{{ `${trans.status}` }}
                                             </v-btn>
                                         </template>
                                         <span>{{ `${trans.updateGuest}` }}</span>
@@ -314,6 +317,21 @@
                 }).catch(() => {
                     this.loading = false
                     this.$store.dispatch('initializeError', error)
+                })
+            },
+
+            onLetterSentChange(guestId, value){
+                const data = {'value': value }
+                const URL = `/api/guests/${guestId}/lettersent`
+                axios.post(URL, data).then((response) => {
+                    if (response.data.success) {
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.guest}  ${this.trans.successfullyUpdated}`
+                        })
+                        this.initialize()
+                    }
                 })
             }
         }

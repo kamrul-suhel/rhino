@@ -2437,5 +2437,10 @@ return [
     [
         'label' => 'Letter sent',
         'identifier' => 'letterSent'
-    ]
+    ],
+
+    [
+        'label' => 'Please contact dealership manager for access to calendar',
+        'identifier' => 'calenderAccessDenied'
+    ],
 ];

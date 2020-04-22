@@ -80,10 +80,10 @@ const mutations = {
 
 
                 {
-                    text: trans.complete,
+                    text: trans.status,
                     align: 'right',
                     sortable: false,
-                    value: 'complete'
+                    value: 'status'
                 }
             ]
         }else{
