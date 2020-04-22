@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="mobile-message">
-
+                Please view on larger screen size
             </div>
         </v-flex>
     </v-layout>
@@ -121,13 +121,16 @@ table td {
     width: 200px!important;
 }
 
-.view-all table {
+.view-all  {
     display:none!important
 }
 @media (min-width: 768px){
-    .view-all table {
+    .view-all  {
         display:block!important
     }
+
+        
+    .mobile-message { display: none;}
 }
 
 </style>
