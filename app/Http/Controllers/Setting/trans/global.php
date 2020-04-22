@@ -1473,6 +1473,17 @@ return [
         'identifier' => 'marketingPreferences'
     ],
 
+    [
+        'label' => 'Update Suppression list',
+        'identifier' => 'updateSuppressionList'
+    ],
+
+
+    [
+        'label' => 'Preferences',
+        'identifier' => 'preferences'
+    ],
+
 
 
     [
@@ -2023,6 +2034,11 @@ return [
         'label' => 'Yes',
         'identifier' => 'yes'
     ],
+    [
+        'label' => 'No',
+        'identifier' => 'no'
+    ],
+
 
     [
         'label' => 'Calendar',

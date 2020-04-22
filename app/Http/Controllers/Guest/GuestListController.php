@@ -79,6 +79,7 @@ class GuestListController extends Controller
         }
 
         return response()->json([
+            'success' => true,
             'guests' => $data,
             'total' => $totalGuest
         ]);

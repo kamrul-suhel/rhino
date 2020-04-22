@@ -227,6 +227,13 @@
                                         {{ `${trans.brands}` }}
                                     </v-tab>
 
+                                    <v-tab
+                                        key="eventPreference"
+                                        ripple
+                                    >
+                                        {{ `${trans.preferences}` }}
+                                    </v-tab>
+
                                     <v-tabs-items touchless>
 
                                         <v-tab-item
@@ -263,6 +270,12 @@
                                             <Brand v-if="selectedEvent.id"
                                                     :eventId="selectedEvent.id"
                                             ></Brand>
+                                        </v-tab-item>
+
+                                        <v-tab-item
+                                            key="eventPreference"
+                                        >
+                                            <GuestSuppression/>
                                         </v-tab-item>
                                     </v-tabs-items>
                                 </v-tabs>
@@ -346,7 +359,8 @@
     import Vehicle from '@/components/Event/EventVehicle'
     import EventUsers from '@/components/Event/EventUsers'
     import Appointment from "@/components/Appointment/Appointment"
-    import EventGuest from "@/components/Event/EventGuest";
+    import EventGuest from "@/components/Event/EventGuest"
+    import GuestSuppression from "@/components/Event/GuestSuppression";
 
     export default {
         components: {
@@ -357,7 +371,8 @@
             Vehicle,
             EventUsers,
             Appointment,
-            EventGuest
+            EventGuest,
+            GuestSuppression
         },
 
         data() {
@@ -623,6 +638,10 @@
                         admin: true
                     }
                 })
+            },
+
+            onDownloadSuppressionList(){
+                console.log('download suppression list')
             }
         }
     }
