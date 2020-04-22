@@ -1,6 +1,7 @@
 <template>
     <v-card min-height="400"
-            max-height="600">
+            max-height="600"
+            class="scroll-y eventUser">
         <v-card-title>
             <h3>{{ `${trans.dealershipUsers}`}}</h3>
         </v-card-title>
