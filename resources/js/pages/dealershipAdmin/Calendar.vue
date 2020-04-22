@@ -71,6 +71,18 @@
                                 </v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
+
+                        <v-list-tile
+                            v-if="teamMemberShow"
+                            avatar
+                            @click="onSelectTeamMember('viewAll')"
+                        >
+                            <v-list-tile-content>
+                                <v-list-tile-title>
+                                    {{ `${trans.viewAll}` }}
+                                </v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
                     </v-list>
                 </v-card>
             </v-flex>
@@ -203,8 +215,15 @@
         <FilterByDate v-if="filterByDate"
                       :date="date"
                       @onDownload="onDownloadCSV"
+                      @onGoBack="onGoBack"
                       :filterByDate="filterByDate">
         </FilterByDate>
+
+        <v-layout row warp
+                  mt-5
+                  v-if="selectedTeamMemberType === 'viewAll'">
+            <ViewAllAppointment :dates="allowDates"/>
+        </v-layout>
 
         <AppointmentDialog></AppointmentDialog>
         <AssignToSaleExecutiveDialog></AssignToSaleExecutiveDialog>
@@ -226,6 +245,7 @@
     import FilterByDate from "@/components/Appointment/FilterByDate";
     import AppointmentDialog from "@/components/Appointment/AppointmentDialog"
     import AssignToSaleExecutiveDialog from "@/components/Appointment/AssignToSaleExecutiveDialog"
+    import ViewAllAppointment from "@/components/Appointment/ViewAllAppointment";
     import CONST from '@/utils/const'
 
     export default {
@@ -234,7 +254,8 @@
             User,
             AppointmentDialog,
             AssignToSaleExecutiveDialog,
-            FilterByDate
+            FilterByDate,
+            ViewAllAppointment
         },
 
         props: {
@@ -256,6 +277,9 @@
                 saleExecutiveDropdown: false,
                 isUserSelected: false,
                 isFiltering: true,
+
+                viewAll: false,
+                viewAllDates: [],
 
                 showDatePicker: false,
                 filterByDate: false,
@@ -345,6 +369,11 @@
             onSelectTeamMember(type) {
                 if (this.rhinoAdmin) {
                     this.fetchEventUser()
+                }
+                // if view all
+                if(type === 'viewAll'){
+                    this.fetchDataForViewAll(type)
+                    return
                 }
 
                 if (type === 'date') {
@@ -668,6 +697,20 @@
                             return false
                         }
                 }
+            },
+
+            async fetchDataForViewAll(type){
+                // get all date in this event
+                const allowDates = fn.allowedDates(this.selectedEvent, this.dealership)
+                this.viewAllDates = [...allowDates]
+
+                // Fetch all Appointment
+                const eventId = this.selectedEvent.id
+                await this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId})
+
+                this.selectedTeamMemberType = type
+                this.teamMemberShow = !this.teamMemberShow
+
             }
         }
     }

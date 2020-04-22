@@ -373,6 +373,12 @@ return [
         'label' => 'Kind Regards,',
         'identifier' => 'kindRegards'
     ],
+
+    [
+        'label' => 'View all',
+        'identifier' => 'viewAll'
+    ],
+
     [
         'label' => 'Events Team',
         'identifier' => 'eventsTeam'
