@@ -1,27 +1,28 @@
 <template>
     <v-layout row wrap>
         <v-flex xs12>
-            <div class="r-tab open no-title">
+            <div class="r-tab open no-title view-all">
                 <div class="r-tab-content open">
                     <v-container fluid pa-0 grid-list-xl>
-                        <table class="appointmentAllView">
+                        <div style="overflow-x:auto;">
+                        <table class="appointmentAllView" style="overflow-x:scroll;">
                             <tr>
-                                <th>Date / slot</th>
-                                <th v-for="(user, index) in users" :key="index">
+                                <th width="200px">Date / slot</th>
+                                <th width="200px" v-for="(user, index) in users" :key="index">
                                     {{ `${user.firstname} ${user.surname}` }}
                                 </th>
                             </tr>
 
                             <tr v-for="date in dates" :key="date">
                                 <td :colspan="users.length+1">
-                                    <h4>{{ date }}</h4>
-                                    <table style="width:100%">
-                                        <tr v-for="appointmentSlot in initializeUserAppointment(date)">
-                                            <td>
+                                    <h4>{{ date|dateFormat('d M Y') }}</h4>
+                                    <table style="width:100%;">
+                                        <tr v-for="appointmentSlot in initializeUserAppointment(date)" style="display: flex;">
+                                            <td width="200px">
                                                 {{ appointmentSlot.start|dateFormat('LT') }} - {{ appointmentSlot.end| dateFormat('LT') }}
                                             </td>
 
-                                            <td v-for="user in users" :key="user.id">
+                                            <td width="200px" v-for="user in users" :key="user.id">
                                                 <ViewAllAppointmentUser :appointmentSlot="appointmentSlot" :user="user">
                                                 </ViewAllAppointmentUser>
                                             </td>
@@ -31,8 +32,12 @@
                                 </td>
                             </tr>
                         </table>
+                        </div>
                     </v-container>
                 </div>
+            </div>
+            <div class="mobile-message">
+                Please view on larger screen size
             </div>
         </v-flex>
     </v-layout>
@@ -107,3 +112,25 @@
         }
     }
 </script>
+
+<style>
+
+
+table th,
+table td {
+    width: 200px!important;
+}
+
+.view-all  {
+    display:none!important
+}
+@media (min-width: 768px){
+    .view-all  {
+        display:block!important
+    }
+
+        
+    .mobile-message { display: none;}
+}
+
+</style>

@@ -67,4 +67,22 @@ class GuestShowController extends Controller
             'guest' => $guest
         ]);
     }
+
+    public function lettersent(Request $request, $id)
+    {
+        if ( $request->value == 0 ){
+            $update = 1;
+        } else {
+            $update = 0;
+        }
+
+        Guest::where('id', $id)->update([
+            'confirmation_letter_sent' => $update
+        ]);
+
+        return response()->json([
+            'success' => true
+        ]);
+
+    }
 }

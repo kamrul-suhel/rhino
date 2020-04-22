@@ -232,7 +232,7 @@
     <v-container fluid px-5 v-else>
     <v-layout row wrap px-4>
         <v-flex xs12 sm6 py-3>
-            <h2>Can not access</h2>
+            <h2>{{trans.calenderAccessDenied}}</h2>
         </v-flex>
     </v-layout>
     </v-container>

@@ -34,7 +34,7 @@ class CountryController extends Controller
         if ($request->has('paginate') && !empty($request->paginate)) {
             // Search by name
             if ($request->has('search') && !empty($request->search)) {
-                $countries = $countries->where('name', 'LIKE', '%' . $request->search . '%');
+                $countries = $countries->where('countries_translation.name', 'LIKE', '%' . $request->search . '%');
             }
 
             // Get Only active country

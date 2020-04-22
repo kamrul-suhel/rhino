@@ -292,6 +292,7 @@ Route::prefix('guests')->middleware('VerifyJWT')->group(function () {
     Route::get('', 'Guest\GuestListController@list');
     Route::get('dropdown', 'Guest\GuestDropdownController@list');
     Route::get('{id}', 'Guest\GuestShowController@show');
+    Route::post('{id}/lettersent', 'Guest\GuestShowController@lettersent');
     Route::post('', 'Guest\GuestStoreController@store');
     Route::post('upload', 'Guest\GuestUploadCSVController@generateGuests');
     Route::post('upload/confirm', 'Guest\GuestUploadCSVController@store');
