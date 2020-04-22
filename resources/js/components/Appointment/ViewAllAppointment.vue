@@ -4,33 +4,37 @@
             <div class="r-tab open no-title">
                 <div class="r-tab-content open">
                     <v-container fluid pa-0 grid-list-xl>
-                        <table class="appointmentAllView">
+                        <div style="overflow-x:auto;">
+                        <table class="appointmentAllView" style="overflow-x:scroll;">
                             <tr>
-                                <th>Date / slot</th>
-                                <th v-for="(user, index) in users" :key="index">
+                                <th width="200px">Date / slot</th>
+                                <th width="200px" v-for="(user, index) in users" :key="index">
                                     {{ `${user.firstname} ${user.surname}` }}
                                 </th>
                             </tr>
 
                             <tr v-for="date in dates" :key="date">
                                 <td :colspan="users.length+1">
-                                    <h4>{{ date }}</h4>
-                                    <table style="width:100%">
-                                        <tr v-for="appointmentSlot in initializeUserAppointment(date)">
-                                            <td>
+                                    <h4>{{ date|dateFormat('d M Y') }}</h4>
+                                    <div style="overflow-x:auto;">
+                                    <table style="width:100%; overflow-x:scroll;">
+                                        <tr v-for="appointmentSlot in initializeUserAppointment(date)" style="display: flex;">
+                                            <td width="200px">
                                                 {{ appointmentSlot.start|dateFormat('LT') }} - {{ appointmentSlot.end| dateFormat('LT') }}
                                             </td>
 
-                                            <td v-for="user in users" :key="user.id">
+                                            <td width="200px" v-for="user in users" :key="user.id">
                                                 <ViewAllAppointmentUser :appointmentSlot="appointmentSlot" :user="user">
                                                 </ViewAllAppointmentUser>
                                             </td>
 
                                         </tr>
                                     </table>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
+                        </div>
                     </v-container>
                 </div>
             </div>
@@ -107,3 +111,17 @@
         }
     }
 </script>
+
+<style>
+
+table {
+    max-width: 100%!important;
+    overflow-x: scroll!important;
+}
+
+table th,
+table td {
+    width: 200px!important;
+}
+
+</style>
