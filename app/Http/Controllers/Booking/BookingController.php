@@ -34,14 +34,23 @@ class BookingController extends Controller
             $event = Event::select(
                 'events.*',
                 'events_translation.name',
-                'events_translation.notes'
+                'events_translation.notes',
+                'types_translation.name as type_name'
             )
                 ->leftJoin('events_translation', function ($eventT) {
                     $eventT->on('events_translation.event_id', '=', 'events.id')
                         ->where('events_translation.language_id', $this->languageId);
                 })
+                ->leftJoin('types', function($type){
+                    $type->on('types.id', '=', 'events.type_id');
+                    $type->leftJoin('types_translation', function($typeT){
+                        $typeT->on('types_translation.type_id', '=', 'types.id');
+                        $typeT->where('types_translation.language_id', $this->languageId);
+                    });
+                })
                 ->where('events.id', $guest->event_id)
                 ->first();
+                
 
             $dealership = Dealership::select(
                 'dealerships.*',

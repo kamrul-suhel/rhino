@@ -12,7 +12,7 @@
                     <v-flex xs12 md5 align-self-center class="mt-md-5 mr-md-5">
                         <h1 class="font-weight-thin text-md-right text-right px-4 mr-4">
                             <span v-if="selectedEvent.greeting == 0">{{trans.hello}}</span> <span v-if="selectedEvent.greeting == 1">{{trans.hi}}</span>
-                            {{  guest.first_name}} {{ trans.greetingFrontend }} {{ selectedEvent.name }}
+                            {{  guest.first_name}} {{ trans.greetingFrontend }} {{ selectedEvent.type_name }}
                         </h1>
                     </v-flex>
                 </v-layout>
