@@ -24,6 +24,12 @@
             left: 0;
             background: #fff;
         }
+
+        &.no-title{
+            &::before{
+                display: none;
+            }
+        }
     }
 
     .r-tab-title{
@@ -75,6 +81,22 @@
         position:relative;
         z-index:1;
         background: #fff;
+
+        table{
+            width:100%;
+            th{
+                width:200px;
+                text-align:left;
+            }
+            td{
+                width:200px;
+                text-align:left;
+            }
+        }
+    }
+
+    .appointmentAllView{
+        width:100%;
     }
 }
 

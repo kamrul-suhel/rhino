@@ -373,6 +373,12 @@ return [
         'label' => 'Kind Regards,',
         'identifier' => 'kindRegards'
     ],
+
+    [
+        'label' => 'View all',
+        'identifier' => 'viewAll'
+    ],
+
     [
         'label' => 'Events Team',
         'identifier' => 'eventsTeam'
@@ -825,6 +831,11 @@ return [
     [
         'label' => 'Are you sure you want to delete ?',
         'identifier' => 'deleteConfirmation'
+    ],
+
+    [
+        'label' => 'Condition',
+        'identifier' => 'condition'
     ],
 
     [
@@ -1468,6 +1479,17 @@ return [
         'identifier' => 'marketingPreferences'
     ],
 
+    [
+        'label' => 'Update Suppression list',
+        'identifier' => 'updateSuppressionList'
+    ],
+
+
+    [
+        'label' => 'Preferences',
+        'identifier' => 'preferences'
+    ],
+
 
 
     [
@@ -2018,6 +2040,11 @@ return [
         'label' => 'Yes',
         'identifier' => 'yes'
     ],
+    [
+        'label' => 'No',
+        'identifier' => 'no'
+    ],
+
 
     [
         'label' => 'Calendar',

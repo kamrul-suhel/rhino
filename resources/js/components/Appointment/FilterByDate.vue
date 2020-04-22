@@ -14,6 +14,7 @@
                     </div>
                     <div>
                         <v-icon
+                            @click="onGoBack()"
                             :color="themeOption.adminNavIconColor">close
                         </v-icon>
                     </div>
@@ -101,6 +102,10 @@
         methods: {
             onDownloadCSV(){
                 this.$emit('onDownload', this.date)
+            },
+
+            onGoBack(){
+                this.$emit('onGoBack')
             }
         }
     }
