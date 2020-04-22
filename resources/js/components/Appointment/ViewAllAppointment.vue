@@ -1,7 +1,7 @@
 <template>
     <v-layout row wrap>
         <v-flex xs12>
-            <div class="r-tab open no-title">
+            <div class="r-tab open no-title view-all">
                 <div class="r-tab-content open">
                     <v-container fluid pa-0 grid-list-xl>
                         <div style="overflow-x:auto;">
@@ -16,8 +16,7 @@
                             <tr v-for="date in dates" :key="date">
                                 <td :colspan="users.length+1">
                                     <h4>{{ date|dateFormat('d M Y') }}</h4>
-                                    <div style="overflow-x:auto;">
-                                    <table style="width:100%; overflow-x:scroll;">
+                                    <table style="width:100%;">
                                         <tr v-for="appointmentSlot in initializeUserAppointment(date)" style="display: flex;">
                                             <td width="200px">
                                                 {{ appointmentSlot.start|dateFormat('LT') }} - {{ appointmentSlot.end| dateFormat('LT') }}
@@ -30,13 +29,15 @@
 
                                         </tr>
                                     </table>
-                                    </div>
                                 </td>
                             </tr>
                         </table>
                         </div>
                     </v-container>
                 </div>
+            </div>
+            <div class="mobile-message">
+
             </div>
         </v-flex>
     </v-layout>
@@ -114,14 +115,19 @@
 
 <style>
 
-table {
-    max-width: 100%!important;
-    overflow-x: scroll!important;
-}
 
 table th,
 table td {
     width: 200px!important;
+}
+
+.view-all table {
+    display:none!important
+}
+@media (min-width: 768px){
+    .view-all table {
+        display:block!important
+    }
 }
 
 </style>
