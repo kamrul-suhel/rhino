@@ -86,7 +86,10 @@ class GuestConfirmed extends Mailable
                 // get Sales executive data
                 $salesExecutive = User::find('id', $guest->user_id)
                     ->first();
-                $this->user = $salesExecutive->email;
+                    if (!$salesExecutive){
+                        return;
+                    }
+                $this->user = $salesExecutive;
             }
 
             if($sendTo == 'dealerManager'){
@@ -97,13 +100,17 @@ class GuestConfirmed extends Mailable
                     'users.surname',
                     'users.id',
                     'users.level'
-                )->leftJoin('event_user', 'users.id', '=', 'event_user.user_id')
-                    ->where('event_user.event_id', $guest->event_id)
+                )->leftJoin('dealership_user', 'dealership_user.user_id', '=', 'users.id')
+                ->leftJoin('events', 'dealership_user.dealership_id', '=', 'events.dealership_id')    
+                ->where('events.id', $guest->event_id)
                     ->where('users.level', '=', 'dealership')
                     ->first();
+                
+                    if (!$manager){
+                        return;
+                    }
 
-                    dd($guest);
-                $this->user = $manager->email;
+                $this->user = $manager;
             }
 
         }
@@ -151,12 +158,12 @@ class GuestConfirmed extends Mailable
 
             case 'dealerManager':
                 return $this->from(env('MAIL_SENDER'))
-                    ->to($this->user)
+                    ->to($this->user->email)
                     ->view('emails.guest.seller_confirmation');
 
             case 'saleExecutive':
                 return $this->from(env('MAIL_SENDER'))
-                    ->to($this->user)
+                    ->to($this->user->email)
                     ->view('emails.guest.seller_confirmation');
         }
 
