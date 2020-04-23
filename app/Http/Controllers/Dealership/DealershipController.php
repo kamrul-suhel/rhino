@@ -76,8 +76,8 @@ class DealershipController extends Controller
         $request->has('friday_start') && $request->friday_start != 'null' ? $dealership->friday_start = $request->friday_start : null;
         $request->has('friday_end') && $request->friday_end != 'null' ? $dealership->friday_end = $request->friday_end : null;
         $request->has('suffix') && $request->suffix != 'null' ? $dealership->suffix = $request->suffix : null;
-        $request->has('suffix') && $request->calendar_access != 'null' ? $dealership->calendar_access = $request->calendar_access : null;
-        $request->has('suffix') && $request->enable_emails != 'null' ? $dealership->enable_emails = $request->enable_emails : null;
+        $request->has('calendar_access') && $request->calendar_access != 'null' ? $dealership->calendar_access = $request->calendar_access : null;
+        $request->has('enable_emails') && $request->enable_emails != 'null' ? $dealership->enable_emails = $request->enable_emails : null;
         $request->has('status') ? $dealership->status = $request->status : null;
 
         $dealership->save();
