@@ -113,7 +113,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 
 .view-all  {
     display:none!important
