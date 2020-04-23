@@ -84,7 +84,9 @@
                         const modifyGuest = _.map(guests, (guest) => {
                             return {
                                 id: guest.id,
-                                confirmation_letter_sent: guest.confirmation_letter_sent,
+                                email: guest.email,
+                                first_name: guest.first_name,
+                                surname: guest.surname,
                                 postal_contact: guest.postal_contact,
                                 email_contact: guest.email_contact,
                                 sms_contact: guest.sms_contact,
