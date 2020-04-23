@@ -82,37 +82,6 @@
         z-index:1;
         background: #fff;
 
-        table{
-            p{
-                margin:0;
-                padding:0;
-            }
-            tr{
-                border-bottom: 1px solid #ddd;
-                margin-bottom:5px;
-                padding-bottom: 5px;
-            }
-
-            width:100%;
-            th.w-200{
-                width:200px;
-                text-align:left;
-            }
-            td.w-200{
-                width:200px;
-                text-align:left;
-            }
-        }
-    }
-
-    .appointmentAllView{
-        width:100%;
-
-        table {
-            span{
-                cursor:pointer;
-            }
-        }
     }
 }
 
@@ -122,4 +91,22 @@
 }
 .r-tab-content.open {
     display: block;
+}
+
+.flex-headers {
+    display:flex; 
+    width:fit-content; 
+    position:relative;
+}
+
+.flex-slots span {
+    cursor: pointer;
+}
+
+.appointments > div:nth-child(odd) {
+    background: #eeeeee;
+}
+
+.appointments > div:nth-child(even) {
+    background: #ffffff;
 }

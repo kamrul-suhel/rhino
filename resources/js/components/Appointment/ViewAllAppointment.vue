@@ -4,34 +4,28 @@
             <div class="r-tab open no-title view-all">
                 <div class="r-tab-content open">
                     <v-container fluid pa-0 grid-list-xl>
-                        <div style="overflow-x:auto;">
-                        <table class="appointmentAllView" style="overflow-x:scroll;">
-                            <tr>
-                                <th class="w-200">Date / slot</th>
-                                <th class="w-200" v-for="(user, index) in users" :key="index">
-                                    {{ `${user.firstname} ${user.surname}` }}
-                                </th>
-                            </tr>
+                        <div style="overflow-x:scroll; height: 600px; position: relative;">
+                            <div class="flex-headers" style=" height:50px; border: solid 1px #cecece; position: sticky; top: 0;z-index: 10;">
+                                    <div style="width: 200px; height: 100%; border-left: solid 1px #cecece; border-right: solid 1px #cecece; align-items: center; display: flex; justify-content: center; background: #616161; color: white">Date / slot</div>
+                                    <div style="width: 200px; height: 100%; border-left: solid 1px #cecece; border-right: solid 1px #cecece; align-items: center; display: flex; justify-content: center; background: #616161; color: white" v-for="(user, index) in users" :key="index">
+                                        {{ `${user.firstname} ${user.surname}` }}
+                                    </div>
+                            </div>
+                    
+                            <div v-for="date in dates" :key="date" class="appointments"> 
+                                <div v-for="appointmentSlot in initializeUserAppointment(date)" v-bind:key="appointmentSlot"
+                                    style="display:flex; width:fit-content; position:relative; align-items:center; height: 48px;  border: solid 1px #cecece;">
 
-                            <tr v-for="date in dates" :key="date">
-                                <td :colspan="users.length+1">
-                                    <h4>{{ date|dateFormat('d M Y') }}</h4>
-                                    <table style="width:100%;">
-                                        <tr v-for="appointmentSlot in initializeUserAppointment(date)" style="display: flex;">
-                                            <td class="w-200">
-                                                {{ appointmentSlot.start|dateFormat('LT') }} - {{ appointmentSlot.end| dateFormat('LT') }}
-                                            </td>
+                                    <div style="width: 200px; height: 48px; border-bottom: solid 1px #8f8f8f; text-align: center; position:sticky;left:0; background: #ddd">
+                                        <strong style="margin-top:20px">{{ date|dateFormat('d m y')}}</strong> <br > {{ appointmentSlot.start|dateFormat('LT') }} - {{ appointmentSlot.end| dateFormat('LT') }}
+                                    </div>
 
-                                            <td class="w-200" v-for="user in users" :key="user.id">
-                                                <ViewAllAppointmentUser :appointmentSlot="appointmentSlot" :user="user">
-                                                </ViewAllAppointmentUser>
-                                            </td>
-
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
+                                    <div class="flex-slots" style="width: 200px; height: 48px;; border-left: solid 1px #cecece; border-right: solid 1px #cecece; display: flex; justify-content: center; align-items: center" v-for="user in users" :key="user.id">
+                                        <ViewAllAppointmentUser :appointmentSlot="appointmentSlot" :user="user">
+                                        </ViewAllAppointmentUser>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </v-container>
                 </div>
