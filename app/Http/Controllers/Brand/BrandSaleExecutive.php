@@ -23,13 +23,12 @@ class BrandSaleExecutive extends Controller
             'brand_user.brand_id',
             'brand_user.user_id'
         )
+            ->with('specializeBrands')
             ->leftJoin('event_user', 'event_user.user_id', '=', 'users.id')
             ->leftJoin('brand_user', 'users.id', '=', 'brand_user.user_id')
             ->whereIn('brand_user.brand_id', $brandIds)
             ->where('event_user.event_id', $eventId)
-            ->with('specializeBrands')
             ->where('users.dealership_id', $dealershipId)
-            ->groupBy('users.id')
             ->get();
 
         return response()->json([

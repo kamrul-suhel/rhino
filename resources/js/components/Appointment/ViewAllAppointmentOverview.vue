@@ -1,9 +1,14 @@
 <template>
-    <p>
-        <span v-if="appointment.status === 3">{{ `${trans.notAvailable}`}}</span>
-        <span v-if="appointment.status === 4">{{ `${trans.breakTime}`}}</span>
-        <span v-if="appointment.status === 1">{{ `${trans.confirmed}`}}</span>
-        <span v-if="appointment.guest_id">{{ appointment.guest_first_name }}</span>
+    <p v-if="selectedEvent.id === appointment.event_id">
+        <span  @click="onAppointmentDetail()">
+            <span v-if="appointment.status === 3">{{ `${trans.notAvailable}`}}</span>
+            <span v-if="appointment.status === 4">{{ `${trans.breakTime}`}}</span>
+            <span v-if="appointment.status === 1">{{ `${trans.confirmed}`}}</span>
+            <span v-if="appointment.guest_id">{{ appointment.guest_first_name }}</span>
+        </span>
+    </p>
+    <p v-else>
+        <span>{{ trans.atOtherEvent }}</span>
     </p>
 </template>
 
@@ -41,10 +46,20 @@
         }),
 
         created() {
-            console.log('appointment status: ', this.appointment.status)
         },
 
         methods: {
+
+            onAppointmentDetail(){
+                if(this.user){
+                    this.$store.commit('setSelectedUser', this.user)
+                }
+
+                this.$store.commit('setAppointmentAvailable', false)
+                this.$store.commit('setAppointmentUnavailable', true)
+                this.$store.commit('setAppointmentDialog', true)
+                this.$store.commit('setAppointmentDialogSlot', this.appointment)
+            }
         }
     }
 </script>

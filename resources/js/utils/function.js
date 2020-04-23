@@ -347,6 +347,11 @@ export default {
             case 'sales_executive':
                 return trans.salesExecutive
 
+            case 'call_handler':
+                return trans.callHandler
+
+            case 'receptionist':
+                return trans.receptionist
             case 'brand':
                 return trans.brand
 

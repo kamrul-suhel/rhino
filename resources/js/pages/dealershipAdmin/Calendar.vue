@@ -313,7 +313,12 @@
             },
 
             updateComponent() {
+                if(this.selectedTeamMemberType === 'viewAll'){
+                    this.fetchDataForViewAll(this.selectedTeamMemberType, false)
+                    return
+                }
                 this.fetchAllAppointmentByEventId(this.selectedUser)
+
                 if (this.authUser.level === CONST.SALE_EXECUTIVE) {
                     return
                 }
@@ -323,8 +328,6 @@
                 }
 
                 return
-
-                this.onGoBack()
             },
 
             selectedUser() {
@@ -699,7 +702,7 @@
                 }
             },
 
-            async fetchDataForViewAll(type){
+            async fetchDataForViewAll(type, changeTeamMemberShow = true){
                 // get all date in this event
                 const allowDates = fn.allowedDates(this.selectedEvent, this.dealership)
                 this.viewAllDates = [...allowDates]
@@ -708,8 +711,10 @@
                 const eventId = this.selectedEvent.id
                 await this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId})
 
+                if(changeTeamMemberShow){
+                    this.teamMemberShow = !this.teamMemberShow
+                }
                 this.selectedTeamMemberType = type
-                this.teamMemberShow = !this.teamMemberShow
 
             }
         }

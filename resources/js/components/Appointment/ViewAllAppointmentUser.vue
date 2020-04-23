@@ -1,6 +1,8 @@
 <template>
     <span v-if="checkAvailability(appointmentSlot)">
-        {{ trans.available }}
+        <span @click="onAppointmentDetail(appointmentSlot, 'available')">
+            {{ trans.available }}
+        </span>
     </span>
     <ViewAllAppointmentOverview :user="user" v-else :appointment="getAppointmentInfo()"></ViewAllAppointmentOverview>
 </template>
