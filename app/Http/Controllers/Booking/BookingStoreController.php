@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Booking;
 
+use App\Event;
+use App\Guest;
+use App\Dealership;
 use App\Appointment;
 use App\AppointmentVehicle;
-use App\Guest;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\BookingRequest;
 use App\Mail\GuestConfirmed;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\BookingRequest;
 
 class BookingStoreController extends Controller
 {
@@ -114,13 +116,23 @@ class BookingStoreController extends Controller
 
         // Send email if appointment is new
         if(
-            !$id &&
+            
             $request->has('sendEmail') &&
             $request->sendEmail == true
         ){
+
             Mail::send(new GuestConfirmed($request->guest_id, $this->languageId));
-            Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'dealerManager'));
-            Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'sellerExecutive'));
+
+
+            // check dealership emails setting
+            $event = Event::find($appointment->event_id);
+            $dealership = Dealership::find($event->dealership_id);
+            
+            if ($dealership->enable_emails){
+                Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'dealerManager'));
+                Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'sellerExecutive'));
+            }
+        
         }
 
         return $appointment;

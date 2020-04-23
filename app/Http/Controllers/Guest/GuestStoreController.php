@@ -25,7 +25,7 @@ class GuestStoreController extends Controller
         $guest = $this->save($request);
 
         // Send invitation email to guest
-        if($guest){
+        if($guest && $request->has('sendInvitation') ){
             Mail::send(new GuestInvitation($guest->id), $this->languageId);
         }
 

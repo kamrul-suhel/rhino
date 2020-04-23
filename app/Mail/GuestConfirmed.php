@@ -100,9 +100,10 @@ class GuestConfirmed extends Mailable
                 )->leftJoin('event_user', 'users.id', '=', 'event_user.user_id')
                     ->where('event_user.event_id', $guest->event_id)
                     ->where('users.level', '=', 'dealership')
-                    ->first('email');
+                    ->first();
 
-                $this->user = $manager;
+                    dd($guest);
+                $this->user = $manager->email;
             }
 
         }
@@ -150,12 +151,12 @@ class GuestConfirmed extends Mailable
 
             case 'dealerManager':
                 return $this->from(env('MAIL_SENDER'))
-                    ->to($this->user->email)
+                    ->to($this->user)
                     ->view('emails.guest.seller_confirmation');
 
             case 'saleExecutive':
                 return $this->from(env('MAIL_SENDER'))
-                    ->to($this->user->email)
+                    ->to($this->user)
                     ->view('emails.guest.seller_confirmation');
         }
 
