@@ -116,8 +116,8 @@
 <style>
 
 
-table th,
-table td {
+table.appointmentAllView th,
+table.appointmentAllView td {
     width: 200px!important;
 }
 
