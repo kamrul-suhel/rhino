@@ -116,7 +116,7 @@ class BookingStoreController extends Controller
 
         // Send email if appointment is new
         if(
-            
+
             $request->has('sendEmail') &&
             $request->sendEmail == true
         ){
@@ -127,12 +127,12 @@ class BookingStoreController extends Controller
             // check dealership emails setting
             $event = Event::find($appointment->event_id);
             $dealership = Dealership::find($event->dealership_id);
-            
+
             if ($dealership->enable_emails){
                 Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'dealerManager'));
-                Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'sellerExecutive'));
+                Mail::send(new GuestConfirmed($request->guest_id, $this->languageId, 'saleExecutive'));
             }
-        
+
         }
 
         return $appointment;
