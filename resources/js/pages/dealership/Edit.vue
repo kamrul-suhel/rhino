@@ -120,7 +120,7 @@
                         <v-flex xs12 sm3 pa-2>
                             <v-text-field
                                 :color="themeOption.inputColor"
-                                :label="`${trans.code}`"
+                                :label="`${trans.dealershipCode}`"
                                 v-model="dealership.suffix"
                                 box solo flat>
                             </v-text-field>
