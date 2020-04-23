@@ -65,6 +65,8 @@ class GuestConfirmed extends Mailable
             ->where('guests.id', $guestId)
             ->first();
 
+
+
         if ($this->sendTo != 'guest') {
             // Get All vehicles
             $vehicles = Vehicle::select(
@@ -84,8 +86,7 @@ class GuestConfirmed extends Mailable
 
             if($sendTo == 'saleExecutive'){
                 // get Sales executive data
-                $salesExecutive = User::find('id', $guest->user_id)
-                    ->first();
+                $salesExecutive = User::find($guest->user_id);
                     if (!$salesExecutive){
                         return;
                     }
