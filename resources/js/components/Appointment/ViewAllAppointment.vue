@@ -7,8 +7,8 @@
                         <div style="overflow-x:auto;">
                         <table class="appointmentAllView" style="overflow-x:scroll;">
                             <tr>
-                                <th width="200px">Date / slot</th>
-                                <th width="200px" v-for="(user, index) in users" :key="index">
+                                <th class="w-200">Date / slot</th>
+                                <th class="w-200" v-for="(user, index) in users" :key="index">
                                     {{ `${user.firstname} ${user.surname}` }}
                                 </th>
                             </tr>
@@ -18,11 +18,11 @@
                                     <h4>{{ date|dateFormat('d M Y') }}</h4>
                                     <table style="width:100%;">
                                         <tr v-for="appointmentSlot in initializeUserAppointment(date)" style="display: flex;">
-                                            <td width="200px">
+                                            <td class="w-200">
                                                 {{ appointmentSlot.start|dateFormat('LT') }} - {{ appointmentSlot.end| dateFormat('LT') }}
                                             </td>
 
-                                            <td width="200px" v-for="user in users" :key="user.id">
+                                            <td class="w-200" v-for="user in users" :key="user.id">
                                                 <ViewAllAppointmentUser :appointmentSlot="appointmentSlot" :user="user">
                                                 </ViewAllAppointmentUser>
                                             </td>
@@ -113,13 +113,7 @@
     }
 </script>
 
-<style>
-
-
-table.appointmentAllView th,
-table.appointmentAllView td {
-    width: 200px!important;
-}
+<style scoped>
 
 .view-all  {
     display:none!important
@@ -129,7 +123,7 @@ table.appointmentAllView td {
         display:block!important
     }
 
-        
+
     .mobile-message { display: none;}
 }
 

@@ -27,7 +27,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4 v-if="isFiltering && checkAccessLevel()">
+        <v-layout mt-4 v-if="isFiltering">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -313,7 +313,12 @@
             },
 
             updateComponent() {
+                if(this.selectedTeamMemberType === 'viewAll'){
+                    this.fetchDataForViewAll(this.selectedTeamMemberType, false)
+                    return
+                }
                 this.fetchAllAppointmentByEventId(this.selectedUser)
+
                 if (this.authUser.level === CONST.SALE_EXECUTIVE) {
                     return
                 }
@@ -323,8 +328,6 @@
                 }
 
                 return
-
-                this.onGoBack()
             },
 
             selectedUser() {
@@ -373,6 +376,8 @@
                 // if view all
                 if(type === 'viewAll'){
                     this.fetchDataForViewAll(type)
+                    this.showDatePicker = false
+                    this.showDatePicker = false
                     return
                 }
 
@@ -456,6 +461,9 @@
                 this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId, date: date})
                 this.$refs.dialog.save(date)
                 this.filterByDate = true
+                this.model = false
+                this.showDatePicker = false
+                this.isFiltering = false
                 this.$store.commit('setInitAppointmentByDate')
             },
 
@@ -696,10 +704,12 @@
                         }else{
                             return false
                         }
+                        default:
+                            return false
                 }
             },
 
-            async fetchDataForViewAll(type){
+            async fetchDataForViewAll(type, changeTeamMemberShow = true){
                 // get all date in this event
                 const allowDates = fn.allowedDates(this.selectedEvent, this.dealership)
                 this.viewAllDates = [...allowDates]
@@ -708,8 +718,11 @@
                 const eventId = this.selectedEvent.id
                 await this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId})
 
+                if(changeTeamMemberShow){
+                    this.teamMemberShow = !this.teamMemberShow
+                }
                 this.selectedTeamMemberType = type
-                this.teamMemberShow = !this.teamMemberShow
+                this.isFiltering = false
 
             }
         }

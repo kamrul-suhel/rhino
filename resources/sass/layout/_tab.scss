@@ -83,12 +83,22 @@
         background: #fff;
 
         table{
+            p{
+                margin:0;
+                padding:0;
+            }
+            tr{
+                border-bottom: 1px solid #ddd;
+                margin-bottom:5px;
+                padding-bottom: 5px;
+            }
+
             width:100%;
-            th{
+            th.w-200{
                 width:200px;
                 text-align:left;
             }
-            td{
+            td.w-200{
                 width:200px;
                 text-align:left;
             }
@@ -97,6 +107,12 @@
 
     .appointmentAllView{
         width:100%;
+
+        table {
+            span{
+                cursor:pointer;
+            }
+        }
     }
 }
 
