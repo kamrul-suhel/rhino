@@ -337,6 +337,7 @@
                 bookingForm.append('status', 1) // Make booking confirm
                 bookingForm.append('type', 'confirmed') // Make guest status confirmed
                 bookingForm.append('_method', 'post')
+                bookingForm.append('sendEmail', true)
 
                 _.map(this.vehicles, function (vehicle, index) {
                     if (vehicle.appointment_vehicle_id) {

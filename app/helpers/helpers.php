@@ -4,9 +4,11 @@ use App\Guest;
 
 if (! function_exists('generateUniqueIdForGuest')) {
     function generateUniqueIdForGuest($suffix) {
+        // three character dealership code + 6 digit number + random letter
 
-        $unique = md5(microtime().rand());
-        $unique = $suffix.$unique;
+        $unique = mt_rand(100000, 999999);
+        $letter = randLetter();
+        $unique = $suffix.$unique.$letter;
         while(true){
             $exists = Guest::where('unique', $unique)
                 ->first();
@@ -18,5 +20,13 @@ if (! function_exists('generateUniqueIdForGuest')) {
         }
 
         return $unique;
+    }
+
+    function randLetter()
+    {
+        $int = rand(0,51);
+        $a_z = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $rand_letter = $a_z[$int];
+        return $rand_letter;
     }
 }
