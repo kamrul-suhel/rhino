@@ -27,7 +27,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout mt-4 v-if="isFiltering && checkAccessLevel()">
+        <v-layout mt-4 v-if="isFiltering">
             <v-flex xs12 sm4>
                 <v-card class="r-border-round">
                     <v-list>
@@ -376,6 +376,8 @@
                 // if view all
                 if(type === 'viewAll'){
                     this.fetchDataForViewAll(type)
+                    this.showDatePicker = false
+                    this.showDatePicker = false
                     return
                 }
 
@@ -459,6 +461,9 @@
                 this.$store.dispatch('fetchAppointmentByEventId', {eventId: eventId, date: date})
                 this.$refs.dialog.save(date)
                 this.filterByDate = true
+                this.model = false
+                this.showDatePicker = false
+                this.isFiltering = false
                 this.$store.commit('setInitAppointmentByDate')
             },
 
@@ -699,6 +704,8 @@
                         }else{
                             return false
                         }
+                        default:
+                            return false
                 }
             },
 
@@ -715,6 +722,7 @@
                     this.teamMemberShow = !this.teamMemberShow
                 }
                 this.selectedTeamMemberType = type
+                this.isFiltering = false
 
             }
         }
