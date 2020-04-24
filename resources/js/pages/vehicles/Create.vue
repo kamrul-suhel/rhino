@@ -7,6 +7,15 @@
                         <span :class="themeOption.textHeadingColor+'--text'">{{ `${trans.createVehicle}` }}</span>
                     </v-toolbar-title>
 
+                    
+                    <v-btn outline round
+                            @click="onGoBack()"
+                            :color="themeOption.adminNavIconColor"
+                            class="ma-0 ml-4">
+                        <v-icon left dark>reply</v-icon>
+                        {{ `${trans.back}` }}
+                    </v-btn>
+
                     <v-divider
                         class="mx-2"
                         inset
@@ -260,6 +269,10 @@
                 }).catch(error => {
                     this.$store.dispatch('initializeError', error)
                 })
+            },
+
+            onGoBack(){
+                window.history.back()
             }
         }
     }

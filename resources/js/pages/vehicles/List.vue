@@ -1,7 +1,15 @@
 <template>
     <div>
         <v-layout row wrap>
+            
             <div class="r-tab" :class="[showForm ? 'open' : '']">
+                <v-btn outline round style="position: absolute; right: 0;"
+                        @click="onGoBack()"
+                        :color="themeOption.adminNavIconColor"
+                        class="ma-0 ml-4 btn-absolute">
+                    <v-icon left dark>reply</v-icon>
+                    {{ `${trans.back}` }}
+                </v-btn>
                 <div class="r-tab-title r-border-round" @click="toggleForm">
                     <div>
                         <v-icon
@@ -477,6 +485,10 @@
 
             toggleForm() {
                 this.showForm = !this.showForm
+            },
+
+            onGoBack(){
+                this.$router.push({name: 'dashboard'})
             }
         }
     }

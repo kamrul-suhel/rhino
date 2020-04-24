@@ -8,10 +8,23 @@
                     lazy-validation>
 
                     <v-layout row wrap justify-space-between>
-                        <v-flex xs12>
+                        <v-flex xs12 sm8>
                             <h3>{{ `${trans.addNawBrand}` }}</h3>
                         </v-flex>
 
+                        
+                        <v-flex xs12 sm4 mb-4 style="text-align: right">
+                            <v-btn outline round
+                                    @click="onGoBack()"
+                                    :color="themeOption.adminNavIconColor"
+                                    class="ma-0 ml-4"  style="" >
+                                <v-icon left dark>reply</v-icon>
+                                {{ `${trans.back}` }}
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
+
+                    <v-layout row wrap justify-space-between>
                         <v-flex xs12 sm4>
                             <v-autocomplete
                                 v-if="this.editBrand"
@@ -374,6 +387,10 @@
                     languageId: selectedLanguage
                 })
             },
+
+            onGoBack(){
+                this.$router.push({name: 'dashboard'})
+            }
         }
     }
 </script>

@@ -454,7 +454,7 @@
             },
 
             onGoBack(){
-                window.history.back()
+                this.$router.push({name: 'dashboard'})
             }
         }
     }

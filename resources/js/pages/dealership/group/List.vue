@@ -2,6 +2,13 @@
     <div>
 
         <div class="r-tab" :class="[showForm ? 'open' : '']">
+            <v-btn outline round
+                    @click="onGoBack()"
+                    :color="themeOption.adminNavIconColor"
+                    class="ma-0 ml-4 btn-absolute"  style="position: absolute; right: 0;" >
+                <v-icon left dark>reply</v-icon>
+                {{ `${trans.back}` }}
+            </v-btn>
             <div class="r-tab-title r-border-round" @click="toggleForm">
                 <div>
                     <v-icon
@@ -349,6 +356,10 @@
                     this.$store.commit( 'setHeaderTitle', `${this.trans.manage} ${this.trans.groups}` )
                     this.$store.commit( 'setNavTitle', `${this.trans.manage} ${this.trans.groups}` )
                 }
+            },
+            
+            onGoBack(){
+                this.$router.push({name: 'dashboard'})
             }
         }
     }
