@@ -1,6 +1,6 @@
 <template>
     <span v-if="checkAvailability(appointmentSlot)">
-        <span @click="onAppointmentDetail(appointmentSlot, 'available')">
+        <span @click="onAppointmentDetail(appointmentSlot, 'available')" style="margin-bottom: 0;padding: 10px; background: #a5e0a5; border-radius: 20px;">
             {{ trans.available }}
         </span>
     </span>

@@ -1,5 +1,5 @@
 <template>
-    <p v-if="selectedEvent.id === appointment.event_id" style="margin-bottom: 0;padding: 10px; background: #a5e0a5; border-radius: 20px;">
+    <p v-if="selectedEvent.id === appointment.event_id" style="margin-bottom: 0;padding: 10px; background: #ddd; border-radius: 20px;">
         <span  @click="onAppointmentDetail()">
             <span v-if="appointment.status === 3">{{ `${trans.notAvailable}`}}</span>
             <span v-if="appointment.status === 4">{{ `${trans.breakTime}`}}</span>

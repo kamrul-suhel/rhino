@@ -103,10 +103,6 @@
     cursor: pointer;
 }
 
-.appointments > div:nth-child(odd) {
-    background: #eeeeee;
-}
-
-.appointments > div:nth-child(even) {
-    background: #ffffff;
+.appointments > div {
+    background: #fff;
 }
