@@ -9,7 +9,7 @@
                     :flat="false"
                 >
                 </language-picker>
-             </v-flex>
+            </v-flex>
         </v-layout>
         <v-form
             row wrap
@@ -133,9 +133,7 @@
                             <v-tabs
                                 v-model="active"
                                 dark
-                                :slider-color="themeOption.tabSliderColor"
-
-                            >
+                                :slider-color="themeOption.tabSliderColor">
 
                                 <v-tab
                                     key="staff"
@@ -168,8 +166,8 @@
 
                                 <v-tabs-items touchless>
                                     <v-tab-item
-                                        key="staff"
-                                    >
+                                        key="staff">
+
                                         <v-layout row wrap pt-3>
                                             <dealership-users></dealership-users>
 
@@ -207,26 +205,111 @@
 
                                     <v-tab-item
                                         key="times">
-                                        <TimePicker :dealership="dealership"
-                                                    v-on:sendTimes="updateTimes">
-                                        </TimePicker>
+                                        <v-container grid-list-lg v-if="dealership.id">
+                                            <v-layout row wrap>
+                                                <TimePicker :value="dealership.monday_start"
+                                                            name="monday_start"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.monday} ${trans.start}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.monday_end"
+                                                            name="monday_end"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.monday} ${trans.end}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.tuesday_start"
+                                                            name="tuesday_start"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.tuesday} ${trans.start}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.tuesday_end"
+                                                            name="tuesday_end"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.tuesday} ${trans.end}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.wednesday_start"
+                                                            name="wednesday_start"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.wednesday} ${trans.start}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.wednesday_end"
+                                                            name="wednesday_end"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.wednesday} ${trans.end}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.thursday_start"
+                                                            name="thursday_start"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.thursday} ${trans.start}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.thursday_end"
+                                                            name="thursday_end"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.thursday} ${trans.end}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.friday_start"
+                                                            name="friday_start"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.friday} ${trans.start}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.friday_end"
+                                                            name="friday_end"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.friday} ${trans.end}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.saturday_start"
+                                                            name="saturday_start"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.saturday} ${trans.start}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.saturday_end"
+                                                            name="saturday_end"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.saturday} ${trans.end}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.sunday_start"
+                                                            name="sunday_start"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.sunday} ${trans.start}`">
+                                                </TimePicker>
+
+                                                <TimePicker :value="dealership.sunday_end"
+                                                            name="sunday_end"
+                                                            @updateTime="onUpdateTime"
+                                                            :field="`${trans.sunday} ${trans.end}`">
+                                                </TimePicker>
+                                            </v-layout>
+                                        </v-container>
                                     </v-tab-item>
 
                                     <v-tab-item
                                         key="settings">
-                                            <v-checkbox
-                                                v-model="dealership.calendar_access"
-                                                :label="`Allow Calendar Access`"
-                                                >
-                                            </v-checkbox>
 
-                                            <v-checkbox
-                                                v-model="dealership.enable_emails"
-                                                :label="`Send System Emails`"
-                                                >
-                                            </v-checkbox>
+                                        <v-checkbox :color="themeOption.primaryColor"
+                                                    v-model="dealership.calendar_access"
+                                                    :label="`Allow Calendar Access`"
+                                        >
+                                        </v-checkbox>
 
-                                            <label class="d-block" for="">Update Guest Contact Preferences</label>
+                                        <v-checkbox :color="themeOption.primaryColor"
+                                                    v-model="dealership.enable_emails"
+                                                    :label="`Send System Emails`"
+                                        >
+                                        </v-checkbox>
+
+                                        <label class="d-block" for="">{{ trans.guestContactPreferences }}</label>
                                     </v-tab-item>
                                 </v-tabs-items>
                             </v-tabs>
@@ -235,7 +318,6 @@
                     <v-divider class="py-3"></v-divider>
                     <v-layout>
                         <v-flex>
-
                             <v-btn
                                 dark
                                 :loading="themeOption.buttonLoading"
@@ -245,7 +327,7 @@
                                 small
                                 @click="onUpdateDealership()"
                             >
-                                {{  `${trans.updateDealership}`  }}
+                                {{ `${trans.updateDealership}` }}
                             </v-btn>
                         </v-flex>
                     </v-layout>
@@ -304,19 +386,19 @@
                 this.$refs.dealershipForm.resetValidation();
             },
 
-            selectedLanguage(){
+            selectedLanguage() {
                 this.$store.dispatch('fetchDealership', {
-                        id: this.$route.params.id,
-                        edit: true,
-                        languageId: this.selectedLanguage.id
+                    id: this.$route.params.id,
+                    edit: true,
+                    languageId: this.selectedLanguage.id
                 })
             }
         },
 
         created() {
             this.initialize()
-             this.$store.commit( 'setHeaderTitle', `${this.trans.editDealership}` )
-             this.$store.commit( 'setNavTitle', `${this.trans.editDealership}` )
+            this.$store.commit('setHeaderTitle', `${this.trans.editDealership}`)
+            this.$store.commit('setNavTitle', `${this.trans.editDealership}`)
         },
 
         methods: {
@@ -329,25 +411,25 @@
             updateTimes(times) {
             },
 
-            onUpdateDealership(){
-                if(this.$refs.dealershipForm.validate()){
+            onUpdateDealership() {
+                if (this.$refs.dealershipForm.validate()) {
                     let dealershipForm = new FormData()
 
                     // Set form object for dealership
-                    _.forOwn(this.dealership, (value, key)=>{
-                        if(key === 'group_id'){
-                            if(value == 'null'){
+                    _.forOwn(this.dealership, (value, key) => {
+                        if (key === 'group_id') {
+                            if (value == 'null') {
 
-                            }else{
+                            } else {
                                 dealershipForm.append(key, value)
                             }
-                        }else{
+                        } else {
                             dealershipForm.append(key, value)
                         }
                     })
 
                     // Set form object for times
-                    _.forOwn(this.times, (value, key)=>{
+                    _.forOwn(this.times, (value, key) => {
                         dealershipForm.append(key, value)
                     })
 
@@ -358,8 +440,8 @@
 
                     // send form data to save
                     const URL = `/api/dealerships/${this.dealership.id}/update`
-                    axios.post(URL, dealershipForm).then((response)=>{
-                        if(response.data.success){
+                    axios.post(URL, dealershipForm).then((response) => {
+                        if (response.data.success) {
                             this.$store.commit('setSnackbarMessage', {
                                 openMessage: true,
                                 timeOut: this.themeOption.snackBarTimeout,
@@ -372,8 +454,17 @@
                 }
             },
 
-            onUploadUsers(){
+            onUploadUsers() {
                 this.$store.commit('setUploadUserDialog', true)
+            },
+
+            onUpdateTime(item) {
+                const newDealership = {
+                    ...this.dealership,
+                    [item.name]: item.value
+                }
+
+                this.$store.commit('setSelectedDealership', newDealership)
             }
         }
     }

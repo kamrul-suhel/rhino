@@ -200,9 +200,93 @@
 
                                         <v-tab-item
                                             key="times">
-                                            <TimePicker :dealership="times"
-                                                        v-on:sendTimes="updateTimes">
-                                            </TimePicker>
+                                            <v-container grid-list-lg>
+                                                <v-layout row wrap>
+                                                    <TimePicker :value="dealership.monday_start"
+                                                                name="monday_start"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.monday} ${trans.start}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.monday_end"
+                                                                name="monday_end"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.monday} ${trans.end}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.tuesday_start"
+                                                                name="tuesday_start"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.tuesday} ${trans.start}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.tuesday_end"
+                                                                name="tuesday_end"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.tuesday} ${trans.end}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.wednesday_start"
+                                                                name="wednesday_start"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.wednesday} ${trans.start}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.wednesday_end"
+                                                                name="wednesday_end"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.wednesday} ${trans.end}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.thursday_start"
+                                                                name="thursday_start"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.thursday} ${trans.start}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.thursday_end"
+                                                                name="thursday_end"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.thursday} ${trans.end}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.friday_start"
+                                                                name="friday_start"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.friday} ${trans.start}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.friday_end"
+                                                                name="friday_end"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.friday} ${trans.end}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.saturday_start"
+                                                                name="saturday_start"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.saturday} ${trans.start}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.saturday_end"
+                                                                name="saturday_end"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.saturday} ${trans.end}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.sunday_start"
+                                                                name="sunday_start"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.sunday} ${trans.start}`">
+                                                    </TimePicker>
+
+                                                    <TimePicker :value="dealership.sunday_end"
+                                                                name="sunday_end"
+                                                                @updateTime="onUpdateTime"
+                                                                :field="`${trans.sunday} ${trans.end}`">
+                                                    </TimePicker>
+                                                </v-layout>
+                                            </v-container>
                                         </v-tab-item>
 
                                         <v-tab-item
@@ -317,7 +401,7 @@
                             })
                         }
 
-                        
+
                         this.dealership = {}
                         this.times = {}
                         this.showForm = false
@@ -335,6 +419,13 @@
 
             onGoBack(){
                 this.$router.push({name: 'dashboard'})
+            },
+
+            onUpdateTime(item) {
+                this.dealership = {
+                    ...this.dealership,
+                    [item.name]: item.value
+                }
             }
         }
     }
