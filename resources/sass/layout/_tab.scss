@@ -93,6 +93,13 @@
     display: block;
 }
 
+
+
+.r-tab.view-all .r-tab-content {
+    padding: 0!important;
+    border: none!important;
+}
+
 .flex-headers {
     display:flex; 
     width:fit-content; 
