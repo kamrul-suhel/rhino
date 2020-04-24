@@ -1,6 +1,46 @@
 <template>
     <v-layout row wrap pt-3>
         <v-flex xs11 sm5>
+            <v-layout row wrap align-center class="pa-0">
+                <v-flex xs4>
+                    <label for="">{{ `${trans.monday} ${trans.start}` }}</label>
+                </v-flex>
+                <v-flex xs4>
+                    <v-select :items="hours" 
+                        v-model="mondayStart.hours"
+                        :label="`${trans.Hours}`">
+                    </v-select>
+                </v-flex>
+                <v-flex xs4>
+                    <v-select :items="minutes" 
+                        v-model="mondayStart.minutes"
+                        :label="`${trans.minutes}`">
+                    </v-select>
+                </v-flex>
+            </v-layout>
+        </v-flex>
+        <v-spacer></v-spacer>
+        <v-flex xs11 sm5>
+            <v-layout row wrap align-center class="pa-0">
+                <v-flex xs4>
+                    <label for="">{{ `${trans.monday} ${trans.end}` }}</label>
+                </v-flex>
+                <v-flex xs4>
+                    <v-select :items="hours" 
+                        v-model="mondayEnd.hours"
+                        :label="`${trans.Hours}`">
+                    </v-select>
+                </v-flex>
+                <v-flex xs4>
+                    <v-select :items="minutes" 
+                        v-model="mondayEnd.minutes"
+                        :label="`${trans.minutes}`">
+                    </v-select>
+                </v-flex>
+            </v-layout>
+        </v-flex>
+
+        <v-flex xs11 sm5>
             <v-menu
                 ref="mondayStart"
                 v-model="mondayStart"
@@ -75,463 +115,6 @@
                 ></v-time-picker>
             </v-menu>
         </v-flex>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="tuesdayStart"
-                v-model="tuesdayStart"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.tuesday_start"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.tuesday_start"
-                        :label="`${trans.tuesday} ${trans.start}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="tuesdayStart"
-                    format="24hr"
-                    v-model="dealership.tuesday_start"
-                    full-width
-                    @click:minute="$refs.tuesdayStart.save(dealership.tuesday_start)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-spacer></v-spacer>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="tuesdayEnd"
-                v-model="tuesdayEnd"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.tuesday_end"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.tuesday_end"
-                        :label="`${trans.tuesday} ${trans.end}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="tuesdayEnd"
-                    format="24hr"
-                    v-model="dealership.tuesday_end"
-                    full-width
-                    @click:minute="$refs.tuesdayEnd.save(dealership.tuesday_end)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="wednesdayStart"
-                v-model="wednesdayStart"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.wednesday_start"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.wednesday_start"
-                        :label="`${trans.wednesday} ${trans.start}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="wednesdayStart"
-                    format="24hr"
-                    v-model="dealership.wednesday_start"
-                    full-width
-                    @click:minute="$refs.wednesdayStart.save(dealership.wednesday_start)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-spacer></v-spacer>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="wednesdayEnd"
-                v-model="wednesdayEnd"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.wednesday_end"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.wednesday_end"
-                        :label="`${trans.wednesday} ${trans.end}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="wednesdayEnd"
-                    format="24hr"
-                    v-model="dealership.wednesday_end"
-                    full-width
-                    @click:minute="$refs.wednesdayEnd.save(dealership.wednesday_end)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="thursdayStart"
-                v-model="thursdayStart"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.thursday_start"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.thursday_start"
-                        :label="`${trans.thursday} ${trans.start}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="thursdayStart"
-                    format="24hr"
-                    v-model="dealership.thursday_start"
-                    full-width
-                    @click:minute="$refs.thursdayStart.save(dealership.thursday_start)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-spacer></v-spacer>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="thursdayEnd"
-                v-model="thursdayEnd"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.thursday_end"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.thursday_end"
-                        :label="`${trans.thursday} ${trans.end}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="thursdayEnd"
-                    format="24hr"
-                    v-model="dealership.thursday_end"
-                    full-width
-                    @click:minute="$refs.thursdayEnd.save(dealership.thursday_end)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="fridayStart"
-                v-model="fridayStart"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.friday_start"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.friday_start"
-                        :label="`${trans.friday} ${trans.start}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="fridayStart"
-                    format="24hr"
-                    v-model="dealership.friday_start"
-                    full-width
-                    @click:minute="$refs.fridayStart.save(dealership.friday_start)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-spacer></v-spacer>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="fridayEnd"
-                v-model="fridayEnd"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.friday_end"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.friday_end"
-                        :label="`${trans.friday} ${trans.end}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="fridayEnd"
-                    format="24hr"
-                    v-model="dealership.friday_end"
-                    full-width
-                    @click:minute="$refs.fridayEnd.save(dealership.friday_end)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="saturdayStart"
-                v-model="saturdayStart"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.saturday_start"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.saturday_start"
-                        :label="`${trans.saturday} ${trans.start}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="saturdayStart"
-                    format="24hr"
-                    v-model="dealership.saturday_start"
-                    full-width
-                    @click:minute="$refs.saturdayStart.save(dealership.saturday_start)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-spacer></v-spacer>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="saturdayEnd"
-                v-model="saturdayEnd"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.saturday_end"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.saturday_end"
-                        :label="`${trans.saturday} ${trans.end}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="saturdayEnd"
-                    format="24hr"
-                    v-model="dealership.saturday_end"
-                    full-width
-                    @click:minute="$refs.saturdayEnd.save(dealership.saturday_end)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="sundayStart"
-                v-model="sundayStart"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.sunday_start"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.sunday_start"
-                        :label="`${trans.sunday} ${trans.start}`"
-                        prepend-icon="access_time"
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        readonly
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="sundayStart"
-                    format="24hr"
-                    v-model="dealership.sunday_start"
-                    full-width
-                    @click:minute="$refs.sundayStart.save(dealership.sunday_start)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
-        <v-spacer></v-spacer>
-
-        <v-flex xs11 sm5>
-            <v-menu
-                ref="sundayEnd"
-                v-model="sundayEnd"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="dealership.sunday_end"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                max-width="290px"
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-text-field
-                        :color="themeOption.inputColor"
-                        v-model="dealership.sunday_end"
-                        :label="`${trans.sunday} ${trans.end}`"
-                        prepend-icon="access_time"
-                        readonly
-                        :rules="[v => !!v || `${trans.selectATime}`]"
-                        required
-                        v-on="on"
-                    ></v-text-field>
-                </template>
-                <v-time-picker
-                    :header-color="themeOption.timePickerHeaderColor"
-                    v-if="sundayEnd"
-                    format="24hr"
-                    v-model="dealership.sunday_end"
-                    full-width
-                    @click:minute="$refs.sundayEnd.save(dealership.sunday_end)"
-                ></v-time-picker>
-            </v-menu>
-        </v-flex>
-
     </v-layout>
 </template>
 
@@ -542,20 +125,73 @@
     export default {
         data() {
             return {
-                tuesdayStart: false,
-                tuesdayEnd: false,
-                wednesdayStart: false,
-                wednesdayEnd: false,
-                thursdayStart: false,
-                thursdayEnd: false,
-                fridayStart: false,
-                fridayEnd: false,
-                saturdayStart: false,
-                saturdayEnd: false,
-                sundayStart: false,
-                sundayEnd: false,
-                mondayStart: false,
-                mondayEnd: false,
+                mondayStart: {
+                    hours: '00',
+                    minutes: '00'
+                },
+                mondayEnd: {
+                    hours: 0,
+                    minutes: 0
+                },
+                tuesdayStart: {
+                    hours: 0,
+                    minutes: 0
+                },
+                tuesdayEnd: {
+                    hours: 0,
+                    minutes: 0
+                },
+                wednesdayStart: {
+                    hours: 0,
+                    minutes: 0
+                },
+                wednesdayEnd: {
+                    hours: 0,
+                    minutes: 0
+                },
+                thursdayStart: {
+                    hours: 0,
+                    minutes: 0
+                },
+                thursdayEnd: {
+                    hours: 0,
+                    minutes: 0
+                },
+                fridayStart: {
+                    hours: 0,
+                    minutes: 0
+                },
+                fridayEnd: {
+                    hours: 0,
+                    minutes: 0
+                },
+                saturdayStart: {
+                    hours: 0,
+                    minutes: 0
+                },
+                saturdayEnd: {
+                    hours: 0,
+                    minutes: 0
+                },
+                sundayStart: {
+                    hours: 0,
+                    minutes: 0
+                },
+                sundayEnd: {
+                    hours: 0,
+                    minutes: 0
+                },
+
+
+                hours: [
+                    '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', 
+                    '12', '13', '14', '15', '16', '17', '18', '19', '20','21', '22', '23' 
+                ],
+                minutes: [
+                    '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', 
+                    '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', 
+                    '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'
+                ],
             }
         },
 
@@ -573,6 +209,16 @@
         watch: {
             dealership(){
                 this.$emit('sendTimes', this.dealership)
+            
+                const mondayStart = this.dealership.monday_start.split(":")
+                console.log(mondayStart);
+                
+                this.mondayStart = {
+                        hours: mondayStart[0],
+                        minutes: mondayStart[1]
+                    }
+                console.log(this.mondayStart);
+                
             }
         },
 
