@@ -23,8 +23,8 @@
                 <v-flex xs12>
                     <v-card flat
                             max-height="250px"
-                            height="250px">
-                        <v-card-text>
+                            height="350px" class="sales-scroller">
+                        <v-card-text class="mover">
                             <v-flex xs12 mt-3
                                     class="salesperson-container"
                                     :class="saleExecutive.selected && saleExecutive.selected === 'selected' ? 'active' : ''"
@@ -100,3 +100,8 @@
         }
     }
 </script>
+<style scoped>
+    .sales-scroller {
+        overflow-y: scroll;
+    }
+</style>
