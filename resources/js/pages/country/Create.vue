@@ -58,7 +58,7 @@
                             ></v-select>
                         </v-flex>
 
-                        <v-flex xs12 sm3 class="mr-2">
+                        <v-flex xs12 sm3 class="mr-2" style="visibility: hidden">
                             <v-switch
                                 :color="themeOption.switchOnColor"
                                 :label="trans.status"
