@@ -1647,6 +1647,11 @@ return [
     ],
 
     [
+        'label' => 'Update Guest Contact Preferences',
+        'identifier' => 'guestContactPreferences'
+    ],
+
+    [
         'label' => 'Organize',
         'identifier' => 'organize'
     ],
