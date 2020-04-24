@@ -9,10 +9,19 @@
             <v-flex xs12 sm6 py-3 >
                 <v-layout row wrap justify-end>
                     <v-btn outline round
-                           v-if="authUser.level === 'dealership' || authUser.level === 'admin'"
+                           v-if="authUser.level === 'admin'"
                            class="ma-0 mr-2"
                            align-self-end :color="themeOption.adminNavIconColor"
                         @click="$router.push({name: 'editEvents', params: {id: selectedEvent.id}})">
+                        <v-icon left dark>reply</v-icon>
+                        {{ trans.backToEvent }}
+                    </v-btn>
+
+                    <v-btn outline round
+                           v-if="authUser.level === 'dealership' || authUser.level === 'call_handler' || authUser.level === 'receptionist'"
+                           class="ma-0 mr-2"
+                           align-self-end :color="themeOption.adminNavIconColor"
+                        @click="$router.push({name: 'editDealershipsEvent', params: {dealershipId: authUser.dealership_id, eventId: selectedEvent.id}})">
                         <v-icon left dark>reply</v-icon>
                         {{ trans.backToEvent }}
                     </v-btn>
