@@ -1618,6 +1618,11 @@ return [
     ],
 
     [
+        'label' => 'Please view on larger screen size',
+        'identifier' => 'largeScreenSize',
+    ],
+
+    [
         'label' => 'Right hand drive image required',
         'identifier' => 'rightHandDriveImageRequired',
     ],

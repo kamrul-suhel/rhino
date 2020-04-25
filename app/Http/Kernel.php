@@ -7,6 +7,9 @@ use App\Http\Middleware\APICallHandlerReceptionist;
 use App\Http\Middleware\APIDealershipUser;
 use App\Http\Middleware\APISalesExecutiveUser;
 use App\Http\Middleware\VerifyJWT;
+use App\Http\Middleware\WebAdminMiddleware;
+use App\Http\Middleware\WebDealershipMiddleware;
+use App\Http\Middleware\WebSalesExecutiveMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -71,7 +74,10 @@ class Kernel extends HttpKernel
         'APIAdminUser' => APIAdminUser::class,
         'APIDealershipUser' => APIDealershipUser::class,
         'APISaleExecutiveUser' => APISalesExecutiveUser::class,
-        'APICallHandlerReceptionist' => APICallHandlerReceptionist::class
+        'APICallHandlerReceptionist' => APICallHandlerReceptionist::class,
+        'AdminMiddleware' => WebAdminMiddleware::class,
+        'DealershipMiddleware' => WebDealershipMiddleware::class,
+        'SalesExecutiveMiddleware' => WebSalesExecutiveMiddleware::class
     ];
 
     /**
