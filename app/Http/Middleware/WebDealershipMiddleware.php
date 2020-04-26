@@ -100,10 +100,9 @@ class WebDealershipMiddleware
 
                 return $this->redirectForbidden();
 
-
             default:
-//                return $this->redirectForbidden();
-                dd($routeName);
+                return $this->redirectForbidden();
+//                dd($routeName); // Enable in development time
         }
     }
 
