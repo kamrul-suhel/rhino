@@ -91,6 +91,15 @@ class WebDealershipMiddleware
 
                 return $this->redirectForbidden();
 
+            case 'CreateDealershipsUser': // Dealership can create user
+                $dealershipId = $request->id;
+
+                if($this->dealershipCanCreateUser($dealershipId)){
+                    return $next($request);
+                }
+
+                return $this->redirectForbidden();
+
 
             default:
 //                return $this->redirectForbidden();
@@ -145,6 +154,19 @@ class WebDealershipMiddleware
      */
     private function canEditDealership($dealershipId)
     {
+        if ((int)$dealershipId === (int)$this->authUser->dealership_id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Dealership can create user
+     * @param $dealershipId
+     * @return bool
+     */
+    private function dealershipCanCreateUser($dealershipId){
         if ((int)$dealershipId === (int)$this->authUser->dealership_id) {
             return true;
         } else {

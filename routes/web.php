@@ -65,27 +65,33 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('dealerships')->group(function () {
         Route::get('/', function () {
             return view('index');
-        })->name('Dealerships')->middleware('AdminMiddleware');
+        })->name('Dealerships')
+            ->middleware('AdminMiddleware');
 
         Route::get('/list', function () {
             return view('index');
-        })->name('ListDealerships')->middleware('AdminMiddleware');
+        })->name('ListDealerships')
+            ->middleware('AdminMiddleware');
 
         Route::get('create', function () {
             return view('index');
-        })->name('CreateDealerships')->middleware('AdminMiddleware');
+        })->name('CreateDealerships')
+            ->middleware('AdminMiddleware');
 
         Route::get('{id}/users', function () {
             return view('index');
-        })->middleware('DealershipMiddleware')->name('DealershipUsers');
+        })->middleware('DealershipMiddleware')
+            ->name('DealershipUsers');
 
         Route::get('{id}/edit', function () {
             return view('index');
-        })->middleware('DealershipMiddleware')->name('EditDealerships');
+        })->middleware('DealershipMiddleware')
+            ->name('EditDealerships');
 
         Route::get('{id}/users/create', function () {
             return view('index');
-        })->name('CreateDealershipsUser');
+        })->name('CreateDealershipsUser')
+            ->middleware('DealershipMiddleware');
 
         /**
          * Group routes
@@ -93,11 +99,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::prefix('groups')->group(function () {
             Route::get('', function () {
                 return view('index');
-            })->name('Groups');
+            })->name('Groups')
+                ->middleware('AdminMiddleware');
 
             Route::get('list', function () {
                 return view('index');
-            })->name('GroupsList');
+            })->name('GroupsList')
+                ->middleware('AdminMiddleware');
         });
 
         /**
@@ -105,7 +113,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
          */
         Route::get('{dealershipId}/events/{id}/edit', function () {
             return view('index');
-        })->name('EditDealershipEvent')->middleware('DealershipMiddleware');
+        })->name('EditDealershipEvent')
+            ->middleware('DealershipMiddleware');
 
         /**
          * Dealership admin route
@@ -135,19 +144,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('countries')->group(function () {
         Route::get('', function () {
             return view('index');
-        })->name('Countries');
+        })->name('Countries')
+            ->middleware('AdminMiddleware');
 
         Route::get('/create', function () {
             return view('index');
-        })->name('CountriesCreate');
+        })->name('CountriesCreate')
+            ->middleware('AdminMiddleware');
 
         Route::get('/list', function () {
             return view('index');
-        })->name('CountriesList');
+        })->name('CountriesList')
+            ->middleware('AdminMiddleware');
 
         Route::get('{id}/edit', function () {
             return view('index');
-        })->name('CountriesEdit');
+        })->name('CountriesEdit')
+            ->middleware('AdminMiddleware');
     });
 
 
@@ -160,11 +173,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('languages')->group(function () {
         Route::get('/', function () {
             return view('index');
-        })->name('Languages');
+        })->name('Languages')
+            ->middleware('AdminMiddleware');
 
         Route::get('list', function () {
             return view('index');
-        })->name('LanguagesList');
+        })->name('LanguagesList')
+            ->middleware('AdminMiddleware');
     });
 
     /*
@@ -176,27 +191,33 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('brands')->group(function () {
         Route::get('/', function () {
             return view('index');
-        })->name('Brands');
+        })->name('Brands')
+            ->middleware('AdminMiddleware');
 
         Route::get('{id}/edit', function () {
             return view('index');
-        })->name('BrandsEdit');
+        })->name('BrandsEdit')
+            ->middleware('AdminMiddleware');
 
         Route::get('create', function () {
             return view('index');
-        })->name('BrandCreate');
+        })->name('BrandCreate')
+            ->middleware('AdminMiddleware');
 
         Route::get('{id}/vehicle/{vehicleId}', function () {
             return view('index');
-        })->name('BrandVehicleEdit');
+        })->name('BrandVehicleEdit')
+            ->middleware('AdminMiddleware');
 
         Route::get('{id}/vehicle/create', function () {
             return view('index');
-        })->name('BrandVehicleCreate');
+        })->name('BrandVehicleCreate')
+            ->middleware('AdminMiddleware');
 
         Route::get('list', function () {
             return view('index');
-        })->name('BrandList');
+        })->name('BrandList')
+            ->middleware('AdminMiddleware');
     });
 
 
@@ -209,19 +230,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('vehicles')->group(function () {
         Route::get('/', function () {
             return view('index');
-        })->name('Vehicles');
+        })->name('Vehicles')
+            ->middleware('AdminMiddleware');
 
         Route::get('{id}/edit', function () {
             return view('index');
-        })->name('VehiclesEdit');
+        })->name('VehiclesEdit')
+            ->middleware('AdminMiddleware');
 
         Route::get('create', function () {
             return view('index');
-        })->name('VehicleCreate');
+        })->name('VehicleCreate')
+            ->middleware('AdminMiddleware');
 
         Route::get('list', function () {
             return view('index');
-        })->name('VehicleList');
+        })->name('VehicleList')
+            ->middleware('AdminMiddleware');
     });
 
 
@@ -234,15 +259,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('companies')->group(function () {
         Route::get('/', function () {
             return view('index');
-        })->name('Companies');
+        })->name('Companies')
+            ->middleware('AdminMiddleware');
 
         Route::get('list', function () {
             return view('index');
-        })->name('CompaniesList');
+        })->name('CompaniesList')
+            ->middleware('AdminMiddleware');
 
         Route::get('create', function () {
             return view('index');
-        })->name('CompaniesList');
+        })->name('CompaniesList')
+            ->middleware('AdminMiddleware');
     });
 
 
@@ -256,22 +284,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('users')->group(function () {
         Route::get('', function () {
             return view('index');
-        })->name('Users')->middleware('AdminMiddleware');
+        })->name('Users')
+            ->middleware('AdminMiddleware');
 
 
         Route::get('list', function () {
             return view('index');
-        })->name('UsersList')->middleware('AdminMiddleware');
+        })->name('UsersList')
+            ->middleware('AdminMiddleware');
 
         Route::get('create', function () {
             return view('index');
-        })->name('UsersCreate')->middleware('AdminMiddleware');
+        })->name('UsersCreate')
+            ->middleware('AdminMiddleware');
 
         Route::get('{id}/edit', function ($id) {
             $user = User::find($id);
             $title = "$user->firstname $user->surname";
             return view('index')->with('title', "User - $title");
-        })->name('UsersEdit')->middleware('DealershipMiddleware');
+        })->name('UsersEdit')
+            ->middleware('DealershipMiddleware');
     });
 
 
@@ -284,11 +316,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('events')->group(function () {
         Route::get('', function () {
             return view('index');
-        })->name('Events');
+        })->name('Events')
+            ->middleware('AdminMiddleware');
 
         Route::get('list', function () {
             return view('index');
-        })->name('EventsList');
+        })->name('EventsList')
+            ->middleware('AdminMiddleware');
 
         Route::get('create', function () {
             return view('index');
@@ -296,23 +330,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
         Route::get('{id}/edit', function () {
             return view('index');
-        })->name('EventsEdit');
+        })->name('EventsEdit')
+            ->middleware('AdminMiddleware');
 
 
         Route::get('types', function () {
             return view('index');
-        })->name('EventTypes');
+        })->name('EventTypes')
+            ->middleware('AdminMiddleware');
 
         Route::get('types/list', function () {
             return view('index');
-        })->name('EventTypesList');
+        })->name('EventTypesList')
+            ->middleware('AdminMiddleware');
 
         /**
          * Event Sales route
          */
         Route::get('{eventId}/sales', function () {
             return view('index');
-        })->name('EventSales')->middleware('SalesExecutiveMiddleware');
+        })->name('EventSales')
+            ->middleware('SalesExecutiveMiddleware');
 
         /**
          * Route for rhino admin to see calender for specific event
@@ -320,7 +358,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
         Route::get('{eventId}/dealerships/{dealershipId}/calendar', function () {
             return view('index');
-        })->name('EventDealershipsCalendar');
+        })->name('EventDealershipsCalendar')
+            ->middleware('AdminMiddleware');
 
         /*
         |--------------------------------------------------------------------------
@@ -403,7 +442,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('settings')->group(function () {
         Route::get('translations', function () {
             return view('index');
-        })->name('SettingsTranslations');
+        })->name('SettingsTranslations')->middleware('AdminMiddleware');
     });
 });
 
