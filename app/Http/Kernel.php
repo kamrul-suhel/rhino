@@ -75,10 +75,9 @@ class Kernel extends HttpKernel
         'APIDealershipUser' => APIDealershipUser::class,
         'APISaleExecutiveUser' => APISalesExecutiveUser::class,
         'APICallHandlerReceptionist' => APICallHandlerReceptionist::class,
-        'WebAdminUser' => WebAdminUser::class,
-        'WebDealershipUser' => WebDealershipUser::class,
-        'WebSaleExecutiveUser' => WebSalesExecutiveUser::class,
-        'WebCallHandlerUser' => WebCallHandlerUser::class
+        'AdminMiddleware' => WebAdminMiddleware::class,
+        'DealershipMiddleware' => WebDealershipMiddleware::class,
+        'SalesExecutiveMiddleware' => WebSalesExecutiveMiddleware::class
     ];
 
     /**
