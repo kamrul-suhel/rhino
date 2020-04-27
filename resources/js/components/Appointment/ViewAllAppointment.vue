@@ -7,20 +7,26 @@
                         <div style="overflow-x:scroll; height: 600px; position: relative;">
                             <div class="flex-headers" style=" height:50px; border: solid 1px #cecece; position: sticky; top: 0;z-index: 10;">
                                     <div style="width: 200px; height: 100%; border-left: solid 1px #cecece; border-right: solid 1px #cecece; align-items: center; display: flex; justify-content: center; background: #616161; color: white">Date / slot</div>
-                                    <div style="width: 200px; height: 100%; border-left: solid 1px #cecece; border-right: solid 1px #cecece; align-items: center; display: flex; justify-content: center; background: #616161; color: white" v-for="(user, index) in users" :key="index">
+                                    <div style="width: 200px; height: 100%; border-left: solid 1px #cecece; border-right: solid 1px #cecece; align-items: center; display: flex; justify-content: center; background: #616161; color: white"
+                                         v-for="(user, index) in users" :key="index">
                                         {{ `${user.firstname} ${user.surname}` }}
                                     </div>
                             </div>
-                    
-                            <div v-for="date in dates" :key="date" class="appointments"> 
-                                <div v-for="appointmentSlot in initializeUserAppointment(date)" v-bind:key="appointmentSlot"
+
+                            <div v-for="(date, index) in dates"
+                                 :key="index"
+                                 class="appointments">
+                                <div v-for="(appointmentSlot, index) in initializeUserAppointment(date)" :key="index"
                                     style="display:flex; width:fit-content; position:relative; align-items:center; height: 48px;  border: solid 1px #cecece;">
 
                                     <div style="width: 200px; height: 48px; border-bottom: solid 1px #8f8f8f; text-align: center; position:sticky;left:0; background: #ddd">
                                         <strong style="margin-top:20px">{{ date|dateFormat('d m y')}}</strong> <br > {{ appointmentSlot.start|dateFormat('LT') }} - {{ appointmentSlot.end| dateFormat('LT') }}
                                     </div>
 
-                                    <div class="flex-slots" style="width: 200px; height: 48px;; border-left: solid 1px #cecece; border-right: solid 1px #cecece; display: flex; justify-content: center; align-items: center" v-for="user in users" :key="user.id">
+                                    <div class="flex-slots"
+                                         style="width: 200px; height: 48px;; border-left: solid 1px #cecece; border-right: solid 1px #cecece; display: flex; justify-content: center; align-items: center"
+                                         v-for="(user, index) in users"
+                                         :key="index">
                                         <ViewAllAppointmentUser :appointmentSlot="appointmentSlot" :user="user">
                                         </ViewAllAppointmentUser>
                                     </div>
@@ -30,8 +36,9 @@
                     </v-container>
                 </div>
             </div>
+
             <div class="mobile-message">
-                Please view on larger screen size
+                {{ trans.largeScreenSize }}
             </div>
         </v-flex>
     </v-layout>

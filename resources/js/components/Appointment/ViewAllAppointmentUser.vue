@@ -4,7 +4,10 @@
             {{ trans.available }}
         </span>
     </span>
-    <ViewAllAppointmentOverview :user="user" v-else :appointment="getAppointmentInfo()"></ViewAllAppointmentOverview>
+
+    <ViewAllAppointmentOverview :user="user"
+                                v-else :appointment="getAppointmentInfo()">
+    </ViewAllAppointmentOverview>
 </template>
 
 <script>
