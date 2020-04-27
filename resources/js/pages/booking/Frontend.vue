@@ -150,7 +150,7 @@
                 }
 
                 return defaultBanner
-            }
+            },
         }
     }
 
@@ -170,6 +170,16 @@ h1 {
 
 .mt-md-5 {
     margin-top: 100px!important;
+}
+
+.menu-toggle {
+    cursor: pointer;
+}
+
+@media ( min-width: 1263px) {
+    .menu-toggle {
+        display:none;
+    }
 }
 
 

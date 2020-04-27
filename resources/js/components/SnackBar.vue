@@ -64,3 +64,8 @@
     }
 
 </script>
+<style scoped>
+    .v-snack.v-snack--active.v-snack--right.v-snack--top { 
+        font-family: 'Source Sans Pro'!important;
+    }
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="part-exchange px-5">
+    <div class="part-exchange px-md-5">
         <v-layout row wrap>
             <v-flex xs12>
                 <h4 class="display-1 mt-5 mx-3 text-xs-center">{{ trans.doYouHaveACarToPartExchange }}</h4>
@@ -10,7 +10,7 @@
                         <v-layout column nowrap fill-height pa-3>
                             <v-flex>
                                 <h6 class="headline">{{ trans.enterYour }} <b>{{ trans.details }}</b></h6>
-                                <v-text-field class="registration-input mt-4"
+                                <v-text-field class="registration-input"
                                               :disabled="isDisable"
                                               :color="color"
                                               v-model="partExchange.registrationNumber"
@@ -151,6 +151,21 @@
                 }
 
                 this.$store.commit('setBookingStep', 3)
+                this.moveTo()
+            },
+
+            moveTo () {
+                let to = this.moveToDown
+                    ? this.$refs.description.offsetTop - 60
+                    : 0
+
+                window.scroll({
+                    top: to,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
+                this.moveToDown = !this.moveToDown
             }
         }
     }

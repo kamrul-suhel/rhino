@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-layout row wrap align-center justify-center class="personal-details" px-5>
+        <v-layout row wrap align-center justify-center class="personal-details px-md-5">
             <v-flex class="xs12" align-center>
                 <h4 class="display-1 mt-5 mx-2 text-xs-center">
                     {{ trans.pleaseConfirmAmendYourContactDetails }}
@@ -245,6 +245,22 @@
 
             onContinue(){
                 this.$store.commit('setBookingStep', 4)
+
+                this.moveTo()
+            },
+
+            moveTo () {
+                let to = this.moveToDown
+                    ? this.$refs.description.offsetTop - 60
+                    : 0
+
+                window.scroll({
+                    top: to,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
+                this.moveToDown = !this.moveToDown
             }
         }
     }

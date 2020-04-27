@@ -243,6 +243,9 @@
                     this.$store.commit('setBookingStep', 1)
                 }
 
+                this.moveTo()
+
+
             },
 
             renderVehicleImage(vehicle) {
@@ -271,6 +274,20 @@
                 }
 
                 return this.themeOption.brandDefaultImage
+            },
+
+            moveTo () {
+                let to = this.moveToDown
+                    ? this.$refs.description.offsetTop - 60
+                    : 0
+
+                window.scroll({
+                    top: to,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
+                this.moveToDown = !this.moveToDown
             }
         }
     }

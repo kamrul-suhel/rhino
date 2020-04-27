@@ -2,15 +2,14 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\VerifyJWT;
 use App\Http\Middleware\APIAdminUser;
-use App\Http\Middleware\WebAdminUser;
-use App\Http\Middleware\APIDealershipUser;
-use App\Http\Middleware\WebDealershipUser;
-use App\Http\Middleware\WebCallHandlerUser;
-use App\Http\Middleware\APISalesExecutiveUser;
-use App\Http\Middleware\WebSalesExecutiveUser;
 use App\Http\Middleware\APICallHandlerReceptionist;
+use App\Http\Middleware\APIDealershipUser;
+use App\Http\Middleware\APISalesExecutiveUser;
+use App\Http\Middleware\VerifyJWT;
+use App\Http\Middleware\WebAdminMiddleware;
+use App\Http\Middleware\WebDealershipMiddleware;
+use App\Http\Middleware\WebSalesExecutiveMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel

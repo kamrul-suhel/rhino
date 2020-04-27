@@ -60,6 +60,10 @@
 
 .model-section {
 
+    @media (min-width: 1300px){
+        padding: 0 60px;
+    }
+
     button.selected {
         background-color: #333C42 !important;
         color: white !important;
@@ -316,6 +320,10 @@
     .book-appointment{
         .border-right{
             border-right: 1px solid rgb(240, 240, 240);
+        }
+
+        @media (min-width: 1300px){
+            padding: 0 60px;
         }
     }
 
@@ -729,21 +737,54 @@
 
     .registration-input {
         width: 330px;
-        height: 70px;
         background-color: rgb(255, 180, 0);
         border: 1px solid rgb(160, 120, 0);
         border-radius: 7px;
         text-transform: uppercase;
         color: black;
+        height: 60px;
+        max-width: 100%;
         font-size: 25px;
         line-height: 25px;
-        padding: 22.5px;
-        max-width: 100%;
+        padding: 15px;
+
+        @media ( min-width: 768px){
+            font-size: 30px;
+            line-height: 25px;
+            padding: 18px;
+            margin-top: 30px;
+            height: 60px;
+        }
+
+        @media (min-width: 960px) {
+            max-width: 100%
+        }
+          
+        @media (min-width: 1080px) {
+            max-width: 80%;
+            height: 70px;
+        }
+
+        @media ( min-width: 1200px){
+            font-size: 35px;
+            line-height: 35px;
+            padding: 30px;
+        }
+
+        @media (min-width: 1300px) {
+            max-width: 60%
+        }
 
         input{
             font-family: 'CharlesWright';
             text-transform: uppercase;
+            text-align: center;
+
+            &::-webkit-input-placeholder {text-align:center;font-size: 21px;}
+            &::-webkit-input-placeholder:-ms-input-placeholder { text-align:center;font-size: 21px;}
+            &::-webkit-input-placeholder ::placeholder {text-align:center;font-size: 21px;}
         }
+
     }
 
     .exchange-details, .no-part-exchange {
@@ -780,7 +821,11 @@
 */
 
 
-
+@media (min-width: 1300px){
+    .part-exchange {
+        padding: 0 60px;
+    }
+}
 
 
 /*
@@ -822,7 +867,11 @@
     End Personal Details Page
 *****************************************
 */
-
+@media (min-width: 1300px){
+    .personal-details {
+        padding: 0 60px;
+    }
+}
 
 
 /*
@@ -832,6 +881,12 @@
 */
 
 .booking-confirmation {
+
+    @media (min-width: 1300px){
+        .booking-confirmation {
+            padding: 0 60px;
+        }
+    }
 
     .v-card {
         background-color: transparent;
@@ -888,6 +943,12 @@
         strong{
 
         }
+    }
+}
+
+.rhinoFrontend {
+    .headline {
+        font-family: 'Source Sans Pro'!important;       
     }
 }
 

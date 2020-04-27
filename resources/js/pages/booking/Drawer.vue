@@ -133,7 +133,7 @@
 
         data() {
             return {
-                drawer: true
+                drawer: false
             }
         },
 
@@ -249,7 +249,9 @@
         },
 
         created() {
-
+            if ( window.innerWidth > 960 ) {
+                this.drawer = true;
+            }
         },
 
         methods: {
@@ -272,7 +274,7 @@
                 }
 
                 return number
-            }
+            },
         }
     }
 </script>

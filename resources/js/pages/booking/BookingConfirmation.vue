@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-layout row wrap align-center justify-center class="booking-confirmation" px-5>
+        <v-layout row wrap align-center justify-center class="booking-confirmation px-md-5">
             <v-flex class="xs12" align-center v-if="!isDisable">
                 <h4 class="display-1 mt-5 mx-2 text-xs-center">
                     {{ trans.FollowingDetailsAreCorrect }}
@@ -372,6 +372,7 @@
                     }
                     this.loading = false
                     this.loader = null
+                    this.moveTo()
                 },error => {
                     this.loading = false
                     this.loader = null
@@ -408,6 +409,20 @@
                     const image =  fn.renderVehicleImage(vehicle, this.dealership, this.themeOption.brandDefaultImage)
                     return image
                 }
+            },
+
+            moveTo () {
+                let to = this.moveToDown
+                    ? this.$refs.description.offsetTop - 60
+                    : 0
+
+                window.scroll({
+                    top: to,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
+                this.moveToDown = !this.moveToDown
             }
         }
     }

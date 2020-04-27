@@ -1,5 +1,5 @@
 <template>
-    <div class="book-appointment px-5">
+    <div class="book-appointment px-py-5">
         <v-layout row wrap>
             <v-flex xs12>
                 <h4 class="display-1 mt-5 text-xs-center">
@@ -155,6 +155,21 @@
                 }
 
                 this.$store.commit('setBookingStep', 2)
+                this.moveTo()
+            },
+
+            moveTo () {
+                let to = this.moveToDown
+                    ? this.$refs.description.offsetTop - 60
+                    : 0
+
+                window.scroll({
+                    top: to,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
+                this.moveToDown = !this.moveToDown
             }
         }
     }
