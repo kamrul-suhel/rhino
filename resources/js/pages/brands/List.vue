@@ -212,6 +212,7 @@
                     </v-btn>
 
                     <v-btn
+                        dark
                         :color="themeOption.buttonDangerColor"
                         small
                         @click="onConfirmDeleteBrand"
@@ -376,6 +377,9 @@
                         }
                         this.$store.commit('setSelectedBrand', {})
                         this.color = ''
+                        setTimeout(() => {
+                            this.$router.push({name: 'editBrand', params: {id: response.data.brand.id}})
+                        }, 1000)
                     })
                 }
 

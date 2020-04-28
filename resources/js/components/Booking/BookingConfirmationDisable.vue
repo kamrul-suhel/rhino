@@ -52,7 +52,7 @@
 
                                 <v-flex xs12>
                                     <h6 class="xs12 body-1 text-xs-center">
-                                        <strong :style="{color: color}">{{ saleExecutive.firstname }}</strong>
+                                        <strong :style="{color: color}">{{ saleExecutive.firstname }} {{ saleExecutive.surname }}</strong>
                                     </h6>
                                 </v-flex>
                             </v-layout>
@@ -99,7 +99,7 @@
 
                                 <v-flex xs12>
                                     <h6 class="registration-confirmation">
-                                        <strong :style="{color: color}">{{ getPartExchangeTitle() }}</strong>
+                                        <strong>{{ getPartExchangeTitle() ? getPartExchangeTitle() : 'None'  }}</strong>
                                     </h6>
                                 </v-flex>
                             </v-layout>
@@ -122,7 +122,7 @@
 
                                 <v-flex mt-1>
                                     <h6 class="xs12 body-2 text-xs-center">
-                                        <strong :style="{color: color}">{{ bringGuest.name }}</strong>
+                                        <strong :style="{color: color}">{{ bringGuest.name ? bringGuest.name : 'None' }}</strong>
                                     </h6>
                                 </v-flex>
                             </v-layout>
