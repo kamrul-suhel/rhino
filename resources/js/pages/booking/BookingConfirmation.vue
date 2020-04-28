@@ -118,7 +118,7 @@
 
                                                         <v-flex xs12>
                                                             <h6 class="xs12 body-1 text-xs-center">
-                                                                {{ saleExecutive.firstname }}
+                                                                {{ saleExecutive.firstname }} {{ saleExecutive.surname }}
                                                             </h6>
                                                         </v-flex>
                                                     </v-layout>

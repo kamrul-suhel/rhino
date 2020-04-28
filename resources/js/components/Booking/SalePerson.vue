@@ -23,8 +23,8 @@
                 <v-flex xs12>
                     <v-card flat
                             max-height="250px"
-                            height="350px" class="sales-scroller">
-                        <v-card-text class="mover">
+                            height="350px" id="sales-scroller">
+                        <v-card-text id="mover">
                             <v-flex xs12 mt-3
                                     class="salesperson-container"
                                     :class="saleExecutive.selected && saleExecutive.selected === 'selected' ? 'active' : ''"
@@ -53,6 +53,9 @@
                             </v-flex>
                         </v-card-text>
                     </v-card>
+                </v-flex>
+                <v-flex v-if="saleExecutives.length > 5" xs12 style="text-align:center; margin-top:20px; cursor: pointer">
+                    <span><small>Scroll for more names</small><br><i class="fas fa-chevron-down"></i></span>
                 </v-flex>
             </v-layout>
         </v-flex>
@@ -96,12 +99,22 @@
             onSalePersonRemove(){
                 this.$store.commit('setBookingSelectedSaleExecutive', {})
                 this.$store.commit('updateUserForBooking', {})
-            }
+            },
+
         }
     }
 </script>
 <style scoped>
-    .sales-scroller {
+    #sales-scroller {
         overflow-y: scroll;
+    }
+
+    #sales-scroller::-webkit-scrollbar {
+    display: none;
+    }
+
+    /* Hide scrollbar for IE and Edge */
+    #sales-scroller {
+    -ms-overflow-style: none;
     }
 </style>

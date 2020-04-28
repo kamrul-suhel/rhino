@@ -12,7 +12,7 @@
                   mt-5
                   justify-center>
             <v-flex xs12
-                    class="border-right px-4"
+                    class="border-right"
                     :md4="vehicleType !== 'unsure'"
                     :md6="vehicleType === 'unsure' || vehicleType === ''">
                 <Calender></Calender>
