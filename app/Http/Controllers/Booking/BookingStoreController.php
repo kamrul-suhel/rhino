@@ -77,13 +77,13 @@ class BookingStoreController extends Controller
         $request->has('user_id') ? $appointment->user_id = $request->user_id : null;
         $appointment->guest_id = $request->has('guest_id') ? $request->guest_id : null;
         $request->has('slot_id') ? $appointment->slot_id = $request->slot_id : null;
-        $request->has('bring_guest') && $request->bring_guest !== 'null' ? $appointment->bring_guest = $request->bring_guest : null;
-        $request->has('guest_changing_car') && $request->guest_changing_car !== 'null' ? $appointment->guest_changing_car = $request->guest_changing_car : null;
+        $request->has('bring_guest') && $request->bring_guest !== 'undefined' ? $appointment->bring_guest = $request->bring_guest : null;
+        $request->has('guest_changing_car') && $request->guest_changing_car !== 'undefined' ? $appointment->guest_changing_car = $request->guest_changing_car : null;
         $request->has('start') ? $appointment->start = $request->start : null;
         $request->has('end') ? $appointment->end = $request->end : null;
-        $request->has('part_ex_vrm') && $request->part_ex_vrm !== 'null' ? $appointment->part_ex_vrm = $request->part_ex_vrm : null;
-        $request->has('part_ex_vehicle') && $request->part_ex_vehicle !== 'null' ? $appointment->part_ex_vehicle = $request->part_ex_vehicle : null;
-        $request->has('part_ex_distance') && $request->part_ex_distance !== 'null' ? $appointment->part_ex_distance = $request->part_ex_distance : null;
+        $request->has('part_ex_vrm') && $request->part_ex_vrm !== 'undefined' ? $appointment->part_ex_vrm = $request->part_ex_vrm : null;
+        $request->has('part_ex_vehicle') && $request->part_ex_vehicle !== 'undefined' ? $appointment->part_ex_vehicle = $request->part_ex_vehicle : null;
+        $request->has('part_ex_distance') && $request->part_ex_distance !== 'undefined' ? $appointment->part_ex_distance = $request->part_ex_distance : null;
         $request->has('status') && $request->status !== 'null' ? $appointment->status = $request->status : null;
 
         $appointment->save();
