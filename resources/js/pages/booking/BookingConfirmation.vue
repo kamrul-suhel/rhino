@@ -34,7 +34,7 @@
                                                         class="mt-2">
                                                 <v-carousel-item
                                                     cycle="false"
-                                                    v-for="vehicle in vehicles"
+                                                    v-for="vehicle in filterVehicles()"
                                                     :key="`${vehicle.id}-${vehicle.condition}`"
                                                     :src="renderVehicleImage(vehicle)"
                                                 ></v-carousel-item>
@@ -273,7 +273,8 @@
         data() {
             return {
                 loader: null,
-                loading: false
+                loading: false,
+                vehicleids: [],
             }
         },
 
@@ -409,6 +410,17 @@
                     const image =  fn.renderVehicleImage(vehicle, this.dealership, this.themeOption.brandDefaultImage)
                     return image
                 }
+            },
+
+            filterVehicles(){
+                // Filter out repeated vehicles (used & new) for carousel
+
+                const filterVehicles = _.uniqBy(this.vehicles, function (e) {
+                    return e.vehicle_id;
+                });
+
+                return filterVehicles
+
             },
 
             moveTo () {
