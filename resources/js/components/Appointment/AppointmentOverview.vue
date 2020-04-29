@@ -6,8 +6,10 @@
                 <span v-if="appointment.status === 3">{{ `${trans.notAvailable}`}}</span>
                 <span v-if="appointment.status === 4">{{ `${trans.breakTime}`}}</span>
                 <span v-if="appointment.status === 1">
-                    {{ `${trans.confirmed}`}}
-                    <span v-if="appointment.guest_id">{{ appointment.guest_first_name }}</span>
+                    <span v-if="appointment.guest_id">
+                        {{ appointment.guest_first_name }} {{ appointment.guest_surname }}
+                        {{ appointment.scheduled_start && appointment.scheduled_end ? '*' : ''  }}
+                    </span>
                 </span>
             </div>
         </v-flex>

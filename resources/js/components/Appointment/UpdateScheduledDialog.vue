@@ -10,7 +10,7 @@
                 primary-title
             >
                 <span :style="{color: themeOption.primaryTextColor}">
-                    {{ `${trans.updateArrivedLeaveTime}` }}
+                    {{ `${trans.overRideTimes}` }}
                 </span>
             </v-card-title>
 
@@ -33,7 +33,7 @@
                             <template v-slot:activator="{ on }">
                                 <v-text-field
                                     v-model="scheduledStart"
-                                    :label="trans.guestArrived"
+                                    :label="trans.start"
                                     :color="themeOption.primaryColor"
                                     prepend-icon="access_time"
                                     readonly
@@ -70,7 +70,7 @@
                             <template v-slot:activator="{ on }">
                                 <v-text-field
                                     v-model="scheduledEnd"
-                                    :label="trans.guestLeave"
+                                    :label="trans.end"
                                     :color="themeOption.primaryColor"
                                     prepend-icon="access_time"
                                     readonly

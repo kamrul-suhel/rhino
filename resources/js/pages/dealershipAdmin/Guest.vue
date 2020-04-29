@@ -116,7 +116,7 @@
                                        flat
                                        v-if="appointment.status === 1"
                                        @click="onUpdateScheduleTime(appointment)">
-                                    <span :style="{color: themeOption.primaryColor}">{{ `${trans.updateArrivedLeaveTime}`}}</span>
+                                    <span :style="{color: themeOption.primaryColor}">{{ `${trans.overRideTimes}`}}</span>
                                 </v-btn>
 
                                 <v-btn :color="themeOption.primaryColor"
