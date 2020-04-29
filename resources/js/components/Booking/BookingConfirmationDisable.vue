@@ -26,9 +26,13 @@
 
                                 <v-flex xs12>
                                     <h6 class="xs12 body-1 text-xs-center">
-                                        <strong :style="{color: color}">
-                                            {{ slot.start|dateFormat('HH:mm', selectedLanguage.language_code) }} - {{
-                                            slot.end|dateFormat('LT', selectedLanguage.language_code)}}
+                                        <strong v-if="scheduled_start && scheduled_end" :style="{color: color}">
+                                            {{ scheduledStart }} - 
+                                            {{ scheduledEnd }}
+                                        </strong>
+                                        <strong v-if="!scheduled_start || !scheduled_end" :style="{color: color}">
+                                            {{ slot.start|dateFormat('HH:mm', selectedLanguage.language_code) }} - 
+                                            {{ slot.end|dateFormat('LT', selectedLanguage.language_code)}}
                                         </strong>
                                     </h6>
                                 </v-flex>
@@ -99,7 +103,7 @@
 
                                 <v-flex xs12>
                                     <h6 class="registration-confirmation">
-                                        <strong>{{ getPartExchangeTitle() ? getPartExchangeTitle() : 'None'  }}</strong>
+                                        <strong>{{ getPartExchangeTitle() ? getPartExchangeTitle() : 'N/A'  }}</strong>
                                     </h6>
                                 </v-flex>
                             </v-layout>
@@ -122,7 +126,9 @@
 
                                 <v-flex mt-1>
                                     <h6 class="xs12 body-2 text-xs-center">
-                                        <strong :style="{color: color}">{{ bringGuest.name ? bringGuest.name : 'None' }}</strong>
+                                        <strong :style="{color: color}">
+                                            {{ (bringGuest.name != 'undefined' && bringGuest.name ) ? bringGuest.name : 'None' }}
+                                        </strong>
                                     </h6>
                                 </v-flex>
                             </v-layout>
@@ -169,6 +175,8 @@
                 bringGuest: 'getBookingBringGuest',
                 guest: 'getBookingGuest',
                 partExchange: 'getBookingPartExchange',
+                scheduled_start: 'getOverrideStart',
+                scheduled_end: 'getOverrideEnd',
                 date: 'getBookingSelectedDate',
                 event: 'getSelectedEvent',
                 isDisable: 'getDisableEditing',
@@ -178,7 +186,8 @@
         }),
 
         created() {
-
+            this.scheduledStart = moment(this.scheduled_start).format('HH:mm')
+            this.scheduledEnd = moment(this.scheduled_end).format('HH:mma')
         },
 
         methods: {

@@ -18,6 +18,9 @@ const defaultState = {
     step: 'selectModel',
     partExchange: {
     },
+    overrideStart: false,
+    overrideEnd: false,
+
 
     confirmDetail: {}
 }
@@ -72,6 +75,9 @@ const mutations = {
                 }
                 state.selectedDate = moment(appointment.start).format( "YYYY-MM-DD")
             }
+
+            state.overrideStart = appointment.scheduled_start
+            state.overrideEnd = appointment.scheduled_end
 
             // Bringing guest info
             if(!_.isEmpty(appointment.bring_guest)){
@@ -171,6 +177,14 @@ const mutations = {
 
     setPartExchange(state, partExchange) {
         state.partExchange = {...partExchange}
+    },
+
+    setOverrideStart(state, overrideStart) {
+        state.overrideStart = {...overrideStart}
+    },
+
+    setOverrideEnd(state, overrideEnd) {
+        state.overrideEnd = {...overrideEnd}
     },
 
     setBookingStep(state, step) {
@@ -340,6 +354,14 @@ const getters = {
 
     getBookingPartExchange(state) {
         return state.partExchange
+    },
+
+    getOverrideStart(state) {
+        return state.overrideStart
+    },
+
+    getOverrideEnd(state) {
+        return state.overrideEnd
     },
 
     getBookingStep(state) {

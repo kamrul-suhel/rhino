@@ -161,7 +161,6 @@
         }),
 
         created() {
-
             this.overrideStart = moment(this.appointment.scheduled_start).format('HH:mma')
             this.overrideEnd = moment(this.appointment.scheduled_end).format('HH:mma')
         },

@@ -31,7 +31,7 @@
                                                         height="250"
                                                         :hide-delimiters="vehicles.length <= 1"
                                                         :hide-controls="vehicles.length <= 1"
-                                                        class="mt-2">
+                                                        class="mt-2 vehicle-carousel">
                                                 <v-carousel-item
                                                     cycle="false"
                                                     v-for="vehicle in filterVehicles()"
@@ -290,6 +290,8 @@
                 bringGuest: 'getBookingBringGuest',
                 guest: 'getBookingGuest',
                 partExchange: 'getBookingPartExchange',
+                scheduled_start: 'getOverrideStart',
+                scheduled_end: 'getOverrideEnd',
                 date: 'getBookingSelectedDate',
                 event: 'getSelectedEvent',
                 isDisable: 'getDisableEditing',
@@ -439,3 +441,10 @@
         }
     }
 </script>
+<style scoped>
+
+.vehicle-carousel .v-image__image.v-image__image--cover {
+    background-size: contain!important;
+}
+
+</style>
