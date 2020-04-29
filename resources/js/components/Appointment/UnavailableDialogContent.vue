@@ -53,12 +53,11 @@
                       mb-4
                       wrap>
                 <v-flex xs12 class="mb-2">
-                    <h3>{{ trans.guest }}</h3>
-                    <v-divider></v-divider>
+                    <h3 :style="{color: themeOption.primaryColor}">{{ trans.guest }}</h3>
                 </v-flex>
 
                 <v-flex xs12 sm6>
-                    <strong>{{ trans.name }}:</strong> {{ `${appointment.guest_surname} ${appointment.guest_first_name}` }}
+                    <strong>{{ trans.name }}:</strong> {{ `${appointment.guest_first_name} ${appointment.guest_surname} ` }}
                 </v-flex>
 
                 <v-flex xs12 sm6>
@@ -66,19 +65,31 @@
                 </v-flex>
 
                 <v-flex xs12>
-                    <strong>{{ trans.bringGuest|trans }}:</strong> {{ `${appointment.bring_guest}` }}
+                    <strong>{{ trans.guests|trans }}:</strong> {{ (appointment.bring_guest != 'undefined') ? appointment.bring_guest : 'No' }}
                 </v-flex>
 
-                <v-flex xs12 sm6>
-                    <strong>{{ trans.partExchange|trans }}:</strong> {{ `${appointment.part_ex_vrm}` }}
+                <v-flex xs12 class="mt-2" v-if="appointment.part_ex_vrm">
+                    <v-divider class="mb-2"></v-divider>
+                    <h3 :style="{color: themeOption.primaryColor}">{{ trans.partExchange|trans }}:</h3>
+                    
+                </v-flex>
+                <v-flex xs12 sm6 v-if="appointment.part_ex_vrm">
+                    <strong>{{ trans.registrationNumber|trans }}:</strong> {{ appointment.part_ex_vrm }}
                 </v-flex>
 
-                <v-flex xs12 sm6>
-                    <strong>{{ trans.model|trans }}:</strong> {{ `${appointment.part_ex_vehicle}` }}
+                <v-flex xs12 sm6 v-if="appointment.part_ex_vrm">
+                    <strong>{{ trans.model|trans }}:</strong> {{ appointment.part_ex_vehicle }}
                 </v-flex>
 
-                <v-flex xs12 sm6>
-                    <strong>{{ trans.currentMileage|trans }}:</strong> {{ `${appointment.part_ex_distance}` }}
+                <v-flex xs12 sm6 v-if="appointment.part_ex_vrm">
+                    <strong>{{ trans.currentMileage|trans }}:</strong> {{ appointment.part_ex_distance }}
+                </v-flex>
+
+                <v-flex v-if="appointment.scheduled_start && appointment.scheduled_end" xs12 class="mt-2">
+                    <v-divider class="mb-2"></v-divider>
+                    <h3 :style="{color: themeOption.primaryColor}">{{ trans.arrangedTime|trans }}:</h3> 
+                        
+                    {{ overrideStart }} - {{ overrideEnd }}
                 </v-flex>
             </v-layout>
 
@@ -104,7 +115,7 @@
                        @click="onUpdateScheduleTime()">
                     <span
                         :style="{color: themeOption.primaryTextColor}">
-                        {{ `${trans.updateArrivedLeaveTime}`}}
+                        {{ `${trans.overRideTimes}`}}
                     </span>
                 </v-btn>
 
@@ -126,7 +137,9 @@
         },
         data() {
             return {
-                updateSchedule: false
+                updateSchedule: false,
+                overrideStart: false,
+                overrideEnd: false,
             }
         },
 
@@ -148,6 +161,8 @@
         }),
 
         created() {
+            this.overrideStart = moment(this.appointment.scheduled_start).format('HH:mma')
+            this.overrideEnd = moment(this.appointment.scheduled_end).format('HH:mma')
         },
 
         methods: {

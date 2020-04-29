@@ -374,6 +374,10 @@
                 }
             }
         }
+        
+        .v-image__image.v-image__image--cover {
+            background-size: contain!important;
+        }
 
         .btnPositioning{
             position:relative;
@@ -769,7 +773,6 @@
         @media ( min-width: 1200px){
             font-size: 35px;
             line-height: 35px;
-            padding: 30px;
         }
 
         @media (min-width: 1300px) {

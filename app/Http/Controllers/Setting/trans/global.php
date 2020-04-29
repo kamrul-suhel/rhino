@@ -649,8 +649,8 @@ return [
     ],
 
     [
-        'label' => 'Update guest arrived & leave time',
-        'identifier' => 'updateArrivedLeaveTime'
+        'label' => 'Override Appointment Times',
+        'identifier' => 'overRideTimes'
     ],
 
     [
@@ -661,6 +661,11 @@ return [
     [
         'label' => 'Guest Leave',
         'identifier' => 'guestLeave'
+    ],
+
+    [
+        'label' => 'Arranged Time',
+        'identifier' => 'arrangedTime'
     ],
 
     [
