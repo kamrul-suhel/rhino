@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Http\Controllers\Controller;
+use App\Guest;
+use Illuminate\Http\Request;
 use App\Http\Requests\GuestRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\GuestUploadCSVRequest;
 use App\Http\Requests\UploadMultipleGuestRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class GuestUploadCSVController extends Controller
 {
@@ -72,6 +73,55 @@ class GuestUploadCSVController extends Controller
         ]);
     }
 
+    public function suppressionUpload(GuestUploadCSVRequest $request)
+    {
+        $file = $request->file;
+        $validator = Validator::make(
+            [
+                'file' => $file,
+                'extension' => strtolower($file->getMimeType()),
+            ],
+            [
+                'file' => 'required',
+                'extension' => 'required|in:csv'
+            ]
+        );
+
+        if ($validator->failed()) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
+
+        $modifyGuests = $this->csvToArray($request->file);
+        foreach ($modifyGuests as $guest){
+
+            $guest = Guest::find($guest['id']);
+
+            if (!$guest){
+                return response()->json([
+                    'success' => false
+                ]); 
+            }
+
+            
+
+            $updateDetails = [
+                'postal_contact' => $guest['postal_contact'],
+                'email_contact' => $guest['email_contact'],
+                'phone_contact' => $guest['phone_contact'],
+                'sms_contact' => $guest['sms_contact']
+            ];
+
+            $guest->where('id', $guest['id'])->update($updateDetails);
+        }
+
+        return response()->json([
+            'success' => true
+        ]);
+
+    }
+
 
     /**
      * Remove any BOM from string
@@ -105,4 +155,6 @@ class GuestUploadCSVController extends Controller
         }
         return $data;
     }
+
+
 }

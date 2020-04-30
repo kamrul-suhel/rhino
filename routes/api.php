@@ -296,6 +296,7 @@ Route::prefix('guests')->middleware('VerifyJWT')->group(function () {
     Route::post('', 'Guest\GuestStoreController@store');
     Route::post('upload', 'Guest\GuestUploadCSVController@generateGuests');
     Route::post('upload/confirm', 'Guest\GuestUploadCSVController@store');
+    Route::post('suppression_upload', 'Guest\GuestUploadCSVController@suppressionUpload');
     Route::put('{id}', 'Guest\GuestStoreController@update');
     Route::delete('{id}', 'Guest\GuestDestroyController@destroy');
 });
