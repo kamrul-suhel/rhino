@@ -32,7 +32,7 @@
                                         </strong>
                                         <strong v-if="!scheduled_start || !scheduled_end" :style="{color: color}">
                                             {{ slot.start|dateFormat('HH:mm', selectedLanguage.language_code) }} - 
-                                            {{ slot.end|dateFormat('LT', selectedLanguage.language_code)}}
+                                            {{ slot.end|dateFormat('HH:mm', selectedLanguage.language_code)}}
                                         </strong>
                                     </h6>
                                 </v-flex>
