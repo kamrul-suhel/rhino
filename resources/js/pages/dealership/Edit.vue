@@ -308,8 +308,6 @@
                                                     :label="`Send System Emails`"
                                         >
                                         </v-checkbox>
-
-                                        <label class="d-block" for="">{{ trans.guestContactPreferences }}</label>
                                     </v-tab-item>
                                 </v-tabs-items>
                             </v-tabs>
