@@ -120,14 +120,23 @@
                 this.loader = 'loading'
                 this.loading = true
 
-                axios.post(URL, guestForm).then((response) => {
-                    if (response.data.success) {
-                        let users = [...response.data.users]
-                        users = _.uniqBy(users, (user) => {
-                            return user.email
-                        })
+                axios.post(URL, guestSuppressionForm).then((response) => {
+                    if (response.data.success == false) {
+                        // Guest ID not found
+                        this.$store.commit('setSnackbarMessage', {
+                                openMessage: true,
+                                timeOut: this.themeOption.snackBarTimeout,
+                                message: `${this.trans.guestDoesntExist}`
+                            })
+                    }
 
-                        this.users = [...users]
+                    if (response.data.success) {
+
+                        this.$store.commit('setSnackbarMessage', {
+                                openMessage: true,
+                                timeOut: this.themeOption.snackBarTimeout,
+                                message: `${this.trans.guestSuccessfullyUpdated}`
+                            })
                     }
 
                     this.loader = null
