@@ -498,7 +498,10 @@
                     return
                 }
 
-                this.$router.push({name: 'listUsers'})
+                console.log('back history!');
+                
+                window.history.back();
+                
             }
         }
     }
