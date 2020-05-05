@@ -18,8 +18,8 @@
                     >
                         <template v-slot:items="props">
                             <td>{{ props.item.firstname }}</td>
+                            <td>{{ props.item.surname }}</td>
                             <td>{{ props.item.email }}</td>
-                            <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                             <td class="text-xs-left">{{ props.item.level }}</td>
                             <td class="text-xs-right">
                                 <v-icon
@@ -109,20 +109,68 @@
                 this.$store.dispatch('fetchUsers', paginateOption)
             },
 
-            onDeleteBrand(brandId) {
-                const URL = `/api/events/${this.selectedEvent.id}/brands/${brandId}`
-                let brandEventFrom = new FormData()
-                brandEventFrom.append(`brand_id`, brandId)
-                brandEventFrom.append(`_method`, 'DELETE')
-                brandEventFrom.append('event_id', this.selectedEvent.id)
-                axios.delete(URL, brandEventFrom).then((response) => {
-                    if (response.data.success) {
-                        this.$store.commit('setInitializeBrands')
+            onDeleteUser(user) {
+                if (this.subComponent) {
+                    const eventId = this.$route.params.eventId
+                    switch (this.model) {
+                        case 'dealership':
+                            const URL = `/api/events/${eventId}/users/${user.id}`
+                            axios.delete(URL).then((response) => {
+                                this.$store.commit('setSnackbarMessage', {
+                                    openMessage: true,
+                                    timeOut: this.themeOption.snackBarTimeout,
+                                    message: `${this.trans.userSuccessfullyRemoveFromEvent}`
+                                })
+
+                                if (response.data.success) {
+                                    this.$store.commit('removeUserFromUserList', user)
+                                }
+                            }).catch(error => {
+                                this.$store.dispatch('initializeError', error)
+                            })
                     }
-                }).catch(error => {
-                    this.$store.dispatch('initializeError', error)
-                })
-            }
+                } else {
+                    this.selectedUser = {...user}
+                    this.deleteDialog = true
+                }
+            },
+
+            onDeleteConfirm() {
+                if (this.subComponent) {
+                    const eventId = this.$route.params.eventId
+                    switch (this.model) {
+                        case 'dealership':
+                            const URL = `/api/events/${eventId}/users/${user.id}`
+                            axios.delete(URL).then((response) => {
+                                if (response.data.success) {
+                                    this.$store.commit('setSnackbarMessage', {
+                                        openMessage: true,
+                                        timeOut: this.themeOption.snackBarTimeout,
+                                        message: `${this.selectedUser.firstname}  ${this.trans.userSuccessfullyRemoveFromEvent}`
+                                    })
+                                    this.$store.commit('setInitialize')
+                                }
+                            }).catch(error => {
+                                this.$store.dispatch('initializeError', error)
+                            })
+                    }
+                } else {
+                    // Delete user
+                    const URL = `/api/users/${this.selectedUser.id}`
+                    axios.delete(URL).then((response) => {
+                        this.deleteDialog = false
+                        this.initialize()
+
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.selectedUser.firstname}  ${this.trans.successfullyDeleted}`
+                        })
+                    }).catch(error => {
+                        this.$store.dispatch('initializeError', error)
+                    })
+                }
+            },
         }
     };
 </script>
