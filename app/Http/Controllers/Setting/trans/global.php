@@ -181,7 +181,7 @@ return [
     ],
 
     [
-        'label' => 'User successfully remove from event',
+        'label' => 'User successfully removed from event',
         'identifier' => 'userSuccessFullyRemoveFromEvent'
     ],
 
@@ -551,11 +551,6 @@ return [
     [
         'label' => 'Manage users',
         'identifier' => 'manageUsers'
-    ],
-
-    [
-        'label' => 'User successfully remove from event',
-        'identifier' => 'userSuccessfullyRemoveFromEvent'
     ],
 
     [
@@ -2467,5 +2462,11 @@ return [
     [
         'label' => 'Guest not found when trying to update record',
         'identifier' => 'guestDoesntExist'
+    ],
+
+    
+    [
+        'label' => 'Sales Exec has booked appointments',
+        'identifier' => 'userHasBookings'
     ],
 ];

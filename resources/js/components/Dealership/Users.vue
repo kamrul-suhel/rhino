@@ -18,8 +18,8 @@
                     >
                         <template v-slot:items="props">
                             <td>{{ props.item.firstname }}</td>
+                            <td>{{ props.item.surname }}</td>
                             <td>{{ props.item.email }}</td>
-                            <td class="text-xs-left">{{ props.item.status === 1 ? trans.active: trans.inactive }}</td>
                             <td class="text-xs-left">{{ props.item.level }}</td>
                             <td class="text-xs-right">
                                 <v-icon
@@ -43,6 +43,52 @@
                 </v-card-text>
             </v-card>
         </v-flex>
+        <v-dialog
+            v-model="deleteDialog"
+            persistent
+            max-width="290"
+        >
+            <v-card>
+                <v-card-title
+                    primary-title
+                    class="pa-2 pl-3"
+                >
+                    <h3>{{ trans.delete }} {{selectedUser.firstname }}</h3>
+                </v-card-title>
+
+                <v-divider></v-divider>
+
+                <v-card-text>
+                    <v-flex xs12>
+                        {{ trans.deleteConfirmation }}
+                    </v-flex>
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions class="pa-3">
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        dark
+                        :color="themeOption.buttonSecondaryColor"
+                        small
+                        @click="deleteDialog = false"
+                    >
+                        {{ trans.cancel }}
+                    </v-btn>
+
+                    <v-btn
+                        dark
+                        :color="themeOption.buttonDangerColor"
+                        small
+                        @click="onDeleteConfirm"
+                    >
+                        {{ trans.delete }}
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
     </v-layout>
 </template>
 
@@ -70,6 +116,9 @@
         data() {
             return {
                 pagination: {},
+                dialog: false,
+                deleteDialog: false,
+                selectedUser: {}
             }
         },
 
@@ -109,20 +158,39 @@
                 this.$store.dispatch('fetchUsers', paginateOption)
             },
 
-            onDeleteBrand(brandId) {
-                const URL = `/api/events/${this.selectedEvent.id}/brands/${brandId}`
-                let brandEventFrom = new FormData()
-                brandEventFrom.append(`brand_id`, brandId)
-                brandEventFrom.append(`_method`, 'DELETE')
-                brandEventFrom.append('event_id', this.selectedEvent.id)
-                axios.delete(URL, brandEventFrom).then((response) => {
-                    if (response.data.success) {
-                        this.$store.commit('setInitializeBrands')
+            onDeleteUser(user) {
+                this.selectedUser = {...user}
+                this.deleteDialog = true
+            },
+
+            onDeleteConfirm() {    
+                // Delete user
+                const URL = `/api/users/${this.selectedUser.id}`
+                axios.delete(URL).then((response) => {
+                    this.deleteDialog = false
+                    this.initialize()
+
+                    if ( response.data.success == true){
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.selectedUser.firstname} ${this.selectedUser.surname} ${this.trans.successfullyDeleted}`
+                        })
                     }
+
+                    if ( response.data.success == false){
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.userHasBookings}`
+                        })
+                    }
+
                 }).catch(error => {
                     this.$store.dispatch('initializeError', error)
                 })
-            }
+                
+            },
         }
     };
 </script>
