@@ -19,7 +19,7 @@ class UserDeleteController extends Controller
         $user = User::with('dealerships')->where('id', $id)->first();
 
         
-        if ( $user->level = "sales_executive"){
+        if ( $user->level == "sales_executive"){
     
             // check sales exec has no upcoming appointments
             $date = Carbon::today();      

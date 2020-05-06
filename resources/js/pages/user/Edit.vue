@@ -250,7 +250,7 @@
             width="500"
         >
             <v-card p2>
-                <v-card-title class="headline">Change your password</v-card-title>
+                <v-card-title class="headline">{{ trans.changeYouPassword }}</v-card-title>
                 <v-spacer></v-spacer>
                 <v-card-text>
                     <v-text-field

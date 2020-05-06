@@ -1325,6 +1325,11 @@ return [
     ],
 
     [
+        'label' => 'Change your password',
+        'identifier' => 'changeYourPassword'
+    ],
+
+    [
         'label' => 'Password successfully updated',
         'identifier' => 'passwordSuccessfullyUpdated'
     ],
