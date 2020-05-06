@@ -43,6 +43,52 @@
                 </v-card-text>
             </v-card>
         </v-flex>
+        <v-dialog
+            v-model="deleteDialog"
+            persistent
+            max-width="290"
+        >
+            <v-card>
+                <v-card-title
+                    primary-title
+                    class="pa-2 pl-3"
+                >
+                    <h3>{{ trans.delete }} {{selectedUser.firstname }}</h3>
+                </v-card-title>
+
+                <v-divider></v-divider>
+
+                <v-card-text>
+                    <v-flex xs12>
+                        {{ trans.deleteConfirmation }}
+                    </v-flex>
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions class="pa-3">
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        dark
+                        :color="themeOption.buttonSecondaryColor"
+                        small
+                        @click="deleteDialog = false"
+                    >
+                        {{ trans.cancel }}
+                    </v-btn>
+
+                    <v-btn
+                        dark
+                        :color="themeOption.buttonDangerColor"
+                        small
+                        @click="onDeleteConfirm"
+                    >
+                        {{ trans.delete }}
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
     </v-layout>
 </template>
 
@@ -70,6 +116,9 @@
         data() {
             return {
                 pagination: {},
+                dialog: false,
+                deleteDialog: false,
+                selectedUser: {}
             }
         },
 
@@ -110,66 +159,37 @@
             },
 
             onDeleteUser(user) {
-                if (this.subComponent) {
-                    const eventId = this.$route.params.eventId
-                    switch (this.model) {
-                        case 'dealership':
-                            const URL = `/api/events/${eventId}/users/${user.id}`
-                            axios.delete(URL).then((response) => {
-                                this.$store.commit('setSnackbarMessage', {
-                                    openMessage: true,
-                                    timeOut: this.themeOption.snackBarTimeout,
-                                    message: `${this.trans.userSuccessfullyRemoveFromEvent}`
-                                })
-
-                                if (response.data.success) {
-                                    this.$store.commit('removeUserFromUserList', user)
-                                }
-                            }).catch(error => {
-                                this.$store.dispatch('initializeError', error)
-                            })
-                    }
-                } else {
-                    this.selectedUser = {...user}
-                    this.deleteDialog = true
-                }
+                this.selectedUser = {...user}
+                this.deleteDialog = true
             },
 
-            onDeleteConfirm() {
-                if (this.subComponent) {
-                    const eventId = this.$route.params.eventId
-                    switch (this.model) {
-                        case 'dealership':
-                            const URL = `/api/events/${eventId}/users/${user.id}`
-                            axios.delete(URL).then((response) => {
-                                if (response.data.success) {
-                                    this.$store.commit('setSnackbarMessage', {
-                                        openMessage: true,
-                                        timeOut: this.themeOption.snackBarTimeout,
-                                        message: `${this.selectedUser.firstname}  ${this.trans.userSuccessfullyRemoveFromEvent}`
-                                    })
-                                    this.$store.commit('setInitialize')
-                                }
-                            }).catch(error => {
-                                this.$store.dispatch('initializeError', error)
-                            })
-                    }
-                } else {
-                    // Delete user
-                    const URL = `/api/users/${this.selectedUser.id}`
-                    axios.delete(URL).then((response) => {
-                        this.deleteDialog = false
-                        this.initialize()
+            onDeleteConfirm() {    
+                // Delete user
+                const URL = `/api/users/${this.selectedUser.id}`
+                axios.delete(URL).then((response) => {
+                    this.deleteDialog = false
+                    this.initialize()
 
+                    if ( response.data.success == true){
                         this.$store.commit('setSnackbarMessage', {
                             openMessage: true,
                             timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedUser.firstname}  ${this.trans.successfullyDeleted}`
+                            message: `${this.selectedUser.firstname} ${this.selectedUser.surname} ${this.trans.successfullyDeleted}`
                         })
-                    }).catch(error => {
-                        this.$store.dispatch('initializeError', error)
-                    })
-                }
+                    }
+
+                    if ( response.data.success == false){
+                        this.$store.commit('setSnackbarMessage', {
+                            openMessage: true,
+                            timeOut: this.themeOption.snackBarTimeout,
+                            message: `${this.trans.userHasBookings}`
+                        })
+                    }
+
+                }).catch(error => {
+                    this.$store.dispatch('initializeError', error)
+                })
+                
             },
         }
     };

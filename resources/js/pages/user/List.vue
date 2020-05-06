@@ -214,20 +214,30 @@
 
             onDeleteUser(user) {
                 if (this.subComponent) {
+                    // REMOVES SALES EXEC FROM AN EVENT, DOES NOT DELETE USER FROM SYSTEM
                     const eventId = this.$route.params.eventId
                     switch (this.model) {
                         case 'dealership':
                             const URL = `/api/events/${eventId}/users/${user.id}`
                             axios.delete(URL).then((response) => {
-                                this.$store.commit('setSnackbarMessage', {
-                                    openMessage: true,
-                                    timeOut: this.themeOption.snackBarTimeout,
-                                    message: `${this.trans.userSuccessfullyRemoveFromEvent}`
-                                })
+                                if ( response.data.success == true){
+                                    this.$store.commit('setSnackbarMessage', {
+                                        openMessage: true,
+                                        timeOut: this.themeOption.snackBarTimeout,
+                                        message: `${this.trans.userSuccessfullyRemoveFromEvent}`
+                                    })
 
-                                if (response.data.success) {
                                     this.$store.commit('removeUserFromUserList', user)
                                 }
+
+                                if (response.data.success == false) {
+                                    this.$store.commit('setSnackbarMessage', {
+                                        openMessage: true,
+                                        timeOut: this.themeOption.snackBarTimeout,
+                                        message: `${this.trans.userHasBookings}`
+                                    })
+                                }
+                                    
                             }).catch(error => {
                                 this.$store.dispatch('initializeError', error)
                             })
@@ -249,7 +259,7 @@
                                     this.$store.commit('setSnackbarMessage', {
                                         openMessage: true,
                                         timeOut: this.themeOption.snackBarTimeout,
-                                        message: `${this.selectedUser.firstname}  ${this.trans.userSuccessfullyRemoveFromEvent}`
+                                        message: `${this.selectedUser.firstname} ${this.selectedUser.surname} ${this.trans.userSuccessfullyRemoveFromEvent}`
                                     })
                                     this.$store.commit('setInitialize')
                                 }
@@ -258,17 +268,25 @@
                             })
                     }
                 } else {
-                    // Delete user
+                    // DELETES USER FROM SYSTEM
                     const URL = `/api/users/${this.selectedUser.id}`
                     axios.delete(URL).then((response) => {
                         this.deleteDialog = false
-                        this.initialize()
-
-                        this.$store.commit('setSnackbarMessage', {
-                            openMessage: true,
-                            timeOut: this.themeOption.snackBarTimeout,
-                            message: `${this.selectedUser.firstname}  ${this.trans.successfullyDeleted}`
-                        })
+                        this.initialize()                        
+                        if (response.data.success == true){
+                            this.$store.commit('setSnackbarMessage', {
+                                openMessage: true,
+                                timeOut: this.themeOption.snackBarTimeout,
+                                message: `${this.selectedUser.firstname} ${this.selectedUser.firstname} ${this.trans.successfullyDeleted}`
+                            })
+                        }
+                        if (response.data.success == false){
+                            this.$store.commit('setSnackbarMessage', {
+                                openMessage: true,
+                                timeOut: this.themeOption.snackBarTimeout,
+                                message: `${this.trans.userHasBookings}`
+                            })
+                        }
                     }).catch(error => {
                         this.$store.dispatch('initializeError', error)
                     })
