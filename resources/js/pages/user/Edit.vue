@@ -63,7 +63,7 @@
                                 :rules="[v => !!v || `${trans.dealershipIsRequired}`]"
                                 :color="themeOption.inputColor"
                                 :label="trans.dealership"
-                                v-model="user.dealershipId"
+                                v-model="user.dealership_id"
                                 box solo flat
                             >
                             </v-select>
@@ -74,8 +74,7 @@
                             <v-select
                                 :items="groups"
                                 item-text="name"
-                                item-value="id"
-                                :rules="[ v => !!v || `${trans.groupIsRequired}`]"
+                                item-value="id"                                
                                 :color="themeOption.inputColor"
                                 :label="trans.group"
                                 v-model="user.group_id"
@@ -122,7 +121,6 @@
                                       item-text="name"
                                       item-value="id"
                                       :color="themeOption.inputColor"
-                                      :rules="[v => !!v || `${trans.regionIsRequired}`]"
                                       :label="trans.region"
                                       v-model="user.region_id"
                                       box solo flat

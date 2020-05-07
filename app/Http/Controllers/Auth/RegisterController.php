@@ -104,6 +104,9 @@ class RegisterController extends Controller
      * @return mixed
      */
     protected function save(Request $request, $id = null){
+
+        //dd($request->all());
+
         $user = $id ? User::findOrFail($id) : new User() ;
         $request->has('firstname') ? $user->firstname = $request->firstname : '';
         $request->has('surname') ? $user->surname = $request->surname : '';
@@ -146,8 +149,13 @@ class RegisterController extends Controller
 
             case User::USERDEALERSHIP:
                 $user->dealership_id = $request->dealershipId;
-                $user->group_id = $request->has('group_id') ? $request->group_id : null;
-                $user->region_id = $request->has('region_id') ? $request->region_id : null;
+                if (!$request->group_id == 'null'){
+                    $user->group_id = $request->has('group_id');
+                }
+                
+                if (!$request->region_id == 'null'){
+                    $user->region_id = $request->has('region_id');
+                }
                 $user->country_id = $request->has('country_id') ? $request->country_id : null;
                 $user->manufacturer_id = null;
                 $user->company_id = null;
@@ -155,8 +163,15 @@ class RegisterController extends Controller
 
             case User::USERSALEEXECUTIVE:
                 $user->dealership_id = $request->dealershipId;
-                $user->group_id = $request->has('group_id') ? $request->group_id : null;
-                $user->region_id = $request->has('region_id') ? $request->region_id : null;
+                
+                if (!$request->group_id == 'null'){
+                    $user->group_id = $request->has('group_id');
+                }
+                
+                if (!$request->region_id == 'null'){
+                    $user->region_id = $request->has('region_id');
+                }
+                
                 $user->country_id = $request->has('country_id') ? $request->country_id : null;
                 $user->manufacturer_id = null;
                 $user->company_id = null;
