@@ -747,18 +747,15 @@
         border-radius: 7px;
         text-transform: uppercase;
         color: black;
-        height: 60px;
+        height: unset;
+        line-height: unset;
         max-width: 100%;
         font-size: 25px;
-        line-height: 25px;
-        padding: 15px;
+        padding: 0;
 
         @media ( min-width: 768px){
             font-size: 30px;
-            line-height: 25px;
-            padding: 18px;
             margin-top: 30px;
-            height: 60px;
         }
 
         @media (min-width: 960px) {
@@ -767,28 +764,42 @@
           
         @media (min-width: 1080px) {
             max-width: 80%;
-            height: 70px;
         }
 
         @media ( min-width: 1200px){
             font-size: 35px;
-            line-height: 35px;
         }
 
         @media (min-width: 1300px) {
             max-width: 60%
         }
 
+        .v-input__control {
+            padding: 5px;
+
+            @media (min-width: 960px) {
+                padding: 10px;
+            }
+
+            .v-input__slot {
+                margin-bottom: 0;
+
+
+            }
+        }
+
         input{
             font-family: 'CharlesWright';
             text-transform: uppercase;
             text-align: center;
-
-            &::-webkit-input-placeholder {text-align:center;font-size: 21px;}
-            &::-webkit-input-placeholder:-ms-input-placeholder { text-align:center;font-size: 21px;}
-            &::-webkit-input-placeholder ::placeholder {text-align:center;font-size: 21px;}
+            padding: 0 10px;
+            max-height: unset;
+            line-height: unset;
         }
-
+        
+        .v-text-field__details {
+            display: none;
+        }
     }
 
     .exchange-details, .no-part-exchange {
