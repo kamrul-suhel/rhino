@@ -430,10 +430,7 @@
                     let userForm = new FormData()
                     userForm.append('_method', 'put')
                     _.forOwn(this.user, (value, key) => {
-                        if (key === 'firstname') {
-                            userForm.append('name', this.user.firstname)
-                            return
-                        }
+
                         if (key === 'dealership_id') {
                             userForm.append('dealershipId', value)
                             return

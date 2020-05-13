@@ -21,6 +21,11 @@
             </div>
 
             <div class="r-tab-content" :class="[showForm ? 'open' : '']" >
+            <v-form
+                row wrap
+                ref="companyForm"
+                v-model="valid"
+                lazy-validation>
                 <v-layout>
                     <v-flex xs12 sm4 mr-3>
                         <v-autocomplete
@@ -41,6 +46,7 @@
                             :label="trans.name"
                             v-model="selectedCompany.name"
                             :color="themeOption.inputColor"
+                            :rules="[v => !!v || `${trans.nameIsRequired}`]"
                             box solo flat
                         ></v-text-field>
                     </v-flex>
@@ -61,7 +67,7 @@
                 </v-layout>
                 <v-layout row>
                     <v-flex xs12 class="pa-2">
-                        <v-btn class="rounded-btn"
+                        <v-btn class="rounded-btn create-edit"
                             small
                             dark
                             :color="themeOption.buttonDangerColor"
@@ -70,6 +76,7 @@
                         </v-btn>
                     </v-flex>
                 </v-layout>
+            </v-form>   
             </div>
         </div>
 
@@ -178,6 +185,7 @@
 
         data() {
             return {
+                valid: true,
                 totalDesserts: 0,
                 desserts: [],
                 pagination: {},
@@ -277,40 +285,54 @@
             },
 
             onCreateCompany() {
-                // Check update or create
-                let URL = '/api/companies'
-                let companyForm = new FormData()
-                companyForm.append('name', this.selectedCompany.name)
-                companyForm.append('logo', this.companyImage)
-                companyForm.append('status', 1)
 
-                if(this.editCompany){
-                    const ID = this.selectedCompany.id
-                    // Update the data
-                    URL = `${URL}/${ID}/update`
-                    companyForm.append('languageId', this.selectedCompany.language_id)
-                    companyForm.append('_method', 'put')
-                }
+                if (this.$refs.companyForm.validate()) {
+                    //disable create/edit button to prevent duplicate entries
+                    const button = document.getElementsByClassName("create-edit")[0].setAttribute("disabled", true);
 
-                axios.post(URL, companyForm).then((response) =>{
-                    if(response.data.success){
-                        this.initialize()
-                        if(this.editCompany){
-                            this.$store.commit('setSnackbarMessage', {
-                                openMessage: true,
-                                timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedCompany.name}  ${this.trans.successfullyUpdated}`
-                            })
-                        }else{
-                            this.$store.commit('setSnackbarMessage', {
-                                openMessage: true,
-                                timeOut: this.themeOption.snackBarTimeout,
-                                message: `${this.selectedCompany.name}  ${this.trans.successfullyCreated}`
-                            })
-                            this.onResetCompany()
-                        }
+
+                    // Check update or create
+                    let URL = '/api/companies'
+                    let companyForm = new FormData()
+                    companyForm.append('name', this.selectedCompany.name)
+                    companyForm.append('logo', this.companyImage)
+                    companyForm.append('status', 1)
+
+                    if(this.editCompany){
+                        const ID = this.selectedCompany.id
+                        // Update the data
+                        URL = `${URL}/${ID}/update`
+                        companyForm.append('languageId', this.selectedCompany.language_id)
+                        companyForm.append('_method', 'put')
                     }
-                })
+
+                    axios.post(URL, companyForm).then((response) =>{
+                        if(response.data.success){
+                            this.initialize()
+                            if(this.editCompany){
+                                this.$store.commit('setSnackbarMessage', {
+                                    openMessage: true,
+                                    timeOut: this.themeOption.snackBarTimeout,
+                                    message: `${this.selectedCompany.name}  ${this.trans.successfullyUpdated}`
+                                })
+                                this.showForm = false;
+                            }else{
+                                this.$store.commit('setSnackbarMessage', {
+                                    openMessage: true,
+                                    timeOut: this.themeOption.snackBarTimeout,
+                                    message: `${this.selectedCompany.name}  ${this.trans.successfullyCreated}`
+                                })
+                                this.onResetCompany()
+                                this.showForm = false;
+                            }
+                        }
+                    
+                    })
+
+                    
+                    // enable create/edit button
+                    button = document.getElementsByClassName("create-edit")[0].setAttribute("disabled", false);
+                }
 
             },
 
