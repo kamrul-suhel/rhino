@@ -147,14 +147,14 @@
 
             downloadBookGuest() {
                 if (this.downloadBookGuest) {
-                    this.downloadType = 'bookedGuest'
+                    this.downloadType = 'bookedGuests'
                     this.downloadGuest = true
                 }
             },
 
             downloadUnBookGuest() {
                 if (this.downloadUnBookGuest) {
-                    this.downloadType = 'unbookedGuest'
+                    this.downloadType = 'unbookedGuests'
                     this.downloadGuest = true
                 }
             },
@@ -284,7 +284,7 @@
 
             onDownloadGuest() {
                 const URL = `/api/csv/guests/download?downloadType=${this.downloadType}&eventId=${this.selectedEvent.id}`
-                const fileName = `${this.trans.bookedGuest}`
+                const fileName = `${this.downloadType}`
 
                 axios.get(URL).then((response) => {
                     // Check response success & have some data

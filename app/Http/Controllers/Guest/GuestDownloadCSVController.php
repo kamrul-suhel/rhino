@@ -29,13 +29,13 @@ class GuestDownloadCSVController extends Controller
             ->where('guests.event_id', $request->eventId);
 
         switch ($request->downloadType) {
-            case 'bookedGuest':
+            case 'bookedGuests':
                 $guests = $guests->where([
                     'guests.status' => 1
                 ]);
                 break;
 
-            case 'unbookedGuest':
+            case 'unbookedGuests':
                 $guests = $guests->whereIn('guests.status', [6, 0]);
                 break;
         }
